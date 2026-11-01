@@ -144,8 +144,24 @@ Header W equals descriptor width on every record. Descriptor `kind` = output bit
 | 9 | font glyph (`tools/glyphs.py`) | |
 
 Format 3 explains earlier dead ends: max run 4 px gives the 2.667 bit/px uniform panels (6 tokens = 24 px per 64-bit
-word). Index 0 = transparent; ~109 distinct indices (max ~0x6f) in entry 0, so an ~112-entry CLUT. The CLUT itself is
-not located yet (colours in sheets are false). Format-2 colour = low nibble range of the same CLUT?, unconfirmed.
+word). Index 0 = transparent; ~109 distinct indices (max ~0x6f) used in entry 0.
+
+**Palettes (found 2026-11-01).** Block 0 file offset 0x382ec0 holds the ROM initializer of the `.data` table at RAM
+0x6045e020: 58 pointers indexed by palette ID (ID 0 and 58+ null). Each points to `{u32 count=256, u32 ptr}` followed
+by 256 x **ARGB8888** (stride 0x408). Entry 0 = `00ffffff` (transparent), 4 = `fffefefe` white, 0x10 = `ff000000`.
+Reader: `FUN_7e23c7d0(id)` returns `table[id]`; `FUN_7e337f49(layer,id)` passes `(entry+4)` to `FUN_7e226722(layer,
+ncolours)` (layer 1 = 16 colours, 2 = 256, 3 = 8); `cw_setColorPalette` / `GPISetPalette` push entries to the display
+engine byte-wise (R,G,B from bits 23..0, alpha separately). `SetPalette_7e337fa3(mode)` loads triples (k-1, k, k-2)
+into layers 1/2/3: mode 1 -> 0x2f/0x30/0x2e, 2 -> 8/9/7, 3 -> 0xe/0xf/0xd, 4 -> 5/6/4, 5 -> 0x2a/0x11/0x10,
+6 -> 0xb/0xc/0xa, 7 -> 0x2c/0x2d/0x2b, 8 -> 0x32/0x33/0x31, 9 -> 0x35/0x36/0x34, 10 -> -/3/-, 11 -> -/2/-.
+Log strings name the modes (Shooting, LV SCP, SCP, LV Guide, Play-Menu, Play Overall, LV Guide Hint, TOP_MENU,
+MODE_GUIDE, MOVE_SHOOTING, SELF_ADJ); exact mode->string mapping not yet read.
+Format-3 icons render correctly with ID 9. Format-2 icons look too dark with ID 8 (16-colour layer); their real
+palette assignment is open.
+
+Entry 0 tail (0x3b1e44-end): a 3525-entry table of `0xbf......` pointers (global image ID -> record, spanning
+entries 0 and 69, likely the `@Axxx@`/image-ID index), then format-1 records (`b3=1`, 32 px tall, 4-bit nibbles,
+background nibble 3), probably inline text icons. Both not yet decoded.
 
 Content (entry 0): digits/7-seg fonts in several sizes, PASM/iAUTO/scene/ART 1-12/ART BKT mode icons, flash
 compensation labels, Wi-Fi, MENU/OK/touch buttons, battery, sliders, panel frames. `tools/icons.py entry.bin base_hex

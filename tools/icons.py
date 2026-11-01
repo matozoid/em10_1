@@ -12,8 +12,11 @@ Writes out_prefix_NN.png. Layout (reverse engineered, see docs/firmware/resource
                a token never straddles a 64-bit word (skip to next word); runs stop at row end
                (8-bit index, kind 8)
   format 9   = font glyph (tools/glyphs.py)
-Palette (CLUT) is not yet located: colours are false. Output is vendor data: keep local."""
-import colorsys, struct, sys
+Palettes: block 0 ROM table at file offset PALTAB (runtime .data copy at 0x6045e020), 58 entries indexed by
+palette ID, each -> {u32 count=256, u32 ptr} -> 256 x ARGB8888. SetPalette(mode) loads ID k into the 256-colour
+layer (fmt 3), k-1 into the 16-colour layer (fmt 2), k-2 into the 8-colour layer. --pal K picks k (default 9).
+Output is vendor data: keep local."""
+import struct, sys
 from PIL import Image, ImageDraw
 
 
@@ -54,21 +57,28 @@ def dec3(p, W, H):
     return px
 
 
-def palette(fmt):
-    if fmt == 2:
-        return {0: None, 1: (120, 150, 200), 2: (160, 180, 220), 3: (200, 215, 240), 4: (255, 255, 255),
-                **{i: (90 + 10 * i, 90, 90) for i in range(5, 16)}}
-    pal = {0: None}
-    for i in range(1, 256):  # false colour: golden-ratio hue walk, brightness by index
-        r, g, b = colorsys.hsv_to_rgb((i * 0.618) % 1, 0.55, 0.55 + 0.45 * ((i * 7) % 16) / 15)
-        pal[i] = (int(r * 255), int(g * 255), int(b * 255))
-    return pal
+PALTAB = 0x382ec0
+BLK0_BASE = 0x7d991020
+
+
+def load_palette(blk0, pid):
+    p = struct.unpack_from('<I', blk0, PALTAB + 4 * pid)[0]
+    n, dp = struct.unpack_from('<2I', blk0, p - BLK0_BASE)
+    return list(struct.unpack_from('<%dI' % n, blk0, dp - BLK0_BASE))
+
+
+def blend(argb, bg):
+    a = argb >> 24
+    return tuple((((argb >> s) & 255) * a + c * (255 - a)) // 255 for s, c in zip((16, 8, 0), bg))
 
 
 def main():
     a = sys.argv
     d = open(a[1], 'rb').read(); base = int(a[2], 16); out = a[3]
     fmts = {int(a[a.index('--fmt') + 1])} if '--fmt' in a else {2, 3}
+    blk0 = open(a[a.index('--blk0') + 1] if '--blk0' in a else 'firmware/stock/dec/blk00_40300000.bin', 'rb').read()
+    pid = int(a[a.index('--pal') + 1], 0) if '--pal' in a else 9
+    pals = {2: load_palette(blk0, pid - 1), 3: load_palette(blk0, pid)}
     PH = int(a[a.index('--page-height') + 1]) if '--page-height' in a else 4000
     items = []
     for r in records(d, base):
@@ -92,10 +102,10 @@ def main():
         hgt = max(y + r['H'] * S + 14 for r, px, S, x, y in pg) + 4
         img = Image.new('RGB', (PW, hgt), (40, 40, 40)); dr = ImageDraw.Draw(img)
         for r, px, S, x, y in pg:
-            pal = palette(r['fmt'])
+            pal = pals[r['fmt']]
             dr.text((x, y), '%x' % r['o'], fill=(255, 200, 0))
             tile = Image.new('RGB', (r['W'], r['H']))
-            tile.putdata([pal.get(v) or ((70, 70, 70) if ((i % r['W']) // 4 + (i // r['W']) // 4) % 2 else (55, 55, 55))
+            tile.putdata([blend(pal[v], (90, 90, 90) if ((i % r['W']) // 4 + (i // r['W']) // 4) % 2 else (60, 60, 60))
                           for i, v in enumerate(px)])
             img.paste(tile.resize((r['W'] * S, r['H'] * S), Image.NEAREST), (x, y + 12))
         img.save('%s_%02d.png' % (out, n))
