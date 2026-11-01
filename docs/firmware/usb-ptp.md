@@ -150,10 +150,58 @@ Vendor Extension ID **0xfffd** (= MTP, *not* the Olympus PTP extension id), seri
 desktop's `gvfsd-gphoto2` auto-claims the interface on every (re)enumeration; each read needs
 `pkill -9 -f gvfsd-gphoto2` (and `gvfs-gphoto2-volume`) first to free interface 0.
 
-### Mode 6 not yet enumerated live — the only open USB item
+### Full verbatim MTP DeviceInfo + unlock test (2026-11-01, raw libusb)
 
-For a *complete* record the one remaining live USB datum is mode 6's DeviceInfo as the camera
-actually reports it (vs. the static array). Reaching it means sending the Olympus OpenSession
-unlock from the host — a live vendor command that changes camera state, so it is gated on
-explicit user approval and not done yet. Its static op set is camera-control only and holds no
-memory-read op, so this is a documentation-completeness item, not an extraction lead.
+Captured with a minimal raw PTP/USB client (libusb-1.0 via `python3 -I` ctypes;
+`tools/ptpraw.py`) — reads only, no capture/format/delete/property-write. This is the
+complete DeviceInfo dataset exactly as the camera emits it in MTP mode (richer than gphoto's
+filtered summary). Interface 0, class 0x06 (Imaging / PTP), protocol 1, bulk IN `0x82`,
+bulk OUT `0x01`.
+
+```
+StandardVersion     = 100  (PTP 1.00)
+VendorExtensionID   = 0x00000006   (= Microsoft MTP; gphoto's "0xfffd" is its own remap)
+VendorExtensionVer  = 100
+VendorExtensionDesc = ''  (empty)
+FunctionalMode      = 0x0000
+Manufacturer='OLYMPUS'  Model='E-M10'  DeviceVersion='1.00'  Serial='<serial>'
+
+OperationsSupported (20):
+  0x1001 GetDeviceInfo   0x1002 OpenSession   0x1003 CloseSession
+  0x1004 GetStorageIDs   0x1005 GetStorageInfo 0x1006 GetNumObjects
+  0x1007 GetObjectHandles 0x1008 GetObjectInfo 0x1009 GetObject
+  0x100a GetThumb        0x100b DeleteObject   0x100f FormatStore
+  0x1014 GetDevicePropDesc 0x1015 GetDevicePropValue 0x1016 SetDevicePropValue
+  0x101b GetPartialObject
+  0x9801 MTP_GetObjectPropsSupported 0x9802 MTP_GetObjectPropDesc
+  0x9803 MTP_GetObjectPropValue      0x9805 MTP_GetObjectPropList
+EventsSupported (4):
+  0x4004 StoreAdded  0x4005 StoreRemoved  0x4002 ObjectAdded  0x4009 RequestObjectTransfer
+DevicePropsSupported (5):
+  0x5001 BatteryLevel  0x5011 DateTime
+  0xd405 (MTP DeviceIcon)  0xd406 (MTP SessionInitiatorInfo)  0xd407 (MTP PerceivedDeviceType)
+CaptureFormats (6):
+  0x3008 WAV  0x300a AVI  0xb980 (vendor)  0x3800 UndefinedImage  0x3801 EXIF/JPEG  0xb101 (vendor, ORF?)
+ImageFormats (9):
+  0x3000 Undefined  0x3001 Association  0x3006 DPOF  0x3008 WAV  0x300a AVI
+  0xb980 (vendor)  0x3800 UndefinedImage  0x3801 EXIF/JPEG  0xb101 (vendor, ORF?)
+```
+
+**Olympus unlock rejected.** Sending `0x9481` and `0x9482` (the newer OM-D
+`OpenSession`/tether unlock that libgphoto2 uses on OMD bodies) each made the camera **STALL
+the bulk pipe** (libusb `LIBUSB_ERROR_PIPE`, -9) — the USB-level form of
+`OperationNotSupported`. After clearing the halt, a second `GetDeviceInfo` returned a
+**byte-for-byte identical** op set: **no mode change occurred.** So the E-M10 Mark I does *not*
+implement the 0x94xx OMD unlock; its vendor range is 0x90xx/0x91xx/0x92xx (see static arrays
+above), and mode 6 is not reachable by that standard handshake. The camera was unaffected
+throughout — session opened/closed cleanly, no state left changed. (Probing this body's own
+0x90xx vendor ops to find a mode switch was *not* attempted: that is open-ended vendor-opcode
+fuzzing on a live body, and the static arrays show the reachable vendor set is camera-control
+only — no memory-read op — so it has no extraction upside and real risk of hitting a
+capture/format/firmware op.)
+
+**USB route is now fully exhausted and documented**: all three menu modes enumerated live,
+full MTP DeviceInfo captured verbatim, the control-mode unlock proven rejected. No USB path —
+menu-selectable or unlock-gated — exposes a memory/flash read. Extraction must go via the
+debug shell (UART; `debug-shell.md`) or a custom-firmware flash→card patch
+(`../mods/firmware-modding.md`).
