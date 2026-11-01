@@ -51,6 +51,18 @@ this looks like the icon/symbol bank, but row widths do not add up cleanly (11 v
 the exact format is **not decoded**. Cleanest next step: find the renderer in block 0 and
 read it, rather than guess.
 
+## Resource loader (block 0, 0x7db66a1c, label `res_get_lensdefel_*` is borrowed)
+`res_get(type, idx, ...)` switches on type 0..6 (+ 0x8000|n variants). It indexes a 16-byte
+directory record `{addr,size,0,0}` at `table + idx*0x10`, then allocates and loads `size` bytes
+(`FUN_7db67224(size,0x101)`). A bank-select branch (`7db66baa/7db66bb4`) picks RAM base
+**0xbf06a000** (bank 0) or **0xbf46a000** (bank 1) — 4 MB apart, matching the pointer ranges
+inside block 1 entry 0 (0xbf06a0..) and entry 69 (0xbf46a0..). So **entry 0 = icon/graphic
+bank 0, entry 69 = bank 1**, each loaded to RAM and referenced by absolute pointers.
+Font index tables use base 0xbfcaa000 (type 0 case: `FUN_7d9dbe94(0xbfcaa000)`).
+Pointer->file offset relation for banks still unresolved (descriptor ptrs are not linear
+with file layout), so icon pixel decode remains open. 
+`tools/ghidra/ScalarRefs.java lo hi` lists code operands in an address range.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
