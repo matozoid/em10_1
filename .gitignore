@@ -1,0 +1,15 @@
+.idea
+reference
+research/owsetup_x/
+research/dbfw_0.3.1.b/
+research/dbfw_extracted/
+research/ghidra_proj/
+research/decomp/
+research/*.log
+research/apk_x/
+research/oishare/
+firmware/stock/
+firmware/community/
+research/camera-probe-*.txt
+research/manual/
+research/sources/
