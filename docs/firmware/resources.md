@@ -163,7 +163,13 @@ Entry 0 tail (0x3b1e44-end): a 3525-entry table of `0xbf......` pointers (global
 entries 0 and 69, likely the `@Axxx@`/image-ID index), then format-1 records (`b3=1`, 32 px tall, 4-bit nibbles,
 background nibble 3), probably inline text icons. ID table entry = RAM addr of record start + 8 (record start
 addr = bank base + file offset). 3047 of 3525 IDs resolve to decoded fmt-2/3 records (1346/1346 in e0, 1701/1706 in
-e69, 1:1); the other 478 point at fmt-1 or wide records not yet decoded. Having an ID does not imply use; the bank
+e69, 1:1) found by the descriptor scan; the other 478 have no 24-byte descriptor. Of those, 218 carry a fmt-2/3
+header and decode exactly via the ID table alone (`id_records()` in `tools/icons.py`; size unknown, decoders stop at
+W*H): these are the wide images (>= 600 px): 640x480 / 720x480 / 720x405 / 640x360 live-view composition grids
+(diagonals, thirds, 4x4, scale, aspect-ratio frames), 617xN / 620xN / 624xN dark translucent menu panels, 814x558 /
+824x54 / 720x78 panel frames and title bars, 642xN dotted grids. All fmt 2 (16-colour layer). Five 820-wide "fmt 3"
+hits in the fmt-1 tail are misparses; ~250 IDs have non-fmt-2/3 headers (fmt-1 region, plus odd ID 0 -> fmt 192,
+IDs 1625/1626 -> fmt 15). Having an ID does not imply use; the bank
 is likely shared across bodies. Which IDs block 0 actually draws: not investigated.
 Sheet colours: palette ID 3 default, ID 6 for exposure-comp scale (user-judged); no single palette fits all icons.
 
