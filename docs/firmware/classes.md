@@ -229,3 +229,11 @@ Scan: runs of >=3 consecutive aligned u32 that are function entries, outside dis
 With `rename`: unnamed members become `Class__vfn<index>_<addr>`, functions referencing the table start become `Class__ctordtor_<addr>`; 3219 renames. TENTATIVE: derived-class tables reuse base-class methods, so a vote can attach the wrong class to shared functions. Index = slot position, so same slot across related classes is the same virtual method.
 Observer pattern is common: `CapBlu_Bluetooth*Observer`, `CmpPli/CmpPls_Play*Observer` (6-slot tables, 2 ctor/dtor refs each).
 Not done yet: inheritance (compare slot tables across classes), pure-virtual stub detection, constructor-based class naming without a member vote.
+
+## Inheritance and constructor naming (`tools/ghidra/ClassGraph.java`)
+Input: the vtable candidates above. A candidate is treated as a class vtable if code references its start (constructor/destructor stores the vtable pointer) or it has a class vote: 1693 of 6525.
+- **Parent** = another class vtable that is no longer than the child and shares the most identical function pointers at the same slot index (>=2 shared and >=50% of the parent), ignoring functions that appear in more than 40 tables (stubs). 182 of 1693 get a parent; the rest are roots (many classes override every slot, or are not true vtables).
+- **Names:** a voted name goes to the first (shortest, lowest address) table only; later tables with the same vote become `<Name>_sub<addr>` because inherited base methods polluted the votes. Unvoted tables are `cls_<addr>`.
+- **Renames (1916):** unnamed methods `<class>__vfn<slot>_<addr>`, referencing FUN_* (ctor/dtor) `<class>__ctordtor_<addr>`.
+- Output TSV: `research/decomp/classgraph.tsv` (vtable, slots, class, voted, parent@addr, shared, ctors).
+Caveats: single inheritance only (no multiple-inheritance/thunk tables); names are tentative; `_sub` suffix means "family of the voted class", not a verified subclass name.
