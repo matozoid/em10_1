@@ -55,6 +55,56 @@ region); (b) the camera runs other firmware (community build or another stock ve
 form not yet recognised (fmt-1 tail, ID 0 fmt 192, IDs 1625/1626 fmt 15 are the only undecoded bank records,
 all small).
 
+### Resolved: ROM pictures live in factory flash at 0x46560000, outside the update BIN (2026-11-01)
+Possibility (a) above is confirmed by code. `FUN_7db66766` (block 0, resource init) reads each resource
+directory from a fixed NAND/flash address into RAM via `FUN_7db67224(size, 0x101)` with `A0 = flash addr`
+(disassembly, not decompiler: Ghidra truncates the function). Directory pointer = buffer + 0x20 (32-byte header).
+
+| res_get type | flash dir addr | dir size | RAM ptr | in update BIN? |
+|---|---|---|---|---|
+| 0, 1, 0xb, 0xc (fonts, icon banks, strings) | 0x41500000 | 0x800 | `a0a665a8` | yes, block 1 |
+| 0x8000\|n (art-filter masks etc.) | 0x42d00000, then 7 sub-dirs from its entries, sizes `6044aac0` | 0x400 | `a0a66498`, subs `a0a664cc[]` | yes, block 2 |
+| 2 (writable user data) | 0x47360000 | 0x400 | `a0a66440` | no |
+| **3 (ROM pictures, 512 slots)** | **0x46560000** | 0x2000 | `a0a6645c` | **no** |
+| 0x11 (unknown, 256 slots) | 0x44a80000 | 0x1000 | `a0a66478` | no |
+| 0x12 (adjust/config) | 0x40200000 | 0x400 | `a0a6658c` | no; if check `FUN_7d997751(7)` fails, 0x400 B default copied from block 0 `0x7dbfbbc0` via `func_0x47001000` (memcpy-like) |
+| 5 | 0x402a0000 (hdr 0x402a0020, <0x20000 B) | - | - | no |
+| 6 | seven 128 KB areas 0x40120000..0x401e0000 (`.data` `6044aadc`) | - | - | no |
+
+`play_res_read` kind 0 → `res_get(3, idx)` is the path used by `app_background_still_rom_picture` /
+`app_background_rom_play_alloc` / `BackGroundCtrl::draw` / `guiUtility::chgBackGround (DRAW_JPEG)`. So the menu
+backdrops and the art-filter demo pictures are almost certainly type-3 JPEGs at 0x46560000..0x47360000 (14 MB).
+Which index maps to which picture is not traced yet.
+
+**Flash map** (from `ram_addr_7d9cc5d9`, a debug-shell command that prints partition starts, and the write guard
+`FUN_7da675f2`):
+
+| range | content |
+|---|---|
+| 0x40000000-0x4005ffff | boot (not in BIN) |
+| 0x40060000, 0x400a0000, 0x400c0000, 0x400e0000, 0x40100000 | small partitions (adjust/settings; `flash_read_sector_status_7da67a27` touches 0x40060000/0x400e0000/0x40100000) |
+| 0x40120000-0x401fffff | type 6 (7 x 128 KB) |
+| 0x40200000 | type 0x12 dir |
+| 0x402a0000 | type 5 |
+| 0x40300000-0x414fffff | block 0 (code), BIN |
+| 0x41500000-0x42cfffff | block 1, BIN |
+| 0x42d00000-0x445fffff | block 2, BIN |
+| 0x44600000-0x44a7ffff | unknown, no code refs found |
+| 0x44a80000-0x4655ffff | type 0x11 |
+| 0x46560000-0x4735ffff | type 3 ROM pictures |
+| 0x47360000-0x4797ffff | type 2, writable user area (dir limit 0x5ffc00) |
+
+`FUN_7da675f2` (flash write guard) returns early (allows) only for 0x40060000..0x40300000 and
+0x47360000..0x47980000 (also via the 0x8xxxxxxx uncached alias); any other write halts with `0xdeadbeef`. So
+normal firmware never rewrites types 3/0x11, consistent with them being factory-programmed.
+Type 2 write/erase in `FUN_7db67274` passes `addr - 0x47360000` to `MBF_FMEMPOST`, so MBF offsets are relative to
+the user area. The same debug function also has a loop reading 0x40060000..0x47980000 in 0x800-byte pages
+(page-wise flash read/verify, `writing_7d991908`).
+
+**How to get the pictures:** only by reading the camera's own flash 0x46560000..0x47360000. Candidate routes: the
+USF debug shell (`memory_addr` prints resource dirs, other commands dump memory), a PTP vendor op, or a hook in
+custom firmware that copies the region to the card. All are live camera actions; none tried.
+
 ## String-table notes
 Entry order follows language; e022 is Dutch. Strings may contain embedded newlines
 (line-wrapped UI text). Example Dutch indices: 1766 "Privéverbinding", 1765 one-time
