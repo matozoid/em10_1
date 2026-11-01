@@ -35,6 +35,26 @@ chroma 0x00/0x80 (`fe80` = white, `0080` = black). Sub 0 at width 128 = black bo
 likely a placeholder/test frame). Sub 1 has a 32-px period of short white runs and no clean width: probably a
 bit pattern / test table, not a UI picture. No photo-style backgrounds exist outside the block 2 JPEGs.
 
+### Menu backdrop search (negative so far, 2026-11-01)
+Target: the user's photo of the live camera (Shooting Menu 1, Dutch UI) shows a blue gradient backdrop with a
+photographic E-M10 + kit lens on the right. Not found in the 1.4 update BIN by any of these checks:
+- All 32 JPEGs in block 2 (entries 0 and 5): art-filter frame masks (black/white, 29) and Wi-Fi assets (3).
+- JPEG markers (SOI, JFIF, DQT, DHT, SOF0, SOS) in blocks 0/1/2: no streams outside block 2 entry 0/5. Block 0 hits
+  are string tables (`IMG FMT=JFIF`, `EXIF1`). Block 2 entry 5 also holds 3 `GIF8` streams (likely web-server
+  assets, unviewed).
+- Every fmt-2/3 record in banks e0/e69 (descriptor scan + ID table): max 59 distinct colours; all large fmt-3
+  records (up to 644x419) are AF-target grids, large fmt-2 records are grids/panels. No photo-like record.
+- Gaps between records in e0/e69: every gap > 0x6f00 B is an AF-grid record. No hidden blob.
+- Blocks 1 and 2 past their last directory entry (0xcd2c00 / 0xe88000) are all zero.
+- Block 2 entries 1-5: directories of small sub-records, 3-11% dense, settings-like, not image data.
+- Block 2 entry 0 sub 0 is i.i.d. noise (see above), not an encoded image.
+- Code references to 0x43b88000 (end of block 2) are a float constant (369.0f), not an address.
+- Manual (p. 74) draws the menu as vector art; no backdrop is visible.
+Open possibilities: (a) the backdrop sits in camera flash that the update BIN never rewrites (factory-only
+region); (b) the camera runs other firmware (community build or another stock version); (c) it is encoded in a
+form not yet recognised (fmt-1 tail, ID 0 fmt 192, IDs 1625/1626 fmt 15 are the only undecoded bank records,
+all small).
+
 ## String-table notes
 Entry order follows language; e022 is Dutch. Strings may contain embedded newlines
 (line-wrapped UI text). Example Dutch indices: 1766 "Privéverbinding", 1765 one-time
