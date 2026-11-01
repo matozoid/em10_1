@@ -66,6 +66,26 @@ stage DLLs / **OlyMuse** (develop + art filters) → **OlyImgView** (render) / `
 - **`OlyGin.dll`**, **`OlyWebXMLMgr.dll`** — decompiled (`research/decomp/OlyGin.c`,
   `OlyWebXMLMgr.c`); Wi-Fi / web-XML remote side.
 
+## Remote camera control — two planes (don't conflate)
+
+Workspace bundles a *full* tethered-control SDK, but it is the wrong plane for this body:
+
+- **USB PTP control** — `OlyCameraLib.dll` (decompile `research/decomp/OlyCameraLib.c`) is a
+  complete tethered SDK: LiveView, capture/shutter, RUN_MODE switching, `SetProperty`, and the
+  opcode table (`../usb-protocol/olympus-opcode-table.csv`) has 65 control ops (0x9481–0x94de),
+  420 device props (0xd0xx), 30 events (0xc0xx). The OM Workspace **GUI does not expose this**
+  (no capture/tether strings in `OM Workspace.exe`); tethered shooting is the separate **OLYMPUS
+  Capture** app on the same SDK. **The E-M10 Mark I does not implement the 0x94xx USB control
+  interface** — proven live: it stalls 0x9481 and reports "No Image Capture" (see
+  `../firmware/usb-ptp.md`). So this plane is unusable for this body.
+- **Wi-Fi CGI control** — the OI.Share plane, and the one that actually works on the E-M10
+  Mark I (verified live via `get_commandlist.cgi`, API 2.20). Full live view
+  (`exec_takemisc?com=startliveview&port=`), shutter/AF (`exec_shutter`, `exec_takemotion`),
+  and settings (`set_camprop`/`get_camprop`: takemode, aperture, shutter, ISO, expcomp, WB,
+  artfilter). Plain HTTP on 192.168.0.10 → cross-platform, usable directly by the KMP app. See
+  `../usb-protocol/wifi-api.md`. **This is the remote-control path for the replacement.**
+  Still un-RE'd: the live-view UDP stream wire format (the `startliveview&port=` payload).
+
 ## Picked deep-dive targets (post-survey)
 
 1. **`olive.dll` ORF + MakerNote reader** — foundational: a replacement must read .ORF and its
