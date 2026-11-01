@@ -68,6 +68,16 @@ consumer and `@Axxx@` parser not yet located. Hand-decoding entry 0 row data giv
 row widths (13,13,13,11,...): rows may be delta-coded or use an unidentified code.
 `tools/ghidra/ScalarRefs.java lo hi` lists code operands in an address range.
 
+## Icon bank decode: dead ends (entry 0)
+- Descriptor = 24 B `{u16 w=14, u16 h, u16 adv=22, u16 4, u16 0, u16 0, u32 size, u32 ptr(0xbf06a000+off), u32 0}`
+  (141 found by scanning; w is always 14, h varies 13..194, adv 22). `ptr+size` matches desc end+8 in ~half.
+- Tried: byte = colour<<4|run with run 0 = row end (rows inconsistent); row ends when sum of both nibbles == w
+  (works on one 14x13 vertical-bar blob, fails elsewhere); fixed 5-byte rows. No consistent pixel start offset
+  after the descriptor. Row counts ~19-20 irrespective of h.
+- Likely consumer is the display HW OSD engine (`api_tft_init_OSD`), not a software blit. Next: trace OSD buffer
+  fill / register programming from `api_tft_init_OSD` (0x7dba5074) instead of guessing bytes.
+- `tools/ghidra/NibbleFuncs.java maxlen` finds small nibble-decode loops (no hit was a decoder).
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
