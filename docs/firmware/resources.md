@@ -35,6 +35,22 @@ Carves `FFD8FF..FFD9` streams by walking markers to SOS then scanning to EOI.
 - Entry 5: 3 JPEGs = **Wi-Fi screen UI assets**: 1x920 gradient strip, 626x180 dark gradient panel, 638x57 "OLYMPUS IMAGE SHARE" title banner (use unconfirmed; the camera Wi-Fi screen text — SSID, password, "Privéverbinding", QR instruction, "Einde <Wi-Fi icon><MENU icon>" — comes from the string tables, the QR is generated at runtime, so these may be only backgrounds/banner or belong to another screen). Entries 1–4, 6: none.
 - Output goes to gitignored `firmware/stock/jpg2/`.
 
+## Block 1 fonts (entries 35-68) — decoded
+Entry 35+k pairs with string table 1+k (same language order; JP/KO/CJK entries are the big ones).
+Header 0x5c bytes, then glyph run (`tools/glyphs.py`, verified by rendering: renders `/` and
+`"` correctly). Per glyph: `u8 rows-1, u16 (w-1)<<4, u8 9`, then 32 rows of 2-bit
+antialiased RLE bytes `level<<6 | (run-1)`. After the run: `{u32 ptr(0xbf......), u16 w, u16 h}`
+index table (8 B/record, ptr is a runtime address). Latin entry has ~151 glyphs, Chinese ~664.
+These hold **text only**; `@Axxx@` icons (Wi-Fi, MENU) were not found here.
+
+## Entries 0 and 69 — icon/graphic candidates (partly understood)
+Both contain ~5300/~10500 `0xbf......` pointer words in serialized records:
+`{u16 w,u16 h,u16 adv,u16 4,0,0,u32 size,u32 ptr,0}` followed by 4-bit-palette RLE data
+(byte = colour<<4 | run, run 0 ends a row). First glyph of entry 0 renders as a ring, so
+this looks like the icon/symbol bank, but row widths do not add up cleanly (11 vs 13), so
+the exact format is **not decoded**. Cleanest next step: find the renderer in block 0 and
+read it, rather than guess.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
