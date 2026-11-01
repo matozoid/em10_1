@@ -16,3 +16,6 @@ Absolute-address regions seen in code operands (instruction count per 1 MB bucke
 
 ## Subsystems by log tag (`tools/subsystems.py`)
 GUI, APPEVENT_STATE/CAMST/CAMON/PWR/TIMER (camera state machine), iseq_ps_* (image sequencer: still/through/recview/update/mng), exp (exposure), api_* (layered API: disp, rec, play, picfile, dps, network_Wifi, histogram, tft, oldb, adj, cube), rec_ImgPro*, RecView, CapThr, Cap_PlayMovie, movplay_com, app_panorama, app_background, GuiTouch, DevBlu_Bluetooth, WIFI_REMOCON_CGI/UTL, WIFI_RELEASE, do_cgi_get, AVM_FILE_MAIN/AVM_API, API_MEDIA(_SD), aud_dev_wm8946 (audio codec), PER_ADCONV, FLASH.
+
+## Auto-naming
+`tools/ghidra/NameFuncs.java` renamed ~9.3k functions (10k+ with C++ pass) from referenced strings; see `classes.md`. Re-runnable (touches only `FUN_*` and `*_<8hex>` names). Output TSVs in `research/decomp/names_pass*.tsv` (gitignored). The Ghidra project itself is not committed; recreate with the steps in `STATUS.md` + this file.
