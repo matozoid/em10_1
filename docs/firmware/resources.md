@@ -82,6 +82,20 @@ row widths (13,13,13,11,...): rows may be delta-coded or use an unidentified cod
 - Retested nibble-sum rows with region [ptr, desc) and both axis orders: 0 of 141 descriptors decode cleanly.
 - `tools/ghidra/NibbleFuncs.java maxlen` finds small nibble-decode loops (no hit was a decoder).
 
+## Icon bank: RLE pixel format (partly decoded, 2026-11-01)
+- **Token = one byte `colour<<4 | (run-1)`** (run 1..16). Runs are **continuous across rows**: no row-end marker; a row
+  is whenever the running sum reaches the image width. Colour 0 = transparent, 1 = edge/antialias, 4 = solid (palette
+  index, palette not located yet).
+- Verified on the first icon (entry 0 file offset 0x16, descriptor at 0x70): 18 wide x 14 high, 252 px exactly,
+  symmetric shape. Descriptor `a=14` is therefore the **height** (the 14 in `{14, b}`), `b` is the **width**.
+  Second icon: rows `04 10 41 10 03` = 13 px each, begins with `0c 0c` (two blank rows).
+- Unresolved: the descriptor `ptr` does not point at the pixel start (icon 2: ptr lands mid-stream, 28 B after the
+  first token). Pixel start sits 0-4 B after a short header (e.g. `15 c0 00 02`) following the previous descriptor.
+  Icon 2's stream runs for ~20 rows, longer than `a=14`, so the descriptor semantics (height/width/ptr) are not fully
+  understood. Descriptor variants also exist with the 4th u16 = 8 and adv 22..54 (~1000 candidates), mostly noise.
+- Next: decode sequentially by walking the stream (row width from the descriptor), emit PNG sheet via PIL,
+  then map `@Axxx@` codes to glyph indices.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
