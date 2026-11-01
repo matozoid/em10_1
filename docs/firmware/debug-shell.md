@@ -79,6 +79,18 @@ with mode), and the C3D/AVM `memdump` debug variants (GPU/coprocessor).
   on internal test pads (standard for this Olympus platform). Not accessible without opening the
   body.
 
+## Live test result (2026-11-01): telnet NOT listening on stock 1.4
+
+Joined camera AP, probed from the host. Port **80 open** (the known HTTP/remocon server). Ports
+**23, 21, 22, 2000, 2323, 8080 all refused**. So the TCP shell is **not started in the shipping
+1.4 build** — flag 0x8050 is 0 (camera runs the Wi-Fi remocon XML proxy instead). The Wi-Fi
+telnet route to the shell is therefore unavailable without first setting that flag (needs a
+command/property that flips it, or modified firmware). HTTP server on :80 is the only live
+network surface.
+
+Next leads to enable it: find what writes 0x8050 (a PTP vendor property, a debug build flag, or a
+hidden HTTP/XML command), or use the community firmware which may ship it enabled.
+
 ## Recommendation for extraction
 
 Easiest with no cable at all: get shell access (Wi-Fi telnet if flag 0x8050 permits, else UART),
