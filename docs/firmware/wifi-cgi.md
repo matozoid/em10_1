@@ -67,3 +67,27 @@ First level `exec_shutter`/`exec_shuttermisc` wrap the handler in `WIFI_RELEASE_
 set_takemode 0x7e70c0c4: maps `com` to a mode id 0..3 or 0xffff, calls WIFI_REMOCON_CGI + a state setter.
 
 Ghidra decompiler caveat: MN103 calling convention (A0 = this/ctx, A1 = args) is not modelled, so params show as `in_A0/in_A1`. Auto-names like `version_7e70bd3c` come from a nearby string, not the real function role.
+
+## LIVE verification (2026-11-01, after `switch_cammode.cgi?mode=rec&lvqty=0320x0240`, then back with `mode=play`)
+Static prediction confirmed: the `getset`/`get` attributes from `desclist` match the firmware table exactly (read-only: touchactiveframe, noisereduction, lowvibtime, bulbtimelimit, digitaltelecon).
+- `switch_cammode` replies `200` with empty body (`Content-Type: www/unknown`).
+- `get_camprop?com=get&propname=desclist` -> HTTP 520 `errorcode` 1004 (bad argument: desclist only supports `com=desc`). This is the first live 1004, confirming its meaning.
+- `com=desc&propname=desclist` returns all 13 descs in one XML (2322 B); per-property `desc` and `get` also work.
+
+Values at probe time and value domains (`enum`):
+| prop | attr | value | enum |
+|---|---|---|---|
+| takemode | getset | P | iAuto P A S M ART |
+| drivemode | getset | continuous-L | normal continuous-H continuous-L selftimer customselftimer |
+| focalvalue | getset | 5.6 | 1.0 .. 91 (1/3-stop steps; list is lens-independent here) |
+| expcomp | getset | +0.3 | -5.0 .. +5.0 in 1/3 steps |
+| shutspeedvalue | getset | 250 | livetime livebulb 60" .. 1.3 .. 8000 |
+| isospeedvalue | getset | Auto | Auto Low 200 .. 25600 |
+| wbvalue | getset | 0 | 0 18 16 17 20 35 64 23 256 257 258 259 512 |
+| artfilter | getset | ART01 | ART01 .. ART12 ARTBKT |
+| noisereduction | get | off | off on auto |
+| lowvibtime | get | 0 | 0 1 125 250 500 1000 2000 4000 8000 15000 30000 |
+| bulbtimelimit | get | 8 | 1 2 4 8 15 20 25 30 |
+| digitaltelecon | get | off | on off |
+| touchactiveframe | get | 0054-0040_0211x0159 | (position-size string) |
+Only read calls were made against these properties; no property was set. The camera was returned to `play` mode. Raw capture: `research/camera-probe-camprop-*.txt` (gitignored).
