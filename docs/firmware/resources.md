@@ -126,6 +126,13 @@ Entry 69 (base 0xbf46a000): 1706 records, 160 with hdr[3]==2 (+52 whole-row hdr-
 box "P", label "PBH", rounded panel frames with a shadow edge (colour index >4, drawn magenta = likely
 semi-transparent shadow), a big curved side panel. Same two-format split as entry 0.
 
+Consumer search (2026-11-01): `api_tft_Draw_Image` (0x7dba41c2) re-confirmed as pure request marshalling. It maps
+format 0x13->0x81, 0x12->0x80, 0x21->0x90, 0x16/0x07->0, copies src ptr, 4 rect u16 pairs, a u16 from the source
+descriptor (+10) and a byte (+14), then posts via `FUN_7db92b39(3,0x10)`. No pixel decode in block 0, so the second
+encoding is almost certainly consumed by the display engine (separate core or HW RLE blitter). Format code is chosen by
+the caller; the `hdr[3]` 2/3 split likely corresponds to blitter pixel formats. Static analysis of block 0 cannot
+resolve it; remaining routes are more blind decoding or finding the engine firmware.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
