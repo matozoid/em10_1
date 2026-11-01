@@ -133,6 +133,24 @@ encoding is almost certainly consumed by the display engine (separate core or HW
 the caller; the `hdr[3]` 2/3 split likely corresponds to blitter pixel formats. Static analysis of block 0 cannot
 resolve it; remaining routes are more blind decoding or finding the engine firmware.
 
+### Icon formats SOLVED (2026-11-01, supersedes the open notes above)
+Header (4 B, same as font glyphs): `H = (b0 | (b1&15)<<8) + 1`, `W = ((b1 | b2<<8) >> 4) + 1`, `b3` = format.
+Header W equals descriptor width on every record. Descriptor `kind` = output bits per pixel (4 for fmt 2, 8 for fmt 3).
+
+| fmt | encoding | verified |
+|---|---|---|
+| 2 | byte RLE `colour<<4 \| (run-1)`, runs continue across rows, 4-bit colour (0 = transparent) | 192/192 e0 |
+| 3 | bitstream, LSB-first, in 64-bit words. Token = 10 bits: 2-bit `run-1` + 8-bit CLUT index. A token never straddles a 64-bit word boundary (leftover bits are zero padding, skip to next word). Runs end at each row end. | 1154/1154 e0, 1546/1546 e69, exact W*H |
+| 9 | font glyph (`tools/glyphs.py`) | |
+
+Format 3 explains earlier dead ends: max run 4 px gives the 2.667 bit/px uniform panels (6 tokens = 24 px per 64-bit
+word). Index 0 = transparent; ~109 distinct indices (max ~0x6f) in entry 0, so an ~112-entry CLUT. The CLUT itself is
+not located yet (colours in sheets are false). Format-2 colour = low nibble range of the same CLUT?, unconfirmed.
+
+Content (entry 0): digits/7-seg fonts in several sizes, PASM/iAUTO/scene/ART 1-12/ART BKT mode icons, flash
+compensation labels, Wi-Fi, MENU/OK/touch buttons, battery, sliders, panel frames. `tools/icons.py entry.bin base_hex
+out_prefix [--fmt 2|3]` writes paged sheets (gitignored, vendor data).
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
