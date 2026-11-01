@@ -111,6 +111,12 @@ digit/OSD glyphs and 8-wide `08700003` bitmaps) do NOT: token sums never divide 
 patterns (period 7-8 B) with colour nibbles up to 0xc. Probably a second format (multi-plane or different RLE).
 Not yet decoded.
 
+User-judged candidate sheets (2026-11-01): for `hdr[3]==3` records, reading tokens as `colour<<4 | run` (run = low
+nibble, NOT run-1; zero-length runs allowed) gives structured grey areas and diagonal edges (record 0x854), unlike raw
+1/2/4/8 bpp or run-1 RLE (noise). Row stride is not constant: best autocorrelation ~45 px for 0x854 although the
+descriptor says w=34/adv=43, and diagonals skew between strides 44 and 46. So rows probably carry their own length or
+end marker. Still undecoded.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
