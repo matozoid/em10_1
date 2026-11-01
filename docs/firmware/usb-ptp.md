@@ -66,16 +66,50 @@ view, capture, movie, focus, storage — matching the OM SDK. **None is a genera
 "read memory / read flash" primitive.** (The 303- and 237-entry "arrays" at 0x7df6ec10 /
 0x7df741e4 are image/pixel data — `1010 1010 …` and `9090 9090 …` fills — not opcode lists.)
 
+## Per-mode DeviceInfo
+
+`OLYMPUS_7e7d4456` is the live GetDeviceInfo responder. It picks which OperationsSupported
+array to send from the current USB mode (`sVar5`, from `FUN_7e7caa83`):
+
+| mode (sVar5) | ops array | count |
+|---|---|---|
+| 0, 5 | 0x7e890e16 | 0x1d (29) |
+| 1 | 0x7e890e78 | 0x12 (18) |
+| 2, 3 | 0x7e890e9c | 0x0b (11) |
+| 4 | 0x7e890e50 | 0x14 (20) |
+| 6 | 0x7e890eb2 | 0x21 (33) |
+
+So the camera advertises different op sets for UMS / MTP / PTP-control / print. The richest
+(mode 6, 33 ops) is the Olympus OM-D control/tether mode and its ops are the camera-control
+set above — still no memory-read op.
+
+## LIVE RESULT (2026-11-01): USB confirmed, no memory-read op
+
+Camera connected over USB. UMS "Storage" mode enumerates as SCSI mass storage (PID 07b4:012e,
+card mounts as a disk) — no PTP. Switched to MTP mode (PID **07b4:012f**); pulled real
+`GetDeviceInfo` with `gphoto2 --debug --summary` (read-only; had to `pkill gvfsd-gphoto2`
+first to free the interface). libgphoto2 identifies it as `PTP_VENDOR_GP_OLYMPUS_OMD`,
+Vendor Extension ID 0xfffd (MTP), device version "1.00", serial V5PG20539.
+
+**OperationsSupported (live, MTP mode) — the complete surface, 20 ops:**
+`0x1001 0x1002 0x1003 0x1004 0x1005 0x1006 0x1007 0x1008 0x1009 0x100a 0x100b 0x100f 0x1014
+0x1015 0x1016 0x101b` (GetDeviceInfo, Open/CloseSession, storage IDs/info, #objects,
+object handles/info/object, thumbnail, DeleteObject, FormatStore, device-prop
+desc/get/set, GetPartialObject) + `0x9801 0x9802 0x9803 0x9805` (MTP GetObjectProps
+Supported/Desc/Value/List). Device capabilities: *File Download, File Deletion,
+No Image Capture, No Open Capture, No vendor-specific capture*.
+
+**Verdict: the live USB op surface is storage + object-metadata transfer only.** No Olympus
+camera-control vendor ops are even exposed in this mode, let alone any raw memory/flash read.
+Object ops (GetObject / GetPartialObject) read **DCIM files on the card by object handle**,
+not arbitrary addresses — they cannot reach flash 0x46560000. This confirms the static
+finding: **no PTP/USB path dumps camera memory.**
+
 ## Bottom line for extraction
 
-- No cable-only memory dump via a documented PTP op: the supported vendor set is
-  camera-control, not memory access.
-- Proving a *negative* for all ~70 vendor ops from statics is hard (handlers are reached via
-  the mailbox/event path, not a table). Two ways to close it:
-  1. **Live, read-only USB probe** — connect USB, send `GetDeviceInfo` (0x1001), confirm the
-     OperationsSupported list above against the real camera, then exercise candidate vendor
-     ops. Non-destructive but a live action → needs user approval.
-  2. Trace each vendor handler from the event-dispatch path (slow; not table-driven).
+- **No cable-only memory dump via USB.** Proven both statically (supported-op arrays are all
+  standard + Olympus camera-control, none a memory read) and live (MTP mode exposes only
+  storage/object + MTP-prop ops).
 - The firmware-update path (`start_usb_firmup`) is a USB *write* op — relevant to the
   custom-firmware modding route (`../mods/firmware-modding.md`), i.e. flashing a patch over
   USB instead of SD, not to reading memory.
@@ -83,3 +117,8 @@ view, capture, movie, focus, storage — matching the OM SDK. **None is a genera
 So the two viable ROM-picture routes remain: the debug shell `file memdump` (needs shell
 access — Wi-Fi telnet is off, UART needs opening the body; see `debug-shell.md`) and a custom
 firmware patch that copies flash→card. USB PTP does not add a third.
+
+Not yet probed live: the OM-D control/tether mode (static mode 6, 33 ops) — entering it needs
+the Olympus vendor session handshake, which changes camera state, so it was not exercised. Its
+op set is known statically (camera-control only) and contains no memory read, so the negative
+holds without it.
