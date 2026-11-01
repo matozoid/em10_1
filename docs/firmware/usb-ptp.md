@@ -122,3 +122,38 @@ Not yet probed live: the OM-D control/tether mode (static mode 6, 33 ops) — en
 the Olympus vendor session handshake, which changes camera state, so it was not exercised. Its
 op set is known statically (camera-control only) and contains no memory read, so the negative
 holds without it.
+
+## Physical USB menu and how each mode is reached (2026-11-01)
+
+The camera body's USB setting menu (E-M10 Mark I, body fw 1.4) offers only **four** entries
+(Dutch UI): `Opslag` (Storage), `MTP`, `Afdrukken` (Print), `Sluiten` (Exit/cancel). So the
+host-selectable USB personalities are only three:
+
+| menu entry | enumerates as | PID | static mode | live result |
+|---|---|---|---|---|
+| Opslag (Storage) | USB Mass Storage (SCSI disk) | 07b4:012e | — (no PTP) | card mounts as block device; no PTP at all |
+| MTP | PTP/MTP | 07b4:012f | mode 4 (20 ops) | confirmed live — storage/object + MTP-prop ops only |
+| Afdrukken (Print) | PictBridge/DPS | — | mode 2/3 (11 ops, static) | **does not enumerate to a PC** — waits for a PictBridge printer handshake; on a non-printer host the device never appears on the bus (confirmed: no new enumeration, camera shows "connecting" then can be cancelled) |
+
+**There is no "PC Control" / tether entry in this body's USB menu.** The richer static op sets
+(mode 0/5 = 29 ops with vendor 0x911x/0x912x, and mode 6 = 33 ops, the OM-D camera-control
+set) are therefore **not reachable by a menu selection**. They are entered only by the host
+issuing the Olympus vendor unlock while the camera is in MTP mode — the standard tether
+handshake (`PTP_OC_OLYMPUS_OpenSession` 0x9481 / 0x9482, as used by Olympus Viewer / OM Capture
+and by libgphoto2's `ptp2` olympus_omd init). libgphoto2 did **not** auto-enter control mode
+here (`gphoto2 --abilities` reports `Configuration support: no` in plain MTP), so mode 6 stays
+dormant until that command is sent. Sending it is a live camera-state change (see below).
+
+Note: in MTP mode the device identifies (via libgphoto2) as `PTP_VENDOR_GP_OLYMPUS_OMD`,
+Vendor Extension ID **0xfffd** (= MTP, *not* the Olympus PTP extension id), serial <serial>,
+`bcdDevice`/"Version" 1.00 (the PTP-stack version field, unrelated to body fw 1.4). The
+desktop's `gvfsd-gphoto2` auto-claims the interface on every (re)enumeration; each read needs
+`pkill -9 -f gvfsd-gphoto2` (and `gvfs-gphoto2-volume`) first to free interface 0.
+
+### Mode 6 not yet enumerated live — the only open USB item
+
+For a *complete* record the one remaining live USB datum is mode 6's DeviceInfo as the camera
+actually reports it (vs. the static array). Reaching it means sending the Olympus OpenSession
+unlock from the host — a live vendor command that changes camera state, so it is gated on
+explicit user approval and not done yet. Its static op set is camera-control only and holds no
+memory-read op, so this is a documentation-completeness item, not an extraction lead.
