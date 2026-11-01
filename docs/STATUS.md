@@ -74,3 +74,19 @@ All 7 `jmp` hooks (opcode `DC`, rel32 from insn start) decode at clean instructi
 
 parser payload (disassembled from a patched scratch copy, never flashed) saves regs, calls 0x403f8408, runs the replaced stock insns (`extbu D3; mov D3,(0x10,SP); btst 2,D3`), then `jmp 0x4041b417` = site+6. Confirms the MN103 spec decodes real code correctly, and the hook pattern: replaced insns are re-executed in the cave, then jump back.
 `loader_patch@0x403001ab` old == new (no-op in this profile).
+
+## Firmware RE progress (2026-11-01, later)
+Done, all in `docs/firmware/` and `docs/hardware/`:
+- Block 0 in Ghidra (base 0x7d991020, ~72.5k funcs, ~10.4k named from debug strings, vtable + class-graph renames):
+  `memory-map`, `rtos-tasks`, `classes`, `blocks`.
+- Wi-Fi CGI (oishare v2.20, 23 CGIs, per-mode dispatch, camprop desclist), live read-only verified: `wifi-cgi`.
+- Blocks 1/2 = resources (`resources.md`): 34 UI string tables (+`@Axxx@` icon codes), 34 fonts (decoded, `tools/glyphs.py`),
+  32 JPEGs (`tools/jpgextract.py`), icon banks entry 0 / 69 (`tools/icons.py`): 444 decoded; ~2600 records in a
+  second encoding (`hdr[3]==3`) still undecoded.
+- Display ASIC command set and outputs: `docs/hardware/display-pipeline.md`. Block 0 only posts requests to it; no
+  decoder or ASIC loader found, so remaining icon formats need blind decoding.
+
+Open: hardware register map, boot/vector code, PTP+USB handlers (unverified on wire), `set_camprop`/`exec_shutter`
+decompile + live test (changes camera state, ask first), stock 1.0-1.3 BINs (user must supply), mn10300 cross-compiler
+for mods, `docs/mods/`, **KMP app scaffold** (`app/` empty; v1 = query server, download, write SD, instructions).
+Note: this doc's older TODO list above is superseded by this section.
