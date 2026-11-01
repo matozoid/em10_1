@@ -122,6 +122,10 @@ autocorrelation peaks at stride 16 B (0.46) and multiples; 8-wide records (`0870
 period with the last 4 nibbles of each 14-nibble row always 0 and alternating row types (possible interleaved
 colour/alpha planes). Unresolved; entry 69 and `@Axxx@` mapping untouched.
 
+Entry 69 (base 0xbf46a000): 1706 records, 160 with hdr[3]==2 (+52 whole-row hdr-3) decode via `tools/icons.py`: mode
+box "P", label "PBH", rounded panel frames with a shadow edge (colour index >4, drawn magenta = likely
+semi-transparent shadow), a big curved side panel. Same two-format split as entry 0.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
