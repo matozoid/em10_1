@@ -75,6 +75,15 @@ with mode), and the C3D/AVM `memdump` debug variants (GPU/coprocessor).
   DOS-filesystem API tags, not USB operations. So there is **no confirmed shell-over-USB path**;
   mapping a vendor PTP opcode to a memory read (or to firmware-update flashing) is the open USB
   lead. `usb` is also a master shell command (handler 0x7e7db895).
+
+  **USB PTP dispatcher not yet located (2026-11-01).** Several opcode-like tables turned out to be
+  unrelated: `{index,opcode}` at 0x7e45c100 is used only by `GuiCallerImp::sendEvent` (GUI event
+  map; its 0x90xx are SDK event ids, not PTP ops); `{op,0,1,1}` at 0x7d9ad28c and `{0x900f,4,...}`
+  at 0x7d9ad38c are read by `IMDF_LOCAL` / `AUD_BRIDGE_LITE_CPU0` (inter-CPU message tables). The
+  real USB PTP opcode→handler table (in the `TSK_PTPCOM` task) was not found; the vendor opcode
+  *occurrence* list 0x9001-0x93f3 is mostly DeviceInfo `OperationsSupported` arrays (plain opcode
+  lists, no handler pointers, e.g. 0x7dc5bf00). No memory-read PTP op confirmed. Locating the
+  dispatcher needs tracing from the PTPCOM receive loop, not from opcode tables.
 - **UART:** the "USF debugging shell" and `DBG_OUT` task strongly imply a hardware serial console
   on internal test pads (standard for this Olympus platform). Not accessible without opening the
   body.
@@ -92,6 +101,14 @@ network surface.
 
 Next leads to enable it: find what writes 0x8050 (a PTP vendor property, a debug build flag, or a
 hidden HTTP/XML command), or use the community firmware which may ship it enabled.
+
+### Correction: 0x8050 is a CPU core-ID / low-level register, not a debug flag (2026-11-01)
+`_DAT_00008050` is read all over low-level code — `IMDF_LOCAL` (inter-CPU image-data flow),
+`AUD_BRIDGE_LITE_CPU0`, `PER_ADCONV`, the wifi shell — always `==0`/`==1` branches, once even read
+into SP. On this dual-core MN103 it is almost certainly the **current-CPU-core id / core mode
+register** (read-only SFR), so the wifi code's `if (_DAT_00008050 == 1)` is a *per-core* branch,
+not a telnet enable/disable. The telnet-closed live result still holds; the gating reason was
+misidentified. There is therefore no known software flag that turns the Wi-Fi shell on.
 
 ### Flag 0x8050 is read-only to the firmware (2026-11-01)
 Searched every reference to absolute address 0x8050 in block 0 (`tools/ghidra/DataRefs.java`, plus
