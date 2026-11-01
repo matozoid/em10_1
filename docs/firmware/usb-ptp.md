@@ -202,6 +202,33 @@ capture/format/firmware op.)
 
 **USB route is now fully exhausted and documented**: all three menu modes enumerated live,
 full MTP DeviceInfo captured verbatim, the control-mode unlock proven rejected. No USB path —
-menu-selectable or unlock-gated — exposes a memory/flash read. Extraction must go via the
-debug shell (UART; `debug-shell.md`) or a custom-firmware flash→card patch
-(`../mods/firmware-modding.md`).
+menu-selectable or unlock-gated — exposes a memory/flash read. Extraction must go via a
+custom-firmware flash→card patch (`../mods/firmware-modding.md`); the UART debug-shell route is
+excluded because the body is never opened.
+
+### Cross-check: live DeviceInfo vs static firmware (2026-11-01, `tools/verify_usb.py`)
+
+The live USB results were verified against the decrypted block 0 (runtime base 0x7d991020):
+
+- **Live MTP op list is byte-for-byte identical to the static mode-4 array at `0x7e890e50`**
+  (20 ops). So the firmware's per-mode DeviceInfo selector (`OLYMPUS_7e7d4456`) exactly
+  predicts what the camera emits over the wire — the static per-mode table is trustworthy.
+  Full static per-mode dump:
+  - `0x7e890e16` mode 0/5 (29): std 0x1001–0x100d,0x100f,0x1014–0x1017,0x101b + vendor
+    0x9116 0x9117 0x9119 0x911c 0x9120 0x9121 0x9122 0x9123 0x9124 0x9125
+  - `0x7e890e50` mode 4 (20): std 0x1001–0x100b,0x100f,0x1014–0x1016,0x101b + 0x9801–0x9803,0x9805  ← **= live**
+  - `0x7e890e78` mode 1 (18): std 0x1001–0x100d,0x100f,0x1014–0x1016,0x101b
+  - `0x7e890e9c` mode 2/3 (11): 0x1001–0x1003,0x1006–0x1009,0x100b–0x100d,0x101b
+  - `0x7e890eb2` mode 6 (33): mode-0/5 set + 0x902c 0x902d 0x902e 0x902f
+- **The OMD unlock opcodes `0x9481`/`0x9482` appear in NO advertised ops array** (confirmed by
+  set-membership against all five arrays). The dozen-plus raw byte-pair matches for those
+  values are unaligned code bytes scattered in `0x7d9xxxxx`, not table entries — so the live
+  pipe-STALL is a genuine OperationNotSupported, matching the firmware.
+- **Union of all advertised vendor ops across every reachable mode** = `0x902c–0x902f,
+  0x9116–0x9125, 0x9801–0x9805`; highest standard op is `0x101b` GetPartialObject. None is a
+  memory/flash read. The larger SDK control list in the `0x7e5bxxxx` region
+  (0x9004–0x925x) is the internal camera-control engine's set, not what the USB DeviceInfo
+  responder advertises; it too is camera-control only.
+
+Conclusion stands and is now double-sourced (live + firmware): **no USB operation reads camera
+memory.**

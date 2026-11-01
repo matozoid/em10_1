@@ -85,8 +85,10 @@ with mode), and the C3D/AVM `memdump` debug variants (GPU/coprocessor).
   lists, no handler pointers, e.g. 0x7dc5bf00). No memory-read PTP op confirmed. Locating the
   dispatcher needs tracing from the PTPCOM receive loop, not from opcode tables.
 - **UART:** the "USF debugging shell" and `DBG_OUT` task strongly imply a hardware serial console
-  on internal test pads (standard for this Olympus platform). Not accessible without opening the
-  body.
+  on internal test pads (standard for this Olympus platform). **Excluded permanently — the owner
+  will not open the body** (any screwdriver/chip-off/JTAG route is off the table; see project
+  memory). So the only shell transport that could ever apply is a network one *forced up by
+  modified firmware* (telnet is off and not software-enableable on stock 1.4).
 
 ## Live test result (2026-11-01): telnet NOT listening on stock 1.4
 
@@ -127,9 +129,14 @@ not at the Wi-Fi shell.
 
 ## Recommendation for extraction
 
-Easiest with no cable at all: get shell access (Wi-Fi telnet if flag 0x8050 permits, else UART),
-run `file memdump rompics 46560000 14680064` (ADR hex, LEN decimal = 0xE00000), then read the
-file off the SD card. All of this is a
-live camera action and must be confirmed with the user before running; only reads so far.
-Open item: whether the shipping 1.4 build leaves the telnet flag (0x8050) enabled, and whether a
-vendor PTP opcode gives a USB-only memory read.
+The shell command `file memdump rompics 46560000 14680064` (ADR hex, LEN decimal = 0xE00000)
+is the clean dump once a shell is reachable — but **no non-invasive transport reaches the shell
+on stock 1.4**: Wi-Fi telnet is off and not software-enableable (flag 0x8050 is a read-only
+register, 887 reads / 0 writes), USB PTP exposes no shell or memory op (proven live + static,
+see `usb-ptp.md`), and UART needs opening the body, which the owner will not do.
+
+**Therefore the only route left is modified firmware** (`../mods/firmware-modding.md`): a
+patch that either forces the shell/telnet task up so the dump command can run over Wi-Fi, or
+more directly copies flash `0x46560000..` to the SD card from a hooked code path — flashed via
+the official OFU updater over USB (no disassembly). This is a live, brick-risk action requiring
+explicit user go-ahead and a recovery plan.
