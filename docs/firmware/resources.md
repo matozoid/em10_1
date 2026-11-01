@@ -76,6 +76,10 @@ row widths (13,13,13,11,...): rows may be delta-coded or use an unidentified cod
   after the descriptor. Row counts ~19-20 irrespective of h.
 - Likely consumer is the display HW OSD engine (`api_tft_init_OSD`), not a software blit. Next: trace OSD buffer
   fill / register programming from `api_tft_init_OSD` (0x7dba5074) instead of guessing bytes.
+- `api_tft_Draw_Image` (0x7dba41c2) / `_Multi_Raw` (0x7dba4bcd) only fill a request block (src ptr, x/y/w/h, format code
+  0x80/0x81/0x83/0x8e/0x90) and post it via `appexec_7db92a6b` / `FUN_7db92b39(3,0x10)`: drawing is delegated to another
+  task/engine, so there is likely **no software decoder in block 0**. `api_tft_init_OSD` is a stub.
+- Retested nibble-sum rows with region [ptr, desc) and both axis orders: 0 of 141 descriptors decode cleanly.
 - `tools/ghidra/NibbleFuncs.java maxlen` finds small nibble-decode loops (no hit was a decoder).
 
 ## Status
