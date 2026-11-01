@@ -14,7 +14,8 @@ Writes out_prefix_NN.png. Layout (reverse engineered, see docs/firmware/resource
   format 9   = font glyph (tools/glyphs.py)
 Palettes: block 0 ROM table at file offset PALTAB (runtime .data copy at 0x6045e020), 58 entries indexed by
 palette ID, each -> {u32 count=256, u32 ptr} -> 256 x ARGB8888. SetPalette(mode) loads ID k into the 256-colour
-layer (fmt 3), k-1 into the 16-colour layer (fmt 2), k-2 into the 8-colour layer. --pal K picks k (default 9).
+layer (fmt 3), k-1 into the 16-colour layer (fmt 2), k-2 into the 8-colour layer. --pal K (fmt 3, default 3),
+--pal16 K (fmt 2, default 8), --override off=K,... per record; OVERRIDES holds user-judged picks.
 Output is vendor data: keep local."""
 import struct, sys
 from PIL import Image, ImageDraw
@@ -61,6 +62,9 @@ PALTAB = 0x382ec0
 BLK0_BASE = 0x7d991020
 
 
+OVERRIDES = {0xbf06a000: {0xdc00: 6}}  # bank base -> {record offset: palette ID}
+
+
 def load_palette(blk0, pid):
     p = struct.unpack_from('<I', blk0, PALTAB + 4 * pid)[0]
     n, dp = struct.unpack_from('<2I', blk0, p - BLK0_BASE)
@@ -77,8 +81,20 @@ def main():
     d = open(a[1], 'rb').read(); base = int(a[2], 16); out = a[3]
     fmts = {int(a[a.index('--fmt') + 1])} if '--fmt' in a else {2, 3}
     blk0 = open(a[a.index('--blk0') + 1] if '--blk0' in a else 'firmware/stock/dec/blk00_40300000.bin', 'rb').read()
-    pid = int(a[a.index('--pal') + 1], 0) if '--pal' in a else 9
-    pals = {2: load_palette(blk0, pid - 1), 3: load_palette(blk0, pid)}
+    # Palette per screen; no single one fits all icons. User-judged defaults (2026-11-01):
+    # ID 3 for format 3 in general, ID 6 for the exposure-compensation scale.
+    pid = int(a[a.index('--pal') + 1], 0) if '--pal' in a else 3
+    pid16 = int(a[a.index('--pal16') + 1], 0) if '--pal16' in a else 8
+    over = dict(OVERRIDES.get(base, {}))
+    if '--override' in a:  # e.g. --override dc00=6,399a0=3 (record offsets, hex)
+        for kv in a[a.index('--override') + 1].split(','):
+            k, v = kv.split('='); over[int(k, 16)] = int(v, 0)
+    cache = {}
+    def pal_for(r):
+        p = pid16 if r['fmt'] == 2 else over.get(r['o'], pid)
+        if p not in cache:
+            cache[p] = load_palette(blk0, p)
+        return cache[p]
     PH = int(a[a.index('--page-height') + 1]) if '--page-height' in a else 4000
     items = []
     for r in records(d, base):
@@ -102,7 +118,7 @@ def main():
         hgt = max(y + r['H'] * S + 14 for r, px, S, x, y in pg) + 4
         img = Image.new('RGB', (PW, hgt), (40, 40, 40)); dr = ImageDraw.Draw(img)
         for r, px, S, x, y in pg:
-            pal = pals[r['fmt']]
+            pal = pal_for(r)
             dr.text((x, y), '%x' % r['o'], fill=(255, 200, 0))
             tile = Image.new('RGB', (r['W'], r['H']))
             tile.putdata([blend(pal[v], (90, 90, 90) if ((i % r['W']) // 4 + (i // r['W']) // 4) % 2 else (60, 60, 60))
