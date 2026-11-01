@@ -18,6 +18,23 @@ splits a decoded block into entries. Extracted data is vendor content: keep loca
 | 1,2,3,4 | sparse (3–11% nonzero) regions of 0x200–0x4000 B sub-records, mostly erased/zero: look like pre-allocated settings/calibration storage |
 | 5,6 | denser (40–54%) small tables |
 
+### Block 2 entry 0: non-JPEG subs (2026-11-01)
+Sub directory: 16-byte records at entry start, addr - 0x42d00400 = file offset. Subs 1-29 = the JPEGs below.
+- **Sub 0** (off 0x400, 0x240000 B): ~0x23ffe0 bytes of i.i.d. 6-bit values (0..63), no spatial correlation at
+  any row width; value frequencies are multiples of 1/256 (i.e. `LUT[rand8]`). A noise/grain or dither texture
+  (Grainy Film art filter is a likely user); not a picture.
+- **Subs 30-39** (0x6d8400 + k*0xa200, 41472 B each): 0x20-byte zero header, 160 rows x 128 u16 (120 used +
+  8 zero pad), 10-bit values 0..1027, then trailer at u16 index 20720: `2013, 0x0a0a, 0x2f0e, ?, checksum`
+  (date-like stamp 2013-10-10). Rendered 120x160 they are smooth masks: full frame, letterbox (two widths),
+  pillarbox, rounded vignette, elliptical vignette. Low-res frame/shading maps, likely paired with the art-filter
+  frame JPEGs or per-aspect shading. Orientation (120x160 vs transposed) unconfirmed.
+
+### Block 2 entry 6 (0x14000 B)
+Two subs: 0x43b74400 (0x6000 B) and 0x43b7a400 (0x8a00 B). 2 bytes per pixel, Y then chroma, Y only 0x00/0xfe,
+chroma 0x00/0x80 (`fe80` = white, `0080` = black). Sub 0 at width 128 = black box with white border (128x96,
+likely a placeholder/test frame). Sub 1 has a 32-px period of short white runs and no clean width: probably a
+bit pattern / test table, not a UI picture. No photo-style backgrounds exist outside the block 2 JPEGs.
+
 ## String-table notes
 Entry order follows language; e022 is Dutch. Strings may contain embedded newlines
 (line-wrapped UI text). Example Dutch indices: 1766 "Privéverbinding", 1765 one-time
