@@ -161,7 +161,11 @@ palette assignment is open.
 
 Entry 0 tail (0x3b1e44-end): a 3525-entry table of `0xbf......` pointers (global image ID -> record, spanning
 entries 0 and 69, likely the `@Axxx@`/image-ID index), then format-1 records (`b3=1`, 32 px tall, 4-bit nibbles,
-background nibble 3), probably inline text icons. Both not yet decoded.
+background nibble 3), probably inline text icons. ID table entry = RAM addr of record start + 8 (record start
+addr = bank base + file offset). 3047 of 3525 IDs resolve to decoded fmt-2/3 records (1346/1346 in e0, 1701/1706 in
+e69, 1:1); the other 478 point at fmt-1 or wide records not yet decoded. Having an ID does not imply use; the bank
+is likely shared across bodies. Which IDs block 0 actually draws: not investigated.
+Sheet colours: palette ID 3 default, ID 6 for exposure-comp scale (user-judged); no single palette fits all icons.
 
 Content (entry 0): digits/7-seg fonts in several sizes, PASM/iAUTO/scene/ART 1-12/ART BKT mode icons, flash
 compensation labels, Wi-Fi, MENU/OK/touch buttons, battery, sliders, panel frames. `tools/icons.py entry.bin base_hex
