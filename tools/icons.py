@@ -35,11 +35,31 @@ def records(d, base):
         yield dict(off=off, o=o, W=W, H=H, fmt=b[3], kind=kind, adv=adv, p=b[4:])
 
 
+IDTAB_OFF, IDTAB_N = 0x3b1e48, 3525  # in block 1 entry 0: image ID -> RAM addr of record start + 8
+
+
+def id_records(d, base, e0):
+    """Records of this bank reachable via the image-ID table (catches wide images the descriptor scan skips).
+    Size is unknown here, so the payload slice is the worst case; decoders stop at W*H."""
+    for i, t in enumerate(struct.unpack_from('<%dI' % IDTAB_N, e0, IDTAB_OFF)):
+        o = t - 8 - base
+        if not 0 <= o < len(d) - 4:
+            continue
+        h = d[o:o + 4]
+        H = (h[0] | (h[1] & 15) << 8) + 1
+        W = ((h[1] | h[2] << 8) >> 4) + 1
+        if h[3] in (2, 3):
+            yield dict(off=None, o=o, W=W, H=H, fmt=h[3], kind=None, adv=None, id=i,
+                       p=d[o + 4:o + 4 + (W * H if h[3] == 2 else W * H * 4 // 3 + 16)])  # fmt 3 worst case: 6 tokens per 64-bit word
+
+
 def dec2(p, W, H):
-    px = []
+    px = []; T = W * H
     for b in p:
         px += [b >> 4] * ((b & 15) + 1)
-    return px[:W * H] if len(px) >= W * H else None
+        if len(px) >= T:
+            return px if len(px) == T else None
+    return None
 
 
 def dec3(p, W, H):
@@ -97,7 +117,11 @@ def main():
         return cache[p]
     PH = int(a[a.index('--page-height') + 1]) if '--page-height' in a else 4000
     items = []
-    for r in records(d, base):
+    e0 = open(a[a.index('--e0') + 1] if '--e0' in a else 'firmware/stock/res1/e000_41500800_3d8800.bin', 'rb').read()
+    rs = list(records(d, base)); seen = {r['o'] for r in rs}
+    rs += [r for r in id_records(d, base, e0) if r['o'] not in seen]
+    rs.sort(key=lambda r: r['o'])
+    for r in rs:
         if r['fmt'] not in fmts:
             continue
         px = (dec2 if r['fmt'] == 2 else dec3)(r['p'], r['W'], r['H'])
