@@ -105,6 +105,12 @@ pixel count is a whole number of rows: digits 1-9, play/file, circle, flash bolt
 The other ~1100 records do not divide by width (likely different hdr-selected encodings or multi-frame) - open.
 Colour indices 0..4 seen mostly; index>4 exists (palette unknown, drawn magenta).
 
+**Header byte 3 selects the encoding.** Records with `hdr[3]==2` (e.g. `15c00002`) decode cleanly with the
+colour<<4|(run-1) RLE (232 of 232 whole-row). Records with `hdr[3]==3` (~1100, e.g. `25100303`, `2a100203`-style
+digit/OSD glyphs and 8-wide `08700003` bitmaps) do NOT: token sums never divide by the width and show periodic
+patterns (period 7-8 B) with colour nibbles up to 0xc. Probably a second format (multi-plane or different RLE).
+Not yet decoded.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
