@@ -223,3 +223,9 @@ Prefixes: `OlyHfw*` = high-level framework operations (Shoot, Ply*=play, Edt*=ed
 | userMenuPlay_RawEditCustom | 1 |
 | userMenuTopMenu | 1 |
 | userCommonSecondWizard | 1 |
+
+## Vtable recovery (`tools/ghidra/VTables.java`)
+Scan: runs of >=3 consecutive aligned u32 that are function entries, outside disassembled code. Found 6525 candidates (mostly 0x7e35e000-0x7e5f8000 and 0x7e896000+; not all are true vtables: state/event/handler tables look the same). 54 have a class vote from already-named members.
+With `rename`: unnamed members become `Class__vfn<index>_<addr>`, functions referencing the table start become `Class__ctordtor_<addr>`; 3219 renames. TENTATIVE: derived-class tables reuse base-class methods, so a vote can attach the wrong class to shared functions. Index = slot position, so same slot across related classes is the same virtual method.
+Observer pattern is common: `CapBlu_Bluetooth*Observer`, `CmpPli/CmpPls_Play*Observer` (6-slot tables, 2 ctor/dtor refs each).
+Not done yet: inheritance (compare slot tables across classes), pure-virtual stub detection, constructor-based class naming without a member vote.
