@@ -58,3 +58,19 @@
 - Import: BinaryLoader, language `mn10300:LE:32:default`, base `0x40300000`, file `firmware/stock/dec/blk00_40300000.bin`. Works headless.
 - `tools/ghidra/DisasAt.java` disassembles at addresses. Community loader_patch site `0x403001ab` decodes sanely (stack stores, `call 0x403013f0`). Start of block (0x40300000) decodes as junk: likely data/vectors or spec gaps. Immediates like `mov 0x7da70800,D0` look suspicious: verify 32-bit immediate endianness against community patch bytes.
 - Next: check hook sites (offsets 1124507-1379078 from base), run full analysis, find PTP/FIRMUP handlers via strings xrefs.
+
+### Hook-site check (em10-1.4 ring-native, 2026-11-01)
+All 7 `jmp` hooks (opcode `DC`, rel32 from insn start) decode at clean instruction boundaries in stock block 0 and land in the payload cave (0x40326ff0..~0x40327400, stock = all 0xFF):
+
+| hook | site | target |
+|---|---|---|
+| parser | 0x4041b411 | 0x40326ff0 |
+| input | 0x40450b06 | 0x40327048 |
+| callback | 0x4042a4a2 | 0x40327178 |
+| reset | 0x4041289b | 0x403271f4 |
+| init | 0x40414daf | 0x40327208 |
+| request | 0x4042a1ac | 0x403272e0 |
+| guard | 0x4042a71b | 0x403273e0 |
+
+parser payload (disassembled from a patched scratch copy, never flashed) saves regs, calls 0x403f8408, runs the replaced stock insns (`extbu D3; mov D3,(0x10,SP); btst 2,D3`), then `jmp 0x4041b417` = site+6. Confirms the MN103 spec decodes real code correctly, and the hook pattern: replaced insns are re-executed in the cave, then jump back.
+`loader_patch@0x403001ab` old == new (no-op in this profile).
