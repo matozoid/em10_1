@@ -96,6 +96,15 @@ row widths (13,13,13,11,...): rows may be delta-coded or use an unidentified cod
 - Next: decode sequentially by walking the stream (row width from the descriptor), emit PNG sheet via PIL,
   then map `@Axxx@` codes to glyph indices.
 
+### Record layout (confirmed 2026-11-01, supersedes "unresolved" above)
+`[4B hdr][RLE pixels][0-3B pad][24B descriptor]`. The descriptor FOLLOWS its pixels. `ptr - base - 0x20` = record start
+(hdr), `size` covers hdr + pixels, descriptor offset - (start+size) is 0..3 on all 1346 candidates. Descriptor `u16[0]`
+(always 14) is not the height; **width = u16[1]**, height = total pixels / width (digits are 13x22). Hdr varies
+(`15c00002`, `25100303`, ...), meaning unknown. `tools/icons.py entry.bin base out.png` decodes the 232 records whose
+pixel count is a whole number of rows: digits 1-9, play/file, circle, flash bolt, disc, Wi-Fi file icons, panel frames.
+The other ~1100 records do not divide by width (likely different hdr-selected encodings or multi-frame) - open.
+Colour indices 0..4 seen mostly; index>4 exists (palette unknown, drawn magenta).
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
