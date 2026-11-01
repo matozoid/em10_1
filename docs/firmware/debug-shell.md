@@ -81,8 +81,10 @@ with mode), and the C3D/AVM `memdump` debug variants (GPU/coprocessor).
 
 ## Live test result (2026-11-01): telnet NOT listening on stock 1.4
 
-Joined camera AP, probed from the host. Port **80 open** (the known HTTP/remocon server). Ports
-**23, 21, 22, 2000, 2323, 8080 all refused**. So the TCP shell is **not started in the shipping
+Joined camera AP, probed from the host (verified: `:80` open and SSID `E-M10-P-<serial>` both
+*before and after* the scan, so every "closed" is a genuine TCP refusal, not a dropped link).
+Port **80 open** (the known HTTP/remocon server). Ports **23, 21, 22, 2000, 2323, 8080, 9000,
+992, 1023, 23023 all refused**. So the TCP shell is **not started in the shipping
 1.4 build** — flag 0x8050 is 0 (camera runs the Wi-Fi remocon XML proxy instead). The Wi-Fi
 telnet route to the shell is therefore unavailable without first setting that flag (needs a
 command/property that flips it, or modified firmware). HTTP server on :80 is the only live
