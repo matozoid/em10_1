@@ -51,3 +51,10 @@
   SD-card path (DCOLYMP/E1139999.BIN, hold OK at boot) may suffice. v1 app = query server + download + write to SD + instructions.
 - Community exe unpacked (tools/pyi_extract.py, static only). Container codec cracked + reimplemented (tools/omfw.py); docs/firmware/container-format.md.
   Decoded blocks in firmware/stock/dec/. Next: identify CPU/arch of block 0 (load 0x40300000), load into Ghidra, map hooks.
+
+## MN103 / Ghidra (2026-11-01)
+- Block 0 CPU = Panasonic MN103 (AM33). Using michaelbrandi/ghidra-mn103-extension (Apache-2.0, untested on real firmware).
+- Install: copy `data/`, `Module.manifest`, `extension.properties` into `~/.config/ghidra/ghidra_12.2_PUBLIC/Extensions/mn103/`, then in `data/languages` run `$GHIDRA/support/sleigh -a .` (`mn103.slaspec` compiles; `mn103_full_experimental.slaspec` fails).
+- Import: BinaryLoader, language `mn10300:LE:32:default`, base `0x40300000`, file `firmware/stock/dec/blk00_40300000.bin`. Works headless.
+- `tools/ghidra/DisasAt.java` disassembles at addresses. Community loader_patch site `0x403001ab` decodes sanely (stack stores, `call 0x403013f0`). Start of block (0x40300000) decodes as junk: likely data/vectors or spec gaps. Immediates like `mov 0x7da70800,D0` look suspicious: verify 32-bit immediate endianness against community patch bytes.
+- Next: check hook sites (offsets 1124507-1379078 from base), run full analysis, find PTP/FIRMUP handlers via strings xrefs.
