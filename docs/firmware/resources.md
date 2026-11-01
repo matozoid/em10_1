@@ -117,6 +117,11 @@ nibble, NOT run-1; zero-length runs allowed) gives structured grey areas and dia
 descriptor says w=34/adv=43, and diagonals skew between strides 44 and 46. So rows probably carry their own length or
 end marker. Still undecoded.
 
+Further hdr[3]==3 tests (user-judged noise): raw 1/2/4 bpp at byte strides 8/16/17 for record 0x854. Byte
+autocorrelation peaks at stride 16 B (0.46) and multiples; 8-wide records (`08700003`, 50 B payload) show a 7-byte row
+period with the last 4 nibbles of each 14-nibble row always 0 and alternating row types (possible interleaved
+colour/alpha planes). Unresolved; entry 69 and `@Axxx@` mapping untouched.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
