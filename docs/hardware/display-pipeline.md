@@ -27,3 +27,10 @@ Source: strings in the debug-console region of block 0. Not verified on hardware
 - OSD output is two layers + image layer composited by the ASIC; "UPD_OSD" carries the buffer address.
 - Next: find where the main CPU writes/loads ASIC firmware or parameter tables (search `boot_on`, `get_fwv`
   handlers) - an ASIC firmware image inside the BIN would explain the format selector.
+
+## Update: debug-console `boot_on/boot_exit/get_fwv` (handler 0x7dbafe95)
+These are register-level I2C accessors for a peripheral IC (calls `FUN_7dbbca26(0x48, reg)` / `FUN_7dbbcafe(0x48, ..)`,
+register 0x1c "ADDR High 1Ch"), i.e. the HDMI/EVF transceiver, not a loader for the display ASIC. No code found that
+uploads firmware to the display ASIC; `FASTBOOT` (0x7dbaf3d3) only posts SET_CPDATA/UPD_OSD style commands. Working
+assumption: the ASIC runs mask-ROM or separately stored firmware, so the icon pixel formats are not decodable from
+this BIN by code analysis. Remaining route: blind decoding of the second format.
