@@ -93,6 +93,21 @@ network surface.
 Next leads to enable it: find what writes 0x8050 (a PTP vendor property, a debug build flag, or a
 hidden HTTP/XML command), or use the community firmware which may ship it enabled.
 
+### Flag 0x8050 is read-only to the firmware (2026-11-01)
+Searched every reference to absolute address 0x8050 in block 0 (`tools/ghidra/DataRefs.java`, plus
+a raw scan for the abs32 store operand `50 80 00 00`): **887 reads, 0 writes.** All reads are
+`mov (0x8050),Dn` / `movhu (0x8050),Dn` scattered across unrelated subsystems (wifi shell,
+ADCONV, Imgpro, …). No instruction writes it. So 0x8050 is not a software-settable flag — it is
+either an on-chip register / debug strap, or a value fixed by boot code below 0x40300000 (outside
+the update BIN). (Caveat: the decompiler cannot always resolve base-register accesses, so some of
+the 887 may be unresolved `(disp,An)` defaulted to this displacement; but there is definitively no
+writer.) **Conclusion: stock 1.4 exposes no command to enable the Wi-Fi telnet shell.** Turning it
+on needs a hardware condition or modified firmware that forces the shell task up — not a runtime
+toggle. This points the extraction effort at the USB vendor-PTP opcodes or the community firmware,
+not at the Wi-Fi shell.
+
+`tools/ghidra/DataRefs.java 0x<addr>` lists data xrefs (R/W) to an absolute address.
+
 ## Recommendation for extraction
 
 Easiest with no cable at all: get shell access (Wi-Fi telnet if flag 0x8050 permits, else UART),
