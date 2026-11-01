@@ -24,7 +24,7 @@ Carves `FFD8FF..FFD9` streams by walking markers to SOS then scanning to EOI.
   white border = **art-filter frame/vignette overlay masks**. One per aspect/size
   combination (3:2 and 4:3 at 4608 wide, 16:9 at 1920/1280, 1:1 at 3456, smaller ones).
   Not photographs. Remaining ones unviewed; may include other filter overlays.
-- Entry 5: 3 JPEGs (unviewed). Entries 1–4, 6: none.
+- Entry 5: 3 JPEGs = **Wi-Fi screen UI assets**: 1x920 gradient strip, 626x180 dark gradient panel, 638x57 "OLYMPUS IMAGE SHARE" title banner (presumably shown on the LCD in Wi-Fi mode). Entries 1–4, 6: none.
 - Output goes to gitignored `firmware/stock/jpg2/`.
 
 ## Status
