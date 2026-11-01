@@ -18,6 +18,15 @@ splits a decoded block into entries. Extracted data is vendor content: keep loca
 | 1,2,3,4 | sparse (3–11% nonzero) regions of 0x200–0x4000 B sub-records, mostly erased/zero: look like pre-allocated settings/calibration storage |
 | 5,6 | denser (40–54%) small tables |
 
+## JPEG extraction (`tools/jpgextract.py entry.bin outdir`)
+Carves `FFD8FF..FFD9` streams by walking markers to SOS then scanning to EOI.
+- Entry 0: 29 JPEGs (sizes 12 KB–588 KB). Sampled two: black frames with a rough
+  white border = **art-filter frame/vignette overlay masks**. One per aspect/size
+  combination (3:2 and 4:3 at 4608 wide, 16:9 at 1920/1280, 1:1 at 3456, smaller ones).
+  Not photographs. Remaining ones unviewed; may include other filter overlays.
+- Entry 5: 3 JPEGs (unviewed). Entries 1–4, 6: none.
+- Output goes to gitignored `firmware/stock/jpg2/`.
+
 ## Status
 Classified by structure/statistics only; formats unverified. Next: decode JPEG subs
 (extract at `FFD8`), find which code references these addresses (block 0 runs at
