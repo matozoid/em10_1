@@ -22,7 +22,9 @@ splits a decoded block into entries. Extracted data is vendor content: keep loca
 Entry order follows language; e022 is Dutch. Strings may contain embedded newlines
 (line-wrapped UI text). Example Dutch indices: 1766 "Privéverbinding", 1765 one-time
 connection, 1763 SSID setting, 1767 password setting, 1975 "SSID", 1976 "Password",
-2052 "Verbinding met smartphone". Index = position in NUL-split list (empties count).
+2052 "Verbinding met smartphone". `@Axxx@` = inline icon glyph codes, not text: `@A078@` = Wi-Fi icon, `@A029@` = MENU button icon
+(idx 2343 "Einde @A078@@A029@" renders as "Einde (Wi-Fi)(MENU)"; idx 2064 "Altijd @A078@-verbinding").
+Glyph images presumably live in the block 1 binary entries 0 / 35+. Index = position in NUL-split list (empties count).
 
 ## JPEG extraction (`tools/jpgextract.py entry.bin outdir`)
 Carves `FFD8FF..FFD9` streams by walking markers to SOS then scanning to EOI.
@@ -30,7 +32,7 @@ Carves `FFD8FF..FFD9` streams by walking markers to SOS then scanning to EOI.
   white border = **art-filter frame/vignette overlay masks**. One per aspect/size
   combination (3:2 and 4:3 at 4608 wide, 16:9 at 1920/1280, 1:1 at 3456, smaller ones).
   Not photographs. Remaining ones unviewed; may include other filter overlays.
-- Entry 5: 3 JPEGs = **Wi-Fi screen UI assets**: 1x920 gradient strip, 626x180 dark gradient panel, 638x57 "OLYMPUS IMAGE SHARE" title banner (use unconfirmed; the camera Wi-Fi screen text — SSID, password, "Privéverbinding", QR instruction, "Einde Wi-Fi [MENU]" — comes from the string tables, the QR is generated at runtime, so these may be only backgrounds/banner or belong to another screen). Entries 1–4, 6: none.
+- Entry 5: 3 JPEGs = **Wi-Fi screen UI assets**: 1x920 gradient strip, 626x180 dark gradient panel, 638x57 "OLYMPUS IMAGE SHARE" title banner (use unconfirmed; the camera Wi-Fi screen text — SSID, password, "Privéverbinding", QR instruction, "Einde <Wi-Fi icon><MENU icon>" — comes from the string tables, the QR is generated at runtime, so these may be only backgrounds/banner or belong to another screen). Entries 1–4, 6: none.
 - Output goes to gitignored `firmware/stock/jpg2/`.
 
 ## Status
