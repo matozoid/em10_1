@@ -61,6 +61,11 @@ bank 0, entry 69 = bank 1**, each loaded to RAM and referenced by absolute point
 Font index tables use base 0xbfcaa000 (type 0 case: `FUN_7d9dbe94(0xbfcaa000)`).
 Pointer->file offset relation for banks still unresolved (descriptor ptrs are not linear
 with file layout), so icon pixel decode remains open. 
+Callers of `res_get`: `api_tft_Get_OSD_ResourceAddr` (0x7dba50ec; args id, kind -> returns loaded buffer
+address), `play_res_read`, `iseq_ps_if_res_read`, `phy_info`, `memory_addr`, etc. The OSD API is called only
+from GUI class 0x7e3a472c vfn11/vfn12 (0x7e02f473 / 0x7e02f3fd, trace fmt `%1s %d %d`). Draw/blit
+consumer and `@Axxx@` parser not yet located. Hand-decoding entry 0 row data gives inconsistent
+row widths (13,13,13,11,...): rows may be delta-coded or use an unidentified code.
 `tools/ghidra/ScalarRefs.java lo hi` lists code operands in an address range.
 
 ## Status
