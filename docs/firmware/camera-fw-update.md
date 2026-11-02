@@ -79,7 +79,28 @@ runs, tagging each step with `[firmup]` log strings (@ `0x7df46ef4`+):
    - result `0` → not this pattern, bump found-counter `(12,sp)`, continue.
    - other nonzero → error, close/free via `0x7dc9cdd5`.
 4. Loggers: `0x7d9999f9` (fmt, d0=value) and `0x7d996e85` (tag-only). `0xE00`/`0xE0C` are the
-   media-layer "entry found" result codes.
+   media-layer "entry found" result codes. More tags: `"[firmup]file_mount/ start."`,
+   `"[firmup] Time"`, `"[firmup]Are?."`.
+
+### Component-slot table + per-file read (loop body `0x7de575d6`-`0x7de5771f`)
+The scan iterates a **9-record descriptor array** at `0x7df46df8` (28 bytes/record; `add 28,a3`
+per iteration, `cmp 9` exit). Each record = one firmware-component slot:
+
+| field | meaning |
+|---|---|
+| +4 | max image size for the slot: rec0..8 = `0x60000, 0x100000, 0x20000, 0x620000, 0xe00000, 0x5000000, 0x4000000, 0x4000000, 0x2c40` (biggest = main firmware regions) |
+| +16 | per-slot RAM state ptr (`0x6044cbc4`+, 4-byte spaced) |
+| +20 | flag/count (1 or 4) |
+| +24 | component id: `2, 0, 5, 0xa, 0xf, 1, 0xb, 0x12, 7` |
+
+For each slot whose `X113????.BIN` file is found, the inner block (`0x7de576a0`) reads a **32-byte
+header** (`mov 32,d0 → (132,sp)`; read via `0x7d9c1429` / `0x7d9c132d` into stack buf `sp+196`),
+then checks a header halfword `(196,sp)==0` (version/validity gate). After the 9-slot loop, if any
+file was found (`(12,sp)>0`) it dispatches the apply/flash via `0x7dc9ccc0` (d0=3, d1=2); else closes
+and logs `"[firmup]Are?."`.
+
+> Correction to prior tick: `0x7de57712` is the **loop-advance** label (next descriptor record), not a
+> "match branch"; the found-file work is the inner block at `0x7de576a0`.
 
 **App takeaway (confirmed):** to update body firmware, write the official body image to SD as
 `DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); the camera mounts SD, scans `DCOLYMP`, logs
