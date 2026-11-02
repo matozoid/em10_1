@@ -40,6 +40,46 @@ The httpd selects a CGI table by connection mode, then calls the handler. Severa
 | 0x7e7720d0 | shutter set: get_connectmode, switch_cammode, get_caminfo, exec_pwoff, get_commandlist, exec_shutter, exec_shuttermisc (both enter 0x7e70a0b5) |
 Second-level tables: shutter 0x7e780c10 (exec_shutter -> 0x7e70a1be, exec_shuttermisc -> 0x7e70a292); rec 0x7e781500 (set_takemode 0x7e70c0c4, exec_takemotion 0x7e70c17c, exec_takemisc 0x7e70c245, get_camprop 0x7e70bd3c, set_camprop 0x7e70be2a, switch_cammode 0x7e70bef7).
 
+### Rec dispatcher internals (RESOLVED 2026-11-02, mn10300 objdump of 0x7e70b5a8)
+
+The rec dispatcher is the common front-end for all six rec CGIs. Steps:
+
+1. **Tokenize the request** — split on a delimiter via helper 0x7da83862 + length via 0x7d99779f;
+   copy the leading command token into a freshly allocated **128-byte** buffer (`[4,sp]`, alloc
+   0x7e7116e2) and a **202-byte** response/work buffer (`[8,sp]`). A token longer than **127 bytes
+   → error** (status −1), never dispatched. A buffer-alloc failure → status −2.
+2. **Name lookup** — linear scan of the 6-entry, 8-byte-record table **0x7e781500**
+   (`{name_ptr, handler}`), `strcmp` (0x7d997773) of the token against each name. Records (verified,
+   decode clean):
+
+   | # | name | handler |
+   |---|---|---|
+   | 0 | `set_takemode.cgi` | 0x7e70c0c4 |
+   | 1 | `exec_takemotion.cgi` | 0x7e70c17c |
+   | 2 | `exec_takemisc.cgi` | 0x7e70c245 |
+   | 3 | `get_camprop.cgi` | 0x7e70bd3c |
+   | 4 | `set_camprop.cgi` | 0x7e70be2a |
+   | 5 | `switch_cammode.cgi` | 0x7e70bef7 |
+
+   The selected handler cell (`[12,sp]`) is **pre-seeded** with the default handler **0x7e70c298**
+   before the scan, so an unknown token keeps the default.
+3. **Mode gate** — call 0x7e70f076, a critical-section (lock pair 0x7e710577 / 0x7e71060a) read of
+   the rec-mode state flag at RAM **0xa0a9257e**; returns the flag. If `!= 1` (camera not actually in
+   rec mode), two commands are still allowed through — `get_camcapa.cgi` (string @0x7e78199b) and
+   `switch_cammode.cgi` (@0x7e7814eb); **any other** token has its handler forced to the default
+   0x7e70c298.
+4. **Default handler 0x7e70c298** = immediate `respond_error(520, 1004)` (0x7e7074e6) — HTTP 520,
+   `errorcode` 1004. So a wrong-mode or unknown rec command returns 520/1004.
+5. **Invoke** — acquire (0x7e70efbe), `calls (handler)` with `a0` = saved arg, `a1` = response
+   buffer; release (0x7e70efbe) after. This 0x7e70efbe pair is the per-request lock around the real
+   CGI body (`WIFI_REMOCO…` locked section).
+
+So the two gates a rec CGI passes: (a) its presence in the mode's top-level table (0x7e772048),
+which yields the 1001 "not available in this mode" error seen live; (b) this dispatcher's own rec-mode
+flag gate, which yields 520/1004 for everything except `get_camcapa`/`switch_cammode` when the flag
+isn't set. `get_camcapa.cgi` is handled here only as a gate-bypass name — its handler lives elsewhere,
+not in the 0x7e781500 table.
+
 ## Errors
 `respond_error(0x208, 0x3ec)` = HTTP 520 + `errorcode` 1004 when a command argument is missing/unknown (static RE; not yet seen live).
 LIVE (2026-11-01, camera in `private` connect mode): every `get_camprop.cgi?com=get|desc&propname=<any of the 14>` returns HTTP 520 `errorcode` 1001, same as an unknown CGI (`fwup_getversions`). So 1001 = CGI not available in the current connect mode / unsupported; the camprop CGIs are in the rec-mode table (0x7e772048) and need the camera switched to remote/rec mode first (`switch_cammode.cgi?mode=rec`). Confirms the per-mode table design. Later calls in that run got empty replies (camera or link dropped), so only the first 11 properties were queried.
