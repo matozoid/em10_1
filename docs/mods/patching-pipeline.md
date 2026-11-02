@@ -27,10 +27,21 @@ Per EULA, the community profile and its patch bytes, and any firmware image buil
 **not committed** (gitignored under `research/` and `firmware/community/`). `fwpatch.py`/`omfw.py`
 are our own clean-room tools and are committed; they take the profile path as an argument.
 
-## Status
-`fwpatch.py plan` against the local profile: `source sha256 MATCH`, all 9 patches `old_matches=True`.
-So the patch set applies cleanly to our stock image. Building the output `E1139999.BIN` (local only)
-is the next step.
+## Status — BUILT + VERIFIED (local)
+`fwpatch.py build` produced `firmware/community/em10-1.4-ring/E1139999.BIN` (gitignored):
+- `source sha256 MATCH`, all 9 patches `old_matches=True`, 9 applied.
+- Output 70254592 bytes (same as stock — all patches in-place), sha `837ecc9e…`.
+
+Independent verification (`omfw.py info` + decoded-block diff vs stock):
+- all 3 block footers `footer_ok=True`;
+- blocks 1 & 2 byte-identical to stock; only block 0 changed;
+- the block-0 diff is **1202 bytes, every one inside a declared patch region, 0 bytes outside** —
+  no collateral damage from re-encode/reseal;
+- 8 of 9 regions actually change bytes; `loader_patch` @427 is a no-op (its `new` already equals the
+  stock bytes there).
+
+So "firmware 1.4 + patch" is **created and validated locally**. Remaining = the on-camera flash,
+which is the user's hardware action (below).
 
 ## Applying to the camera (live / hardware — user action)
 1. Copy the built `E1139999.BIN` to the SD card root dir `DCOLYMP/` (so `DCOLYMP/E1139999.BIN`).
