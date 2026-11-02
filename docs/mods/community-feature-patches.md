@@ -116,10 +116,81 @@ is the radio stack that can actually drive 5 GHz. (A full RE of the alternate AR
 **Note:** the E-M10 Mark I is **not** in the `wifi-5ghz` body set — its radio is 2.4 GHz-only
 hardware, so there is nothing to unlock.
 
-## 4. `sh2-four-rates` — OM1 Super-Hi 2 extra frame rates (67 block-0 patches)
+## 4. `sh2-four-rates` — OM1 SH2 / ProCap-SH2 extra frame rates (67 block-0 patches)
 
-_(RE in progress — next tick.)_
+Adds four high-speed rates — **12.5 · 16.7 · 25 · 50 fps** — to the OM-1's SH2 / ProCapture-SH2
+burst modes. `implementation: SH2-R9-OM1II-donor-native-SH1-paths` = the OM-1 **Mark II's** SH2 code
+is the donor, grafted onto the OM-1's SH1 paths. Partly **hardware-verified** (`physical_sh2_12_5:
+true`), unlike ring/shutter. The detail note adds that on lenses that don't support 50 fps the menu
+restriction is relaxed so 12.5/16.7 stay selectable.
 
-## 5. `ep7-controls` — E-P7 control remap (1021 block-0/1 patches)
+67 patches in block 0, three kinds:
 
-_(RE in progress — next tick.)_
+**(a) 242 B payload cave** (`sh2_r9_payload` @ `0x602d4560`) — a rate-code translator/validator:
+```
+exthu d0
+cmp 125,d0 ; beq -> mov 12,d0 ; retf   ; rate code 125 (12.5 fps x10) -> engine slot 12
+cmp 167,d0 ; beq -> mov 16,d0 ; retf   ; 167 (16.7 fps x10)          -> slot 16
+cmp 1200,d0 ; jmp 0x603ba411            ; else back to integer_guard
+... movhu (-558,a0),d0 ; cmp 125/167 ... ; mov (a3),d0 ; divu 3,d0  ; cadence = rate/3
+```
+It maps the new fractional rate codes (125 = 12.5, 167 = 16.7, and the 25/50 integer rates) onto the
+engine's internal rate slots and computes the sensor cadence (`divu 3`).
+
+**(b) 7 guard hooks** (`DC`+rel32 `jmp` into the payload): `sh2_r9_integer_guard` (`0x603ba40c`),
+`cadence_guard` (`0x603ad311`), `selector_guard` (`0x603b8399`), `budget_guard` (`0x60918b00`),
+`limit_a` (`0x60919707`), `limit_b` (`0x60919764`), `format_guard` (`0x6091be40`) — they intercept
+the rate-selector, cadence, exposure-budget, rate-limit and readout-format checks so the engine
+accepts the new rates. `sh2_r9_loader_end` (`0x60024e18`, `fccc00582f60`) is a loader marker.
+
+**(c) 58 scattered small edits** (1–11 B each, `0x605bf9e4 … 0x6151381c`) — the **rate-table + flag
+data**: e.g. at `0x605bf9e4` stock table bytes become `7d`/`a7` (= 125 / 167, the new rate codes)
+and count/limit cells are bumped (`0x605c18ac`: `0c`→`14`, 12→20). These write the new rates into the
+tables the guards/payload then validate.
+
+## 5. `ep7-controls` — E-P7 button / exposure / menu remap (1021 patches)
+
+The largest feature, E-P7 only. `title` "E-P7 버튼·노출·메뉴 기능", `status`
+"버튼 리맵 · AF 홈 이동 · M/Auto ISO 노출보정" = **button remap · AF-home move · M/Auto-ISO exposure
+compensation**; the D-pad can be set to ISO/WB/AF-position/Drive as a group or assigned per direction
+(`implementation: ep7-native-controls-2026-10-18`, `hardware_verified: false`).
+
+Despite 1021 patches it is overwhelmingly **table-driven config**, not code — only **9 code hooks**
+(`DC`+rel32) in the whole feature:
+
+| | count | hooks | shape |
+|---|---|---|---|
+| block 0 (app) | 640 | 7 | 301 × 1-byte + many 2–8-byte edits, over `0x5e0d0…0x11bcb1c` |
+| block 1 (resource) | 381 | 2 | 326 × 1-byte + menu strings |
+
+- **block 0** = the control-assignment tables: hundreds of single-byte flag flips (which button maps
+  to which function, per-D-pad-direction assignments, M/Auto-ISO exposure-comp enable bits) plus a
+  few multi-byte descriptor records (the "largest" patch @ `0x4aaf0c`, 99 B, is a table of 4-byte
+  control-descriptor entries, not executable code), and 7 native hooks that implement the new
+  behaviors (AF-home move, exposure comp in M mode, per-direction dispatch).
+- **block 1** = resource edits: 326 single-byte table flips to expose the new menu entries, plus the
+  new UTF-16LE menu labels — e.g. `기능 할당` ("function assignment") — and 2 resource hooks.
+
+So the mechanism is: unlock/retarget a large set of existing control-table slots by flipping their
+flags, add the menu entries that surface them, and bolt on a little native glue for the behaviors
+the stock tables can't express. Full byte-level enumeration of 1021 config entries is not
+meaningful (it's data, not logic) and is out of scope; the structure above is the RE result.
+
+---
+
+## Summary across the five families
+
+| family | kind | code hooks | key mechanism |
+|---|---|---|---|
+| shutter-sound | asset + native | ~6 sections | PCM bank + menu-commit paired write |
+| korean | resource | 0 | JPN string+font slot overwrite (UTF-16LE + glyphs) |
+| wifi-5ghz | native + blob | 2 | channel limit 13→36 + swap ARM Wi-Fi ELF |
+| sh2-four-rates | native + table | 7 + payload | rate-code translator + rate-table edits (12.5/16.7/25/50) |
+| ep7-controls | table + native | 9 | mass control/menu flag edits + glue |
+
+Two reusable patterns for our own model-agnostic patcher (`docs/mods/firmware-modding.md`):
+**(1) native detour → cave** (ring, shutter, wifi, sh2, ep7 glue — same `DC`+rel32 technique we
+verified on the E-M10), and **(2) data-table/resource edits** (korean, sh2 rate table, ep7 configs —
+in-place same-length overwrites of tables in block 0/1/2, no code). The E-M10 Mark I is in **none**
+of these five body sets; only `ring-native` targets it.
+
