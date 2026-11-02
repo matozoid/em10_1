@@ -134,6 +134,40 @@ command/argument tree and the firmware's oishare version (`2.20`), rather than h
 This is the correct capability-discovery entry point (`get_camcapa.cgi` does not exist on this body —
 see its dead-end note above).
 
+## Camera-mode state machine (switch_cammode / get_connectmode) (RESOLVED 2026-11-02)
+
+Two distinct state concepts, two RAM cells:
+
+| cell | meaning |
+|---|---|
+| 0x608e9210 | **connection index** — selects the per-connection context/CGI-table and buffer (indexes table 0xa0a92720, `asl2` → ×4). Used by every CGI handler. |
+| 0xa0a9257e | **current cammode** — `0`/`1`/`2`. Read through critical-section helper **0x7e70f076** (the "gate" in the rec dispatcher). `1` = **rec** (so the rec dispatcher's "flag == 1" test = "camera is in rec mode"). The other two are play/browse and shutter. |
+| 0xa0a9258c | **lvqty** (live-view quality) — set `1` for `0640x0480`, else `0`, from the `lvqty` param. |
+
+`switch_cammode.cgi` enters via the rec dispatcher 0x7e70b5a8 (its top-level handler in all four
+tables **is** 0x7e70b5a8), bypasses the cammode gate (it is one of the two gate-bypass names), and is
+dispatched to leaf **0x7e70bef7**. The leaf:
+1. Requires at least the `mode` arg (`movhu (a3)` count `< 1` → error 0x7e70c0b5).
+2. Parses `lvqty` (strings `0320x0240` / `0640x0480` @0x7e781d33) → writes 0xa0a9258c.
+3. Parses `mode` against the null-separated list `rec\0play\0shutter` (@0x7e781d47) and, combined with
+   the **current** cammode from 0x7e70f076, posts a camera-task **transition app-event** via
+   0x7e70e0c3. Events observed in the transition matrix: **0x41b0001, 0x41b0002, 0x41b0020,
+   0x41b0022, 0x41b0023** (= 68878337/338/368/370/371). The exact (current → target) → event mapping
+   is only partially traced (see dead end).
+
+`get_connectmode.cgi` handler **0x7e6f9a85**: reads the connection context (0x608e9210 → 0xa0a92720),
+calls 0x7e7078d1 to fetch the current connect-mode value, and returns it as a small
+`connect mode` / `text/xml` document (templates @0x7e7721e9 / 0x7e772205). Note **connect mode**
+(web/private/etc., per the top-level table selection) is a separate axis from **cammode**
+(rec/play/shutter) handled by switch_cammode.
+
+**Dead end / partial:** the full switch_cammode transition matrix — which of the five 0x41b00xx events
+fires for each (current cammode, requested mode, lvqty) combination — was not exhaustively traced; the
+branch tree at 0x7e70bf3f–0x7e70c0c8 is large and the event semantics live in the camera task (not
+block-0 resident). Enough is known for the client: send `switch_cammode.cgi?mode=rec&lvqty=0320x0240`
+to enter rec mode (live-verified earlier), `?mode=play` to leave it. The precise event ids are
+recorded above for any future live correlation.
+
 ## get_caminfo — model name only (RESOLVED 2026-11-02)
 
 `get_caminfo.cgi` handler **0x7e6f9b91** (universal — in all four top-level tables) returns a tiny XML
