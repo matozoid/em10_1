@@ -1,4 +1,4 @@
-# Status (2026-11-02)
+# Status (2026-11-02, Wi-Fi CGI surface complete)
 
 ## Known
 - Community build "db firmware 0.3.1.b" (azqeurio/om-c-firmware, tag dbv0.3.1.b):
@@ -140,3 +140,24 @@ Docs in `docs/workspace/` and `docs/usb-protocol/`:
 
 Still open (Workspace/app side): MDP_AS CameraSimulation binary schema (deferred); decompile `OlyBayerDecoder` demosaic
 math (SIMD/CUDA — low ROI); KMP app scaffold still empty. Firmware-side open items unchanged from the section above.
+
+## 2026-11-02 — Wi-Fi CGI surface COMPLETE + RAM catalog (all in `docs/firmware/wifi-cgi.md`, `memory-map.md`)
+Finished the CGI sweep; **every get_commandlist CGI (23) and every rec-dispatcher leaf now has a traced handler.**
+- **get_camprop fully resolved**: `com=get` builder 0x7e70e3ed is two-phase — phase 1 (event 0x41b0012) current value,
+  phase 2 (**new event 0x41b0013**) supported-value list (u32 array, same formatter bank as `desc`). Shared response
+  assembler 0x7e711c0d emits `<desc><propname>…</propname><attribute>…</attribute>[<value>…</value>][<enum>…</enum></desc>`
+  (fragments @0x7e7844xx); get fills both optional blocks, desc drives the same template. No separate get-only formatters.
+- **Minor CGIs**: exec_pwoff.cgi 0x7e6f9d6a (wifi_mngr power-off, cmd 0x1000), get_unusedcapacity.cgi 0x7e6fae32
+  (fileif_get_free_space), get_dcffilenum.cgi 0x7e6fafcc (`<dcffile>%lu</dcffile>`, key 23, cell 0xa0a912fc).
+- **Movie/reservation**: get_movplaytime.cgi 0x7e6fa1f9 (DIR+file, play_load_get_mov_info, .MOV/.AVI), get_rsvimglist.cgi
+  0x7e6fa464 (text/plain transfer-reservation list), clear_resvflg.cgi 0x7e6fa3b6 (wifi_mngr_clear_resvflg 0x7e7078ba).
+- **Time/GPS**: set_utctimediff.cgi 0x7e6fab8f (utctime=+diff=, flips get_activate key 0x8CF4), get_gpsdivunit.cgi
+  0x7e6fad08 (`<divunit>500</divunit>`, coord=value/500); req_attachexifgps 0x7e6fb11b / req_storegpsinfo 0x7e6fb58d
+  (geotag-write handlers located, field decode deferred — live-action only).
+- **exec_takemotion.cgi 0x7e70c17c**: AF-frame + movie control — 5-cmd table @0x7e78156c (assignafframe/releaseafframe/
+  takeready/starttake/stoptake), take-phase cell 0xa0a92590 selects phase handlers 0x7e70c7b5/c86b/c810/c8c6.
+- **Error codes**: 1001 not-available-in-mode, 1002 required-param-missing, 1004 bad-value, 1005 resource/media-I/O.
+- **RAM catalog** consolidated into memory-map.md (state cells, event ids 0x41b00xx, registry keys 0x62F1/0x8CF4,
+  mask-ROM region 0x4700xxxx). Corrected: 0xbd9b window = RAM scratch, not I/O regs.
+Deferred by design: camprop value *encodings* (client reads desc/enum lists); GPS-write field layouts (live-action).
+Firmware RE now pivots to: hardware I/O register identification, boot/vector code, and the KMP app scaffold (`app/`).
