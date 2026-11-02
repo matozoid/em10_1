@@ -102,6 +102,37 @@ and logs `"[firmup]Are?."`.
 > Correction to prior tick: `0x7de57712` is the **loop-advance** label (next descriptor record), not a
 > "match branch"; the found-file work is the inner block at `0x7de576a0`.
 
+### Pre-flash image validation (safe-flash gate) (2026-11-03)
+Before committing anything, `FIRMUP_SRV` validates the image and **aborts without flashing on any
+failure** — so a malformed/corrupt/truncated image is rejected, not written. Flow (runtime base
+`0x7d991020`):
+
+1. `0x7de57e24` (image validator) → core parser `0x7da8883e`. The parser is **not a byte checksum**;
+   it walks the image's **internal region table — up to 32 sub-image records** — reading each record's
+   field + size (`0x7da88820`/`0x7da88826`), rounding size up by 64, building 16-byte descriptors
+   `{ptr, field, size}`, and accumulating the running offset. It returns structural error `0x3321`
+   (13089) if the records overflow / don't fit, and the caller compares the parsed total against the
+   file size.
+2. On mismatch the validator logs and sets error `0x3322` (13090) → `[firmup]...FIRMUP_CHECKSUM_ERROR`
+   (`0x7de57abc`); a separate `[firmup]...usr_checksum_error` (`0x7de57ec1`) covers the user/image
+   checksum field, and `[firmup]...checksum_error` (`0x7de589ce`) the write-phase check. Any of these
+   jumps to the abort path (`0x7de58350` / `0x7de57da0`) — **no flash**.
+3. Only when validation passes does it reach the write phase: `[firmup]TYPE_FIRMUP_WRITE_OK`
+   (`0x7de58970`) → `[firmup]SUCCESS_REBOOT` (`0x7de57dd1`).
+
+**Safe-flash takeaway:** the camera gates the flash behind structural + checksum validation of the
+image, so a bad download/copy fails closed (aborts) rather than bricking. This is independent of the
+*container footer* additive checksum that `omfw.py` recomputes (`docs/firmware/container-format.md`):
+firmup re-validates the mounted file's own internal region table + checksum field.
+
+> **Open caveat for the patched `E1139999.BIN`.** Our local verification only confirmed the container
+> footer + that block-0 edits stay inside declared patch regions. It did **not** confirm the built
+> image still satisfies firmup's *internal* `usr_checksum` / region-table validation. If the
+> `ring-native` payload changed bytes covered by a stored internal checksum without the community tool
+> updating it, the camera would **reject** the image (safe — no flash), not brick. Next step: locate
+> the stored `usr_checksum` field (and the 32-byte image header's role) and confirm whether the
+> community patch set keeps it valid, or whether `fwpatch.py` must recompute it.
+
 **App takeaway (confirmed):** to update body firmware, write the official body image to SD as
 `DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); the camera mounts SD, scans `DCOLYMP`, logs
 `Binary file Hakken` on the match, reads it, and flashes. Our app only places the file + drives the
