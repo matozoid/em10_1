@@ -117,6 +117,65 @@ So the Wi-Fi property-set path is: HTTP `value` → range/allowed-list check →
 values, so the KMP client should pick from the `desc` list rather than compute an encoding. drivemode's
 sub-id 0x81b sits in a different numeric space than the others (confirmed, not a misparse).
 
+### get_camprop / desc value-list path (RESOLVED 2026-11-02, mn10300 objdump)
+
+`com=get` (read current value) and `com=desc` (enumerate legal values) share **one app event,
+`0x41b0012` (= 68878354)** — a generic *camprop-query* event. They are told apart by the command
+block written to RAM `0xa0a925c0`, not by the event id:
+
+| path | builder | `[0xa0a925c0]` | `[0xa0a925c4]` | `[0xa0a925d0]` | event |
+|---|---|---|---|---|---|
+| get-value | 0x7e70e3ed | `a3` (ptr) | `d0` | `d0` (movhu) | 0x41b0012 |
+| get-desc | 0x7e70e88e | sub-id | 0 | 0 | 0x41b0012 |
+
+Both post via 0x7e70e0c3, then read the result buffer at `a3 = [0xa0a925d4]` and the status/count
+word at `[0xa0a925d0]`.
+
+The **desc builder 0x7e70e88e** then switches on sub-id to a per-property desc formatter that turns
+the returned buffer into the enumerated legal-value list:
+
+| sub-id | property | formatter |
+|---|---|---|
+| 2 | expcomp | 0x7e7120c8 |
+| 3 | focalvalue | 0x7e7121b6 |
+| 4 | shutspeedvalue | 0x7e711f65 |
+| 6 | isospeedvalue | 0x7e711ec1 |
+| 9 | wbvalue | 0x7e712053 |
+| 2075 (0x81b) | drivemode | 0x7e711e50 |
+| 280 (0x118) | artfilter | 0x7e7123ff |
+| 10032 (0x2730) | **unidentified** | 0x7e7124e9 |
+| default | error | log string @0x7e78… |
+
+**takemode is special:** its desc leaf 0x7e70d1cc does NOT go through the 0x7e70e88e switch. It
+gets its own session (0x7d996fe2), writes `0xa0a925c0/c4/d0`, posts its own event **`0x41b0015`
+(= 68878357)**, reads `[0xa0a925d0]`, calls 0x7e7122a4, then response-builder 0x7e711d09.
+
+So the camprop event map is:
+
+| event | meaning |
+|---|---|
+| 0x41b0011 | set value (all settable props except takemode) |
+| 0x41b0012 | get value **and** get desc (query), per command block |
+| 0x41b0014 | set takemode |
+| 0x41b0015 | get/desc takemode |
+
+Shared helpers: 0x7d996fe2 = get-session (get/desc), 0x7d996faa = get-session (set),
+0x7d996ff0 / 0x7d996fb8 = release-session, 0x7e7074a1 = HTTP-200 respond, 0x7e7074e6 = HTTP-520
+error respond, 0x7e711d09 = response-list builder, 0x7d9999f9 = error/log formatter.
+
+**Dead ends logged:** (1) sub-id `10032` (0x2730) has a real desc formatter (0x7e7124e9) in the
+switch but is an **orphan case**: exactly 7 Wi-Fi desc leaves call 0x7e70e88e (expcomp 2, focalvalue
+3, shutspeedvalue 4, isospeedvalue 6, wbvalue 9, drivemode 2075, artfilter 280), and none passes
+10032 — so no Wi-Fi desclist property drives it. It is reachable only by some non-Wi-Fi caller of
+0x7e70e88e (internal camprop query), not through the 14-entry desclist. (2) The read-only simple
+props (touchactiveframe, noisereduction, lowvibtime, bulbtimelimit, digitaltelecon) **bypass
+0x7e70e88e entirely** — each desc leaf does get-session 0x7d996fe2 → a per-prop helper (e.g.
+touchactiveframe 0x7da82515; noisereduction/lowvib/bulb/telecon via 0x7db93fb8 + 0x7e712315 /
+0x7e71238a) → response-builder 0x7e711d09, with no 0x41b0012 query event at all. The earlier
+"280-repeat" heuristic for identifying them was noise, not reliable.
+(3) Encoded-value units still not decoded — `desc` enumerates the legal values, so the KMP client
+picks from that list rather than computing an encoding.
+
 ## exec_shutter (RESOLVED 2026-11-02, mn10300 objdump of leaf 0x7e70a1be)
 First level `exec_shutter`/`exec_shuttermisc` wrap the handler in `WIFI_RELEASE_CGI(1)...(0)`.
 
