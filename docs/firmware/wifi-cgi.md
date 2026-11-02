@@ -546,3 +546,33 @@ with OI.Share's "share order" being set during browse.
 
 **New errorcode:** **1002** = required request parameter missing/empty (distinct from 1004 bad value,
 1001 not-available in current mode, 1005 resource/media-I/O).
+
+## Time-sync + GPS group (RESOLVED 2026-11-02, mn10300 objdump)
+
+Completes the geotag/clock surface. Same front-end (0x7e6fc38a / 0x7e6ff2c6 / conn table 0xa0a92720).
+Handler table entries: set_utctimediff 0x7e6fab8f, get_gpsdivunit 0x7e6fad08, req_attachexifgps
+0x7e6fb11b, req_storegpsinfo 0x7e6fb58d.
+
+### set_utctimediff.cgi -> 0x7e6fab8f (`do_cgi_set_utctimediff`)
+Two params tokenised via 0x7da83862: **`utctime=`** (UTC time string, 15 chars, copied with mask-ROM
+memcpy 0x47001000) and **`diff=`** (timezone offset, 5 chars). Sets the camera clock + timezone;
+logs `utctime = %s`. This is the write that flips the activation/time-sync status read back by
+`get_activate` (registry key 0x8CF4) — confirms the earlier get_activate finding. **Live-action class**
+(changes camera clock) — static decode only; do not POST to hardware without asking.
+
+### get_gpsdivunit.cgi -> 0x7e6fad08 (`do_cgi_get_gpsdivunit`)
+GET. Opens a session, emits:
+
+```
+<?xml version="1.0"?>
+<divunit>%d</divunit>
+```
+
+with `%d` = **500**, hard-coded (immediate in the handler). `divunit` is the fixed scale factor the
+client uses to encode GPS coordinates as integers for req_storegpsinfo: coordinate = value / 500.
+Session-open fail → 520/1005.
+
+### req_attachexifgps.cgi -> 0x7e6fb11b / req_storegpsinfo.cgi -> 0x7e6fb58d
+Geotag **write** CGIs: store GPS info into the camera's pending-EXIF buffer / attach it to images.
+Both are **live-action class** (mutate image metadata on the SD card). Handlers located; full field
+decode deferred — not needed for the KMP query/download v1, and firing them is gated on user approval.
