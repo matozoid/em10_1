@@ -4,7 +4,12 @@ Container = blocks; block = 32B header + dlen data + 32B footer.
  header: 'OE' model(BCD-ish) .. @8 load addr u32, @12 dlen u32, @16 ver u32, @20 u2 u32, rest reserved.
  footer: header[:28] echo + u32 V, with V + sum32(dec) + 2*sum32(hdr[:28]) == 0 (mod 2^32).
  data per 16B chunk: plain[j] = enc[P[j]] ^ 0xFF
-usage: omfw.py info|dec|enc FILE [OUTDIR_OR_OUT]"""
+usage:
+  omfw.py info FILE                      list blocks + footer check
+  omfw.py dec  FILE OUTDIR               decode each block to OUTDIR/blkNN_<load>.bin
+  omfw.py rebuild FILE DECDIR OUT.BIN    re-encode blocks from DECDIR (patched in place,
+                                         same length), recompute footers, write flashable BIN.
+                                         Rebuilding an unmodified DECDIR reproduces FILE exactly."""
 import struct, sys, os
 P = [1,3,0,2,6,4,7,5,11,10,9,8,13,14,12,15]
 Q = [0]*16
@@ -29,6 +34,22 @@ def blocks(raw):
         if dlen%16 or off+64+dlen>len(raw): raise ValueError("truncated block at %#x"%off)
         yield dict(idx=i,off=off,hdr=h,load=load,dlen=dlen,ver=ver,u2=u2,data=raw[off+32:off+32+dlen],ftr=raw[off+32+dlen:off+64+dlen])
         off+=64+dlen; i+=1
+def rebuild(raw, decdir):
+    """Reassemble a container from decoded blocks in decdir (names as `dec` wrote).
+    Each decoded file is re-encoded in place (length must match the original block),
+    headers are preserved, footers recomputed. Returns the new container bytes."""
+    out=bytearray()
+    for b in blocks(raw):
+        name="blk%02d_%08x.bin"%(b["idx"],b["load"])
+        path=os.path.join(decdir,name)
+        p=open(path,"rb").read()
+        if len(p)!=b["dlen"]:
+            raise ValueError("%s length %#x != block dlen %#x (patches must be in-place)"%(name,len(p),b["dlen"]))
+        data=enc(p)
+        ftr=b["hdr"][:28]+struct.pack("<I",footer_v(b["hdr"],p))
+        out+=b["hdr"]+data+ftr
+    return bytes(out)
+
 if __name__=="__main__":
     cmd,f=sys.argv[1],sys.argv[2]; raw=open(f,"rb").read()
     out=sys.argv[3] if len(sys.argv)>3 else None
@@ -39,3 +60,12 @@ if __name__=="__main__":
             ok = b["ftr"][:28]==b["hdr"][:28] and struct.unpack("<I",b["ftr"][28:])[0]==v
             print("blk%d off=%#x load=%#010x len=%#x ver=%#x u2=%#x footer_ok=%s sha=%s"%(b["idx"],b["off"],b["load"],b["dlen"],b["ver"],b["u2"],ok,__import__("hashlib").sha256(p).hexdigest()[:12]))
             if cmd=="dec" and out: open(os.path.join(out,"blk%02d_%08x.bin"%(b["idx"],b["load"])),"wb").write(p)
+    elif cmd=="rebuild":
+        decdir=sys.argv[3]; outbin=sys.argv[4]
+        new=rebuild(raw,decdir)
+        open(outbin,"wb").write(new)
+        import hashlib
+        print("wrote %s  %d bytes  sha=%s  identical_to_input=%s"%(
+            outbin,len(new),hashlib.sha256(new).hexdigest()[:12],new==raw))
+    else:
+        sys.exit("unknown cmd %r"%cmd)

@@ -29,3 +29,16 @@ parser/request/callback/guard/input hooks (@1124507..1379078). Marked by the aut
 real device NOT verified" (user reports of it working were in the release notes; unverified here).
 `runtime_base` 2107183136 = 0x7D9D... (see profiles.json). Patch tool/CPU emulation modules: `engine`, `om1_*`, `om5ii_*` in the exe.
 Install: SD card `DCOLYMP/E1139999.BIN`.
+
+## Rebuild / repackage (tools/omfw.py `rebuild`) — VERIFIED round-trip
+`omfw.py rebuild FILE DECDIR OUT.BIN` reassembles a flashable container from the decoded blocks in
+DECDIR (as `omfw.py dec` wrote them). Each decoded block is re-encoded in place — a patch must keep
+the block's byte length (`dlen`) unchanged — headers are preserved and footers recomputed
+(`V + sum32(dec) + 2*sum32(hdr[:28]) == 0`).
+
+Acceptance test (2026-11-02): decode stock `OLY_E_113_1400_0000_0000.BIN` (3 blocks) → `rebuild` with
+the **unmodified** DECDIR reproduces the input **byte-for-byte** (`identical_to_input=True`,
+70254592 bytes, sha `84d81b2d…`). So the full patch pipeline is: `dec` → edit a `blkNN_*.bin` in
+place (same length) → `rebuild` → rename to `E1139999.BIN` on SD `DCOLYMP/`. This is the mechanism for
+"firmware 1.4 + patch": stock is already 1.4, so a mod = an in-place edit of block 0 re-sealed by
+`rebuild`.
