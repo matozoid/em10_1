@@ -66,11 +66,34 @@ Consequences for the KMP replacement:
   still carried the Mark I simulation data) or deriving the profile empirically from Mark I
   OOC-JPEG vs RAW pairs shot on the user's camera.
 
+## E-M10 Mark I camera-ID = `S0051` (confirmed)
+
+Resolved from ExifTool's `%olympusCameraTypes` (`lib/Image/ExifTool/Olympus.pm`). All E-M10 codes:
+
+| code | model |
+|---|---|
+| **`S0051`** | **E-M10 (Mark I)** |
+| `S0059` | E-M10 Mark II |
+| `S0068` | E-M10 Mark III |
+| `S0088` | E-M10 Mark IV |
+| `S0094` | E-M10 Mark IIIS |
+
+This **cross-validates the `MDP_AS.omdp` decode above**: ExifTool and the Workspace table agree
+exactly on `S0088`=E-M10 Mark IV, `S0080`=E-M1X, `S0092`=E-M1 Mark III. So the camera-ID code *is*
+the MakerNote `Equipment:0x0100` CameraType2 string, and the Mark I's is `S0051`.
+
+`S0051` is **not** in `MDP_AS.omdp` (oldest E-M10 there = `S0088`), nor in any engine DLL's code
+list (`OlyImgProc2`/`OlyLaurel` = S0003/S0004; `OlyLoquat`/`OlyWalnut` = S0067; `OlyClover` =
+S0067/S0080/S0089/S0092/S0095) — confirming the Mark I is unsupported by this Workspace build's
+per-model simulation data.
+
+No local Mark I sample with intact MakerNote: the repo's `reference/signal-2026-11-01-*.jpg` are
+**ART 1.26.10** (RawTherapee-fork) exports with Make/Model/MakerNote stripped — not usable to read
+CameraType2. (A straight-from-camera ORF/JPEG would show `S0051` at `Equipment:0x0100`.)
+
 ## Open / next
 
-- **Mark I camera-ID code unknown.** It is not in any bundled table. The definitive value is the
-  *CameraType2* string in the Mark I's own files — read `Equipment:0x0100` from any Mark I ORF or
-  JPEG MakerNote (the user has the camera; one sample file settles it). Cross-check against
-  ExifTool's `%olympusCameraTypes`.
 - Check whether an **Olympus Viewer 3** install (older) is obtainable to recover the Mark I
-  `CameraSimulation` profile — the only Olympus-authored route to the exact look.
+  (`S0051`) `CameraSimulation` profile — the only Olympus-authored route to the exact OOC look.
+- Alternatively derive the Mark I colour profile empirically from straight-from-camera OOC-JPEG vs
+  ORF pairs.
