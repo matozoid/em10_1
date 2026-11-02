@@ -30,6 +30,26 @@ copy — the pipeline is a chain of these stages (demosaic, NR, color, sharpen),
 GPU path (`OlyCliviaCheck`→`cudart64_12`, plus `opencv_world3416`). `OlyPoplar` additionally
 exposes `IOlyCameraRawDevelopEventHandler` (ns `OLYCAM`) — the camera-develop event surface.
 
+## Stage-plugin ABI (plant codename DLLs)
+
+Every develop-stage DLL exports the **same 3-function plugin ABI**, codename-substituted:
+
+```
+OlyGet<Name>Instance     // return the stage's filter/develop instance
+Oly<Name>Initialize      // one-time stage init
+Oly<Name>Finalize        // teardown
+```
+
+seen for Maple, Peony, Loquat, Walnut, Pomegranate, … . `OlyLoquat` adds
+`OlyLoquatCliviaSkipSwitch` — a toggle for the **Clivia** GPU path (`OlyCliviaCheck` →
+`cudart64_12`), i.e. skip-GPU/CPU-fallback control. So each plant DLL is a hot-pluggable develop
+stage returning a COM-style instance; the host chains them.
+
+Codename→role is **not** cleanly separable from strings (all stages embed the shared imaging
+lib, so gamma/edge/chroma/NR strings appear everywhere). Weak distinct signals: `OlySunflower`
+→ lens distortion, `OlyAcacia`/`OlyClover` → resize/resample. Firm role assignment needs the
+per-stage instance vtable (decompilation).
+
 ## Working model (to confirm by decompilation)
 
 1. olive `COlyImgFmtOrf` opens the ORF/TIFF container, resolves IFD0 strips + MakerNote
