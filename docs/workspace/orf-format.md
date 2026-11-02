@@ -92,6 +92,30 @@ newer (3/4) layout. These correspond to the Olympus MakerNote generations:
 The E-M10 Mark I writes the gen-3 `"OLYMPUS\0"` MakerNote (confirm against a real `.ORF` off the
 card — tag chain and header bytes above are what the reader keys on).
 
+## Olympus MakerNote sub-IFD tags (cross-checked vs ExifTool)
+
+The `SetMakerNoteIFDTags` registry (tags whose value is a nested IFD) corresponds to the
+documented Olympus gen-3 MakerNote sub-directories. From ExifTool's `Olympus` tag table
+(https://exiftool.org/TagNames/Olympus.html):
+
+| MakerNote tag | sub-IFD |
+|---|---|
+| `0x2010` | Equipment |
+| `0x2020` | CameraSettings |
+| `0x2030` | RawDevelopment |
+| `0x2031` | RawDev2 |
+| `0x2040` | ImageProcessing |
+| `0x2050` | FocusInfo |
+| `0x3000` | RawInfo |
+| `0x4000` | MainInfo |
+
+Main-IFD `0x0000` = MakerNoteVersion; each sub-IFD carries its own `0x0000` version
+(EquipmentVersion, CameraSettingsVersion, …). Key fields the replacement needs early:
+Equipment `0x0100` CameraType2 (string[6]), `0x0101` SerialNumber (string[32]), `0x0201`
+LensType (int8u[6]); CameraSettings `0x0200` ExposureMode, `0x0301` FocusMode, `0x0400`
+FlashMode, `0x0500` WhiteBalance2, `0x0603` ImageQuality2. (ExifTool does not document the
+`OLYMP`/`OLYMPUS` header bytes or the `0x300` version gate — those come from the olive RE above.)
+
 ## For the replacement
 
 Reading an E-M10 `.ORF` = a standard little-endian TIFF reader (`"II"`, magic `0x4f52` → IFD0)
