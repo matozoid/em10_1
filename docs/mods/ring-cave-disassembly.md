@@ -108,6 +108,55 @@ Both clear the ready flag `0xbd9b8814 = 0` at reset / init so a stale ring value
 across a lens detach or power/mode cycle, then load a descriptor-struct neighbour cell
 (`0xa0a5c6ec` / `0xa0a5c974`) and return.
 
+## Internal cave subroutines (traced tick 2)
+
+### `0x40327810` — full descriptor gate (reached from `input_hook`)
+```
+mov (0xa0a5c970),a0          ; lens-descriptor pointer
+cmp 0,a0 ; beq bail          ; null
+mov a0,d0 ; and 3,d0 ; bne bail   ; misaligned
+cmp 0xa0000000,a0 ; bcs bail  ; ptr below RAM window -> bail
+cmp 0xa3fffdcf,a0 ; bhi bail  ; ptr above RAM window -> bail
+movbu (560,a0),d0            ; flags byte at +560
+btst 128,d0 ; beq bail        ; ring-capable bit 0x80 clear -> bail
+mov (0xbd9b8814),d0          ; load ready flag
+jmp 0x40327068               ; -> A/M consume path
+```
+This is the **complete** `descriptor_gate`: null + alignment + an explicit **RAM-range bounds check
+(`0xA0000000 … 0xA3FFFDCF`)** before the `flags[+560] & 0x80` ring-capable test — a defensive guard
+so a garbage pointer can never be dereferenced to fake ring capability. Confirms the profile's
+`flags_offset 560, flag_mask 128` exactly.
+
+### `0x403271ad` — lens-comm **response-69** detection
+```
+mov (52,sp),a0 ; cmp 0,a0 ; beq ...
+movhu (a0),d0 ; cmp 69,d0 ; beq hit      ; response id == 69 (0x45)?
+movhu (2,a0),d0 ; cmp 69,d0 ; beq hit     ; or at +2
+... and 255,(8,sp) ; cmp 69 ...
+hit: or 256,d0 ; mov d0,(8,sp)            ; set bit 0x100 = "saw response 69"
+```
+Then `0x403271d1` shifts/stores the result into a response buffer (`asr 8`, `inc d1`, `movbu`) and
+returns. This is the `native-polls-69` half of the profile's `impl` — it watches lens-comm response
+message **69** and raises an internal flag bit `0x100`.
+
+### `0x403274b9`/`0x403274e1` — guard tail
+Tests saved A0 bit1; one path clears the ready flag and returns status `0x6507` (25863), the other
+calls stock `0x4041b35d` (`[d2,d3,a2,a3]`, frame 16) before returning. `0x6507` is the candidate's
+signal value back to the stock guard site.
+
+### `0x40327770` — lens-comm transaction builder
+```
+mov 0x85c1,d0 ; mov 0,a0 ; clr d1
+call 0x403426a4,[d2,d3],12      ; issue transaction (cmd 0x85c1)
+cmp 4,d0 ; beq ... ; cmp 6,d0 ; beq ...   ; branch on result 4/6
+mov d0,d2 ; call 0x404d71a0,[d2],8
+cmp 53,d0 ; bcs ... ; cmp 56,d0 ; bhi ...  ; handle response ids 53..56 (0x35..0x38)
+call 0x40451a89,[],4 ; cmp 4,d0 ...
+```
+Drives a lens-comm exchange with command id **`0x85C1`** and dispatches on response ids 4/6 and the
+53–56 (0x35–0x38) range — the machinery behind the `polls 69-81-84` design (reading the lens's
+ring/aperture capability + value over the lens bus).
+
 ## Summary of the mechanism
 
 1. `reset`/`init` clear the ready flag.
