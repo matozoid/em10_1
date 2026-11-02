@@ -93,6 +93,47 @@ discovery must come from `get_caminfo` + `get_commandlist` + per-prop `get_campr
 `respond_error(0x208, 0x3ec)` = HTTP 520 + `errorcode` 1004 when a command argument is missing/unknown (static RE; not yet seen live).
 LIVE (2026-11-01, camera in `private` connect mode): every `get_camprop.cgi?com=get|desc&propname=<any of the 14>` returns HTTP 520 `errorcode` 1001, same as an unknown CGI (`fwup_getversions`). So 1001 = CGI not available in the current connect mode / unsupported; the camprop CGIs are in the rec-mode table (0x7e772048) and need the camera switched to remote/rec mode first (`switch_cammode.cgi?mode=rec`). Confirms the per-mode table design. Later calls in that run got empty replies (camera or link dropped), so only the first 11 properties were queried.
 
+## get_commandlist — self-describing command grammar (RESOLVED 2026-11-02)
+
+`get_commandlist.cgi` returns the camera's **own** command grammar as XML (content-type `text/xml`).
+Handler **0x7e6f9e2d**, present in all four top-level tables (0x7e771e68 / 0x7e771f60 / 0x7e772048 /
+0x7e7720d0) — a universal CGI available in every connect mode. It emits a **static 5616-byte XML
+template at 0x7e7707d0** (copied via 0x7e6fd474 into a 5616-byte buffer; a mode-indexed table at
+0xa0a92720, index cell 0x608e9210, selects the buffer). The template:
+
+```
+<?xml version="1.0"?>
+<oishare>
+ <version>2.20</version>
+ <support func="web"/> <support func="remote"/> <support func="gps"/> <support func="release"/>
+ <cgi name="..."> <http_method type="get|post"> <cmd1 name="..."> <param1 name="...">
+   <cmd2 name="..."> <param2 name="..."/> ... </cmd2> </param1> </cmd1> </http_method> </cgi>
+ ... (23 <cgi> entries)
+</oishare>
+```
+
+This **is** the `cmd1`/`param1`/`cmd2`/`param2` grammar (the open "rec-mode request parsing" thread):
+a self-describing schema the client fetches to learn the legal CGI/argument tree. The 23 `<cgi>`
+entries equal the embedded CGI set exactly. `switch_cammode` shows `cmd1=mode` →
+`param1={rec,play,shutter}`, with `rec`/`shutter` carrying `cmd2=lvqty` → `param2={0320x0240,
+0640x0480}` (confirms the live-tested `switch_cammode.cgi?mode=rec&lvqty=0320x0240`).
+
+**Independent corroboration of the camprop RE** — the template's `get_camprop`/`set_camprop` grammar
+matches the disassembly-derived property tables exactly:
+- `get_camprop` `com=get` and `com=desc` (both HTTP GET) each enumerate **14** `propname` values:
+  touchactiveframe, takemode, drivemode, focalvalue, expcomp, shutspeedvalue, isospeedvalue, wbvalue,
+  noisereduction, lowvibtime, bulbtimelimit, artfilter, digitaltelecon, desclist.
+- `set_camprop` `com=set` (HTTP **POST**) enumerates exactly the **8 settable** props: takemode,
+  drivemode, focalvalue, expcomp, shutspeedvalue, isospeedvalue, wbvalue, artfilter — identical to
+  the settable set found in the set-leaf disassembly. So the five read-only props (touchactiveframe,
+  noisereduction, lowvibtime, bulbtimelimit, digitaltelecon) are read-only by design, confirmed from
+  two independent sources.
+
+**For the KMP client:** fetch `get_commandlist.cgi` once after connect to get the full legal
+command/argument tree and the firmware's oishare version (`2.20`), rather than hard-coding endpoints.
+This is the correct capability-discovery entry point (`get_camcapa.cgi` does not exist on this body —
+see its dead-end note above).
+
 ## Camera properties (get_camprop / set_camprop)
 Table `desclist` at 0x7e7816b0, 16-byte records `{name, get, desc, set}`; 0 = not available. `com=get` -> slot 1, `com=desc` -> slot 2, set_camprop `com=set` -> slot 3.
 | prop | get | desc | set |
