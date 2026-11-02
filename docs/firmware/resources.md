@@ -260,6 +260,12 @@ IDs 1625/1626 -> fmt 15). Having an ID does not imply use; the bank
 is likely shared across bodies. Which IDs block 0 actually draws: not investigated.
 Sheet colours: palette ID 3 default, ID 6 for exposure-comp scale (user-judged); no single palette fits all icons.
 
+**Re-verified 2026-11-02** (`tools/icons.py` fresh run, both banks): bank0 (0xbf06a000) **1527** records decode,
+bank1/e69 (0xbf46a000) **1743** decode, **0** real failures. The only 5 `decode fail`s are the known fmt-1-tail
+misparses (ID-table entries at 0x3b5e90/62c4/63c8/69bc/0x3bb6a0 whose targets land in the tail pointer/text region →
+bogus `33333303` "headers", W=H=820, not icons). So both `hdr[3]` encodings are fully covered; nothing real is left
+undecoded in either bank. (Earlier summaries citing "~2600 undecoded hdr[3]==3 records" are obsolete — see STATUS.md.)
+
 Content (entry 0): digits/7-seg fonts in several sizes, PASM/iAUTO/scene/ART 1-12/ART BKT mode icons, flash
 compensation labels, Wi-Fi, MENU/OK/touch buttons, battery, sliders, panel frames. `tools/icons.py entry.bin base_hex
 out_prefix [--fmt 2|3]` writes paged sheets (gitignored, vendor data).

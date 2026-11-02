@@ -81,8 +81,11 @@ Done, all in `docs/firmware/` and `docs/hardware/`:
   `memory-map`, `rtos-tasks`, `classes`, `blocks`.
 - Wi-Fi CGI (oishare v2.20, 23 CGIs, per-mode dispatch, camprop desclist), live read-only verified: `wifi-cgi`.
 - Blocks 1/2 = resources (`resources.md`): 34 UI string tables (+`@Axxx@` icon codes), 34 fonts (decoded, `tools/glyphs.py`),
-  32 JPEGs (`tools/jpgextract.py`), icon banks entry 0 / 69 (`tools/icons.py`): 444 decoded; ~2600 records in a
-  second encoding (`hdr[3]==3`) still undecoded.
+  32 JPEGs (`tools/jpgextract.py`), icon banks entry 0 / 69 (`tools/icons.py`): both `hdr[3]` encodings
+  SOLVED (fmt 2 = 4-bit RLE, fmt 3 = 2-bit-run + 8-bit CLUT index) — **3270 records decode** (bank0 1527,
+  bank1 1743). Only 5 bank0 "fails" remain, all bogus (ID-table entries pointing into the tail
+  pointer/text region → garbage `33333303` headers, not icons). The earlier "~2600 hdr[3]==3 undecoded"
+  note is obsolete.
 - Display ASIC command set and outputs: `docs/hardware/display-pipeline.md`. Block 0 only posts requests to it; no
   decoder or ASIC loader found, so remaining icon formats need blind decoding.
 
