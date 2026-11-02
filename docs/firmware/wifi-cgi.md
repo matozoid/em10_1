@@ -315,11 +315,34 @@ block written to RAM `0xa0a925c0`, not by the event id:
 
 | path | builder | `[0xa0a925c0]` | `[0xa0a925c4]` | `[0xa0a925d0]` | event |
 |---|---|---|---|---|---|
-| get-value | 0x7e70e3ed | `a3` (ptr) | `d0` | `d0` (movhu) | 0x41b0012 |
+| get-value | 0x7e70e3ed | `a3` (ptr) | `d0` | `d0` (movhu) | 0x41b0012 (+0x41b0013 list) |
 | get-desc | 0x7e70e88e | sub-id | 0 | 0 | 0x41b0012 |
 
 Both post via 0x7e70e0c3, then read the result buffer at `a3 = [0xa0a925d4]` and the status/count
 word at `[0xa0a925d0]`.
+
+**get-value builder 0x7e70e3ed is two-phase** (full disassembly 2026-11-02). A single `com=get`
+response carries the current value *and* the supported-value list, built in order:
+
+- **Phase 1 — current value.** Writes command block `[0xa0a925c0]=a3` (sub-id ptr), `[c4]=0`,
+  `[d0]=0`, posts **`0x41b0012`** (= 68878354), reads count/status `[0xa0a925d0]`, result `[0xa0a925d4]→a2`.
+  Switches on sub-id to the per-property formatter and formats the single value `(a2)`:
+  32-bit props (drivemode 2075, isospeed 6, wb 9, artfilter 280, 10032) read `mov (a2),d0`;
+  16-bit props (focalvalue 3, expcomp 2, shutspeed 4) read `movhu (a2),d0; exth`.
+  Result pointer saved to `(12,sp)`.
+- **Phase 2 — value list.** Re-posts with `[0xa0a925d0]=0`, result `[0xa0a925d4]→a2`, event
+  **`0x41b0013`** (= 68878355, *new* — camprop list-query). Count returns in `[0xa0a925d0]`;
+  `a2` is now an **array of 32-bit entries**. Loops `d3 = 0 .. count-1`: for `d3>0` appends the
+  separator string `@0x7e781b61` (via concat 0x7d99772d), indexes element `(d2<<2, a2)` (`asl2`),
+  runs the **same formatter** as phase 1 (indexed form), concatenates. Re-reads count each pass.
+- **Assemble.** If both phase statuses are 0, calls 0x7e711c0d with the phase-1 value ptr `(12,sp)`
+  and the list buffer `(16,sp)` to emit the combined XML, then releases session (0x7d996ff0).
+
+So `com=get` and `com=desc` call the **identical** sub-id→formatter set (0x7e711e50 / 0x7e7121b6 /
+0x7e7120c8 / 0x7e711f65 / 0x7e711ec1 / 0x7e712053 / 0x7e7123ff / 0x7e7124e9); the only difference is
+`get` precedes the list with the single current value (phase 1 / `0x41b0012`) whereas `desc` emits
+richer per-entry descriptors. The list enumeration itself uses event `0x41b0013`. This resolves the
+"get-value formatters" open thread: there is no separate get-only formatter bank.
 
 The **desc builder 0x7e70e88e** then switches on sub-id to a per-property desc formatter that turns
 the returned buffer into the enumerated legal-value list:
@@ -345,7 +368,8 @@ So the camprop event map is:
 | event | meaning |
 |---|---|
 | 0x41b0011 | set value (all settable props except takemode) |
-| 0x41b0012 | get value **and** get desc (query), per command block |
+| 0x41b0012 | get current value **and** get desc (query), per command block |
+| 0x41b0013 | get supported-value **list** (phase 2 of `com=get`) |
 | 0x41b0014 | set takemode |
 | 0x41b0015 | get/desc takemode |
 
