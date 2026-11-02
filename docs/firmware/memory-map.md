@@ -28,6 +28,7 @@ bss unless noted. VERIFIED = read/written by disassembled code this session.
 | 0xa0a9257e | **current cammode** (0=play/browse, 1=rec, 2=shutter); accessed only through critical-section helper 0x7e70f076 | wifi-cgi mode state machine |
 | 0xa0a9258a | cammode **event-ack / last-posted** flag (compared in default handler 0x7e70c298 before posting event 0x41b0004) | wifi-cgi (inferred) |
 | 0xa0a9258c | **lvqty** live-view quality: 1 = 0640x0480, else 0 (0320x0240) | wifi-cgi switch_cammode leaf |
+| 0xa0a92590 | **take-phase** state (0/1/2/3); selects exec_takemotion phase handler | wifi-cgi exec_takemotion |
 | 0xa0a5c970 | **lens-descriptor pointer** cell (ring descriptor_gate pointer_cell); null/aligned/RAM-range checked before use | ring-cave |
 | 0xa0a5c6ec, 0xa0a5c974 | neighbour cells in the lens-descriptor struct | ring-cave |
 | 0xbd9b8810 | ring **cached aperture value** (u16) — community payload scratch | ring-cave |
