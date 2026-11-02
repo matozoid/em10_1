@@ -64,9 +64,27 @@ The **accessory** updater (strobe/lens) uses its own two patterns, `F???????BIN`
 - `0x7db8b6a7` (a0=tag, d0=level) and `0x7d9999f9` = `[firmup]` trace loggers; error tag
   `"[firmup]File Init Err."` @ `0x7df46d2c`. Component framework tagged `CIC_*` (`CIC_MUTEX`, `}CIC_END`).
 
+### Body-update scan flow (`0x7de57532`)
+The body scanner (`api_firmup_Check_FirmwareUpdate` leaf; symbol tags @ `0x7db93270`/`0x7db9328a`)
+runs, tagging each step with `[firmup]` log strings (@ `0x7df46ef4`+):
+
+1. Mount SD media (`0x7de57763`). Fail → `"[firmup]Mount Err:"`, bail with -1. OK → `"[firmup]mount_ok"`.
+   (The earlier `"[firmup]File Init Err."` @ `0x7df46d2c` is the pre-mount media-handle-open failure.)
+2. Allocate work buffers (`0x7de57767`, size `1800`=0x708; config struct @ `0x7df46df8` holds buffer
+   sizes 0x60000 / 0x100000 and RAM scratch pointers `0x6044cbc4`/`0x6044cbd8`).
+3. Loop over the `X113????BIN` pattern table, calling the 8.3 dir pattern-scan `0x7de577a7` per entry.
+   - result `0xE00` (3584) or `0xE0C` (3596) → `jmp 0x7de57712` = **match / handle-found** branch →
+     `"[firmup]...Binary file Hakken !!!!!"` ("Hakken" = 発見, *found*) → `"[firmup]...read file_size ="`
+     → `"[firmup]ld_img_st"` (load image, then validate + flash).
+   - result `0` → not this pattern, bump found-counter `(12,sp)`, continue.
+   - other nonzero → error, close/free via `0x7dc9cdd5`.
+4. Loggers: `0x7d9999f9` (fmt, d0=value) and `0x7d996e85` (tag-only). `0xE00`/`0xE0C` are the
+   media-layer "entry found" result codes.
+
 **App takeaway (confirmed):** to update body firmware, write the official body image to SD as
-`DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); camera's `api_firmup_Check_FirmwareUpdate` finds it.
-Our app only places the file + drives the boot-hold UI — it does **not** reimplement flashing.
+`DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); the camera mounts SD, scans `DCOLYMP`, logs
+`Binary file Hakken` on the match, reads it, and flashes. Our app only places the file + drives the
+boot-hold UI — it does **not** reimplement flashing or the image header/validation.
 
 ## Dead ends / notes
 - USB path: the real flash routine is behind a runtime-populated vtable slot (+36); can't follow the
