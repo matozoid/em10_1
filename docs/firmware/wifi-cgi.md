@@ -134,6 +134,20 @@ command/argument tree and the firmware's oishare version (`2.20`), rather than h
 This is the correct capability-discovery entry point (`get_camcapa.cgi` does not exist on this body —
 see its dead-end note above).
 
+## get_activate — time-sync activation status (RESOLVED 2026-11-02)
+
+`get_activate.cgi` handler **0x7e6faa71** returns `<?xml version="1.0"?>\r\n<activate>STATE</activate>`
+where STATE is **`notyet`** or **`done`**. It reads registry key **36084 (0x8CF4)** via getter
+0x7d9d36c4 (debug string `"timegap ="` @0x7e772aef): if the getter returns **-1** (no stored value)
+→ `notyet`, otherwise → `done`.
+
+So "activate" here is **not** licensing/DRM — it is whether the camera's **UTC time offset
+("timegap")** has been configured, i.e. whether the client has called `set_utctimediff.cgi` this
+session. A fresh connection reports `notyet`; after the app pushes the phone's UTC offset it reports
+`done`. This pairs with `set_utctimediff` / `get_gpsdivunit` / `req_storegpsinfo` (the GPS/geotag
+support group) — the app is expected to sync time before geotagging. For the KMP client: call
+`set_utctimediff` early, then `get_activate` should read `done`.
+
 ## Camera-mode state machine (switch_cammode / get_connectmode) (RESOLVED 2026-11-02)
 
 Two distinct state concepts, two RAM cells:
