@@ -26,7 +26,9 @@ Embedded CGIs: get_connectmode, switch_cammode, get_caminfo, exec_pwoff, get_res
 
 Remote-control events go through `WIFI_REMOCON_CGI` (appevent callback/message, GET POINT, REC COMP, RECVIEW COMP, shooting type/mode/exposure-time/continuous-limit getters). The HTTP server task is `WIFI_HTTPD`; `wifi_mngr_*` and `ol_imageshare_*` back the browse/transfer calls.
 
-TODO: decompile handlers, document request parsing (cmd1/param1/cmd2), the exec_shutter state machine, and the set_camprop property table.
+TODO: document the rec-mode request parsing (cmd1/param1/cmd2) and the per-property get/desc/set leaf
+value encodings. (DONE 2026-11-02: exec_shutter com→event map and exec_shuttermisc subcommands — see
+below; set_camprop property table — see "Camera properties".)
 
 ## Dispatch tables (static RE; runtime addresses; name/handler pairs of 8 bytes)
 The httpd selects a CGI table by connection mode, then calls the handler. Several modes share handlers.
@@ -62,8 +64,62 @@ Table `desclist` at 0x7e7816b0, 16-byte records `{name, get, desc, set}`; 0 = no
 | digitaltelecon | y | y | - |
 So noisereduction, lowvibtime, bulbtimelimit, digitaltelecon are read-only over Wi-Fi.
 
-## exec_shutter
-First level `exec_shutter`/`exec_shuttermisc` wrap the handler in `WIFI_RELEASE_CGI(1)...(0)`. Leaf 0x7e70a1be maps the `com` value (6 strcmp branches) to app events 0x41b0024..0x41b0029 and posts it; HTTP 200 on success. Exact strings per branch not yet resolved (decompiler hides the string args).
+Per-property leaf handler addresses (get / desc / set), dumped from the table 2026-11-02 for the
+next decompile pass on the value encodings:
+
+| prop | get | desc | set |
+|---|---|---|---|
+| desclist | 7e70cf89 | - | - |
+| touchactiveframe | 7e70d09d | 7e70d0e9 | - |
+| takemode | 7e70d17f | 7e70d1cc | 7e70d251 |
+| drivemode | 7e70d31b | 7e70d379 | 7e70d3c3 |
+| focalvalue | 7e70d478 | 7e70d4d5 | 7e70d51e |
+| expcomp | 7e70d5c4 | 7e70d621 | 7e70d66a |
+| shutspeedvalue | 7e70d710 | 7e70d76d | 7e70d7b6 |
+| isospeedvalue | 7e70d898 | 7e70d8f5 | 7e70d93e |
+| wbvalue | 7e70d9e3 | 7e70da40 | 7e70da89 |
+| noisereduction | 7e70db2e | 7e70db7b | - |
+| lowvibtime | 7e70dbf2 | 7e70dc3f | - |
+| bulbtimelimit | 7e70dcae | 7e70dcfb | - |
+| artfilter | 7e70dd56 | 7e70ddb4 | 7e70ddfe |
+| digitaltelecon | 7e70deaa | 7e70def7 | - |
+
+## exec_shutter (RESOLVED 2026-11-02, mn10300 objdump of leaf 0x7e70a1be)
+First level `exec_shutter`/`exec_shuttermisc` wrap the handler in `WIFI_RELEASE_CGI(1)...(0)`.
+
+Leaf 0x7e70a1be: reads the arg count (`movhu (a1),d1`); if `<=0` → HTTP 520 `errorcode` 1004 via
+0x7e7074e6. Otherwise matches the `com` arg against 6 string constants (strcmp helper 0x7d997773,
+strings at 0x7e780c-xx) and loads an app-event id into d2; on a match it posts the event via
+0x7d9b12a2, then always returns **HTTP 200** (0x7e7074a1). Unknown `com` → d2 stays 0 → no event
+posted, still HTTP 200. The complete `com` → event map (strcmp order):
+
+| `com` | app event | meaning |
+|---|---|---|
+| `1stpush` | 0x41b0024 | half-press down (AF + meter) |
+| `1strelease` | 0x41b0025 | half-press up |
+| `2ndpush` | 0x41b0026 | full-press down (release shutter) |
+| `2ndrelease` | 0x41b0027 | full-press up |
+| `1st2ndpush` | 0x41b0028 | full press in one step (AF + shutter) |
+| `2nd1strelease` | 0x41b0029 | release shutter but keep half-press held |
+
+These six are exactly the `exec_shutter.cgi?com=` values seen in the OI.Share capture
+(`../usb-protocol/wifi-cgi-endpoints-oishare-4.6.0.txt`). So the Wi-Fi shutter control is a thin
+HTTP→app-event shim: each `com` posts one key-state event (events 0x41b0024..29) into the body's
+normal shutter-button event path.
+
+### exec_shuttermisc (leaf 0x7e70a292)
+Arg-indexed dispatch through an 8-byte `{strptr, handler}` table at **0x7e780c3c** (helper
+0x7da836f1):
+
+| `com` | handler |
+|---|---|
+| `startliveview` | 0x7e70a2f3 |
+| `stopliveview` | 0x7e70a36d |
+
+So **live-view start/stop is also reachable from the shutter-mode dispatcher** (table 0x7e7720d0),
+not only via `exec_takemisc` in rec mode — the shutter personality can both drive the shutter and
+open the MJPEG-over-UDP stream (`../usb-protocol/liveview-udp.md`).
+
 set_takemode 0x7e70c0c4: maps `com` to a mode id 0..3 or 0xffff, calls WIFI_REMOCON_CGI + a state setter.
 
 Ghidra decompiler caveat: MN103 calling convention (A0 = this/ctx, A1 = args) is not modelled, so params show as `in_A0/in_A1`. Auto-names like `version_7e70bd3c` come from a nearby string, not the real function role.
