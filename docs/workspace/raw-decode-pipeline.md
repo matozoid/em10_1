@@ -45,10 +45,30 @@ seen for Maple, Peony, Loquat, Walnut, Pomegranate, … . `OlyLoquat` adds
 `cudart64_12`), i.e. skip-GPU/CPU-fallback control. So each plant DLL is a hot-pluggable develop
 stage returning a COM-style instance; the host chains them.
 
-Codename→role is **not** cleanly separable from strings (all stages embed the shared imaging
-lib, so gamma/edge/chroma/NR strings appear everywhere). Weak distinct signals: `OlySunflower`
-→ lens distortion, `OlyAcacia`/`OlyClover` → resize/resample. Firm role assignment needs the
-per-stage instance vtable (decompilation).
+### Codename → engine generation (decompiled + RTTI-mapped)
+
+The plant DLLs are **not** single filter steps — each is a full **TruePic image-engine-generation
+raw processor**. `OlyGetMapleInstance` builds a **`COlyDC9RawProc`** (5544-byte state object;
+vtable `+0x98` = configure/open, `+0x08` = AddRef; `OlyMapleInitialize`/`Finalize` just set up /
+tear down two `CRITICAL_SECTION`s). RTTI across the set:
+
+| DLL | generation | components present |
+|---|---|---|
+| `OlyMaple` | **DC9** | `COlyDC9RawProc`, `DC9NR`, `DC9CameraSimulation`, `DC9DisplayParameters`, `DC9ParamManage(OWN)` |
+| `OlyPeony`, `OlyPomegranate` | **DC11** | `COlyDC11RawProc`, NR (`DC9NR`), `DC11CameraSimulation`, `DC11DisplayParameters`, `DC11ParamManager` |
+| `OlyWalnut`, `OlyLoquat` | **DC13** | `COlyDC13RawProc`, `DC13NR`, `DC13CameraSimulation`, `DC13DisplayParameters`, `DC13ParamManager` |
+| `OlyPoplar` | DC11+DC13 | `ParamManager` (cross-gen parameter orchestration) |
+| `OlyAcacia` | DC13 | `DC13NRCM` (noise reduction / colour management) |
+
+So each generation engine bundles: **RawProc** (develop core), **NR** (noise reduction),
+**CameraSimulation** (reproduce the in-camera OOC-JPEG look — Picture Modes / colour), 
+**DisplayParameters**, and **ParamManager** (the develop-knob manager = the sub-objects behind
+`IOlyIPRawParameter`). `OlyMuse`'s art filters carry matching `_DC9`/`_DC11`/`_DC13` suffixes
+(`architecture.md`): the whole develop path is bucketed by engine generation.
+
+Open: which DCx the E-M10 Mark I (TruePic VII) selects — the RawProc `+0x98` configure path keys
+off camera/model; needs a decompile of that selector or a live develop trace to pin. For a
+replacement, **`CameraSimulation`** is the component to study to match OOC-JPEG rendering.
 
 ## Working model (to confirm by decompilation)
 
