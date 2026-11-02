@@ -73,6 +73,44 @@ yields a malfunctioning-but-recoverable camera (reflash stock), not a dead one. 
 unverified runtime behaviour on real hardware — if the payload corrupts boot or the scheduler, the
 SD recovery task never starts and recovery is lost.
 
+## Safe flashing method — rely on the camera's fail-closed pre-flash gate (2026-11-03)
+The lowest-risk way to try a patched body image is to **let the camera's own validator be the gate**,
+because `FIRMUP_SRV` validates before it writes and aborts on any failure (see
+`docs/firmware/camera-fw-update.md` → "Pre-flash image validation"):
+1. **Structural parse** (`0x7de57e24`/`0x7da8883e`): walks the image's ≤32-record region table,
+   checks sizes vs file length (error `0x3321`).
+2. **Image-id + usr_checksum** (`0x7de58985`/`0x7de573d1`): asserts the id byte `== 'E'` (body) and
+   compares a **20-byte (5×u32) internal integrity array** (error `0x3202`), plus a header-flag gate
+   (`0x3204`). Mismatch → abort, **no flash**.
+3. Only on success → `TYPE_FIRMUP_WRITE_OK` → `SUCCESS_REBOOT`.
+
+So a wrong/corrupt/incompletely-patched image is **rejected, not flashed**. That makes "attempt the
+flash and observe" a safe probe: the camera does nothing destructive on a bad image.
+
+**Where our built image stands:**
+- Our `fwpatch.py` output reproduces the community tool's **declared expected output hash exactly**
+  (`sha256 837ecc9e…` — it matches the profile's stated expected image), so the pipeline is faithful:
+  what we build is what the mod author intended to ship.
+- But the mod author's own declared verification is **structural + CPU-emulation only, not hardware**
+  (`test_candidate`, real-device unverified — same caveat as `ring_summary`). Neither the author's
+  tool nor our pipeline writes the camera's internal **20-byte usr_checksum array**; both produce the
+  image from the payload patches alone.
+- Therefore **whether the camera's `usr_checksum` accepts this image is genuinely unverified.** Two
+  outcomes, both non-bricking:
+  - array lies **inside** a patched region (implicitly correct) → image flashes;
+  - array lies **outside** → stock value vs patched payload mismatches → camera rejects (`0x3202`),
+    does nothing.
+
+**Recommended safe procedure (if the user chooses to try it):** full battery; write only the built
+`E1139999.BIN` to `DCOLYMP/`; run the update; watch for `SUCCESS_REBOOT` vs an on-screen checksum/validation
+error. A validation error means the image was rejected pre-write (harmless) — not a failed flash. Do
+**not** interrupt power/SD once `TYPE_FIRMUP_WRITE_OK` is reached (that is the only truly dangerous
+window). Keep a known-good stock `E1139999.BIN` on hand for `FIRMUP_SRV` recovery.
+
+> Open (needs runtime image layout, not reachable by pure static RE): the exact file offset and
+> coverage of the 20-byte `usr_checksum` array — which decides outcome (a) vs (b) above, and whether
+> `fwpatch.py` could/should recompute it to guarantee acceptance.
+
 ## Applying to the camera (live / hardware — user action)
 1. Copy the built `E1139999.BIN` to the SD card root dir `DCOLYMP/` (so `DCOLYMP/E1139999.BIN`).
 2. In the camera, the `api_firmup` updater mounts the card, scans `DCOLYMP` for `E113????.BIN`, finds
