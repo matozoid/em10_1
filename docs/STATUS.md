@@ -94,6 +94,26 @@ decompile + live test (changes camera state, ask first), stock 1.0-1.3 BINs (use
 for mods, `docs/mods/`, **KMP app scaffold** (`app/` empty; v1 = query server, download, write SD, instructions).
 Note: this doc's older TODO list above is superseded by this section.
 
+## 2026-11-02 — Wi-Fi CGI deep dive (all in `docs/firmware/wifi-cgi.md`)
+Disassembled the remaining CGI internals with mn10300 objdump (static RE; the earlier live run was read-only):
+- **camprop path fully mapped**: set-value encoding (events 0x41b0011 / 0x41b0014-takemode), get+desc share query
+  event 0x41b0012 (told apart by the command block at 0xa0a925c0), takemode desc event 0x41b0015. Per-property
+  encoders/formatters tabulated. Dead ends: desc sub-id 10032 is an orphan switch case (no Wi-Fi leaf drives it);
+  5 read-only props bypass the desc builder; encoded-value units undecoded (client reads `desc` list).
+- **rec dispatcher 0x7e70b5a8**: tokenize → 6-entry table 0x7e781500 strcmp → cammode gate 0x7e70f076; default
+  handler 0x7e70c298 = HTTP 520/1004. Two-stage gating (top-level table 1001 vs dispatcher 520/1004).
+- **get_commandlist 0x7e6f9e2d**: serves a static 5616-byte oishare-2.20 XML command grammar (cmd1/param1/cmd2/param2,
+  23 cgi entries) = the self-describing schema; independently confirms 14 get/desc + 8 set camprop names.
+- **get_caminfo 0x7e6f9b91**: model name ONLY (registry key 0x62F1); no fw version (not on Wi-Fi), no serial.
+- **camera-mode state machine**: cells connection-index 0x608e9210, cammode 0xa0a9257e (0/1/2, 1=rec), lvqty
+  0xa0a9258c; switch_cammode leaf 0x7e70bef7 posts transition events 0x41b0001/0002/0020/0022/0023 (full matrix
+  only partially traced = dead end). get_connectmode 0x7e6f9a85.
+- **get_activate 0x7e6faa71**: `<activate>notyet|done</activate>` = UTC time-sync status (key 0x8CF4), not DRM.
+- **get_camcapa.cgi**: DEAD END — vestigial/other-model name, no handler in block 0, always 520/1004.
+- **image browse**: get_imglist 0x7e6fa683 (`text/plain` dir listing, `?DIR=`), get_thumbnail 0x7e6fa809 (EXIF/mov
+  thumbnail JPEG), get_resizeimg 0x7e6f9f0b.
+KMP capability discovery = get_commandlist + get_caminfo + get_camprop?com=desc (NOT get_camcapa).
+
 ## 2026-11-02 — OM Workspace + OI.Share reverse-engineering
 OM Workspace install at `research/owsetup_x/app` (build 2025-07-22). All interop RE, binaries/decompiles kept local.
 Docs in `docs/workspace/` and `docs/usb-protocol/`:

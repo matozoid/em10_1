@@ -134,6 +134,30 @@ command/argument tree and the firmware's oishare version (`2.20`), rather than h
 This is the correct capability-discovery entry point (`get_camcapa.cgi` does not exist on this body —
 see its dead-end note above).
 
+## Image / playback browse CGIs (RESOLVED 2026-11-02)
+
+| CGI | handler | returns |
+|---|---|---|
+| get_imglist | 0x7e6fa683 | `text/plain` directory listing |
+| get_thumbnail | 0x7e6fa809 | thumbnail JPEG bytes |
+| get_resizeimg | 0x7e6f9f0b | resized full-frame JPEG (companion; not disassembled in detail) |
+
+**get_imglist.cgi?DIR=`<path>`** — takes a required `DIR=` query param (parsed via tokenizer
+0x7da83862; missing → error, debug `"no ?DIR= : (do_cgi_get_imglist)"`). Walks the directory with
+the card/file enumerators 0x7de9e636 / 0x7de9e64e and emits a `text/plain` body of per-file records
+(debug fields `dir_type=`, `file_path:`, `directory_no_exists`). This is the standard OI.Share
+directory-listing protocol (one CSV-ish line per entry: path, name, size, attribute, date, time). The
+client walks `/DCIM` top-down using `DIR=` to descend.
+
+**get_thumbnail.cgi** — parses file params via 0x7da83862, then **branches on file extension**: for
+video (`.MOV` / `.AVI`, strings @0x7e77263e) it extracts a poster frame via
+`play_load_get_mov_info` (0x7dd…); for stills it pulls the embedded EXIF thumbnail through the JPEG
+helpers 0x7dd62b59 / 0x7dd69e07 / 0x7dd5c812. Response body = the thumbnail JPEG. (Mirrors the
+`get_movplaytime` / `get_rsvimglist` playback group.)
+
+For the KMP client these three cover remote image browse: `get_imglist` to enumerate, `get_thumbnail`
+for previews, `get_resizeimg` for a downscaled full image, and the raw file over the normal file path.
+
 ## get_activate — time-sync activation status (RESOLVED 2026-11-02)
 
 `get_activate.cgi` handler **0x7e6faa71** returns `<?xml version="1.0"?>\r\n<activate>STATE</activate>`
