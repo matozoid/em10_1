@@ -43,6 +43,14 @@ Independent verification (`omfw.py info` + decoded-block diff vs stock):
 So "firmware 1.4 + patch" is **created and validated locally**. Remaining = the on-camera flash,
 which is the user's hardware action (below).
 
+### Header-gate check (brick-risk reduction)
+All three container block headers in the built `E1139999.BIN` are **byte-identical to stock** (the
+camera already accepts stock 1.4's headers, and `rebuild` preserves headers — only block-0 data +
+footer change). File diffs vs stock are confined to `0x27010`–`0x11fffff` (block-0 encoded data +
+recomputed footer); blocks 1 & 2 are untouched. So the camera's post-mount header/validity gate sees
+exactly what it accepts for stock. The only part that cannot be cleared statically is the **patch
+payload's runtime behaviour on the real body** — the author's TEST_CANDIDATE caveat stands.
+
 ## Applying to the camera (live / hardware — user action)
 1. Copy the built `E1139999.BIN` to the SD card root dir `DCOLYMP/` (so `DCOLYMP/E1139999.BIN`).
 2. In the camera, the `api_firmup` updater mounts the card, scans `DCOLYMP` for `E113????.BIN`, finds
