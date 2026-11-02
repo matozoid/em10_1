@@ -134,6 +134,34 @@ command/argument tree and the firmware's oishare version (`2.20`), rather than h
 This is the correct capability-discovery entry point (`get_camcapa.cgi` does not exist on this body —
 see its dead-end note above).
 
+## get_caminfo — model name only (RESOLVED 2026-11-02)
+
+`get_caminfo.cgi` handler **0x7e6f9b91** (universal — in all four top-level tables) returns a tiny XML
+document:
+
+```
+<?xml version="1.0"?>
+<caminfo>
+<model>%s</model>
+</caminfo>
+```
+
+(templates at 0x7e77231d + 0x7e772347; built into the shared response buffer via 0x7e6fd474.) The
+`%s` model-name string is fetched at runtime from the camera's property registry: getter 0x7d9d3769
+with key **25329 (0x62F1)** into a 128-byte buffer (debug string `"model name : %s"` @0x7e77230c).
+
+**Limitation / dead end for the app:** `get_caminfo` exposes **only the model name** — no firmware
+version, no serial number, no capability flags. The registry value for key 0x62F1 is not statically
+resolvable from block 0 (it comes from the runtime property DB), but OI.Share shows it as the short
+model string (e.g. `E-M10`). So over Wi-Fi:
+- **Model name** → `get_caminfo`.
+- **Firmware version** → NOT available over Wi-Fi (consistent with the no-Wi-Fi-fwup finding; version
+  is read over USB/PTP or shown in the body menu only).
+- **Serial** → NOT in any CGI; only surfaced in the AP SSID `E-M10-P-<serial>`.
+
+The firmware's own error-log strings here contain a typo, `get_cominfo.cgi` (@0x7e772377/0x7e77239b) —
+cosmetic, the live CGI name is `get_caminfo.cgi`.
+
 ## Camera properties (get_camprop / set_camprop)
 Table `desclist` at 0x7e7816b0, 16-byte records `{name, get, desc, set}`; 0 = not available. `com=get` -> slot 1, `com=desc` -> slot 2, set_camprop `com=set` -> slot 3.
 | prop | get | desc | set |
