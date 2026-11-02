@@ -84,6 +84,39 @@ next decompile pass on the value encodings:
 | artfilter | 7e70dd56 | 7e70ddb4 | 7e70ddfe |
 | digitaltelecon | 7e70deaa | 7e70def7 | - |
 
+### set_camprop value encoding (RESOLVED 2026-11-02, mn10300 objdump of the set leaves)
+Every settable property's `com=set` leaf follows the same shape (verified on all 8):
+
+1. Get the session/arg object (`0x7d996faa`); null → HTTP 520 `errorcode` **1005** (no session/context).
+2. Parse the `value` to a numeric and **range-check `value < 0x4000` (16384)**; out of range → the fail path.
+3. Validate the value against the property's current allowed set via the shared helpers
+   `0x7e711742` then `0x7e71278d` (the same list the `get`/`desc` leaves emit); reject → fail.
+4. Encode the value through a per-property encoder (`0x7e712228` / `0x7e7122d4` / `0x7e711e80` …) into a
+   stack buffer, then write a 3-word command block to RAM **0xa0a925c0**:
+   `[0xa0a925c0] = sub-id`, `[0xa0a925c4] = 0`, `[0xa0a925c8] = encoded value`.
+5. Post an app event (`0x7e70e0c3`) to apply it; event return non-zero → fail.
+6. Success → HTTP 200; value rejected at any step → HTTP 520 `errorcode` **3001** (bad/!settable value).
+
+The property is selected by the **(event id, sub-id)** pair in the command block, not by a per-property
+handler — all but `takemode` share event **0x41b0011**:
+
+| prop | app event | sub-id `[0xa0a925c0]` | value range |
+|---|---|---|---|
+| takemode | 0x41b0014 | 0 | < 0x4000 |
+| expcomp | 0x41b0011 | 2 | < 0x4000 |
+| focalvalue (aperture) | 0x41b0011 | 3 | < 0x4000 |
+| shutspeedvalue | 0x41b0011 | 4 | < 0x4000 |
+| isospeedvalue | 0x41b0011 | 6 | < 0x4000 |
+| wbvalue | 0x41b0011 | 9 | < 0x4000 |
+| drivemode | 0x41b0011 | 0x81b (2075) | < 0x4000 |
+| artfilter | 0x41b0011 | (0x41b0011 path) | < 0x4000 |
+
+So the Wi-Fi property-set path is: HTTP `value` → range/allowed-list check → encode → write
+`{sub-id, 0, value}` at 0xa0a925c0 → post event 0x41b0011/0x41b0014. The encoded value's exact units
+(the per-property encoder output) are not yet decoded — `get`/`desc` return the enumerated legal
+values, so the KMP client should pick from the `desc` list rather than compute an encoding. drivemode's
+sub-id 0x81b sits in a different numeric space than the others (confirmed, not a misparse).
+
 ## exec_shutter (RESOLVED 2026-11-02, mn10300 objdump of leaf 0x7e70a1be)
 First level `exec_shutter`/`exec_shuttermisc` wrap the handler in `WIFI_RELEASE_CGI(1)...(0)`.
 
