@@ -75,6 +75,16 @@ Each `*_hook` patch replaces a `jmp`-worth of stock bytes with a jump into the `
 the bootloader/loader is not (the `loader_patch` is a no-op in this profile) — consistent with the
 Reddit note that reflashing stock firmware is safe "as long as you don't mess with the bootloader."
 
+**Byte-level verification** (`tools/…/verify_patch.py`, `python3 -I`, read-only) against our
+`blk00_40300000.bin`: every patch's `old` bytes match our stock block 0 **exactly** at its offset
+(all 9), so the candidate binds to precisely our image. The `payload_cave` region (off `0x26ff0`,
+len **2201** = `0x899` bytes) is **all `0xFF`** in stock — genuine free space the payload is written
+into. Each `*_hook` `new` is `DC <rel32-LE> <0xCB padding…>`: `DC` = MN103 `jmp rel32`, and every
+decoded rel32 resolves to the matching cave slot we had already recorded (e.g. `parser_hook`
+`dc dfbbf0ff` → `0x4041b411 − 0xF4421 = 0x40326ff0`; `request_hook` `dc 34d1efff` → `0x403272e0`;
+`callback_hook` `dc d6ccefff` → `0x40327178`), trailing `0xCB` filling out the original instruction
+length. `loader_patch` old == new (`fccc0008a77d`) — confirmed no-op.
+
 ### E-M10 ring gate mechanism (`descriptor_gate`)
 
 `descriptor_gate`: `{pointer_cell: 0xa0a5c970, flags_offset: 560, flag_mask: 128}`. The patch follows
