@@ -338,6 +338,29 @@ response carries the current value *and* the supported-value list, built in orde
 - **Assemble.** If both phase statuses are 0, calls 0x7e711c0d with the phase-1 value ptr `(12,sp)`
   and the list buffer `(16,sp)` to emit the combined XML, then releases session (0x7d996ff0).
 
+**Response XML template (assembler 0x7e711c0d, decoded 2026-11-02).** It is a `strcat` chain
+(helper 0x7e7124f2 = append-and-return-length) over these static fragments at `0x7e7844xx`:
+
+```
+[prefix]<desc><propname>NAME</propname><attribute>ATTR</attribute>[<value>CUR</value>][<enum>LIST</enum>]</desc>
+```
+
+| fragment | address |
+|---|---|
+| `<desc>` / `</desc>` | 0x7e784473 / 0x7e7844ca |
+| `<propname>` / `</propname>` | 0x7e78447a / 0x7e784485 |
+| `<attribute>` / `</attribute>` | 0x7e784491 / 0x7e78449d |
+| `<value>` / `</value>` | 0x7e7844aa / 0x7e7844b2 |
+| `<enum>` / `</enum>` | 0x7e7844bb / 0x7e7844c2 |
+
+`NAME` = propname arg, `ATTR` = caller attribute string (property access flags, client-opaque),
+`CUR` = phase-1 current value (`<value>` block emitted only when the value ptr `(28,sp)` ≠ 0),
+`LIST` = phase-2 formatted list (`<enum>` block emitted only when the list ptr `(32,sp)` ≠ 0).
+This is ONE shared assembler: `com=get` fills both optional blocks (current + enum list); `com=desc`
+drives the same template with its own value/enum content. So the KMP client parses the identical
+`<desc><propname>…</propname><attribute>…</attribute><value>…</value><enum>…</enum></desc>` shape for
+both `com=get` and `com=desc` — only which optional blocks are populated differs.
+
 So `com=get` and `com=desc` call the **identical** sub-id→formatter set (0x7e711e50 / 0x7e7121b6 /
 0x7e7120c8 / 0x7e711f65 / 0x7e711ec1 / 0x7e712053 / 0x7e7123ff / 0x7e7124e9); the only difference is
 `get` precedes the list with the single current value (phase 1 / `0x41b0012`) whereas `desc` emits
