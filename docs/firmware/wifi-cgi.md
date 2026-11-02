@@ -514,3 +514,35 @@ failure → 520/1005.
 **New facts for the catalogs:** errorcode **1005** = resource/media-I/O failure; RAM cell
 **0xa0a912fc** = cached DCF file number; getter **0x7db93fb8(key)** is the generic small-property
 reader (keys 23 = dcffilenum, and the noisereduction/lowvibtime/bulbtimelimit group).
+
+## Movie-time + transfer-reservation CGIs (RESOLVED 2026-11-02, mn10300 objdump)
+
+Same CGI front-end (parse 0x7e6fc38a, resp-init 0x7e6ff2c6, conn table `0xa0a92720`, err-respond
+0x7e6fc34e). These complete the playback/sharing surface.
+
+### get_movplaytime.cgi -> 0x7e6fa1f9 (`do_cgi_get_movplaytime`)
+GET, grammar `<cmd1 name="DIR"/>` + filename (two params tokenised via 0x7da83862). Opens the target
+via 0x7e6fb774 (expects 200), reads media info with 0x7dd62b59 and `play_load_get_mov_info`, branching
+on extension `.MOV` / `.AVI` (strings 0x7e77263e/0x7e772643). Returns the clip's play time (duration).
+Missing/empty params → **errorcode 1002** (required parameter absent). `play_load_get_mov_info err`
+logged on failure. Scratch cell 0xa0a91304 cleared at entry.
+
+### get_rsvimglist.cgi -> 0x7e6fa464 (`do_cgi_get_rsvimglist`)
+GET, Content-type **text/plain**. Enumerates the **transfer-reservation set** — images the user has
+flagged on-camera for Wi-Fi transfer/share. Reads the reservation list via 0x7de2b941 (log
+`resrv_num =`), posts the connection event (0x7e6ff28c), emits the plain-text listing through template
+copier 0x7e6fd474. The reserved-images counterpart to get_imglist.
+
+### clear_resvflg.cgi -> 0x7e6fa3b6 (`do_cgi_clear_resvflg`)
+GET. Calls `wifi_mngr_clear_resvflg` 0x7e7078ba (command `0x1000`) to **clear all transfer-reservation
+flags**, then posts the connection event (0x7e6ff2a8 / 0x7e6ff28c) and returns the standard OK body.
+Failure logs `wifi_mngr_clear_resvflg err` and returns 520/1005. Note: distinct wifi_mngr entry point
+from exec_pwoff (0x7e7078ba here vs 0x7e7078e1 for power-off), both taking arg `0x1000`.
+
+**Reservation family summary:** the camera keeps a per-image "reserved for transfer" flag; the Wi-Fi
+API exposes *list* (get_rsvimglist) and *clear-all* (clear_resvflg). Setting an individual flag is not
+a standalone CGI in this firmware's tables — it is driven through the image/playback path, consistent
+with OI.Share's "share order" being set during browse.
+
+**New errorcode:** **1002** = required request parameter missing/empty (distinct from 1004 bad value,
+1001 not-available in current mode, 1005 resource/media-I/O).
