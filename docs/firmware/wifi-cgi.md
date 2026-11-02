@@ -65,7 +65,7 @@ The rec dispatcher is the common front-end for all six rec CGIs. Steps:
    before the scan, so an unknown token keeps the default.
 3. **Mode gate** — call 0x7e70f076, a critical-section (lock pair 0x7e710577 / 0x7e71060a) read of
    the rec-mode state flag at RAM **0xa0a9257e**; returns the flag. If `!= 1` (camera not actually in
-   rec mode), two commands are still allowed through — `get_camcapa.cgi` (string @0x7e78199b) and
+   rec mode), two commands are still allowed through — `get_camcapa.cgi` (string @0x7e781b9b) and
    `switch_cammode.cgi` (@0x7e7814eb); **any other** token has its handler forced to the default
    0x7e70c298.
 4. **Default handler 0x7e70c298** = immediate `respond_error(520, 1004)` (0x7e7074e6) — HTTP 520,
@@ -77,8 +77,17 @@ The rec dispatcher is the common front-end for all six rec CGIs. Steps:
 So the two gates a rec CGI passes: (a) its presence in the mode's top-level table (0x7e772048),
 which yields the 1001 "not available in this mode" error seen live; (b) this dispatcher's own rec-mode
 flag gate, which yields 520/1004 for everything except `get_camcapa`/`switch_cammode` when the flag
-isn't set. `get_camcapa.cgi` is handled here only as a gate-bypass name — its handler lives elsewhere,
-not in the 0x7e781500 table.
+isn't set.
+
+**`get_camcapa.cgi` dead end (2026-11-02):** the string 0x7e781b9b has exactly ONE reference in all
+of block 0 — the gate-bypass `strcmp` immediate above. It is in **no dispatch table** (neither the
+four top-level tables 0x7e771e68/0x7e771f60/0x7e772048/0x7e7720d0 nor the rec/shutter second-level
+tables), so no handler is bound to it. After passing the gate it still misses the 0x7e781500 scan and
+runs the pre-seeded default handler → **HTTP 520 / errorcode 1004**. It is also absent from the
+OI.Share 4.6.0 endpoint list. Conclusion: `get_camcapa.cgi` is a **vestigial / other-model command
+name** on the E-M10 Mark I — the firmware knows the name well enough to let it through the rec-mode
+gate, but has no implementation, so it always errors. Not usable by the KMP client; capability
+discovery must come from `get_caminfo` + `get_commandlist` + per-prop `get_camprop?com=desc`.
 
 ## Errors
 `respond_error(0x208, 0x3ec)` = HTTP 520 + `errorcode` 1004 when a command argument is missing/unknown (static RE; not yet seen live).
