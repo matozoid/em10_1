@@ -125,13 +125,34 @@ image, so a bad download/copy fails closed (aborts) rather than bricking. This i
 *container footer* additive checksum that `omfw.py` recomputes (`docs/firmware/container-format.md`):
 firmup re-validates the mounted file's own internal region table + checksum field.
 
-> **Open caveat for the patched `E1139999.BIN`.** Our local verification only confirmed the container
-> footer + that block-0 edits stay inside declared patch regions. It did **not** confirm the built
-> image still satisfies firmup's *internal* `usr_checksum` / region-table validation. If the
-> `ring-native` payload changed bytes covered by a stored internal checksum without the community tool
-> updating it, the camera would **reject** the image (safe — no flash), not brick. Next step: locate
-> the stored `usr_checksum` field (and the 32-byte image header's role) and confirm whether the
-> community patch set keeps it valid, or whether `fwpatch.py` must recompute it.
+#### usr_checksum internals (2026-11-03)
+Chain: validator `0x7de57e24` → `0x7de58985` (body types 0/2 only; also asserts the image id byte
+`== 0x45 'E'` via `0x7da8880b`) → worker `0x7de573d1`. The worker:
+- reads header word `+4` (a derived pointer) and header flag `+16`;
+- when flag `== 1`, runs a **5-iteration compare loop** of 32-bit words: `mov (d0,a1),d3;
+  mov (d0,a0),d1; cmp d1,d3; bne → error 0x3202 (12802)` — i.e. it compares a **20-byte (5×u32)
+  integrity array** (stored copy vs a reference/recomputed copy), advancing `d0` by 4 each step,
+  `d2 < 5`;
+- flag `!= 1` → error `0x3204 (12804)`; the reference address is built from the header pointer plus a
+  `+0x60000` region base and small fixed offsets (`-8` / `+64 -32`).
+
+So a valid body image must carry a **matching 20-byte internal integrity array** (5 words — possibly
+5 per-region checksums, or a 20-byte digest) in addition to the container footer. firmup compares it
+**before flashing** and rejects on mismatch.
+
+> **Open caveat for the patched `E1139999.BIN`.** `fwpatch.py`/`omfw.py` recompute only the **container
+> footer**, never this internal 20-byte integrity array. Our block-0 diff is confined to the 9 declared
+> `ring-native` patch regions, so:
+> - if the integrity array lies **inside** a patched region (the community `new` bytes already carry
+>   the correct value) → the built image passes;
+> - if it lies **outside** the patched regions → the built image keeps the **stock** array, which will
+>   not match the patched payload → the camera **rejects** it (error `0x3202`, safe — no flash), it
+>   does not brick.
+>
+> Either way the failure is fail-closed. Next step: locate the 20-byte array's file offset in decoded
+> block 0 (from the `+4`/`+16`/`+0x60000` header math) and test whether it falls within any of the 9
+> patch regions — that decides whether the current built image would actually flash, and whether
+> `fwpatch.py` must learn to recompute it.
 
 **App takeaway (confirmed):** to update body firmware, write the official body image to SD as
 `DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); the camera mounts SD, scans `DCOLYMP`, logs
