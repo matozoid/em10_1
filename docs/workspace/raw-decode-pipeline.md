@@ -41,5 +41,26 @@ exposes `IOlyCameraRawDevelopEventHandler` (ns `OLYCAM`) — the camera-develop 
 3. `COlyBayerDecoder` in the active stage DLL demosaics to RGB; subsequent plant stages apply
    NR / color / sharpening; art filters via `OlyMuse` (`architecture.md`).
 
-Next: decompile `GetRawDecorder` + `COlyIPDecodeImage` to pin the decoder hand-off and the
-`IOlyIPRawParameter` field layout (the develop knobs a replacement must drive).
+## Verified decode contract (decompiled)
+
+`OlyImgProc2` only *brokers* the decoder; the concrete decoder is injected from a stage DLL.
+
+- **`COlyFilterParam`** holds two raw-parameter objects: `+0x18` (primary) and `+0x20`
+  (secondary/fallback). `SetRawParameter(p1, p2)` releases any prior, `AddRef`s + stores both,
+  and sets the dirty flag at `+0xd`.
+- **`GetRawDecorder(IOlyImageDecoder** out)`** calls the primary raw param's vtable **`+0x48`**
+  (GetDecoder); on failure it retries the secondary. It returns whatever decoder the raw param
+  holds — OlyImgProc2 does not create one.
+- **`IOlyIPRawParameter` object layout**: `+8` = the **`IOlyImageDecoder`** instance (GetDecoder
+  `+0x48` just returns `this+8` AddRef'd); `+0x10 … +0x58` = ~10 further COM sub-objects = the
+  develop knobs (WB / color matrix / tone / NR / …), each released in the param's release-all
+  method. So the concrete `COlyBayerDecoder` (from the active stage DLL) is slotted into
+  `rawParam+8` by the host, then surfaced through this interface.
+- **`OlyIP2_SetInitialDecodeModeForRawParameter(u16 mode)`** writes a **process-global** default
+  decode mode into a static `COlyIPRawImage` config blob (`s___AVCOlyIPRawImage… + 0x1c`), i.e. a
+  one-time initial mode applied to newly built raw params.
+
+Contract for a replacement: build/obtain an `IOlyImageDecoder` (the Bayer decoder), wrap it + the
+develop sub-objects in an `IOlyIPRawParameter`, hand that to `COlyFilterParam::SetRawParameter`,
+then pull the decoder back via `GetRawDecorder`. The pixel math lives in `COlyBayerDecoder`
+(stage DLLs) — the next thing to decompile for the actual demosaic/develop algorithm.
