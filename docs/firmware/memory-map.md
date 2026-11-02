@@ -12,7 +12,9 @@ Absolute-address regions seen in code operands (instruction count per 1 MB bucke
 | 0x60400000-0x60a00000 | RAM variables/bss (cached) |
 | 0xa0900000-0xa0b00000 | RAM alias (uncached?) e.g. pointer_cell 0xa0a5c970 |
 | 0xbd9b.... | **RAM scratch** (was tentatively "I/O registers"): the community ring payload uses 0xbd9b8810/0xbd9b8814 as its own read/write state cells, so this window is writable RAM, not memory-mapped I/O. Correction to the earlier guess. |
-| 0x80000000, 0x8ff00000, 0x99400000, 0x9a000000-0x9e000000 | unidentified (peripherals/DMA?) |
+| 0x00008000-0x000080xx | **on-chip I/O (interrupt controller)** via AM33 abs16 window — 0x8050 = active interrupt channel reg, 0x8070 = latched status/enable, 0x8000-0x8018 = 7 boot-programmed channels. See `docs/hardware/boot-and-io.md` |
+| 0x98001000 | memory-mapped peripheral block (boot writes 16 to 0x98001008) |
+| 0x8ff00000, 0x99400000, 0x9a000000-0x9e000000 | unidentified (peripherals/DMA?) |
 
 ## Known RAM state cells (catalog, 2026-11-02)
 
