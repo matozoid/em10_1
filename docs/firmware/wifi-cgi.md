@@ -576,3 +576,34 @@ Session-open fail → 520/1005.
 Geotag **write** CGIs: store GPS info into the camera's pending-EXIF buffer / attach it to images.
 Both are **live-action class** (mutate image metadata on the SD card). Handlers located; full field
 decode deferred — not needed for the KMP query/download v1, and firing them is gated on user approval.
+
+## exec_takemotion.cgi (RESOLVED 2026-11-02, mn10300 objdump of leaf 0x7e70c17c)
+
+The last unmapped rec-dispatcher CGI. Leaf `0x7e70c17c` (reached through rec dispatcher 0x7e70b5a8).
+Gate: requires cammode phase cell `0xa0a9258a` ≠ 0 and a positive first param, else error leaf
+0x7e70c29b. It tokenises the command keyword and linear-searches a **5-entry {name, id} table at
+0x7e78156c** (strcmp 0x7d997773):
+
+| keyword | id |
+|---|---|
+| `assignafframe` | 0 |
+| `releaseafframe` | 1 |
+| `takeready` | 2 |
+| `starttake` | 3 |
+| `stoptake` | 4 |
+
+No match → id 5 → error. On a match it then switches on the **take-phase state cell `0xa0a92590`**
+(0/1/2/3) to one of four phase handlers — 0x7e70c7b5 (0), 0x7e70c86b (1), 0x7e70c810 (2),
+0x7e70c8c6 (3) — each receiving the matched motion-id, i.e. the same command is handled differently
+depending on the current take phase.
+
+So `exec_takemotion.cgi` is the **AF-frame + movie/sequence capture control** channel, separate from
+`exec_shutter.cgi` (still release): set/clear the AF target frame (`assignafframe`/`releaseafframe`),
+arm (`takeready`), and start/stop a take (`starttake`/`stoptake`). This matches OI.Share's remote
+movie-record and touch-AF controls. Phase cell `0xa0a92590` sits in the same state block as cammode
+(0xa0a9257e), the mode-ack flag (0xa0a9258a) and lvqty (0xa0a9258c).
+
+**Wi-Fi CGI surface is now fully mapped** — every entry in the get_commandlist grammar (23 CGIs) and
+every rec-dispatcher leaf has a traced handler. Remaining camprop value *encodings* are intentionally
+left to the client (it reads the `desc`/`enum` lists); the GPS-write field layouts are the only
+deferred detail, and those are live-action-only.
