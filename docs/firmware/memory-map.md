@@ -33,6 +33,7 @@ bss unless noted. VERIFIED = read/written by disassembled code this session.
 | 0xbd9b8810 | ring **cached aperture value** (u16) — community payload scratch | ring-cave |
 | 0xbd9b8814 | ring **ready flag** — community payload scratch | ring-cave |
 | 0xa0937fd8 | **TSK_PTPCOM node pool** (USB/PTP mailbox) | usb-ptp |
+| 0xa0a912fc | cached **DCF file number** (next image seq), read via getter 0x7db93fb8(key 23) | wifi-cgi get_dcffilenum |
 
 ### Property-registry keys (via getters 0x7d9d3769 / 0x7d9d36c4)
 | key | meaning |
