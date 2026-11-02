@@ -81,8 +81,16 @@ EXIF/TIFF tag chain** (`FUN_1800320c0`): it builds an ID path **`0x8769`** (Exif
 value offset as a u32 (byte-swapped per the endian flag), and stores it as the **MakerNote base
 offset** at object `+0xc`.
 
-`FUN_180031ea0` then reads the **14-byte MakerNote header** at that base and selects the parser
-generation — RTTI classes **`COlyMakerNote2`** (vtable `0x180087c48`), **`COlyMakerNote3`**
+`FUN_180031ea0` is the **recursive IFD walker** reached from the MakerNote base. IFD layout =
+`[u16 entryCount][entryCount × 12-byte entries][u32 nextIFDoffset]` (the constant `6` in the code
+= 2-byte count + 4-byte next-ptr); every multi-byte field is byte-swapped when the `+0x59`
+big-endian flag is set. It records each IFD's `{start,end}` extent in a visited-range vector
+(recursion guard), then for every entry whose **TIFF type == 13 (IFD pointer)** *and* whose tag is
+present in the `SetMakerNoteIFDTags` registry (`DAT_180097010..018`) it **recurses** into the
+sub-IFD at the entry's value offset. That is exactly how the Equipment/CameraSettings/… nested
+sub-IFDs (table below) get descended — generically, driven by the registry, not hard-coded.
+
+The header read selects the parser generation — RTTI classes **`COlyMakerNote2`** (vtable `0x180087c48`), **`COlyMakerNote3`**
 (`0x180087ca0`), **`COlyMakerNote4`** (`0x180087cf8`), with a shared **`COlyMakerNoteHeader`**
 (`0x180087d60`). The generation is gated by a 16-bit value read from the first IFD (object `+0xd`)
 against the threshold **`0x300`** (= MakerNote header version 3.00): `< 0x300` takes the simple
