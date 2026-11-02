@@ -476,3 +476,41 @@ Values at probe time and value domains (`enum`):
 | digitaltelecon | get | off | on off |
 | touchactiveframe | get | 0054-0040_0211x0159 | (position-size string) |
 Only read calls were made against these properties; no property was set. The camera was returned to `play` mode. Raw capture: `research/camera-probe-camprop-*.txt` (gitignored).
+
+## Minor utility CGIs (RESOLVED 2026-11-02, mn10300 objdump)
+
+Three more handlers traced. All share the common CGI front-end: request parse/log-in 0x7e6fc38a,
+response-buffer init 0x7e6ff2c6, connection index `0x608e9210` → per-connection context table
+`0xa0a92720` (`asl2` index), error-respond 0x7e6fc34e. The shared failure path returns HTTP 520 with
+**errorcode 1005** (resource / media-I/O failure — distinct from 1001 not-available and 1004 bad-arg).
+
+### exec_pwoff.cgi -> 0x7e6f9d6a (`do_cgi_exec_pwoff`)
+GET. Present in **3 of 4** top-level tables (records 0x7e771f78, 0x7e772060, 0x7e7720e8 all point at
+the one handler). Requests camera power-off: posts a Wi-Fi-manager event via 0x7e6ff28c (mode=1, d1=3)
+then 0x7e7078e1 with command `0x1000`; if the event-set call does not return the expected value it
+logs `wifi_mngr_set_event err : (do_cgi_exec_pwoff)` and returns 520/1005. On success builds the
+standard OK response via template copier 0x7e6fd474. **Live-action class** (changes camera power
+state) — do not fire against hardware without asking the user first.
+
+### get_unusedcapacity.cgi -> 0x7e6fae32 (`do_cgi_get_unusedcapacity`)
+GET. Opens a session (0x7d996f72), resolves the mounted-media handle (0x7de9e97f, log tag
+`mounted_media(hex):`), then calls `fileif_get_free_space` 0x7de9e4fe with two stack out-params
+(`(24,sp)`,`(28,sp)`) = the free-space result. Errors (`scheap_small_alloc err`,
+`fileif_get_free_space err`) → 520/1005. Returns the SD card's free capacity.
+
+### get_dcffilenum.cgi -> 0x7e6fafcc (`do_cgi_get_dcffilenum`)
+GET. Opens a session, reads the DCF file-number counter via property key **23** (getter 0x7db93fb8,
+same getter family as noisereduction/lowvib/bulb), caches it to RAM cell **0xa0a912fc**, and formats
+the body with template 0x7e772e84:
+
+```
+<?xml version="1.0"?>
+<dcffile>%lu</dcffile>
+```
+
+Content-type `text/xml`. `%lu` = the next DCF image sequence number (unsigned long). Session-open
+failure → 520/1005.
+
+**New facts for the catalogs:** errorcode **1005** = resource/media-I/O failure; RAM cell
+**0xa0a912fc** = cached DCF file number; getter **0x7db93fb8(key)** is the generic small-property
+reader (keys 23 = dcffilenum, and the noisereduction/lowvibtime/bulbtimelimit group).
