@@ -46,7 +46,8 @@ bss unless noted. VERIFIED = read/written by disassembled code this session.
 | 0x41b0001 / 0002 / 0020 / 0022 / 0023 | cammode transitions (switch_cammode; full matrix only partly traced) |
 | 0x41b0004 (68878340) | cammode event in default-handler path |
 | 0x41b0011 | set_camprop value (all settable props except takemode) |
-| 0x41b0012 | get_camprop **and** desc query (differentiated by the 0xa0a925c0 block) |
+| 0x41b0012 | get_camprop current-value **and** desc query (differentiated by the 0xa0a925c0 block) |
+| 0x41b0013 | get_camprop supported-value list (phase 2 of `com=get`) |
 | 0x41b0014 / 0x41b0015 | takemode set / desc |
 | 0x41b0024…0x41b0029 | exec_shutter release sub-events (1stpush … 2nd1strelease) |
 
