@@ -51,6 +51,28 @@ recomputed footer); blocks 1 & 2 are untouched. So the camera's post-mount heade
 exactly what it accepts for stock. The only part that cannot be cleared statically is the **patch
 payload's runtime behaviour on the real body** — the author's TEST_CANDIDATE caveat stands.
 
+### Recovery path survives a bad payload (why brick risk is low) (2026-11-02)
+The SD-card updater (`DCOLYMP/E113????.BIN` scanner) is RTOS task **`FIRMUP_SRV`** (id 0x14, entry
+`0x7de57532`, priority 8) — confirmed by cross-joining the id→name table (`0x4035fb66`) with the
+task-creation table (`0x7d9a9384`); see `docs/firmware/rtos-tasks.md`. It is a standalone task spawned
+at kernel init alongside 133 others, **not** code buried behind the rec/menu app. So:
+- A payload that only misbehaves in the lens / aperture-ring / rec subsystem leaves `FIRMUP_SRV`
+  running → the camera still scans SD on power-up-with-button-held and can reflash stock 1.4 to
+  recover. This is the common failure mode for the `ring-native` patch (it hooks the lens/aperture
+  path; its cave is at block-0 `0x27010`+, far from cold-boot entry at offset 0, which is unpatched).
+- True brick requires the payload to take down the **kernel/scheduler**, the **SD/media stack**, or to
+  corrupt **cold-boot bring-up** (block-0 offset 0, the reset entry at `0x7d991020`) so the task
+  table at `0x7d9a9384` is never walked. The ring-native patches touch none of these regions.
+- There is **no separate bootloader partition** observed: block 0 is both the cold-boot reset stub and
+  the main OS, and the recovery updater is an OS task — so recovery depends on block 0 reaching task
+  spawn. Packaging integrity (valid headers/footers, unchanged reset entry) is what protects that, and
+  all of it checks out for the built image.
+
+Net: with packaging verified and the patch confined to the lens subsystem, a bad flash most likely
+yields a malfunctioning-but-recoverable camera (reflash stock), not a dead one. Residual risk is the
+unverified runtime behaviour on real hardware — if the payload corrupts boot or the scheduler, the
+SD recovery task never starts and recovery is lost.
+
 ## Applying to the camera (live / hardware — user action)
 1. Copy the built `E1139999.BIN` to the SD card root dir `DCOLYMP/` (so `DCOLYMP/E1139999.BIN`).
 2. In the camera, the `api_firmup` updater mounts the card, scans `DCOLYMP` for `E113????.BIN`, finds
