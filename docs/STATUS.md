@@ -1,4 +1,4 @@
-# Status (2026-11-01)
+# Status (2026-11-02)
 
 ## Known
 - Community build "db firmware 0.3.1.b" (azqeurio/om-c-firmware, tag dbv0.3.1.b):
@@ -90,3 +90,30 @@ Open: hardware register map, boot/vector code, PTP+USB handlers (unverified on w
 decompile + live test (changes camera state, ask first), stock 1.0-1.3 BINs (user must supply), mn10300 cross-compiler
 for mods, `docs/mods/`, **KMP app scaffold** (`app/` empty; v1 = query server, download, write SD, instructions).
 Note: this doc's older TODO list above is superseded by this section.
+
+## 2026-11-02 — OM Workspace + OI.Share reverse-engineering
+OM Workspace install at `research/owsetup_x/app` (build 2025-07-22). All interop RE, binaries/decompiles kept local.
+Docs in `docs/workspace/` and `docs/usb-protocol/`:
+- **ORF/MakerNote reader** (`workspace/orf-format.md`): olive.dll = generic TIFF/EXIF engine, Olympus specifics
+  registered externally; `COlyImgFmtOrf` IS-A TIFF; ORF signature (IIRO/IIRS/IITO/IILO subtypes); MakerNote located
+  via ExifIFD 0x8769 → 0x927c, generation gate at version 3.00; recursive IFD walker; sub-IFD tag table.
+- **RAW decode pipeline** (`workspace/raw-decode-pipeline.md`): OlyImgProc2 = broker; concrete `COlyBayerDecoder`
+  injected from TruePic-generation stage DLLs (Maple=DC9, Peony/Pomegranate=DC11, Walnut/Loquat=DC13, Acacia=DC13).
+  Each stage bundles RawProc/NR/**CameraSimulation**/DisplayParameters/ParamManager.
+- **Model selection** (`workspace/model-selection.md`): develop keyed by MakerNote Equipment 0x0100 CameraType2
+  camera-ID code (not model name). Full code→model table only in `MDP_AS.omdp`. **E-M10 Mark I = `S0051`** (ExifTool
+  cross-checked). DEAD END: `S0051` absent from this Workspace build — no Mk I CameraSimulation profile ships; generic
+  RAW develop works but won't match the Mk I OOC-JPEG look. Exact match needs Olympus Viewer 3 (older) or empirical
+  derivation from the user's OOC-JPEG vs ORF pairs.
+- **Plugin architecture** (`workspace/plugin-architecture.md`): `*.omdp`/`*.ofnp` = renamed PE32+ DLLs, single COM
+  factory each (`OlyCreateMediaPluginInstance` / `OlyCreateFuncPluginInstance`), loaded by `PluginMgr.dll`
+  (ns OLYPLGMGR). 6 MDP media plugins + 11 FNP function plugins. `MDP_AS` = CameraSimulation data plugin (MFC-linked);
+  CameraSimulation *code* lives in the engine DLLs. MDP_AS binary-profile schema RE DEFERRED (low ROI — Mk I absent).
+- **Live-view UDP stream** (`usb-protocol/liveview-udp.md`): full MJPEG-over-UDP wire format from OI.Share
+  (`startliveview`/`stopliveview`); 12-byte base header, first-packet TLV extension block; complete newer-parser TLV
+  table (types 1/3/4/5/8/9/10/12/16/17/18/106/107/108–115/200; 108–115 = 8 AF/face overlay Rects).
+- **Wi-Fi CGI surface**: CLOSED. The `research/oishare` dex has the identical 58-endpoint set already captured in
+  `usb-protocol/wifi-cgi-endpoints-oishare-4.6.0.txt`; no diff.
+
+Still open (Workspace/app side): MDP_AS CameraSimulation binary schema (deferred); decompile `OlyBayerDecoder` demosaic
+math (SIMD/CUDA — low ROI); KMP app scaffold still empty. Firmware-side open items unchanged from the section above.
