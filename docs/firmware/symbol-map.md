@@ -85,6 +85,10 @@ readable.
 | `0x7e326b8c` | 2967 | `vcall_slot80` | **virtual dispatch**: `vtbl=*(a0); calls *(vtbl+80)`; guards `a2!=0` & index `d0≤1`; returns `exth(ret)`. Confirms C++-style objects with vtable pointer at object `+0` | `symbol-map.md` |
 | `0x7d9999f9` | 3724 | `dbg_fmt_emit?` | builds a 32-byte stack buffer using cached state from `0x7d996e85`; hot output/format path (tentative) | `symbol-map.md` |
 | `0x7d996e85` | 3105 | `sfr8050_byte_state` | reads SFR `0x8050`, classifies input byte (`0xff→1`, `0xfe→0`), caches flag in RAM global `0x6044a15a` | `symbol-map.md` |
+| `0x7d997b14` | 1500 | `trace_log` | debug/trace emit, gated by global enable byte `0xa0a65f40` (0 = emit) + level `0xa0a65f41`; arg code's top byte (`>>24`, vs 62) = facility/category. Called from task wrappers (e.g. PC_PTP) | `symbol-map.md` |
+| `0x7db8b6c8` | 1780 | `range_check_or_log` | if `idx (d0) >= count *(0x6044acb0)` → emit via `0x7d9999f9` (out-of-range log/assert) | `symbol-map.md` |
+| `0x7dfc7272` | 1660 | `decode_packed_id` | decode packed 32-bit id: bits `23:16` → index (`−1`, `×4`) into RAM table `0x6044e518`; bits `15:8` → secondary lookup | `symbol-map.md` |
+| `0x7db93fb8` | 1988 | `code_lookup_6000` | thunk→`0x7db93fc1`: table lookup by code, special-cases value `6000` | `symbol-map.md` |
 
 RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share the `0x6044xxxx` page →
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
