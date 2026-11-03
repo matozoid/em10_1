@@ -171,6 +171,10 @@ class hierarchy.
 | `0x60711dfc` | `trace_cap_offset` | u32 current write offset into the buffer | `symbol-map.md` |
 | `0x60711e00` | `trace_cap_base` | base of the ~512 KB capture buffer (cap `0x7FFFF`) | `symbol-map.md` |
 | `0x7da8376d` | `strlen` | scan-to-NUL, returns `a1−a0` | `symbol-map.md` |
+| `0x7d999a53` | `dbg_print_hex` | gated by `0x6044a15c` (output enable, halfword): emit `" " + u32_to_hex8(d0) + "\n"` via `emit 0x7d996ee2`; alt path when `0x6044a15a==1` (1043 xrefs) | `symbol-map.md` |
+| `0x7d999aad` | `u32_to_hex8` | write 8 uppercase hex chars of `d0` to buffer `a0` (nibble loop, `+'0'`/`+'A'-10`) | `symbol-map.md` |
+| `0x7d996ee2` | `emit` / `trace_puts` | raw string output sink (1466 xrefs); takes string in `a0` | `symbol-map.md` |
+| `0x6044a15c` | `dbg_hexprint_enable` | halfword, non-zero → `dbg_print_hex` emits | `symbol-map.md` |
 
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
