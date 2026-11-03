@@ -218,6 +218,8 @@ confirms the firmware does real float math via the coprocessor, not pure integer
 | `0x7da84248` | `fp_cmp_b` | `udf05 d1,d0` FP compare intrinsic (sibling predicate) | `symbol-map.md` |
 | `0x7da8424f` | `fp_negate` | `xor 0x80000000,d0` (flip IEEE-754 sign bit), returns `2×` | `symbol-map.md` |
 | `0x7da84261` | `fp_classify` | IEEE-754 single decompose: mantissa `&0x7fffff`, exponent `&0x7f800000`; detects inf/NaN (exp all-ones) and subnormal/zero | `symbol-map.md` |
+| `0x7da84235` | `fp_op_udf02` | `udf02 d1,d0` coprocessor FP intrinsic; returns `2×result` in `d1` (same ×2 convention as `fp_cmp_a`; 689 xrefs). Exact op not pinned — no AM33 FPU udf-opcode spec (dead end on precise semantics) | `symbol-map.md` |
+| `0x7da8423c` / `0x7da84243` | `fp_op_udf06` | `udf06 d0,d1` coprocessor FP intrinsic (binary at `…423c`; unary at `…4243` with `d1=0`); result in `d1`. Exact op not pinned (same dead end) | `symbol-map.md` |
 | `0x7da83f80` | `__muldf2` | **double-precision** soft-float **multiply** (763 xrefs; pure integer, NOT the udf04/05 coprocessor path — doubles are emulated, singles use the coprocessor). Decodes two IEEE-754 doubles (11-bit exp `lsr20 &2047`, 52-bit mantissa), classifies operands (zero/inf/nan → bits 1/2/4), returns NaN hi `0x7ff80000` or Inf `0x7ff00000` for specials, else adds biased exps (overflow >3069→inf, underflow <970→0) and `mulu` the mantissas | `symbol-map.md` |
 
 ## Subsystem singletons (named via inline RTTI/trace strings)
