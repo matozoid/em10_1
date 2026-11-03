@@ -206,6 +206,7 @@ class hierarchy.
 | `0x7d999a53` | `dbg_print_hex` | gated by `0x6044a15c` (output enable, halfword): emit `" " + u32_to_hex8(d0) + "\n"` via `emit 0x7d996ee2`; alt path when `0x6044a15a==1` (1043 xrefs) | `symbol-map.md` |
 | `0x7d999aad` | `u32_to_hex8` | write 8 uppercase hex chars of `d0` to buffer `a0` (nibble loop, `+'0'`/`+'A'-10`) | `symbol-map.md` |
 | `0x7d996ee2` | `emit` / `trace_puts` | raw string output sink (1466 xrefs); takes string in `a0`. Emits byte-by-byte via `console_putc 0x7d9c51fc`, translating `\n`(10)→`\r\n` (CRLF) | `symbol-map.md` |
+| `0x7da886b4` | 680 | `dbg_trace_line` | gated debug trace-line emitter: only if enable `*(0x6044a15c)!=0`. If suppress flag `*(0x6044a15a)!=1` → `console_out(a0)` + a second fixed string; else formatted path `0x7dbbdb29` with `"%s %s"` / `"%s %08X %s"` (label, hex, suffix). Twin `0x7da886fb` = same via `emit 0x7d996ee2` | `symbol-map.md` |
 | `0x7d9c51fc` | `console_putc` | terminal byte sink: char in `d0`. Guard/flush `0x7d9b1645`, then push char into a **767-entry RAM console ring at `0xa0bba15c`** (write index halfword at SFR `0x8ff00084`) and the hardware debug FIFO at the `0x8ff000xx` peripheral window (status `0x8ff0007e`/`007c`). Bottom of the entire log pipeline (`trace_log_printf`→`console_out`/`emit`→here) | `symbol-map.md` |
 | `0x6044a15c` | `dbg_hexprint_enable` | halfword, non-zero → `dbg_print_hex` emits | `symbol-map.md` |
 
