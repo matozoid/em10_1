@@ -118,8 +118,11 @@ RAM capability/flag table region: `0x60711xxx` (`0x60711d7c` matrix; neighbours 
 Corroborates the C++-style object model (vtable pointer at object `+0`; see `vcall_slot80`).
 | address | xrefs | symbol | role | source |
 |---|---|---|---|---|
-| `0x7e2053c1` | 2182 | `ctor_vtbl_7e42c10c` | constructor: writes vtable const `0x7e42c10c` to obj `+0`, stores arg at `+4`, clears `+8` | `symbol-map.md` |
-| `0x7e2053d2` | 2029 | `ctor_vtbl_7e42c10c_noarg` | same class, no-arg variant (installs vtable, clears `+8`, returns null `a0`) | `symbol-map.md` |
+| `0x7e2053c1` | 2182 | `OMReactive_ctor` | constructor of the **OMReactive** refcounted base class: writes vtable `0x7e42c10c` to obj `+0`, stores arg at `+4` (refcount), clears `+8` | `symbol-map.md` |
+| `0x7e2053d2` | 2029 | `OMReactive_ctor_noarg` | same class, no-arg variant (installs vtable, clears `+8`, returns null `a0`) | `symbol-map.md` |
+| `0x7e206dc9` | 950 | `OMReactive_ref_dec` | refcount decrement at obj `+4`; on underflow loads msg `"underflow in OMREactive less then 0"` (`0x7e42c580`) and calls assert stub | `symbol-map.md` |
+| `0x7e206de4` | — | `OMReactive_ref_inc` | refcount increment at obj `+4`; on overflow (`0xffff`) loads `"overflow in OMREactive too many active"` (`0x7e42c5b0`) and calls assert stub | `symbol-map.md` |
+| `0x7e2053aa` | — | `assert_stub` | **release no-op** (`retf` only) — the error-report target for OMReactive refcount asserts does nothing in production firmware | `symbol-map.md` |
 | `0x7dff548d` | 2639 | `obj_factory_512` | allocate a 512-byte object (via `0x7e206a17`), tag class `0x7e385ebc`, run ctor `0x7da82515` | `symbol-map.md` |
 | `0x7da82515` | 2099 | `ctor_thunk` | 2-arg thunk → worker `0x7da811b7` (148-byte frame); sibling of apply thunk `0x7da82530`→`0x7da8254b` | `symbol-map.md` |
 | `0x7d9d36c4` | 2176 | `handle_to_obj` | resolve handle→object: if `a0==0` look up via `0x7d9d2bcc` (by id `d0`), else return `*(a0+4)` | `symbol-map.md` |
@@ -128,7 +131,7 @@ Corroborates the C++-style object model (vtable pointer at object `+0`; see `vca
 | `0x7e724078` | 1490 | `ctx_f10916_dispatch` | gets ctx via `0x7e722617`, gates on byte field `+10916`, then calls `0x7e723f81` on sub-struct `+10148` | `symbol-map.md` |
 | `0x7e205040` | 1255 | `base_reset_vtbl_7e42c02c` | lifecycle reset/dtor stage: installs base vtable `0x7e42c02c` at obj `+0`, then `0x7e2050d6` zeroes member at obj `+24` if non-null; returns null `a0` | `symbol-map.md` |
 
-Known vtable constants: `0x7e42c10c` (class built by `ctor_vtbl_7e42c10c`), `0x7e385ebc` (class tag set
+Known vtable constants: `0x7e42c10c` (**OMReactive** refcounted base class, built by `OMReactive_ctor`), `0x7e385ebc` (class tag set
 by `obj_factory_512`), `0x7e42c02c` (base vtable installed by `base_reset_vtbl_7e42c02c`), `0x7e42c09c`
 (sibling vtable installed nearby at `0x7e2050e2`). The `0x7e42cxxx` block is a **vtable array** for one
 class hierarchy.
