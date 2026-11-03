@@ -51,11 +51,15 @@ coverage. Per-subsystem detail lives in the linked docs; this file is the cross-
 | `0x7d9cdaaa` | `flash_err_handler` | common write/erase error bail | `flash-storage.md` |
 | `0x7e21d6dc` | `startFirmUp` | USB-link firmware-update entry | `usb-ptp.md`, `camera-fw-update.md` |
 
+## libc-style primitives
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7da837b0` | `strncmp` | bounded compare: `a0=s1, a1=s2, d0=n`; returns 0 on equal-within-n or NUL, else signed byte diff. Used by `usr_checksum` id==2 path + region id-check | `symbol-map.md` |
+| `0x7da837d4` | `strncpy` | bounded copy `a1→a0` up to `d0`, stops at NUL then pads (immediately follows `strncmp`) | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` per-slot apply helper; `0x7d9929ce`/`0x7d9928ee` fmem commit — not fully decoded
   (NAND-controller MMIO register sequence one hop down). `flash-storage.md`.
-- `0x7da837b0` — generic compare/copy helper reused by `usr_checksum` id==2 path and region id-check;
-  exact semantics (memcmp vs DMA) not pinned.
 - Imaging/PTP/WiFi task entries beyond the firmup set — many named in `rtos-tasks.md` but entry
   functions not yet decoded.
 
