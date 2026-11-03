@@ -72,6 +72,21 @@ table; names cross-joined from `0x4035fb66`.
 | `0x7d9cdaaa` | `flash_err_handler` | common write/erase error bail | `flash-storage.md` |
 | `0x7e21d6dc` | `startFirmUp` | USB-link firmware-update entry | `usb-ptp.md`, `camera-fw-update.md` |
 
+## Hottest helpers (by block-0 call count) — global registry / accessors
+Ranked by direct `call` xrefs; these dominate the call graph, so naming them makes most disassembly
+readable.
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7e207498` | 12294 | `obj_get_f104` | field getter: `return *(a0+104)` (hottest single call target — `+104` is a very hot object field) | `symbol-map.md` |
+| `0x7dfc01bf` | 10930 | `registry_get` | bounds-checked indexed get on a global singleton collection: fetch `get_singleton()`, then `idx_in_bounds` before access | `symbol-map.md` |
+| `0x7dfc0312` | — | `get_singleton` | lazy-init accessor for global singleton at RAM cell `0x6044cf18` (inits via `0x7dfc02ea` if null) | `symbol-map.md` |
+| `0x7dfc038f` | — | `idx_in_bounds` | returns `1` if `d0 (index) < *(a0+24)` (collection count), else `0` | `symbol-map.md` |
+| `0x7e206a0f` | 5384 | `accessor_thunks` | block of 4-byte trampolines to getter/setter pair `0x7e208040`/`0x7e20804a` | `symbol-map.md` |
+
+RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share the `0x6044xxxx` page →
+that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
+the `0xa0000000` cached SDRAM data segment above).
+
 ## OS / IPC primitives (hot, reused everywhere)
 | address | symbol | role | source |
 |---|---|---|---|
