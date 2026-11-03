@@ -193,9 +193,15 @@ confirms the firmware does real float math via the coprocessor, not pure integer
 | `0x7da84261` | `fp_classify` | IEEE-754 single decompose: mantissa `&0x7fffff`, exponent `&0x7f800000`; detects inf/NaN (exp all-ones) and subnormal/zero | `symbol-map.md` |
 
 ## Subsystem singletons (named via inline RTTI/trace strings)
+Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
+`0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
+shape `a0=*(cell); if null → alloc N + ctor + store`. Classes that install a vtable can be named from
+the inline trace string that follows the vtable (see CPlayZoom); vtable-less struct singletons cannot.
 | address | symbol | role | source |
 |---|---|---|---|
 | `0x7e24831c` | `CPlayZoom_instance` | lazy singleton getter for the **CPlayZoom** playback-zoom controller (924 xrefs): cell `0x60454418`, 184-byte object, ctor `0x7e24825d` (base `0x7e2414c5`), vtable `0x7e4693a0`. Class named by inline trace string `"CPlayZoom::setDbZoomInfo_Lite Called."` right after the vtable. Followed by an accessor bank (getters/setters at obj `+12/+16/+20/+32/...`) | `symbol-map.md` |
+| `0x7e23dfec` | `singleton_604543e8` | lazy getter: cell `0x604543e8`, 336-byte **vtable-less** struct, ctor `0x7e23de5d` (defaults `+16=0xff`, rest 0). No class string (no vtable) → unnamed state/config struct | `symbol-map.md` |
+| `0x7e24ff2a` | `global_ptr_60454428_get` | plain getter `return *(0x60454428)`; paired setter at `0x7e24ff33` (`*(0x60454428)=a0`). Global object-pointer slot, set elsewhere | `symbol-map.md` |
 
 ## Misc object accessors
 | address | symbol | role | source |
