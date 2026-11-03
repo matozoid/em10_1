@@ -153,7 +153,7 @@ class hierarchy.
 | `0x7dfc0587` | `lock_get` | get lock object for id `d0`; lazy-inits the lock-manager singleton at `0x6044cf20` (alloc 44 B via `0x7e206a17` if null) | `symbol-map.md` |
 | `0x7dfc056a` | `mutex_lock` | virtual `lock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+12)` | `symbol-map.md` |
 | `0x7dfc057a` | `mutex_unlock` | virtual `unlock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+16)` | `symbol-map.md` |
-| `0x7e02ec5a` | `get_singleton_6044eb38` | **double-checked-locking** singleton init (1061 xrefs): check `*(0x6044eb38)`; if null take lock id 2 (`lock_get`+`mutex_lock`), re-check, alloc 8 B + ctor `0x7e02ecb2`, store, release (`mutex_unlock`) | `symbol-map.md` |
+| `0x7e02ec5a` | `get_singleton_6044eb38` | **double-checked-locking** singleton init (1061 xrefs): check `*(0x6044eb38)`; if null take lock id 2 (`lock_get`+`mutex_lock`), re-check, alloc 8 B + ctor `0x7e02ecb2`, store, release (`mutex_unlock`). Ctor `0x7e02ecb2`: obj+0 = ptr to **static config record `0x7e473a2c`** (NOT a vtable — slots are ints `{15,15,0x101,0,0,1,0xffff,7,1}`, a limits/param table), obj+4=0; then `0x7e05371c`→`0x7e02fd97` finish init | `symbol-map.md` |
 
 ## libc-style primitives
 | address | symbol | role | source |
