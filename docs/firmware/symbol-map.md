@@ -102,7 +102,11 @@ The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs)
 | `0x7e20804a` | `free` | null-safe: if `a0!=0` → `heap_free`; manager at `0x60452220`, custom-free hook via vtbl `+16` | `symbol-map.md` |
 | `0x7db954ab` | `heap_alloc` | **size-class allocator**: buckets `≤124`→`0x7d996f56`, `≤2044`→`0x7d996fc6`, `≤16380`→`0x7d996f8e`, larger → further paths. Segregated-fit pools | `symbol-map.md` |
 | `0x7db954ed` | `heap_free` | matching free (pointer in `a0`) | `symbol-map.md` |
-| `0x7dff54c5` | `obj_factory_512b` | `alloc(512)` + ctor `0x7da82515` with class `0x7e3858c1`, args `(a3,d2)`; sibling of `obj_factory_512` (`0x7dff548d`, class `0x7e385ebc`) | `symbol-map.md` |
+| `0x7dff54c5` | `log_fmt_msg_b` | **CORRECTED** (was `obj_factory_512b`): formatted-log builder — `alloc(512)` + `sprintf 0x7da82515` with format string `0x7e3858c1` (`"…A_SD_CARD.MEDIA_EXTERNAL.MED…"`) + emit + free. `0x7e3858c1` is a string, not a class | `symbol-map.md` |
+| `0x7da811b7` | `vformat` | printf format core (parses `%`=37); backs `sprintf 0x7da82515` and `vsprintf 0x7da82ef3`. 148-byte frame | `symbol-map.md` |
+| `0x7da82ef3` | `vsprintf` | thin wrapper → `vformat 0x7da811b7` (dst=`a0`, fmt=`a1`, va_ptr=`d0`) | `symbol-map.md` |
+| `0x7e334de7` | `dbg_printf_lvl2` | level-gated debug printf (806 xrefs): only if verbosity `0x6046017c >= 2` → `vsprintf 0x7da82ef3` into a 256 B stack buffer + emit via `0x7dff71b7` | `symbol-map.md` |
+| `0x6046017c` | `dbg_verbosity` | debug print level; `dbg_printf_lvl2` emits only when `>= 2` | `symbol-map.md` |
 
 ## Capability / flag tests
 | address | xrefs | symbol | role | source |
@@ -123,16 +127,15 @@ Corroborates the C++-style object model (vtable pointer at object `+0`; see `vca
 | `0x7e206dc9` | 950 | `OMReactive_ref_dec` | refcount decrement at obj `+4`; on underflow loads msg `"underflow in OMREactive less then 0"` (`0x7e42c580`) and calls assert stub | `symbol-map.md` |
 | `0x7e206de4` | — | `OMReactive_ref_inc` | refcount increment at obj `+4`; on overflow (`0xffff`) loads `"overflow in OMREactive too many active"` (`0x7e42c5b0`) and calls assert stub | `symbol-map.md` |
 | `0x7e2053aa` | — | `assert_stub` | **release no-op** (`retf` only) — the error-report target for OMReactive refcount asserts does nothing in production firmware | `symbol-map.md` |
-| `0x7dff548d` | 2639 | `obj_factory_512` | allocate a 512-byte object (via `0x7e206a17`), tag class `0x7e385ebc`, run ctor `0x7da82515` | `symbol-map.md` |
-| `0x7da82515` | 2099 | `ctor_thunk` | 2-arg thunk → worker `0x7da811b7` (148-byte frame); sibling of apply thunk `0x7da82530`→`0x7da8254b` | `symbol-map.md` |
+| `0x7dff548d` | 2639 | `log_fmt_msg` | **CORRECTED** (was `obj_factory_512`): formatted-log builder — alloc 512 B scratch (`0x7e206a17`), `sprintf` with format string `0x7e385ebc` (`"%1s..%1s, %d..[HLS]: %1s"`), `console_out 0x7d996e85`, then free. The "class tag" was a **format string**, not a vtable | `symbol-map.md` |
+| `0x7da82515` | 2099 | `sprintf` | **CORRECTED** (was `ctor_thunk`): variadic `sprintf(dst_desc=a0, fmt=arg, …)` → calls the format core `0x7da811b7`. (`0x7da82530` is a *different* thunk → `0x7da8254b`, not a format wrapper — see Open) | `symbol-map.md` |
 | `0x7d9d36c4` | 2176 | `handle_to_obj` | resolve handle→object: if `a0==0` look up via `0x7d9d2bcc` (by id `d0`), else return `*(a0+4)` | `symbol-map.md` |
 | `0x7dfc4738` | 1620 | `get_singleton2` | lazy-init singleton at RAM cell `0x6044d0e4`: if null, alloc 36-byte obj (`0x7e206a0f`) + ctor `0x7dfc4676` | `symbol-map.md` |
 | `0x7e22ca31` | 1608 | `mgr_5c_call` | singleton accessor: if mgr `*(0x6045425c)` null → 0, else dispatch `0x7e22cb42` | `symbol-map.md` |
 | `0x7e724078` | 1490 | `ctx_f10916_dispatch` | gets ctx via `0x7e722617`, gates on byte field `+10916`, then calls `0x7e723f81` on sub-struct `+10148` | `symbol-map.md` |
 | `0x7e205040` | 1255 | `base_reset_vtbl_7e42c02c` | lifecycle reset/dtor stage: installs base vtable `0x7e42c02c` at obj `+0`, then `0x7e2050d6` zeroes member at obj `+24` if non-null; returns null `a0` | `symbol-map.md` |
 
-Known vtable constants: `0x7e42c10c` (**OMReactive** refcounted base class, built by `OMReactive_ctor`), `0x7e385ebc` (class tag set
-by `obj_factory_512`), `0x7e42c02c` (base vtable installed by `base_reset_vtbl_7e42c02c`), `0x7e42c09c`
+Known vtable constants: `0x7e42c10c` (**OMReactive** refcounted base class, built by `OMReactive_ctor`), `0x7e42c02c` (base vtable installed by `base_reset_vtbl_7e42c02c`), `0x7e42c09c`
 (sibling vtable installed nearby at `0x7e2050e2`). The `0x7e42cxxx` block is a **vtable array** for one
 class hierarchy.
 
