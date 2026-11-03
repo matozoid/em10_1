@@ -82,6 +82,9 @@ readable.
 | `0x7dfc0312` | — | `get_singleton` | lazy-init accessor for global singleton at RAM cell `0x6044cf18` (inits via `0x7dfc02ea` if null) | `symbol-map.md` |
 | `0x7dfc038f` | — | `idx_in_bounds` | returns `1` if `d0 (index) < *(a0+24)` (collection count), else `0` | `symbol-map.md` |
 | `0x7e206a0f` | 5384 | `accessor_thunks` | block of 4-byte trampolines to getter/setter pair `0x7e208040`/`0x7e20804a` | `symbol-map.md` |
+| `0x7e326b8c` | 2967 | `vcall_slot80` | **virtual dispatch**: `vtbl=*(a0); calls *(vtbl+80)`; guards `a2!=0` & index `d0≤1`; returns `exth(ret)`. Confirms C++-style objects with vtable pointer at object `+0` | `symbol-map.md` |
+| `0x7d9999f9` | 3724 | `dbg_fmt_emit?` | builds a 32-byte stack buffer using cached state from `0x7d996e85`; hot output/format path (tentative) | `symbol-map.md` |
+| `0x7d996e85` | 3105 | `sfr8050_byte_state` | reads SFR `0x8050`, classifies input byte (`0xff→1`, `0xfe→0`), caches flag in RAM global `0x6044a15a` | `symbol-map.md` |
 
 RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share the `0x6044xxxx` page →
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
