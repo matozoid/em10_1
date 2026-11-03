@@ -172,6 +172,7 @@ class hierarchy.
 | address / global | symbol | role | source |
 |---|---|---|---|
 | `0x7ddca749` | `trace_capture_append` | if enable `0x60711de8==1` and not-full `0x60711de9==0`: `strlen`(`0x7da8376d`)+`memcpy`(`0x7da837d6`) the string `a0` into buffer at base`+offset`, advance offset. Else fall back to `trace_log 0x7d996ee2` + `cap_test(0x10000,grp1)` | `symbol-map.md` |
+| `0x7ddca7f0` | `trace_cap_puts_hex32` | formatted capture print (877 xrefs): `trace_capture_append(prefix a0)`, then append `" "+u32_to_hex8(d2)+"\n"`. Sibling `0x7ddca819` formats a 16-bit value via `0x7da894f1` | `symbol-map.md` |
 | `0x60711de8` | `trace_cap_enable` | byte, `==1` → record into the buffer | `symbol-map.md` |
 | `0x60711de9` | `trace_cap_full` | byte, set to `1` when offset would reach cap (locks further writes) | `symbol-map.md` |
 | `0x60711dfc` | `trace_cap_offset` | u32 current write offset into the buffer | `symbol-map.md` |
