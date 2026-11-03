@@ -176,6 +176,8 @@ class hierarchy.
 |---|---|---|---|
 | `0x7da837b0` | `strncmp` | bounded compare: `a0=s1, a1=s2, d0=n`; returns 0 on equal-within-n or NUL, else signed byte diff. Used by `usr_checksum` id==2 path + region id-check | `symbol-map.md` |
 | `0x7da837d4` | `strncpy` | bounded copy `a1→a0` up to `d0`, stops at NUL then pads (immediately follows `strncmp`) | `symbol-map.md` |
+| `0x7d997773` | `strcmp` | unbounded byte compare `a0` vs `a1`; returns signed `*a0-*a1` at first mismatch, 0 if equal (574 xrefs). **Separate copy** in the core `0x7d99xxxx` region — distinct from the `0x7da83xxx` string cluster (two libc instances linked) | `symbol-map.md` |
+| `0x7d99779f` | `strlen` | scan-to-NUL in core region (sibling of `strcmp 0x7d997773`); distinct from `strlen 0x7da8376d` | `symbol-map.md` |
 | `0x47001000` | `memcpy` | mask-ROM `memcpy(dst=a0, src=a1, len=d0)` — 1394 xrefs | `memory-map.md` |
 | `0x4700110c` | `memset` | mask-ROM `memset(dst=a0, val=d0, len=d1)` — 3612 xrefs (was mislabeled byte-copy) | `memory-map.md` |
 
