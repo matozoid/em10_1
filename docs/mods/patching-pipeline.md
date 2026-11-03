@@ -95,11 +95,13 @@ flash and observe" a safe probe: the camera does nothing destructive on a bad im
   (`test_candidate`, real-device unverified — same caveat as `ring_summary`). Neither the author's
   tool nor our pipeline writes the camera's internal **20-byte usr_checksum array**; both produce the
   image from the payload patches alone.
-- Therefore **whether the camera's `usr_checksum` accepts this image is genuinely unverified.** Two
-  outcomes, both non-bricking:
-  - array lies **inside** a patched region (implicitly correct) → image flashes;
-  - array lies **outside** → stock value vs patched payload mismatches → camera rejects (`0x3202`),
-    does nothing.
+- **RESOLVED (2026-11-03):** the `usr_checksum` gate is a **header↔tail duplicate-array consistency
+  check**, not a payload hash (full decode in `docs/firmware/camera-fw-update.md` → "RESOLVED"). It
+  compares the region header's first 20 bytes against the first 20 of the region's trailing 32-byte
+  block. All 9 patches sit mid-payload (0.00–7.31 % of block 0), touching **neither** compared window,
+  so the stamps are byte-identical to stock and the gate **passes** (accepting outcome). `fwpatch.py`
+  does not need to recompute it. Camera acceptance of the *packaging/integrity gates* is therefore
+  statically established; only the **patch's runtime behaviour on real hardware** stays unverified.
 
 **Recommended safe procedure (if the user chooses to try it):** full battery; write only the built
 `E1139999.BIN` to `DCOLYMP/`; run the update; watch for `SUCCESS_REBOOT` vs an on-screen checksum/validation
@@ -107,9 +109,9 @@ error. A validation error means the image was rejected pre-write (harmless) — 
 **not** interrupt power/SD once `TYPE_FIRMUP_WRITE_OK` is reached (that is the only truly dangerous
 window). Keep a known-good stock `E1139999.BIN` on hand for `FIRMUP_SRV` recovery.
 
-> Open (needs runtime image layout, not reachable by pure static RE): the exact file offset and
-> coverage of the 20-byte `usr_checksum` array — which decides outcome (a) vs (b) above, and whether
-> `fwpatch.py` could/should recompute it to guarantee acceptance.
+> ~~Open (needs runtime image layout): the exact file offset and coverage of the 20-byte
+> `usr_checksum` array.~~ **RESOLVED 2026-11-03** (see the two bullets above): it is a header↔tail
+> duplicate-array check, the patches miss both windows, the gate passes, no recompute needed.
 
 ### Per-slot header gate + the single remaining reject mechanism (2026-11-03)
 Disassembled the inner found-file block of `FIRMUP_SRV` (`0x7de575d6`-loop over the 9-slot component
