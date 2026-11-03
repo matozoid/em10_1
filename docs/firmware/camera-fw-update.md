@@ -136,23 +136,35 @@ Chain: validator `0x7de57e24` → `0x7de58985` (body types 0/2 only; also assert
 - flag `!= 1` → error `0x3204 (12804)`; the reference address is built from the header pointer plus a
   `+0x60000` region base and small fixed offsets (`-8` / `+64 -32`).
 
-So a valid body image must carry a **matching 20-byte internal integrity array** (5 words — possibly
-5 per-region checksums, or a 20-byte digest) in addition to the container footer. firmup compares it
-**before flashing** and rejects on mismatch.
+So a valid body image must carry a **matching 20-byte internal integrity array** in addition to the
+container footer. firmup compares it **before flashing** and rejects on mismatch.
 
-> **Open caveat for the patched `E1139999.BIN`.** `fwpatch.py`/`omfw.py` recompute only the **container
-> footer**, never this internal 20-byte integrity array. Our block-0 diff is confined to the 9 declared
-> `ring-native` patch regions, so:
-> - if the integrity array lies **inside** a patched region (the community `new` bytes already carry
->   the correct value) → the built image passes;
-> - if it lies **outside** the patched regions → the built image keeps the **stock** array, which will
->   not match the patched payload → the camera **rejects** it (error `0x3202`, safe — no flash), it
->   does not brick.
->
-> Either way the failure is fail-closed. Next step: locate the 20-byte array's file offset in decoded
-> block 0 (from the `+4`/`+16`/`+0x60000` header math) and test whether it falls within any of the 9
-> patch regions — that decides whether the current built image would actually flash, and whether
-> `fwpatch.py` must learn to recompute it.
+##### RESOLVED (2026-11-03): it is a header↔tail duplicate-array check, not a payload hash
+Full decode of the flag-`==1` compare loop (`0x7de57421` hardware loop) settles where the two operands
+come from — both are **in the image**, no content hash is computed:
+- `a1 = P` — the region data base (descriptor `+4` = region header `+8` pointer);
+- `a0 = P + 64 + *(P+12) − 32` — i.e. 32 bytes before the region's end (`*(P+12)` = payload length,
+  `64` = region-header size). So `a0` points at the **last 32 bytes of the region payload**;
+- loop `i = 0..4`: `cmp *(P + i*4), *(a0 + i*4)` → first mismatch = error `0x3202`.
+
+So `usr_checksum` asserts that the **first 20 bytes of the region header** equal the **first 20 bytes
+of the region's trailing 32-byte block** — a *duplicate-array consistency check* (the same 20-byte
+stamp is written both at the region head and near its tail). It does **not** checksum the payload body.
+Consequence: a patch in the **middle** of the payload changes neither copy, so the check still passes.
+
+**Verdict for the built `E1139999.BIN`:** all 9 `ring-native` patches lie between **0.00 % and 7.31 %**
+of block 0 (offsets 427 … 1 379 085 in an 18 874 304-byte block). The two compared windows are
+`[0 : 20)` (header) and `[blk−32 : blk−12)` (tail). **No patch intersects either window** (verified
+numerically). Therefore the patched image's header/tail stamps are byte-identical to stock and the
+`usr_checksum` gate **passes** — this is the accepting outcome (a), not the rejecting outcome (b).
+`fwpatch.py` does **not** need to recompute this array for the ring-native patch set.
+
+> Residual bound: the exact region partitioning (the ≤32-record table built at runtime) is not pinned
+> statically, so in principle a payload split into multiple inner regions could place some inner
+> region's tail window over a patch. For the ring-native offsets that is not the case against the
+> single-region (whole-block) model, and the qualitative result — *a duplicate-array check, defeated
+> only by touching a head/tail stamp, never by a mid-payload edit* — holds regardless of partition.
+> The gate is fail-closed either way, so an unexpected partition would reject-not-brick.
 
 **App takeaway (confirmed):** to update body firmware, write the official body image to SD as
 `DCOLYMP/E1139999.BIN` (matches `E113????.BIN`); the camera mounts SD, scans `DCOLYMP`, logs
