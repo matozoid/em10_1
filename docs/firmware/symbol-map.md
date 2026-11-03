@@ -211,6 +211,7 @@ confirms the firmware does real float math via the coprocessor, not pure integer
 | `0x7da84248` | `fp_cmp_b` | `udf05 d1,d0` FP compare intrinsic (sibling predicate) | `symbol-map.md` |
 | `0x7da8424f` | `fp_negate` | `xor 0x80000000,d0` (flip IEEE-754 sign bit), returns `2×` | `symbol-map.md` |
 | `0x7da84261` | `fp_classify` | IEEE-754 single decompose: mantissa `&0x7fffff`, exponent `&0x7f800000`; detects inf/NaN (exp all-ones) and subnormal/zero | `symbol-map.md` |
+| `0x7da83f80` | `__muldf2` | **double-precision** soft-float **multiply** (763 xrefs; pure integer, NOT the udf04/05 coprocessor path — doubles are emulated, singles use the coprocessor). Decodes two IEEE-754 doubles (11-bit exp `lsr20 &2047`, 52-bit mantissa), classifies operands (zero/inf/nan → bits 1/2/4), returns NaN hi `0x7ff80000` or Inf `0x7ff00000` for specials, else adds biased exps (overflow >3069→inf, underflow <970→0) and `mulu` the mantissas | `symbol-map.md` |
 
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
