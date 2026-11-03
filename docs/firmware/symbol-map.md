@@ -94,6 +94,14 @@ RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share th
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
 the `0xa0000000` cached SDRAM data segment above).
 
+## Capability / flag tests
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7ddca1ce` | 1695 | `cap_test` | grouped bitmask test: `return (*(0x60711d7c + d1*4) & d0) != 0`. Indexes RAM capability/flag table at `0x60711d7c` by group `d1`, ANDs mask `d0`. Candidate for the ROM capability-table family behind the ring-feature `descriptor_gate` | `symbol-map.md`, `community-dbfw-tool.md` |
+
+RAM capability/flag table region: `0x60711xxx` (`0x60711d7c` bitmask table; neighbours `0x60711da8`,
+`0x60711dac` read by the adjacent function) — inside the `0x60000000` RAM aperture.
+
 ## Object model — construction / dispatch / resolve
 Corroborates the C++-style object model (vtable pointer at object `+0`; see `vcall_slot80`).
 | address | xrefs | symbol | role | source |
@@ -103,6 +111,9 @@ Corroborates the C++-style object model (vtable pointer at object `+0`; see `vca
 | `0x7dff548d` | 2639 | `obj_factory_512` | allocate a 512-byte object (via `0x7e206a17`), tag class `0x7e385ebc`, run ctor `0x7da82515` | `symbol-map.md` |
 | `0x7da82515` | 2099 | `ctor_thunk` | 2-arg thunk → worker `0x7da811b7` (148-byte frame); sibling of apply thunk `0x7da82530`→`0x7da8254b` | `symbol-map.md` |
 | `0x7d9d36c4` | 2176 | `handle_to_obj` | resolve handle→object: if `a0==0` look up via `0x7d9d2bcc` (by id `d0`), else return `*(a0+4)` | `symbol-map.md` |
+| `0x7dfc4738` | 1620 | `get_singleton2` | lazy-init singleton at RAM cell `0x6044d0e4`: if null, alloc 36-byte obj (`0x7e206a0f`) + ctor `0x7dfc4676` | `symbol-map.md` |
+| `0x7e22ca31` | 1608 | `mgr_5c_call` | singleton accessor: if mgr `*(0x6045425c)` null → 0, else dispatch `0x7e22cb42` | `symbol-map.md` |
+| `0x7e724078` | 1490 | `ctx_f10916_dispatch` | gets ctx via `0x7e722617`, gates on byte field `+10916`, then calls `0x7e723f81` on sub-struct `+10148` | `symbol-map.md` |
 
 Known vtable constants: `0x7e42c10c` (class built by `ctor_vtbl_7e42c10c`), `0x7e385ebc` (class tag set
 by `obj_factory_512`).
