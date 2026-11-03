@@ -137,7 +137,8 @@ The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs)
 | `0x7e208040` | `alloc` | tail-call → `heap_alloc` (size `d0` → ptr `a0`) | `symbol-map.md` |
 | `0x7e20804a` | `free` | null-safe: if `a0!=0` → `heap_free`; manager at `0x60452220`, custom-free hook via vtbl `+16` | `symbol-map.md` |
 | `0x7db954ab` | `heap_alloc` | **size-class allocator**: buckets `≤124`→`0x7d996f56`, `≤2044`→`0x7d996fc6`, `≤16380`→`0x7d996f8e`, larger → further paths. Segregated-fit pools | `symbol-map.md` |
-| `0x7db954ed` | `heap_free` | matching free (pointer in `a0`) | `symbol-map.md` |
+| `0x7e206a1f` | `mem_free_thunk` | **1029 xrefs** — one-instruction tail-call to `free 0x7e20804a` (pointer in `a0`, null-safe). The standard free entry paired with the alloc thunks `0x7e206a0f`/`0x7e206a17`; `0x7e206a27` is an identical sibling. Dedicated row (was only noted inside the `0x7e206a0f` entry) |
+| `0x7db954ed` | `heap_free` | matching free (pointer in `a0`): reads the **4-byte block header at `ptr−4`** holding the block's size, then dispatches by the same size-classes as `heap_alloc` (`≤124`→`0x7d996f64`, `≤2044`→`0x7d996fd4`, …) to return the block to its segregated-fit pool | `symbol-map.md` |
 | `0x7dff54c5` | `log_fmt_msg_b` | **CORRECTED** (was `obj_factory_512b`): formatted-log builder — `alloc(512)` + `sprintf 0x7da82515` with format string `0x7e3858c1` (`"…A_SD_CARD.MEDIA_EXTERNAL.MED…"`) + emit + free. `0x7e3858c1` is a string, not a class | `symbol-map.md` |
 | `0x7da811b7` | `vformat` | printf format core (parses `%`=37); backs `sprintf 0x7da82515` and `vsprintf 0x7da82ef3`. 148-byte frame | `symbol-map.md` |
 | `0x7da82ef3` | `vsprintf` | thin wrapper → `vformat 0x7da811b7` (dst=`a0`, fmt=`a1`, va_ptr=`d0`) |
