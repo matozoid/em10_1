@@ -97,9 +97,11 @@ the `0xa0000000` cached SDRAM data segment above).
 ## Capability / flag tests
 | address | xrefs | symbol | role | source |
 |---|---|---|---|---|
-| `0x7ddca1ce` | 1695 | `cap_test` | grouped bitmask test: `return (*(0x60711d7c + d1*4) & d0) != 0`. Indexes RAM capability/flag table at `0x60711d7c` by group `d1`, ANDs mask `d0`. Candidate for the ROM capability-table family behind the ring-feature `descriptor_gate` | `symbol-map.md`, `community-dbfw-tool.md` |
+| `0x7ddca1ce` | 1695 | `cap_test` | **`cap_test(mask=d0, group=d1)`** → `(*(0x60711d7c + group*4) & mask) != 0`. A 2-D capability matrix (group index × bit mask) in RAM table `0x60711d7c`. Sample sites: `(grp 4, mask 0x8000000)`, `(grp d2, mask 64)`. Candidate for the ROM capability family behind the ring-feature `descriptor_gate` | `symbol-map.md`, `community-dbfw-tool.md` |
+| `0x7ddca28a` | — | `cap_group_of` | sibling that computes a capability `group` from an id (feeds `cap_test` as `d1`) | `symbol-map.md` |
+| `0x7dd79b00`+ | — | `cap_eval_hub` | capability-evaluation routine: many back-to-back `cap_test`/`cap_group_of` calls (feature-enable logic) | `symbol-map.md` |
 
-RAM capability/flag table region: `0x60711xxx` (`0x60711d7c` bitmask table; neighbours `0x60711da8`,
+RAM capability/flag table region: `0x60711xxx` (`0x60711d7c` matrix; neighbours `0x60711da8`,
 `0x60711dac` read by the adjacent function) — inside the `0x60000000` RAM aperture.
 
 ## Object model — construction / dispatch / resolve
