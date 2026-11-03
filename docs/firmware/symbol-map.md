@@ -192,6 +192,11 @@ confirms the firmware does real float math via the coprocessor, not pure integer
 | `0x7da8424f` | `fp_negate` | `xor 0x80000000,d0` (flip IEEE-754 sign bit), returns `2×` | `symbol-map.md` |
 | `0x7da84261` | `fp_classify` | IEEE-754 single decompose: mantissa `&0x7fffff`, exponent `&0x7f800000`; detects inf/NaN (exp all-ones) and subnormal/zero | `symbol-map.md` |
 
+## Subsystem singletons (named via inline RTTI/trace strings)
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e24831c` | `CPlayZoom_instance` | lazy singleton getter for the **CPlayZoom** playback-zoom controller (924 xrefs): cell `0x60454418`, 184-byte object, ctor `0x7e24825d` (base `0x7e2414c5`), vtable `0x7e4693a0`. Class named by inline trace string `"CPlayZoom::setDbZoomInfo_Lite Called."` right after the vtable. Followed by an accessor bank (getters/setters at obj `+12/+16/+20/+32/...`) | `symbol-map.md` |
+
 ## Misc object accessors
 | address | symbol | role | source |
 |---|---|---|---|
