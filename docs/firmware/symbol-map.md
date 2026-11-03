@@ -21,6 +21,8 @@ coverage. Per-subsystem detail lives in the linked docs; this file is the cross-
 | `0x4035fb66` | `TASK_NAME_TBL` | id→name table, 145 records, 26-byte stride | `rtos-tasks.md` |
 | `0x7d9a9384` | `TASK_CREATE_TBL` | task-creation descriptors, 134 records, 28-byte stride (`+0` id, `+12` fn, `+16` prio, `+20` stack) | `rtos-tasks.md` |
 | `0x6000xxxx` | `FIRMUP_SCRATCH` | firmup RAM scratch (`0x60001130`, `0x6044cbc4`+) | `flash-storage.md`, `camera-fw-update.md` |
+| `0xa0000000`–`0xa0fc7860` | `GLOBAL_DATA` | main SDRAM `.data`/`.bss` + global pointer cells (2447 distinct refs in block 0, dense at `0xa0a3`–`0xa0a9`); cached DRAM data segment | `symbol-map.md` |
+| `0xa0a5c970` | `descriptor_gate_cell` | global pointer cell read by the ring-feature descriptor gate (`flags_offset 560`, `flag_mask 128`) | `community-dbfw-tool.md` |
 
 ## RTOS tasks (entry points — confirmed via two-table cross-join)
 | entry | task id | name | prio | stack | source |
@@ -58,8 +60,11 @@ coverage. Per-subsystem detail lives in the linked docs; this file is the cross-
 | `0x7da837d4` | `strncpy` | bounded copy `a1→a0` up to `d0`, stops at NUL then pads (immediately follows `strncmp`) | `symbol-map.md` |
 
 ## Open / to-label (tracked across loop ticks)
-- `0x7da82530` per-slot apply helper; `0x7d9929ce`/`0x7d9928ee` fmem commit — not fully decoded
-  (NAND-controller MMIO register sequence one hop down). `flash-storage.md`.
+- `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
+  global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
+  `-1`) vs a non-empty-name path. Worker role (component/file open within apply) not fully decoded.
+- `0x7d9929ce`/`0x7d9928ee` fmem commit — not fully decoded (NAND-controller MMIO register sequence
+  one hop down). `flash-storage.md`.
 - Imaging/PTP/WiFi task entries beyond the firmup set — many named in `rtos-tasks.md` but entry
   functions not yet decoded.
 
