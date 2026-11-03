@@ -127,6 +127,37 @@ not at the Wi-Fi shell.
 
 `tools/ghidra/DataRefs.java 0x<addr>` lists data xrefs (R/W) to an absolute address.
 
+## Command dispatch chain + what drives it (2026-11-03)
+
+Traced how the 59-entry master command table (`0x7dbbecec`, dup `0x7dbbfa80`,
+`{char* name, void* handler}` stride 8) is actually reached. All callers below are
+32-bit-immediate calls (register-indirect paths noted separately):
+
+- **Dispatch** `0x7da84eb8` — `strncmp` loop over the 59 entries (compare via `0x7da836f1`
+  against the token; stride 8, `cmp 59,d2`). On match it loads `handler = *(entry+4)` and
+  `calls (a1)` with `a0 =` arg struct, `d0 =` arg count. Sole immediate caller: exec_line.
+- **exec_line** `0x7da84d3e` — takes a line struct in `a0` (`(a0)` = string ptr), clears a
+  255-byte scratch at global `0x60710c04` (via `0x4700110c` memset), `strlen` (`0x7d99779f`)
+  clamped to 254, copies the line in (`0x7da837d6`), tokenizes into arg table `0x60710d04`
+  (`0x7da84ded`), then calls dispatch. Sole immediate caller: autoexec runner.
+- **autoexec runner** `0x7da84ccf` — iterates a **29-entry canned-command table** `0x7dbbe24c`
+  (stride 8) and runs each line through exec_line. Before the loop it polls hardware
+  (`0x7d9c9cd8`, mask `0x12345678`) and pokes SFR `0x8ff00190`. Entry `0x7da84cb9` runs the
+  runner only when its mode arg `d0 == 1`, else just logs (`0x7da84ea6`).
+- **Debug-enable latch:** the shell-init function (above `0x7da84cbe`) prints the banner lines
+  (trace_log `0x7d996ee2`) and writes the magic **`0x12345678` to SFR `0x8ff00190`** as its last
+  act. So "debug mode on" is a hardware/SFR latch, not a PTP/Wi-Fi-settable flag.
+
+**Transport conclusion (confirms the non-invasive dead-end):** the master command dispatch is
+driven by an **on-device autoexec script gated behind the `0x8ff00190`/`0x12345678` mode latch**,
+not by any live command channel a host can type into. The interactive readline (S_SHELL
+`0x7de3bcd5`, reads up to 260 B via `0x7de477f5`) is the console path, and it is wired to the UART
+device (body-open → **excluded** by the owner's no-disassembly rule). No immediate-call path, and
+no USB/PTP vendor-opcode handler, enters exec_line/dispatch — so there is **no non-invasive
+(USB/PTP/Wi-Fi) way to issue shell commands on stock 1.4**. This matches the Wi-Fi-telnet and
+usb-ptp findings above: reaching the shell needs modified firmware (force the console task up, or
+hook a dump path), flashed via the official OFU updater. Cross-ref `symbol-map.md` for the labels.
+
 ## Recommendation for extraction
 
 The shell command `file memdump rompics 46560000 14680064` (ADR hex, LEN decimal = 0xE00000)
