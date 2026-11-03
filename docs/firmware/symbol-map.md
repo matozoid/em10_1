@@ -176,6 +176,21 @@ class hierarchy.
 | `0x7d996ee2` | `emit` / `trace_puts` | raw string output sink (1466 xrefs); takes string in `a0` | `symbol-map.md` |
 | `0x6044a15c` | `dbg_hexprint_enable` | halfword, non-zero → `dbg_print_hex` emits | `symbol-map.md` |
 
+## Soft-float / FPU coprocessor intrinsics
+Compiler-emitted FP helpers using MN10300 `udf04`/`udf05` user-defined (coprocessor/FPU) ops —
+confirms the firmware does real float math via the coprocessor, not pure integer emulation.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7da8425a` | `fp_cmp_a` | `udf04 d1,d0`-based FP compare intrinsic; returns `2×result` in `d1` (heavily used — 1015+ xrefs) | `symbol-map.md` |
+| `0x7da84248` | `fp_cmp_b` | `udf05 d1,d0` FP compare intrinsic (sibling predicate) | `symbol-map.md` |
+| `0x7da8424f` | `fp_negate` | `xor 0x80000000,d0` (flip IEEE-754 sign bit), returns `2×` | `symbol-map.md` |
+| `0x7da84261` | `fp_classify` | IEEE-754 single decompose: mantissa `&0x7fffff`, exponent `&0x7f800000`; detects inf/NaN (exp all-ones) and subnormal/zero | `symbol-map.md` |
+
+## Misc object accessors
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e1e8a41` | `obj_get_f264` | field getter `return *(a0+264)` (1015 xrefs; cf. `obj_get_f104`) | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
