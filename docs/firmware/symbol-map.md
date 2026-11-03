@@ -132,6 +132,17 @@ by `obj_factory_512`).
 | `0x7da837b0` | `strncmp` | bounded compare: `a0=s1, a1=s2, d0=n`; returns 0 on equal-within-n or NUL, else signed byte diff. Used by `usr_checksum` id==2 path + region id-check | `symbol-map.md` |
 | `0x7da837d4` | `strncpy` | bounded copy `a1→a0` up to `d0`, stops at NUL then pads (immediately follows `strncmp`) | `symbol-map.md` |
 
+## Debug shell — command dispatch (not reachable non-invasively; see `debug-shell.md`)
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dbbecec` | `shell_cmd_table` | master 59-entry `{char* name, void* handler}` table (dup `0x7dbbfa80`), stride 8 | `debug-shell.md` |
+| `0x7dbbe24c` | `shell_autoexec_table` | 29-entry canned-command table run at debug init | `debug-shell.md` |
+| `0x7da84eb8` | `shell_dispatch` | `strncmp`-loop over 59 entries (cmp via `0x7da836f1`), `calls *(entry+4)` on match; `a0`=args, `d0`=argc | `debug-shell.md` |
+| `0x7da84d3e` | `shell_exec_line` | clears scratch `0x60710c04`, copies+tokenizes line into arg table `0x60710d04`, calls dispatch | `debug-shell.md` |
+| `0x7da84ccf` | `shell_autoexec_run` | iterates `0x7dbbe24c`, runs each via `shell_exec_line`; polls HW `0x7d9c9cd8` mask `0x12345678` | `debug-shell.md` |
+| `0x7da84cb9` | `shell_autoexec_gate` | runs autoexec only if mode `d0==1`; else logs (`0x7da84ea6`) | `debug-shell.md` |
+| `0x8ff00190` | `dbg_mode_latch` | SFR written `0x12345678` by shell-init = "debug mode on" (hardware latch, not PTP/Wi-Fi settable) | `debug-shell.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
