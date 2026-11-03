@@ -251,6 +251,9 @@ class hierarchy.
 | `0x7da836f1` | `strcmp` | unbounded byte compare `a0` vs `a1` (`movbu`+`setlb`/`leq` loop), returns signed `*a0−*a1` at first mismatch, 0 if equal. **1437 xrefs** — the app-cluster (`0x7da83xxx`) copy, sibling of `strcpy 0x7da83710` and `strlen 0x7da8376d`; distinct from core `strcmp 0x7d997773`. (Was referenced inline by the DBGLVL row; now pinned by disasm) |
 | `0x7da83710` | `strcpy` | copy `a1`→`a0` byte loop until NUL (`setlb`/`lne`), returns original `a0`; app-cluster sibling of `strcmp 0x7da836f1` |
 | `0x7da836ab` | `strcat` | scan `a0` to its NUL, then copy `a1`→end-of-`a0` until NUL; returns original `a0`. App-cluster string primitive (completes strcmp/strcpy/strlen/strcat quartet) |
+| `0x7e270db5` | `wformat_core` | **wide-char (UTF-16) `vsprintf` engine** (374 xrefs): scans the format over 2-byte units (`movhu`, step +2) for `%`(37)/NUL, emits literal runs and `%`-conversions into an output builder, accumulating the total wchar count (returned via the `a0` count-ptr). Uses `wcslen 0x7e22b159` + `wcscpy 0x7e22b131`. Backs the camera's wide-text paths (menus/filenames) |
+| `0x7e22b159` | `wcslen` | count 2-byte units until the 16-bit NUL, returns the wchar count (`d0`); null-safe |
+| `0x7e22b131` | `wcscpy` | copy wide string `a1`→`a0` (2-byte `movhu` loop) until 16-bit NUL; null-guarded |
 | `0x7da8376d` | `strlen` | scan-to-NUL, returns `a1−a0` | `symbol-map.md` |
 | `0x7d999a53` | `dbg_print_hex` | gated by `0x6044a15c` (output enable, halfword): emit `" " + u32_to_hex8(d0) + "\n"` via `emit 0x7d996ee2`; alt path when `0x6044a15a==1` (1043 xrefs) | `symbol-map.md` |
 | `0x7d999aad` | `u32_to_hex8` | write 8 uppercase hex chars of `d0` to buffer `a0` (nibble loop, `+'0'`/`+'A'-10`) | `symbol-map.md` |
