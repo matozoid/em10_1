@@ -111,6 +111,30 @@ window). Keep a known-good stock `E1139999.BIN` on hand for `FIRMUP_SRV` recover
 > coverage of the 20-byte `usr_checksum` array — which decides outcome (a) vs (b) above, and whether
 > `fwpatch.py` could/should recompute it to guarantee acceptance.
 
+### Per-slot header gate + the single remaining reject mechanism (2026-11-03)
+Disassembled the inner found-file block of `FIRMUP_SRV` (`0x7de575d6`-loop over the 9-slot component
+descriptor, record stride 28, `+24` = component id):
+- `0x7de576be` sets read length `32`; `0x7de576df` sets buffer `sp+196`; two reads
+  (`0x7d9c1429` seek/prep, then `0x7d9c132d` read 32 B into `sp+196`), each return-checked → error
+  close (`0x7dc9cdd5` / `0x7dc9ce19`, `d1=3`) on failure.
+- **Validity gate `0x7de57701`:** `movhu (196,sp),d0; cmp 0,d0` — the first halfword of the component's
+  32-byte header must read a known value or the slot errors; the loop then advances (`add 28,a3`,
+  `0x7de57712`) and the actual flash is dispatched **after** the 9-slot loop (`0x7de57720`: if any
+  slot found → `0x7dc9ccc0`, `d0=3,d1=2`).
+
+This gate — and every structural/header/region-table gate found so far — reads **container
+metadata**, and the built image's metadata is provably identical to stock: `omfw.py info` + a
+block-by-block compare of the current `E1139999.BIN` shows **all three block headers byte-identical to
+stock**; only block 0 differs, and only in (i) the recomputed footer and (ii) the 1202 payload bytes
+inside declared patch regions (blocks 1 & 2 are byte-for-byte stock). So the camera's metadata gates
+see exactly the stock bytes and pass identically.
+
+**Net narrowing:** the *only* pre-flash check that could reject the patched image is one that
+checksums the **decoded block-0 payload** (i.e. the `usr_checksum` 20-byte array, if its coverage
+includes the patched region). Every other gate is satisfied by construction. That reduces the whole
+"will it flash?" question to the single open item above (payload-coverage of `usr_checksum`), which is
+the runtime-layout dead-end — not statically resolvable without executing the camera's image loader.
+
 ## Applying to the camera (live / hardware — user action)
 1. Copy the built `E1139999.BIN` to the SD card root dir `DCOLYMP/` (so `DCOLYMP/E1139999.BIN`).
 2. In the camera, the `api_firmup` updater mounts the card, scans `DCOLYMP` for `E113????.BIN`, finds
