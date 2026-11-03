@@ -79,6 +79,9 @@ readable.
 |---|---|---|---|---|
 | `0x7e207498` | 12294 | `obj_get_f104` | field getter: `return *(a0+104)` (hottest single call target — `+104` is a very hot object field) | `symbol-map.md` |
 | `0x7dfc01bf` | 10930 | `trace_log_printf` | **central leveled debug/trace printf** (#2 hottest fn). Arg `d0`=level/tag; format string + varargs on caller stack (callee reads fmt at `(16,sp)`, varargs follow). Gets log ctx `0x7dfc0312`, checks level-enabled `0x7dfc038f`, if emitting formats+writes via `0x7dfc040d`. **Correction:** prior "registry_get / bounds-checked indexed get" label was WRONG — call sites pass format strings (e.g. `*****Q OVER?!*****`), not indices | `symbol-map.md` |
+| `0x7dfc0312` | — | `get_log_ctx` | lazy-init log-context singleton at RAM `0x6044cf18` (ctor `0x7dfc02ea` if null). Ctx struct: `+20`=flag (via `0x7dfc032a`), `+24`=verbosity **threshold** | `symbol-map.md` |
+| `0x7dfc038f` | — | `log_level_suppressed` | verbosity gate: `a0`=ctx, `d0`=msg level; returns 1 (suppress) when `*(ctx+24)` threshold > level, else 0 (emit). Used by `trace_log_printf` and `0x7dfc0420` | `symbol-map.md` |
+| `0x7dfc040d` | — | `log_format_emit` | format+emit core (via `0x7dfc0420`): re-checks `log_level_suppressed`, allocs **300-byte** line buffer (`0x7e206a17`), formats from fmt+varargs, dispatches to sink descriptor `0x7e35db28` | `symbol-map.md` |
 | `0x7dfc0312` | — | `get_singleton` | lazy-init accessor for global singleton at RAM cell `0x6044cf18` (inits via `0x7dfc02ea` if null) | `symbol-map.md` |
 | `0x7dfc038f` | — | `idx_in_bounds` | returns `1` if `d0 (index) < *(a0+24)` (collection count), else `0` | `symbol-map.md` |
 | `0x7e206a0f` | 5384 | `heap_alloc_thunk` | tail-call → `alloc 0x7e208040`. **Corrected: this is the heap allocator thunk, not an accessor.** Sibling `0x7e206a17` (242 xrefs) same target; `0x7e206a1f` (1029)/`0x7e206a27` → `free 0x7e20804a`. Size in `d0`, returns ptr in `a0` (null on fail) | `symbol-map.md` |
