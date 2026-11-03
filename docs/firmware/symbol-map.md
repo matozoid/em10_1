@@ -90,6 +90,19 @@ RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share th
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
 the `0xa0000000` cached SDRAM data segment above).
 
+## Object model — construction / dispatch / resolve
+Corroborates the C++-style object model (vtable pointer at object `+0`; see `vcall_slot80`).
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7e2053c1` | 2182 | `ctor_vtbl_7e42c10c` | constructor: writes vtable const `0x7e42c10c` to obj `+0`, stores arg at `+4`, clears `+8` | `symbol-map.md` |
+| `0x7e2053d2` | 2029 | `ctor_vtbl_7e42c10c_noarg` | same class, no-arg variant (installs vtable, clears `+8`, returns null `a0`) | `symbol-map.md` |
+| `0x7dff548d` | 2639 | `obj_factory_512` | allocate a 512-byte object (via `0x7e206a17`), tag class `0x7e385ebc`, run ctor `0x7da82515` | `symbol-map.md` |
+| `0x7da82515` | 2099 | `ctor_thunk` | 2-arg thunk → worker `0x7da811b7` (148-byte frame); sibling of apply thunk `0x7da82530`→`0x7da8254b` | `symbol-map.md` |
+| `0x7d9d36c4` | 2176 | `handle_to_obj` | resolve handle→object: if `a0==0` look up via `0x7d9d2bcc` (by id `d0`), else return `*(a0+4)` | `symbol-map.md` |
+
+Known vtable constants: `0x7e42c10c` (class built by `ctor_vtbl_7e42c10c`), `0x7e385ebc` (class tag set
+by `obj_factory_512`).
+
 ## OS / IPC primitives (hot, reused everywhere)
 | address | symbol | role | source |
 |---|---|---|---|
