@@ -81,7 +81,7 @@ readable.
 | `0x7dfc01bf` | 10930 | `registry_get` | bounds-checked indexed get on a global singleton collection: fetch `get_singleton()`, then `idx_in_bounds` before access | `symbol-map.md` |
 | `0x7dfc0312` | — | `get_singleton` | lazy-init accessor for global singleton at RAM cell `0x6044cf18` (inits via `0x7dfc02ea` if null) | `symbol-map.md` |
 | `0x7dfc038f` | — | `idx_in_bounds` | returns `1` if `d0 (index) < *(a0+24)` (collection count), else `0` | `symbol-map.md` |
-| `0x7e206a0f` | 5384 | `accessor_thunks` | block of 4-byte trampolines to getter/setter pair `0x7e208040`/`0x7e20804a` | `symbol-map.md` |
+| `0x7e206a0f` | 5384 | `heap_alloc_thunk` | tail-call → `alloc 0x7e208040`. **Corrected: this is the heap allocator thunk, not an accessor.** Sibling `0x7e206a17` (242 xrefs) same target; `0x7e206a1f` (1029)/`0x7e206a27` → `free 0x7e20804a`. Size in `d0`, returns ptr in `a0` (null on fail) | `symbol-map.md` |
 | `0x7e326b8c` | 2967 | `vcall_slot80` | **virtual dispatch**: `vtbl=*(a0); calls *(vtbl+80)`; guards `a2!=0` & index `d0≤1`; returns `exth(ret)`. Confirms C++-style objects with vtable pointer at object `+0` | `symbol-map.md` |
 | `0x7d9999f9` | 3724 | `dbg_fmt_emit?` | builds a 32-byte stack buffer using cached state from `0x7d996e85`; hot output/format path (tentative) | `symbol-map.md` |
 | `0x7d996e85` | 3105 | `sfr8050_byte_state` | reads SFR `0x8050`, classifies input byte (`0xff→1`, `0xfe→0`), caches flag in RAM global `0x6044a15a` | `symbol-map.md` |
@@ -93,6 +93,16 @@ readable.
 RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share the `0x6044xxxx` page →
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
 the `0xa0000000` cached SDRAM data segment above).
+
+## Heap allocator (core memory management)
+The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs) wraps the heap. Core:
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e208040` | `alloc` | tail-call → `heap_alloc` (size `d0` → ptr `a0`) | `symbol-map.md` |
+| `0x7e20804a` | `free` | null-safe: if `a0!=0` → `heap_free`; manager at `0x60452220`, custom-free hook via vtbl `+16` | `symbol-map.md` |
+| `0x7db954ab` | `heap_alloc` | **size-class allocator**: buckets `≤124`→`0x7d996f56`, `≤2044`→`0x7d996fc6`, `≤16380`→`0x7d996f8e`, larger → further paths. Segregated-fit pools | `symbol-map.md` |
+| `0x7db954ed` | `heap_free` | matching free (pointer in `a0`) | `symbol-map.md` |
+| `0x7dff54c5` | `obj_factory_512b` | `alloc(512)` + ctor `0x7da82515` with class `0x7e3858c1`, args `(a3,d2)`; sibling of `obj_factory_512` (`0x7dff548d`, class `0x7e385ebc`) | `symbol-map.md` |
 
 ## Capability / flag tests
 | address | xrefs | symbol | role | source |
