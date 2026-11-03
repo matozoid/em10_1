@@ -138,6 +138,10 @@ class hierarchy.
 |---|---|---|---|
 | `0x7d9c132d` | `os_read` | generic blocking read/receive: `a0=handle obj (deref `(a0)`), d0=len/id, d1=timeout` (`-1`=block). **154 xrefs.** Dispatches to backend `0x7d9c4093` (timed) vs `0x7d9a7ba0` (blocking) after handle-validity check `0x7d9c3fa8`. Used by firmup (SD file read) + PC_PTP (queue drain) | `symbol-map.md` |
 | `0x7d9c1429` | `os_read_prep` | companion seek/prep used before `os_read` in the firmup header read | `camera-fw-update.md` |
+| `0x7dfc0587` | `lock_get` | get lock object for id `d0`; lazy-inits the lock-manager singleton at `0x6044cf20` (alloc 44 B via `0x7e206a17` if null) | `symbol-map.md` |
+| `0x7dfc056a` | `mutex_lock` | virtual `lock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+12)` | `symbol-map.md` |
+| `0x7dfc057a` | `mutex_unlock` | virtual `unlock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+16)` | `symbol-map.md` |
+| `0x7e02ec5a` | `get_singleton_6044eb38` | **double-checked-locking** singleton init (1061 xrefs): check `*(0x6044eb38)`; if null take lock id 2 (`lock_get`+`mutex_lock`), re-check, alloc 8 B + ctor `0x7e02ecb2`, store, release (`mutex_unlock`) | `symbol-map.md` |
 
 ## libc-style primitives
 | address | symbol | role | source |
