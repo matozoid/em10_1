@@ -256,6 +256,9 @@ class hierarchy.
 | `0x7e270db5` | `wformat_core` | **wide-char (UTF-16) `vsprintf` engine** (374 xrefs): scans the format over 2-byte units (`movhu`, step +2) for `%`(37)/NUL, emits literal runs and `%`-conversions into an output builder, accumulating the total wchar count (returned via the `a0` count-ptr). Uses `wcslen 0x7e22b159` + `wcscpy 0x7e22b131`. Backs the camera's wide-text paths (menus/filenames) |
 | `0x7e22b159` | `wcslen` | count 2-byte units until the 16-bit NUL, returns the wchar count (`d0`); null-safe |
 | `0x7e22b131` | `wcscpy` | copy wide string `a1`→`a0` (2-byte `movhu` loop) until 16-bit NUL; null-guarded |
+| `0x7da83656` | `memcpy` | app-cluster byte `memcpy(dst=a0, src=a1, len=d0)`: forward `movbu` copy until `dst==dst+len`, no NUL stop; returns. 363 xrefs. Distinct from mask-ROM `memcpy 0x47001000` |
+| `0x7da83669` | `memmove` | overlap-safe copy (same args): forward copy when `dst<=src`, else backward copy (`add len` to both ptrs, decrement). 0 direct `call` xrefs (reached via pointer/tail) — sibling of `memcpy 0x7da83656` |
+| `0x7da837d6` | `strncpy` | **CORRECTED** (rows above call it "memcpy"): copies `a1`→`a0` up to `d0` bytes, stopping early at the source NUL, then zero-pads the remainder of the `d0`-byte field. Used by `rtos_svc_err_log` / `trace_capture_append` to copy a bounded name |
 | `0x7da8376d` | `strlen` | scan-to-NUL, returns `a1−a0` | `symbol-map.md` |
 | `0x7d999a53` | `dbg_print_hex` | gated by `0x6044a15c` (output enable, halfword): emit `" " + u32_to_hex8(d0) + "\n"` via `emit 0x7d996ee2`; alt path when `0x6044a15a==1` (1043 xrefs) | `symbol-map.md` |
 | `0x7d999aad` | `u32_to_hex8` | write 8 uppercase hex chars of `d0` to buffer `a0` (nibble loop, `+'0'`/`+'A'-10`) | `symbol-map.md` |
