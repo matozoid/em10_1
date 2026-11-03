@@ -72,6 +72,12 @@ table; names cross-joined from `0x4035fb66`.
 | `0x7d9cdaaa` | `flash_err_handler` | common write/erase error bail | `flash-storage.md` |
 | `0x7e21d6dc` | `startFirmUp` | USB-link firmware-update entry | `usb-ptp.md`, `camera-fw-update.md` |
 
+## OS / IPC primitives (hot, reused everywhere)
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7d9c132d` | `os_read` | generic blocking read/receive: `a0=handle obj (deref `(a0)`), d0=len/id, d1=timeout` (`-1`=block). **154 xrefs.** Dispatches to backend `0x7d9c4093` (timed) vs `0x7d9a7ba0` (blocking) after handle-validity check `0x7d9c3fa8`. Used by firmup (SD file read) + PC_PTP (queue drain) | `symbol-map.md` |
+| `0x7d9c1429` | `os_read_prep` | companion seek/prep used before `os_read` in the firmup header read | `camera-fw-update.md` |
+
 ## libc-style primitives
 | address | symbol | role | source |
 |---|---|---|---|
