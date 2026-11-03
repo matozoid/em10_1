@@ -156,6 +156,18 @@ class hierarchy.
 | `0x7da84cb9` | `shell_autoexec_gate` | runs autoexec only if mode `d0==1`; else logs (`0x7da84ea6`) | `debug-shell.md` |
 | `0x8ff00190` | `dbg_mode_latch` | SFR written `0x12345678` by shell-init = "debug mode on" (hardware latch, not PTP/Wi-Fi settable) | `debug-shell.md` |
 
+## Diagnostics — in-memory trace capture buffer
+`0x7ddca749` (1047 xrefs) is a RAM trace-capture sink. When enabled it appends log strings to a
+512 KB buffer, so the buffer is a **standing dump target** (its text accumulates in RAM).
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7ddca749` | `trace_capture_append` | if enable `0x60711de8==1` and not-full `0x60711de9==0`: `strlen`(`0x7da8376d`)+`memcpy`(`0x7da837d6`) the string `a0` into buffer at base`+offset`, advance offset. Else fall back to `trace_log 0x7d996ee2` + `cap_test(0x10000,grp1)` | `symbol-map.md` |
+| `0x60711de8` | `trace_cap_enable` | byte, `==1` → record into the buffer | `symbol-map.md` |
+| `0x60711de9` | `trace_cap_full` | byte, set to `1` when offset would reach cap (locks further writes) | `symbol-map.md` |
+| `0x60711dfc` | `trace_cap_offset` | u32 current write offset into the buffer | `symbol-map.md` |
+| `0x60711e00` | `trace_cap_base` | base of the ~512 KB capture buffer (cap `0x7FFFF`) | `symbol-map.md` |
+| `0x7da8376d` | `strlen` | scan-to-NUL, returns `a1−a0` | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
