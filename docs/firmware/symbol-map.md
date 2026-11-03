@@ -132,6 +132,7 @@ Corroborates the C++-style object model (vtable pointer at object `+0`; see `vca
 | `0x7d9d36c4` | 2176 | `handle_to_obj` | resolve handle→object: if `a0==0` look up via `0x7d9d2bcc` (by id `d0`), else return `*(a0+4)` | `symbol-map.md` |
 | `0x7dfc4738` | 1620 | `get_singleton2` | lazy-init singleton at RAM cell `0x6044d0e4`: if null, alloc 36-byte obj (`0x7e206a0f`) + ctor `0x7dfc4676` | `symbol-map.md` |
 | `0x7e22ca31` | 1608 | `mgr_5c_call` | singleton accessor: if mgr `*(0x6045425c)` null → 0, else dispatch `0x7e22cb42` | `symbol-map.md` |
+| `0x7e22ca49` | 841 | `mgr_5c_call2` | sibling 2-arg accessor on SAME mgr singleton `*(0x6045425c)`: if null → 0, else forward (a0→a1 obj, a1→d2 val) and dispatch `0x7e22cbbb`. Mgr ctor `0x7e22ca67` installs vtable `0x7e45e460` (slots all code ptrs, no inline class-name string → class unidentified) | `symbol-map.md` |
 | `0x7e724078` | 1490 | `ctx_f10916_dispatch` | gets ctx via `0x7e722617`, gates on byte field `+10916`, then calls `0x7e723f81` on sub-struct `+10148` | `symbol-map.md` |
 | `0x7e205040` | 1255 | `base_reset_vtbl_7e42c02c` | lifecycle reset/dtor stage: installs base vtable `0x7e42c02c` at obj `+0`, then `0x7e2050d6` zeroes member at obj `+24` if non-null; returns null `a0` | `symbol-map.md` |
 
