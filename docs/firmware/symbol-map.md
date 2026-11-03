@@ -173,6 +173,8 @@ class hierarchy.
 |---|---|---|---|
 | `0x7ddca749` | `trace_capture_append` | if enable `0x60711de8==1` and not-full `0x60711de9==0`: `strlen`(`0x7da8376d`)+`memcpy`(`0x7da837d6`) the string `a0` into buffer at base`+offset`, advance offset. Else fall back to `trace_log 0x7d996ee2` + `cap_test(0x10000,grp1)` | `symbol-map.md` |
 | `0x7ddca7f0` | `trace_cap_puts_hex32` | formatted capture print (877 xrefs): `trace_capture_append(prefix a0)`, then append `" "+u32_to_hex8(d2)+"\n"`. Sibling `0x7ddca819` formats a 16-bit value via `0x7da894f1` | `symbol-map.md` |
+| `0x7dd438e1` | `log_val_fmt` | value-logging wrapper (869 xrefs): logs message (`a0`, default ptr `0x7ded4e40` when null) + hex value (`d0`); routes to `dbg_print_hex_routed 0x7d9999f9` (console) vs plain `dbg_print_hex 0x7d999a53` by `console_present? 0x7dd53bb2` or flag `0x60709d54==1` | `symbol-map.md` |
+| `0x7dd53bb2` | `console_present?` | thin wrapper → mask-ROM `0x47001b0a`, returns a byte (debug/console-attached query); gates log routing | `symbol-map.md` |
 | `0x60711de8` | `trace_cap_enable` | byte, `==1` → record into the buffer | `symbol-map.md` |
 | `0x60711de9` | `trace_cap_full` | byte, set to `1` when offset would reach cap (locks further writes) | `symbol-map.md` |
 | `0x60711dfc` | `trace_cap_offset` | u32 current write offset into the buffer | `symbol-map.md` |
