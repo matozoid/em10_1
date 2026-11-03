@@ -56,10 +56,15 @@ bss unless noted. VERIFIED = read/written by disassembled code this session.
 | 0x41b0024…0x41b0029 | exec_shutter release sub-events (1stpush … 2nd1strelease) |
 
 ### Mask-ROM helper region 0x4700xxxx
-Calls into `0x47001xxx` recur as library primitives — 0x4700110c and 0x47001000 are byte-copy
-(`memcpy`-shaped: dst in a2/a0, len in d1) used by every response builder. This region is **below**
-the block-0 image (which starts at runtime 0x7d991020) and is not in the dump — it is the SoC
-**mask/boot ROM**. Not disassemblable from our material (dead end: no ROM image; body never opened).
+Calls into `0x47001xxx` recur as library primitives, used by every response builder. **Corrected
+by call-site arg analysis** (prior note called both "byte-copy" — only one is):
+- `0x47001000` = **memcpy**(dst=`a0`, src=`a1`, len=`d0`) — 1394 xrefs.
+- `0x4700110c` = **memset**(dst=`a0`, val=`d0`, len=`d1`) — 3612 xrefs (call sites pass a fill
+  value `0`/`0xff`/`255` in `d0`, not a source pointer, so it is memset not memcpy).
+
+This region is **below** the block-0 image (which starts at runtime 0x7d991020) and is not in the
+dump — it is the SoC **mask/boot ROM**. Not disassemblable from our material (dead end: no ROM
+image; body never opened) — but the two primitives' signatures are pinned from their call sites.
 
 ## Subsystems by log tag (`tools/subsystems.py`)
 GUI, APPEVENT_STATE/CAMST/CAMON/PWR/TIMER (camera state machine), iseq_ps_* (image sequencer: still/through/recview/update/mng), exp (exposure), api_* (layered API: disp, rec, play, picfile, dps, network_Wifi, histogram, tft, oldb, adj, cube), rec_ImgPro*, RecView, CapThr, Cap_PlayMovie, movplay_com, app_panorama, app_background, GuiTouch, DevBlu_Bluetooth, WIFI_REMOCON_CGI/UTL, WIFI_RELEASE, do_cgi_get, AVM_FILE_MAIN/AVM_API, API_MEDIA(_SD), aud_dev_wm8946 (audio codec), PER_ADCONV, FLASH.
