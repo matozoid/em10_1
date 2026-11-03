@@ -36,6 +36,25 @@ coverage. Per-subsystem detail lives in the linked docs; this file is the cross-
 | `0x7dafa287` | `0x46` | `TAKE_MAIN` | 4 | `0x500` | `rtos-tasks.md` |
 | `0x7dfc0061` | `0x63` | `CA_MAIN` — camera-app main | 11 | `0x9000` | `rtos-tasks.md` |
 
+## Communication tasks — PTP / USB / WiFi (entries, confirmed via creation table `0x7d9a9384`)
+Important for the app/protocol RE (host link + WiFi remote). All extracted by walking the task-creation
+table; names cross-joined from `0x4035fb66`.
+| entry | task id | name | prio | stack |
+|---|---|---|---|---|
+| `0x7e7d8dcf` | `0x24` | `PC_PTP` — PTP command task (host link) | 4 | `0x518` |
+| `0x7e7cf804` | `0x67` | `PTPASYNC` — async PTP events | 11 | `0x800` |
+| `0x7d9eb34c` | `0x66` | `PTPCOM` — PTP transport/comm | 10 | `0x600` |
+| `0x7e7d9b3a` | `0x26` | `PC_USB` — USB device task | 4 | `0x718` |
+| `0x7e7d9d2e` | `0x27` | `PC_USBPNP` — USB plug-and-play | 4 | `0x518` |
+| `0x7e7dd991` | `0x28` | `PC_USBSRV` — USB service | 4 | `0x318` |
+| `0x7e7d79b8` | `0x22` | `PC_HOSTCOM` — host command dispatch | 4 | `0x318` |
+| `0x7e7d8e15` | `0x21` | `PC_EVENT` — host event push | 4 | `0x318` |
+| `0x7e7d8fec` | `0x25` | `PC_UAM` — USB access manager | 4 | `0x318` |
+| `0x7dd71a55` | `0x20` | `PC_1394PNP` — FireWire PnP (legacy) | 9 | `0x500` |
+| `0x7e7d7d46` | `0x23` | `PC_I1394` — FireWire transport (legacy) | 4 | `0x718` |
+| `0x7de2d14e` | `0x7a` | `WIFI_REMOCON_THROUGH` — WiFi remote-control pass-through | 4 | `0x1000` |
+| `0x7dd6b376` | `0x6d` | `EYEFI` — Eye-Fi SD WiFi card task | 4 | `0x400` |
+
 ## Firmware-update / flash path
 | address | symbol | role | source |
 |---|---|---|---|
