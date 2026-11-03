@@ -140,7 +140,9 @@ The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs)
 | `0x7db954ed` | `heap_free` | matching free (pointer in `a0`) | `symbol-map.md` |
 | `0x7dff54c5` | `log_fmt_msg_b` | **CORRECTED** (was `obj_factory_512b`): formatted-log builder — `alloc(512)` + `sprintf 0x7da82515` with format string `0x7e3858c1` (`"…A_SD_CARD.MEDIA_EXTERNAL.MED…"`) + emit + free. `0x7e3858c1` is a string, not a class | `symbol-map.md` |
 | `0x7da811b7` | `vformat` | printf format core (parses `%`=37); backs `sprintf 0x7da82515` and `vsprintf 0x7da82ef3`. 148-byte frame | `symbol-map.md` |
-| `0x7da82ef3` | `vsprintf` | thin wrapper → `vformat 0x7da811b7` (dst=`a0`, fmt=`a1`, va_ptr=`d0`) | `symbol-map.md` |
+| `0x7da82ef3` | `vsprintf` | thin wrapper → `vformat 0x7da811b7` (dst=`a0`, fmt=`a1`, va_ptr=`d0`) |
+| `0x7da82530` | `sprintf_r` | **1065 xrefs** — reentrant stdio `sprintf`: builds a fake string-`FILE` on the stack (`mov sp,a0; inc4; store buf ptr`) pointing at the dest buffer, then calls the stdio formatter core `0x7da8254b` with string-mode flag=1. Heavier path than the lightweight `sprintf 0x7da82515` (newlib `_svfprintf_r` style; uses the reentrancy global, so it is the copy used by code that also does stream I/O) |
+| `0x7da8254b` | `vfprintf_core` | newlib `_[s]vfprintf_r`-style formatter core behind `sprintf_r 0x7da82530`: fetches the reentrancy struct via `0x7da816ad` (cached to global `0xa09f0978`), takes a `FILE`-like sink at `sp+72` and the string-vs-stream `flag` at `sp+24`; emits characters through putc `0x7d9c5d07`. String mode (flag!=0) writes into the fake string-FILE's buffer | `symbol-map.md` | `symbol-map.md` |
 | `0x7e334de7` | `dbg_printf_lvl2` | level-gated debug printf (806 xrefs): only if verbosity `0x6046017c >= 2` → `vsprintf 0x7da82ef3` into a 256 B stack buffer + emit via `0x7dff71b7` | `symbol-map.md` |
 | `0x6046017c` | `dbg_verbosity` | debug print level; `dbg_printf_lvl2` emits only when `>= 2` | `symbol-map.md` |
 
