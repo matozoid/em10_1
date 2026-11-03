@@ -83,8 +83,8 @@ readable.
 | `0x7dfc038f` | — | `idx_in_bounds` | returns `1` if `d0 (index) < *(a0+24)` (collection count), else `0` | `symbol-map.md` |
 | `0x7e206a0f` | 5384 | `heap_alloc_thunk` | tail-call → `alloc 0x7e208040`. **Corrected: this is the heap allocator thunk, not an accessor.** Sibling `0x7e206a17` (242 xrefs) same target; `0x7e206a1f` (1029)/`0x7e206a27` → `free 0x7e20804a`. Size in `d0`, returns ptr in `a0` (null on fail) | `symbol-map.md` |
 | `0x7e326b8c` | 2967 | `vcall_slot80` | **virtual dispatch**: `vtbl=*(a0); calls *(vtbl+80)`; guards `a2!=0` & index `d0≤1`; returns `exth(ret)`. Confirms C++-style objects with vtable pointer at object `+0` | `symbol-map.md` |
-| `0x7d9999f9` | 3724 | `dbg_fmt_emit?` | builds a 32-byte stack buffer using cached state from `0x7d996e85`; hot output/format path (tentative) | `symbol-map.md` |
-| `0x7d996e85` | 3105 | `sfr8050_byte_state` | reads SFR `0x8050`, classifies input byte (`0xff→1`, `0xfe→0`), caches flag in RAM global `0x6044a15a` | `symbol-map.md` |
+| `0x7d9999f9` | 3724 | `dbg_print_hex_routed` | **RESOLVED** (was `dbg_fmt_emit?`): twin of `dbg_print_hex 0x7d999a53` — gated by `0x6044a15c`, builds `" "+u32_to_hex8(d0)+"\n"`, emits via the `console_out 0x7d996e85` router (instead of plain `emit`) | `symbol-map.md` |
+| `0x7d996e85` | 3105 | `console_out` | **RESOLVED** (was `sfr8050_byte_state`): string output **router**, arg `a0`=string. Reads console-mode SFR `0x8050`: if `0` → fall back to `emit 0x7d996ee2`. First byte `0xff`/`0xfe` = mode escape toggling suppress flag `0x6044a15a` (1/0). Else (if not suppressed) send string (len ≤128) to channel handle `0x7d9b0858` via `0x7d9c1429` | `symbol-map.md` |
 | `0x7d997b14` | 1500 | `trace_log` | debug/trace emit, gated by global enable byte `0xa0a65f40` (0 = emit) + level `0xa0a65f41`; arg code's top byte (`>>24`, vs 62) = facility/category. Called from task wrappers (e.g. PC_PTP) | `symbol-map.md` |
 | `0x7db8b6c8` | 1780 | `range_check_or_log` | if `idx (d0) >= count *(0x6044acb0)` → emit via `0x7d9999f9` (out-of-range log/assert) | `symbol-map.md` |
 | `0x7dfc7272` | 1660 | `decode_packed_id` | decode packed 32-bit id: bits `23:16` → index (`−1`, `×4`) into RAM table `0x6044e518`; bits `15:8` → secondary lookup | `symbol-map.md` |
@@ -137,7 +137,8 @@ class hierarchy.
 | address | symbol | role | source |
 |---|---|---|---|
 | `0x7d9c132d` | `os_read` | generic blocking read/receive: `a0=handle obj (deref `(a0)`), d0=len/id, d1=timeout` (`-1`=block). **154 xrefs.** Dispatches to backend `0x7d9c4093` (timed) vs `0x7d9a7ba0` (blocking) after handle-validity check `0x7d9c3fa8`. Used by firmup (SD file read) + PC_PTP (queue drain) | `symbol-map.md` |
-| `0x7d9c1429` | `os_read_prep` | companion seek/prep used before `os_read` in the firmup header read | `camera-fw-update.md` |
+| `0x7d9c1429` | `os_chan_io_prep` | channel I/O prep (bidirectional): seek/prep before `os_read` in firmup; also the **send** path in `console_out` (buf, len, handle, timeout `-1`) — not read-only | `camera-fw-update.md` |
+| `0x7d9b0858` | `console_out_chan` | console output channel handle used by `console_out 0x7d996e85` | `symbol-map.md` |
 | `0x7dfc0587` | `lock_get` | get lock object for id `d0`; lazy-inits the lock-manager singleton at `0x6044cf20` (alloc 44 B via `0x7e206a17` if null) | `symbol-map.md` |
 | `0x7dfc056a` | `mutex_lock` | virtual `lock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+12)` | `symbol-map.md` |
 | `0x7dfc057a` | `mutex_unlock` | virtual `unlock()`: inner obj `*(a0+4)`, `vtbl=*(obj)`, `calls *(vtbl+16)` | `symbol-map.md` |
