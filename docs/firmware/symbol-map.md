@@ -403,6 +403,7 @@ class hierarchy.
 | `0x7d997751` | `strncmp` | **strncmp** `(a0, a1, n=d0)` — bounded byte compare, returns 0 when `n` bytes equal or both strings end, else signed `*a0−*a1` at first mismatch. Core `0x7d99xxxx` copy, sibling of `strcmp 0x7d997773` | `symbol-map.md` |
 | `0x7d997773` | `strcmp` | unbounded byte compare `a0` vs `a1`; returns signed `*a0-*a1` at first mismatch, 0 if equal (574 xrefs). **Separate copy** in the core `0x7d99xxxx` region — distinct from the `0x7da83xxx` string cluster (two libc instances linked) | `symbol-map.md` |
 | `0x7d99779f` | `strlen` | scan-to-NUL in core region (sibling of `strcmp 0x7d997773`); distinct from `strlen 0x7da8376d` | `symbol-map.md` |
+| `0x7e6e23f9` | `memcpy_thunk` | **memcpy thunk** (118 xrefs) — bare tail-call forwarding `(a0=dst, a1=src, d0=n)` to ROM **`memcpy 0x47001000`** (the mask-ROM libc at `0x47000000`). A per-module libc shim (one of a small thunk bank): neighbors **`0x7e6e241f` = memset thunk** (→ ROM `0x4700110c`), **`0x7e6e242a` = strlen** (inline `movbu`/`setlb`/`lne` scan, returns `a1−a0`; third copy alongside `strlen 0x7d99779f`/`0x7da8376d`). 118 call sites in this module reach memcpy through this local entry rather than the ROM address directly | `symbol-map.md` |
 | `0x47001000` | `memcpy` | mask-ROM `memcpy(dst=a0, src=a1, len=d0)` — 1394 xrefs | `memory-map.md` |
 | `0x4700110c` | `memset` | mask-ROM `memset(dst=a0, val=d0, len=d1)` — 3612 xrefs (was mislabeled byte-copy) | `memory-map.md` |
 
