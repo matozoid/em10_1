@@ -670,6 +670,21 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## "filemem" media/file memory block pool
+Dedicated fixed-block allocator for the **file/media subsystem** ("filemem"), living in the
+`0xa0a8xxxx` RAM region (distinct from the general `pool_alloc_block` pools). IRQ-safe (`irq_save
+0x7d9c580c`/`irq_restore 0x7d9c5851`) under lock token `0x1700171c` (`0x7d9ca752`/`0x7d9ca845`). The
+**small** class = 128-byte blocks, base `0xa0a8fa04`, link/sig table `0xa0a8fa08`, region 16 KiB =
+128 blocks; a **medium** class also exists (`filemem_medium`). Blocks carry a signature/used marker
+(link slot `+2`, sentinel `0xFFFE`) checked on free. Diagnostics dump (`0x7df59450`):
+`==== filemem_small/medium ====`, `sign: ____ size: %d addr: 0x%08x`, `used block: %d`,
+`free block: %d`.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dea2cbf` | `filemem_alloc` | **176 xrefs** — allocate a filemem block: under lock, pop a free block from the pool, mark used, return its address | `symbol-map.md` |
+| `0x7dea2db0` | `filemem_free` | **179 xrefs** — free a filemem block. Bounds-check `base <= ptr < base+16384` (fail → `trace_log` code `0x1000C404`), index `(ptr-base)>>7`, **double-free detect** on the link slot (already-free → `0x1000C405`); on error dumps the full pool diagnostic (used/free block counts, per-block sign/size/addr) | `symbol-map.md` |
+| `0xa0a8fa04` / `0xa0a8fa08` | `g_filemem_small_base` / `g_filemem_small_link` | small-pool block-array base + link/signature table | `symbol-map.md` |
+
 ## Structured trace-record emitter (task-stamped)
 Family that packs a variable-arity argument record and emits it through `trace_log 0x7d997b14`,
 auto-stamping the **current task id** (fetched via `0x7d9a1c14`) into each record. The packed struct:
