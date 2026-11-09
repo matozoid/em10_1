@@ -669,6 +669,28 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## Size-classed fixed-block buffer-pool allocator
+IRQ-safe fixed-block pool allocator with two size classes. `d0` = requested size, `d3` = caller tag
+stored in the pool's link table. Wrapped in a critical section (`irq_save 0x7d9c580c` / `irq_restore
+0x7d9c5851`). Each class is a free-list of fixed blocks: pop head index, relink, compute block
+address = `base + index*blocksize`, bump in-use count and peak high-water. Failure returns a module
+`0x15B` error code (via error logger `0x7da91d8d`), never a pointer.
+- **128-byte class** (`size<=128`): head `0x606b8fd8`, link table `0x606b8fec`, block array
+  `*(0x606ba6a4)` (×128), in-use `0x606b8fda`, max-tag `0x606b8fdc`, peak `0x606b8fde`;
+  empty → err `0x15B00001`.
+- **512-byte class** (`128<size<=512`): head `0x606b8fe0`, link table `0x606b907c`, block array
+  `*(0x606ba6a8)` (×512); empty → err `0x15B00002`.
+- `size>512` → err `0x15B00003` (unsupported).
+
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7da9661c` | `pool_alloc_block` | **185 xrefs** — size-classed IRQ-safe block allocator (128B/512B). Returns a block pointer, or `0x15B0000{1,2,3}` on pool-empty / oversize. Head index is a free `0xffff` sentinel. Core buffer/message-packet allocator | `symbol-map.md` |
+| `0x7da9675e` | `pool_free_block` | matching free: under `irq_save`, push block index back onto the class free-list head, decrement in-use count. 0 direct call xrefs (reached by pointer / paired dealloc) | `symbol-map.md` |
+| `0x606b8fd8`/`0x606b8fe0` | `g_pool{128,512}_head` | free-list head index per class (`0xffff` = empty) | `symbol-map.md` |
+| `0x606b8fec`/`0x606b907c` | `g_pool{128,512}_link` | per-class link/tag tables (slot = `{next_index, tag}`) | `symbol-map.md` |
+| `0x606ba6a4`/`0x606ba6a8` | `g_pool{128,512}_base` | pointers to the 128B / 512B block arrays | `symbol-map.md` |
+| `0x606b8fda`/`0x606b8fde` | `g_pool128_inuse` / `g_pool128_peak` | 128B-class in-use count + peak high-water (`0x606b8fdc` = max tag seen) | `symbol-map.md` |
+
 ## Movie-playback (MOVPLAY / "movp") debug trace
 Category-gated debug-trace family for the **movie-playback** subsystem. Each builds a line
 `%08x [movp]…` — timestamp from `read_hw_tick 0x7d996ba7`, tag `[movp]` — into the shared movp
