@@ -504,7 +504,7 @@ the inline trace string that follows the vtable (see CPlayZoom); vtable-less str
 |---|---|---|---|
 | `0x7e24831c` | `CPlayZoom_instance` | lazy singleton getter for the **CPlayZoom** playback-zoom controller (924 xrefs): cell `0x60454418`, 184-byte object, ctor `0x7e24825d` (base `0x7e2414c5`), vtable `0x7e4693a0`. Class named by inline trace string `"CPlayZoom::setDbZoomInfo_Lite Called."` right after the vtable. Followed by an accessor bank (getters/setters at obj `+12/+16/+20/+32/...`) | `symbol-map.md` |
 | `0x7e23dfec` | `singleton_604543e8` | lazy getter: cell `0x604543e8`, 336-byte **vtable-less** struct, ctor `0x7e23de5d` (defaults `+16=0xff`, rest 0). No class string (no vtable) → unnamed state/config struct | `symbol-map.md` |
-| `0x7e24ff2a` | `global_ptr_60454428_get` | plain getter `return *(0x60454428)`; paired setter at `0x7e24ff33` (`*(0x60454428)=a0`). Global object-pointer slot, set elsewhere | `symbol-map.md` |
+| `0x7e24ff2a` | `global_ptr_60454428_get` | plain getter `return *(0x60454428)` = **`g_gui_app`** (GUI-App singleton, see GUI App / WinMain section); paired setter `0x7e24ff33`, set once by WinMain init | `symbol-map.md` |
 
 ## Misc object accessors
 | address | symbol | role | source |
@@ -529,6 +529,21 @@ cleared via `trace_log_printf 0x7dfc01bf`, then AND-NOT the passed bits out of t
 | `0x6044cf34` | `g_mainsystem_observer_head` | MainSystem state-observer list head/singleton: broadcast loop (`cmp 0, a0` guard, ≤100 entries) notifies subscribers on state change; entries use shared observer-base tag `0x7e35d9c4` | `symbol-map.md` |
 | `0x7dfc1a9e` / `0x7dfc1aac` | `rhp_lock` / `rhp_unlock` | paired critical-section acquire/release wrapping the state-clear ops | `symbol-map.md` |
 | `0x7E35D980` | `mainsystem_string_pool` | `MainSystem`, `rhp_take_over`, `hls %d…` fmts, `Wait Function`, clearState traces | `symbol-map.md` |
+
+## GUI App / WinMain message loop
+Top-level GUI application task. A large WinMain-style function (around `0x7e22b245`) allocates the
+**2876-byte GUI-App object** (`alloc 0x7e22d42b`), stores it in the singleton bank
+(`g_gui_app 0x60454428`, partner slot `0x60454240`), logs `[GUI App]:WinMain messageloop start`
+(`0x7e45e16c`) via `0x7e334cab`, then pumps startup event ids 4352/4098/6400 through the GUI
+event dispatcher. Hot virtual-dispatch shims forward into the app object's (large) vtable.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e23075e` | `guiapp_vcall_440` | **207 xrefs** — virtual-dispatch shim: `calls vtable[440](a1)` on object `a0`, then halfword accessor `obj_geth_f4 0x7e22ff64`, `exth` (sign-extend) result. Hottest entry of the GUI-App dispatch bank | `symbol-map.md` |
+| `0x7e230771` | `guiapp_vcall_584` | sibling shim: reads `g_gui_app` via `global_ptr_60454428_get 0x7e24ff2a`, compares against obj field `+120`, then calls `vtable[584]`/`vtable[580]`. Null-guarded | `symbol-map.md` |
+| `0x7e224c04` | `guiapp_dispatch_msg` | **GUI message/event dispatcher**: `d0`=event id → `0x7e224ee0` (recv/post, -1 timeout), then routes by id (4098, 4352, …) updating GUI-DB flag bytes (e.g. `0x60772fcc`). Pumped by WinMain | `symbol-map.md` |
+| `0x7e22ff64` | `obj_geth_f4` | halfword field accessor `return (s16)*(a0+4)` (via `0x7e22fea6`); one of a thunk bank (`0x7e22ff6e`/`0x7e22ff7a`/`0x7e22ff87`… each `inc4 a0`→call) | `symbol-map.md` |
+| `0x60454428` | `g_gui_app` | GUI-App singleton instance (2876 B); getter `0x7e24ff2a`, setter `0x7e24ff33`; set once by WinMain init. Partner slot `0x60454240` | `symbol-map.md` |
+| `0x7e45e16c` | `guiapp_string_pool` | `[GUI App]:WinMain messageloop start`, `[GUI]:waiting END REDRAW / not change GUIDB` | `symbol-map.md` |
 
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
