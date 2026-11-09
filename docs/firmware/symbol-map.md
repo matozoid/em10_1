@@ -530,6 +530,21 @@ cleared via `trace_log_printf 0x7dfc01bf`, then AND-NOT the passed bits out of t
 | `0x7dfc1a9e` / `0x7dfc1aac` | `rhp_lock` / `rhp_unlock` | paired critical-section acquire/release wrapping the state-clear ops | `symbol-map.md` |
 | `0x7E35D980` | `mainsystem_string_pool` | `MainSystem`, `rhp_take_over`, `hls %d…` fmts, `Wait Function`, clearState traces | `symbol-map.md` |
 
+## GUI App — LightBox DB controller (playback index / contact-sheet view)
+GUI-App component for the **LightBox** (multi-image playback index / contact-sheet scroll view).
+92-byte object, lazy singleton in cell `0x60454414` (same `0x604544xx` bank as `CPlayZoom`
+`0x60454418` and `g_gui_app 0x60454428`). Shares playback-view DB **base ctor `0x7e2414c5`** with
+CPlayZoom. Named by trace strings `[GUI App]++setDbLightBoxInfo_ScrollSelect/ScrollBoth/Move`
+(pool `0x7e4677f4`).
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e2463e9` | `lightbox_db_instance` | **203 xrefs** — lazy singleton getter: cell `0x60454414`; if null → `operator new 0x7e206a0f`(92) + ctor `0x7e246395` + store. Returns the LightBox DB object | `symbol-map.md` |
+| `0x7e246395` | `lightbox_db_ctor` | ctor: base `0x7e2414c5` (shared with CPlayZoom), installs vtable/type word `0x7e467d14` at `+0`, seeds `+28=1`/`+36=1`, zeros the rest, memset-clears a 20-byte region | `symbol-map.md` |
+| `0x7e246429` | `lightbox_callback` | `callbackFunc`: logs `[GUI App   ]:callbackFunc commandID:0x%04x, statusID:0x%04x, …` (`0x7e4678d4`), dispatches on command/status id | `symbol-map.md` |
+| `0x60454414` | `g_lightbox_db` | LightBox DB singleton cell (92-byte object) | `symbol-map.md` |
+| `0x7e246417` / `0x7e24641d` / `0x7e246423` | `lightbox_set_f44` / `lightbox_get_f56` / `lightbox_set_f56` | tiny field accessors: `*(a0+44)=d0`, `return *(a0+56)`, `*(a0+56)=d0` | `symbol-map.md` |
+| `0x7e4677f4` | `lightbox_string_pool` | `setDbLightBoxInfo_ScrollSelect`/`_ScrollBoth`/`_Move`, `callbackFunc commandID…` | `symbol-map.md` |
+
 ## GUI App / WinMain message loop
 Top-level GUI application task. A large WinMain-style function (around `0x7e22b245`) allocates the
 **2876-byte GUI-App object** (`alloc 0x7e22d42b`), stores it in the singleton bank
