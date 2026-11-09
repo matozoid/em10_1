@@ -68,3 +68,9 @@ get_dcffilenum, req_attachexifgps, req_storegpsinfo, exec_shutter, exec_shutterm
 - => **E-M10 Mark I does NOT support Wi-Fi firmware update.** iOS-over-Wi-Fi flashing is NOT viable for this camera.
   Firmware update must go over USB (PTP vendor ops 0x9119/0x911c/0x9121-0x9125, see firmware-update.md).
   Wi-Fi CGI remains useful for browse/transfer/remote-shutter/liveview in later milestones (and works on iOS).
+
+## See also
+Cross-reference against the external `n0p/om-tether` project (OM-1 Mark II, PTP/IP tethering):
+[`om-tether-crossref.md`](om-tether-crossref.md). It confirms the generation split — E-M10 is OI.Share
+HTTP-CGI v2.20 only; the repo's 15740 PTP/IP + `0x94xx` path is a later-body generation and does not
+apply here.

@@ -54,3 +54,8 @@ dominant `0x94xx` set is entirely unsupported.
   the reachable mode). Build the control layer on those.
 - `olympus-opcode-table.csv` remains useful only as a reference for *newer* OM bodies, not the
   Mark I. Its 8-opcode Mark I overlap is a dead end for a USB control path on this body.
+
+Human-readable names for that `0x94xx`/`0xD0xx`/`0xC0xx` SDK generation (from libgphoto2 +
+OM Capture, via the `n0p/om-tether` project) are tabulated in
+[`om-tether-crossref.md`](om-tether-crossref.md), which independently confirms this generation split
+against both the E-M10 firmware strings and an OM-1 Mark II.
