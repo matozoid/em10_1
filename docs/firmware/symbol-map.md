@@ -388,6 +388,23 @@ confirms the firmware does real float math via the coprocessor, not pure integer
 | `0x60450fa8` | — | `cmp_registry` *(RAM global)* | pointer to the **PlayCommonComponent ("Cmp") framework** registry/manager — root of the keyed tree of 7636-byte (`0x1DD4`) component instances. Read inline (never via a getter) across the `0x7e12xxxx` subsystem (`CmpPCom_PlayCommonComponent.cpp`); components are added/looked-up by id through `rbtree_insert_7636 0x7e196b09`. Lifecycle trace labels in rodata `0x7E3FD3E4`: `BootMount` / `CmpMediaMount` / `CmpMediaUnmount` / `CmpTS` (mount/unmount component events, `play_service`). Component on-stack frames appear as ~7796-byte locals (e.g. `(7796,sp)` at `0x7e132dea`) | `symbol-map.md` |
 | `0x7da8415e` | `__extendsfdf2` | **float32 → double** widening conversion (259 xrefs). Classifies the single via `fp_classify 0x7da84261` (class bits in `d3`): NaN (bit4) → double NaN hi `0x7FF80000`; zero (bit2) → ±0.0; inf (bit1) → double inf hi `0x7FF00000`; else normal — rebias the exponent (single bias field `0x3F800000` → double `0x3FF00000`, `asr 3`) and shift the 23-bit mantissa into the double's 52-bit field, then OR the preserved sign bit (`0x80000000`) into the hi word. Returns the double in `d0:d1` | `symbol-map.md` |
 
+## MovPlay (movie-playback) debug-print bank
+A bank of 5 gated `printf`-style trace emitters for the **movie-playback** subsystem, all tagged
+`[movp]` and gated by a single bitmask register. The flag names come from the inline debug-mode help
+text (`"movp debug print tools … movplay debug MODE [OPTIONS]"`, rodata `0x7DEF3EEC+`). Caller passes
+`(d0 = flag-bit mask, d1 = value, a0 = label string)`; the `%08x` prefix is a context id from
+`0x7d996ba7`. Line is built with `sprintf 0x7da82515` into RAM buffer `movp_trace_buf 0xA0A69DE0`,
+then emitted via `dbg_trace_line 0x7da886b4`. Mask is set by the debug-mode command parser
+`0x7dd6d687` (and `0x7dd6e0ae`).
+
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7dd6ee92` | `movp_trace_val` | **primary MovPlay trace** (208 xrefs): if `(*movp_debug_mask & d0)` set, print fmt `0x7DEF3EB5` `"%08x [movp]%s %d(0x%x)"` (ctx, label `a0`, value `d1`, value hex). Sibling `0x7dd6eed1` = same fmt, 2nd route | `symbol-map.md` |
+| `0x7dd6ee20` / `0x7dd6ee5a` | `movp_trace_label` | label-only variant, fmt `0x7DEF3EA7` `"%08x [movp]%s"` (same gate/route pair) | `symbol-map.md` |
+| `0x7dd6ef13` | `movp_trace_err` | error variant, fmt `0x7DEF3ECC` `"%08x [movp]ERROR!!! %s %d(0x%x)"` | `symbol-map.md` |
+| `0xa0a69ddc` | `movp_debug_mask` | DEBUG_MOV_PLAY_* enable bitmask (debug-register region `0xa0a6xxxx`). Bits (from help text): 0 `FUNC`, 1 `CALLBACK`, 2 `MAIN`, 3 `IF`, 4 `IMDFUNC`, 5 `TIME`, 6 `MOV_HEADER`, 7 `RING_BUFFER`, 8 `AVCHD`, 9 `AVCHD_API_PARAM`, 11 `TASK`, 12 `AVCHD_BRIDGE`, 13 `AVCHD_API`, 14 `OS`, 15 `AVCHDI`, 16 `AVMID`. Set via parser `0x7dd6d687` | `symbol-map.md` |
+| `0xA0A69DE0` | `movp_trace_buf` | scratch line buffer for the MovPlay trace bank (sprintf target) | `symbol-map.md` |
+
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
 `0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
