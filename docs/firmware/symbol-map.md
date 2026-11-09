@@ -605,6 +605,21 @@ of preconditions and logs each by name with an `OK`/`NG` verdict. The hot emitte
 | `0x7e224095` | `mode_judge_trace` | **198 xrefs** — emits a mode-judge trace line from label string `a0`: builds a 56-byte ctx (`0x7e22352e`), formats (`0x7e223896`), emits via handler `0x7e02fda8` (→ log core `0x7dfc0587`). Sibling variants `0x7e2240b1` (→ `0x7e033d22`), `0x7e2240cd` differ only by emit handler | `symbol-map.md` |
 | `0x7e42de80` | `mode_judge_string_pool` | `MODE_*_JUDGE_NG`/`_OK` precondition labels (movie, multi-exposure, interval shooting, my-mode, photo session, HDR, media, live guide, scene) | `symbol-map.md` |
 
+## CapPls — playback-info app (app_playinfo_*)
+Playback application class **`CapPls`** (module `0x7e086xxx`–`0x7e08bxxx`). Exposes an
+`app_playinfo_*` API (names end in `#`, debug/trace tags). Covers: playback **zoom**
+(`CapPls::app_playinfo_init_zoom_force`), **panorama play scroll**
+(`app_playinfo_panorama_play_scroll_check_func` horizontal/vertical), **image overlay** picture
+selection (`app_playinfo_image_overlay_get/set_pic_select_*`), and **Eye-Fi transfer** picture
+selection (`app_playinfo_eyefi_transfer_get_pic_select_state` / `get_max_picno_selected`).
+String pool at `0x7e3c7439`. DB-open failures log `[CHLS]DB_OPEN_ERR`.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e086bbe` | `playinfo_get_pos_sum` | **195 xrefs** — `return *(g_playinfo_base 0x60761570) + *(g_playinfo_off 0x6075e77c)`: combines a base and offset playinfo state word (playback scroll/zoom position). Thin, no args | `symbol-map.md` |
+| `0x7e086bce` / `0x7e086bd7` / `0x7e086be0` | `playinfo_get_u16_fd86` / `playinfo_get_154c` / `playinfo_get_u16_156a` | adjacent playinfo state getters: `(u16)*(0x6044fd86)`, `*(0x6076154c)`, `(u16)*(0x6076156a)` | `symbol-map.md` |
+| `0x60761570` | `g_playinfo_base` | CapPls playinfo state word (written across `0x7e0855xx`); paired with `g_playinfo_off 0x6075e77c` (written `0x7e08af25`) | `symbol-map.md` |
+| `0x7e3c7439` | `cappls_string_pool` | `app_playinfo_*` API names: eyefi_transfer / image_overlay pic-select, init_zoom_force, panorama_play_scroll_check_func | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
