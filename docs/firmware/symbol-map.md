@@ -561,6 +561,23 @@ event dispatcher. Hot virtual-dispatch shims forward into the app object's (larg
 | `0x60454428` | `g_gui_app` | GUI-App singleton instance (2876 B); getter `0x7e24ff2a`, setter `0x7e24ff33`; set once by WinMain init. Partner slot `0x60454240` | `symbol-map.md` |
 | `0x7e45e16c` | `guiapp_string_pool` | `[GUI App]:WinMain messageloop start`, `[GUI]:waiting END REDRAW / not change GUIDB` | `symbol-map.md` |
 
+## Sensor pre-processing / black-correction (BC) calibration
+Imaging-pipeline subsystem for **optical-black / black-correction (BC)** and smear calibration.
+String pool `0x7e78c580`: `SetPrePro` (set pre-processing), per-Bayer-channel sums
+`CRSumear`/`CGrSumear`/`CGbSumear`/`CBSumear` (**smear** = sensor dark/OB artifact, R/Gr/Gb/B),
+`%sCalib.prm` (calibration param file), `PRM_BC_DISABLE`, `BC_UNIT:OFF`, `bc exec 1/5/6`.
+A bank of **14 thin command wrappers** each sets a command id and calls the packer `0x7e7241c1`,
+which byte-serializes (cmd, args) into a stack message via `0x7e759138` then runs it through
+executor `0x7e723ab9` (72-byte frame).
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e724377` | `bc_cmd_09` | **202 xrefs** — BC/pre-processing command #9: `exthu` arg → stack, cmd id 9, call packer `0x7e7241c1`. Hottest of the command API | `symbol-map.md` |
+| `0x7e72438e` | `bc_cmd_13` | sibling wrapper, command id 13 | `symbol-map.md` |
+| `0x7e7243a5` | `bc_cmd_12` | sibling wrapper, command id 12 | `symbol-map.md` |
+| `0x7e7241c1` | `bc_cmd_pack` | packs (cmd `d0`, args) into a stack message (byte-serializer `0x7e759138`), then executes via `0x7e723ab9`. Fed by all 14 `bc_cmd_*` wrappers | `symbol-map.md` |
+| `0x7e759138` | `bc_msg_putbyte` | byte serializer `*(a0)=d0` into the command-message buffer | `symbol-map.md` |
+| `0x7e78c580` | `bc_string_pool` | `SetPrePro`, `C{R,Gr,Gb,B}Sumear`, `%sCalib.prm`, `PRM_BC_DISABLE`, `BC_UNIT:OFF`, `bc exec N` | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
