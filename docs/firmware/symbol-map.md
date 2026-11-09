@@ -291,6 +291,16 @@ class hierarchy.
 | `0x7da84cb9` | `shell_autoexec_gate` | runs autoexec only if mode `d0==1`; else logs (`0x7da84ea6`) | `debug-shell.md` |
 | `0x8ff00190` | `dbg_mode_latch` | SFR written `0x12345678` by shell-init = "debug mode on" (hardware latch, not PTP/Wi-Fi settable) | `debug-shell.md` |
 
+## Face-detection debug console — OMRON OKAO Vision (`face_dbg_*`, not reachable non-invasively)
+Maintenance/console command set for the body's face-detection engine. Identified by its rodata string pool at `0x7df443xx`–`0x7df451xx`: command names `face_dbg_start/stop/get/keep/reset/abort/prog/get_eye/dump/setting/log/pt/load/set_pos/set_info/get_pos/mdm/tune_lost/tune_get`, field labels (`confidence`/`angle`/`pose`/`eye_x`/`eye_y`/`detect_w`/`scale`/`aspect`), and the OMRON **OKAO Vision** SDK markers `face_dbg_okao_pt_version` / `face_dbg_okao_ss_version` (`"Version :"`/`"Major :"`/`"Minor :"`). Mode tokens: `type => FACE_STILL`/`FACE_NEWEST`, `TRACKING/TOUCH POS`, `EYE-AF ON`. Shares the rodata pool with sibling recorder modules (`rec_ps.c`, `rec_raw_*`, `rec_sat_*`, `REC WAVE *`).
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7de4afcc` | `face_dbg_dispatch` | name-keyed command dispatcher for the face console. Saves caller `d0`→`d3`, `a0`→`a3` (a3 = command descriptor, name at `*(a3+4)`); logs the `"FACE"` banner via `face_dbg_trace_label 0x7de4afb8`; scans the 24-entry RAM registry `0x6044CA38` (`{handler@+0, char* keyname@+4}`, stride 8), `strcmp 0x7da836f1`(`*(a3+4)`, `*(entry+4)`); on match `calls *(entry)` with `a0=a3, d0=d3`. Same shape as `shell_dispatch 0x7da84eb8` | `symbol-map.md` |
+| `0x7de4afc2` | `face_dbg_put_hex` | **223 xrefs** — module-local hex-trace thunk used by nearly every `face_dbg_*` handler; 2 insns: tail-call `dbg_print_hex_routed 0x7d9999f9` then `ret`. Nearby label strings `"LOG RESULT"`/`"LOG HISTORY"`/`"0x"` | `symbol-map.md` |
+| `0x7de4afb8` | `face_dbg_trace_label` | thunk → `dbg_trace_line 0x7da886b4` (gated console emit); used to print the `"FACE"` section banner and per-command `"..._dbg_* in"`/`"out"` labels | `symbol-map.md` |
+| `0x6044CA38` | `face_dbg_cmd_table` (RAM) | 24-entry command registry scanned by `face_dbg_dispatch`; 8-byte entries `{handler, char* keyname}`, populated at runtime | `symbol-map.md` |
+| `0x6044CAF8` | `face_dbg_log_seq` (RAM) | u16 log-sequence counter: `face_dbg_dispatch`-cluster increments it (`inc`; `div 32` → modulo ring index at `0x7de4b040`) and stores back | `symbol-map.md` |
+
 ## Diagnostics — in-memory trace capture buffer
 `0x7ddca749` (1047 xrefs) is a RAM trace-capture sink. When enabled it appends log strings to a
 512 KB buffer, so the buffer is a **standing dump target** (its text accumulates in RAM).
