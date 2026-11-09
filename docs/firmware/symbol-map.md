@@ -620,6 +620,19 @@ String pool at `0x7e3c7439`. DB-open failures log `[CHLS]DB_OPEN_ERR`.
 | `0x60761570` | `g_playinfo_base` | CapPls playinfo state word (written across `0x7e0855xx`); paired with `g_playinfo_off 0x6075e77c` (written `0x7e08af25`) | `symbol-map.md` |
 | `0x7e3c7439` | `cappls_string_pool` | `app_playinfo_*` API names: eyefi_transfer / image_overlay pic-select, init_zoom_force, panorama_play_scroll_check_func | `symbol-map.md` |
 
+## CGuiDrawCtrl — GUI draw controller (live-view "through" display)
+GUI draw-controller class (module `0x7e240xxx`). Drives the live-view **through** image
+(`reqDrawThrough` → graphics-engine `GESetEvent()`) and black-frame fill (`DrawImageBlack`).
+Trace strings `[GUI App]: CGuiDrawCtrl::DrawImageBlack` (`0x7e46603d`),
+`CGuiDrawCtrl::reqDrawThrough draw() ret = %d` (`0x7e466065`), `…reqDrawThrough GESetEvent()`
+(`0x7e46609d`). Small 12-byte state singleton in the `0x604543xx` GUI bank.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e24048a` | `guidrawctrl_instance` | **193 xrefs** — lazy singleton getter: cell `0x604543f8`; if null → `operator new 0x7e206a0f`(12) + ctor `0x7e24047f` + store. Returns the CGuiDrawCtrl state object | `symbol-map.md` |
+| `0x7e24047f` | `guidrawctrl_ctor` | ctor for the 12-byte **vtable-less** state struct: `+0`(u16)=1, `+4`=0 | `symbol-map.md` |
+| `0x604543f8` | `g_guidrawctrl` | CGuiDrawCtrl state singleton cell | `symbol-map.md` |
+| `0x7e46603d` | `guidrawctrl_string_pool` | `CGuiDrawCtrl::DrawImageBlack`, `::reqDrawThrough draw() ret=%d`, `::reqDrawThrough GESetEvent()` (methods live in module `0x7e240xxx`, e.g. log sites `0x7e2405ae`/`0x7e2406ca`) | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
