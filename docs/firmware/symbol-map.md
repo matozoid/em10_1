@@ -510,6 +510,25 @@ the inline trace string that follows the vtable (see CPlayZoom); vtable-less str
 | address | symbol | role | source |
 |---|---|---|---|
 | `0x7e1e8a41` | `obj_get_f264` | field getter `return *(a0+264)` (1015 xrefs; cf. `obj_get_f104`) | `symbol-map.md` |
+| `0x7e0e67ad` | `obj_get_f372` | field-pointer getter `return a0+372` (**186 xrefs**) — returns pointer to an embedded field/sub-object at `+372`. Sibling thunk bank: `0x7e0e67b4` `return a0+468` (also **186 xrefs**), setter `0x7e0e67bb` `*(a0+516)=a1`, getter `0x7e0e67c2` `return *(a0+528)`. Owning class **unresolved** — module `0x7e0e6xxx`; the nearby `0x7e35d9c4` tag is the **shared observer-base** (see `event_subject_ctor 0x7e1e7de3`), not proof of owner. Hot entry pts into a large (`≥528 B`) controller object | `symbol-map.md` |
+
+## MainSystem / RHP — shooting-session & interval (timelapse) state controller
+String pool at `0x7E35D980`: `MainSystem`, `rhp_take_over : bootState %d` (`0x7e35d99d`), the
+`hls %d %d …` format family + `Wait Function` (`0x7e35db90`), and the two state-clear traces
+`clearIntervalShootingState state[0x%08X]` (`0x7e35dbb8`) / `clearPhotoSessionState state[0x%08X]`
+(`0x7e35dbe1`). "RHP" takes over boot state; drives the photo-session and interval-shooting
+(timelapse) state machines, each backed by a global bitmask word. The clear ops run under the
+scheduler critical-section pair `lock 0x7dfc1a9e` / `unlock 0x7dfc1aac`, trace the state being
+cleared via `trace_log_printf 0x7dfc01bf`, then AND-NOT the passed bits out of the global word.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dfc12e4` | `clear_interval_shooting_state` | `lock 0x7dfc1a9e`; trace fmt `0x7e35dbb8` arg=bits(d2); `g_interval_state 0x6044cf70 &= ~bits`; `unlock 0x7dfc1aac`. Clears interval-shooting (timelapse) state bits | `symbol-map.md` |
+| `0x7dfc1312` | `clear_photo_session_state` | same shape (sibling): trace fmt `0x7e35dbe1`; `g_photo_session_state 0x6044cf98 &= ~bits`. Clears photo-session state bits. Followed by a third clear variant at `0x7dfc1340` touching state word `0x6044cfac` | `symbol-map.md` |
+| `0x6044cf70` | `g_interval_state` | interval-shooting (timelapse) state bitmask word | `symbol-map.md` |
+| `0x6044cf98` | `g_photo_session_state` | photo-session state bitmask word | `symbol-map.md` |
+| `0x6044cf34` | `g_mainsystem_observer_head` | MainSystem state-observer list head/singleton: broadcast loop (`cmp 0, a0` guard, ≤100 entries) notifies subscribers on state change; entries use shared observer-base tag `0x7e35d9c4` | `symbol-map.md` |
+| `0x7dfc1a9e` / `0x7dfc1aac` | `rhp_lock` / `rhp_unlock` | paired critical-section acquire/release wrapping the state-clear ops | `symbol-map.md` |
+| `0x7E35D980` | `mainsystem_string_pool` | `MainSystem`, `rhp_take_over`, `hls %d…` fmts, `Wait Function`, clearState traces | `symbol-map.md` |
 
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
