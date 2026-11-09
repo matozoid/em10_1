@@ -670,6 +670,12 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## GUI-App composite wide-text update
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e26238d` | `guiapp_compose_wtext_update` | **183 xrefs** — GUI-App record wide-text (UTF-16) compose + dirty-check + redraw. Clears a 512-byte (256-wchar) stack work buffer (`memset 0x4700110c`), builds the display text from the object's wide-string fields (`+132` = current wstr ptr, `+130` = u16 count/len, `+140` = u8 flag) via the wstr builder `0x7e271706` (×5), compares against the stored value (`wcscmp 0x7e22b0fa` / `wcslen 0x7e22b159`), and on change fires the change-notify/redraw dispatch `0x7e232831` (→`0x7e22c0e7`, ×4) and reads `g_gui_app` (`0x7e24ff2a`). Always returns 1. In the GUI-App record-class wide-string family (cf. `set_wstr_member_156 0x7e266e2c`); exact owner class not string-anchored | `symbol-map.md` |
+| `0x7e271706` | `wstr_build_field` | wide-string field builder/appender used by `guiapp_compose_wtext_update` (reads a1 input halfwords, writes into the a2 work buffer). Reused composition helper in the GUI-App text path | `symbol-map.md` |
+
 ## Growable array (vector<u32>) primitive
 | address | symbol | role | source |
 |---|---|---|---|
