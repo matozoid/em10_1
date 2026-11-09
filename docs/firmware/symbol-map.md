@@ -481,6 +481,19 @@ is the low-level renderer behind the camera UI/menus (pairs with the BiDi text c
 | `0x60482468` | `vgc_error_cb` | VG-client error/overflow callback object (vtable-dispatched: `calls *(0x60482468)`) | `symbol-map.md` |
 | `0x7E8A7C00` | `vgc_string_pool` | VG-client message/function-name string pool (`[VG CLIENT]`, `vpath/vfill`, `vgcHwifConv_*`, HEAP/alignment errors) | `symbol-map.md` |
 
+## Exposure / AE (EXP) subsystem — debug flags & trace
+The **auto-exposure / program-line (EXP)** subsystem's debug-trace control. A single flag word
+`g_exp_debug_flags 0x607529a0` gates `[exp]`/`[EXP]` trace prints across the exposure/AE/AF pipeline;
+code reads it through a getter and `btst`s individual bits. String pool `0x7DF65580+` carries the
+APEX values and the `exp` debug-shell command tree.
+
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7deca77e` | `exp_get_debug_flags` | getter `return *(0x607529a0)` (187 xrefs): callers `btst <bit>,d0; beq` to gate exposure trace prints (e.g. bit `0x800` → msg `0x7DF5E5C2`) | `symbol-map.md` |
+| `0x607529a0` | `g_exp_debug_flags` | exposure/AE/AF **debug-trace + behavior flag word**; bit `0x08000000` = `ip_af_flag` print-request. Widely consulted (via the getter) | `symbol-map.md` |
+| `0x7deca787` | `exp_af_flag_poll` | if `g_exp_debug_flags & 0x08000000`: log `"[exp]ip_af_flag"` (`0x7DF65621`) then clear the bit (one-shot). Backs the `exp af <0\|1>` debug command | `symbol-map.md` |
+| `0x7DF65580` | `exp_debug_strings` | EXP trace/command string pool: `[EXP] BV_18x18`, `bv_std`/`drange_offset`/`sdr_record`/`expand_bv`, APEX `bv/av/tv/sv`/`cv`, command tree `exp <P_Line\|CAM\|AE_TAG\|AF_AE>` with `table_id`/`capture_mode`/`tag_*`/`left/top/width/height`, `120fps AF ON/OFF`, `g_debug_af_flag` | `symbol-map.md` |
+
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
 `0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
