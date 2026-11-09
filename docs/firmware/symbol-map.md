@@ -669,6 +669,11 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## Growable array (vector<u32>) primitive
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dfc0ad2` | `vec_push_u32` | **184 xrefs** — `vector<u32>::push_back(vec=a0, value=a1)`. Vector struct: **+4 = count**, **+8 = capacity**, **+12 = data pointer** (array of 4-byte elements). Fast path (`count<cap`): `data[count++] = value`. Full: grow capacity to `count*2+1`, `operator new 0x7e206a17` new buffer, memset (`0x4700110c`), copy `count` old elements, swap in the new buffer, then append. Core growable-array append used across the codebase | `symbol-map.md` |
+
 ## Size-classed fixed-block buffer-pool allocator
 IRQ-safe fixed-block pool allocator with two size classes. `d0` = requested size, `d3` = caller tag
 stored in the pool's link table. Wrapped in a critical section (`irq_save 0x7d9c580c` / `irq_restore
