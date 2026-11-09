@@ -592,6 +592,19 @@ failure path logs `[GuiTouch] guiUtility::ShowPanelEx changePanel Fail!!!` (`0x7
 | `0x6046031c` / `0x60460308` / `0x60460314` | `panel_state_*` | panel-manager state/flags (sub-param, pending, enable) | `symbol-map.md` |
 | `0x7e5dee06` | `gui_panel_string_pool` | `PostEventToCA(AddSub) …touch_x/touch_y`, `ShowPanelEx` transition + Fail logs, `SetPale…` | `symbol-map.md` |
 
+## Mode-transition judge (precondition check) trace
+Shooting-mode transition **judge** layer: before entering/leaving a mode the firmware evaluates a set
+of preconditions and logs each by name with an `OK`/`NG` verdict. The hot emitter takes a condition
+**label string** and formats+emits a trace line. Label pool `0x7e42de80` covers the mode judges:
+`MODE_MOVIE_JUDGE_NG`, `MODE_MULTI_EXPOSURE_FRAME_JUDGE_NG`/`_BUFFER_SCALE_OFF_JUDGE_OK`,
+`MODE_INTERVAL_SHOOTING_JUDGE_NG`, `MODE_MY_MODE_JUDGE_NG`, `MODE_PHOTO_SESSION_JUDGE_NG`,
+`MODE_HDR1_HDR2_JUDGE_NG`, `MEDIA_EXIST_JUDGE_OK`/`MEDIA_FORMAT_…`, `isLiveGuide`, `MODE_SCEN…`.
+(Cross-refs the RHP interval-shooting / photo-session state machine — see MainSystem/RHP section.)
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e224095` | `mode_judge_trace` | **198 xrefs** — emits a mode-judge trace line from label string `a0`: builds a 56-byte ctx (`0x7e22352e`), formats (`0x7e223896`), emits via handler `0x7e02fda8` (→ log core `0x7dfc0587`). Sibling variants `0x7e2240b1` (→ `0x7e033d22`), `0x7e2240cd` differ only by emit handler | `symbol-map.md` |
+| `0x7e42de80` | `mode_judge_string_pool` | `MODE_*_JUDGE_NG`/`_OK` precondition labels (movie, multi-exposure, interval shooting, my-mode, photo session, HDR, media, live guide, scene) | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
