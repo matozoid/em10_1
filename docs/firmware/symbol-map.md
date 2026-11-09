@@ -412,6 +412,23 @@ then emitted via `dbg_trace_line 0x7da886b4`. Mask is set by the debug-mode comm
 | `0xa0a69ddc` | `movp_debug_mask` | DEBUG_MOV_PLAY_* enable bitmask (debug-register region `0xa0a6xxxx`). Bits (from help text): 0 `FUNC`, 1 `CALLBACK`, 2 `MAIN`, 3 `IF`, 4 `IMDFUNC`, 5 `TIME`, 6 `MOV_HEADER`, 7 `RING_BUFFER`, 8 `AVCHD`, 9 `AVCHD_API_PARAM`, 11 `TASK`, 12 `AVCHD_BRIDGE`, 13 `AVCHD_API`, 14 `OS`, 15 `AVCHDI`, 16 `AVMID`. Set via parser `0x7dd6d687` | `symbol-map.md` |
 | `0xA0A69DE0` | `movp_trace_buf` | scratch line buffer for the MovPlay trace bank (sprintf target) | `symbol-map.md` |
 
+## Audio codec register driver (`se2` sound chip — EQ / power / wave play-rec)
+The **movie-sound / audio-codec** low-level driver. Register-name pool `0x7DEE0500+` names a `se2`
+sound chip: a 5-band EQ register bank `se2_5beq_r{0..4}{g,p,a,b,c}` (22 names), power regs
+`ldo_vsel=` / `bg_vsel=`, `[reg_reset_softstart]`, `[mute_all]`, and a full audio-command verb list
+(`Power On/Off`, `Play/Rec Init/Start/Stop/End/Complete`, `Set Volume`, `Set Output/Input Device`,
+`Noise reduction for lens`, `Get Wave Header`, `Check Wave Header`, `Level Monitor`, `Semaphore
+Wait/Signal`, `audio_status`…). Register accesses are mirrored into a (addr,data) **journal** so the
+debug shell can dump the chip's programmed state via header `"[reg]adr | dat"` (`0x7DEE0656`).
+
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7dd4e968` | `sndreg_set` | audio-codec register setter (206 xrefs): `(a0=obj, d0=index)`. `d2=index&0xffff`; if `index>175` → emit trace error `0x0610C002` via `trace_log 0x7d997b14`, return 1 (out-of-range — 176 registers). Else if dbg-flag `0x200000` set (`0x7dd42b1e`) → `log_val_fmt 0x7dd438e1` msg `0x7DEE0656` `"[reg]adr | dat"`, value `(index<<16)|*(u16*)obj`. Packs `d2=((index&0x7fff)<<16)|(*(u16*)obj&0xffff)` and calls `reg_journal_append 0x7dd423b2`; returns 0 on success | `symbol-map.md` |
+| `0x7dd423b2` | `reg_journal_append` | append `(addr,data)` to the register-access journal: read counter `*(u16*)0x607096e8`; if `>=256` return 1 (full); else write 6-byte record `{u16 addr @(a1), 4 data bytes from d1>>24/16/8/0}` at `0x607096ee + count*6`, `inc count` | `symbol-map.md` |
+| `0x607096e8` | `reg_journal_count` | u16 journal entry counter (≤256) | `symbol-map.md` |
+| `0x607096ee` | `reg_journal_buf` | journal record array, 256 × 6-byte `{u16 addr, u32 data}` (adjacent to counter) | `symbol-map.md` |
+| `0x7DEE0500` | `sndreg_name_pool` | `se2` register-name + audio-verb string pool (EQ `se2_5beq_*`, `ldo_vsel`/`bg_vsel`, `[mute_all]`, `[reg_reset_softstart]`, play/rec/device verbs) | `symbol-map.md` |
+
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
 `0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
