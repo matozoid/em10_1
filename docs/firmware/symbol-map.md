@@ -669,6 +669,21 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## Movie-playback (MOVPLAY / "movp") debug trace
+Category-gated debug-trace family for the **movie-playback** subsystem. Each builds a line
+`%08x [movp]…` — timestamp from `read_hw_tick 0x7d996ba7`, tag `[movp]` — into the shared movp
+format scratch buffer `0xa0a69de0` via `vsprintf 0x7da82515`, gated by the movp debug-enable mask
+`0xa0a69ddc` (`if (mask & category(d0)) emit`), then routes the line out. Format templates and the
+movp message pool live at `0x7def3e40`+ (`MOVPLAY_COM command/status`, `MOVPLAY_COM_ONESHOT status`,
+`< not exist SOUND track >`, `%08x [movp]ERROR!!! %s %d(0x%x)`, `movp debug print too`).
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dd6ee1e` | `movp_trace` | **185 xrefs** — movp debug printer, fmt `%08x [movp]%s` (`0x7def3ea7`), **console** route via `dbg_trace_line 0x7da886b4`. Main movp log entry (args: category `d0`, msg ptr `a0`) | `symbol-map.md` |
+| `0x7dd6ee58` | `movp_trace_raw` | same as `movp_trace` but **raw** route via `dbg_trace_emit 0x7da886fb` | `symbol-map.md` |
+| `0x7dd6ee92` | `movp_trace_iv` | movp printer with int+hex args, fmt `%08x [movp]%s %d(0x%x)` (`0x7def3eb5`) | `symbol-map.md` |
+| `0xa0a69ddc` / `0xa0a69de0` | `g_movp_dbg_mask` / `g_movp_fmt_buf` | movp debug-enable category mask + format scratch buffer | `symbol-map.md` |
+| `0x7def3e40`+ | `movp_string_pool` | MOVPLAY command/status/error trace strings | `symbol-map.md` |
+
 ## No-op stub / "not implemented" reporter
 | address | symbol | role | source |
 |---|---|---|---|
