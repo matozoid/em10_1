@@ -69,8 +69,13 @@ get_dcffilenum, req_attachexifgps, req_storegpsinfo, exec_shutter, exec_shutterm
   Firmware update must go over USB (PTP vendor ops 0x9119/0x911c/0x9121-0x9125, see firmware-update.md).
   Wi-Fi CGI remains useful for browse/transfer/remote-shutter/liveview in later milestones (and works on iOS).
 
-## See also
-Cross-reference against the external `n0p/om-tether` project (OM-1 Mark II, PTP/IP tethering):
-[`om-tether-crossref.md`](om-tether-crossref.md). It confirms the generation split — E-M10 is OI.Share
-HTTP-CGI v2.20 only; the repo's 15740 PTP/IP + `0x94xx` path is a later-body generation and does not
-apply here.
+## External corroboration (`n0p/om-tether`, checked 2026-11-09)
+The clean-room Linux project `github.com/n0p/om-tether` tethers an **OM-1 Mark II** and independently
+describes this same OI.Share CGI family — its descriptor is **v5.20** vs the E-M10's **v2.20** (same
+commands, ~2.5× more on the newer body). It confirms the two-generation picture: its primary path is
+**PTP/IP on TCP 15740 in Wi-Fi station mode** with `0x94xx` ops, which the E-M10 Mark I does **not**
+expose (verified here — `OLYSetConnectPCInfo`/`StationMode`/`ConnectPcInfo`/`not_CONN_MODE_TRANSFER`/
+`get_screennail` are all absent from `blk00`; the shared CGI names `get_caminfo`/`get_imglist`/
+`exec_takemisc`/`startliveview`/`set_camprop`… are present). E-M10 Wi-Fi is the camera's own AP +
+HTTP CGI only — no 15740 responder. The `0x94xx` generation split is detailed in
+[`sdk-opcode-compat.md`](sdk-opcode-compat.md).

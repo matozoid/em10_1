@@ -55,7 +55,33 @@ dominant `0x94xx` set is entirely unsupported.
 - `olympus-opcode-table.csv` remains useful only as a reference for *newer* OM bodies, not the
   Mark I. Its 8-opcode Mark I overlap is a dead end for a USB control path on this body.
 
-Human-readable names for that `0x94xx`/`0xD0xx`/`0xC0xx` SDK generation (from libgphoto2 +
-OM Capture, via the `n0p/om-tether` project) are tabulated in
-[`om-tether-crossref.md`](om-tether-crossref.md), which independently confirms this generation split
-against both the E-M10 firmware strings and an OM-1 Mark II.
+## Names for the `0x94xx` generation (reference, NOT E-M10 behaviour)
+
+Our `olympus-opcode-table.csv` lists the SDK catalog as numbers only. The public names below come
+from libgphoto2's `camlibs/ptp2/ptp.h` + OM Capture traces (via the clean-room `n0p/om-tether`
+project, which drives an **OM-1 Mark II** over PTP/IP and independently confirms this generation
+split). These name the SDK / OM-1-era generation — a decode aid for the CSV and for a future
+newer-body profile, **not** operations the E-M10 Mark I implements.
+
+Operations: `0x9481` OMD_Capture (bulb: param 3 press / 6 release) · `0x9482` GetDateTime ·
+`0x9483` MagnifyLiveViewPoint · `0x9484` GetLiveViewImage (JPEG) · `0x9485` OMD_GetImage (SDRAM) ·
+`0x9486` ChangedProperties (heavy poll) · `0x9487` MFDrive · `0x9488` MagnifyLiveViewArea ·
+`0x9489` SetProperties · `0x948A` PollProperties (light poll) · `0x948B` SetProperties2 ·
+`0x948D` OpticalZoomDrive · `0x94A1` DetectOneTouchWB · `0x94BA` TransferModeStartStop (keep-alive) ·
+`0x94BB` GetUntransferList · `0x94BC` GetLocalObjectInfo · `0x94BD` GetLocalObject ·
+`0x94BE` DeleteLocalObject · `0x94BF` SetConnectPcInfo · `0x94C0` GetConnectPcInfo ·
+`0x94C1` ClearConnectPcInfo · `0x94C2` GetOTWBKelvin · `0x94C3` StationMode · `0x94C4` GetAFTargetFrames.
+
+Device properties: `0xD002` aperture · `0xD003` focus mode · `0xD004` metering · `0xD006` exp mode ·
+`0xD007` ISO (**older bodies — E-M10 gen**) · `0xD009` drive mode · `0xD00D` image format ·
+`0xD01C` shutter speed (`(num<<16)|den`) · `0xD01E` WB · `0xD052` CameraControlMode (1=PC, 2=standalone) ·
+`0xD06D` LiveViewModeOM · `0xD0DC` CaptureTarget (1=SDRAM, 2=card) · `0xD1C0` ISO (OM-1+, replaces `0xD007`).
+
+Events: `0x4002` ObjectAdded · `0x400D` CaptureComplete · `0xC001` OLY_CreateRecView ·
+`0xC002`/`0xC102` OLY_ObjectAdded · `0xC003` OLY_AF_Frame · `0xC004` OLY_DirectStoreImage ·
+`0xC005` OLY_CompleteCameraControlOff · `0xC008` OLY_DevicePropChanged ·
+`0xC00C`/`0xC10C` OLY_ImageTransferModeFinish · `0xC00D`/`0xC10D` OLY_ImageRecordFinish ·
+`0xC00E` OLY_SlotStatusChange · `0xC011` OLY_NotifyAFTargetFrame (match the `0xc0xx` CSV rows).
+
+PTP/IP transport (newer-body only, absent on E-M10): CIPA DC-005, TCP 15740, command+event sockets,
+`u32 len | u32 type | payload`; acceptance compares only `GUID[10..15]` == paired MAC reversed.
