@@ -633,6 +633,22 @@ Trace strings `[GUI App]: CGuiDrawCtrl::DrawImageBlack` (`0x7e46603d`),
 | `0x604543f8` | `g_guidrawctrl` | CGuiDrawCtrl state singleton cell | `symbol-map.md` |
 | `0x7e46603d` | `guidrawctrl_string_pool` | `CGuiDrawCtrl::DrawImageBlack`, `::reqDrawThrough draw() ret=%d`, `::reqDrawThrough GESetEvent()` (methods live in module `0x7e240xxx`, e.g. log sites `0x7e2405ae`/`0x7e2406ca`) | `symbol-map.md` |
 
+## Camera query / settings API facade (CA-app getters)
+Module `0x7e20dxxx` is the app-facing **camera state/settings query API**. Each entry logs its
+operation name via the trace emitter `0x7e224079` (56-byte ctx, sibling of `mode_judge_trace`),
+looks up a manager object and calls its accessor `vtable[1](modeInfo)`, then logs
+`result of <op> = SUCCESS/ERROR and modeInfo = …`. Operation-name + result strings in pools
+`0x7e42fd94` and `0x7e42ffc0`/`0x7e430007`. Named operations seen: `getSetting`, `getSettingDetail`,
+`getSettingUser`, `setSetting`, `getCondition`, `getZoomFrame`, `getThroughZoomRate`,
+`getAfAreaType`, `isAfEnable`, `getAvailableShootCount`, `getMovieTime`, `getMediaStateInfo`,
+`afState`. (Mirrors the state surface a replacement app must read — see KMP notes.)
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e20d793` | `ca_getSetting` | **192 xrefs** — `getSetting(d0=modeInfo)`: trace `getSetting`, look up manager (`0x7e224079`), call accessor `vtable[1](modeInfo)`, log `result of getSetting = SUCCESS/ERROR and modeInfo=…`, return value. Hottest query of the facade | `symbol-map.md` |
+| `0x7e20d7dc` | `ca_getSettingDetail` | sibling: `getSettingDetail(modeInfo)`, same shape | `symbol-map.md` |
+| `0x7e224079` | `ca_op_trace` | per-op trace/lookup helper (56-byte ctx via `0x7e22352e`/`0x7e223896`, handler `0x7e02ec5a`); sibling of `mode_judge_trace 0x7e224095` | `symbol-map.md` |
+| `0x7e42fd94` / `0x7e430007` | `ca_api_string_pool` | operation names (`get*`/`set*`/`is*`) + `result of <op> = SUCCESS/ERROR and modeInfo=` templates | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
