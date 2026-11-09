@@ -669,6 +669,12 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## No-op stub / "not implemented" reporter
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7d999ae0` | `noop_stub` | **empty function body** (`de 00 00` = `retf [],0`, returns immediately, no reg restore). **187 direct `call` sites** — and **0 occurrences as a data word** (not a vtable default; every reference is a direct call). Inert instrumentation/hook compiled to a no-op in this release build; the 187 call sites are dead hooks. Immediately followed by `report_not_implemented` (its "not-implemented" sibling path) | `symbol-map.md` |
+| `0x7d999ae3` | `report_not_implemented` | logs the fixed string **`"not implemented"`** (`0x7d999af4`) via `dbg_trace_line 0x7da886b4`, returns 0. 3 xrefs. Default/placeholder body for unimplemented operations | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
