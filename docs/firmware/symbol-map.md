@@ -456,6 +456,24 @@ is why that 2-instruction thunk shows 209 xrefs.
 | `0x7E45DEBC` | `ascii_char_prop_table` | 32 × 8-byte `{u32 key, u32 handler}` ASCII char-property perfect-hash table | `symbol-map.md` |
 | `0x7e25d503` | `textlayout_ctor` | derived text-layout object ctor: base ctor `0x7e23046c`, install vtable `0x7E46EEDC`, zero fields `+768..+788` (list head @+768); object ≥792 B. Class is **stringless** (no RTTI name near vtable) — exact name unresolved | `symbol-map.md` |
 
+## VG (vector-graphics) client — UI draw-command engine
+The **vector-graphics client** (`[VG CLIENT]`), an OpenVG-style path/fill draw layer that feeds a
+graphics-accelerator HW interface (`vgcHwifConv_*`). It builds draw commands into per-primitive
+command buffers, then flushes them to the HW converter. Module `0x7e86xxxx`–`0x7e87xxxx`; string pool
+`0x7E8A7C00+` (`[VG CLIENT] !!! ERROR !!! => %s`, `cannot assign HEAP memory of the VG client`,
+`image address is not 128 byte aligned`, `vgcHwifConv_incObjectRefcount`, `vgcHwifConv_moveCB`). This
+is the low-level renderer behind the camera UI/menus (pairs with the BiDi text classifier above).
+
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7e87c5ca` | `vgc_draw_path_fill` | **core UI draw primitive** (209 xrefs): appends a path command (type 34) then a fill command (type 36) to the VG command buffer. Flushes first (`vgc_cmdbuf_flush`) when state `a3 ∈ {1,2,3}` and ctx `+116 != 0` (sets busy flag `+77=1`). Each append goes through `vgc_cmdbuf_reserve`; on overflow (ret 2) reports `"vpath(%d)…over flow"` (`0x7E8A7D3D`) / `"vfill(%d)…over flow"` (`0x7E8A7D61`) via the client error-callback `*(0x60482468)` + `vgc_error` (code `0x1002`) | `symbol-map.md` |
+| `0x7e86bce9` | `vgc_cmdbuf_reserve` | reserve/bounds-check a slot in a VG command sub-buffer: selects buffer by `d0` (`this+4` vs `this+40`), reads `cap+12 / ptr+16 / count+20`; returns 1=ok (→`vgc_cmd_write`), 2=overflow, 3=alt | `symbol-map.md` |
+| `0x7e867e46` | `vgc_cmd_write` | write the command payload into the reserved command-buffer slot | `symbol-map.md` |
+| `0x7e87b2aa` | `vgc_cmdbuf_flush` | flush/submit the accumulated command buffer to the HW converter (→`0x7e87511b`) | `symbol-map.md` |
+| `0x7e87ab61` | `vgc_error` | VG-client error reporter (`[VG CLIENT] !!! ERROR !!! => %s`); code in `d0` | `symbol-map.md` |
+| `0x60482468` | `vgc_error_cb` | VG-client error/overflow callback object (vtable-dispatched: `calls *(0x60482468)`) | `symbol-map.md` |
+| `0x7E8A7C00` | `vgc_string_pool` | VG-client message/function-name string pool (`[VG CLIENT]`, `vpath/vfill`, `vgcHwifConv_*`, HEAP/alignment errors) | `symbol-map.md` |
+
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
 `0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
