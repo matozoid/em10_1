@@ -510,6 +510,7 @@ the inline trace string that follows the vtable (see CPlayZoom); vtable-less str
 | address | symbol | role | source |
 |---|---|---|---|
 | `0x7e1e8a41` | `obj_get_f264` | field getter `return *(a0+264)` (1015 xrefs; cf. `obj_get_f104`) | `symbol-map.md` |
+| `0x7e22be56` | `guiobj_get_delegate` | **203 xrefs** — getter `return *(a0+20)` on a GUI base object (module `0x7e22bxxx`, g_gui_app cluster). `+20` = pointer to a child/delegate object **with its own vtable** (callers then invoke its `vtable[468]`). Accessor bank: setter `0x7e22be50` (`*(a0+20)=a1`); `+16` is a **flags word** with `guiobj_flag_setclr 0x7e22be2a` (`d1≠0 → *(a0+16)\|=d0 ; else &= ~d0`) and `guiobj_flag_test 0x7e22be41` (`return (*(a0+16)&d0)≠0`) | `symbol-map.md` |
 | `0x7e0e67ad` | `obj_get_f372` | field-pointer getter `return a0+372` (**186 xrefs**) — returns pointer to an embedded field/sub-object at `+372`. Sibling thunk bank: `0x7e0e67b4` `return a0+468` (also **186 xrefs**), setter `0x7e0e67bb` `*(a0+516)=a1`, getter `0x7e0e67c2` `return *(a0+528)`. Owning class **unresolved** — module `0x7e0e6xxx`; the nearby `0x7e35d9c4` tag is the **shared observer-base** (see `event_subject_ctor 0x7e1e7de3`), not proof of owner. Hot entry pts into a large (`≥528 B`) controller object | `symbol-map.md` |
 
 ## MainSystem / RHP — shooting-session & interval (timelapse) state controller
