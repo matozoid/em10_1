@@ -670,6 +670,20 @@ subsystem each facade serves is **not resolvable statically** — the names live
 | `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
 | `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
 
+## Structured trace-record emitter (task-stamped)
+Family that packs a variable-arity argument record and emits it through `trace_log 0x7d997b14`,
+auto-stamping the **current task id** (fetched via `0x7d9a1c14`) into each record. The packed struct:
+`+0` = trace code (top byte = facility, per `trace_log`), `+4`/`+8` = payload args, `+12` = arity
+selector. Core formatter `0x7de5e90f` switches on the arity field (0/1/2/3 → 3/4/5-field
+`trace_log` calls); the convenience wrappers pre-fill the struct.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7de5e9d3` | `trace_rec3` | **180 xrefs** — 3-arg trace wrapper: packs `{code=d0, arg=d1, ptr=a0, arity=0}` and forwards to `trace_rec_format`. Most-used entry of the family | `symbol-map.md` |
+| `0x7de5e90f` | `trace_rec_format` | arity-switch formatter: validates the record (`trace_rec_validate 0x7de5e9e6`), stamps current task id, and builds a 3/4/5-field `trace_log` call per the `+12` selector, emitting via `trace_rec_emit 0x7de5e9b0` | `symbol-map.md` |
+| `0x7de5e9b0` | `trace_rec_emit` | tail-call to `trace_log 0x7d997b14` with the packed record (44-byte frame) | `symbol-map.md` |
+| `0x7de5e9ba` | `trace_rec_tag39` | wrapper with fixed trace code `0x39040003` (`+code d0`, `+arg d1`) | `symbol-map.md` |
+| `0x7de5e9e6` | `trace_rec_validate` | context/handle check: null ptr → status `0x9D05`; current-task fetch (`0x7d9a1c14`) failure → `0x9D09`; else stores task id into the record | `symbol-map.md` |
+
 ## GUI-App composite wide-text update
 | address | symbol | role | source |
 |---|---|---|---|
