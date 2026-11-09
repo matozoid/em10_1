@@ -651,6 +651,24 @@ looks up a manager object and calls its accessor `vtable[1](modeInfo)`, then log
 | `0x7e224079` | `ca_op_trace` | per-op trace/lookup helper (56-byte ctx via `0x7e22352e`/`0x7e223896`, handler `0x7e02ec5a`); sibling of `mode_judge_trace 0x7e224095` | `symbol-map.md` |
 | `0x7e42fd94` / `0x7e430007` | `ca_api_string_pool` | operation names (`get*`/`set*`/`is*`) + `result of <op> = SUCCESS/ERROR and modeInfo=` templates | `symbol-map.md` |
 
+## Trace/call-logger facade singletons (bank `0x6044e958`+)
+A bank of tiny **stateless trace/call-logger facade** objects — each 4 bytes (vtable pointer only,
+no state), lazily built by a `get_shootcount_mgr`-shape getter (double-checked lock **slot 2**:
+`0x7dfc0587`/`0x7dfc056a`/`0x7dfc057a`, `operator new(4)` `0x7e206a0f`, ctor installs vtable). Each
+vtable method logs an operation as `<name>(args)` by resolving a packed **log-context id** (`0x10cxx`
+block) through `decode_packed_id 0x7dfc7272` (the `%1s` name token) and formatting via
+`trace_log_printf` / `0x7dfc01e6` at level 3, using the shared template pool
+`0x7e386100`–`0x7e386260` (`%1s(%d)`, `%1s(%d, %d)`, `%1s(%d, %d, %d)`, enter/exit brace markers
+`}{}`/`}h{`/`}_t`); several stamp a `0xdeadbeef` trace sentinel (`0x7dfc498f`). The specific
+subsystem each facade serves is **not resolvable statically** — the names live in the RAM id-table
+`0x6044e518` that `decode_packed_id` indexes. Same family as `get_shootcount_mgr 0x7e02fda8`.
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7dff7a90` | `get_tracelog_facade_1` | **190 xrefs** — lazy-singleton getter for trace/call-logger facade, cell `0x6044e958`, vtable `0x7e386238` (8 methods `0x7dff7f24`…`0x7dff7ca6`, ctor `0x7dff7ae8`). Log-ctx ids `0x10c01`/`0x10c0c`/`0x10c20`. Subsystem name unresolved (RAM id-table) | `symbol-map.md` |
+| `0x7dff83eb` | `get_tracelog_facade_2` | sibling getter, cell `0x6044e95c`, ctor `0x7dff8443`; same facade shape, reached from facade-1's `vtable[0]` (`0x7dff7f24`→`0x7dff83e1`→`0x7dfce306`) | `symbol-map.md` |
+| `0x6044e958` / `0x6044e95c` | `g_tracelog_facade[1,2]` | RAM singleton cells for the facade bank | `symbol-map.md` |
+| `0x7e386100`–`0x7e386260` | `tracelog_fmt_pool` | shared trace format-template pool (`%1s(%d[, %d[, %d]])`, brace enter/exit markers) | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
