@@ -578,6 +578,20 @@ executor `0x7e723ab9` (72-byte frame).
 | `0x7e759138` | `bc_msg_putbyte` | byte serializer `*(a0)=d0` into the command-message buffer | `symbol-map.md` |
 | `0x7e78c580` | `bc_string_pool` | `SetPrePro`, `C{R,Gr,Gb,B}Sumear`, `%sCalib.prm`, `PRM_BC_DISABLE`, `BC_UNIT:OFF`, `bc exec N` | `symbol-map.md` |
 
+## GUI panel manager — guiUtility::ShowPanelEx
+Central GUI screen/panel switcher. `ShowPanelEx(newPanelNo, sub)` compares the request to the
+current panel (`g_cur_panel_no 0x604601d0`, u16); if a change is needed it tears down the old
+panel, posts a **panel-change event to "CA"** (camera-application) and records the new panel.
+Named by trace `[GUI App]: guiUtility::ShowPanelEx  PanelNo : %03d >>>>> %03d` (`0x7e5dee86`);
+failure path logs `[GuiTouch] guiUtility::ShowPanelEx changePanel Fail!!!` (`0x7e5deec4`).
+| address | symbol | role | source |
+|---|---|---|---|
+| `0x7e337794` | `gui_show_panel_ex` | **199 xrefs** — `guiUtility::ShowPanelEx(d0=newPanelNo, d1=sub)`. No-ops when already on the panel (and flags clear); else tears down old panel via `0x7e33927d`, runs `0x7e3358a8`, posts the change event via `gui_post_panel_event 0x7e33581d`, stores `g_cur_panel_no=newPanelNo` / `0x6046031c=sub`, logs the `>>>>>` transition | `symbol-map.md` |
+| `0x7e33581d` | `gui_post_panel_event` | builds a **PostEventToCA** message: alloc (`0x7e3354f7`), `*(ev)=2` (event type), `+4=panelNo`, `+8=sub`, `+12=ctx` | `symbol-map.md` |
+| `0x604601d0` | `g_cur_panel_no` | current GUI panel number (u16) | `symbol-map.md` |
+| `0x6046031c` / `0x60460308` / `0x60460314` | `panel_state_*` | panel-manager state/flags (sub-param, pending, enable) | `symbol-map.md` |
+| `0x7e5dee06` | `gui_panel_string_pool` | `PostEventToCA(AddSub) …touch_x/touch_y`, `ShowPanelEx` transition + Fail logs, `SetPale…` | `symbol-map.md` |
+
 ## Open / to-label (tracked across loop ticks)
 - `0x7da82530` = 2-arg **thunk** → worker `0x7da8254b` (68-byte frame): sets up `(a0, arg)`, writes
   global cell `0xa09f0978`, dispatches on a flag to a name/handle-open path (`0x7da82f08`, checks for
