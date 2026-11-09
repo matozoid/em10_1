@@ -429,6 +429,29 @@ debug shell can dump the chip's programmed state via header `"[reg]adr | dat"` (
 | `0x607096ee` | `reg_journal_buf` | journal record array, 256 × 6-byte `{u16 addr, u32 data}` (adjacent to counter) | `symbol-map.md` |
 | `0x7DEE0500` | `sndreg_name_pool` | `se2` register-name + audio-verb string pool (EQ `se2_5beq_*`, `ldo_vsel`/`bg_vsel`, `[mute_all]`, `[reg_reset_softstart]`, play/rec/device verbs) | `symbol-map.md` |
 
+## Text / BiDi character classification (RTL menu i18n)
+A bank of per-character classifier leaves feeding a dispatcher `bidi_classify 0x7E22A5C3`, which reads
+a `u16` character (`movhu (a2),d0`) and branches by class. The script ranges — **U+0590–05FF (Hebrew)**
+and **U+0600–06FF (Arabic)** — plus the bracket mirror-pair test identify this as **bidirectional
+(RTL) text layout** support for the camera's localized menus/captions. The ASCII-printable path uses a
+perfect-hash property table. The dispatcher is the base-class method of a text-layout object hierarchy
+(derived vtable `0x7E46EEDC`, ctor `0x7e25d503`); the vtable[0] thunk `0x7e25d53c` re-exports it, which
+is why that 2-instruction thunk shows 209 xrefs.
+
+| address / global | symbol | role | source |
+|---|---|---|---|
+| `0x7E22A5C3` | `bidi_classify` | character-class dispatcher: `movhu (a2),d0` → branch by script/type (calls the leaves below); base virtual of the text-layout class | `symbol-map.md` |
+| `0x7e22b601` | `get_bidi_classify` | trivial getter `return 0x7E22A5C3` (adjacent to `prop_code_static_lookup 0x7e22b60f`) | `symbol-map.md` |
+| `0x7e25d53c` | `vt_get_bidi_classify` | vtable[0] thunk (209 xrefs): calls base ctor `0x7e2304ef`, then `return 0x7E22A5C3`; shared across derived text-layout vtables | `symbol-map.md` |
+| `0x7e22ae5c` | `char_is_arabic` | `d0 ∈ [0x600,0x6FF]` → 1 (Arabic block) | `symbol-map.md` |
+| `0x7e22ae9a` | `char_is_hebrew` | `d0 ∈ [0x590,0x5FF]` → 1 (Hebrew block) | `symbol-map.md` |
+| `0x7e22ae71` | `char_is_bracket` | BiDi mirror-pair test: `( ) < > { } [ ]` (0x28/29/3C/3E/7B/7D/5B/5D) → 1 | `symbol-map.md` |
+| `0x7e22aeaf` | `char_is_at` | `d0 == '@'` (0x40) → 1 | `symbol-map.md` |
+| `0x7e22aebc` | `char_is_space` | `d0 == 0x20` → 1 | `symbol-map.md` |
+| `0x7e22aec9` | `char_ascii_prop` | printable `[0x21,0x7E]`: index `(c-32)&31` into `ascii_char_prop_table` (perfect hash, handler `0x7e22af01`) | `symbol-map.md` |
+| `0x7E45DEBC` | `ascii_char_prop_table` | 32 × 8-byte `{u32 key, u32 handler}` ASCII char-property perfect-hash table | `symbol-map.md` |
+| `0x7e25d503` | `textlayout_ctor` | derived text-layout object ctor: base ctor `0x7e23046c`, install vtable `0x7E46EEDC`, zero fields `+768..+788` (list head @+768); object ≥792 B. Class is **stringless** (no RTTI name near vtable) — exact name unresolved | `symbol-map.md` |
+
 ## Subsystem singletons (named via inline RTTI/trace strings)
 Cells cluster in a **singleton-pointer bank** at RAM `~0x60454418`–`0x60454440` (and a nearby
 `0x604543xx` group): each slot holds one lazily-constructed subsystem controller. Getters follow the
