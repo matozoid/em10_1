@@ -34,4 +34,5 @@ python3 -I tools/omfw.py info firmware/stock/OLY_E_113_1400_0000_0000.BIN
 python3 -I tools/omfw.py dec  firmware/stock/OLY_E_113_1400_0000_0000.BIN firmware/stock/dec
 python3 -I tools/fwpatch.py plan STOCK.BIN PROFILE.json --id em10-1.4
 python3 -I tools/symbol_index.py --once 0x7de57532
+python3 -I tools/dis.py 7de57e24 7de58a90        # needs mn10300-elf-objdump, see docs/STATUS.md
 ```
