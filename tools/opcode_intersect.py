@@ -1,3 +1,7 @@
+#!/usr/bin/env python3 -I
+"""Intersect the OM Workspace SDK PTP opcode catalog with the opcodes the E-M10 Mark I implements.
+Result is discussed in docs/usb-protocol/sdk-opcode-compat.md.
+usage: opcode_intersect.py docs/usb-protocol/olympus-opcode-table.csv"""
 import csv,sys
 csvpath=sys.argv[1]
 codes=set()

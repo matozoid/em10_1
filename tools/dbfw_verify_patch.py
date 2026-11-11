@@ -1,3 +1,8 @@
+#!/usr/bin/env python3 -I
+"""Check the community em10-1.4 ring-native patches against decoded stock block 0 (old bytes match,
+payload cave is 0xFF fill). Superseded for general use by `fwpatch.py plan`; kept as the original
+independent check. Profile JSON is third-party data: keep it local.
+usage: dbfw_verify_patch.py PROFILES.json blk00_40300000.bin"""
 import json, base64, sys
 prof = json.load(open(sys.argv[1],"rb"))
 blk0 = open(sys.argv[2],"rb").read()

@@ -3,7 +3,8 @@
 # Needs a real terminal for the password prompt, or CAM_PASS=... in the environment.
 # SWITCH=1 additionally calls switch_cammode?mode=rec (changes camera mode, no writes to card/settings), then back to the original mode.
 set -u
-SSID="${CAM_SSID:-E-M10-P-<serial>}"; HOME_CON="${HOME_CON:-<home-connection>}"; H=192.168.0.10
+SSID="${CAM_SSID:?set CAM_SSID to the camera AP name (E-M10-P-<serial>)}"
+HOME_CON="${HOME_CON:?set HOME_CON to the NetworkManager connection to rejoin afterwards}"; H=192.168.0.10
 OUT="$(dirname "$0")/../research/camera-probe-camprop-$(date +%Y%m%d-%H%M%S).txt"
 if [ -z "${CAM_PASS:-}" ]; then read -rsp "Camera Wi-Fi password: " CAM_PASS </dev/tty; echo; fi
 g(){ echo "== GET $1"; curl -s -m 8 -i "http://$H/$1" | head -c 6000; echo; }

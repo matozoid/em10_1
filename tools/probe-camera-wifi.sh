@@ -2,8 +2,8 @@
 # Join camera AP, probe read-only CGI endpoints, rejoin home Wi-Fi. No writes to the camera.
 # usage: tools/probe-camera-wifi.sh   (prompts for password; or set CAM_PASS)
 set -u
-SSID="${CAM_SSID:-E-M10-P-<serial>}"
-HOME_CON="${HOME_CON:-<home-connection>}"
+SSID="${CAM_SSID:?set CAM_SSID to the camera AP name (E-M10-P-<serial>)}"
+HOME_CON="${HOME_CON:?set HOME_CON to the NetworkManager connection to rejoin afterwards}"
 OUT="$(dirname "$0")/../research/camera-probe-$(date +%Y%m%d-%H%M%S).txt"
 if [ -z "${CAM_PASS:-}" ]; then [ -r /dev/tty ] && [ -t 0 -o -e /dev/tty ] && { read -rsp "Camera Wi-Fi password: " CAM_PASS </dev/tty || true; echo; }; fi
 : "${CAM_PASS:?no TTY: run in a real terminal, or CAM_PASS=... $0}"

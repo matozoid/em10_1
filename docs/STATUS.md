@@ -115,7 +115,7 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - **No flash of a patched image on the real camera**, and none planned while the owner judges the
   risk too high. Procedure and risk analysis are in `mods/patching-pipeline.md`.
 - **No mod of our own.** Everything built so far reproduces the community ring-native patch. There
-  is no MN10300 cross-compiler/assembler setup for writing new payloads.
+  is an MN10300 assembler and linker (binutils) but no C compiler, and no payload build setup.
 - **ROM pictures at `0x46560000` are not extracted.** The only remaining route is a patch that dumps
   flash to SD or forces the shell up (`mods/firmware-modding.md`).
 - **KMP app**: `app/` is an empty directory. Plan in [`ARCHITECTURE.md`](ARCHITECTURE.md).
@@ -134,9 +134,20 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - Deferred as low value: `MDP_AS` CameraSimulation schema, `OlyBayerDecoder` demosaic math.
 
 ## Environment
-- Ghidra 12.2 at `/home/danny/dev/ghidra_12.2_PUBLIC` with `michaelbrandi/ghidra-mn103-extension`
-  (language `mn10300:LE:32:default`); project in `research/ghidra_proj/`. Setup steps are in the
-  archived log. Headless scripts in `tools/ghidra/`.
+- Ghidra 12.2 at `~/dev/ghidra_12.2_PUBLIC` with `michaelbrandi/ghidra-mn103-extension`
+  (language `mn10300:LE:32:default`); project in `research/ghidra_proj/`. Headless scripts in
+  `tools/ghidra/`. The extension is per-user: copy its `data/`, `Module.manifest` and
+  `extension.properties` to `~/.config/ghidra/ghidra_12.2_PUBLIC/Extensions/mn103/` and run
+  `$GHIDRA/support/sleigh mn103.slaspec` in `data/languages`. Open the project headless with
+  `analyzeHeadless research/ghidra_proj em10 -process blk00_40300000.bin -noanalysis -readOnly
+  -scriptPath tools/ghidra -postScript <Script>.java <args>`.
+- GNU binutils 2.42 for `mn10300-elf` in `/usr/local/bin` (`mn10300-elf-objdump`, `-as`, `-ld`, ...).
+  Build: `configure --target=mn10300-elf --prefix=/usr/local --disable-nls --disable-gdb
+  --disable-sim --disable-gprofng --disable-werror`, then `make MAKEINFO=true` and
+  `sudo make MAKEINFO=true install`. The `--target` is essential: without it a native binutils is
+  installed that shadows the system `ld`/`as`. Build tree kept at `~/dev/binutils/mn10300/build`.
+- `tools/dis.py START END` = annotated disassembly of block 0 at runtime addresses (hex immediates
+  and referenced strings added to objdump's output).
 - Decoded blocks in `firmware/stock/dec/`; resource extracts in `firmware/stock/res1`, `res2`,
   `jpg2`, `sheets`.
 - Run Python tools that read firmware or vendor files with `python3 -I`.
