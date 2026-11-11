@@ -1,7 +1,7 @@
 # Block 0 memory map and analysis setup
 
 **Runtime address = load address + 0x3d691020.** Block 0 is staged at 0x40300000 but runs relocated: file offset 0 = runtime `0x7d991020` (= `runtime_base` in the community profile). VERIFIED: with this base 2315 of 3000 sampled strings have matching absolute pointers in code; with the load address 0 do.
-Relative `jmp`/`call` are unaffected. Community patch offsets and addresses in `STATUS.md` hook table are in load space; add 0x3d691020 for Ghidra.
+Relative `jmp`/`call` are unaffected. Community patch offsets and addresses in the `STATUS.md` hook table are in load space; add 0x3d691020 for Ghidra.
 
 Ghidra project (`research/ghidra_proj`, program `blk00_40300000.bin`) now imported at base `0x7d991020`: 72,580 functions, 10,763 reference strings.
 

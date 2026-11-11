@@ -178,4 +178,4 @@ boot-hold UI — it does **not** reimplement flashing or the image header/valida
 - Per-letter sub-component mapping (S/G/H/W/A/M/V/D/T/I/N) not yet identified — would need tracing each
   `_Execute` branch; low priority (app only needs the `E` body image).
 - Cross-ref: `docs/firmware/update-server.md` (Workspace server side), `docs/firmware/updater-ow-2.5.md`
-  (OW updater tool), `docs/firmware/usb-ptp.md` (PTP transport), `docs/STATUS.md` (app v1 update plan).
+  (OW updater tool), `docs/firmware/usb-ptp.md` (PTP transport), `docs/ARCHITECTURE.md` (app v1 update plan).

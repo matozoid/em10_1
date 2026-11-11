@@ -1,66 +1,48 @@
-# Status (2026-11-02, Wi-Fi CGI surface complete)
+# Status (2026-11-11)
 
-## Known
-- Community build "db firmware 0.3.1.b" (azqeurio/om-c-firmware, tag dbv0.3.1.b):
-  closed source, Windows PyInstaller exes (Python 3.12), 119 MiB.
-  sha256 25aacf5aaf69bbdfbe3b6759dc1bc83f8729b6ce23b320e2e89d3a2a55c54e599 (matches GitHub digest)
-  Claims E-M10 Mark I: only "Panasonic aperture ring works" (community-tested, not by author).
-  NOT executed. Unpacking blocked pending user decision.
-- Prior art: lightsnowdev.blogspot.com 2014 posts: oly_fw_manip --unpack/--pack to XML,
-  ~64 files per image, same crypto across OM-D line. Tool not public; blog URLs 404 now (try Wayback).
-- Stock E-M10 Mark I firmware: v1.1 (May 2014) .. later; fetched via Olympus Digital Camera Updater.
+Current state of the E-M10 Mark I project. The chronological log for 2026-11-01/02 (first-day
+findings, superseded TODO lists, Ghidra setup notes) is archived in
+[`STATUS-log-2026-11-01_02.md`](STATUS-log-2026-11-01_02.md).
 
-## Verified facts (from archived 2014 lightsnowdev post, saved in research/sources/)
-- Camera update ID: 1130 (E-M1 1090, E-M5 0970).
-- Doc URL pattern: http://dl01.olympus-imaging.com/ww/ud2/[lang]/0001/[id]/index[N]a.html (N: v1.0=1, v1.1=2)
-- v1.1 BIN: .../OLYMPUS_MASTER/FIRMWARES/0001/1130/OLY_E_113_1104_0000_0000.BIN
-- dl01.olympus-imaging.com no longer resolves (2026-11-01); Wayback has no copy of the BIN.
-- BIN unpacks to ~64 files; 00.main-code-01.bin holds main code. OS: uITRON.
-  Strings: Broadcom BCM WiFi (SDPCMD CDC), OLYMPUS BlueSDK a4 (Bluetooth), "WIFI SHELL",
-  "USF debugging shell Version 1.10", CGI commands used by Olympus Image Share app.
-- Updater is spoofable: a Python script emulating the Olympus server let author flash any BIN,
-  any version (no version/signature gate observed on E-M10, per blog). Unverified by us.
-- Tool oly_fw_manip (--unpack/--pack/--analyze) not public; E-M5 Mark II hit "Index range exceeds
-  random number generator". Reference thread: personal-view.com/talks/discussion/2789/olympus-hacks
+## Ground rules
+- **The body is never opened.** No teardown, UART pads, JTAG or chip-off. Everything is static RE
+  plus what the camera exposes over USB, Wi-Fi and the SD card.
+- **Camera-state changes need the owner's go-ahead.** Read-only probes are fine. State-changing
+  calls (`set_camprop`, shutter, GPS write) are confirmed with the owner each time.
+- **No patched firmware is flashed.** The owner considers it too risky for now (2026-11-11); nothing
+  has ever been flashed. Patched images are built and verified locally only.
+- **Third-party material stays local.** Stock/community firmware, the community patch profile,
+  decompiles and unpacked vendor software live in gitignored `firmware/`, `research/` and
+  `reference/`. Only our own docs and tools are committed.
+- **Symbol labelling is committed in batches** (per session or subsystem), not one commit per label.
 
-## TODO
-0. Source stock BIN: Olympus Digital Camera Updater 2.0 installer (Softpedia mirror lists E-M10 FW 1.4?? -
-   suspect mislabel, E-M10 Mark I last known ~1.5), personal-view.com thread, or capture from a
-   camera-attached updater run on a Windows machine.
-1. Obtain stock firmware image(s) (updater package or capture from updater network call).
-2. Identify container format, crypto; write own unpack/repack (tools/).
-3. Camera USB enumeration: lsusb/udev/libgphoto2/PTP vendor ops; log to docs/usb-protocol.
-4. Hardware teardown photos + chip IDs (iFixit E-M10 teardown as start).
-5. Static analysis of community patcher to learn which firmware bytes it changes.
+## Target
+| item | value |
+|---|---|
+| Body firmware | 1.4 (latest for the Mark I), `OLY_E_113_1400_0000_0000.BIN`, 70 254 592 B, sha256 `84d81b2d…` |
+| Model / update id | 113 / 1130; camera-ID code `S0051` |
+| CPU | Panasonic MN103 / AM33 (dual core), uITRON RTOS |
+| Runtime base | block 0 executes at `0x7d991020` (container load address `0x40300000` is packaging only) |
+| Wi-Fi | camera AP `E-M10-P-<serial>`, HTTP CGI at `192.168.0.10:80`, OI.Share descriptor v2.20 |
+| USB | VID `07b4`; PTP/MTP only |
 
-## 2026-11-01 additions
-- reference/E-M10_MANUAL_ENGLISH.PDF added (fw 1.0 manual). USB modes in docs/usb-protocol/usb-modes.md.
-- OM Workspace 2.5.0.11 unpacked: docs/firmware/updater-ow-2.5.md. Real PTP/firmware calls live in
-  OlyCameraLib.dll (IOlyCamera::FirmwareCheck, FirmwareUpdateInitiate, GetFirmwareStatus,
-  GetFirmwareUpdateMode, GetFirmwareLanguageCode, TransFirmware). Ghidra decompile in progress.
-- Ghidra 12.2 at /home/danny/dev/ghidra_12.2_PUBLIC; headless script tools/ghidra/DumpDecomp.java.
-- Extra goal: new app replacing OM Workspace (v1: firmware update). Stack: Kotlin Multiplatform + Compose (see docs/ARCHITECTURE.md).
+## Done
 
-## User camera (2026-11-01)
-- Body firmware 1.4 (latest for original E-M10 per Wikipedia / havecamerawilltravel: Dec 2018; unconfirmed by 2nd source). Lens firmware 1.0.
-- Wi-Fi AP SSID `E-M10-P-<serial>`; no Wi-Fi fwup support (see usb-protocol/wifi-api.md).
-- Stock 1.4 BIN not yet obtained. Official host dl01.olympus-imaging.com dead. Sources seen: softpedia mirror (403 to us).
+### Firmware container and patch pipeline — `firmware/container-format.md`, `mods/`
+- Container codec cracked and reimplemented (`tools/omfw.py info|dec|rebuild`): 3 blocks, XOR +
+  16-byte permutation, additive footer checksum. Round-trip is byte-exact.
+- Model-agnostic patch engine `tools/fwpatch.py plan|build`, driven by an external profile JSON.
+- Community patcher "db firmware 0.3.1.b" unpacked statically (never executed) and understood:
+  `firmware/community-dbfw-tool.md`, `mods/community-feature-patches.md`,
+  `mods/ring-cave-disassembly.md`.
+- **"1.4 + ring-native" image built and verified locally** (`firmware/community/em10-1.4-ring/E1139999.BIN`,
+  sha256 `837ecc9e…`, equal to the profile's expected output). Only block 0 differs from stock:
+  1202 bytes, all inside the 9 declared patch regions. Headers are byte-identical to stock.
+  See `mods/patching-pipeline.md`.
 
-## 2026-11-02
-- Stock E-M10 Mark I firmware 1.4 BIN OBTAINED (see firmware/update-server.md). Wi-Fi/USB/PTP flash path no longer required for v1:
-  SD-card path (DCOLYMP/E1139999.BIN, hold OK at boot) may suffice. v1 app = query server + download + write to SD + instructions.
-- Community exe unpacked (tools/pyi_extract.py, static only). Container codec cracked + reimplemented (tools/omfw.py); docs/firmware/container-format.md.
-  Decoded blocks in firmware/stock/dec/. Next: identify CPU/arch of block 0 (load 0x40300000), load into Ghidra, map hooks.
-
-## MN103 / Ghidra (2026-11-01)
-- Block 0 CPU = Panasonic MN103 (AM33). Using michaelbrandi/ghidra-mn103-extension (Apache-2.0, untested on real firmware).
-- Install: copy `data/`, `Module.manifest`, `extension.properties` into `~/.config/ghidra/ghidra_12.2_PUBLIC/Extensions/mn103/`, then in `data/languages` run `$GHIDRA/support/sleigh -a .` (`mn103.slaspec` compiles; `mn103_full_experimental.slaspec` fails).
-- Import: BinaryLoader, language `mn10300:LE:32:default`, base `0x40300000`, file `firmware/stock/dec/blk00_40300000.bin`. Works headless.
-- `tools/ghidra/DisasAt.java` disassembles at addresses. Community loader_patch site `0x403001ab` decodes sanely (stack stores, `call 0x403013f0`). Start of block (0x40300000) decodes as junk: likely data/vectors or spec gaps. Immediates like `mov 0x7da70800,D0` look suspicious: verify 32-bit immediate endianness against community patch bytes.
-- Next: check hook sites (offsets 1124507-1379078 from base), run full analysis, find PTP/FIRMUP handlers via strings xrefs.
-
-### Hook-site check (em10-1.4 ring-native, 2026-11-01)
-All 7 `jmp` hooks (opcode `DC`, rel32 from insn start) decode at clean instruction boundaries in stock block 0 and land in the payload cave (0x40326ff0..~0x40327400, stock = all 0xFF):
+Ring-native hook sites (load-space addresses; add the runtime delta from `firmware/memory-map.md`).
+All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x40327400`, which is all
+`0xFF` in stock:
 
 | hook | site | target |
 |---|---|---|
@@ -72,92 +54,89 @@ All 7 `jmp` hooks (opcode `DC`, rel32 from insn start) decode at clean instructi
 | request | 0x4042a1ac | 0x403272e0 |
 | guard | 0x4042a71b | 0x403273e0 |
 
-parser payload (disassembled from a patched scratch copy, never flashed) saves regs, calls 0x403f8408, runs the replaced stock insns (`extbu D3; mov D3,(0x10,SP); btst 2,D3`), then `jmp 0x4041b417` = site+6. Confirms the MN103 spec decodes real code correctly, and the hook pattern: replaced insns are re-executed in the cave, then jump back.
-`loader_patch@0x403001ab` old == new (no-op in this profile).
+`loader_patch@0x403001ab` is a no-op in this profile (old == new).
 
-## Firmware RE progress (2026-11-01, later)
-Done, all in `docs/firmware/` and `docs/hardware/`:
-- Block 0 in Ghidra (base 0x7d991020, ~72.5k funcs, ~10.4k named from debug strings, vtable + class-graph renames):
-  `memory-map`, `rtos-tasks`, `classes`, `blocks`.
-- Wi-Fi CGI (oishare v2.20, 23 CGIs, per-mode dispatch, camprop desclist), live read-only verified: `wifi-cgi`.
-- Blocks 1/2 = resources (`resources.md`): 34 UI string tables (+`@Axxx@` icon codes), 34 fonts (decoded, `tools/glyphs.py`),
-  32 JPEGs (`tools/jpgextract.py`), icon banks entry 0 / 69 (`tools/icons.py`): both `hdr[3]` encodings
-  SOLVED (fmt 2 = 4-bit RLE, fmt 3 = 2-bit-run + 8-bit CLUT index) — **3270 records decode** (bank0 1527,
-  bank1 1743). Only 5 bank0 "fails" remain, all bogus (ID-table entries pointing into the tail
-  pointer/text region → garbage `33333303` headers, not icons). The earlier "~2600 hdr[3]==3 undecoded"
-  note is obsolete.
-- Display ASIC command set and outputs: `docs/hardware/display-pipeline.md`. Block 0 only posts requests to it; no
-  decoder or ASIC loader found, so remaining icon formats need blind decoding.
+### In-camera firmware update — `firmware/camera-fw-update.md`, `firmware/flash-storage.md`
+- **SD-card path resolved.** Task `FIRMUP_SRV` (id 0x14, entry `0x7de57532`) scans `DCOLYMP/` for
+  `E113????.BIN` (body) and per-letter sub-component files; `E1139999.BIN` matches.
+- **Pre-flash validation fails closed.** Structural region-table parse (error `0x3321`/`0x3322`),
+  image-id `'E'` check, and `usr_checksum` (error `0x3202`). Any failure aborts before writing.
+- **`usr_checksum` is a header↔tail duplicate-array check, not a payload hash.** Mid-payload patches
+  do not touch either 20-byte window, so the built ring-native image passes every packaging gate
+  statically. Only its runtime behaviour on the real body is unverified.
+- **Recovery.** The updater is an ordinary RTOS task inside block 0; there is no separate
+  bootloader partition. A patch that breaks only the lens/rec path leaves SD reflash of stock
+  available. A patch that breaks boot, the scheduler or the SD stack does not.
+- USB PC-link update (`startFirmUp` `0x7e21d6dc`) is located but the flash routine sits behind a
+  runtime vtable slot; not followed further.
 
-Open: hardware register map, boot/vector code, PTP+USB handlers (unverified on wire), `set_camprop`/`exec_shutter`
-decompile + live test (changes camera state, ask first), stock 1.0-1.3 BINs (user must supply), mn10300 cross-compiler
-for mods, `docs/mods/`, **KMP app scaffold** (`app/` empty; v1 = query server, download, write SD, instructions).
-Note: this doc's older TODO list above is superseded by this section.
+### Firmware internals — `firmware/`
+- Block 0 in Ghidra: ~72.5k functions, ~10.4k auto-named from debug strings, vtable and class-graph
+  renames (`classes.md`, `blocks.md`, `memory-map.md`).
+- **Complete task registry**: 134 tasks with id, name, entry, priority, stack (`rtos-tasks.md`).
+- **`symbol-map.md`: about 1 340 curated address rows** across ~40 subsystems: heap allocator, object
+  model, OS/IPC primitives, libc cluster, soft-float, GUI app / panel manager / Super Control Panel,
+  playback components (Cmp*), movie playback, AE, sensor black-correction, audio codec, VG draw
+  engine, embedded Expat 1.95.5, OKAO face detection, on-camera httpd. `tools/symbol_index.py`
+  regenerates the address→doc index.
+- Mask-ROM primitives pinned from call sites: `0x47001000` memcpy, `0x4700110c` memset.
+- Reset entry at `0x7d991020` is real startup code; on-chip interrupt controller at abs16
+  `0x8000–0x80xx`; ISR dispatcher `0x7d9a1920` (`hardware/boot-and-io.md`).
+- Blocks 1/2 resources fully decoded: 34 string tables, 34 fonts, 32 JPEGs, 3270 icon records
+  (`resources.md`; `tools/glyphs.py`, `icons.py`, `jpgextract.py`).
+- Display ASIC command set (`hardware/display-pipeline.md`).
 
-## 2026-11-02 — Wi-Fi CGI deep dive (all in `docs/firmware/wifi-cgi.md`)
-Disassembled the remaining CGI internals with mn10300 objdump (static RE; the earlier live run was read-only):
-- **camprop path fully mapped**: set-value encoding (events 0x41b0011 / 0x41b0014-takemode), get+desc share query
-  event 0x41b0012 (told apart by the command block at 0xa0a925c0), takemode desc event 0x41b0015. Per-property
-  encoders/formatters tabulated. Dead ends: desc sub-id 10032 is an orphan switch case (no Wi-Fi leaf drives it);
-  5 read-only props bypass the desc builder; encoded-value units undecoded (client reads `desc` list).
-- **rec dispatcher 0x7e70b5a8**: tokenize → 6-entry table 0x7e781500 strcmp → cammode gate 0x7e70f076; default
-  handler 0x7e70c298 = HTTP 520/1004. Two-stage gating (top-level table 1001 vs dispatcher 520/1004).
-- **get_commandlist 0x7e6f9e2d**: serves a static 5616-byte oishare-2.20 XML command grammar (cmd1/param1/cmd2/param2,
-  23 cgi entries) = the self-describing schema; independently confirms 14 get/desc + 8 set camprop names.
-- **get_caminfo 0x7e6f9b91**: model name ONLY (registry key 0x62F1); no fw version (not on Wi-Fi), no serial.
-- **camera-mode state machine**: cells connection-index 0x608e9210, cammode 0xa0a9257e (0/1/2, 1=rec), lvqty
-  0xa0a9258c; switch_cammode leaf 0x7e70bef7 posts transition events 0x41b0001/0002/0020/0022/0023 (full matrix
-  only partially traced = dead end). get_connectmode 0x7e6f9a85.
-- **get_activate 0x7e6faa71**: `<activate>notyet|done</activate>` = UTC time-sync status (key 0x8CF4), not DRM.
-- **get_camcapa.cgi**: DEAD END — vestigial/other-model name, no handler in block 0, always 520/1004.
-- **image browse**: get_imglist 0x7e6fa683 (`text/plain` dir listing, `?DIR=`), get_thumbnail 0x7e6fa809 (EXIF/mov
-  thumbnail JPEG), get_resizeimg 0x7e6f9f0b.
-KMP capability discovery = get_commandlist + get_caminfo + get_camprop?com=desc (NOT get_camcapa).
+### Wi-Fi — `firmware/wifi-cgi.md`, `usb-protocol/wifi-api.md`, `usb-protocol/liveview-udp.md`
+- Every CGI in `get_commandlist` (23) and every rec-dispatcher leaf has a traced handler. Read-only
+  calls verified live. Error codes 1001/1002/1004/1005 mapped.
+- Live-view MJPEG-over-UDP wire format documented from OI.Share.
+- No firmware update over Wi-Fi on this body (no `fwup_*`), no PTP/IP responder on TCP 15740.
+- Cross-checked against `n0p/om-tether` (OM-1 II, descriptor v5.20): same CGI family, newer generation.
 
-## 2026-11-02 — OM Workspace + OI.Share reverse-engineering
-OM Workspace install at `research/owsetup_x/app` (build 2025-07-22). All interop RE, binaries/decompiles kept local.
-Docs in `docs/workspace/` and `docs/usb-protocol/`:
-- **ORF/MakerNote reader** (`workspace/orf-format.md`): olive.dll = generic TIFF/EXIF engine, Olympus specifics
-  registered externally; `COlyImgFmtOrf` IS-A TIFF; ORF signature (IIRO/IIRS/IITO/IILO subtypes); MakerNote located
-  via ExifIFD 0x8769 → 0x927c, generation gate at version 3.00; recursive IFD walker; sub-IFD tag table.
-- **RAW decode pipeline** (`workspace/raw-decode-pipeline.md`): OlyImgProc2 = broker; concrete `COlyBayerDecoder`
-  injected from TruePic-generation stage DLLs (Maple=DC9, Peony/Pomegranate=DC11, Walnut/Loquat=DC13, Acacia=DC13).
-  Each stage bundles RawProc/NR/**CameraSimulation**/DisplayParameters/ParamManager.
-- **Model selection** (`workspace/model-selection.md`): develop keyed by MakerNote Equipment 0x0100 CameraType2
-  camera-ID code (not model name). Full code→model table only in `MDP_AS.omdp`. **E-M10 Mark I = `S0051`** (ExifTool
-  cross-checked). DEAD END: `S0051` absent from this Workspace build — no Mk I CameraSimulation profile ships; generic
-  RAW develop works but won't match the Mk I OOC-JPEG look. Exact match needs Olympus Viewer 3 (older) or empirical
-  derivation from the user's OOC-JPEG vs ORF pairs.
-- **Plugin architecture** (`workspace/plugin-architecture.md`): `*.omdp`/`*.ofnp` = renamed PE32+ DLLs, single COM
-  factory each (`OlyCreateMediaPluginInstance` / `OlyCreateFuncPluginInstance`), loaded by `PluginMgr.dll`
-  (ns OLYPLGMGR). 6 MDP media plugins + 11 FNP function plugins. `MDP_AS` = CameraSimulation data plugin (MFC-linked);
-  CameraSimulation *code* lives in the engine DLLs. MDP_AS binary-profile schema RE DEFERRED (low ROI — Mk I absent).
-- **Live-view UDP stream** (`usb-protocol/liveview-udp.md`): full MJPEG-over-UDP wire format from OI.Share
-  (`startliveview`/`stopliveview`); 12-byte base header, first-packet TLV extension block; complete newer-parser TLV
-  table (types 1/3/4/5/8/9/10/12/16/17/18/106/107/108–115/200; 108–115 = 8 AF/face overlay Rects).
-- **Wi-Fi CGI surface**: CLOSED. The `research/oishare` dex has the identical 58-endpoint set already captured in
-  `usb-protocol/wifi-cgi-endpoints-oishare-4.6.0.txt`; no diff.
+### USB — `firmware/usb-ptp.md`, `usb-protocol/`
+- PTP is mailbox-driven (`TSK_PTPCOM`); there is no static opcode→handler table.
+- Advertised vendor ops: 18 (`0x902c–0x902f`, `0x9116–0x9125`, `0x9801–0x9805`). Internal engine ops: 54.
+- **OM Workspace's SDK command set is a different protocol generation** (`0x94xx`); it shares
+  nothing usable with the Mark I (`usb-protocol/sdk-opcode-compat.md`). `0x9481`/`0x9482` stall live.
+- No PTP memory-read op exists.
 
-Still open (Workspace/app side): MDP_AS CameraSimulation binary schema (deferred); decompile `OlyBayerDecoder` demosaic
-math (SIMD/CUDA — low ROI); KMP app scaffold still empty. Firmware-side open items unchanged from the section above.
+### Debug shell — `firmware/debug-shell.md`
+- 59-command "USF debugging shell 1.10" mapped, including `flash addr` and `file memdump`.
+- **Not reachable on stock 1.4 without opening the body.** Telnet is closed (live-tested), `0x8050`
+  is the active-interrupt register and not a debug flag, the dispatch is driven by an autoexec script
+  behind SFR latch `0x8ff00190 = 0x12345678`, and the interactive console is UART.
 
-## 2026-11-02 — Wi-Fi CGI surface COMPLETE + RAM catalog (all in `docs/firmware/wifi-cgi.md`, `memory-map.md`)
-Finished the CGI sweep; **every get_commandlist CGI (23) and every rec-dispatcher leaf now has a traced handler.**
-- **get_camprop fully resolved**: `com=get` builder 0x7e70e3ed is two-phase — phase 1 (event 0x41b0012) current value,
-  phase 2 (**new event 0x41b0013**) supported-value list (u32 array, same formatter bank as `desc`). Shared response
-  assembler 0x7e711c0d emits `<desc><propname>…</propname><attribute>…</attribute>[<value>…</value>][<enum>…</enum></desc>`
-  (fragments @0x7e7844xx); get fills both optional blocks, desc drives the same template. No separate get-only formatters.
-- **Minor CGIs**: exec_pwoff.cgi 0x7e6f9d6a (wifi_mngr power-off, cmd 0x1000), get_unusedcapacity.cgi 0x7e6fae32
-  (fileif_get_free_space), get_dcffilenum.cgi 0x7e6fafcc (`<dcffile>%lu</dcffile>`, key 23, cell 0xa0a912fc).
-- **Movie/reservation**: get_movplaytime.cgi 0x7e6fa1f9 (DIR+file, play_load_get_mov_info, .MOV/.AVI), get_rsvimglist.cgi
-  0x7e6fa464 (text/plain transfer-reservation list), clear_resvflg.cgi 0x7e6fa3b6 (wifi_mngr_clear_resvflg 0x7e7078ba).
-- **Time/GPS**: set_utctimediff.cgi 0x7e6fab8f (utctime=+diff=, flips get_activate key 0x8CF4), get_gpsdivunit.cgi
-  0x7e6fad08 (`<divunit>500</divunit>`, coord=value/500); req_attachexifgps 0x7e6fb11b / req_storegpsinfo 0x7e6fb58d
-  (geotag-write handlers located, field decode deferred — live-action only).
-- **exec_takemotion.cgi 0x7e70c17c**: AF-frame + movie control — 5-cmd table @0x7e78156c (assignafframe/releaseafframe/
-  takeready/starttake/stoptake), take-phase cell 0xa0a92590 selects phase handlers 0x7e70c7b5/c86b/c810/c8c6.
-- **Error codes**: 1001 not-available-in-mode, 1002 required-param-missing, 1004 bad-value, 1005 resource/media-I/O.
-- **RAM catalog** consolidated into memory-map.md (state cells, event ids 0x41b00xx, registry keys 0x62F1/0x8CF4,
-  mask-ROM region 0x4700xxxx). Corrected: 0xbd9b window = RAM scratch, not I/O regs.
-Deferred by design: camprop value *encodings* (client reads desc/enum lists); GPS-write field layouts (live-action).
-Firmware RE now pivots to: hardware I/O register identification, boot/vector code, and the KMP app scaffold (`app/`).
+### OM Workspace / OI.Share — `workspace/`, `firmware/update-server.md`, `firmware/updater-ow-2.5.md`
+- ORF/MakerNote reader, RAW decode pipeline, model selection, plugin architecture documented.
+- Firmware update server protocol documented; stock 1.4 BIN obtained through it.
+- Mark I (`S0051`) has no CameraSimulation profile in the current Workspace build.
+
+## Not done
+- **No flash of a patched image on the real camera**, and none planned while the owner judges the
+  risk too high. Procedure and risk analysis are in `mods/patching-pipeline.md`.
+- **No mod of our own.** Everything built so far reproduces the community ring-native patch. There
+  is no MN10300 cross-compiler/assembler setup for writing new payloads.
+- **ROM pictures at `0x46560000` are not extracted.** The only remaining route is a patch that dumps
+  flash to SD or forces the shell up (`mods/firmware-modding.md`).
+- **KMP app**: `app/` is an empty directory. Plan in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+- Stock firmware 1.0–1.3 BINs are not available.
+
+## Open RE items
+- `0x7d9929ce` / `0x7d9928ee` flash commit (NAND-controller register sequence) — `flash-storage.md`.
+- `0x7da82530` thunk → worker `0x7da8254b` in the firmup apply path.
+- Entry functions of imaging/PTP/Wi-Fi tasks beyond the firmup set.
+- Per-letter sub-component mapping of `S/G/H/W/A/M/V/D/T/I/N113????.BIN`.
+- USB PC-link flash routine behind vtable slot +36; arg-ids 334–337.
+- MMIO identity: `0x98001000` block, `0x8ff00000`, `0x99400000`, `0x9a000000–0x9e000000`; the 7
+  boot-programmed interrupt channels are not tied to named sources.
+- `switch_cammode` transition matrix (partially traced); camprop value encodings; GPS-write field layouts.
+- `set_camprop` / `exec_shutter` live test (state-changing; ask first).
+- Deferred as low value: `MDP_AS` CameraSimulation schema, `OlyBayerDecoder` demosaic math.
+
+## Environment
+- Ghidra 12.2 at `/home/danny/dev/ghidra_12.2_PUBLIC` with `michaelbrandi/ghidra-mn103-extension`
+  (language `mn10300:LE:32:default`); project in `research/ghidra_proj/`. Setup steps are in the
+  archived log. Headless scripts in `tools/ghidra/`.
+- Decoded blocks in `firmware/stock/dec/`; resource extracts in `firmware/stock/res1`, `res2`,
+  `jpg2`, `sheets`.
+- Run Python tools that read firmware or vendor files with `python3 -I`.

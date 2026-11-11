@@ -1,4 +1,5 @@
 .idea
+*.iml
 .claude
 reference
 research/owsetup_x/

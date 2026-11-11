@@ -6,7 +6,7 @@ command set to control the Mark I?* **No.** They are different protocol generati
 
 Sources: `olympus-opcode-table.csv` (523 PTP opcodes extracted from `OlyCameraLib`, the Workspace
 camera SDK; internal_id↔ptp_code↔flags) vs the Mark I's advertised + internal vendor opcode sets
-established live and statically in `usb-ptp.md`. Computed by `scratchpad/opcode_intersect.py`
+established live and statically in `usb-ptp.md`. Computed by `tools/opcode_intersect.py`
 (python3 -I).
 
 ## Numbers

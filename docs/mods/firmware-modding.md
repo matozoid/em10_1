@@ -52,7 +52,8 @@ Our E-M10 1.4 `OLY_E_113_1400_0000_0000.BIN`, 3 blocks:
 **Repack verified (2026-11-01):** `enc(dec(data)) == data` for all three blocks, and
 `footer_v(hdr, plain)` reproduces the stored footer checksum exactly. So a patched block can be
 re-encrypted into a container the camera's updater accepts. `tools/omfw.py {info|dec} <bin> [out]`.
-(`enc` / `footer_v` are module functions; a one-shot `build` subcommand is still TODO.)
+`tools/omfw.py rebuild <bin> <decdir> <out.bin>` re-encodes patched blocks and reseals the footers;
+`tools/fwpatch.py build` does the whole patch-and-reseal from a profile (see `patching-pipeline.md`).
 
 ## Implication for extracting the ROM pictures
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # Verify live USB DeviceInfo findings against the decrypted firmware block 0.
 # Runtime base: file offset 0 == runtime 0x7d991020.  offset = addr - 0x7d991020.
-import struct, sys
-BLK = "/home/danny/IdeaProjects/em10_1/firmware/stock/dec/blk00_40300000.bin"
+import os, struct, sys
+BLK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "firmware", "stock", "dec", "blk00_40300000.bin")
 RT = 0x7d991020
 b = open(BLK, "rb").read()
 def off(a): return a - RT

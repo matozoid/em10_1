@@ -41,7 +41,7 @@ Win32 errors are wrapped as `GetLastError() | 0x80070000`.
 ## Image-format class hierarchy
 
 RTTI (resolved manually via the Complete Object Locator — `tools`-side
-`scratchpad/rtti_vtables.py`, since Ghidra didn't auto-apply RTTI). Base **`COlyImgFmt`**
+`tools/rtti_vtables.py`, since Ghidra didn't auto-apply RTTI). Base **`COlyImgFmt`**
 (vtable `0x180084528`) with siblings `COlyImgFmtBmp`, `COlyImgFmtJfif`, `COlyImgFmtJpeg`,
 `COlyImgFmtExifJpeg`, `COlyImgFmtTiff`, `COlyImgFmtDelegate`, and **`COlyImgFmtOrf`**. All share
 inherited slots 5-9; each overrides slot 0 (QueryInterface) and slot 3 (Open/Identify).
