@@ -224,6 +224,12 @@ after the NOREXE step. It is not evidence that a boot stage is protected.
   nothing, hands over to normal startup", so an OK-at-power-on SD check probably exists and is
   selected by something not yet found (a start mechanism other than `0x7d9c17ff`, or boot code
   outside the update file). It is not proof: the delay could have another cause.
+- **Live (owner, 2026-11-12):** the delay appears **only with OK held**. MENU held and INFO held at
+  power-on start at normal speed. So power-on does test the OK button specifically, which makes an
+  unrelated cause unlikely. Still not shown: that the extra time is the `DCOLYMP` scan (an empty
+  `DCOLYMP` folder on the card was not tried; the owner judges it would not add evidence, since a
+  difference of a few directory reads is not something you can time by hand), and where the key test lives. The body has no
+  physical card-access lamp to watch (owner's recollection; not checked against the manual).
 - `0x7de57763`, called by both the boot sequence and the scanner and described above as "mount SD",
   is a stub that returns 0.
 

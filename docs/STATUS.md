@@ -60,8 +60,9 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - **SD-card scanner located.** Task `FIRMUP_CLI` (creation id 0x14, entry `0x7de57532`) scans `DCOLYMP/`
   for `E113????.BIN` (body) and per-letter sub-component files; `E1139999.BIN` matches. It posts to
   `FIRMUP_SRV` (`0x7de57942`), which also serves the USB route. **What starts the scanner is not
-  found.** Live: power-on with OK held and no firmware on the card boots 1–2 s slower, which fits
-  "scan, find nothing, continue" but does not prove it.
+  found.** Live: power-on with OK held and no firmware on the card boots 1–2 s slower; MENU or INFO
+  held does not. That fits "OK selects the scan, it finds nothing, startup continues" but does not
+  prove the delay is the scan.
 - **Pre-flash validation fails closed.** Structural region-table parse (error `0x3321`/`0x3322`),
   image-id `'E'` check, and `usr_checksum` (error `0x3202`). Any failure aborts before writing.
 - **`usr_checksum` is a header↔tail duplicate-array check, not a payload hash.** Mid-payload patches
