@@ -57,23 +57,27 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 `loader_patch@0x403001ab` is a no-op in this profile (old == new).
 
 ### In-camera firmware update — `firmware/camera-fw-update.md`, `firmware/flash-storage.md`
-- **SD-card path resolved.** Task `FIRMUP_SRV` (id 0x14, entry `0x7de57532`) scans `DCOLYMP/` for
-  `E113????.BIN` (body) and per-letter sub-component files; `E1139999.BIN` matches.
+- **SD-card scanner located.** Task `FIRMUP_CLI` (creation id 0x14, entry `0x7de57532`) scans `DCOLYMP/`
+  for `E113????.BIN` (body) and per-letter sub-component files; `E1139999.BIN` matches. It posts to
+  `FIRMUP_SRV` (`0x7de57942`), which also serves the USB route. **What starts the scanner is not
+  found.** Live: power-on with OK held and no firmware on the card boots 1–2 s slower, which fits
+  "scan, find nothing, continue" but does not prove it.
 - **Pre-flash validation fails closed.** Structural region-table parse (error `0x3321`/`0x3322`),
   image-id `'E'` check, and `usr_checksum` (error `0x3202`). Any failure aborts before writing.
 - **`usr_checksum` is a header↔tail duplicate-array check, not a payload hash.** Mid-payload patches
   do not touch either 20-byte window, so the built ring-native image passes every packaging gate
   statically. Only its runtime behaviour on the real body is unverified.
-- **Recovery.** The updater is an ordinary RTOS task inside block 0; there is no separate
-  bootloader partition. A patch that breaks only the lens/rec path leaves SD reflash of stock
-  available. A patch that breaks boot, the scheduler or the SD stack does not.
+- **Recovery is unproven.** The updater tasks live inside block 0, and the code that selects an SD
+  update at power-on is unknown. A patch that breaks only the lens/rec path would probably leave
+  an update route available; a patch that breaks boot, the scheduler or the SD stack would not.
 - USB PC-link update (`startFirmUp` `0x7e21d6dc`) is located but the flash routine sits behind a
   runtime vtable slot; not followed further.
 
 ### Firmware internals — `firmware/`
 - Block 0 in Ghidra: ~72.5k functions, ~10.4k auto-named from debug strings, vtable and class-graph
   renames (`classes.md`, `blocks.md`, `memory-map.md`).
-- **Complete task registry**: 134 tasks with id, name, entry, priority, stack (`rtos-tasks.md`).
+- Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
+  one over at least part of the table** (see the correction there); needs re-deriving.
 - **`symbol-map.md`: about 1 340 curated address rows** across ~40 subsystems: heap allocator, object
   model, OS/IPC primitives, libc cluster, soft-float, GUI app / panel manager / Super Control Panel,
   playback components (Cmp*), movie playback, AE, sensor black-correction, audio codec, VG draw
@@ -122,6 +126,9 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - Stock firmware 1.0–1.3 BINs are not available.
 
 ## Open RE items
+- What starts the SD scanner task at power-on (OK held), and whether that code is inside block 0.
+- Re-derive the task registry names from the names the boot code logs (ids are shifted by one).
+- Battery-level and version gates before an update; whether a written image is read back and verified.
 - `0x7d9929ce` / `0x7d9928ee` flash commit (NAND-controller register sequence) — `flash-storage.md`.
 - `0x7da82530` thunk → worker `0x7da8254b` in the firmup apply path.
 - Entry functions of imaging/PTP/Wi-Fi tasks beyond the firmup set.

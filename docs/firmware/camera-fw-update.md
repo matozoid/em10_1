@@ -171,6 +171,67 @@ numerically). Therefore the patched image's header/tail stamps are byte-identica
 `Binary file Hakken` on the match, reads it, and flashes. Our app only places the file + drives the
 boot-hold UI — it does **not** reimplement flashing or the image header/validation.
 
+## Update-flow trace and corrections (2026-11-11)
+
+Static trace with `tools/dis.py` and the Ghidra project, plus one live observation. This section
+**supersedes** the task naming used above and in `rtos-tasks.md` for the update tasks.
+
+### Task names are shifted by one around the update tasks
+The creation table (`0x7d9a9384`) ids are one higher than the name-table (`0x4035fb66`) ids here.
+Evidence is in the boot code itself, which logs a name right after starting each task:
+
+| creation id | entry | what the code is | name the firmware logs / correct name |
+|---|---|---|---|
+| 0x13 | `0x7de9d4f4` | queue worker, started from the file-foreground init | FILEFGND (name-table 0x12) |
+| 0x14 | `0x7de57532` | SD `DCOLYMP` scanner; **posts** requests to mailbox cell `0x7d9b06ee` | **FIRMUP_CLI** (name-table 0x13) |
+| 0x15 | `0x7de57942` | request loop (`[fupsrv]Get request.`); **reads** mailbox `0x7d9b06ee` | **FIRMUP_SRV** (name-table 0x14); boot logs `"FIRMUP_SRV"` at `0x7da87344` after starting it |
+| 0x4f | — | started by boot at `0x7da877b5` with log `"USTART1"` | USRSTART_FIRST (name-table 0x4e) |
+
+So `0x7de57532` is the **client** (SD scanner), not `FIRMUP_SRV`. The 134-task registry in
+`rtos-tasks.md` was built by joining the two tables on equal ids and is therefore suspect over at
+least this range; it needs re-deriving from the names the boot code logs.
+
+### One update server, two clients
+- `FIRMUP_SRV` (`0x7de57942`) is started unconditionally in the normal boot sequence (`0x7da8733d`).
+- Its requests come from the SD scanner (`0x7de576c2`) and from the USB path (`FirmwareCheck`
+  `0x7e7d3b95`, `0x7e7d2e83`). Validation and writing are shared; the route only changes how the
+  image arrives.
+- The USB path is fully visible: GUI `Check_FirmwareUpdate` `0x7e14d0b0` →
+  `api_firmup_Check_FirmwareUpdate` → on success `start_usb_firmup` `0x7e14d026` →
+  `api_firmup_Execute_FirmwareUpdate`.
+
+### Image checks in the validator (`0x7de57e24`)
+Per region record (parser `0x7da8883e`, up to 32 records): byte 1 must be `'E'` (`0x7da8880b`),
+bytes 2–3 big-endian must be `0x1130` (`0x7da88811`; mismatch = error `0x3202`), byte 20 is the
+component kind (`0x7da88832`): 0 = USR, 1 = OSD, then PIC, WAV, FRAME, ADJSLF, RESCOM, NOREXE, …
+(order as tested in the code; only 0 and 1 are confirmed against the header layout). The stock 1.4
+BIN's three blocks have kind bytes 0, 1, 6, i.e. USR + OSD + (by that order) RESCOM, and **no NOREXE
+component**. Components are written in a fixed order with resources first and USR near the end;
+NOREXE, when an image has one, is written after USR.
+
+Correction: the string `Boot ha yaranai zeyo` ("boot is not done") at `0x7de58917` is only a log line
+after the NOREXE step. It is not evidence that a boot stage is protected.
+
+### SD-card trigger: not found statically, but consistent with a live observation
+- No code in block 0 starts task 0x14 (the SD scanner). All 157 call sites of the task-start routine
+  `0x7d9c17ff` were resolved; none passes its id cell `0x7d9b028c`, which has no references at all.
+  The only generic starter is the debug-shell `OlyTaskStart` command. The strings
+  `REBOOT SYSTEM UPDATE`, `REBOOT USER UPDATE`, `RebootFlag` are referenced by no code.
+- When the scanner finds no matching file it does not fail: `0x7dc9cdd5` logs `exit`, starts
+  USRSTART_FIRST (`"USTART1"`) and ends its own task, i.e. it hands over to normal startup.
+- **Live (owner, 2026-11-11):** power-on with OK held, card without firmware files: the camera starts
+  normally but takes one to two seconds longer than usual. That matches "scanner runs, finds
+  nothing, hands over to normal startup", so an OK-at-power-on SD check probably exists and is
+  selected by something not yet found (a start mechanism other than `0x7d9c17ff`, or boot code
+  outside the update file). It is not proof: the delay could have another cause.
+- `0x7de57763`, called by both the boot sequence and the scanner and described above as "mount SD",
+  is a stub that returns 0.
+
+### Consequence for recovery claims
+The statement that a bad patch "leaves the SD updater running, so stock can be reflashed" rests on
+an SD trigger that is observed only indirectly and whose selecting code is unknown. If that code
+lives in block 0, a patch that breaks early startup removes it. Treat SD recovery as **unproven**.
+
 ## Dead ends / notes
 - USB path: the real flash routine is behind a runtime-populated vtable slot (+36); can't follow the
   indirect `calls (a2)` to a fixed address from static analysis alone.

@@ -52,6 +52,11 @@ exactly what it accepts for stock. The only part that cannot be cleared statical
 payload's runtime behaviour on the real body** — the author's TEST_CANDIDATE caveat stands.
 
 ### Recovery path survives a bad payload (why brick risk is low) (2026-11-02)
+> **Superseded 2026-11-11.** `0x7de57532` is the SD scanner *client* (FIRMUP_CLI), not FIRMUP_SRV, and
+> no code that starts it at power-on has been found. SD recovery is unproven; the "low brick risk"
+> conclusion below does not hold as written. See `docs/firmware/camera-fw-update.md` →
+> "Update-flow trace and corrections". The owner has one camera and does not flash.
+
 The SD-card updater (`DCOLYMP/E113????.BIN` scanner) is RTOS task **`FIRMUP_SRV`** (id 0x14, entry
 `0x7de57532`, priority 8) — confirmed by cross-joining the id→name table (`0x4035fb66`) with the
 task-creation table (`0x7d9a9384`); see `docs/firmware/rtos-tasks.md`. It is a standalone task spawned
