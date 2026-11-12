@@ -90,7 +90,9 @@ class H(BaseHTTPRequestHandler):
         if name in ("get_unusedcapacity", "get_dcffilenum"):
             if mode != "play":
                 return self.error(1001)
-            return self.reply("<unused>1234567</unused>" if name == "get_unusedcapacity" else "<dcffile>3</dcffile>")
+            # as on the real E-M10: an XML declaration first; free space saturates at 2^32-1
+            return self.reply('<?xml version="1.0"?>\r\n' + ("<unused>4294967295</unused>" if name == "get_unusedcapacity"
+                                                              else "<dcffile>3</dcffile>") + "\r\n")
         if name == "get_imglist":
             d = q.get("DIR")
             if d is None:

@@ -113,3 +113,28 @@ USB side (E-M1 only): it drives the body through libgphoto2 with the `0x9481` sh
 device properties `d0xx` (e.g. `d00c` AF mode, `d051` AF field, `d006` exposure program, `d010` picture
 mode). The E-M10 Mark I rejects `0x9481` (`sdk-opcode-compat.md`), so this part does not transfer.
 
+## Live probe with `tools/emcam.py` (2026-11-12, E-M10 Mark I, read-only)
+`emcam.py probe` ran on the owner's camera in `private` connect mode, play mode. Raw report kept locally
+in `research/` (not committed: it lists picture file names). All 16 checks passed.
+
+Confirmed on this body:
+- Replies start with `<?xml version="1.0"?>`; `get_connectmode` → `private`, `get_caminfo` → model `E-M10`.
+- `get_imglist.cgi?DIR=…` → `VER_100`, then one line per entry: `dir,name,size,attr,date,time`. Directories
+  have attribute 16 and size 0; files had attribute 0. Date and time are FAT-packed values. Folders made by
+  another camera (`100CANON`) are listed like the camera's own.
+- `get_dcffilenum` → `<dcffile>271</dcffile>` with 115 + 311 directory entries on the card: it counts
+  pictures, with a RAW + JPEG pair as one (311 entries in `101OLYMP` are 155 pairs plus one single).
+- `get_unusedcapacity` → `<unused>4294967295</unused>`: the 32-bit maximum, i.e. the value saturates when
+  4 GB or more is free. The unit below that limit is presumably bytes; not yet seen.
+- `get_activate` → `<activate>done</activate>`; `get_gpsdivunit` → `<divunit>500</divunit>` (both as
+  predicted from the firmware); `get_rsvimglist` → just `VER_100` when nothing is marked for transfer.
+- `get_commandlist` is 5616 bytes with the same 23 commands as on 2026-11-01.
+- `get_thumbnail` works for a JPEG from another camera (11 936 bytes, starts `FF D8 FF DB`).
+- **`get_resizeimg` with `size=1024` returned the full original file** (same 6 342 609 bytes) for that
+  other-camera JPEG. Whether it resizes the E-M10's own pictures is the next thing to check; the probe now
+  prefers the camera's own folders.
+- Plain file download by path works.
+
+Side observation: every file in `101OLYMP` carries the date 2014-01-01 00:00:00, so the camera's clock was
+not set when they were taken.
+

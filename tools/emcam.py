@@ -83,6 +83,11 @@ class Camera:
         m = re.search(r"<%s>(.*?)</%s>" % (name, name), self.text(path), re.S)
         return m.group(1).strip() if m else None
 
+    def free_bytes(self):
+        """Free card space in bytes, or None when the camera reports its 32-bit maximum (4 GB or more)."""
+        v = int(self.tag("get_unusedcapacity.cgi", "unused"))
+        return None if v >= 0xffffffff else v
+
     # --- browsing ---
     def listdir(self, directory):
         """Entries of one card directory: dicts with path, name, size, is_dir, date, time."""
@@ -255,7 +260,8 @@ def probe(cam, out):
     step("GET get_imglist.cgi?DIR=/DCIM (raw)", raw("get_imglist.cgi?DIR=/DCIM"))
     dirs = step("parsed /DCIM", lambda: cam.listdir("/DCIM")) or []
     first = None
-    for d in [e for e in dirs if e["is_dir"]][:2]:
+    # the camera's own folders first, so the image checks run on a picture this camera took
+    for d in sorted([e for e in dirs if e["is_dir"]], key=lambda e: "OLYMP" not in e["name"])[:2]:
         step("GET get_imglist.cgi?DIR=%s (raw, first 1500 bytes)" % d["path"], raw("get_imglist.cgi?DIR=" + d["path"]))
         entries = step("parsed %s (count, first 3)" % d["path"],
                        lambda d=d: (lambda l: "%d entries: %s" % (len(l), l[:3]))(cam.listdir(d["path"])))
@@ -309,11 +315,16 @@ def run(cam, a):
     if a.cmd == "info":
         print("connect mode :", cam.tag("get_connectmode.cgi", "connectmode"))
         print("model        :", cam.tag("get_caminfo.cgi", "model"))
-        for label, path in (("free space   :", "get_unusedcapacity.cgi"), ("picture files:", "get_dcffilenum.cgi")):
-            try:                               # print the reply's text content; tag names differ per CGI
-                print(label, " ".join(re.sub(r"<[^>]+>", " ", cam.text(path)).split()))
-            except CameraError as e:
-                print(label, "(%s)" % e)
+        try:
+            free = cam.free_bytes()
+            print("free space   :", "4 GB or more (the camera's counter stops at 4294967295 bytes)" if free is None
+                  else "%.1f MB" % (free / 1e6))
+        except CameraError as e:
+            print("free space   : (%s)" % e)
+        try:                                   # counts pictures, with a RAW+JPEG pair as one
+            print("pictures     :", cam.tag("get_dcffilenum.cgi", "dcffile"))
+        except CameraError as e:
+            print("pictures     : (%s)" % e)
         xml = cam.text("get_commandlist.cgi")
         print("api version  :", (re.search(r"<version>(.*?)</version>", xml) or [0, "?"])[1])
         print("commands     :", " ".join(sorted(set(re.findall(r'<cgi name="([^"]+)"', xml)))))
