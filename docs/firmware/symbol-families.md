@@ -9251,3 +9251,562 @@ Counts: set 977, global 720, get 542, nop 405, thunk 308, ret 146. Total 3098.
 | `0x7e9daad3` | 2 | `global_8ff0009c_get_7e9daad3` | Leaf `return *0x8ff0009c`. | disassembly |
 | `0x7e9dab2a` | 2 | `global_8ff000c8_get_7e9dab2a` | Leaf `return *0x8ff000c8`. | disassembly |
 | `0x7e9dae68` | 1 | `global_98e00098_get_7e9dae68` | Leaf `return *0x98e00098`. | disassembly |
+
+## Two-instruction helpers
+Bodies of exactly two instructions plus return, classified from their disassembly on 2026-11-12:
+- `store[_u16|_u8]_<value>_f<off>|g<address>_<addr>`: store a constant into a field (`f`) or a global (`g`).
+  Some `g` addresses are hardware registers (e.g. `0x9b20xxxx`); the name only records the store.
+- `get_<s16|u16|s8|u8>_f<off>|g<address>_<addr>`: read a field or global and sign- or zero-extend it.
+- `thunk_<s16|u16|s8|u8>_<target>_<addr>`: call `target` and narrow its result.
+- `thunk_arg<s16|u16|s8|u8>_<target>_<addr>`: narrow the argument, then call `target`.
+- `call0_<target>_<addr>`: call `target`, return 0. `call_arg0_<target>_<addr>`: call `target` with `d0 = 0`.
+
+Counts: thunk 221, store 211, call0 40, get 38, call 35. Total 545.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d9925b1` | 7 | `thunk_argu8_7d992229_7d9925b1` | Converts `d0` to u8, then calls `0x7d992229`. | disassembly |
+| `0x7d9925ba` | 1 | `thunk_argu8_7d992232_7d9925ba` | Converts `d0` to u8, then calls `0x7d992232`. | disassembly |
+| `0x7d995080` | 8 | `thunk_argu16_7d9962a3_7d995080` | Converts `d1` to u16, then calls `0x7d9962a3`. | disassembly |
+| `0x7d99509d` | 9 | `thunk_argu16_7d9964bd_7d99509d` | Converts `d1` to u16, then calls `0x7d9964bd`. | disassembly |
+| `0x7d9950b2` | 1 | `thunk_argu8_7d995ee5_7d9950b2` | Converts `d1` to u8, then calls `0x7d995ee5`. | disassembly |
+| `0x7d996e24` | 7 | `thunk_u16_7d9dbd79_7d996e24` | `return (u16) 0x7d9dbd79()` — thunk with result conversion. | disassembly |
+| `0x7d996e2f` | 4 | `thunk_u16_7d9dbda0_7d996e2f` | `return (u16) 0x7d9dbda0()` — thunk with result conversion. | disassembly |
+| `0x7d9a101d` | 1 | `store_u16_0_f10_7d9a101d` | `*(u16*)(this+10) = 0`. | disassembly |
+| `0x7d9a16ce` | 3 | `thunk_args16_7d9a156d_7d9a16ce` | Converts `d0` to s16, then calls `0x7d9a156d`. | disassembly |
+| `0x7d9c6a2d` | 1 | `store_1_ga0a3e6cc_7d9c6a2d` | `*0xa0a3e6cc = 1`. | disassembly |
+| `0x7d9cb15e` | 1 | `thunk_u16_7d99223b_7d9cb15e` | `return (u16) 0x7d99223b()` — thunk with result conversion. | disassembly |
+| `0x7d9d40dd` | 3 | `thunk_u8_7d9d40e6_7d9d40dd` | `return (u8) 0x7d9d40e6()` — thunk with result conversion. | disassembly |
+| `0x7d9d51c6` | 5 | `thunk_u8_7d9d51d8_7d9d51c6` | `return (u8) 0x7d9d51d8()` — thunk with result conversion. | disassembly |
+| `0x7d9d51e4` | 3 | `get_s16_ga0a53764_7d9d51e4` | Leaf `return (s16)*(u16*)0xa0a53764`. | disassembly |
+| `0x7d9d51f7` | 1 | `get_s16_ga0a53766_7d9d51f7` | Leaf `return (s16)*(u16*)0xa0a53766`. | disassembly |
+| `0x7d9d52f3` | 1 | `thunk_u16_7d9d3ec2_7d9d52f3` | `return (u16) 0x7d9d3ec2()` — thunk with result conversion. | disassembly |
+| `0x7d9d8915` | 1 | `get_u16_ga0a537f4_7d9d8915` | Leaf `return (u16)*0xa0a537f4`. | disassembly |
+| `0x7d9db13b` | 4 | `thunk_argu8_7d9e9319_7d9db13b` | Converts `d0` to u8, then calls `0x7d9e9319`. | disassembly |
+| `0x7d9db376` | 12 | `thunk_argu8_7d9e0ffc_7d9db376` | Converts `d1` to u8, then calls `0x7d9e0ffc`. | disassembly |
+| `0x7d9db92b` | 1 | `get_u8_ga0a53db8_7d9db92b` | Leaf `return (u8)*0xa0a53db8`. | disassembly |
+| `0x7d9dc128` | 2 | `get_s16_ga0a53dea_7d9dc128` | Leaf `return (s16)*(u16*)0xa0a53dea`. | disassembly |
+| `0x7d9df36b` | 4 | `thunk_argu16_7d9decbb_7d9df36b` | Converts `d1` to u16, then calls `0x7d9decbb`. | disassembly |
+| `0x7d9df374` | 4 | `thunk_argu16_7d9ded48_7d9df374` | Converts `d0` to u16, then calls `0x7d9ded48`. | disassembly |
+| `0x7d9df3a5` | 3 | `thunk_argu8_7d9deed9_7d9df3a5` | Converts `d1` to u8, then calls `0x7d9deed9`. | disassembly |
+| `0x7d9e04be` | 6 | `thunk_argu8_7d9dfe43_7d9e04be` | Converts `d0` to u8, then calls `0x7d9dfe43`. | disassembly |
+| `0x7d9e04c7` | 1 | `thunk_argu8_7d9e004d_7d9e04c7` | Converts `d0` to u8, then calls `0x7d9e004d`. | disassembly |
+| `0x7d9e10ba` | 14 | `thunk_argu16_7d9e163c_7d9e10ba` | Converts `d0` to u16, then calls `0x7d9e163c`. | disassembly |
+| `0x7d9e10c3` | 10 | `thunk_argu16_7d9e166e_7d9e10c3` | Converts `d0` to u16, then calls `0x7d9e166e`. | disassembly |
+| `0x7d9e3bf0` | 19 | `thunk_argu8_7d9c5c68_7d9e3bf0` | Converts `d1` to u8, then calls `0x7d9c5c68`. | disassembly |
+| `0x7d9e5c01` | 1 | `store_u8_0_ga0a572fc_7d9e5c01` | `*(u8*)0xa0a572fc = 0`. | disassembly |
+| `0x7d9e5c0b` | 1 | `thunk_argu8_7d9e5d23_7d9e5c0b` | Converts `d0` to u8, then calls `0x7d9e5d23`. | disassembly |
+| `0x7d9e5c14` | 1 | `thunk_argu8_7d9e5d74_7d9e5c14` | Converts `d0` to u8, then calls `0x7d9e5d74`. | disassembly |
+| `0x7d9e6703` | 2 | `store_2_g6056171c_7d9e6703` | `*0x6056171c = 2`. | disassembly |
+| `0x7d9e6b80` | 3 | `thunk_u16_7d9e7477_7d9e6b80` | `return (u16) 0x7d9e7477()` — thunk with result conversion. | disassembly |
+| `0x7d9e6bb1` | 4 | `thunk_u16_47001671_7d9e6bb1` | `return (u16) 0x47001671()` — thunk with result conversion. | disassembly |
+| `0x7d9e6bbc` | 1 | `store_0_g60561738_7d9e6bbc` | `*0x60561738 = 0`. | disassembly |
+| `0x7d9e834f` | 1 | `call_arg0_7d9e97af_7d9e834f` | Calls `0x7d9e97af` with `d0 = 0`. | disassembly |
+| `0x7d9e97a5` | 2 | `store_0_g60561740_7d9e97a5` | `*0x60561740 = 0`. | disassembly |
+| `0x7d9ec80b` | 2 | `store_0_g988000f8_7d9ec80b` | `*0x988000f8 = 0`. | disassembly |
+| `0x7d9ed562` | 1 | `store_u16_1_g605618f4_7d9ed562` | `*(u16*)0x605618f4 = 1`. | disassembly |
+| `0x7da67a1e` | 1 | `call0_7da67a27_7da67a1e` | Calls `0x7da67a27` and returns 0. | disassembly |
+| `0x7da881ff` | 1 | `thunk_u16_7da882ae_7da881ff` | `return (u16) 0x7da882ae()` — thunk with result conversion. | disassembly |
+| `0x7da882b7` | 1 | `store_u16_1_g606b7cbc_7da882b7` | `*(u16*)0x606b7cbc = 1`. | disassembly |
+| `0x7da88c1d` | 1 | `store_u16_1_g606b7d8c_7da88c1d` | `*(u16*)0x606b7d8c = 1`. | disassembly |
+| `0x7da892f6` | 2 | `thunk_u8_7d996e2f_7da892f6` | `return (u8) 0x7d996e2f()` — thunk with result conversion. | disassembly |
+| `0x7da8c520` | 1 | `thunk_u16_7da8dac4_7da8c520` | `return (u16) 0x7da8dac4()` — thunk with result conversion. | disassembly |
+| `0x7da8c529` | 1 | `thunk_u16_7da8db25_7da8c529` | `return (u16) 0x7da8db25()` — thunk with result conversion. | disassembly |
+| `0x7da91d21` | 1 | `store_1_g9ba003c8_7da91d21` | `*0x9ba003c8 = 1`. | disassembly |
+| `0x7daa39e5` | 1 | `get_u8_g606bad40_7daa39e5` | Leaf `return (u8)*(u16*)0x606bad40`. | disassembly |
+| `0x7daa5305` | 2 | `get_s16_g606badc0_7daa5305` | Leaf `return (s16)*(u16*)0x606badc0`. | disassembly |
+| `0x7daa5325` | 1 | `store_u8_0_g606badbe_7daa5325` | `*(u8*)0x606badbe = 0`. | disassembly |
+| `0x7daa79e0` | 1 | `store_u16_0_g606bb3b0_7daa79e0` | `*(u16*)0x606bb3b0 = 0`. | disassembly |
+| `0x7daa989e` | 3 | `store_u8_1_g606bb460_7daa989e` | `*(u8*)0x606bb460 = 1`. | disassembly |
+| `0x7daaa520` | 1 | `store_0_g606bb4bc_7daaa520` | `*0x606bb4bc = 0`. | disassembly |
+| `0x7daaa533` | 1 | `store_0_g606bb4c0_7daaa533` | `*0x606bb4c0 = 0`. | disassembly |
+| `0x7daaa8c1` | 1 | `get_u8_g606bb4ac_7daaa8c1` | Leaf `return (u8)*(u16*)0x606bb4ac`. | disassembly |
+| `0x7dabc5e7` | 2 | `thunk_u16_7dac6182_7dabc5e7` | `return (u16) 0x7dac6182()` — thunk with result conversion. | disassembly |
+| `0x7dabc5fb` | 1 | `store_0_g606bb804_7dabc5fb` | `*0x606bb804 = 0`. | disassembly |
+| `0x7dabf117` | 1 | `call0_7dabf120_7dabf117` | Calls `0x7dabf120` and returns 0. | disassembly |
+| `0x7dac0988` | 1 | `store_u8_0_g606bb96a_7dac0988` | `*(u8*)0x606bb96a = 0`. | disassembly |
+| `0x7dac1221` | 2 | `store_u16_1_g606bb970_7dac1221` | `*(u16*)0x606bb970 = 1`. | disassembly |
+| `0x7dac4c7d` | 1 | `store_u8_0_g606c4b52_7dac4c7d` | `*(u8*)0x606c4b52 = 0`. | disassembly |
+| `0x7dac4fb0` | 1 | `store_u8_1_g606c4b58_7dac4fb0` | `*(u8*)0x606c4b58 = 1`. | disassembly |
+| `0x7dac4fbb` | 2 | `store_u8_0_g606c4b58_7dac4fbb` | `*(u8*)0x606c4b58 = 0`. | disassembly |
+| `0x7dac9620` | 1 | `store_u8_1_g606c58ab_7dac9620` | `*(u8*)0x606c58ab = 1`. | disassembly |
+| `0x7dacd672` | 1 | `store_0_g606c59a0_7dacd672` | `*0x606c59a0 = 0`. | disassembly |
+| `0x7dad0576` | 2 | `thunk_u16_7dacf6fd_7dad0576` | `return (u16) 0x7dacf6fd()` — thunk with result conversion. | disassembly |
+| `0x7dad3b7c` | 1 | `store_u16_0_g606c624e_7dad3b7c` | `*(u16*)0x606c624e = 0`. | disassembly |
+| `0x7dad4341` | 1 | `store_u8_1_g606c6306_7dad4341` | `*(u8*)0x606c6306 = 1`. | disassembly |
+| `0x7dad4ab2` | 2 | `thunk_argu16_7dad4abb_7dad4ab2` | Converts `d0` to u16, then calls `0x7dad4abb`. | disassembly |
+| `0x7dae2448` | 2 | `get_s16_g606c64ce_7dae2448` | Leaf `return (s16)*(u16*)0x606c64ce`. | disassembly |
+| `0x7daf9f57` | 1 | `call0_7daf5a01_7daf9f57` | Calls `0x7daf5a01` and returns 0. | disassembly |
+| `0x7dafa23d` | 2 | `store_u16_0_g606c661c_7dafa23d` | `*(u16*)0x606c661c = 0`. | disassembly |
+| `0x7dafb7e6` | 3 | `store_u16_1_g606c6c18_7dafb7e6` | `*(u16*)0x606c6c18 = 1`. | disassembly |
+| `0x7dafbcbf` | 2 | `store_u8_1_g606c6b81_7dafbcbf` | `*(u8*)0x606c6b81 = 1`. | disassembly |
+| `0x7dafbcca` | 5 | `store_u8_0_g606c6b81_7dafbcca` | `*(u8*)0x606c6b81 = 0`. | disassembly |
+| `0x7dafdec1` | 1 | `store_u16_1_g606c6ca0_7dafdec1` | `*(u16*)0x606c6ca0 = 1`. | disassembly |
+| `0x7db000f2` | 4 | `thunk_argu16_7db00141_7db000f2` | Converts `d0` to u16, then calls `0x7db00141`. | disassembly |
+| `0x7db000fb` | 3 | `thunk_argu16_7db00141_7db000fb` | Converts `d0` to u16, then calls `0x7db00141`. | disassembly |
+| `0x7db00138` | 1 | `thunk_argu16_7db00141_7db00138` | Converts `d0` to u16, then calls `0x7db00141`. | disassembly |
+| `0x7db00ba1` | 1 | `call_arg0_7db00baa_7db00ba1` | Calls `0x7db00baa` with `d0 = 0`. | disassembly |
+| `0x7db01605` | 1 | `call_arg0_7db01819_7db01605` | Calls `0x7db01819` with `d0 = 0`. | disassembly |
+| `0x7db0ac61` | 2 | `thunk_u16_7db0f339_7db0ac61` | `return (u16) 0x7db0f339()` — thunk with result conversion. | disassembly |
+| `0x7db0bc11` | 2 | `store_u16_0_g606c9290_7db0bc11` | `*(u16*)0x606c9290 = 0`. | disassembly |
+| `0x7db0bc50` | 6 | `call_arg0_7d9d5163_7db0bc50` | Calls `0x7d9d5163` with `d0 = 0`. | disassembly |
+| `0x7db12bcc` | 2 | `thunk_u16_7daf34a7_7db12bcc` | `return (u16) 0x7daf34a7()` — thunk with result conversion. | disassembly |
+| `0x7db12bd7` | 1 | `thunk_u16_7daf3515_7db12bd7` | `return (u16) 0x7daf3515()` — thunk with result conversion. | disassembly |
+| `0x7db12bec` | 4 | `thunk_u16_7daf394e_7db12bec` | `return (u16) 0x7daf394e()` — thunk with result conversion. | disassembly |
+| `0x7db12bf7` | 3 | `thunk_u16_7daf397b_7db12bf7` | `return (u16) 0x7daf397b()` — thunk with result conversion. | disassembly |
+| `0x7db12c0c` | 1 | `thunk_u16_7daf44fb_7db12c0c` | `return (u16) 0x7daf44fb()` — thunk with result conversion. | disassembly |
+| `0x7db12c17` | 1 | `thunk_u8_7daf4546_7db12c17` | `return (u8) 0x7daf4546()` — thunk with result conversion. | disassembly |
+| `0x7db1333d` | 3 | `thunk_u16_7db43e95_7db1333d` | `return (u16) 0x7db43e95()` — thunk with result conversion. | disassembly |
+| `0x7db13348` | 13 | `thunk_u16_7db50401_7db13348` | `return (u16) 0x7db50401()` — thunk with result conversion. | disassembly |
+| `0x7db1605b` | 1 | `store_1_g9b200004_7db1605b` | `*0x9b200004 = 1`. | disassembly |
+| `0x7db16066` | 1 | `store_1_g9b200804_7db16066` | `*0x9b200804 = 1`. | disassembly |
+| `0x7db16071` | 1 | `store_1_g9b201004_7db16071` | `*0x9b201004 = 1`. | disassembly |
+| `0x7db1607c` | 1 | `store_1_g9b200008_7db1607c` | `*0x9b200008 = 1`. | disassembly |
+| `0x7db16087` | 1 | `store_1_g9b200808_7db16087` | `*0x9b200808 = 1`. | disassembly |
+| `0x7db16092` | 1 | `store_1_g9b201008_7db16092` | `*0x9b201008 = 1`. | disassembly |
+| `0x7db169af` | 1 | `store_0_g9b300048_7db169af` | `*0x9b300048 = 0`. | disassembly |
+| `0x7db170e5` | 1 | `store_1_g9b300024_7db170e5` | `*0x9b300024 = 1`. | disassembly |
+| `0x7db170f0` | 1 | `store_1_g9b300028_7db170f0` | `*0x9b300028 = 1`. | disassembly |
+| `0x7db1791b` | 7 | `call0_7db6526b_7db1791b` | Calls `0x7db6526b` and returns 0. | disassembly |
+| `0x7db17926` | 6 | `call0_7db6530a_7db17926` | Calls `0x7db6530a` and returns 0. | disassembly |
+| `0x7db18cc2` | 3 | `call0_7db653ad_7db18cc2` | Calls `0x7db653ad` and returns 0. | disassembly |
+| `0x7db18ccd` | 2 | `call0_7db65400_7db18ccd` | Calls `0x7db65400` and returns 0. | disassembly |
+| `0x7db18d4c` | 1 | `call0_7db170e5_7db18d4c` | Calls `0x7db170e5` and returns 0. | disassembly |
+| `0x7db18d55` | 1 | `call0_7db170f0_7db18d55` | Calls `0x7db170f0` and returns 0. | disassembly |
+| `0x7db19bff` | 1 | `store_u16_0_g606c9d24_7db19bff` | `*(u16*)0x606c9d24 = 0`. | disassembly |
+| `0x7db20042` | 1 | `store_0_g606c9d5c_7db20042` | `*0x606c9d5c = 0`. | disassembly |
+| `0x7db2202e` | 1 | `store_0_g606ce3e0_7db2202e` | `*0x606ce3e0 = 0`. | disassembly |
+| `0x7db3299f` | 1 | `call0_7dac9620_7db3299f` | Calls `0x7dac9620` and returns 0. | disassembly |
+| `0x7db43ea3` | 5 | `thunk_u16_7db43eac_7db43ea3` | `return (u16) 0x7db43eac()` — thunk with result conversion. | disassembly |
+| `0x7db4501a` | 4 | `call0_7db65454_7db4501a` | Calls `0x7db65454` and returns 0. | disassembly |
+| `0x7db45025` | 3 | `call0_7db654f3_7db45025` | Calls `0x7db654f3` and returns 0. | disassembly |
+| `0x7db450b4` | 1 | `call0_7db46083_7db450b4` | Calls `0x7db46083` and returns 0. | disassembly |
+| `0x7db450bd` | 1 | `call0_7db4608e_7db450bd` | Calls `0x7db4608e` and returns 0. | disassembly |
+| `0x7db46083` | 1 | `store_1_g9c500004_7db46083` | `*0x9c500004 = 1`. | disassembly |
+| `0x7db4608e` | 1 | `store_1_g9c500008_7db4608e` | `*0x9c500008 = 1`. | disassembly |
+| `0x7db46282` | 8 | `call0_7db65129_7db46282` | Calls `0x7db65129` and returns 0. | disassembly |
+| `0x7db4628d` | 5 | `call0_7db651c8_7db4628d` | Calls `0x7db651c8` and returns 0. | disassembly |
+| `0x7db492f6` | 1 | `store_1_g9b400004_7db492f6` | `*0x9b400004 = 1`. | disassembly |
+| `0x7db49301` | 1 | `store_1_g9b400804_7db49301` | `*0x9b400804 = 1`. | disassembly |
+| `0x7db4930c` | 1 | `store_1_g9b401004_7db4930c` | `*0x9b401004 = 1`. | disassembly |
+| `0x7db49317` | 1 | `store_1_g9b401804_7db49317` | `*0x9b401804 = 1`. | disassembly |
+| `0x7db49322` | 1 | `store_1_g9b400008_7db49322` | `*0x9b400008 = 1`. | disassembly |
+| `0x7db4932d` | 1 | `store_1_g9b400808_7db4932d` | `*0x9b400808 = 1`. | disassembly |
+| `0x7db49338` | 1 | `store_1_g9b401008_7db49338` | `*0x9b401008 = 1`. | disassembly |
+| `0x7db49343` | 1 | `store_1_g9b401808_7db49343` | `*0x9b401808 = 1`. | disassembly |
+| `0x7db4bfcd` | 1 | `store_0_g9b100018_7db4bfcd` | `*0x9b100018 = 0`. | disassembly |
+| `0x7db50401` | 1 | `thunk_u16_7db44ba5_7db50401` | `return (u16) 0x7db44ba5()` — thunk with result conversion. | disassembly |
+| `0x7db512ae` | 17 | `call0_7db64edd_7db512ae` | Calls `0x7db64edd` and returns 0. | disassembly |
+| `0x7db512b9` | 6 | `call0_7db64f79_7db512b9` | Calls `0x7db64f79` and returns 0. | disassembly |
+| `0x7db5267d` | 1 | `store_0_g9b0003c0_7db5267d` | `*0x9b0003c0 = 0`. | disassembly |
+| `0x7db52687` | 1 | `store_0_g9b0003c4_7db52687` | `*0x9b0003c4 = 0`. | disassembly |
+| `0x7db52754` | 1 | `store_0_g9b000460_7db52754` | `*0x9b000460 = 0`. | disassembly |
+| `0x7db53f2a` | 1 | `store_1_g9b000468_7db53f2a` | `*0x9b000468 = 1`. | disassembly |
+| `0x7db551d7` | 1 | `store_0_g9b0003dc_7db551d7` | `*0x9b0003dc = 0`. | disassembly |
+| `0x7db56937` | 2 | `thunk_u16_7db5aa27_7db56937` | `return (u16) 0x7db5aa27()` — thunk with result conversion. | disassembly |
+| `0x7db56940` | 1 | `thunk_u16_7db5aa76_7db56940` | `return (u16) 0x7db5aa76()` — thunk with result conversion. | disassembly |
+| `0x7db5f9f2` | 1 | `thunk_u16_7db61bcf_7db5f9f2` | `return (u16) 0x7db61bcf()` — thunk with result conversion. | disassembly |
+| `0x7db67c6e` | 1 | `thunk_u16_7db72f43_7db67c6e` | `return (u16) 0x7db72f43()` — thunk with result conversion. | disassembly |
+| `0x7db67c79` | 1 | `thunk_u16_7db69dbe_7db67c79` | `return (u16) 0x7db69dbe()` — thunk with result conversion. | disassembly |
+| `0x7db67c82` | 1 | `thunk_u16_7db69eea_7db67c82` | `return (u16) 0x7db69eea()` — thunk with result conversion. | disassembly |
+| `0x7db67ca3` | 2 | `thunk_argu16_7db6a27d_7db67ca3` | Converts `d0` to u16, then calls `0x7db6a27d`. | disassembly |
+| `0x7db67cac` | 2 | `thunk_argu16_7db6a3ca_7db67cac` | Converts `d0` to u16, then calls `0x7db6a3ca`. | disassembly |
+| `0x7db67cb5` | 1 | `thunk_argu16_7db6a516_7db67cb5` | Converts `d0` to u16, then calls `0x7db6a516`. | disassembly |
+| `0x7db67cbe` | 11 | `thunk_argu16_7db6a575_7db67cbe` | Converts `d0` to u16, then calls `0x7db6a575`. | disassembly |
+| `0x7db67cc7` | 4 | `thunk_argu16_7db6a5f6_7db67cc7` | Converts `d0` to u16, then calls `0x7db6a5f6`. | disassembly |
+| `0x7db67cef` | 1 | `thunk_argu16_7db6a9b5_7db67cef` | Converts `d0` to u16, then calls `0x7db6a9b5`. | disassembly |
+| `0x7db67cf8` | 2 | `thunk_argu16_7db6a9f3_7db67cf8` | Converts `d0` to u16, then calls `0x7db6a9f3`. | disassembly |
+| `0x7db67d01` | 1 | `thunk_argu16_7db6aa31_7db67d01` | Converts `d0` to u16, then calls `0x7db6aa31`. | disassembly |
+| `0x7db67d0a` | 15 | `thunk_argu16_7db6ae45_7db67d0a` | Converts `d0` to u16, then calls `0x7db6ae45`. | disassembly |
+| `0x7db67d2f` | 8 | `thunk_argu16_7db6b814_7db67d2f` | Converts `d0` to u16, then calls `0x7db6b814`. | disassembly |
+| `0x7db67d42` | 1 | `thunk_u16_7db721cf_7db67d42` | `return (u16) 0x7db721cf()` — thunk with result conversion. | disassembly |
+| `0x7db67dd3` | 1 | `thunk_argu16_7db6fd67_7db67dd3` | Converts `d0` to u16, then calls `0x7db6fd67`. | disassembly |
+| `0x7db67ddc` | 1 | `thunk_u8_7db6fef3_7db67ddc` | `return (u8) 0x7db6fef3()` — thunk with result conversion. | disassembly |
+| `0x7db67de7` | 1 | `thunk_argu16_7db6fefc_7db67de7` | Converts `d0` to u16, then calls `0x7db6fefc`. | disassembly |
+| `0x7db67df2` | 6 | `thunk_argu8_7db70246_7db67df2` | Converts `d0` to u8, then calls `0x7db70246`. | disassembly |
+| `0x7db67e07` | 1 | `thunk_argu16_7db702f2_7db67e07` | Converts `d0` to u16, then calls `0x7db702f2`. | disassembly |
+| `0x7db67e7a` | 1 | `thunk_argu16_7db6aa31_7db67e7a` | Converts `d0` to u16, then calls `0x7db6aa31`. | disassembly |
+| `0x7db67e83` | 12 | `thunk_argu16_7db6ab9f_7db67e83` | Converts `d0` to u16, then calls `0x7db6ab9f`. | disassembly |
+| `0x7db67e95` | 1 | `call0_7db7020b_7db67e95` | Calls `0x7db7020b` and returns 0. | disassembly |
+| `0x7db67ea0` | 1 | `thunk_argu16_7db6b925_7db67ea0` | Converts `d0` to u16, then calls `0x7db6b925`. | disassembly |
+| `0x7db6833e` | 3 | `thunk_u16_7db69eea_7db6833e` | `return (u16) 0x7db69eea()` — thunk with result conversion. | disassembly |
+| `0x7db6874e` | 1 | `store_0_g606ef5f8_7db6874e` | `*0x606ef5f8 = 0`. | disassembly |
+| `0x7db68758` | 1 | `store_0_g606ef5fc_7db68758` | `*0x606ef5fc = 0`. | disassembly |
+| `0x7db69f27` | 1 | `call0_7db7205a_7db69f27` | Calls `0x7db7205a` and returns 0. | disassembly |
+| `0x7db69f32` | 1 | `call0_7db7206a_7db69f32` | Calls `0x7db7206a` and returns 0. | disassembly |
+| `0x7db6a565` | 1 | `thunk_argu16_7db93fb8_7db6a565` | Converts `d0` to u16, then calls `0x7db93fb8`. | disassembly |
+| `0x7db6ab8f` | 1 | `thunk_argu16_7db944dc_7db6ab8f` | Converts `d0` to u16, then calls `0x7db944dc`. | disassembly |
+| `0x7db6b809` | 1 | `store_u16_1_g606ef862_7db6b809` | `*(u16*)0x606ef862 = 1`. | disassembly |
+| `0x7db6e0b6` | 1 | `store_u8_1_g606f16f2_7db6e0b6` | `*(u8*)0x606f16f2 = 1`. | disassembly |
+| `0x7db6e0d7` | 1 | `store_u16_0_g606f16f4_7db6e0d7` | `*(u16*)0x606f16f4 = 0`. | disassembly |
+| `0x7db6e192` | 3 | `store_u8_1_g606f16f6_7db6e192` | `*(u8*)0x606f16f6 = 1`. | disassembly |
+| `0x7db6e19d` | 3 | `store_u8_0_g606f16f6_7db6e19d` | `*(u8*)0x606f16f6 = 0`. | disassembly |
+| `0x7db6e258` | 1 | `store_u8_0_g606f16f8_7db6e258` | `*(u8*)0x606f16f8 = 0`. | disassembly |
+| `0x7db6e894` | 2 | `call0_7db9d268_7db6e894` | Calls `0x7db9d268` and returns 0. | disassembly |
+| `0x7db6e92b` | 1 | `call_arg0_7db706ce_7db6e92b` | Calls `0x7db706ce` with `d0 = 0`. | disassembly |
+| `0x7db6fc98` | 1 | `call_arg0_7db71d5b_7db6fc98` | Calls `0x7db71d5b` with `d0 = 0`. | disassembly |
+| `0x7db7017c` | 2 | `thunk_argu8_7db895af_7db7017c` | Converts `d0` to u8, then calls `0x7db895af`. | disassembly |
+| `0x7db701d0` | 1 | `store_0_g606f1704_7db701d0` | `*0x606f1704 = 0`. | disassembly |
+| `0x7db701da` | 1 | `store_m1_g606f1704_7db701da` | `*0x606f1704 = -1`. | disassembly |
+| `0x7db70201` | 1 | `store_0_g606f1708_7db70201` | `*0x606f1708 = 0`. | disassembly |
+| `0x7db7020b` | 2 | `store_m1_g606f1708_7db7020b` | `*0x606f1708 = -1`. | disassembly |
+| `0x7db70232` | 1 | `store_0_g606f170c_7db70232` | `*0x606f170c = 0`. | disassembly |
+| `0x7db702f2` | 1 | `thunk_argu16_7db6b24f_7db702f2` | Converts `d0` to u16, then calls `0x7db6b24f`. | disassembly |
+| `0x7db72041` | 1 | `call0_7db72f52_7db72041` | Calls `0x7db72f52` and returns 0. | disassembly |
+| `0x7db72bbb` | 12 | `thunk_argu16_7db72fa9_7db72bbb` | Converts `d0` to u16, then calls `0x7db72fa9`. | disassembly |
+| `0x7db72bc4` | 11 | `thunk_argu16_7db72fd3_7db72bc4` | Converts `d0` to u16, then calls `0x7db72fd3`. | disassembly |
+| `0x7db737c9` | 3 | `call_arg0_7db7387f_7db737c9` | Calls `0x7db7387f` with `d0 = 0`. | disassembly |
+| `0x7db7660c` | 2 | `store_0_g606f2b78_7db7660c` | `*0x606f2b78 = 0`. | disassembly |
+| `0x7db79866` | 2 | `store_1_g9b900024_7db79866` | `*0x9b900024 = 1`. | disassembly |
+| `0x7db79a80` | 1 | `thunk_u16_7db7542f_7db79a80` | `return (u16) 0x7db7542f()` — thunk with result conversion. | disassembly |
+| `0x7db79a89` | 1 | `thunk_u16_7db75443_7db79a89` | `return (u16) 0x7db75443()` — thunk with result conversion. | disassembly |
+| `0x7db79a92` | 1 | `thunk_u16_7db75457_7db79a92` | `return (u16) 0x7db75457()` — thunk with result conversion. | disassembly |
+| `0x7db7ebe0` | 1 | `store_u16_0_g606f5a04_7db7ebe0` | `*(u16*)0x606f5a04 = 0`. | disassembly |
+| `0x7db816d8` | 2 | `get_s16_g606f5df0_7db816d8` | Leaf `return (s16)*(u16*)0x606f5df0`. | disassembly |
+| `0x7db83aa8` | 1 | `thunk_u16_7db83fb5_7db83aa8` | `return (u16) 0x7db83fb5()` — thunk with result conversion. | disassembly |
+| `0x7db84d56` | 1 | `get_s16_g606f608c_7db84d56` | Leaf `return (s16)*(u16*)0x606f608c`. | disassembly |
+| `0x7db84d60` | 2 | `get_s16_g606f608a_7db84d60` | Leaf `return (s16)*(u16*)0x606f608a`. | disassembly |
+| `0x7db88137` | 2 | `thunk_u16_7db814d7_7db88137` | `return (u16) 0x7db814d7()` — thunk with result conversion. | disassembly |
+| `0x7db88140` | 2 | `thunk_u16_7db814e0_7db88140` | `return (u16) 0x7db814e0()` — thunk with result conversion. | disassembly |
+| `0x7db8824a` | 3 | `thunk_u16_7db83ab1_7db8824a` | `return (u16) 0x7db83ab1()` — thunk with result conversion. | disassembly |
+| `0x7db88927` | 5 | `thunk_u16_7db83aa8_7db88927` | `return (u16) 0x7db83aa8()` — thunk with result conversion. | disassembly |
+| `0x7db8893a` | 3 | `thunk_s16_7db78dad_7db8893a` | `return (s16) 0x7db78dad()` — thunk with result conversion. | disassembly |
+| `0x7db88a7d` | 1 | `thunk_args16_7db814e6_7db88a7d` | Converts `d0` to s16, then calls `0x7db814e6`. | disassembly |
+| `0x7db91d8c` | 1 | `store_u16_1_g606f804c_7db91d8c` | `*(u16*)0x606f804c = 1`. | disassembly |
+| `0x7db94aeb` | 2 | `thunk_u16_7d9d3be7_7db94aeb` | `return (u16) 0x7d9d3be7()` — thunk with result conversion. | disassembly |
+| `0x7db94be1` | 12 | `thunk_argu16_7d9d3769_7db94be1` | Converts `d0` to u16, then calls `0x7d9d3769`. | disassembly |
+| `0x7dba3cd1` | 1 | `store_u8_0_g606fcd6c_7dba3cd1` | `*(u8*)0x606fcd6c = 0`. | disassembly |
+| `0x7dba3d7f` | 6 | `call0_7da896f4_7dba3d7f` | Calls `0x7da896f4` and returns 0. | disassembly |
+| `0x7dba3d8a` | 4 | `call0_7da896d6_7dba3d8a` | Calls `0x7da896d6` and returns 0. | disassembly |
+| `0x7dba3e1a` | 10 | `thunk_u8_7d9d5175_7dba3e1a` | `return (u8) 0x7d9d5175()` — thunk with result conversion. | disassembly |
+| `0x7dba3e7a` | 3 | `thunk_u16_7dacc95b_7dba3e7a` | `return (u16) 0x7dacc95b()` — thunk with result conversion. | disassembly |
+| `0x7dba3ec7` | 2 | `call_arg0_7db930b6_7dba3ec7` | Calls `0x7db930b6` with `d0 = 0`. | disassembly |
+| `0x7dba3ed2` | 2 | `thunk_u16_47001671_7dba3ed2` | `return (u16) 0x47001671()` — thunk with result conversion. | disassembly |
+| `0x7dba415d` | 1 | `thunk_u8_7d9d5151_7dba415d` | `return (u8) 0x7d9d5151()` — thunk with result conversion. | disassembly |
+| `0x7dba4168` | 1 | `thunk_u16_7d9d51c6_7dba4168` | `return (u16) 0x7d9d51c6()` — thunk with result conversion. | disassembly |
+| `0x7dba4173` | 4 | `thunk_u8_7d9dbc32_7dba4173` | `return (u8) 0x7d9dbc32()` — thunk with result conversion. | disassembly |
+| `0x7dbae4d3` | 1 | `store_u16_0_g606fe522_7dbae4d3` | `*(u16*)0x606fe522 = 0`. | disassembly |
+| `0x7dbb1195` | 1 | `thunk_argu8_7dbbb5a8_7dbb1195` | Converts `d0` to u8, then calls `0x7dbbb5a8`. | disassembly |
+| `0x7dbb18cf` | 3 | `thunk_u16_7dbb31a4_7dbb18cf` | `return (u16) 0x7dbb31a4()` — thunk with result conversion. | disassembly |
+| `0x7dbb31a4` | 1 | `thunk_u16_7dbb3541_7dbb31a4` | `return (u16) 0x7dbb3541()` — thunk with result conversion. | disassembly |
+| `0x7dbb3541` | 1 | `thunk_u16_7dbb27fb_7dbb3541` | `return (u16) 0x7dbb27fb()` — thunk with result conversion. | disassembly |
+| `0x7dbb5211` | 1 | `call_arg0_7dbb75af_7dbb5211` | Calls `0x7dbb75af` with `d0 = 0`. | disassembly |
+| `0x7dbb52b3` | 1 | `call_arg0_7dbb75af_7dbb52b3` | Calls `0x7dbb75af` with `d0 = 0`. | disassembly |
+| `0x7dbb8823` | 1 | `store_64_g9c000014_7dbb8823` | `*0x9c000014 = 64`. | disassembly |
+| `0x7dbb8847` | 1 | `store_1_g9c000014_7dbb8847` | `*0x9c000014 = 1`. | disassembly |
+| `0x7dbb97da` | 1 | `store_0x100_g9c000014_7dbb97da` | `*0x9c000014 = 0x100`. | disassembly |
+| `0x7dbbb5ae` | 1 | `thunk_s8_7dbbba5d_7dbbb5ae` | `return (s8) 0x7dbbba5d()` — thunk with result conversion. | disassembly |
+| `0x7dc9d1fb` | 1 | `thunk_u16_7dc9d204_7dc9d1fb` | `return (u16) 0x7dc9d204()` — thunk with result conversion. | disassembly |
+| `0x7dd41546` | 1 | `store_0_g60702434_7dd41546` | `*0x60702434 = 0`. | disassembly |
+| `0x7dd48aa8` | 1 | `thunk_u16_7dd49c80_7dd48aa8` | `return (u16) 0x7dd49c80()` — thunk with result conversion. | disassembly |
+| `0x7dd4ea86` | 1 | `thunk_u16_7dd43929_7dd4ea86` | `return (u16) 0x7dd43929()` — thunk with result conversion. | disassembly |
+| `0x7dd4edec` | 1 | `thunk_u16_7dd48aa8_7dd4edec` | `return (u16) 0x7dd48aa8()` — thunk with result conversion. | disassembly |
+| `0x7dd51df5` | 1 | `thunk_u16_7dd52a68_7dd51df5` | `return (u16) 0x7dd52a68()` — thunk with result conversion. | disassembly |
+| `0x7dd51f12` | 1 | `store_u16_1_g6070a550_7dd51f12` | `*(u16*)0x6070a550 = 1`. | disassembly |
+| `0x7dd6f6c6` | 1 | `store_u16_0_g6070faf2_7dd6f6c6` | `*(u16*)0x6070faf2 = 0`. | disassembly |
+| `0x7dd763ab` | 1 | `store_u8_1_g6044c68c_7dd763ab` | `*(u8*)0x6044c68c = 1`. | disassembly |
+| `0x7dd79cdd` | 11 | `get_s16_g607103a8_7dd79cdd` | Leaf `return (s16)*(u16*)0x607103a8`. | disassembly |
+| `0x7dd7a714` | 1 | `thunk_u16_7ddc93dd_7dd7a714` | `return (u16) 0x7ddc93dd()` — thunk with result conversion. | disassembly |
+| `0x7dd83f81` | 2 | `get_s8_g607109da_7dd83f81` | Leaf `return (s8)*(u16*)0x607109da`. | disassembly |
+| `0x7dd83f8b` | 1 | `get_s8_g607109dd_7dd83f8b` | Leaf `return (s8)*(u8*)0x607109dd`. | disassembly |
+| `0x7dd83fbb` | 5 | `get_s8_g607109df_7dd83fbb` | Leaf `return (s8)*(u8*)0x607109df`. | disassembly |
+| `0x7dd84061` | 3 | `get_s16_g607109e2_7dd84061` | Leaf `return (s16)*(u16*)0x607109e2`. | disassembly |
+| `0x7dd8a09f` | 1 | `thunk_argu16_7d9c1982_7dd8a09f` | Converts `d0` to u16, then calls `0x7d9c1982`. | disassembly |
+| `0x7dd90ce4` | 1 | `store_u16_0_g607114cc_7dd90ce4` | `*(u16*)0x607114cc = 0`. | disassembly |
+| `0x7dd90cee` | 4 | `get_s16_g607114cc_7dd90cee` | Leaf `return (s16)*(u16*)0x607114cc`. | disassembly |
+| `0x7dda1ccd` | 1 | `thunk_u8_7daa531c_7dda1ccd` | `return (u8) 0x7daa531c()` — thunk with result conversion. | disassembly |
+| `0x7ddab1bb` | 1 | `store_0_g607118f0_7ddab1bb` | `*0x607118f0 = 0`. | disassembly |
+| `0x7ddbd61d` | 2 | `get_s16_g60711d4e_7ddbd61d` | Leaf `return (s16)*(u16*)0x60711d4e`. | disassembly |
+| `0x7ddc944c` | 1 | `thunk_u16_7ddc93d4_7ddc944c` | `return (u16) 0x7ddc93d4()` — thunk with result conversion. | disassembly |
+| `0x7ddf0044` | 1 | `call0_7e7e011c_7ddf0044` | Calls `0x7e7e011c` and returns 0. | disassembly |
+| `0x7ddf3731` | 1 | `thunk_u16_7ddf43e5_7ddf3731` | `return (u16) 0x7ddf43e5()` — thunk with result conversion. | disassembly |
+| `0x7ddf373a` | 1 | `thunk_u16_7ddf50db_7ddf373a` | `return (u16) 0x7ddf50db()` — thunk with result conversion. | disassembly |
+| `0x7ddfe840` | 1 | `thunk_u16_7ddffd6c_7ddfe840` | `return (u16) 0x7ddffd6c()` — thunk with result conversion. | disassembly |
+| `0x7de2205e` | 1 | `call_arg0_7de227ce_7de2205e` | Calls `0x7de227ce` with `d0 = 0`. | disassembly |
+| `0x7de2646b` | 1 | `store_u8_1_g6073a2fa_7de2646b` | `*(u8*)0x6073a2fa = 1`. | disassembly |
+| `0x7de2b90c` | 3 | `thunk_argu16_7de2b9dd_7de2b90c` | Converts `d0` to u16, then calls `0x7de2b9dd`. | disassembly |
+| `0x7de2b91d` | 4 | `thunk_argu16_7de2bb62_7de2b91d` | Converts `d0` to u16, then calls `0x7de2bb62`. | disassembly |
+| `0x7de2b926` | 2 | `thunk_argu16_7de2bbb0_7de2b926` | Converts `d0` to u16, then calls `0x7de2bbb0`. | disassembly |
+| `0x7de2b92f` | 2 | `thunk_argu16_7de2bc56_7de2b92f` | Converts `d0` to u16, then calls `0x7de2bc56`. | disassembly |
+| `0x7de2b938` | 2 | `thunk_argu16_7de2bcaa_7de2b938` | Converts `d0` to u16, then calls `0x7de2bcaa`. | disassembly |
+| `0x7de2b941` | 7 | `thunk_argu16_7de2bcd1_7de2b941` | Converts `d0` to u16, then calls `0x7de2bcd1`. | disassembly |
+| `0x7de2b94a` | 4 | `thunk_argu16_7de2bd09_7de2b94a` | Converts `d0` to u16, then calls `0x7de2bd09`. | disassembly |
+| `0x7de41e56` | 1 | `call_arg0_7de49f9b_7de41e56` | Calls `0x7de49f9b` with `d0 = 0`. | disassembly |
+| `0x7de4a3b7` | 1 | `thunk_u16_7de4a3c0_7de4a3b7` | `return (u16) 0x7de4a3c0()` — thunk with result conversion. | disassembly |
+| `0x7de5213e` | 1 | `store_1_g60742494_7de5213e` | `*0x60742494 = 1`. | disassembly |
+| `0x7de58ab2` | 2 | `thunk_argu16_7d996629_7de58ab2` | Converts `d0` to u16, then calls `0x7d996629`. | disassembly |
+| `0x7de5a2df` | 1 | `call0_7de5a2e8_7de5a2df` | Calls `0x7de5a2e8` and returns 0. | disassembly |
+| `0x7de5edd1` | 2 | `store_0_ga0a75b64_7de5edd1` | `*0xa0a75b64 = 0`. | disassembly |
+| `0x7de63681` | 1 | `store_u16_0_ga0a75d38_7de63681` | `*(u16*)0xa0a75d38 = 0`. | disassembly |
+| `0x7de682b2` | 1 | `store_0_g609fa8bc_7de682b2` | `*0x609fa8bc = 0`. | disassembly |
+| `0x7de6ab2f` | 1 | `store_u16_1_g609faad8_7de6ab2f` | `*(u16*)0x609faad8 = 1`. | disassembly |
+| `0x7de734ab` | 1 | `store_u16_0_ga0a77908_7de734ab` | `*(u16*)0xa0a77908 = 0`. | disassembly |
+| `0x7de75aaa` | 2 | `thunk_argu16_7d9b12a2_7de75aaa` | Converts `d1` to u16, then calls `0x7d9b12a2`. | disassembly |
+| `0x7de77d4e` | 1 | `call0_7ddf20f4_7de77d4e` | Calls `0x7ddf20f4` and returns 0. | disassembly |
+| `0x7de84d5a` | 1 | `thunk_u16_7de84cfd_7de84d5a` | `return (u16) 0x7de84cfd()` — thunk with result conversion. | disassembly |
+| `0x7de8dcda` | 1 | `thunk_argu16_7de8d95d_7de8dcda` | Converts `d0` to u16, then calls `0x7de8d95d`. | disassembly |
+| `0x7de94a9a` | 2 | `thunk_argu16_7de95625_7de94a9a` | Converts `d0` to u16, then calls `0x7de95625`. | disassembly |
+| `0x7de9e98c` | 1 | `thunk_argu16_7deac001_7de9e98c` | Converts `d0` to u16, then calls `0x7deac001`. | disassembly |
+| `0x7dea92d5` | 2 | `thunk_u16_7dea919a_7dea92d5` | `return (u16) 0x7dea919a()` — thunk with result conversion. | disassembly |
+| `0x7dea9d52` | 16 | `call_arg0_7dea9d5b_7dea9d52` | Calls `0x7dea9d5b` with `d0 = 0`. | disassembly |
+| `0x7deab0e5` | 5 | `call_arg0_7deaafca_7deab0e5` | Calls `0x7deaafca` with `d0 = 0`. | disassembly |
+| `0x7deab1ef` | 2 | `get_u16_g6074fbd4_7deab1ef` | Leaf `return (u16)*0x6074fbd4`. | disassembly |
+| `0x7deb714f` | 1 | `thunk_argu8_7dec4ccc_7deb714f` | Converts `d0` to u8, then calls `0x7dec4ccc`. | disassembly |
+| `0x7dec4960` | 3 | `get_s16_ga0a903bc_7dec4960` | Leaf `return (s16)*(u16*)0xa0a903bc`. | disassembly |
+| `0x7dec579c` | 2 | `store_0_g60752858_7dec579c` | `*0x60752858 = 0`. | disassembly |
+| `0x7decf920` | 1 | `get_s16_g607565b8_7decf920` | Leaf `return (s16)*(u16*)0x607565b8`. | disassembly |
+| `0x7ded6b44` | 1 | `get_s16_g60758f98_7ded6b44` | Leaf `return (s16)*(u16*)0x60758f98`. | disassembly |
+| `0x7ded6b85` | 1 | `store_u8_0_g60758f9e_7ded6b85` | `*(u8*)0x60758f9e = 0`. | disassembly |
+| `0x7ded7866` | 2 | `call0_7ded790d_7ded7866` | Calls `0x7ded790d` and returns 0. | disassembly |
+| `0x7ded786f` | 1 | `call0_7ded7929_7ded786f` | Calls `0x7ded7929` and returns 0. | disassembly |
+| `0x7dfc6ee9` | 17 | `thunk_argu16_7dfc6e58_7dfc6ee9` | Converts `d0` to u16, then calls `0x7dfc6e58`. | disassembly |
+| `0x7dfc84a3` | 3 | `call0_7dfc1909_7dfc84a3` | Calls `0x7dfc1909` and returns 0. | disassembly |
+| `0x7dfc84ac` | 1 | `call0_7dfc1950_7dfc84ac` | Calls `0x7dfc1950` and returns 0. | disassembly |
+| `0x7dfc84b5` | 1 | `call0_7dfc1959_7dfc84b5` | Calls `0x7dfc1959` and returns 0. | disassembly |
+| `0x7dfcbf9a` | 5 | `thunk_u16_7db9d621_7dfcbf9a` | `return (u16) 0x7db9d621()` — thunk with result conversion. | disassembly |
+| `0x7dfcbfa5` | 8 | `thunk_u16_7db9d656_7dfcbfa5` | `return (u16) 0x7db9d656()` — thunk with result conversion. | disassembly |
+| `0x7dfcbfb0` | 1 | `thunk_u16_7db9d5e6_7dfcbfb0` | `return (u16) 0x7db9d5e6()` — thunk with result conversion. | disassembly |
+| `0x7dfcc417` | 3 | `thunk_argu8_7dba353b_7dfcc417` | Converts `d0` to u8, then calls `0x7dba353b`. | disassembly |
+| `0x7dfcc9a4` | 1 | `thunk_argu16_7db67d0a_7dfcc9a4` | Converts `d0` to u16, then calls `0x7db67d0a`. | disassembly |
+| `0x7dfccd3c` | 1 | `thunk_argu8_7db9d6d4_7dfccd3c` | Converts `d0` to u8, then calls `0x7db9d6d4`. | disassembly |
+| `0x7dff0387` | 1 | `call_arg0_7dff065e_7dff0387` | Calls `0x7dff065e` with `d0 = 0`. | disassembly |
+| `0x7e04f395` | 1 | `call0_7dba3868_7e04f395` | Calls `0x7dba3868` and returns 0. | disassembly |
+| `0x7e04f7bd` | 1 | `store_2_f12_7e04f7bd` | `*(this+12) = 2`. | disassembly |
+| `0x7e04ff69` | 1 | `thunk_u8_7dba6430_7e04ff69` | `return (u8) 0x7dba6430()` — thunk with result conversion. | disassembly |
+| `0x7e05379a` | 1 | `thunk_argu16_7db67ea0_7e05379a` | Converts `d0` to u16, then calls `0x7db67ea0`. | disassembly |
+| `0x7e0537a5` | 1 | `thunk_argu16_7db67e8c_7e0537a5` | Converts `d0` to u16, then calls `0x7db67e8c`. | disassembly |
+| `0x7e0564af` | 1 | `thunk_u16_7dfc147e_7e0564af` | `return (u16) 0x7dfc147e()` — thunk with result conversion. | disassembly |
+| `0x7e05666a` | 1 | `thunk_u16_7dfc150c_7e05666a` | `return (u16) 0x7dfc150c()` — thunk with result conversion. | disassembly |
+| `0x7e056675` | 2 | `thunk_u16_7dfc14f2_7e056675` | `return (u16) 0x7dfc14f2()` — thunk with result conversion. | disassembly |
+| `0x7e057151` | 3 | `store_0_f40_7e057151` | `*(this+40) = 0`. | disassembly |
+| `0x7e0580ba` | 3 | `call_arg0_7e0583aa_7e0580ba` | Calls `0x7e0583aa` with `d0 = 0`. | disassembly |
+| `0x7e07d33e` | 1 | `store_u8_0_g6075d618_7e07d33e` | `*(u8*)0x6075d618 = 0`. | disassembly |
+| `0x7e07d3ce` | 2 | `store_u8_0_g6075d619_7e07d3ce` | `*(u8*)0x6075d619 = 0`. | disassembly |
+| `0x7e07e5ca` | 1 | `store_u8_0_f36_7e07e5ca` | `*(u8*)(this+36) = 0`. | disassembly |
+| `0x7e07e6ca` | 1 | `store_u8_0_f36_7e07e6ca` | `*(u8*)(this+36) = 0`. | disassembly |
+| `0x7e0851ae` | 2 | `store_0_g6044fd68_7e0851ae` | `*0x6044fd68 = 0`. | disassembly |
+| `0x7e086542` | 3 | `get_s16_g6075e760_7e086542` | Leaf `return (s16)*(u16*)0x6075e760`. | disassembly |
+| `0x7e08654c` | 3 | `get_s16_g6075e762_7e08654c` | Leaf `return (s16)*(u16*)0x6075e762`. | disassembly |
+| `0x7e087438` | 2 | `get_s16_g6076156e_7e087438` | Leaf `return (s16)*(u16*)0x6076156e`. | disassembly |
+| `0x7e08be84` | 2 | `call_arg0_7dfc2a75_7e08be84` | Calls `0x7dfc2a75` with `d0 = 0`. | disassembly |
+| `0x7e08c0df` | 1 | `thunk_u16_7db9e6ff_7e08c0df` | `return (u16) 0x7db9e6ff()` — thunk with result conversion. | disassembly |
+| `0x7e08c0ea` | 1 | `thunk_u16_7db9e8ae_7e08c0ea` | `return (u16) 0x7db9e8ae()` — thunk with result conversion. | disassembly |
+| `0x7e08ceb5` | 1 | `thunk_argu16_7db9e85c_7e08ceb5` | Converts `d0` to u16, then calls `0x7db9e85c`. | disassembly |
+| `0x7e08d07c` | 1 | `thunk_argu8_7db9d6d4_7e08d07c` | Converts `d0` to u8, then calls `0x7db9d6d4`. | disassembly |
+| `0x7e094bae` | 1 | `call_arg0_7e091d10_7e094bae` | Calls `0x7e091d10` with `d0 = 0`. | disassembly |
+| `0x7e094bb7` | 1 | `call_arg0_7e091e69_7e094bb7` | Calls `0x7e091e69` with `d0 = 0`. | disassembly |
+| `0x7e094bc0` | 1 | `call_arg0_7e094293_7e094bc0` | Calls `0x7e094293` with `d0 = 0`. | disassembly |
+| `0x7e0a6648` | 1 | `store_7_f948_7e0a6648` | `*(this+948) = 7`. | disassembly |
+| `0x7e0a9377` | 3 | `thunk_u16_7db9e1a6_7e0a9377` | `return (u16) 0x7db9e1a6()` — thunk with result conversion. | disassembly |
+| `0x7e0ac60c` | 1 | `call_arg0_7e0ac1a2_7e0ac60c` | Calls `0x7e0ac1a2` with `d0 = 0`. | disassembly |
+| `0x7e0ade04` | 1 | `thunk_u16_7dba0afd_7e0ade04` | `return (u16) 0x7dba0afd()` — thunk with result conversion. | disassembly |
+| `0x7e0ae061` | 1 | `thunk_argu16_7db9d93d_7e0ae061` | Converts `d0` to u16, then calls `0x7db9d93d`. | disassembly |
+| `0x7e0ae079` | 1 | `thunk_u16_7e0ade04_7e0ae079` | `return (u16) 0x7e0ade04()` — thunk with result conversion. | disassembly |
+| `0x7e0ae248` | 1 | `thunk_argu16_7e0ae061_7e0ae248` | Converts `d0` to u16, then calls `0x7e0ae061`. | disassembly |
+| `0x7e0afc7f` | 10 | `get_s16_g6044ff70_7e0afc7f` | Leaf `return (s16)*(u16*)0x6044ff70`. | disassembly |
+| `0x7e0c61d2` | 1 | `store_42_f4300_7e0c61d2` | `*(this+4300) = 42`. | disassembly |
+| `0x7e0cc02a` | 2 | `thunk_u16_7e0cc6ad_7e0cc02a` | `return (u16) 0x7e0cc6ad()` — thunk with result conversion. | disassembly |
+| `0x7e0d40cb` | 1 | `thunk_args16_7e0ec71c_7e0d40cb` | Converts `d0` to s16, then calls `0x7e0ec71c`. | disassembly |
+| `0x7e0d5889` | 2 | `thunk_args16_7e0edc2e_7e0d5889` | Converts `d0` to s16, then calls `0x7e0edc2e`. | disassembly |
+| `0x7e0d5b59` | 1 | `call_arg0_7e0d6171_7e0d5b59` | Calls `0x7e0d6171` with `d0 = 0`. | disassembly |
+| `0x7e0d6fd0` | 1 | `call_arg0_7dfc27c3_7e0d6fd0` | Calls `0x7dfc27c3` with `d0 = 0`. | disassembly |
+| `0x7e0d856b` | 11 | `get_s16_g60450768_7e0d856b` | Leaf `return (s16)*(u16*)0x60450768`. | disassembly |
+| `0x7e0da21b` | 1 | `store_u16_0_g60450844_7e0da21b` | `*(u16*)0x60450844 = 0`. | disassembly |
+| `0x7e0ec725` | 1 | `get_s16_g60450850_7e0ec725` | Leaf `return (s16)*(u16*)0x60450850`. | disassembly |
+| `0x7e0ecd0c` | 1 | `call_arg0_7dfc2822_7e0ecd0c` | Calls `0x7dfc2822` with `d0 = 0`. | disassembly |
+| `0x7e0ecd17` | 1 | `call_arg0_7dfc2822_7e0ecd17` | Calls `0x7dfc2822` with `d0 = 0`. | disassembly |
+| `0x7e0edc2e` | 1 | `thunk_args16_7e0b0c34_7e0edc2e` | Converts `d0` to s16, then calls `0x7e0b0c34`. | disassembly |
+| `0x7e0edc39` | 23 | `thunk_s16_7e0afc7f_7e0edc39` | `return (s16) 0x7e0afc7f()` — thunk with result conversion. | disassembly |
+| `0x7e0f26aa` | 10 | `get_s16_g604508e4_7e0f26aa` | Leaf `return (s16)*(u16*)0x604508e4`. | disassembly |
+| `0x7e0f2ffe` | 1 | `thunk_argu16_7e1098b0_7e0f2ffe` | Converts `d0` to u16, then calls `0x7e1098b0`. | disassembly |
+| `0x7e103604` | 7 | `call_arg0_7dfcf4e8_7e103604` | Calls `0x7dfcf4e8` with `d0 = 0`. | disassembly |
+| `0x7e108eae` | 4 | `thunk_u16_7dba09f3_7e108eae` | `return (u16) 0x7dba09f3()` — thunk with result conversion. | disassembly |
+| `0x7e10d4d7` | 1 | `thunk_argu16_7e10d56f_7e10d4d7` | Converts `d0` to u16, then calls `0x7e10d56f`. | disassembly |
+| `0x7e10d4e0` | 1 | `thunk_argu16_7e10d56f_7e10d4e0` | Converts `d0` to u16, then calls `0x7e10d56f`. | disassembly |
+| `0x7e135039` | 2 | `store_0_f28_7e135039` | `*(this+28) = 0`. | disassembly |
+| `0x7e1350f1` | 2 | `store_0_f28_7e1350f1` | `*(this+28) = 0`. | disassembly |
+| `0x7e1351a6` | 1 | `store_0_f24_7e1351a6` | `*(this+24) = 0`. | disassembly |
+| `0x7e148a10` | 2 | `store_0_f28_7e148a10` | `*(this+28) = 0`. | disassembly |
+| `0x7e148ac8` | 2 | `store_0_f28_7e148ac8` | `*(this+28) = 0`. | disassembly |
+| `0x7e148b7d` | 1 | `store_0_f24_7e148b7d` | `*(this+24) = 0`. | disassembly |
+| `0x7e148bfe` | 1 | `store_0_f24_7e148bfe` | `*(this+24) = 0`. | disassembly |
+| `0x7e17e753` | 1 | `store_33_f1372_7e17e753` | `*(this+1372) = 33`. | disassembly |
+| `0x7e17eefa` | 1 | `store_39_f1372_7e17eefa` | `*(this+1372) = 39`. | disassembly |
+| `0x7e17fb37` | 1 | `store_44_f1384_7e17fb37` | `*(this+1384) = 44`. | disassembly |
+| `0x7e1811d3` | 1 | `store_59_f1372_7e1811d3` | `*(this+1372) = 59`. | disassembly |
+| `0x7e181592` | 1 | `store_63_f1372_7e181592` | `*(this+1372) = 63`. | disassembly |
+| `0x7e1818ab` | 1 | `store_67_f1372_7e1818ab` | `*(this+1372) = 67`. | disassembly |
+| `0x7e181aec` | 1 | `store_71_f1372_7e181aec` | `*(this+1372) = 71`. | disassembly |
+| `0x7e184468` | 1 | `store_93_f1412_7e184468` | `*(this+1412) = 93`. | disassembly |
+| `0x7e184872` | 1 | `store_97_f1412_7e184872` | `*(this+1412) = 97`. | disassembly |
+| `0x7e184e2f` | 1 | `store_105_f1412_7e184e2f` | `*(this+1412) = 105`. | disassembly |
+| `0x7e18516e` | 1 | `store_110_f1372_7e18516e` | `*(this+1372) = 110`. | disassembly |
+| `0x7e185e13` | 1 | `store_116_f1432_7e185e13` | `*(this+1432) = 116`. | disassembly |
+| `0x7e18659e` | 1 | `store_126_f1432_7e18659e` | `*(this+1432) = 126`. | disassembly |
+| `0x7e189753` | 1 | `store_144_f1372_7e189753` | `*(this+1372) = 144`. | disassembly |
+| `0x7e18a726` | 1 | `store_154_f1372_7e18a726` | `*(this+1372) = 154`. | disassembly |
+| `0x7e18ba2a` | 1 | `store_162_f1372_7e18ba2a` | `*(this+1372) = 162`. | disassembly |
+| `0x7e1ef11f` | 1 | `store_1_f24_7e1ef11f` | `*(this+24) = 1`. | disassembly |
+| `0x7e20558f` | 7 | `get_s16_f44_7e20558f` | Leaf `return (s16)*(u16*)(this+44)`. | disassembly |
+| `0x7e209a4c` | 7 | `store_1_g60452224_7e209a4c` | `*0x60452224 = 1`. | disassembly |
+| `0x7e209a57` | 7 | `store_0_g60452224_7e209a57` | `*0x60452224 = 0`. | disassembly |
+| `0x7e20b3e3` | 10 | `store_0_g6076d624_7e20b3e3` | `*0x6076d624 = 0`. | disassembly |
+| `0x7e20b5ca` | 1 | `store_1_g60452230_7e20b5ca` | `*0x60452230 = 1`. | disassembly |
+| `0x7e20b5d5` | 1 | `store_0_g60452230_7e20b5d5` | `*0x60452230 = 0`. | disassembly |
+| `0x7e20b5df` | 1 | `store_2_g60452230_7e20b5df` | `*0x60452230 = 2`. | disassembly |
+| `0x7e20b5f3` | 2 | `store_1_g60452230_7e20b5f3` | `*0x60452230 = 1`. | disassembly |
+| `0x7e20c228` | 2 | `store_0_g60452248_7e20c228` | `*0x60452248 = 0`. | disassembly |
+| `0x7e20d628` | 1 | `store_0_g6076d658_7e20d628` | `*0x6076d658 = 0`. | disassembly |
+| `0x7e20d63b` | 2 | `store_1_g6076d658_7e20d63b` | `*0x6076d658 = 1`. | disassembly |
+| `0x7e20dc98` | 1 | `store_0_g6076d668_7e20dc98` | `*0x6076d668 = 0`. | disassembly |
+| `0x7e20e81a` | 1 | `store_0_g6076d67c_7e20e81a` | `*0x6076d67c = 0`. | disassembly |
+| `0x7e20f8e6` | 5 | `store_0_g6076d68c_7e20f8e6` | `*0x6076d68c = 0`. | disassembly |
+| `0x7e20f8f0` | 1 | `store_0_g6076d690_7e20f8f0` | `*0x6076d690 = 0`. | disassembly |
+| `0x7e20f905` | 1 | `store_1_g6076d690_7e20f905` | `*0x6076d690 = 1`. | disassembly |
+| `0x7e20fc6b` | 1 | `store_11_g6076d694_7e20fc6b` | `*0x6076d694 = 11`. | disassembly |
+| `0x7e2102ee` | 7 | `store_0_g60452264_7e2102ee` | `*0x60452264 = 0`. | disassembly |
+| `0x7e2114f8` | 1 | `store_0_g6076d6d8_7e2114f8` | `*0x6076d6d8 = 0`. | disassembly |
+| `0x7e21154e` | 4 | `call_arg0_7e20ecbe_7e21154e` | Calls `0x7e20ecbe` with `d0 = 0`. | disassembly |
+| `0x7e21198e` | 1 | `store_0_g6076d6e0_7e21198e` | `*0x6076d6e0 = 0`. | disassembly |
+| `0x7e214f10` | 1 | `store_0x7d0_g604522bc_7e214f10` | `*0x604522bc = 0x7d0`. | disassembly |
+| `0x7e215adb` | 1 | `store_0_g6076d768_7e215adb` | `*0x6076d768 = 0`. | disassembly |
+| `0x7e215df1` | 1 | `call_arg0_7e215dfa_7e215df1` | Calls `0x7e215dfa` with `d0 = 0`. | disassembly |
+| `0x7e21692c` | 1 | `store_u8_0_g6045238c_7e21692c` | `*(u8*)0x6045238c = 0`. | disassembly |
+| `0x7e21cf77` | 1 | `store_1_g6076d7b0_7e21cf77` | `*0x6076d7b0 = 1`. | disassembly |
+| `0x7e21dfe7` | 2 | `call_arg0_7e20ebf9_7e21dfe7` | Calls `0x7e20ebf9` with `d0 = 0`. | disassembly |
+| `0x7e21e1f2` | 1 | `store_0_g6076d7bc_7e21e1f2` | `*0x6076d7bc = 0`. | disassembly |
+| `0x7e21fce2` | 1 | `store_0_g6076d7d4_7e21fce2` | `*0x6076d7d4 = 0`. | disassembly |
+| `0x7e2240e9` | 1 | `store_0_g60452a7c_7e2240e9` | `*0x60452a7c = 0`. | disassembly |
+| `0x7e225270` | 11 | `thunk_s16_7e225080_7e225270` | `return (s16) 0x7e225080()` — thunk with result conversion. | disassembly |
+| `0x7e22c99c` | 1 | `thunk_s16_7e22cd1b_7e22c99c` | `return (s16) 0x7e22cd1b()` — thunk with result conversion. | disassembly |
+| `0x7e22c9a5` | 1 | `thunk_s16_7e22cd88_7e22c9a5` | `return (s16) 0x7e22cd88()` — thunk with result conversion. | disassembly |
+| `0x7e22fc51` | 4 | `get_s16_f82_7e22fc51` | Leaf `return (s16)*(u16*)(this+82)`. | disassembly |
+| `0x7e22fea6` | 1 | `thunk_s16_7e22cd1b_7e22fea6` | `return (s16) 0x7e22cd1b()` — thunk with result conversion. | disassembly |
+| `0x7e22feaf` | 1 | `thunk_s16_7e22cd44_7e22feaf` | `return (s16) 0x7e22cd44()` — thunk with result conversion. | disassembly |
+| `0x7e22feb8` | 1 | `thunk_s16_7e22cd88_7e22feb8` | `return (s16) 0x7e22cd88()` — thunk with result conversion. | disassembly |
+| `0x7e22fec1` | 1 | `thunk_s16_7e22ce01_7e22fec1` | `return (s16) 0x7e22ce01()` — thunk with result conversion. | disassembly |
+| `0x7e22feca` | 1 | `thunk_s16_7e22ce14_7e22feca` | `return (s16) 0x7e22ce14()` — thunk with result conversion. | disassembly |
+| `0x7e22fed3` | 1 | `thunk_s16_7e22ce43_7e22fed3` | `return (s16) 0x7e22ce43()` — thunk with result conversion. | disassembly |
+| `0x7e22feec` | 1 | `thunk_s16_7e22ce83_7e22feec` | `return (s16) 0x7e22ce83()` — thunk with result conversion. | disassembly |
+| `0x7e22ff15` | 1 | `thunk_s16_7e22cee4_7e22ff15` | `return (s16) 0x7e22cee4()` — thunk with result conversion. | disassembly |
+| `0x7e22ff1e` | 1 | `thunk_s16_7e22cf36_7e22ff1e` | `return (s16) 0x7e22cf36()` — thunk with result conversion. | disassembly |
+| `0x7e22ff27` | 1 | `thunk_s16_7e22cf86_7e22ff27` | `return (s16) 0x7e22cf86()` — thunk with result conversion. | disassembly |
+| `0x7e233e12` | 3 | `get_s16_f84_7e233e12` | Leaf `return (s16)*(u16*)(this+84)`. | disassembly |
+| `0x7e233f86` | 2 | `store_u16_1_f86_7e233f86` | `*(u16*)(this+86) = 1`. | disassembly |
+| `0x7e23b8e9` | 8 | `store_0_f24_7e23b8e9` | `*(this+24) = 0`. | disassembly |
+| `0x7e23bc6e` | 1 | `thunk_s16_7e2258f3_7e23bc6e` | `return (s16) 0x7e2258f3()` — thunk with result conversion. | disassembly |
+| `0x7e240657` | 4 | `thunk_argu16_7e226f4a_7e240657` | Converts `d0` to u16, then calls `0x7e226f4a`. | disassembly |
+| `0x7e243c8a` | 4 | `store_4_f6884_7e243c8a` | `*(this+6884) = 4`. | disassembly |
+| `0x7e24f85e` | 12 | `call_arg0_7e24ed3f_7e24f85e` | Calls `0x7e24ed3f` with `d0 = 0`. | disassembly |
+| `0x7e257cd1` | 6 | `thunk_argu16_7e2323b1_7e257cd1` | Converts `d0` to u16, then calls `0x7e2323b1`. | disassembly |
+| `0x7e266fc9` | 2 | `get_s16_f166_7e266fc9` | Leaf `return (s16)*(u16*)(this+166)`. | disassembly |
+| `0x7e267025` | 1 | `thunk_s16_7e22cd1b_7e267025` | `return (s16) 0x7e22cd1b()` — thunk with result conversion. | disassembly |
+| `0x7e267030` | 1 | `thunk_s16_7e22cd44_7e267030` | `return (s16) 0x7e22cd44()` — thunk with result conversion. | disassembly |
+| `0x7e26703b` | 1 | `thunk_s16_7e22cdb7_7e26703b` | `return (s16) 0x7e22cdb7()` — thunk with result conversion. | disassembly |
+| `0x7e267046` | 1 | `thunk_s16_7e22cde6_7e267046` | `return (s16) 0x7e22cde6()` — thunk with result conversion. | disassembly |
+| `0x7e267051` | 1 | `thunk_s16_7e22ce01_7e267051` | `return (s16) 0x7e22ce01()` — thunk with result conversion. | disassembly |
+| `0x7e2cacb5` | 2 | `store_0_f4_7e2cacb5` | `*(this+4) = 0`. | disassembly |
+| `0x7e2cb7fe` | 2 | `call_arg0_7e2cd0b8_7e2cb7fe` | Calls `0x7e2cd0b8` with `d0 = 0`. | disassembly |
+| `0x7e2cd6e9` | 6 | `store_0_g6045e348_7e2cd6e9` | `*0x6045e348 = 0`. | disassembly |
+| `0x7e2d6dc8` | 1 | `store_0_f4_7e2d6dc8` | `*(this+4) = 0`. | disassembly |
+| `0x7e2f34e4` | 1 | `store_u16_0_f4_7e2f34e4` | `*(u16*)(this+4) = 0`. | disassembly |
+| `0x7e324e53` | 5 | `store_1_f8_7e324e53` | `*(this+8) = 1`. | disassembly |
+| `0x7e3358a8` | 3 | `store_0_g60460184_7e3358a8` | `*0x60460184 = 0`. | disassembly |
+| `0x7e33718e` | 2 | `store_1_g604601b0_7e33718e` | `*0x604601b0 = 1`. | disassembly |
+| `0x7e3371d7` | 3 | `store_1_g604601b4_7e3371d7` | `*0x604601b4 = 1`. | disassembly |
+| `0x7e3371e2` | 2 | `store_0_g604601b4_7e3371e2` | `*0x604601b4 = 0`. | disassembly |
+| `0x7e337f21` | 1 | `store_u16_m1_g604601d2_7e337f21` | `*(u16*)0x604601d2 = -1`. | disassembly |
+| `0x7e338711` | 3 | `store_u16_0_g60460232_7e338711` | `*(u16*)0x60460232 = 0`. | disassembly |
+| `0x7e33871b` | 1 | `get_s16_g60460232_7e33871b` | Leaf `return (s16)*(u16*)0x60460232`. | disassembly |
+| `0x7e338725` | 1 | `store_u16_0_g604602a2_7e338725` | `*(u16*)0x604602a2 = 0`. | disassembly |
+| `0x7e338777` | 1 | `store_0_g604602a4_7e338777` | `*0x604602a4 = 0`. | disassembly |
+| `0x7e338bcc` | 16 | `thunk_u8_7e2265dd_7e338bcc` | `return (u8) 0x7e2265dd()` — thunk with result conversion. | disassembly |
+| `0x7e3393a1` | 2 | `get_s16_g60460328_7e3393a1` | Leaf `return (s16)*(u16*)0x60460328`. | disassembly |
+| `0x7e3393e2` | 1 | `store_u16_0_g6046032e_7e3393e2` | `*(u16*)0x6046032e = 0`. | disassembly |
+| `0x7e33952a` | 1 | `store_u16_0_g60460340_7e33952a` | `*(u16*)0x60460340 = 0`. | disassembly |
+| `0x7e33c2e0` | 3 | `store_u16_0_g604603a8_7e33c2e0` | `*(u16*)0x604603a8 = 0`. | disassembly |
+| `0x7e33c31d` | 1 | `store_0_g604603ac_7e33c31d` | `*0x604603ac = 0`. | disassembly |
+| `0x7e33c330` | 1 | `store_0_g604603b0_7e33c330` | `*0x604603b0 = 0`. | disassembly |
+| `0x7e349b95` | 2 | `store_u16_0_f6_7e349b95` | `*(u16*)(this+6) = 0`. | disassembly |
+| `0x7e34bd84` | 2 | `thunk_argu8_7e34bd8d_7e34bd84` | Converts `d0` to u8, then calls `0x7e34bd8d`. | disassembly |
+| `0x7e34dde7` | 1 | `store_2_f200_7e34dde7` | `*(this+200) = 2`. | disassembly |
+| `0x7e34f2ac` | 1 | `store_2_f200_7e34f2ac` | `*(this+200) = 2`. | disassembly |
+| `0x7e6a3b91` | 1 | `thunk_argu8_7e6a5778_7e6a3b91` | Converts `d0` to u8, then calls `0x7e6a5778`. | disassembly |
+| `0x7e6a3ba5` | 9 | `thunk_u16_7e6a57bc_7e6a3ba5` | `return (u16) 0x7e6a57bc()` — thunk with result conversion. | disassembly |
+| `0x7e6c5df6` | 1 | `call_arg0_7e6c5d64_7e6c5df6` | Calls `0x7e6c5d64` with `d0 = 0`. | disassembly |
+| `0x7e6da5e9` | 3 | `store_u8_0_f146_7e6da5e9` | `*(u8*)(this+146) = 0`. | disassembly |
+| `0x7e6dfe13` | 1 | `store_u8_1_f42_7e6dfe13` | `*(u8*)(this+42) = 1`. | disassembly |
+| `0x7e6e12e1` | 2 | `thunk_argu16_7e6df786_7e6e12e1` | Converts `d0` to u16, then calls `0x7e6df786`. | disassembly |
+| `0x7e6ee650` | 2 | `thunk_args16_7d9a1079_7e6ee650` | Converts `d0` to s16, then calls `0x7d9a1079`. | disassembly |
+| `0x7e6f5dab` | 2 | `thunk_args16_7d9a1447_7e6f5dab` | Converts `d0` to s16, then calls `0x7d9a1447`. | disassembly |
+| `0x7e6f5db6` | 5 | `thunk_args16_7d9a1447_7e6f5db6` | Converts `d0` to s16, then calls `0x7d9a1447`. | disassembly |
+| `0x7e6f5dc1` | 4 | `thunk_args16_7d9a1447_7e6f5dc1` | Converts `d0` to s16, then calls `0x7d9a1447`. | disassembly |
+| `0x7e6f5dcc` | 3 | `thunk_args16_7d9a1447_7e6f5dcc` | Converts `d0` to s16, then calls `0x7d9a1447`. | disassembly |
+| `0x7e70210f` | 2 | `store_0_g608e97ec_7e70210f` | `*0x608e97ec = 0`. | disassembly |
+| `0x7e70a099` | 1 | `thunk_argu16_7e70ab3f_7e70a099` | Converts `d0` to u16, then calls `0x7e70ab3f`. | disassembly |
+| `0x7e70bb35` | 3 | `thunk_u16_7e70f076_7e70bb35` | `return (u16) 0x7e70f076()` — thunk with result conversion. | disassembly |
+| `0x7e70bd1f` | 1 | `call_arg0_7e70f08d_7e70bd1f` | Calls `0x7e70f08d` with `d0 = 0`. | disassembly |
+| `0x7e71825d` | 2 | `call0_7e7c926a_7e71825d` | Calls `0x7e7c926a` and returns 0. | disassembly |
+| `0x7e722620` | 1 | `store_0_g6091c53c_7e722620` | `*0x6091c53c = 0`. | disassembly |
+| `0x7e7c01ec` | 3 | `store_u16_0_ga0936640_7e7c01ec` | `*(u16*)0xa0936640 = 0`. | disassembly |
+| `0x7e7c6112` | 5 | `thunk_argu16_7d9d3a9a_7e7c6112` | Converts `d0` to u16, then calls `0x7d9d3a9a`. | disassembly |
+| `0x7e7c79ab` | 3 | `thunk_u16_7e7c79b4_7e7c79ab` | `return (u16) 0x7e7c79b4()` — thunk with result conversion. | disassembly |
+| `0x7e7c8142` | 3 | `thunk_argu16_7de859c8_7e7c8142` | Converts `d0` to u16, then calls `0x7de859c8`. | disassembly |
+| `0x7e7c814d` | 4 | `thunk_argu16_7de85a8b_7e7c814d` | Converts `d0` to u16, then calls `0x7de85a8b`. | disassembly |
+| `0x7e7c8231` | 1 | `thunk_u16_7dba60c1_7e7c8231` | `return (u16) 0x7dba60c1()` — thunk with result conversion. | disassembly |
+| `0x7e7c823c` | 2 | `thunk_s16_7dba6280_7e7c823c` | `return (s16) 0x7dba6280()` — thunk with result conversion. | disassembly |
+| `0x7e7c8e23` | 1 | `store_u8_0_ga0936808_7e7c8e23` | `*(u8*)0xa0936808 = 0`. | disassembly |
+| `0x7e7ca818` | 1 | `thunk_u16_7e7d31bc_7e7ca818` | `return (u16) 0x7e7d31bc()` — thunk with result conversion. | disassembly |
+| `0x7e7ca90d` | 1 | `store_u16_1_ga0937934_7e7ca90d` | `*(u16*)0xa0937934 = 1`. | disassembly |
+| `0x7e7cc121` | 1 | `store_0_ga0937a98_7e7cc121` | `*0xa0937a98 = 0`. | disassembly |
+| `0x7e7cc5b1` | 1 | `store_0_ga0937fac_7e7cc5b1` | `*0xa0937fac = 0`. | disassembly |
+| `0x7e7cfc31` | 2 | `store_u16_1_ga0937fd4_7e7cfc31` | `*(u16*)0xa0937fd4 = 1`. | disassembly |
+| `0x7e7d70cc` | 14 | `thunk_argu16_7e7d70ae_7e7d70cc` | Converts `d0` to u16, then calls `0x7e7d70ae`. | disassembly |
+| `0x7e7d7fbe` | 2 | `store_u8_0_ga093975c_7e7d7fbe` | `*(u8*)0xa093975c = 0`. | disassembly |
+| `0x7e7d9ae3` | 6 | `thunk_u16_7d9c5738_7e7d9ae3` | `return (u16) 0x7d9c5738()` — thunk with result conversion. | disassembly |
+| `0x7e7d9aee` | 1 | `thunk_argu16_7e7d90e8_7e7d9aee` | Converts `d0` to u16, then calls `0x7e7d90e8`. | disassembly |
+| `0x7e7d9af7` | 6 | `thunk_argu16_7e7d90e8_7e7d9af7` | Converts `d0` to u16, then calls `0x7e7d90e8`. | disassembly |
+| `0x7e7d9b00` | 6 | `thunk_argu16_7e7d90e8_7e7d9b00` | Converts `d0` to u16, then calls `0x7e7d90e8`. | disassembly |
+| `0x7e7d9b09` | 8 | `thunk_argu16_7e7d90e8_7e7d9b09` | Converts `d0` to u16, then calls `0x7e7d90e8`. | disassembly |
+| `0x7e7da054` | 1 | `store_0x2001_ga09398f4_7e7da054` | `*0xa09398f4 = 0x2001`. | disassembly |
+| `0x7e7da3eb` | 1 | `call_arg0_7e7da701_7e7da3eb` | Calls `0x7e7da701` with `d0 = 0`. | disassembly |
+| `0x7e7dd1c5` | 1 | `store_0x101_g98f01000_7e7dd1c5` | `*0x98f01000 = 0x101`. | disassembly |
+| `0x7e7dd1d1` | 2 | `store_0_g98f01000_7e7dd1d1` | `*0x98f01000 = 0`. | disassembly |
+| `0x7e7dd634` | 1 | `store_0x400_g98f01018_7e7dd634` | `*0x98f01018 = 0x400`. | disassembly |
+| `0x7e7dd64f` | 5 | `store_0_g98f01018_7e7dd64f` | `*0x98f01018 = 0`. | disassembly |
+| `0x7e7dd71f` | 1 | `get_u16_g98f01018_7e7dd71f` | Leaf `return (u16)*0x98f01018`. | disassembly |
+| `0x7e7e08c7` | 1 | `store_u8_0_g60a064dc_7e7e08c7` | `*(u8*)0x60a064dc = 0`. | disassembly |
+| `0x7e7e0fd1` | 3 | `thunk_u8_7e7e0af4_7e7e0fd1` | `return (u8) 0x7e7e0af4()` — thunk with result conversion. | disassembly |
+| `0x7e7fc715` | 4 | `store_0_f4_7e7fc715` | `*(this+4) = 0`. | disassembly |
+| `0x7e7fc71c` | 2 | `store_1_f4_7e7fc71c` | `*(this+4) = 1`. | disassembly |
+| `0x7e825274` | 1 | `store_3_f508_7e825274` | `*(this+508) = 3`. | disassembly |
+| `0x7e825a39` | 2 | `store_0x105_f420_7e825a39` | `*(this+420) = 0x105`. | disassembly |
+| `0x7e828ef1` | 2 | `store_0xea3_f420_7e828ef1` | `*(this+420) = 0xea3`. | disassembly |
+| `0x7e82ea13` | 3 | `store_2_f8_7e82ea13` | `*(this+8) = 2`. | disassembly |
+| `0x7e83efe7` | 1 | `store_0_g6047f718_7e83efe7` | `*0x6047f718 = 0`. | disassembly |
+| `0x7e8540d8` | 2 | `store_1_f4_7e8540d8` | `*(this+4) = 1`. | disassembly |
+| `0x7e8540e0` | 1 | `store_0_f4_7e8540e0` | `*(this+4) = 0`. | disassembly |
+| `0x7e8543bf` | 4 | `store_1_f4_7e8543bf` | `*(this+4) = 1`. | disassembly |
+| `0x7e8543c7` | 2 | `store_0_f4_7e8543c7` | `*(this+4) = 0`. | disassembly |
+| `0x7e85ebe3` | 1 | `call0_7e855650_7e85ebe3` | Calls `0x7e855650` and returns 0. | disassembly |
+| `0x7e872099` | 3 | `store_0_f4_7e872099` | `*(this+4) = 0`. | disassembly |
+| `0x7e880a3d` | 1 | `store_0_g60b0703c_7e880a3d` | `*0x60b0703c = 0`. | disassembly |
+| `0x7e88166e` | 2 | `get_u16_g60b0706c_7e88166e` | Leaf `return (u16)*0x60b0706c`. | disassembly |
+| `0x7e8816eb` | 1 | `call0_7e882ed6_7e8816eb` | Calls `0x7e882ed6` and returns 0. | disassembly |
+| `0x7e881f06` | 3 | `thunk_args16_7d9a16ce_7e881f06` | Converts `d0` to s16, then calls `0x7d9a16ce`. | disassembly |
+| `0x7e881f11` | 3 | `thunk_args16_7d9a77bb_7e881f11` | Converts `d0` to s16, then calls `0x7d9a77bb`. | disassembly |
+| `0x7e881f26` | 11 | `thunk_args16_7d9a1447_7e881f26` | Converts `d0` to s16, then calls `0x7d9a1447`. | disassembly |
+| `0x7e881f31` | 7 | `thunk_args16_7d9a6935_7e881f31` | Converts `d0` to s16, then calls `0x7d9a6935`. | disassembly |
+| `0x7e881f3c` | 6 | `thunk_args16_7d9a8454_7e881f3c` | Converts `d0` to s16, then calls `0x7d9a8454`. | disassembly |
+| `0x7e881f47` | 1 | `thunk_args16_7d9a8156_7e881f47` | Converts `d0` to s16, then calls `0x7d9a8156`. | disassembly |
+| `0x7e881f52` | 6 | `thunk_args16_7d9a11cd_7e881f52` | Converts `d0` to s16, then calls `0x7d9a11cd`. | disassembly |
+| `0x7e881f5d` | 4 | `thunk_args16_7d9a682b_7e881f5d` | Converts `d0` to s16, then calls `0x7d9a682b`. | disassembly |
+| `0x7e881f8f` | 3 | `thunk_args16_7d9a0c1d_7e881f8f` | Converts `d0` to s16, then calls `0x7d9a0c1d`. | disassembly |
+| `0x7e881fc3` | 3 | `thunk_args16_7d9a87ad_7e881fc3` | Converts `d0` to s16, then calls `0x7d9a87ad`. | disassembly |
+| `0x7e881fe6` | 1 | `thunk_args16_7e881945_7e881fe6` | Converts `d0` to s16, then calls `0x7e881945`. | disassembly |
+| `0x7e88200d` | 1 | `call_arg0_7d9a65d3_7e88200d` | Calls `0x7d9a65d3` with `d0 = 0`. | disassembly |
+| `0x7e882ecd` | 1 | `thunk_argu8_7e886b1b_7e882ecd` | Converts `d0` to u8, then calls `0x7e886b1b`. | disassembly |
+| `0x7e886c84` | 8 | `call0_7e8850ea_7e886c84` | Calls `0x7e8850ea` and returns 0. | disassembly |
+| `0x7e887c6b` | 3 | `thunk_argu8_7e882ecd_7e887c6b` | Converts `d0` to u8, then calls `0x7e882ecd`. | disassembly |
+| `0x7e88cd94` | 1 | `call0_7d9a173b_7e88cd94` | Calls `0x7d9a173b` and returns 0. | disassembly |
+| `0x7e9db119` | 1 | `call0_7e9dae16_7e9db119` | Calls `0x7e9dae16` and returns 0. | disassembly |
