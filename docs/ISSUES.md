@@ -19,7 +19,7 @@ firmware is flashed. Every **flash** item is therefore parked as an idea; its re
 
 ## Proposed order
 
-1. ~~C1, C2~~ — first live run of the client, read-only: done 2026-11-12. **C19** is the small follow-up.
+1. ~~C1, C2~~ — first live run of the client, read-only: done 2026-11-12. C19 (resize check) is done too.
 2. **C3, C5** — live run of the state-changing commands, then "save to computer after each shot".
 3. **A8** — show the installed firmware version, so the update flow can say "you are up to date".
 4. **C8** — a live-view window; it unlocks most of the tethering features.
@@ -51,7 +51,7 @@ firmware is flashed. Every **flash** item is therefore parked as an idea; its re
 | C14 | 3 | Set the camera's time zone offset (`set_utctimediff`) | low | S | state | C3 | open |
 | C12 | 3 | Second-monitor / webcam output of the live view | low | M | state | C8 | open |
 | C13 | 3 | Write GPS positions into pictures (`req_attachexifgps`, `req_storegpsinfo`); field layout not yet decoded | low | M | state | C3 | open |
-| C19 | 1 | Check `get_resizeimg` on one of the camera's own pictures (it returned the full file for another camera's JPEG) | med | S | read | – | open |
+| C19 | 1 | Check `get_resizeimg` on one of the camera's own pictures (it returned the full file for another camera's JPEG) | med | S | read | – | done 2026-11-12: resizes own pictures (7.5 MB → 366 kB); other cameras' JPEGs come back whole |
 | C20 | 3 | Offer to set the camera clock when pictures carry the unset date 2014-01-01 (there is no clock command over Wi-Fi; `set_utctimediff` only sets the zone offset) | low | S | read | – | open |
 
 ## App (`app/`, Kotlin Multiplatform)

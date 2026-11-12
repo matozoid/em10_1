@@ -130,9 +130,9 @@ Confirmed on this body:
   predicted from the firmware); `get_rsvimglist` → just `VER_100` when nothing is marked for transfer.
 - `get_commandlist` is 5616 bytes with the same 23 commands as on 2026-11-01.
 - `get_thumbnail` works for a JPEG from another camera (11 936 bytes, starts `FF D8 FF DB`).
-- **`get_resizeimg` with `size=1024` returned the full original file** (same 6 342 609 bytes) for that
-  other-camera JPEG. Whether it resizes the E-M10's own pictures is the next thing to check; the probe now
-  prefers the camera's own folders.
+- **`get_resizeimg` resizes the camera's own pictures only.** `size=1024` of an E-M10 JPEG (7 534 917
+  bytes) returned 365 950 bytes (second probe run, same day). For a JPEG from another camera it returned
+  the full original file unchanged (6 342 609 bytes). A client should not assume the reply is small.
 - Plain file download by path works.
 
 Side observation: every file in `101OLYMP` carries the date 2014-01-01 00:00:00, so the camera's clock was
