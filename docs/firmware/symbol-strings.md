@@ -9015,3 +9015,37 @@ storage are left out.
 | `0x7e21c2fb` | 2 | `checkSleepBootServiceSubAppMdlJudgeBootService` | Named by the identifier string it references first (its own trace tag in this firmware's convention). | own trace string |
 | `0x7e21df4f` | 0 | `receiveChangeOutputStartEndPlaySubAppStatePlay` | Named by the identifier string it references first (its own trace tag in this firmware's convention). | own trace string |
 | `0x7e31eba3` | 1 | `doCmdSsUSBConnectStUsbPrintSel_EvtReqEndPlay` | Named by the identifier string it references first (its own trace tag in this firmware's convention). | own trace string |
+
+## Functions named by their own trace string (tagged forms)
+Like the section above, for trace strings that carry a tag or decoration around the name, e.g.
+`[GUI App   ]:doCmdSsBtReceiveConnectWaitEvtBTRcvPincode` or `rcvShtStartMfAssistIn_TAKE_PICTURE_END_WAIT()`. Only
+names that occur once are listed (25). Many are GUI-App menu/state-machine handlers named
+`doCmd<Screen><State><Event>`.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7e0d1ac0` | 1 | `rcvShtEndZoomFrameIn_TAKE_PICTURE_END_WAIT` | Logs `rcvShtEndZoomFrameIn_TAKE_PICTURE_END_WAIT()` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e0d1ba4` | 1 | `rcvShtScrollThroughIn_TAKE_PICTURE_END_WAIT` | Logs `rcvShtScrollThroughIn_TAKE_PICTURE_END_WAIT()` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e0d1c49` | 1 | `rcvShtSetThroughTypeZoomIn_TAKE_PICTURE_END_WAIT` | Logs `rcvShtSetThroughTypeZoomIn_TAKE_PICTURE_END_WAIT()` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e0d1d0c` | 1 | `rcvShtStartMfAssistIn_TAKE_PICTURE_END_WAIT` | Logs `rcvShtStartMfAssistIn_TAKE_PICTURE_END_WAIT()` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e0d1dca` | 1 | `rcvShtStartZoomFrameIn_TAKE_PICTURE_END_WAIT` | Logs `rcvShtStartZoomFrameIn_TAKE_PICTURE_END_WAIT()` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e12f267` | 1 | `tp_transitState_touch_handling_To_touch_idle` | Logs `tp_transitState_touch_handling_To_touch_idle line=%d` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e12f289` | 1 | `tp_transitState_touch_idle_To_touch_handling` | Logs `tp_transitState_touch_idle_To_touch_handling line=%d` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c6bb9` | 1 | `doCmdSsBtReceiveReqPincodeEvtStChgCtrlRing` | Logs `[GUI App   ]:doCmdSsBtReceiveReqPincodeEvtStChgCtrlRing` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c6c27` | 1 | `doCmdSsBtReceiveConnectPincodeEvtStChgCtrlRing` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectPincodeEvtStChgCtrlRing` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c6cf1` | 1 | `doCmdSsBtReceiveConnectPincodeEvtBTRcvPinTime` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectPincodeEvtBTRcvPinTime` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c763d` | 1 | `doCmdSsBtReceiveConnectWaitEvtBTRcvPincode` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectWaitEvtBTRcvPincode` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7654` | 1 | `doCmdSsBtReceiveConnectWaitEvtBTRcvPinFail` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectWaitEvtBTRcvPinFail` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c76bb` | 1 | `doCmdSsBtReceiveConnectWaitEvtBTRcConecSucc` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectWaitEvtBTRcConecSucc` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c76d2` | 1 | `doCmdSsBtReceiveConnectWaitEvtBTRcvConcFai` | Logs `[GUI App   ]:doCmdSsBtReceiveConnectWaitEvtBTRcvConcFai` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c78b6` | 1 | `doCmdSsBtReceiveRejectPairingEvtStChgPENPAL` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectPairingEvtStChgPENPAL` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7906` | 1 | `doCmdSsBtReceiveRejectConnectEvtStChgPENPAL` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectConnectEvtStChgPENPAL` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c79ee` | 1 | `doCmdSsBtReceiveRejectPairingEvtStChgModeDial` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectPairingEvtStChgModeDial` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7a3e` | 1 | `doCmdSsBtReceiveRejectConnectEvtStChgModeDial` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectConnectEvtStChgModeDial` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7b26` | 1 | `doCmdSsBtReceiveRejectPairingEvtReqEndMenu` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectPairingEvtReqEndMenu` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7b76` | 1 | `doCmdSsBtReceiveRejectConnectEvtReqEndMenu` | Logs `[GUI App   ]:doCmdSsBtReceiveRejectConnectEvtReqEndMenu` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c7c7e` | 1 | `doCmdSsBtReceiveImageCancelEvtBTRcvImgCance` | Logs `[GUI App   ]:doCmdSsBtReceiveImageCancelEvtBTRcvImgCance` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e2c9b73` | 1 | `doCmd_SsBtSend_StBtSendReqBusy_EvtBtSendUpdisp` | Logs `[GUI App   ]:doCmd_SsBtSend_StBtSendReqBusy_EvtBtSendUpdisp` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e302249` | 1 | `doCmdSsDebugMenuColor_SettingEvtKeyPowerOn` | Logs `[GUI App   ]:doCmdSsDebugMenuColor_SettingEvtKeyPowerOn` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e31022a` | 1 | `doCmd_SsMenuMain_StMenuMaiWarning_EvtEndWarning` | Logs `[GUI App   ]00doCmd_SsMenuMain_StMenuMaiWarning_EvtEndWarning` at entry: its own name in this firmware's trace convention. | own trace string |
+| `0x7e3103f9` | 1 | `doCmd_SsMenuMain_StMenuMaiWarning_EvtKeyOkOn` | Logs `[GUI App   ]00doCmd_SsMenuMain_StMenuMaiWarning_EvtKeyOkOn` at entry: its own name in this firmware's trace convention. | own trace string |
