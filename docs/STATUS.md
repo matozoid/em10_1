@@ -23,6 +23,7 @@ findings, superseded TODO lists, Ghidra setup notes) is archived in
 | Model / update id | 113 / 1130; camera-ID code `S0051` |
 | CPU | Panasonic MN103 / AM33 (dual core), uITRON RTOS |
 | Runtime base | block 0 executes at `0x7d991020` (container load address `0x40300000` is packaging only) |
+| Wi-Fi chip | Broadcom BCM43362 over SDIO; chip firmware `43362a2-roml/sdio-apsta-idsup-idauth-pno`, built 2012-10-29 (strings returned by `bcm_fw_version_strings` `0x7e88982f`) |
 | Wi-Fi | camera AP `E-M10-P-<serial>`, HTTP CGI at `192.168.0.10:80`, OI.Share descriptor v2.20 |
 | USB | VID `07b4`; PTP/MTP only |
 
