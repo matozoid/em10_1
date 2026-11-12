@@ -1323,6 +1323,146 @@ RAM globals note: cell `0x6044cf18` and the firmup scratch `0x6044cbc4` share th
 that page is a **shared RAM globals/BSS region** inside the `0x60000000` RAM aperture (distinct from
 the `0xa0000000` cached SDRAM data segment above).
 
+## OlyHfwOpe sub-component table getters (pattern family)
+Every function in block 0 with the exact byte sequence of `olyhfw_ope_subcomp_get45` `0x7e29cf9d`
+(`mov d0,d1; exthu d1; cmp N,d1; bcc; exthu d0; asl2 d0; add OFF,a0; mov (d0,a0),a0; …; retf`) is a
+bounds-checked getter over a pointer table inside a GUI screen object: `(a0=this, d0=u16 idx)` →
+`idx < N ? *(this + OFF + idx*4) : NULL`. A byte-pattern scan on 2026-11-12 found **197** such functions
+(OFF = 792 in 192 of them), all in banks `0x7e27`–`0x7e2c`; each GUI screen class has its own copy sized to
+its number of sub-components. The ones already listed in the main table keep their earlier names; the
+remaining 127 are listed here, named `olyhfw_subcomp_get<N>_<address>`. The xref column is Ghidra's
+reference count (`—` where the function list has no entry).
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7e27341d` | 13 | `olyhfw_subcomp_get13_7e27341d` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e273dd7` | 5 | `olyhfw_subcomp_get6_7e273dd7` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e2769d2` | 7 | `olyhfw_subcomp_get112_7e2769d2` | `idx < 112 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e277edf` | 10 | `olyhfw_subcomp_get10_7e277edf` | `idx < 10 ? *(this + 880 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e2781dd` | 7 | `olyhfw_subcomp_get11_7e2781dd` | `idx < 11 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e2784d7` | 9 | `olyhfw_subcomp_get11_7e2784d7` | `idx < 11 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e279326` | 7 | `olyhfw_subcomp_get9_7e279326` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e279d29` | 3 | `olyhfw_subcomp_get3_7e279d29` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e279f51` | 5 | `olyhfw_subcomp_get10_7e279f51` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27a65c` | 8 | `olyhfw_subcomp_get9_7e27a65c` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27a981` | 7 | `olyhfw_subcomp_get7_7e27a981` | `idx < 7 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27b03d` | 7 | `olyhfw_subcomp_get9_7e27b03d` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27bb24` | 5 | `olyhfw_subcomp_get9_7e27bb24` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27bd51` | 14 | `olyhfw_subcomp_get15_7e27bd51` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27c06d` | 6 | `olyhfw_subcomp_get9_7e27c06d` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27c9f8` | 12 | `olyhfw_subcomp_get14_7e27c9f8` | `idx < 14 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27d8d7` | 16 | `olyhfw_subcomp_get17_7e27d8d7` | `idx < 17 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27dc41` | 15 | `olyhfw_subcomp_get15_7e27dc41` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e27e9f9` | 17 | `olyhfw_subcomp_get17_7e27e9f9` | `idx < 17 ? *(this + 792 + idx*4) : NULL` (bank `0x7e27`). | pattern scan |
+| `0x7e2806f3` | 15 | `olyhfw_subcomp_get18_7e2806f3` | `idx < 18 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28186e` | 5 | `olyhfw_subcomp_get7_7e28186e` | `idx < 7 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e281aa6` | 11 | `olyhfw_subcomp_get12_7e281aa6` | `idx < 12 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e281d60` | 15 | `olyhfw_subcomp_get54_7e281d60` | `idx < 54 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28346c` | 7 | `olyhfw_subcomp_get42_7e28346c` | `idx < 42 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28376c` | 16 | `olyhfw_subcomp_get16_7e28376c` | `idx < 16 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28403f` | 9 | `olyhfw_subcomp_get9_7e28403f` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e287184` | 11 | `olyhfw_subcomp_get15_7e287184` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e287426` | 17 | `olyhfw_subcomp_get18_7e287426` | `idx < 18 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e287c64` | 5 | `olyhfw_subcomp_get6_7e287c64` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e287f06` | 11 | `olyhfw_subcomp_get41_7e287f06` | `idx < 41 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e288230` | 5 | `olyhfw_subcomp_get6_7e288230` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e288488` | 12 | `olyhfw_subcomp_get13_7e288488` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e288800` | 5 | `olyhfw_subcomp_get6_7e288800` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e288f25` | 3 | `olyhfw_subcomp_get4_7e288f25` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e289131` | 4 | `olyhfw_subcomp_get8_7e289131` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28af60` | 10 | `olyhfw_subcomp_get12_7e28af60` | `idx < 12 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28b4ef` | 13 | `olyhfw_subcomp_get25_7e28b4ef` | `idx < 25 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28bdc3` | 12 | `olyhfw_subcomp_get13_7e28bdc3` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28d2d9` | 11 | `olyhfw_subcomp_get13_7e28d2d9` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28d714` | 5 | `olyhfw_subcomp_get7_7e28d714` | `idx < 7 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28d9d0` | 13 | `olyhfw_subcomp_get13_7e28d9d0` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28e079` | 2 | `olyhfw_subcomp_get3_7e28e079` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28e305` | — | `olyhfw_subcomp_get1_7e28e305` | `idx < 1 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28e39a` | 7 | `olyhfw_subcomp_get8_7e28e39a` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28e600` | 10 | `olyhfw_subcomp_get88_7e28e600` | `idx < 88 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28ec9c` | 4 | `olyhfw_subcomp_get4_7e28ec9c` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28f002` | 3 | `olyhfw_subcomp_get11_7e28f002` | `idx < 11 ? *(this + 792 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e28f9f4` | 2 | `olyhfw_subcomp_get5_7e28f9f4` | `idx < 5 ? *(this + 796 + idx*4) : NULL` (bank `0x7e28`). | pattern scan |
+| `0x7e2903c7` | 11 | `olyhfw_subcomp_get35_7e2903c7` | `idx < 35 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e290c73` | 8 | `olyhfw_subcomp_get12_7e290c73` | `idx < 12 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e294120` | 15 | `olyhfw_subcomp_get15_7e294120` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29477c` | 9 | `olyhfw_subcomp_get30_7e29477c` | `idx < 30 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e294f27` | 9 | `olyhfw_subcomp_get10_7e294f27` | `idx < 10 ? *(this + 824 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e295305` | 15 | `olyhfw_subcomp_get16_7e295305` | `idx < 16 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e297b21` | 13 | `olyhfw_subcomp_get30_7e297b21` | `idx < 30 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e298967` | 5 | `olyhfw_subcomp_get5_7e298967` | `idx < 5 ? *(this + 808 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29934d` | 8 | `olyhfw_subcomp_get21_7e29934d` | `idx < 21 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29bd70` | 8 | `olyhfw_subcomp_get9_7e29bd70` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29c2fc` | 9 | `olyhfw_subcomp_get10_7e29c2fc` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29c7ba` | 8 | `olyhfw_subcomp_get15_7e29c7ba` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e29cc2d` | 7 | `olyhfw_subcomp_get8_7e29cc2d` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e29`). | pattern scan |
+| `0x7e2a181a` | 17 | `olyhfw_subcomp_get28_7e2a181a` | `idx < 28 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2a`). | pattern scan |
+| `0x7e2aa2b3` | 8 | `olyhfw_subcomp_get10_7e2aa2b3` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2a`). | pattern scan |
+| `0x7e2aa6a3` | 6 | `olyhfw_subcomp_get6_7e2aa6a3` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2a`). | pattern scan |
+| `0x7e2aa9b1` | 7 | `olyhfw_subcomp_get9_7e2aa9b1` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2a`). | pattern scan |
+| `0x7e2af4b1` | 11 | `olyhfw_subcomp_get12_7e2af4b1` | `idx < 12 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2a`). | pattern scan |
+| `0x7e2b05ed` | 11 | `olyhfw_subcomp_get16_7e2b05ed` | `idx < 16 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b0996` | 9 | `olyhfw_subcomp_get10_7e2b0996` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b0d84` | 14 | `olyhfw_subcomp_get32_7e2b0d84` | `idx < 32 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b1327` | 5 | `olyhfw_subcomp_get6_7e2b1327` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b16da` | 2 | `olyhfw_subcomp_get2_7e2b16da` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b1839` | 9 | `olyhfw_subcomp_get13_7e2b1839` | `idx < 13 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b1bd2` | 10 | `olyhfw_subcomp_get10_7e2b1bd2` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b2e35` | 9 | `olyhfw_subcomp_get21_7e2b2e35` | `idx < 21 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b3712` | 3 | `olyhfw_subcomp_get3_7e2b3712` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b3aff` | 5 | `olyhfw_subcomp_get5_7e2b3aff` | `idx < 5 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b3e18` | 8 | `olyhfw_subcomp_get8_7e2b3e18` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b42f3` | 6 | `olyhfw_subcomp_get6_7e2b42f3` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b467a` | 11 | `olyhfw_subcomp_get29_7e2b467a` | `idx < 29 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b5f54` | 6 | `olyhfw_subcomp_get6_7e2b5f54` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b626a` | 5 | `olyhfw_subcomp_get5_7e2b626a` | `idx < 5 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b64a6` | 10 | `olyhfw_subcomp_get14_7e2b64a6` | `idx < 14 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b681d` | 5 | `olyhfw_subcomp_get7_7e2b681d` | `idx < 7 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b6f5b` | 7 | `olyhfw_subcomp_get4_7e2b6f5b` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b7193` | 9 | `olyhfw_subcomp_get9_7e2b7193` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b73eb` | — | `olyhfw_subcomp_get1_7e2b73eb` | `idx < 1 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b8841` | 15 | `olyhfw_subcomp_get15_7e2b8841` | `idx < 15 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b9117` | 10 | `olyhfw_subcomp_get10_7e2b9117` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b93c4` | 14 | `olyhfw_subcomp_get14_7e2b93c4` | `idx < 14 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b9a38` | 14 | `olyhfw_subcomp_get14_7e2b9a38` | `idx < 14 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b9d53` | 2 | `olyhfw_subcomp_get2_7e2b9d53` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2b9f33` | 6 | `olyhfw_subcomp_get6_7e2b9f33` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2ba15a` | 2 | `olyhfw_subcomp_get2_7e2ba15a` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2ba33a` | 6 | `olyhfw_subcomp_get6_7e2ba33a` | `idx < 6 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bad77` | 4 | `olyhfw_subcomp_get4_7e2bad77` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bb2b2` | 17 | `olyhfw_subcomp_get17_7e2bb2b2` | `idx < 17 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bb594` | 2 | `olyhfw_subcomp_get2_7e2bb594` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bb780` | — | `olyhfw_subcomp_get3_7e2bb780` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bbdf6` | 8 | `olyhfw_subcomp_get8_7e2bbdf6` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bc4f4` | — | `olyhfw_subcomp_get3_7e2bc4f4` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bc665` | 9 | `olyhfw_subcomp_get14_7e2bc665` | `idx < 14 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bd2df` | — | `olyhfw_subcomp_get2_7e2bd2df` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bd450` | 5 | `olyhfw_subcomp_get5_7e2bd450` | `idx < 5 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bd65e` | 5 | `olyhfw_subcomp_get23_7e2bd65e` | `idx < 23 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bd938` | 13 | `olyhfw_subcomp_get67_7e2bd938` | `idx < 67 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bddfe` | 4 | `olyhfw_subcomp_get40_7e2bddfe` | `idx < 40 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2be0af` | 4 | `olyhfw_subcomp_get4_7e2be0af` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2be79d` | 2 | `olyhfw_subcomp_get2_7e2be79d` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bea2c` | 2 | `olyhfw_subcomp_get2_7e2bea2c` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bec23` | 2 | `olyhfw_subcomp_get2_7e2bec23` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bee1d` | 2 | `olyhfw_subcomp_get2_7e2bee1d` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bf0a6` | 2 | `olyhfw_subcomp_get2_7e2bf0a6` | `idx < 2 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bfa25` | 4 | `olyhfw_subcomp_get4_7e2bfa25` | `idx < 4 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2bfc37` | 10 | `olyhfw_subcomp_get10_7e2bfc37` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2b`). | pattern scan |
+| `0x7e2c05ac` | 3 | `olyhfw_subcomp_get3_7e2c05ac` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c07e8` | 2 | `olyhfw_subcomp_get3_7e2c07e8` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c09da` | 9 | `olyhfw_subcomp_get9_7e2c09da` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c0c80` | — | `olyhfw_subcomp_get3_7e2c0c80` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c0df1` | 18 | `olyhfw_subcomp_get20_7e2c0df1` | `idx < 20 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c109e` | — | `olyhfw_subcomp_get3_7e2c109e` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c1714` | 8 | `olyhfw_subcomp_get8_7e2c1714` | `idx < 8 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c1dfc` | — | `olyhfw_subcomp_get3_7e2c1dfc` | `idx < 3 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c1f6d` | 7 | `olyhfw_subcomp_get9_7e2c1f6d` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c2ba8` | 10 | `olyhfw_subcomp_get9_7e2c2ba8` | `idx < 9 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c2e43` | 7 | `olyhfw_subcomp_get7_7e2c2e43` | `idx < 7 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c30bb` | 18 | `olyhfw_subcomp_get18_7e2c30bb` | `idx < 18 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+| `0x7e2c34af` | 10 | `olyhfw_subcomp_get10_7e2c34af` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
+
 ## Heap allocator (core memory management)
 The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs) wraps the heap. Core:
 | address | symbol | role | source |
