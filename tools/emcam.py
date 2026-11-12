@@ -19,9 +19,14 @@ Read-only commands (do not change anything on the camera):
 
 Commands that change camera state (mode, settings, or take pictures):
   mode rec|play|shutter [--lvqty 0320x0240|0640x0480]
+                               (--lvqty applies to rec; the camera only accepts it coming from play,
+                               so the client switches to play first)
   set NAME VALUE               set a property (rec mode), e.g. set isospeedvalue 400
-  shutter ACTION               ACTION: half, release-half, full, release-full, press, release-keep-half
-                               (shutter mode; `press` focuses and takes one picture)
+  shoot [--focus-wait SECONDS] take one picture: switches to shutter mode, half-press, waits for
+                               focus, full press, releases both stages, returns to rec mode
+  shutter ACTION               one raw shutter-button step (shutter mode): half, release-half, full,
+                               release-full, press, release-keep-half. A press without its release
+                               leaves the button held; prefer `shoot`
   liveview [--frames N] [--out DIR] [--port P]
                                receive the live-view stream and save JPEG frames (rec mode; the
                                stream size is the --lvqty given to `mode rec`)
@@ -32,7 +37,7 @@ options: --host ADDRESS (default 192.168.0.10), --timeout SECONDS (default 10)
 Errors: the camera answers HTTP 520 with a code: 1001 not available in the current mode, 1002 required
 parameter missing, 1004 bad value, 1005 resource or card I/O error.
 """
-import argparse, os, re, socket, struct, sys, urllib.error, urllib.parse, urllib.request
+import argparse, os, re, socket, struct, sys, time, urllib.error, urllib.parse, urllib.request
 
 ERRORS = {"1001": "not available in the current mode (try `mode rec`, `mode play` or `mode shutter`)",
           "1002": "required parameter missing", "1004": "bad value", "1005": "resource or card I/O error"}
@@ -43,7 +48,9 @@ DIR_ATTR = 0x10
 
 
 class CameraError(Exception):
-    pass
+    def __init__(self, message, status=None):
+        super().__init__(message)
+        self.status = status
 
 
 class Camera:
@@ -62,7 +69,7 @@ class Camera:
             m = re.search(r"<errorcode>\s*(\d+)\s*</errorcode>", body)
             code = m.group(1) if m else None
             raise CameraError("HTTP %d%s for %s" % (e.code, (" error %s: %s" % (code, ERRORS.get(code, "unknown")))
-                                                    if code else "", path)) from None
+                                                    if code else "", path), e.code) from None
         except (urllib.error.URLError, socket.timeout, ConnectionError) as e:
             raise CameraError("cannot reach the camera at %s (%s). Is this computer on the camera's Wi-Fi?"
                               % (self.base, getattr(e, "reason", e))) from None
@@ -78,7 +85,15 @@ class Camera:
     def listdir(self, directory):
         """Entries of one card directory: dicts with path, name, size, is_dir, date, time."""
         out = []
-        for line in self.text("get_imglist.cgi?DIR=" + urllib.parse.quote(directory)).splitlines():
+        for attempt in range(7):               # right after a shot the camera is still writing and answers 520
+            try:
+                listing = self.text("get_imglist.cgi?DIR=" + urllib.parse.quote(directory))
+                break
+            except CameraError as e:
+                if e.status != 520 or attempt == 6:
+                    raise
+                time.sleep(1.0)
+        for line in listing.splitlines():
             p = line.strip().split(",")
             if len(p) < 6 or not p[0].startswith("/"):
                 continue                       # skips the VER_100 header line
@@ -96,6 +111,34 @@ class Camera:
                 yield from self.walk(e["path"])
             else:
                 yield e
+
+    # --- mode and shutter ---
+    def set_mode(self, mode, lvqty=None):
+        """Switch camera mode. The live-view size is only taken on a switch from play to rec, so a rec
+        request with a size goes through play first."""
+        if mode == "rec" and lvqty:
+            self.request("switch_cammode.cgi?mode=play")
+            self.request("switch_cammode.cgi?mode=rec&lvqty=" + lvqty)
+        else:
+            self.request("switch_cammode.cgi?mode=" + mode)
+
+    def shoot(self, focus_wait=2.0, save_wait=1.5):
+        """Take one picture and leave the camera in rec mode with the shutter button released."""
+        self.set_mode("shutter")               # exec_shutter is only accepted in shutter mode
+        pressed = []
+        try:
+            self.request("exec_shutter.cgi?com=1stpush"); pressed.append("1strelease")
+            time.sleep(focus_wait)
+            self.request("exec_shutter.cgi?com=2ndpush"); pressed.append("2nd1strelease")
+            time.sleep(0.5)
+        finally:
+            for step in reversed(pressed):     # always release what was pressed, full stage first
+                try:
+                    self.request("exec_shutter.cgi?com=" + step)
+                except CameraError as e:
+                    print("warning: %s" % e, file=sys.stderr)
+            time.sleep(save_wait)
+            self.set_mode("rec")               # in shutter mode the camera rejects the get_* commands
 
     # --- properties ---
     def prop_desc(self, name):
@@ -200,9 +243,10 @@ def main(argv=None):
     p = sub.add_parser("prop"); p.add_argument("name")
     p = sub.add_parser("raw"); p.add_argument("path")
     p = sub.add_parser("mode"); p.add_argument("mode", choices=("rec", "play", "shutter"))
-    p.add_argument("--lvqty", choices=("0320x0240", "0640x0480"), default="0320x0240")
+    p.add_argument("--lvqty", choices=("0320x0240", "0640x0480"))
     p = sub.add_parser("set"); p.add_argument("name"); p.add_argument("value")
     p = sub.add_parser("shutter"); p.add_argument("action", choices=sorted(SHUTTER))
+    p = sub.add_parser("shoot"); p.add_argument("--focus-wait", type=float, default=2.0)
     p = sub.add_parser("liveview"); p.add_argument("--frames", type=int, default=30)
     p.add_argument("--out", default="liveview"); p.add_argument("--port", type=int, default=0)
     a = ap.parse_args(argv)
@@ -257,7 +301,7 @@ def run(cam, a):
     elif a.cmd == "raw":
         sys.stdout.buffer.write(cam.request(a.path)); print()
     elif a.cmd == "mode":
-        cam.request("switch_cammode.cgi?mode=%s%s" % (a.mode, "&lvqty=" + a.lvqty if a.mode == "rec" else ""))
+        cam.set_mode(a.mode, a.lvqty)
         print("camera mode set to %s" % a.mode)
     elif a.cmd == "set":
         body = '<?xml version="1.0"?>\r\n<set>\r\n<value>%s</value>\r\n</set>\r\n' % a.value
@@ -267,6 +311,9 @@ def run(cam, a):
     elif a.cmd == "shutter":
         cam.request("exec_shutter.cgi?com=" + SHUTTER[a.action])
         print("sent %s" % SHUTTER[a.action])
+    elif a.cmd == "shoot":
+        cam.shoot(a.focus_wait)
+        print("picture taken; camera is back in rec mode")
     elif a.cmd == "liveview":
         liveview(cam, a.frames, a.out, a.port, cam.timeout)
     elif a.cmd == "poweroff":

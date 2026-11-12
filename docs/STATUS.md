@@ -111,10 +111,10 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 
 - **Client: `tools/emcam.py`** (2026-11-12) covers browse, download, thumbnails, resized images,
   properties, mode switch, shutter and live view. Tested only against the fake camera
-  `tools/emcam_mock.py`, not yet against the real body. Assumptions to confirm live: the
-  `get_imglist` line format (`dir,name,size,attr,date,time` after a `VER_100` line, as in other
-  OI.Share cameras), the `set_camprop` POST body (`<set><value>…</value></set>`), and the reply
-  format of `get_unusedcapacity`.
+  `tools/emcam_mock.py`, not yet against the real body. The file-list format and the `set_camprop`
+  body are confirmed on the sister model E-M1 by the `omcap` project (`usb-protocol/wifi-api.md`),
+  which also supplied the single-shot sequence and the play-then-rec rule for the live-view size.
+  Still to confirm live: the reply format of `get_unusedcapacity`, and everything on the E-M10 itself.
 
 ### USB — `firmware/usb-ptp.md`, `usb-protocol/`
 - PTP is mailbox-driven (`TSK_PTPCOM`); there is no static opcode→handler table.

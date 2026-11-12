@@ -79,3 +79,37 @@ expose (verified here — `OLYSetConnectPCInfo`/`StationMode`/`ConnectPcInfo`/`n
 `exec_takemisc`/`startliveview`/`set_camprop`… are present). E-M10 Wi-Fi is the camera's own AP +
 HTTP CGI only — no 15740 responder. The `0x94xx` generation split is detailed in
 [`sdk-opcode-compat.md`](sdk-opcode-compat.md).
+
+## External corroboration (`HolmHaensel/omcap`, checked 2026-11-12)
+`github.com/HolmHaensel/omcap` ("E-M1 Capture", GPL-3) is a tethering web app for the **OM-D E-M1
+Mark I** (tested on firmware 4.6) over Wi-Fi and, through libgphoto2, over USB. The E-M1 is the E-M10's
+sister model: its command list is **oishare v2.60** with the same 23 CGIs as the E-M10's v2.20 plus
+`get_screennail`. We use it as a protocol reference only (facts observed on a real camera); no code is
+copied, since its licence differs from this repository's intent to stay clean-room.
+
+Confirmed on a real E-M1, matching our static findings and the assumptions in `tools/emcam.py`:
+- `get_imglist` lines are `dir,name,size,attr,date,time` after a `VER_…` line; attribute bit `0x10`
+  marks a directory.
+- `set_camprop.cgi?com=set&propname=NAME` takes a POST body `<?xml version="1.0"?><set><value>V</value></set>`.
+- `exec_shutter` is only accepted in mode `shutter`, and in that mode the `get_*` commands are rejected.
+- Live view is `exec_takemisc.cgi?com=startliveview&port=P`, RTP-style datagrams with a 12-byte header,
+  marker bit `0x80` in byte 1 on the last packet of a frame, and a header extension on the first.
+
+New operational details (not visible in our static analysis):
+- **`lvqty` is only taken on a switch from `play` to `rec`**; coming from `shutter` the old size stays.
+- Right after a shot the camera is still writing and answers `get_imglist` with HTTP 520 for a few seconds;
+  retry.
+- A working single-shot sequence: `mode=shutter`, `1stpush`, wait about 2 s for focus, `2ndpush`,
+  `2nd1strelease`, `1strelease`, wait about 1.5 s for saving, `mode=rec`.
+- Touch AF: `exec_takemotion.cgi?com=assignafframe&point=XXXXxYYYY` (coordinates in the grid given by
+  `touchactiveframe`) answers `affocus` ok/ng with `afframepoint` and `afframesize`; then
+  `com=takeready&point=…`.
+- Movie: `exec_takemotion.cgi?com=startmovietake&liveview=on` / `com=stopmovietake` (E-M1; not in the
+  E-M10's command list).
+- About 10 % of live-view frames lose a packet on Wi-Fi and must be dropped.
+- Still unconfirmed there too: the reply format of `get_unusedcapacity`.
+
+USB side (E-M1 only): it drives the body through libgphoto2 with the `0x9481` shutter operation and
+device properties `d0xx` (e.g. `d00c` AF mode, `d051` AF field, `d006` exposure program, `d010` picture
+mode). The E-M10 Mark I rejects `0x9481` (`sdk-opcode-compat.md`), so this part does not transfer.
+

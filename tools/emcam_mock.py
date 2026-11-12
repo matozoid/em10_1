@@ -18,7 +18,7 @@ FILES = {"/DCIM/100OLYMP/P1010001.JPG": JPEG, "/DCIM/100OLYMP/P1010002.ORF": b"R
          "/DCIM/100OLYMP/P1010003.MOV": b"M" * 9000}
 PROPS = {"takemode": ["getset", "P", "iAuto P A S M ART"], "isospeedvalue": ["getset", "Auto", "Auto Low 200 400 800"],
          "noisereduction": ["get", "off", "off on auto"]}
-STATE = {"mode": "play", "lv": None, "shots": []}
+STATE = {"mode": "play", "lv": None, "shots": [], "log": []}
 COMMANDS = ["get_connectmode", "switch_cammode", "get_caminfo", "exec_pwoff", "get_resizeimg", "get_imglist",
             "get_thumbnail", "exec_takemisc", "get_camprop", "set_camprop", "exec_shutter"]
 FATDATE, FATTIME = (2026 - 1980) << 9 | 11 << 5 | 12, 10 << 11 | 30 << 5 | 5
@@ -71,6 +71,8 @@ class H(BaseHTTPRequestHandler):
         name, mode = u.path.lstrip("/").replace(".cgi", ""), STATE["mode"]
         if u.path in FILES:
             return self.reply(FILES[u.path], ctype="image/jpeg")
+        if name == "mock_log":                    # test hook: what the client did, in order
+            return self.reply("\n".join(STATE["log"]), ctype="text/plain")
         if name == "get_connectmode":
             return self.reply("<connectmode>private</connectmode>")
         if name == "get_caminfo":
@@ -80,6 +82,7 @@ class H(BaseHTTPRequestHandler):
         if name == "switch_cammode":
             if q.get("mode") not in ("rec", "play", "shutter"):
                 return self.error(1004)
+            STATE["log"].append("mode " + q["mode"] + (" " + q["lvqty"] if "lvqty" in q else ""))
             STATE["mode"] = q["mode"]
             return self.reply(ctype="www/unknown")
         if name == "exec_pwoff":
@@ -128,7 +131,7 @@ class H(BaseHTTPRequestHandler):
         if name == "exec_shutter":
             if mode != "shutter":
                 return self.error(1001)
-            STATE["shots"].append(q.get("com"))
+            STATE["shots"].append(q.get("com")); STATE["log"].append("shutter " + str(q.get("com")))
             return self.reply()
         self.error(1001)
 
