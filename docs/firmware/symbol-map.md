@@ -1347,6 +1347,8 @@ the `0xa0000000` cached SDRAM data segment above).
 ## Pattern families (separate file)
 Per-class copies of small routines, entry stubs and one-line field writers (several thousand addresses) are
 listed in [`symbol-families.md`](symbol-families.md), one section per family.
+Names guessed from the log strings a function references (about 8,900, heuristic) are in
+[`symbol-strings.md`](symbol-strings.md).
 
 ## Heap allocator (core memory management)
 The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs) wraps the heap. Core:
