@@ -135,6 +135,8 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - Mark I (`S0051`) has no CameraSimulation profile in the current Workspace build.
 
 ## Not done
+Prioritised list of app, client and firmware-idea work: [`ISSUES.md`](ISSUES.md).
+
 - **No flash of a patched image on the real camera**, and none planned while the owner judges the
   risk too high. Procedure and risk analysis are in `mods/patching-pipeline.md`.
 - **No mod of our own.** Everything built so far reproduces the community ring-native patch. There

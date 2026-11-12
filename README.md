@@ -12,6 +12,7 @@ See [docs/STATUS.md](docs/STATUS.md).
 ## Layout
 Committed:
 - `docs/STATUS.md`        current state, open items, ground rules
+- `docs/ISSUES.md`        prioritised issue list (app, Wi-Fi client, firmware ideas)
 - `docs/ARCHITECTURE.md`  plan for the replacement app (Kotlin Multiplatform)
 - `docs/firmware/`        container format, memory map, RTOS tasks, classes, resources, Wi-Fi CGI
                           handlers, USB PTP, debug shell, in-camera update, update server, and the
