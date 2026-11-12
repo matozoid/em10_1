@@ -1484,6 +1484,25 @@ reference count (`—` where the function list has no entry).
 | `0x7e2c30bb` | 18 | `olyhfw_subcomp_get18_7e2c30bb` | `idx < 18 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
 | `0x7e2c34af` | 10 | `olyhfw_subcomp_get10_7e2c34af` | `idx < 10 ? *(this + 792 + idx*4) : NULL` (bank `0x7e2c`). | pattern scan |
 
+## Cmp component Idle-enter copies (pattern family)
+Every Cmp component class carries its own copy of the same "enter Idle" routine: a `call`+`ret` wrapper
+followed by a body that sets the state word to 49 at `+948` and `+256`, `+636 = 466`, `+632 = 0` and logs
+`"Cmp_Play%s Idle"` ([[cmp-component-framework]]). A byte-pattern scan on 2026-11-12 finds **28** copies in
+banks `0x7e15`–`0x7e1c`; 19 wrappers were already labelled individually in the main table. The remaining 9
+wrappers are listed here as `cmp_enter_idle_<address>`; each body sits 8 bytes after its wrapper.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7e127bf4` | 22 | `cmp_enter_idle_7e127bf4` | Cmp component Idle-state enter: thin wrapper → body `0x7e127bfc`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e14b090` | 23 | `cmp_enter_idle_7e14b090` | Cmp component Idle-state enter: thin wrapper → body `0x7e14b098`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e14e0b3` | 21 | `cmp_enter_idle_7e14e0b3` | Cmp component Idle-state enter: thin wrapper → body `0x7e14e0bb`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e161797` | 22 | `cmp_enter_idle_7e161797` | Cmp component Idle-state enter: thin wrapper → body `0x7e16179f`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e19fea8` | 20 | `cmp_enter_idle_7e19fea8` | Cmp component Idle-state enter: thin wrapper → body `0x7e19feb0`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e1a4854` | 20 | `cmp_enter_idle_7e1a4854` | Cmp component Idle-state enter: thin wrapper → body `0x7e1a485c`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e1a7126` | 20 | `cmp_enter_idle_7e1a7126` | Cmp component Idle-state enter: thin wrapper → body `0x7e1a712e`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e1bc122` | 20 | `cmp_enter_idle_7e1bc122` | Cmp component Idle-state enter: thin wrapper → body `0x7e1bc12a`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+| `0x7e1c3ddf` | 20 | `cmp_enter_idle_7e1c3ddf` | Cmp component Idle-state enter: thin wrapper → body `0x7e1c3de7`, which sets state 49 (Idle) at `+948` and `+256`, `+636 = 466`, `+632 = 0`, and logs `"Cmp_Play%s Idle"`. Byte-identical to the other copies listed in the Cmp Idle-enter section. | pattern scan |
+
 ## Heap allocator (core memory management)
 The `0x7e206a0f`/`...a17`/`...a1f`/`...a27` thunk cluster (~6.6k combined xrefs) wraps the heap. Core:
 | address | symbol | role | source |
