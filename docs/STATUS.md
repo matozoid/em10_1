@@ -109,6 +109,13 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - No firmware update over Wi-Fi on this body (no `fwup_*`), no PTP/IP responder on TCP 15740.
 - Cross-checked against `n0p/om-tether` (OM-1 II, descriptor v5.20): same CGI family, newer generation.
 
+- **Client: `tools/emcam.py`** (2026-11-12) covers browse, download, thumbnails, resized images,
+  properties, mode switch, shutter and live view. Tested only against the fake camera
+  `tools/emcam_mock.py`, not yet against the real body. Assumptions to confirm live: the
+  `get_imglist` line format (`dir,name,size,attr,date,time` after a `VER_100` line, as in other
+  OI.Share cameras), the `set_camprop` POST body (`<set><value>…</value></set>`), and the reply
+  format of `get_unusedcapacity`.
+
 ### USB — `firmware/usb-ptp.md`, `usb-protocol/`
 - PTP is mailbox-driven (`TSK_PTPCOM`); there is no static opcode→handler table.
 - Advertised vendor ops: 18 (`0x902c–0x902f`, `0x9116–0x9125`, `0x9801–0x9805`). Internal engine ops: 54.

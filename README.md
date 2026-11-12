@@ -36,5 +36,6 @@ python3 -I tools/omfw.py dec  firmware/stock/OLY_E_113_1400_0000_0000.BIN firmwa
 python3 -I tools/fwpatch.py plan STOCK.BIN PROFILE.json --id em10-1.4
 python3 -I tools/symbol_index.py --once 0x7de57532
 python3 -I tools/symbols.py stats
+python3 tools/emcam.py info                       # on the camera's Wi-Fi; see tools/README.md
 python3 -I tools/dis.py 7de57e24 7de58a90        # needs mn10300-elf-objdump, see docs/STATUS.md
 ```

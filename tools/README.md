@@ -45,6 +45,8 @@ go under gitignored `firmware/` or `research/` and are never committed.
 ## Live camera (read-only unless stated)
 | script | purpose |
 |---|---|
+| `emcam.py` | Wi-Fi client: info, list/download/pull files, thumbnails, resized JPEGs, properties; state-changing: mode switch, set property, shutter, live view, power off. `emcam.py -h` lists everything |
+| `emcam_mock.py [PORT]` | fake camera for developing clients offline (same replies, per-mode errors, live-view stream); use with `emcam.py --host 127.0.0.1:PORT` |
 | `ptpraw.py` | minimal raw PTP client over libusb: OpenSession, GetDeviceInfo; no writes |
 | `probe-camera-wifi.sh` | join the camera AP, query read-only CGI endpoints, rejoin home Wi-Fi |
 | `probe-camprop.sh` | read-only camprop CGI test; `SWITCH=1` also switches camera mode and back |
