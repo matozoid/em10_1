@@ -13,8 +13,9 @@ See [docs/STATUS.md](docs/STATUS.md).
 Committed:
 - `docs/STATUS.md`        current state, open items, ground rules
 - `docs/ARCHITECTURE.md`  plan for the replacement app (Kotlin Multiplatform)
-- `docs/firmware/`        container format, memory map, RTOS tasks, classes, symbol map, resources,
-                          Wi-Fi CGI handlers, USB PTP, debug shell, in-camera update, update server
+- `docs/firmware/`        container format, memory map, RTOS tasks, classes, resources, Wi-Fi CGI
+                          handlers, USB PTP, debug shell, in-camera update, update server, and the
+                          symbol files (`symbol-map.md`, `symbol-families.md`, `symbol-strings.md`)
 - `docs/usb-protocol/`    USB modes, PTP opcode tables, Wi-Fi API, live-view UDP, myset format
 - `docs/mods/`            patching pipeline, community patches and how they work
 - `docs/workspace/`       OM Workspace internals: ORF format, RAW decode, plugins, model selection
@@ -34,5 +35,6 @@ python3 -I tools/omfw.py info firmware/stock/OLY_E_113_1400_0000_0000.BIN
 python3 -I tools/omfw.py dec  firmware/stock/OLY_E_113_1400_0000_0000.BIN firmware/stock/dec
 python3 -I tools/fwpatch.py plan STOCK.BIN PROFILE.json --id em10-1.4
 python3 -I tools/symbol_index.py --once 0x7de57532
+python3 -I tools/symbols.py stats
 python3 -I tools/dis.py 7de57e24 7de58a90        # needs mn10300-elf-objdump, see docs/STATUS.md
 ```

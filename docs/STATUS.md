@@ -80,11 +80,21 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   renames (`classes.md`, `blocks.md`, `memory-map.md`).
 - Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
   one over at least part of the table** (see the correction there); needs re-deriving.
-- **`symbol-map.md`: about 1 340 curated address rows** across ~40 subsystems: heap allocator, object
-  model, OS/IPC primitives, libc cluster, soft-float, GUI app / panel manager / Super Control Panel,
-  playback components (Cmp*), movie playback, AE, sensor black-correction, audio codec, VG draw
-  engine, embedded Expat 1.95.5, OKAO face detection, on-camera httpd. `tools/symbol_index.py`
-  regenerates the address→doc index.
+- **About 25 400 of the ~72 600 block-0 functions have a documented name** (2026-11-12), in three files:
+  - `symbol-map.md` (~1 860 rows): hand-analysed, with a description each. ~40 subsystems: heap
+    allocator, object model, OS/IPC primitives, libc, soft-float, GUI base/container classes, Super
+    Control Panel, playback components (Cmp*), movie playback, AE, sensor black-correction, audio
+    codec, VG draw engine, embedded Expat 1.95.5, OKAO face detection, on-camera httpd, Wi-Fi.
+  - `symbol-families.md` (~14 500 rows): per-class copies of small routines, compiler entry stubs,
+    one- and two-instruction accessors, vtable members; each family explained once.
+  - `symbol-strings.md` (~9 000 rows): names derived from log strings. Heuristic; `symbol-map.md`
+    takes precedence.
+  `tools/symbols.py stats` prints current counts; `tools/symbol_index.py --once ADDR` finds an address.
+  The names are also applied in the Ghidra project (`tools/ghidra/ApplyNames.java`).
+- Factory/test features seen while labelling, not investigated further: white-chart calibration and
+  `[Sense]`/`[Defect]`/`[BvCCD]`/`[AFLED]` sections of a `…Calib.prm` file, `DSCPRM…CSV` parameter
+  files, `DCIM/100OLYMP/000CALIBLST`, input-macro playback from `MACRO000.DAT`, a GUI "Life Test".
+  The rows are in `symbol-map.md` (`adj_*`, `macro_play`, `calib_list_path`, `gui_life_test_start`).
 - Mask-ROM primitives pinned from call sites: `0x47001000` memcpy, `0x4700110c` memset.
 - Reset entry at `0x7d991020` is real startup code; on-chip interrupt controller at abs16
   `0x8000–0x80xx`; ISR dispatcher `0x7d9a1920` (`hardware/boot-and-io.md`).
@@ -155,6 +165,11 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   --disable-sim --disable-gprofng --disable-werror`, then `make MAKEINFO=true` and
   `sudo make MAKEINFO=true install`. The `--target` is essential: without it a native binutils is
   installed that shadows the system `ld`/`as`. Build tree kept at `~/dev/binutils/mn10300/build`.
+- Symbol workflow: `tools/symbols.py candidates LO HI [MAXSIZE]` lists unlabelled functions by
+  reference count, `tools/func_patterns.py clusters|small|shapes` finds groups that can be labelled
+  together, `tools/symbols.py dupes` checks the result, and `tools/symbols.py export` +
+  `tools/ghidra/ApplyNames.java` load the names into Ghidra. A backup of the project from before the
+  first import is in `research/ghidra_proj.bak-2026-11-12/`.
 - `tools/dis.py START END` = annotated disassembly of block 0 at runtime addresses (hex immediates
   and referenced strings added to objdump's output).
 - Decoded blocks in `firmware/stock/dec/`; resource extracts in `firmware/stock/res1`, `res2`,

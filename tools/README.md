@@ -21,6 +21,8 @@ go under gitignored `firmware/` or `research/` and are never committed.
 | `rtos_tasks.py` | dump the RTOS task id/name table |
 | `verify_usb.py` | check live USB DeviceInfo findings against the per-mode opcode arrays in block 0 |
 | `symbol_index.py` | address → doc index built from `docs/` only (output is committable) |
+| `symbols.py stats\|export\|dupes\|candidates` | work with the three symbol documents: counts, name export for Ghidra, duplicate check, unlabelled functions by reference count |
+| `func_patterns.py clusters\|small\|shapes` | find unlabelled functions that can be labelled as a group: byte-identical copies, one- and two-instruction bodies; needs `mn10300-elf-objdump` |
 | `subsystems.py` | group `FuncStrings.java` output by log-tag prefix |
 | `opcode_intersect.py` | OM Workspace SDK opcodes vs the Mark I's own (`docs/usb-protocol/sdk-opcode-compat.md`) |
 
@@ -58,6 +60,7 @@ scripts that rename.
 
 | script | purpose |
 |---|---|
+| `ApplyNames.java TSV [dry]` | apply names from `symbols.py export` to the project (renames; run without `-readOnly`) |
 | `DecompAt.java ADDR...` | decompile the functions containing the given addresses |
 | `DisasAt.java ADDR N ...` | disassemble N bytes at each address (clears and re-disassembles: not for `-readOnly`) |
 | `DumpDecomp.java OUT` | decompile every function into one C file |
@@ -74,3 +77,12 @@ scripts that rename.
 | `ClassGraph.java TSV OUT [rename]` | inheritance and constructor naming from vtables |
 | `ImmHist.java MIN` | histogram of 32-bit immediates by 1 MB bucket |
 | `NibbleFuncs.java` | find candidate nibble/RLE decoder functions |
+
+## Labelling workflow
+1. `symbols.py candidates 20 99999 40` — pick unlabelled functions, most referenced first.
+2. Read them with `dis.py` or `ghidra/DecompAt.java`; for groups use `func_patterns.py`.
+3. Add rows: hand-analysed ones to `docs/firmware/symbol-map.md`, machine-listed groups to
+   `symbol-families.md` with one explanation per group, string-derived names to `symbol-strings.md`.
+   When a script appends to one of these files, read the file before opening it for writing.
+4. `symbols.py dupes` — no address should gain a second row.
+5. Commit per batch. Optionally `symbols.py export names.tsv` and `ApplyNames.java` to refresh Ghidra.
