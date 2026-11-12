@@ -16,6 +16,8 @@ Read-only commands (do not change anything on the camera):
   props                        list remote-control properties with value and allowed values (rec mode)
   prop NAME                    show one property (rec mode)
   raw PATH                     GET any path, e.g. raw 'get_activate.cgi'
+  probe [-o FILE]              run every read-only check once and write the raw replies to FILE
+                               (default emcam-probe.txt); the file to send back after a live test
 
 Commands that change camera state (mode, settings, or take pictures):
   mode rec|play|shutter [--lvqty 0320x0240|0640x0480]
@@ -229,6 +231,51 @@ def liveview(cam, frames, out, port, host_timeout):
     print("saved %d frames to %s (%d incomplete frames dropped)" % (n, out, dropped))
 
 
+def probe(cam, out):
+    """Read-only live check. Records raw replies so parsing assumptions can be verified afterwards."""
+    lines = []
+
+    def step(title, fn):
+        try:
+            result = fn()
+        except CameraError as e:
+            result = "ERROR: %s" % e
+        lines.append("== %s\n%s\n" % (title, result))
+        print("%-40s %s" % (title, "failed" if str(result).startswith("ERROR") else "ok"))
+        return None if str(result).startswith("ERROR") else result
+
+    def raw(path, limit=1500):
+        return lambda: cam.request(path)[:limit].decode("latin-1")
+
+    for path in ("get_connectmode.cgi", "get_caminfo.cgi", "get_unusedcapacity.cgi", "get_dcffilenum.cgi",
+                 "get_activate.cgi", "get_gpsdivunit.cgi", "get_rsvimglist.cgi"):
+        step("GET " + path, raw(path))
+    step("GET get_commandlist.cgi (length, names)", lambda: "%d bytes: %s" % (
+        len(cam.request("get_commandlist.cgi")), " ".join(re.findall(r'<cgi name="([^"]+)"', cam.text("get_commandlist.cgi")))))
+    step("GET get_imglist.cgi?DIR=/DCIM (raw)", raw("get_imglist.cgi?DIR=/DCIM"))
+    dirs = step("parsed /DCIM", lambda: cam.listdir("/DCIM")) or []
+    first = None
+    for d in [e for e in dirs if e["is_dir"]][:2]:
+        step("GET get_imglist.cgi?DIR=%s (raw, first 1500 bytes)" % d["path"], raw("get_imglist.cgi?DIR=" + d["path"]))
+        entries = step("parsed %s (count, first 3)" % d["path"],
+                       lambda d=d: (lambda l: "%d entries: %s" % (len(l), l[:3]))(cam.listdir(d["path"])))
+        if first is None:
+            try:
+                first = next((e for e in cam.listdir(d["path"]) if e["name"].upper().endswith(".JPG")), None)
+            except CameraError:
+                pass
+    if first:
+        q = urllib.parse.quote(first["path"])
+        for title, path in (("thumbnail", "get_thumbnail.cgi?DIR=" + q), ("resize 1024", "get_resizeimg.cgi?DIR=%s&size=1024" % q),
+                            ("file itself", first["path"])):
+            step("%s of %s (size, first bytes)" % (title, first["path"]),
+                 lambda path=path: (lambda b: "%d bytes, starts %s" % (len(b), b[:4].hex()))(cam.request(path)))
+        step("listed size of that file", lambda: first["size"])
+    with open(out, "w", encoding="utf-8") as f:
+        f.write("emcam probe (read-only requests only)\n\n" + "\n".join(lines))
+    print("wrote %s" % out)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--host", default="192.168.0.10")
@@ -242,6 +289,7 @@ def main(argv=None):
     p = sub.add_parser("pull"); p.add_argument("dest"); p.add_argument("dir", nargs="?", default="/DCIM")
     p = sub.add_parser("prop"); p.add_argument("name")
     p = sub.add_parser("raw"); p.add_argument("path")
+    p = sub.add_parser("probe"); p.add_argument("-o", default="emcam-probe.txt")
     p = sub.add_parser("mode"); p.add_argument("mode", choices=("rec", "play", "shutter"))
     p.add_argument("--lvqty", choices=("0320x0240", "0640x0480"))
     p = sub.add_parser("set"); p.add_argument("name"); p.add_argument("value")
@@ -300,6 +348,8 @@ def run(cam, a):
             print("%s = %s  (%s)\nallowed: %s" % (d["name"], d["value"], d["attribute"], " ".join(d["enum"])))
     elif a.cmd == "raw":
         sys.stdout.buffer.write(cam.request(a.path)); print()
+    elif a.cmd == "probe":
+        probe(cam, a.o)
     elif a.cmd == "mode":
         cam.set_mode(a.mode, a.lvqty)
         print("camera mode set to %s" % a.mode)
