@@ -114,6 +114,8 @@ class H(BaseHTTPRequestHandler):
                     threading.Thread(target=stream, args=(STATE["lv"],), daemon=True).start()
                 elif q.get("com") == "stopliveview":
                     STATE["lv"] = None
+                elif q.get("com") in ("getlastjpg", "getrecview"):
+                    return self.reply(JPEG, ctype="image/jpeg")
                 else:
                     return self.error(1004)
                 return self.reply()
@@ -134,6 +136,9 @@ class H(BaseHTTPRequestHandler):
             if mode != "shutter":
                 return self.error(1001)
             STATE["shots"].append(q.get("com")); STATE["log"].append("shutter " + str(q.get("com")))
+            if q.get("com") == "2ndpush":             # a new picture appears on the card
+                n = "P10100%02d.JPG" % (len(CARD["/DCIM/100OLYMP"]) + 1)
+                CARD["/DCIM/100OLYMP"].append((n, len(JPEG), 32)); FILES["/DCIM/100OLYMP/" + n] = JPEG
             return self.reply()
         self.error(1001)
 

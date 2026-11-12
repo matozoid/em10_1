@@ -35,7 +35,7 @@ firmware is flashed. Every **flash** item is therefore parked as an idea; its re
 |---|---|---|---|---|---|---|---|
 | C1 | 1 | Live test of the read-only commands on the E-M10: `info`, `ls -r`, `get`, `thumb`, `resize`, `pull` | high | S | read | camera on Wi-Fi | done 2026-11-12 (probe, 16/16) |
 | C2 | 3 | Capture the real `get_unusedcapacity` reply and parse it (done: `<unused>N</unused>`, saturates at 4294967295). Left: see a value below 4 GB to confirm the unit | low | S | read | C1 | open |
-| C3 | 1 | Live test of `mode`, `props`, `prop`, `set`, `shoot`, `liveview` | high | S | state | – | open |
+| C3 | 1 | Live test of `mode`, `props`, `prop`, `set`, `shoot`, `liveview` | high | S | state | – | open: guided `emcam.py livetest` is ready (tested on the mock), waiting for a run on the camera |
 | C5 | 1 | Save to computer after each shot (`exec_takemisc` `getlastjpg` / `getrecview`) | high | S | state | C3 | open |
 | C8 | 2 | Live-view window instead of saving frames (local web page served by the client) | high | M | state | C3 | open |
 | C4 | 2 | Touch autofocus: `focus X Y` using `assignafframe` / `takeready`, report focus ok and frame position | med | S | state | C3 | open |

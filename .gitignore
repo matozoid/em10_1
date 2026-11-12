@@ -24,3 +24,5 @@ tools/__pycache__/
 *.7z.*
 research/ghidra_proj.bak*/
 research/emcam-probe-*.txt
+research/emcam-livetest*/
+emcam-livetest*/

@@ -33,6 +33,10 @@ Commands that change camera state (mode, settings, or take pictures):
                                receive the live-view stream and save JPEG frames (rec mode; the
                                stream size is the --lvqty given to `mode rec`)
   poweroff                     switch the camera off
+  livetest [--out DIR] [--yes] guided test of the state-changing commands: asks before each step
+                               (rec mode, properties, live view, set a property to its current value,
+                               take one picture, fetch it, back to play mode) and writes a report and
+                               sample files into DIR (default emcam-livetest)
 
 options: --host ADDRESS (default 192.168.0.10), --timeout SECONDS (default 10)
 
@@ -204,7 +208,18 @@ class FrameAssembler:
         return jpeg if jpeg[:2] == b"\xff\xd8" and jpeg[-2:] == b"\xff\xd9" else None
 
 
-def liveview(cam, frames, out, port, host_timeout):
+def tlv_types(dg):
+    """Extension entries of a first live-view datagram as [(type, words)]."""
+    out, n = [], struct.unpack(">H", dg[14:16])[0] * 4
+    i, end = 16, min(len(dg), 16 + n)
+    while i + 4 <= end:
+        t, words = struct.unpack(">HH", dg[i:i + 4])
+        out.append((t, words))
+        i += 4 + words * 4
+    return out
+
+
+def liveview(cam, frames, out, port, host_timeout, stats=None):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1 << 20)
     sock.bind(("", port))
@@ -220,9 +235,16 @@ def liveview(cam, frames, out, port, host_timeout):
             except socket.timeout:
                 raise CameraError("no live-view data received on UDP port %d (firewall? camera not in rec mode?)" % port)
             was_open = asm.parts is not None
+            if stats is not None:
+                stats["datagrams"] = stats.get("datagrams", 0) + 1
+                stats["max_datagram"] = max(stats.get("max_datagram", 0), len(dg))
+                if len(dg) >= 16 and dg[0] & 0x10 and "first_header" not in stats:
+                    stats["first_header"], stats["tlv"] = dg[:16].hex(), tlv_types(dg)
             jpeg = asm.feed(dg)
             if jpeg:
                 n += 1
+                if stats is not None:
+                    stats.setdefault("frame_sizes", []).append(len(jpeg))
                 with open(os.path.join(out, "frame%05d.jpg" % n), "wb") as f:
                     f.write(jpeg)
             elif was_open and asm.parts is None:
@@ -233,7 +255,143 @@ def liveview(cam, frames, out, port, host_timeout):
         except CameraError as e:
             print("warning: could not stop live view: %s" % e, file=sys.stderr)
         sock.close()
+    if stats is not None:
+        stats["frames"], stats["dropped"] = n, dropped
     print("saved %d frames to %s (%d incomplete frames dropped)" % (n, out, dropped))
+
+
+def livetest(cam, out, assume_yes):
+    """Guided test of the state-changing commands. Every step asks first; the camera is put back in play mode."""
+    os.makedirs(out, exist_ok=True)
+    report, summary = [], []
+
+    def log(title, body):
+        report.append("== %s\n%s\n" % (title, body))
+
+    def ask(what):
+        if assume_yes:
+            return True
+        a = input("\n%s\n  [Enter] run   [s] skip   [q] stop the test > " % what).strip().lower()
+        if a == "q":
+            raise KeyboardInterrupt
+        return a != "s"
+
+    def step(name, what, fn):
+        if not ask(what):
+            summary.append((name, "skipped", ""))
+            return None
+        t0 = time.time()
+        try:
+            result = fn()
+            summary.append((name, "ok", "%.1f s" % (time.time() - t0)))
+            return result if result is not None else True
+        except CameraError as e:
+            summary.append((name, "FAILED", str(e)))
+            log(name + " FAILED", str(e))
+            print("  failed: %s" % e)
+            return None
+
+    def own_folder():
+        dirs = [e for e in cam.listdir("/DCIM") if e["is_dir"]]
+        mine = [e for e in dirs if "OLYMP" in e["name"]] or dirs
+        return sorted(mine, key=lambda e: e["name"])[-1]["path"] if mine else None
+
+    print("Guided live test. It switches the camera to rec mode, reads its settings, receives live view,\n"
+          "writes one setting back unchanged, takes ONE picture and returns to play mode.\n"
+          "Point the camera at something it can focus on. Files go to %s/." % out)
+    changed_mode = False
+    try:
+        log("start", "connect mode %s, model %s" % (cam.tag("get_connectmode.cgi", "connectmode"),
+                                                    cam.tag("get_caminfo.cgi", "model")))
+        folder = own_folder()
+        before = {e["name"] for e in cam.listdir(folder)} if folder else set()
+        log("card before", "folder %s, %d entries" % (folder, len(before)))
+
+        def to_rec():
+            cam.set_mode("rec", "0640x0480")
+        if step("rec mode", "1/7  Switch the camera to rec mode (live view 640x480).", to_rec) is None:
+            raise CameraError("without rec mode the remaining steps cannot run")
+        changed_mode = True
+
+        def read_props():
+            raw = cam.text("get_camprop.cgi?com=desc&propname=desclist")
+            log("desclist raw", raw)
+            ds = cam.prop_desc("desclist")
+            log("properties", "\n".join("%-18s %-6s %-22s %s" % (d["name"], d["attribute"], d["value"], " ".join(d["enum"]))
+                                        for d in ds))
+            log("get takemode raw", cam.text("get_camprop.cgi?com=get&propname=takemode"))
+            return ds
+        props = step("properties", "2/7  Read the remote-control properties (read-only).", read_props) or []
+
+        def live():
+            stats = {}
+            liveview(cam, 20, os.path.join(out, "liveview"), 0, cam.timeout, stats)
+            sizes = stats.get("frame_sizes", [])
+            log("live view", "frames %s, dropped %s, datagrams %s, largest datagram %s bytes\n"
+                             "frame sizes min/avg/max %s\nfirst header %s\nextension entries (type, words) %s"
+                % (stats.get("frames"), stats.get("dropped"), stats.get("datagrams"), stats.get("max_datagram"),
+                   ("%d / %d / %d" % (min(sizes), sum(sizes) // len(sizes), max(sizes))) if sizes else "-",
+                   stats.get("first_header"), stats.get("tlv")))
+        step("live view", "3/7  Receive 20 live-view frames (the camera's screen may go dark meanwhile).", live)
+
+        def set_same():
+            d = next((d for d in props if d["name"] == "isospeedvalue" and d["attribute"] == "getset"), None) or \
+                next((d for d in props if d["attribute"] == "getset"), None)
+            if d is None:
+                raise CameraError("no settable property was read in step 2")
+            body = '<?xml version="1.0"?>\r\n<set>\r\n<value>%s</value>\r\n</set>\r\n' % d["value"]
+            reply = cam.text("set_camprop.cgi?com=set&propname=" + d["name"], body.encode())
+            after = cam.tag("get_camprop.cgi?com=get&propname=" + d["name"], "value")
+            log("set %s to its current value %r" % (d["name"], d["value"]), "reply %r\nreads back %r" % (reply, after))
+            if after != d["value"]:
+                raise CameraError("%s read back %r after writing %r" % (d["name"], after, d["value"]))
+        step("set (unchanged value)", "4/7  Write one property back with the value it already has (no visible change).", set_same)
+
+        shot = step("shoot", "5/7  Take ONE picture (half-press, 2 s for focus, full press, release).", lambda: cam.shoot())
+
+        def fetch_last():
+            for com in ("getlastjpg", "getrecview"):
+                try:
+                    data = cam.request("exec_takemisc.cgi?com=" + com)
+                    log("exec_takemisc %s" % com, "%d bytes, starts %s" % (len(data), data[:4].hex()))
+                    if data[:2] == b"\xff\xd8":
+                        with open(os.path.join(out, com + ".jpg"), "wb") as f:
+                            f.write(data)
+                except CameraError as e:
+                    log("exec_takemisc %s" % com, "ERROR %s" % e)
+        if shot:
+            step("last picture", "6/7  Ask the camera for the picture it just took (two commands, read-only).", fetch_last)
+
+        def new_files():
+            f = own_folder()
+            now = cam.listdir(f) if f else []
+            new = [e for e in now if e["name"] not in before]
+            log("card after", "folder %s, %d entries, new: %s" % (f, len(now), [(e["name"], e["size"]) for e in new]))
+            jpg = next((e for e in new if e["name"].upper().endswith(".JPG")), None)
+            if jpg:
+                with open(os.path.join(out, "thumb_" + jpg["name"]), "wb") as fh:
+                    fh.write(cam.request("get_thumbnail.cgi?DIR=" + urllib.parse.quote(jpg["path"])))
+            if shot and not new:
+                raise CameraError("a picture was taken but no new file appears in %s" % f)
+        step("new files", "7/7  List the card again to find the new picture and fetch its thumbnail (read-only).", new_files)
+    except KeyboardInterrupt:
+        summary.append(("test", "stopped by you", ""))
+    except CameraError as e:
+        summary.append(("test", "FAILED", str(e)))
+    finally:
+        if changed_mode:
+            try:
+                cam.set_mode("play")
+                summary.append(("back to play mode", "ok", ""))
+            except CameraError as e:
+                summary.append(("back to play mode", "FAILED", str(e)))
+        text = "emcam live test\n\nSUMMARY\n" + "\n".join("  %-24s %-16s %s" % r for r in summary) + "\n\n" + "\n".join(report)
+        with open(os.path.join(out, "report.txt"), "w", encoding="utf-8") as f:
+            f.write(text)
+        print("\nSUMMARY")
+        for r in summary:
+            print("  %-24s %-16s %s" % r)
+        print("\nReport and sample files are in %s/ ; copy that whole folder back." % out)
 
 
 def probe(cam, out):
@@ -295,6 +453,7 @@ def main(argv=None):
     p = sub.add_parser("pull"); p.add_argument("dest"); p.add_argument("dir", nargs="?", default="/DCIM")
     p = sub.add_parser("prop"); p.add_argument("name")
     p = sub.add_parser("raw"); p.add_argument("path")
+    p = sub.add_parser("livetest"); p.add_argument("--out", default="emcam-livetest"); p.add_argument("--yes", action="store_true")
     p = sub.add_parser("probe"); p.add_argument("-o", default="emcam-probe.txt")
     p = sub.add_parser("mode"); p.add_argument("mode", choices=("rec", "play", "shutter"))
     p.add_argument("--lvqty", choices=("0320x0240", "0640x0480"))
@@ -359,6 +518,8 @@ def run(cam, a):
             print("%s = %s  (%s)\nallowed: %s" % (d["name"], d["value"], d["attribute"], " ".join(d["enum"])))
     elif a.cmd == "raw":
         sys.stdout.buffer.write(cam.request(a.path)); print()
+    elif a.cmd == "livetest":
+        livetest(cam, a.out, a.yes)
     elif a.cmd == "probe":
         probe(cam, a.o)
     elif a.cmd == "mode":
