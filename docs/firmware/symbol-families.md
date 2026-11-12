@@ -9811,3 +9811,4982 @@ Counts: thunk 221, store 211, call0 40, get 38, call 35. Total 545.
 | `0x7e887c6b` | 3 | `thunk_argu8_7e882ecd_7e887c6b` | Converts `d0` to u8, then calls `0x7e882ecd`. | disassembly |
 | `0x7e88cd94` | 1 | `call0_7d9a173b_7e88cd94` | Calls `0x7d9a173b` and returns 0. | disassembly |
 | `0x7e9db119` | 1 | `call0_7e9dae16_7e9db119` | Calls `0x7e9dae16` and returns 0. | disassembly |
+
+## Vtable members (Ghidra class pass)
+Functions that `tools/ghidra/VTables.java` and `ClassGraph.java` placed in a class: `<class>__vfn<N>_<addr>` is
+slot N of that class's vtable, `<class>__ctordtor_<addr>` is a function that installs the vtable (a constructor
+or destructor). `<class>` is the class name where a debug string gave one (e.g. `OlyHfwOpeSndCtlSoundEvFw`) and
+`cls_<vtable address>` otherwise. A function shared by several classes is listed under the first class the
+pass assigned it to. 4969 listed across 248 classes; 4 in the flash-write and firmware-update ranges are left out.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d9a211d` | 2 | `cls_7dc4a90c__vfn1_7d9a211d` | Vtable slot 1 (byte offset `+4`) of class `cls_7dc4a90c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9a41f6` | 2 | `cls_7dc4a90c__vfn0_7d9a41f6` | Vtable slot 0 (byte offset `+0`) of class `cls_7dc4a90c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9a6826` | 2 | `cls_7dc4a90c__vfn2_7d9a6826` | Vtable slot 2 (byte offset `+8`) of class `cls_7dc4a90c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9c5dd4` | 3 | `cls_7e8d97a4__ctordtor_7d9c5dd4` | Constructor or destructor of class `cls_7e8d97a4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9d3ed7` | 1 | `cls_7da610b0__vfn2_7d9d3ed7` | Vtable slot 2 (byte offset `+8`) of class `cls_7da610b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9d3f76` | 2 | `cls_7da610b0__vfn0_7d9d3f76` | Vtable slot 0 (byte offset `+0`) of class `cls_7da610b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9d44d4` | 1 | `cls_7da610b0__vfn1_7d9d44d4` | Vtable slot 1 (byte offset `+4`) of class `cls_7da610b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7d9d511e` | 10 | `cls_7da610b0__ctordtor_7d9d511e` | Constructor or destructor of class `cls_7da610b0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7da93c00` | 1 | `cls_7dbc3080__vfn0_7da93c00` | Vtable slot 0 (byte offset `+0`) of class `cls_7dbc3080`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7da941b8` | 1 | `cls_7dbc3080__ctordtor_7da941b8` | Constructor or destructor of class `cls_7dbc3080` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25aae` | 21 | `cls_7dbe6514__ctordtor_7db25aae` | Constructor or destructor of class `cls_7dbe6514` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25b74` | 1 | `cls_7dbe6514__vfn0_7db25b74` | Vtable slot 0 (byte offset `+0`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25bfe` | 1 | `cls_7dbe6514__vfn1_7db25bfe` | Vtable slot 1 (byte offset `+4`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c0f` | 1 | `cls_7dbe6514__vfn2_7db25c0f` | Vtable slot 2 (byte offset `+8`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c20` | 1 | `cls_7dbe6514__vfn3_7db25c20` | Vtable slot 3 (byte offset `+12`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c31` | 1 | `cls_7dbe6514__vfn4_7db25c31` | Vtable slot 4 (byte offset `+16`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c42` | 1 | `cls_7dbe6514__vfn5_7db25c42` | Vtable slot 5 (byte offset `+20`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c8c` | 1 | `cls_7dbe6514__vfn6_7db25c8c` | Vtable slot 6 (byte offset `+24`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25c9d` | 1 | `cls_7dbe6514__vfn7_7db25c9d` | Vtable slot 7 (byte offset `+28`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25cae` | 1 | `cls_7dbe6514__vfn8_7db25cae` | Vtable slot 8 (byte offset `+32`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25cbf` | 1 | `cls_7dbe6514__vfn9_7db25cbf` | Vtable slot 9 (byte offset `+36`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25cd0` | 1 | `cls_7dbe6514__vfn10_7db25cd0` | Vtable slot 10 (byte offset `+40`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25ce1` | 1 | `cls_7dbe6514__vfn11_7db25ce1` | Vtable slot 11 (byte offset `+44`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25cf2` | 1 | `cls_7dbe6514__vfn12_7db25cf2` | Vtable slot 12 (byte offset `+48`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d03` | 1 | `cls_7dbe6514__vfn13_7db25d03` | Vtable slot 13 (byte offset `+52`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d14` | 1 | `cls_7dbe6514__vfn14_7db25d14` | Vtable slot 14 (byte offset `+56`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d25` | 1 | `cls_7dbe6514__vfn15_7db25d25` | Vtable slot 15 (byte offset `+60`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d36` | 1 | `cls_7dbe6514__vfn16_7db25d36` | Vtable slot 16 (byte offset `+64`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d48` | 1 | `cls_7dbe6514__vfn17_7db25d48` | Vtable slot 17 (byte offset `+68`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d5a` | 1 | `cls_7dbe6514__vfn18_7db25d5a` | Vtable slot 18 (byte offset `+72`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d6c` | 1 | `cls_7dbe6514__vfn19_7db25d6c` | Vtable slot 19 (byte offset `+76`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d7e` | 1 | `cls_7dbe6514__vfn20_7db25d7e` | Vtable slot 20 (byte offset `+80`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25d90` | 1 | `cls_7dbe6514__vfn21_7db25d90` | Vtable slot 21 (byte offset `+84`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25da2` | 1 | `cls_7dbe6514__vfn22_7db25da2` | Vtable slot 22 (byte offset `+88`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25db4` | 1 | `cls_7dbe6514__vfn23_7db25db4` | Vtable slot 23 (byte offset `+92`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25dc6` | 1 | `cls_7dbe6514__vfn24_7db25dc6` | Vtable slot 24 (byte offset `+96`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25dd8` | 1 | `cls_7dbe6514__vfn25_7db25dd8` | Vtable slot 25 (byte offset `+100`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25dea` | 1 | `cls_7dbe6514__vfn26_7db25dea` | Vtable slot 26 (byte offset `+104`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25dfc` | 1 | `cls_7dbe6514__vfn27_7db25dfc` | Vtable slot 27 (byte offset `+108`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e0e` | 1 | `cls_7dbe6514__vfn28_7db25e0e` | Vtable slot 28 (byte offset `+112`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e20` | 1 | `cls_7dbe6514__vfn29_7db25e20` | Vtable slot 29 (byte offset `+116`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e32` | 1 | `cls_7dbe6514__vfn30_7db25e32` | Vtable slot 30 (byte offset `+120`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e44` | 1 | `cls_7dbe6514__vfn31_7db25e44` | Vtable slot 31 (byte offset `+124`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e56` | 1 | `cls_7dbe6514__vfn32_7db25e56` | Vtable slot 32 (byte offset `+128`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e68` | 1 | `cls_7dbe6514__vfn33_7db25e68` | Vtable slot 33 (byte offset `+132`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e7a` | 1 | `cls_7dbe6514__vfn34_7db25e7a` | Vtable slot 34 (byte offset `+136`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e8c` | 1 | `cls_7dbe6514__vfn35_7db25e8c` | Vtable slot 35 (byte offset `+140`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25e9e` | 1 | `cls_7dbe6514__vfn36_7db25e9e` | Vtable slot 36 (byte offset `+144`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25eb0` | 1 | `cls_7dbe6514__vfn37_7db25eb0` | Vtable slot 37 (byte offset `+148`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25ec2` | 1 | `cls_7dbe6514__vfn38_7db25ec2` | Vtable slot 38 (byte offset `+152`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25ed4` | 1 | `cls_7dbe6514__vfn39_7db25ed4` | Vtable slot 39 (byte offset `+156`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25ee6` | 1 | `cls_7dbe6514__vfn40_7db25ee6` | Vtable slot 40 (byte offset `+160`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25ef6` | 1 | `cls_7dbe6514__vfn41_7db25ef6` | Vtable slot 41 (byte offset `+164`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f0b` | 1 | `cls_7dbe6514__vfn42_7db25f0b` | Vtable slot 42 (byte offset `+168`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f20` | 1 | `cls_7dbe6514__vfn43_7db25f20` | Vtable slot 43 (byte offset `+172`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f30` | 1 | `cls_7dbe6514__vfn44_7db25f30` | Vtable slot 44 (byte offset `+176`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f40` | 1 | `cls_7dbe6514__vfn45_7db25f40` | Vtable slot 45 (byte offset `+180`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f50` | 1 | `cls_7dbe6514__vfn46_7db25f50` | Vtable slot 46 (byte offset `+184`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f6a` | 1 | `cls_7dbe6514__vfn47_7db25f6a` | Vtable slot 47 (byte offset `+188`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f7c` | 1 | `cls_7dbe6514__vfn48_7db25f7c` | Vtable slot 48 (byte offset `+192`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f8e` | 1 | `cls_7dbe6514__vfn49_7db25f8e` | Vtable slot 49 (byte offset `+196`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db25f9e` | 1 | `cls_7dbe6514__vfn50_7db25f9e` | Vtable slot 50 (byte offset `+200`) of class `cls_7dbe6514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db280f1` | 1 | `cls_7dbe6714__vfn0_7db280f1` | Vtable slot 0 (byte offset `+0`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db281cb` | 1 | `cls_7dbe6714__vfn1_7db281cb` | Vtable slot 1 (byte offset `+4`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db281e9` | 1 | `cls_7dbe6714__vfn2_7db281e9` | Vtable slot 2 (byte offset `+8`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28207` | 1 | `cls_7dbe6714__vfn3_7db28207` | Vtable slot 3 (byte offset `+12`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28225` | 1 | `cls_7dbe6714__vfn4_7db28225` | Vtable slot 4 (byte offset `+16`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28243` | 1 | `cls_7dbe6714__vfn5_7db28243` | Vtable slot 5 (byte offset `+20`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db282b2` | 1 | `cls_7dbe6714__vfn6_7db282b2` | Vtable slot 6 (byte offset `+24`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db282d0` | 1 | `cls_7dbe6714__vfn7_7db282d0` | Vtable slot 7 (byte offset `+28`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db282ee` | 1 | `cls_7dbe6714__vfn8_7db282ee` | Vtable slot 8 (byte offset `+32`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2830c` | 1 | `cls_7dbe6714__vfn9_7db2830c` | Vtable slot 9 (byte offset `+36`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2832a` | 1 | `cls_7dbe6714__vfn10_7db2832a` | Vtable slot 10 (byte offset `+40`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28348` | 1 | `cls_7dbe6714__vfn11_7db28348` | Vtable slot 11 (byte offset `+44`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28366` | 1 | `cls_7dbe6714__vfn12_7db28366` | Vtable slot 12 (byte offset `+48`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db28384` | 1 | `cls_7dbe6714__vfn13_7db28384` | Vtable slot 13 (byte offset `+52`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db283a2` | 1 | `cls_7dbe6714__vfn14_7db283a2` | Vtable slot 14 (byte offset `+56`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db283c0` | 1 | `cls_7dbe6714__vfn15_7db283c0` | Vtable slot 15 (byte offset `+60`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db283de` | 1 | `cls_7dbe6714__vfn16_7db283de` | Vtable slot 16 (byte offset `+64`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db283fe` | 1 | `cls_7dbe6714__vfn17_7db283fe` | Vtable slot 17 (byte offset `+68`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2841e` | 1 | `cls_7dbe6714__vfn18_7db2841e` | Vtable slot 18 (byte offset `+72`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2843e` | 1 | `cls_7dbe6714__vfn19_7db2843e` | Vtable slot 19 (byte offset `+76`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2845e` | 1 | `cls_7dbe6714__vfn20_7db2845e` | Vtable slot 20 (byte offset `+80`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2847e` | 1 | `cls_7dbe6714__vfn21_7db2847e` | Vtable slot 21 (byte offset `+84`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2849e` | 1 | `cls_7dbe6714__vfn22_7db2849e` | Vtable slot 22 (byte offset `+88`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db284be` | 1 | `cls_7dbe6714__vfn23_7db284be` | Vtable slot 23 (byte offset `+92`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db284de` | 1 | `cls_7dbe6714__vfn24_7db284de` | Vtable slot 24 (byte offset `+96`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db284fe` | 1 | `cls_7dbe6714__vfn25_7db284fe` | Vtable slot 25 (byte offset `+100`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2851e` | 1 | `cls_7dbe6714__vfn26_7db2851e` | Vtable slot 26 (byte offset `+104`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2853e` | 1 | `cls_7dbe6714__vfn27_7db2853e` | Vtable slot 27 (byte offset `+108`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2855e` | 1 | `cls_7dbe6714__vfn28_7db2855e` | Vtable slot 28 (byte offset `+112`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2857e` | 1 | `cls_7dbe6714__vfn29_7db2857e` | Vtable slot 29 (byte offset `+116`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2859e` | 1 | `cls_7dbe6714__vfn30_7db2859e` | Vtable slot 30 (byte offset `+120`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db285be` | 1 | `cls_7dbe6714__vfn31_7db285be` | Vtable slot 31 (byte offset `+124`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db285de` | 1 | `cls_7dbe6714__vfn32_7db285de` | Vtable slot 32 (byte offset `+128`) of class `cls_7dbe6714`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db29f1c` | 2 | `cls_7dbe6714__ctordtor_7db29f1c` | Constructor or destructor of class `cls_7dbe6714` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b0e8` | 1 | `cls_7dbe6804__vfn16_7db2b0e8` | Vtable slot 16 (byte offset `+64`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b1c3` | 1 | `cls_7dbe6804__vfn17_7db2b1c3` | Vtable slot 17 (byte offset `+68`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b2c0` | 1 | `cls_7dbe6804__vfn18_7db2b2c0` | Vtable slot 18 (byte offset `+72`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b393` | 1 | `cls_7dbe6804__vfn24_7db2b393` | Vtable slot 24 (byte offset `+96`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b466` | 1 | `cls_7dbe6804__vfn19_7db2b466` | Vtable slot 19 (byte offset `+76`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b519` | 1 | `cls_7dbe6804__vfn20_7db2b519` | Vtable slot 20 (byte offset `+80`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b5ec` | 1 | `cls_7dbe6804__vfn21_7db2b5ec` | Vtable slot 21 (byte offset `+84`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b6ba` | 1 | `cls_7dbe6804__vfn22_7db2b6ba` | Vtable slot 22 (byte offset `+88`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b77e` | 1 | `cls_7dbe6804__vfn23_7db2b77e` | Vtable slot 23 (byte offset `+92`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b843` | 1 | `cls_7dbe6804__vfn25_7db2b843` | Vtable slot 25 (byte offset `+100`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2b911` | 1 | `cls_7dbe6804__vfn26_7db2b911` | Vtable slot 26 (byte offset `+104`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2ba1c` | 1 | `cls_7dbe6804__vfn27_7db2ba1c` | Vtable slot 27 (byte offset `+108`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2baeb` | 1 | `cls_7dbe6804__vfn28_7db2baeb` | Vtable slot 28 (byte offset `+112`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2bba3` | 1 | `cls_7dbe6804__vfn29_7db2bba3` | Vtable slot 29 (byte offset `+116`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2bc5b` | 1 | `cls_7dbe6804__vfn31_7db2bc5b` | Vtable slot 31 (byte offset `+124`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2bd60` | 1 | `cls_7dbe6804__vfn36_7db2bd60` | Vtable slot 36 (byte offset `+144`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2be51` | 1 | `cls_7dbe6804__vfn40_7db2be51` | Vtable slot 40 (byte offset `+160`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2bf4c` | 1 | `cls_7dbe6804__vfn42_7db2bf4c` | Vtable slot 42 (byte offset `+168`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2c08e` | 1 | `cls_7dbe6804__vfn44_7db2c08e` | Vtable slot 44 (byte offset `+176`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2c167` | 4 | `cls_7dbe6804__vfn46_7db2c167` | Vtable slot 46 (byte offset `+184`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db2c1db` | 4 | `cls_7dbe6804__vfn61_7db2c1db` | Vtable slot 61 (byte offset `+244`) of class `cls_7dbe6804`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6a570` | 1 | `cls_7dc01ee8__vfn2_7db6a570` | Vtable slot 2 (byte offset `+8`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6a5f1` | 1 | `cls_7dc01ee8__vfn8_7db6a5f1` | Vtable slot 8 (byte offset `+32`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6aa65` | 0 | `cls_7dc01ee8__vfn13_7db6aa65` | Vtable slot 13 (byte offset `+52`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6ab9a` | 1 | `cls_7dc01ee8__vfn5_7db6ab9a` | Vtable slot 5 (byte offset `+20`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6ac8d` | 1 | `cls_7dc01ee8__vfn11_7db6ac8d` | Vtable slot 11 (byte offset `+44`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db6ae40` | 1 | `cls_7dc01ee8__vfn12_7db6ae40` | Vtable slot 12 (byte offset `+48`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db73183` | 1 | `cls_7dc4a90c__ctordtor_7db73183` | Constructor or destructor of class `cls_7dc4a90c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db93fb5` | 1 | `cls_7dc01ee8__vfn1_7db93fb5` | Vtable slot 1 (byte offset `+4`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db94013` | 1 | `cls_7dc01ee8__vfn7_7db94013` | Vtable slot 7 (byte offset `+28`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db9448c` | 1 | `cls_7dc01ee8__vfn0_7db9448c` | Vtable slot 0 (byte offset `+0`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db944b2` | 1 | `cls_7dc01ee8__vfn6_7db944b2` | Vtable slot 6 (byte offset `+24`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db944d9` | 1 | `cls_7dc01ee8__vfn4_7db944d9` | Vtable slot 4 (byte offset `+16`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db94596` | 1 | `cls_7dc01ee8__vfn10_7db94596` | Vtable slot 10 (byte offset `+40`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db9463f` | 1 | `cls_7dc01ee8__vfn3_7db9463f` | Vtable slot 3 (byte offset `+12`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7db946fc` | 1 | `cls_7dc01ee8__vfn9_7db946fc` | Vtable slot 9 (byte offset `+36`) of class `cls_7dc01ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb268` | 2 | `cls_7df0abdc__ctordtor_7dddb268` | Constructor or destructor of class `cls_7df0abdc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb35c` | 1 | `cls_7df0abdc__vfn0_7dddb35c` | Vtable slot 0 (byte offset `+0`) of class `cls_7df0abdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb4ab` | 1 | `cls_7df0abdc__vfn1_7dddb4ab` | Vtable slot 1 (byte offset `+4`) of class `cls_7df0abdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb4ed` | 1 | `cls_7df0abdc__vfn4_7dddb4ed` | Vtable slot 4 (byte offset `+16`) of class `cls_7df0abdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb525` | 1 | `cls_7df0abdc__vfn2_7dddb525` | Vtable slot 2 (byte offset `+8`) of class `cls_7df0abdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dddb5c2` | 1 | `cls_7df0abdc__vfn3_7dddb5c2` | Vtable slot 3 (byte offset `+12`) of class `cls_7df0abdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc088` | 1 | `cls_7df2d44c__vfn0_7ddfc088` | Vtable slot 0 (byte offset `+0`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc0f3` | 1 | `cls_7df2d44c__vfn1_7ddfc0f3` | Vtable slot 1 (byte offset `+4`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc114` | 1 | `cls_7df2d44c__vfn2_7ddfc114` | Vtable slot 2 (byte offset `+8`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc17f` | 1 | `cls_7df2d44c__vfn3_7ddfc17f` | Vtable slot 3 (byte offset `+12`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc1a0` | 1 | `cls_7df2d44c__vfn4_7ddfc1a0` | Vtable slot 4 (byte offset `+16`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc20b` | 1 | `cls_7df2d44c__vfn5_7ddfc20b` | Vtable slot 5 (byte offset `+20`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc22c` | 1 | `cls_7df2d44c__ctordtor_7ddfc22c` | Constructor or destructor of class `cls_7df2d44c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc6a1` | 1 | `cls_7df2d44c__vfn6_7ddfc6a1` | Vtable slot 6 (byte offset `+24`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc6ae` | 0 | `cls_7df2d44c__vfn7_7ddfc6ae` | Vtable slot 7 (byte offset `+28`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc6e2` | 0 | `cls_7df2d44c__vfn8_7ddfc6e2` | Vtable slot 8 (byte offset `+32`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc768` | 1 | `cls_7df2d44c__vfn9_7ddfc768` | Vtable slot 9 (byte offset `+36`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc7a8` | 1 | `cls_7df2d44c__vfn10_7ddfc7a8` | Vtable slot 10 (byte offset `+40`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc7e4` | 1 | `cls_7df2d44c__vfn11_7ddfc7e4` | Vtable slot 11 (byte offset `+44`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc828` | 1 | `cls_7df2d44c__vfn12_7ddfc828` | Vtable slot 12 (byte offset `+48`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfc858` | 1 | `cls_7df2d44c__vfn13_7ddfc858` | Vtable slot 13 (byte offset `+52`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfca07` | 1 | `cls_7df2d44c__vfn14_7ddfca07` | Vtable slot 14 (byte offset `+56`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfca45` | 1 | `cls_7df2d44c__vfn15_7ddfca45` | Vtable slot 15 (byte offset `+60`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfca85` | 1 | `cls_7df2d44c__vfn16_7ddfca85` | Vtable slot 16 (byte offset `+64`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcac1` | 1 | `cls_7df2d44c__vfn17_7ddfcac1` | Vtable slot 17 (byte offset `+68`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcb05` | 1 | `cls_7df2d44c__vfn18_7ddfcb05` | Vtable slot 18 (byte offset `+72`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcb35` | 1 | `cls_7df2d44c__vfn19_7ddfcb35` | Vtable slot 19 (byte offset `+76`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcbba` | 1 | `cls_7df2d44c__vfn20_7ddfcbba` | Vtable slot 20 (byte offset `+80`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcc2f` | 1 | `cls_7df2d44c__vfn21_7ddfcc2f` | Vtable slot 21 (byte offset `+84`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfcc5f` | 1 | `cls_7df2d44c__vfn22_7ddfcc5f` | Vtable slot 22 (byte offset `+88`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfccdf` | 1 | `cls_7df2d44c__vfn23_7ddfccdf` | Vtable slot 23 (byte offset `+92`) of class `cls_7df2d44c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfd950` | 1 | `cls_7df2d584__vfn0_7ddfd950` | Vtable slot 0 (byte offset `+0`) of class `cls_7df2d584`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfd986` | 1 | `cls_7df2d584__vfn1_7ddfd986` | Vtable slot 1 (byte offset `+4`) of class `cls_7df2d584`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfdc5f` | 1 | `cls_7df2d584__vfn2_7ddfdc5f` | Vtable slot 2 (byte offset `+8`) of class `cls_7df2d584`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfdd80` | 1 | `cls_7df2d584__vfn3_7ddfdd80` | Vtable slot 3 (byte offset `+12`) of class `cls_7df2d584`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfdec3` | 1 | `cls_7df2d584__vfn4_7ddfdec3` | Vtable slot 4 (byte offset `+16`) of class `cls_7df2d584`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7ddfdfd9` | 1 | `cls_7df2d584__ctordtor_7ddfdfd9` | Constructor or destructor of class `cls_7df2d584` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07173` | 4 | `cls_7df2d8c8__ctordtor_7de07173` | Constructor or destructor of class `cls_7df2d8c8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de075f1` | 1 | `cls_7df2d8c8__vfn0_7de075f1` | Vtable slot 0 (byte offset `+0`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07623` | 1 | `cls_7df2d8c8__vfn1_7de07623` | Vtable slot 1 (byte offset `+4`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07654` | 1 | `cls_7df2d8c8__vfn2_7de07654` | Vtable slot 2 (byte offset `+8`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07682` | 1 | `cls_7df2d8c8__vfn3_7de07682` | Vtable slot 3 (byte offset `+12`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de076a8` | 1 | `cls_7df2d8c8__vfn4_7de076a8` | Vtable slot 4 (byte offset `+16`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de076d9` | 1 | `cls_7df2d8c8__vfn5_7de076d9` | Vtable slot 5 (byte offset `+20`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07704` | 1 | `cls_7df2d8c8__vfn6_7de07704` | Vtable slot 6 (byte offset `+24`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de0772a` | 1 | `cls_7df2d8c8__vfn7_7de0772a` | Vtable slot 7 (byte offset `+28`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07749` | 1 | `cls_7df2d8c8__vfn8_7de07749` | Vtable slot 8 (byte offset `+32`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07779` | 1 | `cls_7df2d8c8__vfn9_7de07779` | Vtable slot 9 (byte offset `+36`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de077a3` | 1 | `cls_7df2d8c8__vfn10_7de077a3` | Vtable slot 10 (byte offset `+40`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de077c8` | 1 | `cls_7df2d8c8__vfn11_7de077c8` | Vtable slot 11 (byte offset `+44`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de077e6` | 1 | `cls_7df2d8c8__vfn12_7de077e6` | Vtable slot 12 (byte offset `+48`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07810` | 1 | `cls_7df2d8c8__vfn13_7de07810` | Vtable slot 13 (byte offset `+52`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07832` | 1 | `cls_7df2d8c8__vfn14_7de07832` | Vtable slot 14 (byte offset `+56`) of class `cls_7df2d8c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07853` | 1 | `cls_7df2d908__vfn0_7de07853` | Vtable slot 0 (byte offset `+0`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de078a9` | 1 | `cls_7df2d908__vfn1_7de078a9` | Vtable slot 1 (byte offset `+4`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de078f3` | 1 | `cls_7df2d908__vfn2_7de078f3` | Vtable slot 2 (byte offset `+8`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de0793a` | 1 | `cls_7df2d908__vfn3_7de0793a` | Vtable slot 3 (byte offset `+12`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de0796f` | 1 | `cls_7df2d908__vfn4_7de0796f` | Vtable slot 4 (byte offset `+16`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de079b6` | 1 | `cls_7df2d908__vfn5_7de079b6` | Vtable slot 5 (byte offset `+20`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de079ec` | 1 | `cls_7df2d908__vfn6_7de079ec` | Vtable slot 6 (byte offset `+24`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07a1f` | 1 | `cls_7df2d908__vfn7_7de07a1f` | Vtable slot 7 (byte offset `+28`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07a3e` | 1 | `cls_7df2d908__vfn8_7de07a3e` | Vtable slot 8 (byte offset `+32`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07a87` | 1 | `cls_7df2d908__vfn9_7de07a87` | Vtable slot 9 (byte offset `+36`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07abf` | 1 | `cls_7df2d908__vfn10_7de07abf` | Vtable slot 10 (byte offset `+40`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07af4` | 1 | `cls_7df2d908__vfn11_7de07af4` | Vtable slot 11 (byte offset `+44`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07b15` | 1 | `cls_7df2d908__vfn12_7de07b15` | Vtable slot 12 (byte offset `+48`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07b4a` | 1 | `cls_7df2d908__vfn13_7de07b4a` | Vtable slot 13 (byte offset `+52`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07b6b` | 1 | `cls_7df2d908__vfn14_7de07b6b` | Vtable slot 14 (byte offset `+56`) of class `cls_7df2d908`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07d46` | 1 | `cls_7df2d948__vfn0_7de07d46` | Vtable slot 0 (byte offset `+0`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07d7b` | 1 | `cls_7df2d948__vfn1_7de07d7b` | Vtable slot 1 (byte offset `+4`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07daf` | 1 | `cls_7df2d948__vfn2_7de07daf` | Vtable slot 2 (byte offset `+8`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07ddf` | 1 | `cls_7df2d948__vfn3_7de07ddf` | Vtable slot 3 (byte offset `+12`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07e08` | 1 | `cls_7df2d948__vfn4_7de07e08` | Vtable slot 4 (byte offset `+16`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07e3c` | 1 | `cls_7df2d948__vfn5_7de07e3c` | Vtable slot 5 (byte offset `+20`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07e68` | 1 | `cls_7df2d948__vfn6_7de07e68` | Vtable slot 6 (byte offset `+24`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07e91` | 1 | `cls_7df2d948__vfn7_7de07e91` | Vtable slot 7 (byte offset `+28`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07eb2` | 1 | `cls_7df2d948__vfn8_7de07eb2` | Vtable slot 8 (byte offset `+32`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07ee6` | 1 | `cls_7df2d948__vfn9_7de07ee6` | Vtable slot 9 (byte offset `+36`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07f12` | 1 | `cls_7df2d948__vfn10_7de07f12` | Vtable slot 10 (byte offset `+40`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07f3a` | 1 | `cls_7df2d948__vfn11_7de07f3a` | Vtable slot 11 (byte offset `+44`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07f5b` | 1 | `cls_7df2d948__vfn12_7de07f5b` | Vtable slot 12 (byte offset `+48`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07f87` | 1 | `cls_7df2d948__vfn13_7de07f87` | Vtable slot 13 (byte offset `+52`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de07fac` | 1 | `cls_7df2d948__vfn14_7de07fac` | Vtable slot 14 (byte offset `+56`) of class `cls_7df2d948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de5438e` | 2 | `cls_7df86338__vfn0_7de5438e` | Vtable slot 0 (byte offset `+0`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de54522` | 1 | `cls_7df86338__vfn1_7de54522` | Vtable slot 1 (byte offset `+4`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de546cb` | 1 | `cls_7df86338__vfn2_7de546cb` | Vtable slot 2 (byte offset `+8`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de5487c` | 1 | `cls_7df86338__vfn3_7de5487c` | Vtable slot 3 (byte offset `+12`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de54a21` | 1 | `cls_7df86338__vfn4_7de54a21` | Vtable slot 4 (byte offset `+16`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de54bc3` | 1 | `cls_7df86338__vfn5_7de54bc3` | Vtable slot 5 (byte offset `+20`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de556e0` | 1 | `cls_7df86338__vfn6_7de556e0` | Vtable slot 6 (byte offset `+24`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de55bf4` | 1 | `cls_7df86338__vfn7_7de55bf4` | Vtable slot 7 (byte offset `+28`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de55c38` | 1 | `cls_7df86338__vfn8_7de55c38` | Vtable slot 8 (byte offset `+32`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de5602b` | 1 | `cls_7df86338__vfn9_7de5602b` | Vtable slot 9 (byte offset `+36`) of class `cls_7df86338`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56350` | 1 | `cls_7df46c28__ctordtor_7de56350` | Constructor or destructor of class `cls_7df46c28` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56515` | 3 | `cls_7df46c28__vfn1_7de56515` | Vtable slot 1 (byte offset `+4`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de565b3` | 2 | `cls_7df46c28__vfn2_7de565b3` | Vtable slot 2 (byte offset `+8`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de565f8` | 3 | `cls_7df46c28__vfn3_7de565f8` | Vtable slot 3 (byte offset `+12`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de5664a` | 3 | `cls_7df46c28__vfn6_7de5664a` | Vtable slot 6 (byte offset `+24`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de566a4` | 3 | `cls_7df46c28__vfn7_7de566a4` | Vtable slot 7 (byte offset `+28`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de566f3` | 3 | `cls_7df46c28__vfn8_7de566f3` | Vtable slot 8 (byte offset `+32`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56745` | 4 | `cls_7df46c28__vfn9_7de56745` | Vtable slot 9 (byte offset `+36`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56827` | 4 | `cls_7df46c28__vfn10_7de56827` | Vtable slot 10 (byte offset `+40`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56834` | 3 | `cls_7df46c28__vfn11_7de56834` | Vtable slot 11 (byte offset `+44`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56851` | 3 | `cls_7df46c28__vfn12_7de56851` | Vtable slot 12 (byte offset `+48`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56870` | 3 | `cls_7df46c28__vfn13_7de56870` | Vtable slot 13 (byte offset `+52`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56935` | 1 | `cls_7df46c28__vfn14_7de56935` | Vtable slot 14 (byte offset `+56`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de569c9` | 1 | `cls_7df46c28__vfn16_7de569c9` | Vtable slot 16 (byte offset `+64`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de569fb` | 1 | `cls_7df46c28__vfn19_7de569fb` | Vtable slot 19 (byte offset `+76`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56ab4` | 1 | `cls_7df46c28__vfn32_7de56ab4` | Vtable slot 32 (byte offset `+128`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56c47` | 1 | `cls_7df46c28__vfn38_7de56c47` | Vtable slot 38 (byte offset `+152`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56cbe` | 1 | `cls_7df46c28__vfn42_7de56cbe` | Vtable slot 42 (byte offset `+168`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56ccb` | 1 | `cls_7df46c28__vfn53_7de56ccb` | Vtable slot 53 (byte offset `+212`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56cf2` | 1 | `cls_7df46c28__vfn50_7de56cf2` | Vtable slot 50 (byte offset `+200`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56d59` | 1 | `cls_7df46c28__vfn44_7de56d59` | Vtable slot 44 (byte offset `+176`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56d9e` | 1 | `cls_7df46c28__vfn45_7de56d9e` | Vtable slot 45 (byte offset `+180`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56dea` | 1 | `cls_7df46c28__vfn48_7de56dea` | Vtable slot 48 (byte offset `+192`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56e11` | 1 | `cls_7df46c28__vfn49_7de56e11` | Vtable slot 49 (byte offset `+196`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56e66` | 1 | `cls_7df46c28__vfn43_7de56e66` | Vtable slot 43 (byte offset `+172`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56f02` | 1 | `cls_7df46c28__vfn54_7de56f02` | Vtable slot 54 (byte offset `+216`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56f2e` | 1 | `cls_7df46c28__vfn55_7de56f2e` | Vtable slot 55 (byte offset `+220`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de56f6f` | 1 | `cls_7df46c28__vfn28_7de56f6f` | Vtable slot 28 (byte offset `+112`) of class `cls_7df46c28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de59225` | 2 | `cls_7df479e4__ctordtor_7de59225` | Constructor or destructor of class `cls_7df479e4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de59290` | 2 | `cls_7df479e4__vfn0_7de59290` | Vtable slot 0 (byte offset `+0`) of class `cls_7df479e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de592af` | 0 | `cls_7df479e4__vfn1_7de592af` | Vtable slot 1 (byte offset `+4`) of class `cls_7df479e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de592ce` | 5 | `cls_7df479e4__vfn2_7de592ce` | Vtable slot 2 (byte offset `+8`) of class `cls_7df479e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de592db` | 9 | `cls_7df479e4__vfn3_7de592db` | Vtable slot 3 (byte offset `+12`) of class `cls_7df479e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de79ec0` | 1 | `cls_7df522cc__vfn3_7de79ec0` | Vtable slot 3 (byte offset `+12`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de7a938` | 1 | `cls_7df522cc__vfn4_7de7a938` | Vtable slot 4 (byte offset `+16`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de7ac0a` | 12 | `cls_7df522cc__ctordtor_7de7ac0a` | Constructor or destructor of class `cls_7df522cc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de7b340` | 1 | `cls_7df522cc__vfn5_7de7b340` | Vtable slot 5 (byte offset `+20`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de7b80d` | 1 | `cls_7df522cc__vfn1_7de7b80d` | Vtable slot 1 (byte offset `+4`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de7cfe8` | 1 | `cls_7df522cc__vfn0_7de7cfe8` | Vtable slot 0 (byte offset `+0`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de8018c` | 1 | `cls_7df522cc__vfn2_7de8018c` | Vtable slot 2 (byte offset `+8`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de801e0` | 2 | `cls_7df52ca8__ctordtor_7de801e0` | Constructor or destructor of class `cls_7df52ca8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de80550` | 6 | `cls_7df52ca8__vfn0_7de80550` | Vtable slot 0 (byte offset `+0`) of class `cls_7df52ca8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de80671` | 4 | `cls_7df52ca8__vfn1_7de80671` | Vtable slot 1 (byte offset `+4`) of class `cls_7df52ca8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de80ff1` | 1 | `cls_7df52ca8__vfn2_7de80ff1` | Vtable slot 2 (byte offset `+8`) of class `cls_7df52ca8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de814a7` | 2 | `cls_7df522cc__vfn7_7de814a7` | Vtable slot 7 (byte offset `+28`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7de81a8c` | 2 | `cls_7df522cc__vfn6_7de81a8c` | Vtable slot 6 (byte offset `+24`) of class `cls_7df522cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc02ba` | 1 | `cls_7e35db30__ctordtor_7dfc02ba` | Constructor or destructor of class `cls_7e35db30` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc02da` | 1 | `cls_7e35db30__vfn0_7dfc02da` | Vtable slot 0 (byte offset `+0`) of class `cls_7e35db30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc04cf` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7dfc04cf` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7dfc0567` | 1 | `cls_7e35db30__vfn1_7dfc0567` | Vtable slot 1 (byte offset `+4`) of class `cls_7e35db30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc0577` | 0 | `cls_7e35db30__vfn2_7dfc0577` | Vtable slot 2 (byte offset `+8`) of class `cls_7e35db30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc1aba` | 2 | `cls_7e5fa2fc__vfn0_7dfc1aba` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc5521` | 1 | `cls_7e360684__vfn6_7dfc5521` | Vtable slot 6 (byte offset `+24`) of class `cls_7e360684`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc564f` | 1 | `cls_7e360684__vfn3_7dfc564f` | Vtable slot 3 (byte offset `+12`) of class `cls_7e360684`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc569d` | 1 | `cls_7e360684__vfn4_7dfc569d` | Vtable slot 4 (byte offset `+16`) of class `cls_7e360684`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc5d90` | 1 | `cls_7e360a4c__ctordtor_7dfc5d90` | Constructor or destructor of class `cls_7e360a4c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc5de9` | 1 | `cls_7e360a4c__vfn6_7dfc5de9` | Vtable slot 6 (byte offset `+24`) of class `cls_7e360a4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc5ebf` | 1 | `cls_7e360a4c__ctordtor_7dfc5ebf` | Constructor or destructor of class `cls_7e360a4c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc6059` | 1 | `cls_7e360a4c__vfn3_7dfc6059` | Vtable slot 3 (byte offset `+12`) of class `cls_7e360a4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc610a` | 1 | `cls_7e360a4c__vfn4_7dfc610a` | Vtable slot 4 (byte offset `+16`) of class `cls_7e360a4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc6398` | 1 | `cls_7e360a80__ctordtor_7dfc6398` | Constructor or destructor of class `cls_7e360a80` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc63d7` | 1 | `cls_7e360a80__ctordtor_7dfc63d7` | Constructor or destructor of class `cls_7e360a80` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc6736` | 21 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7dfc6736` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7dfc6778` | 26 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7dfc6778` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7dfc67a4` | 1 | `cls_7e360b0c__ctordtor_7dfc67a4` | Constructor or destructor of class `cls_7e360b0c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc67f3` | 1 | `cls_7e360b0c__vfn0_7dfc67f3` | Vtable slot 0 (byte offset `+0`) of class `cls_7e360b0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfc750f` | 1 | `cls_7e36d630__vfn0_7dfc750f` | Vtable slot 0 (byte offset `+0`) of class `cls_7e36d630`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcce2c` | 1 | `cls_7e371fb4__ctordtor_7dfcce2c` | Constructor or destructor of class `cls_7e371fb4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcce77` | 1 | `cls_7e371fb4__ctordtor_7dfcce77` | Constructor or destructor of class `cls_7e371fb4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd0d4` | 1 | `cls_7e372270__ctordtor_7dfcd0d4` | Constructor or destructor of class `cls_7e372270` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd121` | 1 | `cls_7e372270__vfn0_7dfcd121` | Vtable slot 0 (byte offset `+0`) of class `cls_7e372270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd14c` | 1 | `cls_7e372270__vfn1_7dfcd14c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e372270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd159` | 1 | `cls_7e372270__vfn4_7dfcd159` | Vtable slot 4 (byte offset `+16`) of class `cls_7e372270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd291` | 1 | `cls_7e372270__vfn2_7dfcd291` | Vtable slot 2 (byte offset `+8`) of class `cls_7e372270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcd429` | 1 | `cls_7e372270__ctordtor_7dfcd429` | Constructor or destructor of class `cls_7e372270` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcf712` | 3 | `cls_7e3735f0__ctordtor_7dfcf712` | Constructor or destructor of class `cls_7e3735f0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcf739` | 1 | `cls_7e3735f0__vfn0_7dfcf739` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3735f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcfbf3` | 1 | `cls_7e3736e8__ctordtor_7dfcfbf3` | Constructor or destructor of class `cls_7e3736e8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfcfcf2` | 1 | `cls_7e3736e8__vfn0_7dfcfcf2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3736e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd0325` | 1 | `cls_7e373744__ctordtor_7dfd0325` | Constructor or destructor of class `cls_7e373744` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd0364` | 4 | `cls_7e373744__ctordtor_7dfd0364` | Constructor or destructor of class `cls_7e373744` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd0387` | 4 | `cls_7e373744__ctordtor_7dfd0387` | Constructor or destructor of class `cls_7e373744` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd04bc` | 1 | `cls_7e5fa2fc__vfn1_7dfd04bc` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd04f1` | 1 | `cls_7e3737fc__ctordtor_7dfd04f1` | Constructor or destructor of class `cls_7e3737fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd0537` | 1 | `cls_7e3737fc__vfn0_7dfd0537` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3737fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd053c` | 1 | `cls_7e3737fc__ctordtor_7dfd053c` | Constructor or destructor of class `cls_7e3737fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd40ed` | 1 | `cls_7e376224__ctordtor_7dfd40ed` | Constructor or destructor of class `cls_7e376224` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd4195` | 1 | `cls_7e376224__vfn0_7dfd4195` | Vtable slot 0 (byte offset `+0`) of class `cls_7e376224`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd4230` | 1 | `cls_7e376224__ctordtor_7dfd4230` | Constructor or destructor of class `cls_7e376224` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd4d34` | 1 | `cls_7e376400__vfn0_7dfd4d34` | Vtable slot 0 (byte offset `+0`) of class `cls_7e376400`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd5d6b` | 27 | `OlyHfwOpeEdtCol__vfn0_7dfd5d6b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeEdtCol`. | Ghidra vtable pass |
+| `0x7dfd6126` | 1 | `cls_7e376d5c__ctordtor_7dfd6126` | Constructor or destructor of class `cls_7e376d5c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd614e` | 1 | `cls_7e376d5c__vfn0_7dfd614e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e376d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd6153` | 1 | `cls_7e376d5c__ctordtor_7dfd6153` | Constructor or destructor of class `cls_7e376d5c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd644b` | 1 | `cls_7e37700c__ctordtor_7dfd644b` | Constructor or destructor of class `cls_7e37700c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd6489` | 1 | `cls_7e37700c__vfn0_7dfd6489` | Vtable slot 0 (byte offset `+0`) of class `cls_7e37700c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfd648e` | 1 | `cls_7e37700c__ctordtor_7dfd648e` | Constructor or destructor of class `cls_7e37700c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfe8ecd` | 1 | `cls_7e3803b0__ctordtor_7dfe8ecd` | Constructor or destructor of class `cls_7e3803b0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfe8ef7` | 1 | `cls_7e3803b0__vfn0_7dfe8ef7` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3803b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfe8efc` | 1 | `cls_7e3803b0__ctordtor_7dfe8efc` | Constructor or destructor of class `cls_7e3803b0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeac4a` | 1 | `cls_7e38083c__ctordtor_7dfeac4a` | Constructor or destructor of class `cls_7e38083c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeac72` | 1 | `cls_7e38083c__vfn0_7dfeac72` | Vtable slot 0 (byte offset `+0`) of class `cls_7e38083c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeac77` | 1 | `cls_7e38083c__ctordtor_7dfeac77` | Constructor or destructor of class `cls_7e38083c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeb0f3` | 2 | `cls_7e380924__ctordtor_7dfeb0f3` | Constructor or destructor of class `cls_7e380924` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeb137` | 1 | `cls_7e380924__vfn6_7dfeb137` | Vtable slot 6 (byte offset `+24`) of class `cls_7e380924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfeb1b1` | 1 | `cls_7e380924__vfn3_7dfeb1b1` | Vtable slot 3 (byte offset `+12`) of class `cls_7e380924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfed265` | 1 | `cls_7e383340__ctordtor_7dfed265` | Constructor or destructor of class `cls_7e383340` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfed295` | 1 | `cls_7e383340__vfn0_7dfed295` | Vtable slot 0 (byte offset `+0`) of class `cls_7e383340`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dfed29a` | 1 | `cls_7e383340__ctordtor_7dfed29a` | Constructor or destructor of class `cls_7e383340` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0c72` | 1 | `cls_7e383790__ctordtor_7dff0c72` | Constructor or destructor of class `cls_7e383790` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0cee` | 2 | `cls_7e383790__ctordtor_7dff0cee` | Constructor or destructor of class `cls_7e383790` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0d86` | 1 | `cls_7e383790__vfn3_7dff0d86` | Vtable slot 3 (byte offset `+12`) of class `cls_7e383790`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0e80` | 51 | `cls_7e3837d0__ctordtor_7dff0e80` | Constructor or destructor of class `cls_7e3837d0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0ed5` | 1 | `cls_7e3837d0__vfn0_7dff0ed5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0f31` | 3 | `cls_7e3837d0__vfn3_7dff0f31` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0f6d` | 3 | `cls_7e3837d0__vfn5_7dff0f6d` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff0f7a` | 3 | `cls_7e3837d0__vfn6_7dff0f7a` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff10bf` | 4 | `cls_7e3837d0__vfn7_7dff10bf` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff10ed` | 3 | `cls_7e3837d0__vfn8_7dff10ed` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff1138` | 1 | `cls_7e3837d0__vfn9_7dff1138` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff11ce` | 3 | `cls_7e3837d0__vfn10_7dff11ce` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3837d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff136e` | 2 | `cls_7e3838f4__ctordtor_7dff136e` | Constructor or destructor of class `cls_7e3838f4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff13cd` | 2 | `cls_7e3838f4__ctordtor_7dff13cd` | Constructor or destructor of class `cls_7e3838f4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff1435` | 1 | `cls_7e3838f4__vfn0_7dff1435` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3838f4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff143a` | 3 | `cls_7e3838f4__ctordtor_7dff143a` | Constructor or destructor of class `cls_7e3838f4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff1940` | 1 | `cls_7e5fa2fc__vfn2_7dff1940` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff20b2` | 1 | `cls_7e383ac0__ctordtor_7dff20b2` | Constructor or destructor of class `cls_7e383ac0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff20ec` | 1 | `cls_7e383ac0__vfn6_7dff20ec` | Vtable slot 6 (byte offset `+24`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2150` | 1 | `cls_7e383ac0__vfn3_7dff2150` | Vtable slot 3 (byte offset `+12`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff218e` | 1 | `cls_7e383ac0__vfn4_7dff218e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff21ea` | 1 | `cls_7e383ac0__vfn11_7dff21ea` | Vtable slot 11 (byte offset `+44`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff21f7` | 1 | `cls_7e383ac0__vfn8_7dff21f7` | Vtable slot 8 (byte offset `+32`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2216` | 1 | `cls_7e383ac0__vfn9_7dff2216` | Vtable slot 9 (byte offset `+36`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2241` | 1 | `cls_7e383ac0__vfn10_7dff2241` | Vtable slot 10 (byte offset `+40`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2294` | 1 | `cls_7e383ac0__vfn16_7dff2294` | Vtable slot 16 (byte offset `+64`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff22bf` | 2 | `cls_7e383ac0__vfn12_7dff22bf` | Vtable slot 12 (byte offset `+48`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2326` | 1 | `cls_7e383ac0__vfn13_7dff2326` | Vtable slot 13 (byte offset `+52`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff234c` | 1 | `cls_7e383ac0__vfn14_7dff234c` | Vtable slot 14 (byte offset `+56`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff2387` | 1 | `cls_7e383ac0__vfn15_7dff2387` | Vtable slot 15 (byte offset `+60`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff23fe` | 1 | `cls_7e383ac0__vfn18_7dff23fe` | Vtable slot 18 (byte offset `+72`) of class `cls_7e383ac0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff579c` | 1 | `cls_7e3860a0__vfn70_7dff579c` | Vtable slot 70 (byte offset `+280`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff57b0` | 1 | `cls_7e3860a0__vfn4_7dff57b0` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5819` | 1 | `cls_7e3860a0__vfn11_7dff5819` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5877` | 1 | `cls_7e3860a0__vfn5_7dff5877` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff58e4` | 1 | `cls_7e3860a0__vfn12_7dff58e4` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5942` | 1 | `cls_7e3860a0__vfn16_7dff5942` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff59ab` | 1 | `cls_7e3860a0__vfn17_7dff59ab` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5a09` | 1 | `cls_7e3860a0__vfn10_7dff5a09` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5a67` | 1 | `cls_7e3860a0__vfn6_7dff5a67` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5ac5` | 1 | `cls_7e3860a0__vfn0_7dff5ac5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5b32` | 1 | `cls_7e3860a0__vfn19_7dff5b32` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5b90` | 1 | `cls_7e3860a0__ctordtor_7dff5b90` | Constructor or destructor of class `cls_7e3860a0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5bae` | 1 | `cls_7e3860a0__vfn3_7dff5bae` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5c1b` | 1 | `cls_7e3860a0__vfn1_7dff5c1b` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5c84` | 1 | `cls_7e3860a0__vfn8_7dff5c84` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5cf0` | 1 | `cls_7e3860a0__vfn2_7dff5cf0` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5d4e` | 1 | `cls_7e3860a0__vfn9_7dff5d4e` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5dac` | 1 | `cls_7e3860a0__vfn7_7dff5dac` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5e17` | 1 | `cls_7e3860a0__vfn14_7dff5e17` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5e7a` | 1 | `cls_7e3860a0__vfn18_7dff5e7a` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5ee5` | 1 | `cls_7e3860a0__vfn13_7dff5ee5` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5f4f` | 1 | `cls_7e3860a0__vfn15_7dff5f4f` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff5fb9` | 1 | `cls_7e3860a0__vfn20_7dff5fb9` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6017` | 1 | `cls_7e3860a0__vfn21_7dff6017` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6080` | 1 | `cls_7e3860a0__vfn22_7dff6080` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff60de` | 1 | `cls_7e3860a0__vfn24_7dff60de` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff613c` | 1 | `cls_7e3860a0__vfn23_7dff613c` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff61a0` | 1 | `cls_7e3860a0__vfn25_7dff61a0` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff61fe` | 1 | `cls_7e3860a0__vfn26_7dff61fe` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6261` | 1 | `cls_7e3860a0__vfn27_7dff6261` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff62ca` | 1 | `cls_7e3860a0__vfn28_7dff62ca` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6328` | 1 | `cls_7e3860a0__vfn29_7dff6328` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6391` | 1 | `cls_7e3860a0__vfn30_7dff6391` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff63f4` | 1 | `cls_7e3860a0__vfn31_7dff63f4` | Vtable slot 31 (byte offset `+124`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6452` | 1 | `cls_7e3860a0__vfn34_7dff6452` | Vtable slot 34 (byte offset `+136`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff64ba` | 1 | `cls_7e3860a0__vfn33_7dff64ba` | Vtable slot 33 (byte offset `+132`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6522` | 1 | `cls_7e3860a0__vfn32_7dff6522` | Vtable slot 32 (byte offset `+128`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6585` | 1 | `cls_7e3860a0__vfn35_7dff6585` | Vtable slot 35 (byte offset `+140`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff65e7` | 1 | `cls_7e3860a0__vfn47_7dff65e7` | Vtable slot 47 (byte offset `+188`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff663c` | 1 | `cls_7e3860a0__vfn36_7dff663c` | Vtable slot 36 (byte offset `+144`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff66a5` | 1 | `cls_7e3860a0__vfn52_7dff66a5` | Vtable slot 52 (byte offset `+208`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff66ee` | 1 | `cls_7e3860a0__vfn44_7dff66ee` | Vtable slot 44 (byte offset `+176`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6756` | 1 | `cls_7e3860a0__vfn48_7dff6756` | Vtable slot 48 (byte offset `+192`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff67ab` | 1 | `cls_7e3860a0__vfn53_7dff67ab` | Vtable slot 53 (byte offset `+212`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff67f5` | 1 | `cls_7e3860a0__vfn40_7dff67f5` | Vtable slot 40 (byte offset `+160`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6846` | 1 | `cls_7e3860a0__vfn45_7dff6846` | Vtable slot 45 (byte offset `+180`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff689a` | 1 | `cls_7e3860a0__vfn49_7dff689a` | Vtable slot 49 (byte offset `+196`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff68ef` | 1 | `cls_7e3860a0__vfn54_7dff68ef` | Vtable slot 54 (byte offset `+216`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6938` | 1 | `cls_7e3860a0__vfn51_7dff6938` | Vtable slot 51 (byte offset `+204`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6982` | 1 | `cls_7e3860a0__vfn46_7dff6982` | Vtable slot 46 (byte offset `+184`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff69d7` | 1 | `cls_7e3860a0__vfn50_7dff69d7` | Vtable slot 50 (byte offset `+200`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6a26` | 1 | `cls_7e3860a0__vfn43_7dff6a26` | Vtable slot 43 (byte offset `+172`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6a6f` | 1 | `cls_7e3860a0__vfn42_7dff6a6f` | Vtable slot 42 (byte offset `+168`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6abe` | 1 | `cls_7e3860a0__vfn38_7dff6abe` | Vtable slot 38 (byte offset `+152`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6b07` | 1 | `cls_7e3860a0__vfn37_7dff6b07` | Vtable slot 37 (byte offset `+148`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6b51` | 1 | `cls_7e3860a0__vfn39_7dff6b51` | Vtable slot 39 (byte offset `+156`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6b99` | 1 | `cls_7e3860a0__vfn55_7dff6b99` | Vtable slot 55 (byte offset `+220`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6bee` | 1 | `cls_7e3860a0__vfn41_7dff6bee` | Vtable slot 41 (byte offset `+164`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6c3d` | 1 | `cls_7e3860a0__vfn60_7dff6c3d` | Vtable slot 60 (byte offset `+240`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6c9e` | 1 | `cls_7e3860a0__vfn56_7dff6c9e` | Vtable slot 56 (byte offset `+224`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6cfc` | 1 | `cls_7e3860a0__vfn58_7dff6cfc` | Vtable slot 58 (byte offset `+232`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6d65` | 1 | `cls_7e3860a0__vfn59_7dff6d65` | Vtable slot 59 (byte offset `+236`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6dce` | 1 | `cls_7e3860a0__vfn62_7dff6dce` | Vtable slot 62 (byte offset `+248`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6e2e` | 1 | `cls_7e3860a0__vfn61_7dff6e2e` | Vtable slot 61 (byte offset `+244`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6e8e` | 1 | `cls_7e3860a0__vfn63_7dff6e8e` | Vtable slot 63 (byte offset `+252`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6ef1` | 1 | `cls_7e3860a0__vfn64_7dff6ef1` | Vtable slot 64 (byte offset `+256`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6f5e` | 1 | `cls_7e3860a0__vfn57_7dff6f5e` | Vtable slot 57 (byte offset `+228`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff6fbc` | 1 | `cls_7e3860a0__vfn65_7dff6fbc` | Vtable slot 65 (byte offset `+260`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff701f` | 1 | `cls_7e3860a0__vfn66_7dff701f` | Vtable slot 66 (byte offset `+264`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7082` | 1 | `cls_7e3860a0__vfn67_7dff7082` | Vtable slot 67 (byte offset `+268`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff70e0` | 1 | `cls_7e3860a0__vfn68_7dff70e0` | Vtable slot 68 (byte offset `+272`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7143` | 1 | `cls_7e3860a0__vfn69_7dff7143` | Vtable slot 69 (byte offset `+276`) of class `cls_7e3860a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff730d` | 1 | `cls_7e3861c8__ctordtor_7dff730d` | Constructor or destructor of class `cls_7e3861c8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff73ef` | 1 | `cls_7e3861c8__vfn0_7dff73ef` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3861c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff76e6` | 1 | `cls_7e3861c8__vfn1_7dff76e6` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3861c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff77c7` | 1 | `cls_7e3861c8__vfn3_7dff77c7` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3861c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7839` | 1 | `cls_7e3861c8__vfn2_7dff7839` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3861c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff78ab` | 1 | `cls_7e3861c8__vfn4_7dff78ab` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3861c8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7ae8` | 1 | `cls_7e386238__ctordtor_7dff7ae8` | Constructor or destructor of class `cls_7e386238` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7af7` | 1 | `cls_7e386238__vfn6_7dff7af7` | Vtable slot 6 (byte offset `+24`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7b68` | 1 | `cls_7e386238__vfn5_7dff7b68` | Vtable slot 5 (byte offset `+20`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7bd9` | 1 | `cls_7e386238__vfn15_7dff7bd9` | Vtable slot 15 (byte offset `+60`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7c3a` | 1 | `cls_7e386238__vfn12_7dff7c3a` | Vtable slot 12 (byte offset `+48`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7ca6` | 1 | `cls_7e386238__vfn7_7dff7ca6` | Vtable slot 7 (byte offset `+28`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7d1a` | 1 | `cls_7e386238__vfn20_7dff7d1a` | Vtable slot 20 (byte offset `+80`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7d7b` | 1 | `cls_7e386238__vfn4_7dff7d7b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7def` | 1 | `cls_7e386238__vfn13_7dff7def` | Vtable slot 13 (byte offset `+52`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7e55` | 1 | `cls_7e386238__vfn14_7dff7e55` | Vtable slot 14 (byte offset `+56`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7ec3` | 1 | `cls_7e386238__vfn1_7dff7ec3` | Vtable slot 1 (byte offset `+4`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7f24` | 1 | `cls_7e386238__vfn0_7dff7f24` | Vtable slot 0 (byte offset `+0`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7f85` | 1 | `cls_7e386238__vfn9_7dff7f85` | Vtable slot 9 (byte offset `+36`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff7ff3` | 1 | `cls_7e386238__vfn16_7dff7ff3` | Vtable slot 16 (byte offset `+64`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff8061` | 1 | `cls_7e386238__vfn8_7dff8061` | Vtable slot 8 (byte offset `+32`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff80cf` | 1 | `cls_7e386238__vfn2_7dff80cf` | Vtable slot 2 (byte offset `+8`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff813d` | 1 | `cls_7e386238__vfn18_7dff813d` | Vtable slot 18 (byte offset `+72`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff81a9` | 1 | `cls_7e386238__vfn19_7dff81a9` | Vtable slot 19 (byte offset `+76`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff81fa` | 1 | `cls_7e386238__vfn3_7dff81fa` | Vtable slot 3 (byte offset `+12`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff826b` | 1 | `cls_7e386238__vfn17_7dff826b` | Vtable slot 17 (byte offset `+68`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff82dc` | 1 | `cls_7e386238__vfn11_7dff82dc` | Vtable slot 11 (byte offset `+44`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff836d` | 1 | `cls_7e386238__vfn10_7dff836d` | Vtable slot 10 (byte offset `+40`) of class `cls_7e386238`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff919f` | 1 | `cls_7e3862d0__ctordtor_7dff919f` | Constructor or destructor of class `cls_7e3862d0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff91ae` | 1 | `cls_7e3862d0__vfn3_7dff91ae` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff91f3` | 1 | `cls_7e3862d0__vfn1_7dff91f3` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9297` | 1 | `cls_7e3862d0__vfn2_7dff9297` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9308` | 1 | `cls_7e3862d0__vfn6_7dff9308` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9350` | 1 | `cls_7e3862d0__vfn4_7dff9350` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9391` | 1 | `cls_7e3862d0__vfn0_7dff9391` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff93fa` | 1 | `cls_7e3862d0__vfn5_7dff93fa` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3862d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9a30` | 1 | `cls_7e386334__ctordtor_7dff9a30` | Constructor or destructor of class `cls_7e386334` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dff9d26` | 1 | `cls_7e38639c__ctordtor_7dff9d26` | Constructor or destructor of class `cls_7e38639c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa126` | 1 | `cls_7e38639c__vfn4_7dffa126` | Vtable slot 4 (byte offset `+16`) of class `cls_7e38639c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa284` | 1 | `cls_7e3863d8__ctordtor_7dffa284` | Constructor or destructor of class `cls_7e3863d8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa4ed` | 1 | `cls_7e3864cc__ctordtor_7dffa4ed` | Constructor or destructor of class `cls_7e3864cc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa4fc` | 1 | `cls_7e3864cc__vfn0_7dffa4fc` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa509` | 1 | `cls_7e3864cc__vfn1_7dffa509` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa517` | 1 | `cls_7e3864cc__vfn2_7dffa517` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa533` | 1 | `cls_7e3864cc__vfn3_7dffa533` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa54c` | 1 | `cls_7e3864cc__vfn4_7dffa54c` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa55d` | 1 | `cls_7e3864cc__vfn5_7dffa55d` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa572` | 1 | `cls_7e3864cc__vfn6_7dffa572` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa5b5` | 1 | `cls_7e3864cc__vfn7_7dffa5b5` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa62e` | 1 | `cls_7e3864cc__vfn8_7dffa62e` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa661` | 1 | `cls_7e3864cc__vfn9_7dffa661` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa696` | 1 | `cls_7e3864cc__vfn10_7dffa696` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa6c4` | 6 | `cls_7e3864cc__vfn11_7dffa6c4` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa6e1` | 1 | `cls_7e3864cc__vfn12_7dffa6e1` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa731` | 1 | `cls_7e3864cc__vfn13_7dffa731` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa7ba` | 1 | `cls_7e3864cc__vfn14_7dffa7ba` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa7fb` | 1 | `cls_7e3864cc__vfn15_7dffa7fb` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffa9be` | 1 | `cls_7e3864cc__vfn16_7dffa9be` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffaa06` | 1 | `cls_7e3864cc__vfn17_7dffaa06` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3864cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffad87` | 1 | `cls_7e38656c__ctordtor_7dffad87` | Constructor or destructor of class `cls_7e38656c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffae12` | 1 | `cls_7e38656c__vfn1_7dffae12` | Vtable slot 1 (byte offset `+4`) of class `cls_7e38656c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb022` | 1 | `cls_7e38656c__vfn5_7dffb022` | Vtable slot 5 (byte offset `+20`) of class `cls_7e38656c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb097` | 1 | `cls_7e38656c__vfn8_7dffb097` | Vtable slot 8 (byte offset `+32`) of class `cls_7e38656c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb1d8` | 1 | `cls_7e386648__ctordtor_7dffb1d8` | Constructor or destructor of class `cls_7e386648` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb2c5` | 1 | `cls_7e386648__vfn0_7dffb2c5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e386648`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb346` | 1 | `cls_7e386648__vfn1_7dffb346` | Vtable slot 1 (byte offset `+4`) of class `cls_7e386648`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb530` | 1 | `cls_7e386648__vfn3_7dffb530` | Vtable slot 3 (byte offset `+12`) of class `cls_7e386648`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb688` | 1 | `cls_7e386648__vfn4_7dffb688` | Vtable slot 4 (byte offset `+16`) of class `cls_7e386648`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb927` | 1 | `cls_7e386730__ctordtor_7dffb927` | Constructor or destructor of class `cls_7e386730` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7dffb95f` | 1 | `cls_7e386730__ctordtor_7dffb95f` | Constructor or destructor of class `cls_7e386730` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021d07` | 1 | `cls_7e3a3b60__ctordtor_7e021d07` | Constructor or destructor of class `cls_7e3a3b60` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021d16` | 1 | `cls_7e3a3b60__vfn3_7e021d16` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3b60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021e6d` | 1 | `cls_7e3a3b60__vfn4_7e021e6d` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3b60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021edc` | 1 | `cls_7e3a3b60__vfn0_7e021edc` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3b60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021f61` | 1 | `cls_7e3a3b60__vfn2_7e021f61` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3b60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e021fce` | 1 | `cls_7e3a3b60__vfn1_7e021fce` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3b60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022180` | 1 | `cls_7e3a3b90__ctordtor_7e022180` | Constructor or destructor of class `cls_7e3a3b90` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02218f` | 1 | `cls_7e3a3b90__vfn11_7e02218f` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0221f4` | 1 | `cls_7e3a3b90__vfn14_7e0221f4` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022259` | 1 | `cls_7e3a3b90__vfn12_7e022259` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0222c0` | 1 | `cls_7e3a3b90__vfn3_7e0222c0` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022325` | 1 | `cls_7e3a3b90__vfn9_7e022325` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02238a` | 1 | `cls_7e3a3b90__vfn17_7e02238a` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0223ef` | 1 | `cls_7e3a3b90__vfn5_7e0223ef` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022454` | 1 | `cls_7e3a3b90__vfn7_7e022454` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0224b9` | 1 | `cls_7e3a3b90__vfn20_7e0224b9` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02251a` | 1 | `cls_7e3a3b90__vfn33_7e02251a` | Vtable slot 33 (byte offset `+132`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02257d` | 1 | `cls_7e3a3b90__vfn26_7e02257d` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0225e0` | 1 | `cls_7e3a3b90__vfn28_7e0225e0` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022643` | 1 | `cls_7e3a3b90__vfn23_7e022643` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0226a6` | 1 | `cls_7e3a3b90__vfn24_7e0226a6` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02271b` | 1 | `cls_7e3a3b90__vfn25_7e02271b` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02277e` | 1 | `cls_7e3a3b90__vfn21_7e02277e` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0227e1` | 1 | `cls_7e3a3b90__vfn22_7e0227e1` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022856` | 1 | `cls_7e3a3b90__vfn16_7e022856` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0228bd` | 1 | `cls_7e3a3b90__vfn27_7e0228bd` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022920` | 1 | `cls_7e3a3b90__vfn15_7e022920` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022985` | 1 | `cls_7e3a3b90__vfn13_7e022985` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0229ea` | 1 | `cls_7e3a3b90__vfn18_7e0229ea` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022a4d` | 1 | `cls_7e3a3b90__vfn2_7e022a4d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022ab4` | 1 | `cls_7e3a3b90__vfn8_7e022ab4` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022b1b` | 1 | `cls_7e3a3b90__vfn4_7e022b1b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022b90` | 1 | `cls_7e3a3b90__vfn6_7e022b90` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022bf5` | 1 | `cls_7e3a3b90__vfn19_7e022bf5` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022c58` | 1 | `cls_7e3a3b90__vfn29_7e022c58` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022cbb` | 1 | `cls_7e3a3b90__vfn30_7e022cbb` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022d20` | 1 | `cls_7e3a3b90__vfn32_7e022d20` | Vtable slot 32 (byte offset `+128`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022d87` | 1 | `cls_7e3a3b90__vfn31_7e022d87` | Vtable slot 31 (byte offset `+124`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022dee` | 1 | `cls_7e3a3b90__vfn0_7e022dee` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022e53` | 1 | `cls_7e3a3b90__vfn1_7e022e53` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022eb8` | 1 | `cls_7e3a3b90__vfn10_7e022eb8` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3b90`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022f7f` | 1 | `cls_7e3a3c30__ctordtor_7e022f7f` | Constructor or destructor of class `cls_7e3a3c30` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022f8e` | 1 | `cls_7e3a3c30__vfn28_7e022f8e` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e022fef` | 1 | `cls_7e3a3c30__vfn22_7e022fef` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023058` | 1 | `cls_7e3a3c30__vfn5_7e023058` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0230dd` | 1 | `cls_7e3a3c30__vfn17_7e0230dd` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023143` | 1 | `cls_7e3a3c30__vfn18_7e023143` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0231a9` | 1 | `cls_7e3a3c30__vfn6_7e0231a9` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02322e` | 1 | `cls_7e3a3c30__vfn4_7e02322e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0232b3` | 1 | `cls_7e3a3c30__vfn25_7e0232b3` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02331f` | 1 | `cls_7e3a3c30__vfn16_7e02331f` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02338e` | 1 | `cls_7e3a3c30__vfn24_7e02338e` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0233fa` | 1 | `cls_7e3a3c30__vfn10_7e0233fa` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02345d` | 1 | `cls_7e3a3c30__vfn29_7e02345d` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0234c6` | 1 | `cls_7e3a3c30__vfn3_7e0234c6` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023529` | 1 | `cls_7e3a3c30__vfn1_7e023529` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02358c` | 1 | `cls_7e3a3c30__vfn9_7e02358c` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023605` | 1 | `cls_7e3a3c30__vfn11_7e023605` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023679` | 1 | `cls_7e3a3c30__vfn26_7e023679` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0236da` | 1 | `cls_7e3a3c30__vfn20_7e0236da` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02373b` | 1 | `cls_7e3a3c30__vfn7_7e02373b` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02379c` | 1 | `cls_7e3a3c30__vfn2_7e02379c` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023808` | 1 | `cls_7e3a3c30__vfn19_7e023808` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023869` | 1 | `cls_7e3a3c30__vfn8_7e023869` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0238cc` | 1 | `cls_7e3a3c30__vfn0_7e0238cc` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023931` | 1 | `cls_7e3a3c30__vfn14_7e023931` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023992` | 1 | `cls_7e3a3c30__vfn13_7e023992` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0239f5` | 1 | `cls_7e3a3c30__vfn15_7e0239f5` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023a5b` | 1 | `cls_7e3a3c30__vfn27_7e023a5b` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023abc` | 1 | `cls_7e3a3c30__vfn21_7e023abc` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023b1f` | 1 | `cls_7e3a3c30__vfn12_7e023b1f` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023b81` | 1 | `cls_7e3a3c30__vfn23_7e023b81` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023be4` | 1 | `cls_7e3a3c30__vfn30_7e023be4` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023c58` | 1 | `cls_7e3a3c30__vfn32_7e023c58` | Vtable slot 32 (byte offset `+128`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023cbb` | 1 | `cls_7e3a3c30__vfn31_7e023cbb` | Vtable slot 31 (byte offset `+124`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023d1c` | 1 | `cls_7e3a3c30__vfn33_7e023d1c` | Vtable slot 33 (byte offset `+132`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023d83` | 1 | `cls_7e3a3c30__vfn34_7e023d83` | Vtable slot 34 (byte offset `+136`) of class `cls_7e3a3c30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023e57` | 1 | `cls_7e3a3cd0__ctordtor_7e023e57` | Constructor or destructor of class `cls_7e3a3cd0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023e66` | 1 | `cls_7e3a3cd0__vfn3_7e023e66` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023eca` | 1 | `cls_7e3a3cd0__vfn11_7e023eca` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023f0b` | 1 | `cls_7e3a3cd0__vfn0_7e023f0b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e023ff9` | 1 | `cls_7e3a3cd0__vfn1_7e023ff9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02406e` | 1 | `cls_7e3a3cd0__vfn4_7e02406e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02415c` | 1 | `cls_7e3a3cd0__vfn8_7e02415c` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024208` | 1 | `cls_7e3a3cd0__vfn6_7e024208` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024275` | 1 | `cls_7e3a3cd0__vfn5_7e024275` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0242e6` | 1 | `cls_7e3a3cd0__vfn9_7e0242e6` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024392` | 1 | `cls_7e3a3cd0__vfn7_7e024392` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0243e0` | 1 | `cls_7e3a3cd0__vfn2_7e0243e0` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02446a` | 1 | `cls_7e3a3cd0__vfn10_7e02446a` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3cd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024510` | 1 | `cls_7e3a3d0c__ctordtor_7e024510` | Constructor or destructor of class `cls_7e3a3d0c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02451f` | 1 | `cls_7e3a3d0c__vfn0_7e02451f` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3d0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024593` | 1 | `cls_7e3a3d0c__vfn1_7e024593` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3d0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0245f4` | 1 | `cls_7e3a3d0c__vfn2_7e0245f4` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3d0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024657` | 1 | `cls_7e3a3d0c__vfn3_7e024657` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3d0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02471f` | 1 | `cls_7e3a3d28__ctordtor_7e02471f` | Constructor or destructor of class `cls_7e3a3d28` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02472e` | 1 | `cls_7e3a3d28__vfn6_7e02472e` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0247a2` | 1 | `cls_7e3a3d28__vfn0_7e0247a2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024805` | 1 | `cls_7e3a3d28__vfn1_7e024805` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024873` | 1 | `cls_7e3a3d28__vfn3_7e024873` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0248d4` | 1 | `cls_7e3a3d28__vfn4_7e0248d4` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02493f` | 1 | `cls_7e3a3d28__vfn5_7e02493f` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0249a0` | 1 | `cls_7e3a3d28__vfn7_7e0249a0` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0249ff` | 1 | `cls_7e3a3d28__vfn2_7e0249ff` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024a61` | 1 | `cls_7e3a3d28__vfn8_7e024a61` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024ad5` | 1 | `cls_7e3a3d28__vfn9_7e024ad5` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3d28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024b90` | 1 | `cls_7e3a3d5c__ctordtor_7e024b90` | Constructor or destructor of class `cls_7e3a3d5c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024b9f` | 1 | `cls_7e3a3d5c__vfn2_7e024b9f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024c13` | 1 | `cls_7e3a3d5c__vfn1_7e024c13` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024c79` | 1 | `cls_7e3a3d5c__vfn4_7e024c79` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024ce9` | 1 | `cls_7e3a3d5c__vfn3_7e024ce9` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024d4c` | 1 | `cls_7e3a3d5c__vfn5_7e024d4c` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024dc0` | 1 | `cls_7e3a3d5c__vfn6_7e024dc0` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024e21` | 1 | `cls_7e3a3d5c__vfn0_7e024e21` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3d5c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024ee8` | 1 | `cls_7e3a3d88__ctordtor_7e024ee8` | Constructor or destructor of class `cls_7e3a3d88` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024ef7` | 1 | `cls_7e3a3d88__vfn1_7e024ef7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024f6b` | 1 | `cls_7e3a3d88__vfn2_7e024f6b` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e024fd6` | 1 | `cls_7e3a3d88__vfn3_7e024fd6` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025037` | 1 | `cls_7e3a3d88__vfn4_7e025037` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02509d` | 1 | `cls_7e3a3d88__vfn5_7e02509d` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0250fe` | 1 | `cls_7e3a3d88__vfn0_7e0250fe` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3d88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0251b7` | 1 | `cls_7e3a3dbc__ctordtor_7e0251b7` | Constructor or destructor of class `cls_7e3a3dbc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0251c6` | 1 | `cls_7e3a3dbc__vfn1_7e0251c6` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3dbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02522c` | 1 | `cls_7e3a3dbc__vfn4_7e02522c` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3dbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0252a8` | 1 | `cls_7e3a3dbc__vfn2_7e0252a8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3dbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02533b` | 1 | `cls_7e3a3dbc__vfn3_7e02533b` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3dbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02539c` | 1 | `cls_7e3a3dbc__vfn0_7e02539c` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3dbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025463` | 1 | `cls_7e3a3de8__ctordtor_7e025463` | Constructor or destructor of class `cls_7e3a3de8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025472` | 1 | `cls_7e3a3de8__vfn5_7e025472` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0254e2` | 1 | `cls_7e3a3de8__vfn3_7e0254e2` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025556` | 1 | `cls_7e3a3de8__vfn12_7e025556` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0255b7` | 1 | `cls_7e3a3de8__vfn2_7e0255b7` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025618` | 1 | `cls_7e3a3de8__vfn13_7e025618` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025685` | 1 | `cls_7e3a3de8__vfn1_7e025685` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0256e8` | 1 | `cls_7e3a3de8__vfn9_7e0256e8` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025760` | 1 | `cls_7e3a3de8__vfn10_7e025760` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0257dc` | 1 | `cls_7e3a3de8__vfn6_7e0257dc` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02583f` | 1 | `cls_7e3a3de8__vfn8_7e02583f` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0258b3` | 1 | `cls_7e3a3de8__vfn11_7e0258b3` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025922` | 1 | `cls_7e3a3de8__vfn7_7e025922` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025983` | 1 | `cls_7e3a3de8__vfn4_7e025983` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0259e6` | 1 | `cls_7e3a3de8__vfn0_7e0259e6` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3de8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025aad` | 1 | `cls_7e3a3e48__ctordtor_7e025aad` | Constructor or destructor of class `cls_7e3a3e48` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025abc` | 1 | `cls_7e3a3e48__vfn1_7e025abc` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025b1d` | 1 | `cls_7e3a3e48__vfn12_7e025b1d` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025b88` | 1 | `cls_7e3a3e48__vfn2_7e025b88` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025bf3` | 1 | `cls_7e3a3e48__vfn3_7e025bf3` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025c5e` | 1 | `cls_7e3a3e48__vfn4_7e025c5e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025ccf` | 1 | `cls_7e3a3e48__vfn5_7e025ccf` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025d40` | 1 | `cls_7e3a3e48__vfn0_7e025d40` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025da5` | 1 | `cls_7e3a3e48__vfn11_7e025da5` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025e06` | 1 | `cls_7e3a3e48__vfn6_7e025e06` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025e67` | 1 | `cls_7e3a3e48__vfn7_7e025e67` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025ec8` | 1 | `cls_7e3a3e48__vfn10_7e025ec8` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025f39` | 1 | `cls_7e3a3e48__vfn8_7e025f39` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e025faa` | 1 | `cls_7e3a3e48__vfn9_7e025faa` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3e48`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026085` | 1 | `cls_7e3a3e88__ctordtor_7e026085` | Constructor or destructor of class `cls_7e3a3e88` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026094` | 1 | `cls_7e3a3e88__vfn1_7e026094` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3e88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0260fa` | 1 | `cls_7e3a3e88__vfn2_7e0260fa` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3e88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02616e` | 1 | `cls_7e3a3e88__vfn4_7e02616e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3e88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0261b8` | 1 | `cls_7e3a3e88__vfn3_7e0261b8` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3e88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026219` | 1 | `cls_7e3a3e88__vfn0_7e026219` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3e88`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0262e0` | 1 | `cls_7e3a3ea8__ctordtor_7e0262e0` | Constructor or destructor of class `cls_7e3a3ea8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0262ef` | 1 | `cls_7e3a3ea8__vfn1_7e0262ef` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3ea8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026352` | 1 | `cls_7e3a3ea8__vfn2_7e026352` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3ea8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0263b7` | 1 | `cls_7e3a3ea8__vfn4_7e0263b7` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3ea8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026402` | 1 | `cls_7e3a3ea8__vfn3_7e026402` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3ea8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02646e` | 1 | `cls_7e3a3ea8__vfn0_7e02646e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3ea8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026537` | 1 | `cls_7e3a3ec8__ctordtor_7e026537` | Constructor or destructor of class `cls_7e3a3ec8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026546` | 1 | `cls_7e3a3ec8__vfn1_7e026546` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0265ac` | 1 | `cls_7e3a3ec8__vfn2_7e0265ac` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026620` | 1 | `cls_7e3a3ec8__vfn4_7e026620` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02666a` | 1 | `cls_7e3a3ec8__vfn3_7e02666a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0266cb` | 1 | `cls_7e3a3ec8__vfn0_7e0266cb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026792` | 1 | `cls_7e3a3ee8__ctordtor_7e026792` | Constructor or destructor of class `cls_7e3a3ee8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0267a1` | 1 | `cls_7e3a3ee8__vfn1_7e0267a1` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026807` | 1 | `cls_7e3a3ee8__vfn5_7e026807` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026875` | 1 | `cls_7e3a3ee8__vfn4_7e026875` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0268e3` | 1 | `cls_7e3a3ee8__vfn3_7e0268e3` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026946` | 1 | `cls_7e3a3ee8__vfn6_7e026946` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0269ba` | 1 | `cls_7e3a3ee8__vfn8_7e0269ba` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026a04` | 1 | `cls_7e3a3ee8__vfn7_7e026a04` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026a65` | 1 | `cls_7e3a3ee8__vfn0_7e026a65` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026aca` | 1 | `cls_7e3a3ee8__vfn2_7e026aca` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3ee8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026b93` | 1 | `cls_7e3a3f24__ctordtor_7e026b93` | Constructor or destructor of class `cls_7e3a3f24` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026ba2` | 1 | `cls_7e3a3f24__vfn0_7e026ba2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3f24`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026c3d` | 1 | `cls_7e3a3f24__vfn1_7e026c3d` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3f24`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026cd1` | 1 | `cls_7e3a3f24__vfn2_7e026cd1` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3f24`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026dce` | 1 | `cls_7e3a3f3c__ctordtor_7e026dce` | Constructor or destructor of class `cls_7e3a3f3c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026ddd` | 1 | `cls_7e3a3f3c__vfn8_7e026ddd` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026e32` | 1 | `cls_7e3a3f3c__vfn9_7e026e32` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026e7c` | 1 | `cls_7e3a3f3c__vfn6_7e026e7c` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026ec6` | 1 | `cls_7e3a3f3c__vfn10_7e026ec6` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026f27` | 1 | `cls_7e3a3f3c__vfn1_7e026f27` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026f88` | 1 | `cls_7e3a3f3c__vfn2_7e026f88` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e026fdd` | 1 | `cls_7e3a3f3c__vfn3_7e026fdd` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027043` | 1 | `cls_7e3a3f3c__vfn0_7e027043` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0270a9` | 1 | `cls_7e3a3f3c__vfn7_7e0270a9` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0270f5` | 1 | `cls_7e3a3f3c__vfn11_7e0270f5` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027161` | 1 | `cls_7e3a3f3c__vfn5_7e027161` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0271c4` | 1 | `cls_7e3a3f3c__vfn4_7e0271c4` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3f3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027289` | 1 | `cls_7e3a3f78__ctordtor_7e027289` | Constructor or destructor of class `cls_7e3a3f78` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027298` | 1 | `cls_7e3a3f78__vfn24_7e027298` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0272e2` | 1 | `cls_7e3a3f78__vfn22_7e0272e2` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02732c` | 1 | `cls_7e3a3f78__vfn10_7e02732c` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027376` | 1 | `cls_7e3a3f78__vfn1_7e027376` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0273c4` | 1 | `cls_7e3a3f78__vfn28_7e0273c4` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0273d4` | 1 | `cls_7e3a3f78__vfn20_7e0273d4` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027422` | 1 | `cls_7e3a3f78__vfn30_7e027422` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027432` | 1 | `cls_7e3a3f78__vfn13_7e027432` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02747c` | 1 | `cls_7e3a3f78__vfn15_7e02747c` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0274c8` | 1 | `cls_7e3a3f78__vfn2_7e0274c8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027512` | 1 | `cls_7e3a3f78__vfn5_7e027512` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02755e` | 1 | `cls_7e3a3f78__vfn25_7e02755e` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0275ac` | 1 | `cls_7e3a3f78__vfn3_7e0275ac` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0275f8` | 1 | `cls_7e3a3f78__vfn6_7e0275f8` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027657` | 1 | `cls_7e3a3f78__vfn7_7e027657` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02766d` | 1 | `cls_7e3a3f78__vfn8_7e02766d` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0276d0` | 1 | `cls_7e3a3f78__vfn14_7e0276d0` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02772a` | 1 | `cls_7e3a3f78__vfn21_7e02772a` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027774` | 1 | `cls_7e3a3f78__vfn11_7e027774` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0277c9` | 1 | `cls_7e3a3f78__vfn23_7e0277c9` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027826` | 1 | `cls_7e3a3f78__vfn27_7e027826` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027835` | 1 | `cls_7e3a3f78__vfn16_7e027835` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02788a` | 1 | `cls_7e3a3f78__vfn17_7e02788a` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0278e4` | 1 | `cls_7e3a3f78__vfn9_7e0278e4` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027932` | 1 | `cls_7e3a3f78__vfn0_7e027932` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027980` | 1 | `cls_7e3a3f78__vfn18_7e027980` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027991` | 1 | `cls_7e3a3f78__vfn19_7e027991` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0279ee` | 1 | `cls_7e3a3f78__vfn29_7e0279ee` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0279fe` | 1 | `cls_7e3a3f78__vfn12_7e0279fe` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027a5b` | 1 | `cls_7e3a3f78__vfn26_7e027a5b` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027a6a` | 1 | `cls_7e3a3f78__vfn4_7e027a6a` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a3f78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027b16` | 1 | `cls_7e3a4010__ctordtor_7e027b16` | Constructor or destructor of class `cls_7e3a4010` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027b25` | 1 | `cls_7e3a4010__vfn2_7e027b25` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027b91` | 1 | `cls_7e3a4010__vfn0_7e027b91` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027be6` | 1 | `cls_7e3a4010__vfn1_7e027be6` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027c47` | 1 | `cls_7e3a4010__vfn3_7e027c47` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027cd0` | 1 | `cls_7e3a4010__vfn4_7e027cd0` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027d3d` | 1 | `cls_7e3a4010__vfn8_7e027d3d` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027d9e` | 1 | `cls_7e3a4010__vfn9_7e027d9e` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027dff` | 1 | `cls_7e3a4010__vfn7_7e027dff` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027e60` | 1 | `cls_7e3a4010__vfn6_7e027e60` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027ec1` | 1 | `cls_7e3a4010__vfn5_7e027ec1` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027f22` | 1 | `cls_7e3a4010__vfn10_7e027f22` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4010`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027fe5` | 1 | `cls_7e3a4078__ctordtor_7e027fe5` | Constructor or destructor of class `cls_7e3a4078` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e027ff4` | 1 | `cls_7e3a4078__vfn7_7e027ff4` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028065` | 1 | `cls_7e3a4078__vfn8_7e028065` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0280c6` | 1 | `cls_7e3a4078__vfn6_7e0280c6` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028159` | 1 | `cls_7e3a4078__vfn9_7e028159` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0281bc` | 1 | `cls_7e3a4078__vfn3_7e0281bc` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028228` | 1 | `cls_7e3a4078__vfn0_7e028228` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0282b2` | 1 | `cls_7e3a4078__vfn5_7e0282b2` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028313` | 1 | `cls_7e3a4078__vfn2_7e028313` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028374` | 1 | `cls_7e3a4078__vfn4_7e028374` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0283e0` | 1 | `cls_7e3a4078__vfn1_7e0283e0` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4078`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0284a4` | 1 | `cls_7e3a40c4__ctordtor_7e0284a4` | Constructor or destructor of class `cls_7e3a40c4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0284b3` | 1 | `cls_7e3a40c4__vfn3_7e0284b3` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028514` | 1 | `cls_7e3a40c4__vfn6_7e028514` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028575` | 1 | `cls_7e3a40c4__vfn0_7e028575` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028652` | 1 | `cls_7e3a40c4__vfn2_7e028652` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0286b3` | 1 | `cls_7e3a40c4__vfn5_7e0286b3` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028714` | 1 | `cls_7e3a40c4__vfn1_7e028714` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a40c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0287db` | 1 | `cls_7e3a40f0__ctordtor_7e0287db` | Constructor or destructor of class `cls_7e3a40f0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0287ea` | 1 | `cls_7e3a40f0__vfn3_7e0287ea` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a40f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028849` | 1 | `cls_7e3a40f0__vfn0_7e028849` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a40f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0288c1` | 1 | `cls_7e3a40f0__vfn2_7e0288c1` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a40f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028926` | 1 | `cls_7e3a40f0__vfn1_7e028926` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a40f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028989` | 1 | `cls_7e3a40f0__vfn4_7e028989` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a40f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028a4b` | 1 | `cls_7e3a4108__ctordtor_7e028a4b` | Constructor or destructor of class `cls_7e3a4108` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028a5a` | 1 | `cls_7e3a4108__vfn0_7e028a5a` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4108`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028aa9` | 1 | `cls_7e3a4108__vfn2_7e028aa9` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4108`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028af3` | 1 | `cls_7e3a4108__vfn1_7e028af3` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4108`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028b3d` | 1 | `cls_7e3a4108__vfn3_7e028b3d` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4108`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028be9` | 1 | `cls_7e3a411c__ctordtor_7e028be9` | Constructor or destructor of class `cls_7e3a411c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028bf8` | 1 | `cls_7e3a411c__vfn2_7e028bf8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a411c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028c42` | 1 | `cls_7e3a411c__vfn1_7e028c42` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a411c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028c8c` | 1 | `cls_7e3a411c__vfn0_7e028c8c` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a411c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028e78` | 1 | `cls_7e3a414c__ctordtor_7e028e78` | Constructor or destructor of class `cls_7e3a414c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028e87` | 1 | `cls_7e3a414c__vfn5_7e028e87` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028ef2` | 1 | `cls_7e3a414c__vfn8_7e028ef2` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028f5c` | 1 | `cls_7e3a414c__vfn2_7e028f5c` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e028fbf` | 1 | `cls_7e3a414c__vfn1_7e028fbf` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02902a` | 1 | `cls_7e3a414c__vfn3_7e02902a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02909b` | 1 | `cls_7e3a414c__vfn4_7e02909b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02911e` | 1 | `cls_7e3a414c__vfn6_7e02911e` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029189` | 1 | `cls_7e3a414c__vfn0_7e029189` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029206` | 1 | `cls_7e3a414c__vfn7_7e029206` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a414c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0292dd` | 1 | `cls_7e3a4194__ctordtor_7e0292dd` | Constructor or destructor of class `cls_7e3a4194` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0292ec` | 1 | `cls_7e3a4194__vfn11_7e0292ec` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0293b8` | 1 | `cls_7e3a4194__vfn17_7e0293b8` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029419` | 1 | `cls_7e3a4194__vfn10_7e029419` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02947f` | 1 | `cls_7e3a4194__vfn12_7e02947f` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0295fb` | 1 | `cls_7e3a4194__vfn6_7e0295fb` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02965c` | 1 | `cls_7e3a4194__vfn9_7e02965c` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0296c1` | 1 | `cls_7e3a4194__vfn5_7e0296c1` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02973a` | 1 | `cls_7e3a4194__vfn1_7e02973a` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02979b` | 1 | `cls_7e3a4194__vfn3_7e02979b` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0297fe` | 1 | `cls_7e3a4194__vfn4_7e0297fe` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029865` | 1 | `cls_7e3a4194__vfn8_7e029865` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0298c6` | 1 | `cls_7e3a4194__vfn2_7e0298c6` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029929` | 1 | `cls_7e3a4194__vfn14_7e029929` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02998f` | 1 | `cls_7e3a4194__vfn15_7e02998f` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0299f5` | 1 | `cls_7e3a4194__vfn13_7e0299f5` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029a5b` | 1 | `cls_7e3a4194__vfn7_7e029a5b` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029ae4` | 1 | `cls_7e3a4194__vfn0_7e029ae4` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029b49` | 1 | `cls_7e3a4194__vfn16_7e029b49` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a4194`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029caf` | 1 | `cls_7e3a4214__ctordtor_7e029caf` | Constructor or destructor of class `cls_7e3a4214` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029cbe` | 1 | `cls_7e3a4214__vfn5_7e029cbe` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029d0d` | 1 | `cls_7e3a4214__vfn2_7e029d0d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029d58` | 1 | `cls_7e3a4214__vfn3_7e029d58` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029db2` | 1 | `cls_7e3a4214__vfn0_7e029db2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029e00` | 1 | `cls_7e3a4214__vfn4_7e029e00` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029e50` | 1 | `cls_7e3a4214__vfn1_7e029e50` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4214`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029ef3` | 1 | `cls_7e3a4254__ctordtor_7e029ef3` | Constructor or destructor of class `cls_7e3a4254` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029f02` | 1 | `cls_7e3a4254__vfn5_7e029f02` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029f76` | 1 | `cls_7e3a4254__vfn11_7e029f76` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e029fe1` | 1 | `cls_7e3a4254__vfn9_7e029fe1` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a047` | 1 | `cls_7e3a4254__vfn3_7e02a047` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a0d8` | 1 | `cls_7e3a4254__vfn16_7e02a0d8` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a139` | 1 | `cls_7e3a4254__vfn2_7e02a139` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a19e` | 1 | `cls_7e3a4254__vfn13_7e02a19e` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a201` | 1 | `cls_7e3a4254__vfn17_7e02a201` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a262` | 1 | `cls_7e3a4254__vfn1_7e02a262` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a2cf` | 1 | `cls_7e3a4254__vfn18_7e02a2cf` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a334` | 1 | `cls_7e3a4254__vfn6_7e02a334` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a3a8` | 1 | `cls_7e3a4254__vfn10_7e02a3a8` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a417` | 1 | `cls_7e3a4254__vfn12_7e02a417` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a482` | 1 | `cls_7e3a4254__vfn7_7e02a482` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a4ee` | 1 | `cls_7e3a4254__vfn19_7e02a4ee` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a554` | 1 | `cls_7e3a4254__vfn8_7e02a554` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a5b5` | 1 | `cls_7e3a4254__vfn0_7e02a5b5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a64e` | 1 | `cls_7e3a4254__vfn14_7e02a64e` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a6eb` | 1 | `cls_7e3a4254__vfn15_7e02a6eb` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a759` | 1 | `cls_7e3a4254__vfn4_7e02a759` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4254`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a81c` | 1 | `cls_7e3a42bc__ctordtor_7e02a81c` | Constructor or destructor of class `cls_7e3a42bc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a82b` | 1 | `cls_7e3a42bc__vfn7_7e02a82b` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a89f` | 1 | `cls_7e3a42bc__vfn13_7e02a89f` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a900` | 1 | `cls_7e3a42bc__vfn12_7e02a900` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a961` | 1 | `cls_7e3a42bc__vfn15_7e02a961` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02a9c6` | 1 | `cls_7e3a42bc__vfn2_7e02a9c6` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02aa2b` | 1 | `cls_7e3a42bc__vfn14_7e02aa2b` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02aa90` | 1 | `cls_7e3a42bc__vfn9_7e02aa90` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02aaf6` | 1 | `cls_7e3a42bc__vfn5_7e02aaf6` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ab64` | 1 | `cls_7e3a42bc__vfn4_7e02ab64` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02abd0` | 1 | `cls_7e3a42bc__vfn3_7e02abd0` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ac31` | 1 | `cls_7e3a42bc__vfn1_7e02ac31` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ac9d` | 1 | `cls_7e3a42bc__vfn10_7e02ac9d` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ad0b` | 1 | `cls_7e3a42bc__vfn11_7e02ad0b` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ad79` | 1 | `cls_7e3a42bc__vfn0_7e02ad79` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ade4` | 1 | `cls_7e3a42bc__vfn8_7e02ade4` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ae49` | 1 | `cls_7e3a42bc__vfn6_7e02ae49` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a42bc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02af1a` | 1 | `cls_7e3a4308__ctordtor_7e02af1a` | Constructor or destructor of class `cls_7e3a4308` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02af29` | 1 | `cls_7e3a4308__vfn3_7e02af29` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02af95` | 1 | `cls_7e3a4308__vfn7_7e02af95` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02aff6` | 1 | `cls_7e3a4308__vfn5_7e02aff6` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b057` | 1 | `cls_7e3a4308__vfn1_7e02b057` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b0b8` | 1 | `cls_7e3a4308__vfn2_7e02b0b8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b119` | 1 | `cls_7e3a4308__vfn4_7e02b119` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b185` | 1 | `cls_7e3a4308__vfn8_7e02b185` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b1e6` | 1 | `cls_7e3a4308__vfn6_7e02b1e6` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b290` | 1 | `cls_7e3a4308__vfn0_7e02b290` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b304` | 1 | `cls_7e3a4308__vfn9_7e02b304` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b3c7` | 1 | `cls_7e3a4334__ctordtor_7e02b3c7` | Constructor or destructor of class `cls_7e3a4334` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b3d6` | 1 | `cls_7e3a4334__vfn6_7e02b3d6` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b420` | 1 | `cls_7e3a4334__vfn4_7e02b420` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b46c` | 1 | `cls_7e3a4334__vfn1_7e02b46c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b4b8` | 1 | `cls_7e3a4334__vfn8_7e02b4b8` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b502` | 1 | `cls_7e3a4334__vfn5_7e02b502` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b54d` | 1 | `cls_7e3a4334__vfn7_7e02b54d` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b597` | 1 | `cls_7e3a4334__vfn0_7e02b597` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b5eb` | 1 | `cls_7e3a4334__vfn2_7e02b5eb` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b635` | 1 | `cls_7e3a4334__vfn3_7e02b635` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4334`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b6e1` | 1 | `cls_7e3a435c__ctordtor_7e02b6e1` | Constructor or destructor of class `cls_7e3a435c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b6f0` | 1 | `cls_7e3a435c__vfn2_7e02b6f0` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a435c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b756` | 1 | `cls_7e3a435c__vfn3_7e02b756` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a435c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b7b7` | 1 | `cls_7e3a435c__vfn1_7e02b7b7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a435c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b818` | 1 | `cls_7e3a435c__vfn0_7e02b818` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a435c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b87d` | 1 | `cls_7e3a435c__vfn4_7e02b87d` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a435c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b940` | 1 | `cls_7e3a4388__ctordtor_7e02b940` | Constructor or destructor of class `cls_7e3a4388` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b94f` | 1 | `cls_7e3a4388__vfn3_7e02b94f` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02b9c3` | 1 | `cls_7e3a4388__vfn7_7e02b9c3` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ba29` | 1 | `cls_7e3a4388__vfn11_7e02ba29` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ba8a` | 1 | `cls_7e3a4388__vfn5_7e02ba8a` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02baeb` | 1 | `cls_7e3a4388__vfn2_7e02baeb` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bb4e` | 1 | `cls_7e3a4388__vfn9_7e02bb4e` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bbbb` | 1 | `cls_7e3a4388__vfn10_7e02bbbb` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bc28` | 1 | `cls_7e3a4388__vfn1_7e02bc28` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bca1` | 1 | `cls_7e3a4388__vfn4_7e02bca1` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bd19` | 1 | `cls_7e3a4388__vfn8_7e02bd19` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bd8d` | 1 | `cls_7e3a4388__vfn6_7e02bd8d` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02be01` | 1 | `cls_7e3a4388__vfn0_7e02be01` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02be75` | 1 | `cls_7e3a4388__vfn12_7e02be75` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a4388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bf3c` | 1 | `cls_7e3a43e4__ctordtor_7e02bf3c` | Constructor or destructor of class `cls_7e3a43e4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bf4b` | 1 | `cls_7e3a43e4__vfn1_7e02bf4b` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02bfbf` | 1 | `cls_7e3a43e4__vfn28_7e02bfbf` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c009` | 1 | `cls_7e3a43e4__vfn8_7e02c009` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c06f` | 1 | `cls_7e3a43e4__vfn12_7e02c06f` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c0d9` | 1 | `cls_7e3a43e4__vfn22_7e02c0d9` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c13a` | 1 | `cls_7e3a43e4__vfn19_7e02c13a` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c19d` | 1 | `cls_7e3a43e4__vfn23_7e02c19d` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c1fe` | 1 | `cls_7e3a43e4__vfn25_7e02c1fe` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c25f` | 1 | `cls_7e3a43e4__vfn17_7e02c25f` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c2c0` | 1 | `cls_7e3a43e4__vfn9_7e02c2c0` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c321` | 1 | `cls_7e3a43e4__vfn10_7e02c321` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c386` | 1 | `cls_7e3a43e4__vfn6_7e02c386` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c3e9` | 1 | `cls_7e3a43e4__vfn13_7e02c3e9` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c450` | 1 | `cls_7e3a43e4__vfn14_7e02c450` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c4c9` | 1 | `cls_7e3a43e4__vfn5_7e02c4c9` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c52f` | 1 | `cls_7e3a43e4__vfn2_7e02c52f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c5bc` | 1 | `cls_7e3a43e4__vfn15_7e02c5bc` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c628` | 1 | `cls_7e3a43e4__vfn7_7e02c628` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c69c` | 1 | `cls_7e3a43e4__vfn4_7e02c69c` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c724` | 1 | `cls_7e3a43e4__vfn20_7e02c724` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c793` | 1 | `cls_7e3a43e4__vfn18_7e02c793` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c7ff` | 1 | `cls_7e3a43e4__vfn26_7e02c7ff` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c86c` | 1 | `cls_7e3a43e4__vfn24_7e02c86c` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c8cf` | 1 | `cls_7e3a43e4__vfn0_7e02c8cf` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c93e` | 1 | `cls_7e3a43e4__vfn16_7e02c93e` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02c9ac` | 1 | `cls_7e3a43e4__vfn3_7e02c9ac` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ca20` | 1 | `cls_7e3a43e4__vfn27_7e02ca20` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ca94` | 1 | `cls_7e3a43e4__vfn11_7e02ca94` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cb02` | 1 | `cls_7e3a43e4__vfn21_7e02cb02` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3a43e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cbd3` | 1 | `cls_7e3a4490__ctordtor_7e02cbd3` | Constructor or destructor of class `cls_7e3a4490` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cbe2` | 1 | `cls_7e3a4490__vfn0_7e02cbe2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cc48` | 1 | `cls_7e3a4490__vfn1_7e02cc48` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cca9` | 1 | `cls_7e3a4490__vfn2_7e02cca9` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cd0b` | 1 | `cls_7e3a4490__vfn3_7e02cd0b` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cd77` | 1 | `cls_7e3a4490__vfn4_7e02cd77` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cdc1` | 1 | `cls_7e3a4490__vfn5_7e02cdc1` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ce22` | 1 | `cls_7e3a4490__vfn6_7e02ce22` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ce87` | 1 | `cls_7e3a4490__vfn7_7e02ce87` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cf1d` | 1 | `cls_7e3a4490__vfn8_7e02cf1d` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4490`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cfeb` | 1 | `cls_7e3a44cc__ctordtor_7e02cfeb` | Constructor or destructor of class `cls_7e3a44cc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02cffa` | 1 | `cls_7e3a44cc__vfn2_7e02cffa` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a44cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d066` | 1 | `cls_7e3a44cc__vfn0_7e02d066` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a44cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d0cb` | 1 | `cls_7e3a44cc__vfn3_7e02d0cb` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a44cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d137` | 1 | `cls_7e3a44cc__vfn1_7e02d137` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a44cc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d32d` | 1 | `cls_7e3a4500__ctordtor_7e02d32d` | Constructor or destructor of class `cls_7e3a4500` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d33c` | 1 | `cls_7e3a4500__vfn14_7e02d33c` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d3a2` | 1 | `cls_7e3a4500__vfn10_7e02d3a2` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d416` | 1 | `cls_7e3a4500__vfn7_7e02d416` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d47b` | 1 | `cls_7e3a4500__vfn5_7e02d47b` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d4e5` | 1 | `cls_7e3a4500__vfn3_7e02d4e5` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d553` | 1 | `cls_7e3a4500__vfn8_7e02d553` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d5b2` | 1 | `cls_7e3a4500__vfn2_7e02d5b2` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d611` | 1 | `cls_7e3a4500__vfn9_7e02d611` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d670` | 1 | `cls_7e3a4500__vfn4_7e02d670` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d6d6` | 1 | `cls_7e3a4500__vfn1_7e02d6d6` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d73c` | 1 | `cls_7e3a4500__vfn11_7e02d73c` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d7aa` | 1 | `cls_7e3a4500__vfn6_7e02d7aa` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d80b` | 1 | `cls_7e3a4500__vfn12_7e02d80b` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d870` | 1 | `cls_7e3a4500__vfn0_7e02d870` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d8e4` | 1 | `cls_7e3a4500__vfn13_7e02d8e4` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a4500`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d9ba` | 1 | `cls_7e3a4544__ctordtor_7e02d9ba` | Constructor or destructor of class `cls_7e3a4544` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02d9c9` | 1 | `cls_7e3a4544__vfn5_7e02d9c9` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02da1c` | 1 | `cls_7e3a4544__vfn4_7e02da1c` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02da6c` | 1 | `cls_7e3a4544__vfn3_7e02da6c` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02daba` | 1 | `cls_7e3a4544__vfn10_7e02daba` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02db04` | 1 | `cls_7e3a4544__vfn2_7e02db04` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02db56` | 1 | `cls_7e3a4544__vfn6_7e02db56` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dbad` | 1 | `cls_7e3a4544__vfn11_7e02dbad` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dbfb` | 1 | `cls_7e3a4544__vfn8_7e02dbfb` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dc45` | 1 | `cls_7e3a4544__vfn7_7e02dc45` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dc91` | 1 | `cls_7e3a4544__vfn1_7e02dc91` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dcde` | 1 | `cls_7e3a4544__vfn0_7e02dcde` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dd2c` | 1 | `cls_7e3a4544__vfn9_7e02dd2c` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4544`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ddd8` | 1 | `cls_7e3a4578__ctordtor_7e02ddd8` | Constructor or destructor of class `cls_7e3a4578` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dde7` | 1 | `cls_7e3a4578__vfn2_7e02dde7` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4578`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02de31` | 1 | `cls_7e3a4578__vfn0_7e02de31` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4578`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02de7f` | 1 | `cls_7e3a4578__vfn1_7e02de7f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4578`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02df2b` | 1 | `cls_7e3a459c__ctordtor_7e02df2b` | Constructor or destructor of class `cls_7e3a459c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02df3a` | 1 | `cls_7e3a459c__vfn3_7e02df3a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02dfae` | 1 | `cls_7e3a459c__vfn2_7e02dfae` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e00f` | 1 | `cls_7e3a459c__vfn7_7e02e00f` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e07c` | 1 | `cls_7e3a459c__vfn1_7e02e07c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e0df` | 1 | `cls_7e3a459c__vfn6_7e02e0df` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e157` | 1 | `cls_7e3a459c__vfn4_7e02e157` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e1cb` | 1 | `cls_7e3a459c__vfn5_7e02e1cb` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e233` | 1 | `cls_7e3a459c__vfn0_7e02e233` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a459c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e2fa` | 1 | `cls_7e3a45d4__ctordtor_7e02e2fa` | Constructor or destructor of class `cls_7e3a45d4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e309` | 1 | `cls_7e3a45d4__vfn1_7e02e309` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e36d` | 1 | `cls_7e3a45d4__vfn2_7e02e36d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e3a8` | 1 | `cls_7e3a45d4__vfn9_7e02e3a8` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e416` | 1 | `cls_7e3a45d4__vfn22_7e02e416` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e484` | 1 | `cls_7e3a45d4__vfn21_7e02e484` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e4e5` | 1 | `cls_7e3a45d4__vfn6_7e02e4e5` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e548` | 1 | `cls_7e3a45d4__vfn12_7e02e548` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e5d7` | 1 | `cls_7e3a45d4__vfn11_7e02e5d7` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e645` | 1 | `cls_7e3a45d4__vfn5_7e02e645` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e6b3` | 1 | `cls_7e3a45d4__vfn4_7e02e6b3` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e714` | 1 | `cls_7e3a45d4__vfn3_7e02e714` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e775` | 1 | `cls_7e3a45d4__vfn20_7e02e775` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e7bf` | 1 | `cls_7e3a45d4__vfn19_7e02e7bf` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e83c` | 1 | `cls_7e3a45d4__vfn17_7e02e83c` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e8b3` | 1 | `cls_7e3a45d4__vfn18_7e02e8b3` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e944` | 1 | `cls_7e3a45d4__vfn8_7e02e944` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02e9b2` | 1 | `cls_7e3a45d4__vfn7_7e02e9b2` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ea1e` | 1 | `cls_7e3a45d4__vfn10_7e02ea1e` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ea8e` | 1 | `cls_7e3a45d4__vfn0_7e02ea8e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02eafa` | 1 | `cls_7e3a45d4__vfn15_7e02eafa` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02eb44` | 1 | `cls_7e3a45d4__vfn16_7e02eb44` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02eb8e` | 1 | `cls_7e3a45d4__vfn14_7e02eb8e` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ebef` | 1 | `cls_7e3a45d4__vfn13_7e02ebef` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a45d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ecb2` | 1 | `cls_7e3a472c__ctordtor_7e02ecb2` | Constructor or destructor of class `cls_7e3a472c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ecd0` | 1 | `cls_7e3a472c__vfn35_7e02ecd0` | Vtable slot 35 (byte offset `+140`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ece4` | 1 | `cls_7e3a472c__vfn8_7e02ece4` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ed29` | 1 | `cls_7e3a472c__vfn26_7e02ed29` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ed92` | 1 | `cls_7e3a472c__vfn17_7e02ed92` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ee0c` | 1 | `cls_7e3a472c__vfn24_7e02ee0c` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ee86` | 1 | `cls_7e3a472c__vfn19_7e02ee86` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02eef4` | 1 | `cls_7e3a472c__vfn25_7e02eef4` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02ef52` | 1 | `cls_7e3a472c__vfn27_7e02ef52` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02efa0` | 1 | `cls_7e3a472c__vfn30_7e02efa0` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02efeb` | 1 | `cls_7e3a472c__vfn33_7e02efeb` | Vtable slot 33 (byte offset `+132`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f03c` | 1 | `cls_7e3a472c__vfn1_7e02f03c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f05e` | 1 | `cls_7e3a472c__vfn5_7e02f05e` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f099` | 1 | `cls_7e3a472c__vfn34_7e02f099` | Vtable slot 34 (byte offset `+136`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f0e0` | 1 | `cls_7e3a472c__vfn3_7e02f0e0` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f1a6` | 1 | `cls_7e3a472c__vfn7_7e02f1a6` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f287` | 1 | `cls_7e3a472c__vfn6_7e02f287` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f2de` | 1 | `cls_7e3a472c__vfn4_7e02f2de` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f320` | 1 | `cls_7e3a472c__vfn22_7e02f320` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f383` | 1 | `cls_7e3a472c__vfn18_7e02f383` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f3fd` | 1 | `cls_7e3a472c__vfn12_7e02f3fd` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f473` | 1 | `cls_7e3a472c__vfn11_7e02f473` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f4e9` | 1 | `cls_7e3a472c__vfn14_7e02f4e9` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f553` | 1 | `cls_7e3a472c__vfn15_7e02f553` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f5f3` | 1 | `cls_7e3a472c__vfn13_7e02f5f3` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f658` | 1 | `cls_7e3a472c__vfn10_7e02f658` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f6c5` | 1 | `cls_7e3a472c__vfn29_7e02f6c5` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f704` | 1 | `cls_7e3a472c__vfn31_7e02f704` | Vtable slot 31 (byte offset `+124`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f762` | 1 | `cls_7e3a472c__vfn9_7e02f762` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f7da` | 1 | `cls_7e3a472c__vfn16_7e02f7da` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f854` | 1 | `cls_7e3a472c__vfn28_7e02f854` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02f8c2` | 1 | `cls_7e3a472c__vfn32_7e02f8c2` | Vtable slot 32 (byte offset `+128`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02fb10` | 1 | `cls_7e3a472c__vfn2_7e02fb10` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02fb9a` | 1 | `cls_7e3a472c__vfn23_7e02fb9a` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3a472c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02fe00` | 1 | `cls_7e3a4890__ctordtor_7e02fe00` | Constructor or destructor of class `cls_7e3a4890` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e02fe0e` | 1 | `cls_7e3a4890__ctordtor_7e02fe0e` | Constructor or destructor of class `cls_7e3a4890` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03046a` | 1 | `cls_7e3a4890__vfn1_7e03046a` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4890`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e033d7a` | 1 | `cls_7e3a4b7c__ctordtor_7e033d7a` | Constructor or destructor of class `cls_7e3a4b7c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e033d89` | 1 | `cls_7e3a4b7c__vfn8_7e033d89` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e033e4b` | 1 | `cls_7e3a4b7c__vfn5_7e033e4b` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e033eac` | 1 | `cls_7e3a4b7c__vfn6_7e033eac` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e033ffd` | 1 | `cls_7e3a4b7c__vfn3_7e033ffd` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034082` | 1 | `cls_7e3a4b7c__vfn0_7e034082` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034103` | 1 | `cls_7e3a4b7c__vfn9_7e034103` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0341df` | 1 | `cls_7e3a4b7c__vfn7_7e0341df` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034242` | 1 | `cls_7e3a4b7c__vfn2_7e034242` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0342ae` | 1 | `cls_7e3a4b7c__vfn4_7e0342ae` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034382` | 1 | `cls_7e3a4b7c__vfn1_7e034382` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0343e3` | 1 | `cls_7e3a4b7c__vfn10_7e0343e3` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3a4b7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034657` | 1 | `cls_7e3a4bc0__ctordtor_7e034657` | Constructor or destructor of class `cls_7e3a4bc0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034666` | 1 | `cls_7e3a4bc0__vfn2_7e034666` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0346c9` | 1 | `cls_7e3a4bc0__vfn1_7e0346c9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03472a` | 1 | `cls_7e3a4bc0__vfn4_7e03472a` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03478d` | 1 | `cls_7e3a4bc0__vfn5_7e03478d` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0347f5` | 1 | `cls_7e3a4bc0__vfn3_7e0347f5` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03485b` | 1 | `cls_7e3a4bc0__vfn6_7e03485b` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0348c1` | 1 | `cls_7e3a4bc0__vfn0_7e0348c1` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4bc0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e034df4` | 1 | `cls_7e3a4c4c__vfn0_7e034df4` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a4c4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0367d2` | 1 | `cls_7e3a4c4c__vfn3_7e0367d2` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3a4c4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e036cab` | 1 | `cls_7e3a55fc__ctordtor_7e036cab` | Constructor or destructor of class `cls_7e3a55fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e036cd5` | 1 | `cls_7e3a55fc__vfn0_7e036cd5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3a55fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e036cda` | 1 | `cls_7e3a55fc__ctordtor_7e036cda` | Constructor or destructor of class `cls_7e3a55fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03e76a` | 1 | `cls_7e5fa2fc__vfn3_7e03e76a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03f0ee` | 1 | `cls_7e3aafc4__ctordtor_7e03f0ee` | Constructor or destructor of class `cls_7e3aafc4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03f197` | 1 | `cls_7e3aafc4__vfn0_7e03f197` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3aafc4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03fd2e` | 1 | `cls_7e3aafc4__vfn9_7e03fd2e` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3aafc4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e03fed8` | 1 | `cls_7e3aafc4__vfn3_7e03fed8` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3aafc4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04021a` | 1 | `cls_7e3aafc4__ctordtor_7e04021a` | Constructor or destructor of class `cls_7e3aafc4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0446e4` | 1 | `cls_7e3ab308__ctordtor_7e0446e4` | Constructor or destructor of class `cls_7e3ab308` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04471a` | 1 | `cls_7e3ab308__vfn0_7e04471a` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3ab308`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04471f` | 1 | `cls_7e3ab308__ctordtor_7e04471f` | Constructor or destructor of class `cls_7e3ab308` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04e810` | 1 | `cls_7e3b0d0c__ctordtor_7e04e810` | Constructor or destructor of class `cls_7e3b0d0c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04e8d4` | 1 | `cls_7e3b0d0c__ctordtor_7e04e8d4` | Constructor or destructor of class `cls_7e3b0d0c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04ea84` | 1 | `cls_7e3b0d0c__vfn5_7e04ea84` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3b0d0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e04f76a` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e04f76a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e04f7ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e04f7ae` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0506e9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0506e9` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0506fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0506fe` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e050791` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e050791` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05084c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05084c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0508af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0508af` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0509b3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0509b3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e050f88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e050f88` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e050fe6` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e050fe6` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e051058` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e051058` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e05117a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e05117a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05142b` | 48 | `cls_7e3a4c4c__vfn1_7e05142b` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3a4c4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05146d` | 47 | `cls_7e3a4c4c__vfn2_7e05146d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3a4c4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05147d` | 1 | `cls_7e3b286c__ctordtor_7e05147d` | Constructor or destructor of class `cls_7e3b286c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0514c3` | 1 | `cls_7e3b286c__vfn7_7e0514c3` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0514e5` | 1 | `cls_7e3b286c__vfn0_7e0514e5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e051510` | 1 | `cls_7e3b286c__vfn1_7e051510` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e051589` | 1 | `cls_7e3b286c__vfn2_7e051589` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05159e` | 1 | `cls_7e3b286c__vfn8_7e05159e` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0515bf` | 1 | `cls_7e3b286c__vfn3_7e0515bf` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0515ea` | 1 | `cls_7e3b286c__vfn9_7e0515ea` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e051663` | 1 | `cls_7e3b286c__vfn4_7e051663` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0516bc` | 1 | `cls_7e3b286c__vfn5_7e0516bc` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e051734` | 1 | `cls_7e3b286c__vfn6_7e051734` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3b286c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e051d32` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e051d32` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e051d61` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e051d61` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e051dba` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e051dba` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e051f1f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e051f1f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05204d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e05204d` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0522d1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0522d1` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e052315` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e052315` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e052324` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e052324` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05255d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e05255d` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05260b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e05260b` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e054741` | 8 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e054741` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e054767` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e054767` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05476c` | 8 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05476c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e05479b` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e05479b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0547c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0547c7` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05497a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05497a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0549af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0549af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0549b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0549b4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e054a1b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e054a1b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e054d8e` | 1 | `cls_7e3b3cd4__vfn0_7e054d8e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054dcc` | 1 | `cls_7e3b3cd4__vfn1_7e054dcc` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054de7` | 1 | `cls_7e3b3cd4__vfn2_7e054de7` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e0a` | 1 | `cls_7e3b3cd4__vfn3_7e054e0a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e31` | 1 | `cls_7e3b3cd4__vfn4_7e054e31` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e4b` | 1 | `cls_7e3b3cd4__vfn5_7e054e4b` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e65` | 1 | `cls_7e3b3cd4__vfn6_7e054e65` | Vtable slot 6 (byte offset `+24`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e7f` | 1 | `cls_7e3b3cd4__vfn7_7e054e7f` | Vtable slot 7 (byte offset `+28`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054e99` | 1 | `cls_7e3b3cd4__vfn8_7e054e99` | Vtable slot 8 (byte offset `+32`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054eb3` | 1 | `cls_7e3b3cd4__vfn9_7e054eb3` | Vtable slot 9 (byte offset `+36`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054ede` | 1 | `cls_7e3b3cd4__vfn10_7e054ede` | Vtable slot 10 (byte offset `+40`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054f07` | 1 | `cls_7e3b3cd4__vfn11_7e054f07` | Vtable slot 11 (byte offset `+44`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054f34` | 1 | `cls_7e3b3cd4__vfn12_7e054f34` | Vtable slot 12 (byte offset `+48`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054f82` | 1 | `cls_7e3b3cd4__vfn13_7e054f82` | Vtable slot 13 (byte offset `+52`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054f9c` | 1 | `cls_7e3b3cd4__vfn14_7e054f9c` | Vtable slot 14 (byte offset `+56`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e054fb6` | 1 | `cls_7e3b3cd4__vfn15_7e054fb6` | Vtable slot 15 (byte offset `+60`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055039` | 1 | `cls_7e3b3cd4__vfn16_7e055039` | Vtable slot 16 (byte offset `+64`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055053` | 1 | `cls_7e3b3cd4__vfn17_7e055053` | Vtable slot 17 (byte offset `+68`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055075` | 1 | `cls_7e3b3cd4__vfn18_7e055075` | Vtable slot 18 (byte offset `+72`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05508f` | 1 | `cls_7e3b3cd4__vfn19_7e05508f` | Vtable slot 19 (byte offset `+76`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0550ac` | 1 | `cls_7e3b3cd4__vfn20_7e0550ac` | Vtable slot 20 (byte offset `+80`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0550c8` | 1 | `cls_7e3b3cd4__vfn21_7e0550c8` | Vtable slot 21 (byte offset `+84`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0550e7` | 1 | `cls_7e3b3cd4__vfn22_7e0550e7` | Vtable slot 22 (byte offset `+88`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055101` | 1 | `cls_7e3b3cd4__vfn23_7e055101` | Vtable slot 23 (byte offset `+92`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05511b` | 1 | `cls_7e3b3cd4__vfn24_7e05511b` | Vtable slot 24 (byte offset `+96`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055135` | 1 | `cls_7e3b3cd4__vfn25_7e055135` | Vtable slot 25 (byte offset `+100`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05514f` | 1 | `cls_7e3b3cd4__vfn26_7e05514f` | Vtable slot 26 (byte offset `+104`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055169` | 1 | `cls_7e3b3cd4__vfn27_7e055169` | Vtable slot 27 (byte offset `+108`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055193` | 1 | `cls_7e3b3cd4__vfn28_7e055193` | Vtable slot 28 (byte offset `+112`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0551bd` | 1 | `cls_7e3b3cd4__vfn29_7e0551bd` | Vtable slot 29 (byte offset `+116`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0551d8` | 1 | `cls_7e3b3cd4__vfn30_7e0551d8` | Vtable slot 30 (byte offset `+120`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0551f2` | 1 | `cls_7e3b3cd4__vfn31_7e0551f2` | Vtable slot 31 (byte offset `+124`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05524a` | 1 | `cls_7e3b3cd4__vfn32_7e05524a` | Vtable slot 32 (byte offset `+128`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055263` | 1 | `cls_7e3b3cd4__vfn33_7e055263` | Vtable slot 33 (byte offset `+132`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05527c` | 1 | `cls_7e3b3cd4__vfn34_7e05527c` | Vtable slot 34 (byte offset `+136`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0552be` | 1 | `cls_7e3b3cd4__vfn35_7e0552be` | Vtable slot 35 (byte offset `+140`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0552e2` | 1 | `cls_7e3b3cd4__vfn36_7e0552e2` | Vtable slot 36 (byte offset `+144`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05530f` | 1 | `cls_7e3b3cd4__vfn37_7e05530f` | Vtable slot 37 (byte offset `+148`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055327` | 1 | `cls_7e3b3cd4__vfn38_7e055327` | Vtable slot 38 (byte offset `+152`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05534d` | 1 | `cls_7e3b3cd4__vfn39_7e05534d` | Vtable slot 39 (byte offset `+156`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055364` | 1 | `cls_7e3b3cd4__vfn47_7e055364` | Vtable slot 47 (byte offset `+188`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055384` | 1 | `cls_7e3b3cd4__vfn48_7e055384` | Vtable slot 48 (byte offset `+192`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0553ab` | 1 | `cls_7e3b3cd4__vfn49_7e0553ab` | Vtable slot 49 (byte offset `+196`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0553e0` | 1 | `cls_7e3b3cd4__vfn50_7e0553e0` | Vtable slot 50 (byte offset `+200`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055403` | 1 | `cls_7e3b3cd4__vfn51_7e055403` | Vtable slot 51 (byte offset `+204`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055426` | 1 | `cls_7e3b3cd4__vfn52_7e055426` | Vtable slot 52 (byte offset `+208`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e055449` | 1 | `cls_7e3b3cd4__vfn53_7e055449` | Vtable slot 53 (byte offset `+212`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05546c` | 1 | `cls_7e3b3cd4__vfn54_7e05546c` | Vtable slot 54 (byte offset `+216`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05548f` | 1 | `cls_7e3b3cd4__vfn55_7e05548f` | Vtable slot 55 (byte offset `+220`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0562a9` | 1 | `cls_7e3b3cd4__vfn40_7e0562a9` | Vtable slot 40 (byte offset `+160`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0562c3` | 1 | `cls_7e3b3cd4__vfn41_7e0562c3` | Vtable slot 41 (byte offset `+164`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0562ec` | 1 | `cls_7e3b3cd4__vfn42_7e0562ec` | Vtable slot 42 (byte offset `+168`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e056308` | 1 | `cls_7e3b3cd4__vfn43_7e056308` | Vtable slot 43 (byte offset `+172`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e056322` | 1 | `cls_7e3b3cd4__vfn44_7e056322` | Vtable slot 44 (byte offset `+176`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05633c` | 1 | `cls_7e3b3cd4__vfn45_7e05633c` | Vtable slot 45 (byte offset `+180`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05637e` | 1 | `cls_7e3b3cd4__vfn46_7e05637e` | Vtable slot 46 (byte offset `+184`) of class `cls_7e3b3cd4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e057144` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e057144` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e057158` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e057158` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05719d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05719d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e057217` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e057217` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e057834` | 1 | `cls_7e5fa2fc__vfn4_7e057834` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e057992` | 1 | `cls_7e5fa2fc__vfn5_7e057992` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e057af0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e057af0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e057c0c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e057c0c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e058874` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e058874` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0588ec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0588ec` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e058df6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e058df6` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e058ea3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e058ea3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e059dcd` | 1 | `cls_7e5fa2fc__vfn6_7e059dcd` | Vtable slot 6 (byte offset `+24`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e059fa2` | 1 | `cls_7e5fa2fc__vfn7_7e059fa2` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05a106` | 1 | `cls_7e5fa2fc__vfn8_7e05a106` | Vtable slot 8 (byte offset `+32`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05b23a` | 1 | `cls_7e5fa2fc__vfn9_7e05b23a` | Vtable slot 9 (byte offset `+36`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05b39e` | 1 | `cls_7e5fa2fc__vfn10_7e05b39e` | Vtable slot 10 (byte offset `+40`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05c44a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05c44a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e05c51b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e05c51b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e05d262` | 1 | `cls_7e5fa2fc__vfn11_7e05d262` | Vtable slot 11 (byte offset `+44`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e05e02a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05e02a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e05e274` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e05e274` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07c49e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e07c49e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e07c596` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07c596` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07e547` | 1 | `cls_7e3c46d0__ctordtor_7e07e547` | Constructor or destructor of class `cls_7e3c46d0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e56a` | 1 | `cls_7e3c46d0__ctordtor_7e07e56a` | Constructor or destructor of class `cls_7e3c46d0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e5f5` | 1 | `cls_7e3c46d0__vfn0_7e07e5f5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3c46d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e66f` | 1 | `cls_7e3c46fc__ctordtor_7e07e66f` | Constructor or destructor of class `cls_7e3c46fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e692` | 1 | `cls_7e3c46fc__ctordtor_7e07e692` | Constructor or destructor of class `cls_7e3c46fc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e6f5` | 1 | `cls_7e3c46fc__vfn0_7e07e6f5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3c46fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e07e8e8` | 36 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e07e8e8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e07e918` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07e918` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07ec4f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07ec4f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07ed2c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e07ed2c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07edc5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e07edc5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e07ede8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07ede8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07f541` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e07f541` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e07f61c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07f61c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e07fab6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e07fab6` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e080226` | 1 | `cls_7e5fa2fc__vfn12_7e080226` | Vtable slot 12 (byte offset `+48`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e080237` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e080237` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e080362` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e080362` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e080367` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e080367` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0825fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0825fb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08260a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e08260a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082619` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082619` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082628` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082628` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082637` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082637` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082733` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082733` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082742` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082742` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082751` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082751` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082760` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082760` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08276f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e08276f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082798` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e082798` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0827c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0827c7` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0827f6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0827f6` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082821` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e082821` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08284c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e08284c` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082862` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e082862` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082899` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e082899` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828be` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828cd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828dc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828eb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0828fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0828fa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082909` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e082909` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08295c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e08295c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08296b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e08296b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08297a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e08297a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e082989` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e082989` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e082a41` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e082a41` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e084120` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e084120` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e084186` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e084186` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08b59c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e08b59c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e08b8ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e08b8ae` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e08f198` | 1 | `cls_7e3c9298__ctordtor_7e08f198` | Constructor or destructor of class `cls_7e3c9298` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e08f1b3` | 1 | `cls_7e3c9298__vfn0_7e08f1b3` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3c9298`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e08f1fe` | 1 | `cls_7e3c92b4__ctordtor_7e08f1fe` | Constructor or destructor of class `cls_7e3c92b4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e08f218` | 1 | `cls_7e3c92b4__ctordtor_7e08f218` | Constructor or destructor of class `cls_7e3c92b4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e08f232` | 1 | `cls_7e3c92b4__vfn0_7e08f232` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3c92b4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e08f7dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e08f7dc` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e08f95f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e08f95f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e097fd3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e097fd3` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09800c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09800c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e098f82` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e098f82` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e098f91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e098f91` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e098fdb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e098fdb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e099028` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e099028` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0991ce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0991ce` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0992a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0992a8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0992e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0992e5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0992fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0992fe` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09933f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e09933f` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09969e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e09969e` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09985c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e09985c` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09987d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e09987d` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099a11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e099a11` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099a44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e099a44` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099a91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e099a91` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099ae0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e099ae0` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099b1b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e099b1b` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099b4e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e099b4e` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099bad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e099bad` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099be4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e099be4` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099c4d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e099c4d` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e099ce6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e099ce6` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09a06d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e09a06d` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09a27c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e09a27c` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09a2ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e09a2ae` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09a382` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e09a382` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09ab8a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e09ab8a` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b03d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e09b03d` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b05d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e09b05d` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b072` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e09b072` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b348` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09b348` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09b393` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09b393` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b44b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09b44b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09b479` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09b479` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b47e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09b47e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09b498` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e09b498` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b4bd` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e09b4bd` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b4fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e09b4fb` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b529` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e09b529` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09b53b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e09b53b` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09bb75` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e09bb75` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09c071` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09c071` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09c0be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09c0be` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09c157` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09c157` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09c18b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09c18b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09c190` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09c190` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09fa30` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn55_7e09fa30` | Vtable slot 55 (byte offset `+220`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fa95` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09fa95` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09faa4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e09faa4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fab3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e09fab3` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09faca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e09faca` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fad9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e09fad9` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fae8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e09fae8` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09faf7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e09faf7` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb06` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e09fb06` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb14` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e09fb14` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb23` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e09fb23` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb32` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e09fb32` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb41` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e09fb41` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb50` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e09fb50` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb5f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e09fb5f` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e09fb6e` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb7d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e09fb7d` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb8c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e09fb8c` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fb9b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e09fb9b` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fbb7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e09fbb7` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fbc6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e09fbc6` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fbe1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e09fbe1` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fbf0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e09fbf0` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fbff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e09fbff` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc0e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e09fc0e` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e09fc1e` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc2e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e09fc2e` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc3d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e09fc3d` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc52` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e09fc52` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc69` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e09fc69` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc78` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e09fc78` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc87` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e09fc87` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fc96` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e09fc96` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fca5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e09fca5` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fcb4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn33_7e09fcb4` | Vtable slot 33 (byte offset `+132`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fcc3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn34_7e09fcc3` | Vtable slot 34 (byte offset `+136`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fcd2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn35_7e09fcd2` | Vtable slot 35 (byte offset `+140`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fce7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn36_7e09fce7` | Vtable slot 36 (byte offset `+144`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fcfc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn37_7e09fcfc` | Vtable slot 37 (byte offset `+148`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn38_7e09fd11` | Vtable slot 38 (byte offset `+152`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd27` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn39_7e09fd27` | Vtable slot 39 (byte offset `+156`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd43` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn40_7e09fd43` | Vtable slot 40 (byte offset `+160`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd58` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn41_7e09fd58` | Vtable slot 41 (byte offset `+164`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn42_7e09fd6e` | Vtable slot 42 (byte offset `+168`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fd84` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn43_7e09fd84` | Vtable slot 43 (byte offset `+172`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fda4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn44_7e09fda4` | Vtable slot 44 (byte offset `+176`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fdb4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn45_7e09fdb4` | Vtable slot 45 (byte offset `+180`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fdc3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn46_7e09fdc3` | Vtable slot 46 (byte offset `+184`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fdd2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn47_7e09fdd2` | Vtable slot 47 (byte offset `+188`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fde1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn48_7e09fde1` | Vtable slot 48 (byte offset `+192`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fdef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn49_7e09fdef` | Vtable slot 49 (byte offset `+196`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fdfe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn50_7e09fdfe` | Vtable slot 50 (byte offset `+200`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fe1a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn51_7e09fe1a` | Vtable slot 51 (byte offset `+204`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fe28` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn52_7e09fe28` | Vtable slot 52 (byte offset `+208`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fe37` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn53_7e09fe37` | Vtable slot 53 (byte offset `+212`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fe47` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn54_7e09fe47` | Vtable slot 54 (byte offset `+216`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09ff31` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn56_7e09ff31` | Vtable slot 56 (byte offset `+224`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09ffca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e09ffca` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e09ffef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e09ffef` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e09fffe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e09fffe` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0059` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a0059` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0080` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a0080` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a008b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a008b` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a00a7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0a00a7` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a07b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a07b7` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a0802` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a0802` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a08ba` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a08ba` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a08e8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a08e8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a08ed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a08ed` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a0907` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a0907` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a09c1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a09c1` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0b30` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a0b30` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0b95` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a0b95` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0bfb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0a0bfb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0ca5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0a0ca5` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0d49` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0a0d49` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0df3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0a0df3` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a0e97` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0a0e97` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1377` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0a1377` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1581` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0a1581` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1653` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0a1653` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1965` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0a1965` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1a2c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0a1a2c` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1a51` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e0a1a51` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1ac6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e0a1ac6` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1b90` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e0a1b90` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1c6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e0a1c6e` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1d91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e0a1d91` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1e5e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e0a1e5e` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1f54` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e0a1f54` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a1f86` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e0a1f86` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2008` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e0a2008` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a208e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e0a208e` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2203` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e0a2203` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2297` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e0a2297` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a24fd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e0a24fd` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a256e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e0a256e` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2a80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn39_7e0a2a80` | Vtable slot 39 (byte offset `+156`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2a94` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a2a94` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2aa4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a2aa4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ab4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a2ab4` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ac4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a2ac4` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ad4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a2ad4` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ae4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0a2ae4` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2af4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0a2af4` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b04` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0a2b04` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b14` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0a2b14` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b22` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0a2b22` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b31` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0a2b31` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b3f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0a2b3f` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b4e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0a2b4e` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b5c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0a2b5c` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b6a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0a2b6a` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b78` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e0a2b78` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b86` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e0a2b86` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2b94` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e0a2b94` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ba2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e0a2ba2` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2bb0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e0a2bb0` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2bbe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e0a2bbe` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2bcc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e0a2bcc` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2bdb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e0a2bdb` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2beb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e0a2beb` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2bf9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e0a2bf9` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2c08` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e0a2c08` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2c26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e0a2c26` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2c3c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e0a2c3c` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2ce4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e0a2ce4` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2cf2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e0a2cf2` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d00` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e0a2d00` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d0e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e0a2d0e` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d23` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e0a2d23` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d33` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn34_7e0a2d33` | Vtable slot 34 (byte offset `+136`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d43` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn35_7e0a2d43` | Vtable slot 35 (byte offset `+140`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d51` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn33_7e0a2d51` | Vtable slot 33 (byte offset `+132`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d61` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn37_7e0a2d61` | Vtable slot 37 (byte offset `+148`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d6f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn36_7e0a2d6f` | Vtable slot 36 (byte offset `+144`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a2d7e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn38_7e0a2d7e` | Vtable slot 38 (byte offset `+152`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a30b8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn40_7e0a30b8` | Vtable slot 40 (byte offset `+160`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a30c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a30c7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a30d6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a30d6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a30e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a30e5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a30f4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a30f4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3103` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3103` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3112` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3112` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3121` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3121` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3130` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3130` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a313f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a313f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a314e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a314e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a315d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a315d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a316c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a316c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a317b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a317b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a318a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a318a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3199` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3199` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31a8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31b7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31c6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31c6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31d5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31d5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31e4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31e4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a31f3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a31f3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3202` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3202` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3295` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a3295` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a32a4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a32a4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a32b3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a32b3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a32c2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a32c2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a32e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a32e7` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3731` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a3731` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a375a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a375a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a3b1d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a3b1d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a3ba8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a3ba8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a46e8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a46e8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a4753` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a4753` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a4806` | 1 | `CapMex_MultiExposure__vfn1_7e0a4806` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a48e2` | 1 | `CapMex_MultiExposure__vfn4_7e0a48e2` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a4c10` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a4c10` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a4c1f` | 1 | `CapMex_MultiExposure__vfn5_7e0a4c1f` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a4dae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a4dae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a4f5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a4f5b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a5187` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a5187` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a518c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a518c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a5287` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a5287` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a52a3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a52a3` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a536e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a536e` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5539` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a5539` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5546` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0a5546` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a555a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0a555a` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5776` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0a5776` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5946` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0a5946` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5b7e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0a5b7e` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a5cc6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0a5cc6` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a6876` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0a6876` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7033` | 1 | `CapMex_MultiExposure__vfn31_7e0a7033` | Vtable slot 31 (byte offset `+124`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7047` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0a7047` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7062` | 1 | `CapMex_MultiExposure__vfn10_7e0a7062` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a707b` | 1 | `CapMex_MultiExposure__vfn7_7e0a707b` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7094` | 1 | `CapMex_MultiExposure__vfn8_7e0a7094` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a70ad` | 1 | `CapMex_MultiExposure__vfn6_7e0a70ad` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a70c6` | 1 | `CapMex_MultiExposure__vfn12_7e0a70c6` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a70df` | 1 | `CapMex_MultiExposure__vfn3_7e0a70df` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a70fb` | 1 | `CapMex_MultiExposure__vfn5_7e0a70fb` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a712f` | 1 | `CapMex_MultiExposure__vfn25_7e0a712f` | Vtable slot 25 (byte offset `+100`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a713d` | 1 | `CapMex_MultiExposure__vfn30_7e0a713d` | Vtable slot 30 (byte offset `+120`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a714b` | 1 | `CapMex_MultiExposure__vfn4_7e0a714b` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7159` | 1 | `CapMex_MultiExposure__vfn24_7e0a7159` | Vtable slot 24 (byte offset `+96`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7167` | 1 | `CapMex_MultiExposure__vfn11_7e0a7167` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7176` | 1 | `CapMex_MultiExposure__vfn13_7e0a7176` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7185` | 1 | `CapMex_MultiExposure__vfn27_7e0a7185` | Vtable slot 27 (byte offset `+108`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7193` | 1 | `CapMex_MultiExposure__vfn23_7e0a7193` | Vtable slot 23 (byte offset `+92`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a71b2` | 1 | `CapMex_MultiExposure__vfn9_7e0a71b2` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a71c0` | 1 | `CapMex_MultiExposure__vfn14_7e0a71c0` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a71ce` | 1 | `CapMex_MultiExposure__vfn28_7e0a71ce` | Vtable slot 28 (byte offset `+112`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a71de` | 1 | `CapMex_MultiExposure__vfn29_7e0a71de` | Vtable slot 29 (byte offset `+116`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a71fc` | 1 | `CapMex_MultiExposure__vfn19_7e0a71fc` | Vtable slot 19 (byte offset `+76`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7215` | 1 | `CapMex_MultiExposure__vfn20_7e0a7215` | Vtable slot 20 (byte offset `+80`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a722e` | 1 | `CapMex_MultiExposure__vfn21_7e0a722e` | Vtable slot 21 (byte offset `+84`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7247` | 1 | `CapMex_MultiExposure__vfn18_7e0a7247` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7260` | 1 | `CapMex_MultiExposure__vfn17_7e0a7260` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a727c` | 1 | `CapMex_MultiExposure__vfn0_7e0a727c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a728c` | 1 | `CapMex_MultiExposure__vfn1_7e0a728c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a729e` | 1 | `CapMex_MultiExposure__vfn15_7e0a729e` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a72ad` | 1 | `CapMex_MultiExposure__vfn22_7e0a72ad` | Vtable slot 22 (byte offset `+88`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a72bb` | 1 | `CapMex_MultiExposure__vfn16_7e0a72bb` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a72ca` | 1 | `CapMex_MultiExposure__vfn26_7e0a72ca` | Vtable slot 26 (byte offset `+104`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a72d8` | 1 | `CapMex_MultiExposure__vfn2_7e0a72d8` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a730f` | 1 | `CapMex_MultiExposure__vfn0_7e0a730f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a731e` | 1 | `CapMex_MultiExposure__vfn32_7e0a731e` | Vtable slot 32 (byte offset `+128`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7372` | 1 | `CapMex_MultiExposure__vfn0_7e0a7372` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7381` | 1 | `CapMex_MultiExposure__vfn1_7e0a7381` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a73d5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a73d5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a73e4` | 1 | `CapMex_MultiExposure__vfn1_7e0a73e4` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0a7525` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a7525` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7648` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a7648` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a7682` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a7682` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7687` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a7687` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a7d30` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a7d30` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7d5f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a7d5f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7d6f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a7d6f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7dbe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a7dbe` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7dce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a7dce` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7eb1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0a7eb1` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7f5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a7f5b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a7f91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a7f91` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a7f96` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a7f96` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a8311` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a8311` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a832b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a832b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8339` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a8339` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a841f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a841f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8533` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a8533` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a8599` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a8599` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a859e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a859e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a85bd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a85bd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8612` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a8612` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8d6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0a8d6e` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8d82` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a8d82` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8da2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a8da2` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8db2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a8db2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8e01` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a8e01` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8e11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0a8e11` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a8fa5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0a8fa5` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a9215` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a9215` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a9316` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0a9316` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a931b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0a931b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0a938e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0a938e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0a96e8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0a96e8` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aa359` | 1 | `CapMex_MultiExposure__vfn19_7e0aa359` | Vtable slot 19 (byte offset `+76`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3a6` | 1 | `CapMex_MultiExposure__vfn3_7e0aa3a6` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3b6` | 1 | `CapMex_MultiExposure__vfn4_7e0aa3b6` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3c6` | 1 | `CapMex_MultiExposure__vfn5_7e0aa3c6` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3d9` | 1 | `CapMex_MultiExposure__vfn6_7e0aa3d9` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3e9` | 1 | `CapMex_MultiExposure__vfn7_7e0aa3e9` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa3f9` | 1 | `CapMex_MultiExposure__vfn8_7e0aa3f9` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa424` | 1 | `CapMex_MultiExposure__vfn9_7e0aa424` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa432` | 1 | `CapMex_MultiExposure__vfn10_7e0aa432` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa440` | 1 | `CapMex_MultiExposure__vfn11_7e0aa440` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa44f` | 1 | `CapMex_MultiExposure__vfn12_7e0aa44f` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa47e` | 1 | `CapMex_MultiExposure__vfn13_7e0aa47e` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa48e` | 1 | `CapMex_MultiExposure__vfn14_7e0aa48e` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa49e` | 1 | `CapMex_MultiExposure__vfn15_7e0aa49e` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa4b1` | 1 | `CapMex_MultiExposure__vfn16_7e0aa4b1` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa4c1` | 1 | `CapMex_MultiExposure__vfn17_7e0aa4c1` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa4d1` | 1 | `CapMex_MultiExposure__vfn18_7e0aa4d1` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa4e1` | 1 | `CapMex_MultiExposure__vfn0_7e0aa4e1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa4f1` | 1 | `CapMex_MultiExposure__vfn1_7e0aa4f1` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa503` | 1 | `CapMex_MultiExposure__vfn2_7e0aa503` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa5e2` | 1 | `CapMex_MultiExposure__vfn0_7e0aa5e2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa5f1` | 1 | `CapMex_MultiExposure__vfn20_7e0aa5f1` | Vtable slot 20 (byte offset `+80`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa64b` | 1 | `CapMex_MultiExposure__vfn0_7e0aa64b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa65a` | 1 | `CapMex_MultiExposure__vfn1_7e0aa65a` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa6ae` | 1 | `CapMex_MultiExposure__vfn0_7e0aa6ae` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa6bd` | 1 | `CapMex_MultiExposure__vfn1_7e0aa6bd` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa717` | 1 | `CapMex_MultiExposure__vfn0_7e0aa717` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa726` | 1 | `CapMex_MultiExposure__vfn1_7e0aa726` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa780` | 1 | `CapMex_MultiExposure__vfn0_7e0aa780` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa78f` | 1 | `CapMex_MultiExposure__vfn1_7e0aa78f` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa7e9` | 1 | `CapMex_MultiExposure__vfn0_7e0aa7e9` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa7f8` | 1 | `CapMex_MultiExposure__vfn1_7e0aa7f8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa84c` | 1 | `CapMex_MultiExposure__vfn0_7e0aa84c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa85b` | 1 | `CapMex_MultiExposure__vfn1_7e0aa85b` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa8b5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0aa8b5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aa8c4` | 1 | `CapMex_MultiExposure__vfn1_7e0aa8c4` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aa9c5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0aa9c5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aab0d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0aab0d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0aab5d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0aab5d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aab62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0aab62` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ab8c1` | 1 | `CapMex_MultiExposure__vfn2_7e0ab8c1` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0ab90e` | 1 | `CapHis_HistogramFacade__vfn0_7e0ab90e` | Vtable slot 0 (byte offset `+0`) of class `CapHis_HistogramFacade`. | Ghidra vtable pass |
+| `0x7e0abb1a` | 1 | `CapHis_HistogramFacade__vfn3_7e0abb1a` | Vtable slot 3 (byte offset `+12`) of class `CapHis_HistogramFacade`. | Ghidra vtable pass |
+| `0x7e0abb25` | 1 | `CapHis_HistogramFacade__vfn4_7e0abb25` | Vtable slot 4 (byte offset `+16`) of class `CapHis_HistogramFacade`. | Ghidra vtable pass |
+| `0x7e0abb68` | 1 | `CapHis_HistogramFacade__vfn5_7e0abb68` | Vtable slot 5 (byte offset `+20`) of class `CapHis_HistogramFacade`. | Ghidra vtable pass |
+| `0x7e0abbb2` | 1 | `CapHis_HistogramFacade__vfn6_7e0abbb2` | Vtable slot 6 (byte offset `+24`) of class `CapHis_HistogramFacade`. | Ghidra vtable pass |
+| `0x7e0abc0f` | 1 | `CapMex_MultiExposure__vfn0_7e0abc0f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0abc1d` | 1 | `CapMex_MultiExposure__vfn1_7e0abc1d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0abca2` | 1 | `CapMex_MultiExposure__vfn3_7e0abca2` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0abcff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0abcff` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0abd60` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0abd60` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0abea2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0abea2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0abf37` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0abf37` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0abf3c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0abf3c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ac009` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ac009` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acb1a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0acb1a` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acc44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0acc44` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aceca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0aceca` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acefe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0acefe` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf0e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0acf0e` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf3c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0acf3c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0acf5b` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf69` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0acf69` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf77` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0acf77` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acf95` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0acf95` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acfa5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0acfa5` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acfb8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0acfb8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acfc8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0acfc8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0acfda` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0acfda` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad09c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0ad09c` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad132` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ad132` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ad167` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0ad167` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad16c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ad16c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ad275` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ad275` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad647` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0ad647` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad7c1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0ad7c1` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad7d5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0ad7d5` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad8ba` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0ad8ba` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad8ca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ad8ca` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ad9c3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0ad9c3` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0adb11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0adb11` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0add7b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0add7b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0add80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0add80` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ae082` | 1 | `CapMex_MultiExposure__vfn1_7e0ae082` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0ae1a9` | 1 | `CapMex_MultiExposure__vfn2_7e0ae1a9` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0ae225` | 1 | `CapMex_MultiExposure__vfn3_7e0ae225` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0ae3ce` | 1 | `CapMex_MultiExposure__vfn4_7e0ae3ce` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0ae74d` | 1 | `CapMex_MultiExposure__vfn5_7e0ae74d` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aea79` | 1 | `CapMex_MultiExposure__vfn0_7e0aea79` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aea88` | 1 | `CapMex_MultiExposure__vfn6_7e0aea88` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aeae6` | 1 | `CapMex_MultiExposure__vfn1_7e0aeae6` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aeb61` | 1 | `CapMex_MultiExposure__ctordtor_7e0aeb61` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0aeb7c` | 1 | `CapMex_MultiExposure__vfn0_7e0aeb7c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aebf7` | 1 | `CapMex_MultiExposure__ctordtor_7e0aebf7` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0aec12` | 1 | `CapMex_MultiExposure__vfn0_7e0aec12` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aec91` | 1 | `CapMex_MultiExposure__ctordtor_7e0aec91` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0aecb1` | 1 | `CapMex_MultiExposure__vfn0_7e0aecb1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0aed02` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0aed02` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aee3c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0aee3c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aef91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0aef91` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0aef9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0aef9f` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af0f5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0af0f5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af104` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af104` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af113` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af113` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af122` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af122` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af131` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af131` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af140` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af140` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af14f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af14f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af15e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af15e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af16d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af16d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af236` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af236` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af245` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af245` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af254` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af254` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af263` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af263` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af272` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af272` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af2d1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af2d1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af2e0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af2e0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af319` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af319` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af328` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af328` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af337` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af337` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af3f0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af3f0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af3ff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af3ff` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af40e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af40e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af41d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af41d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af42c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af42c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af43b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af43b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af44a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af44a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af459` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af459` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af468` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af468` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af477` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af477` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af5ca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af5ca` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af5d9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af5d9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af5e8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af5e8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af5f7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af5f7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af606` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af606` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af615` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af615` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af624` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af624` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af633` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af633` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af66e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af66e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af6cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af6cd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af6dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af6dc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af7f7` | 1 | `cls_7e5fa2fc__vfn13_7e0af7f7` | Vtable slot 13 (byte offset `+52`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0af80a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af80a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af819` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af819` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af828` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af828` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af837` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af837` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af846` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af846` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af855` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af855` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af864` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af864` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af873` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af873` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af8b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0af8b2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0af8c1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0af8c1` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0af99e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0af99e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b14ad` | 12 | `cls_7e3d8e74__vfn0_7e0b14ad` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3d8e74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b1fd4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b1fd4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b2011` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b2011` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b24de` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b24de` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b2571` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b2571` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b27f5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b27f5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b288f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b288f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b2894` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b2894` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4d90` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4d90` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4daa` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4daa` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4dc4` | 1 | `CapMex_MultiExposure__vfn0_7e0b4dc4` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b4e55` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4e55` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4e6f` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4e6f` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4e89` | 1 | `CapMex_MultiExposure__vfn0_7e0b4e89` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b4f1a` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4f1a` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4f34` | 1 | `CapMex_MultiExposure__ctordtor_7e0b4f34` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b4f4e` | 1 | `CapMex_MultiExposure__vfn0_7e0b4f4e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b537a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b537a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b53c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b53c7` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b5460` | 1 | `cls_7e5fa2fc__vfn14_7e0b5460` | Vtable slot 14 (byte offset `+56`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b5665` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b5665` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b569c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b569c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b60b7` | 1 | `cls_7e3da5d4__ctordtor_7e0b60b7` | Constructor or destructor of class `cls_7e3da5d4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b60c5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0b60c5` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b60c8` | 1 | `cls_7e3da5d4__ctordtor_7e0b60c8` | Constructor or destructor of class `cls_7e3da5d4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b60d9` | 1 | `cls_7e3da5d4__vfn0_7e0b60d9` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3da5d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b60f9` | 1 | `cls_7e3da5d4__vfn1_7e0b60f9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3da5d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b610e` | 1 | `cls_7e3da5d4__vfn2_7e0b610e` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3da5d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0b612e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0b612e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b613c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0b613c` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b614b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0b614b` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b615a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0b615a` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6169` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0b6169` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6177` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0b6177` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6185` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0b6185` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6193` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0b6193` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b61b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b61b2` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b61c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b61c7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b61dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0b61dc` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b61f1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0b61f1` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6203` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0b6203` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b62bc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0b62bc` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b638c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b638c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b63be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b63be` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b63c3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b63c3` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b68d6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0b68d6` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6942` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b6942` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6950` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b6950` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6a9e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0b6a9e` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6ccb` | 1 | `CapMex_MultiExposure__vfn0_7e0b6ccb` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6d34` | 1 | `CapMex_MultiExposure__vfn0_7e0b6d34` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6d53` | 1 | `CapMex_MultiExposure__vfn1_7e0b6d53` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6dda` | 1 | `CapMex_MultiExposure__vfn0_7e0b6dda` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6df9` | 1 | `CapMex_MultiExposure__vfn1_7e0b6df9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6e94` | 1 | `CapMex_MultiExposure__vfn1_7e0b6e94` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0b6ebc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b6ebc` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b6f27` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b6f27` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6f2c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b6f2c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b6fa9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b6fa9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b6fe4` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0b6fe4` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7407` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0b7407` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b796e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b796e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b797d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b797d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b798c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b798c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b799b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b799b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b79aa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b79aa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b79b9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b79b9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b79c8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b79c8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7a03` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b7a03` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7a62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b7a62` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7a71` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b7a71` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7af4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b7af4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7b03` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b7b03` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7b4d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b7b4d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b7c1c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b7c1c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b7e6c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b7e6c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b8109` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0b8109` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b810e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0b810e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b88ff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0b88ff` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b894f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0b894f` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0b9f12` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9f12` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b9f2c` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9f2c` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b9f7b` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9f7b` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b9f95` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9f95` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b9fe4` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9fe4` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0b9ffe` | 1 | `CapMex_MultiExposure__ctordtor_7e0b9ffe` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba04d` | 1 | `cls_7e3db144__ctordtor_7e0ba04d` | Constructor or destructor of class `cls_7e3db144` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ba076` | 1 | `cls_7e3db144__ctordtor_7e0ba076` | Constructor or destructor of class `cls_7e3db144` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ba576` | 1 | `CapMex_MultiExposure__ctordtor_7e0ba576` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba590` | 1 | `CapMex_MultiExposure__ctordtor_7e0ba590` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba5df` | 1 | `CapMex_MultiExposure__ctordtor_7e0ba5df` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba5f9` | 1 | `CapMex_MultiExposure__ctordtor_7e0ba5f9` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba683` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ba683` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ba73a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0ba73a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ba946` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ba946` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0baa72` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0baa72` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0baa77` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0baa77` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bc9c9` | 1 | `CapMex_MultiExposure__vfn2_7e0bc9c9` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcb94` | 1 | `CapMex_MultiExposure__vfn0_7e0bcb94` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcba2` | 1 | `CapMex_MultiExposure__vfn1_7e0bcba2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcc85` | 1 | `CapMex_MultiExposure__vfn0_7e0bcc85` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcc94` | 1 | `CapMex_MultiExposure__vfn3_7e0bcc94` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcce8` | 1 | `CapMex_MultiExposure__vfn0_7e0bcce8` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bccf7` | 1 | `CapMex_MultiExposure__vfn1_7e0bccf7` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcd51` | 1 | `CapMex_MultiExposure__vfn0_7e0bcd51` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcd60` | 1 | `CapMex_MultiExposure__vfn1_7e0bcd60` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcdba` | 1 | `CapMex_MultiExposure__vfn0_7e0bcdba` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bcdc9` | 1 | `CapMex_MultiExposure__vfn1_7e0bcdc9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bce2c` | 1 | `CapMex_MultiExposure__vfn1_7e0bce2c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0bceb0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bceb0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bcf2d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bcf2d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bd062` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bd062` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bd15b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bd15b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bd160` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bd160` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bea9a` | 1 | `cls_7e3dc304__ctordtor_7e0bea9a` | Constructor or destructor of class `cls_7e3dc304` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0beab7` | 1 | `cls_7e3dc304__ctordtor_7e0beab7` | Constructor or destructor of class `cls_7e3dc304` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0beac8` | 1 | `cls_7e3dc304__vfn0_7e0beac8` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3dc304`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0beaf8` | 1 | `cls_7e3dc304__vfn1_7e0beaf8` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3dc304`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0beb3d` | 1 | `cls_7e3dc304__vfn2_7e0beb3d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3dc304`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0bec63` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bec63` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bece6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bece6` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bef43` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bef43` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bef8d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bef8d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bef92` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bef92` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bf6fc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0bf6fc` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfa44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0bfa44` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfa58` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0bfa58` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfa73` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0bfa73` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfa83` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0bfa83` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfa93` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0bfa93` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfaa3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0bfaa3` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfab3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0bfab3` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfadf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0bfadf` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfaed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bfaed` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfafd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0bfafd` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb0d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0bfb0d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb1d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0bfb1d` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb2d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0bfb2d` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb3d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0bfb3d` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb4d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0bfb4d` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfb5f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0bfb5f` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfc4f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0bfc4f` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfe32` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bfe32` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0bfe95` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0bfe95` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0bfe9a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0bfe9a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c0b3d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b3d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b4c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b4c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b5b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b6a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b6a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b79` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b79` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b88` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0b97` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0b97` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0ba6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0ba6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0bb5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0bb5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0bc4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0bc4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0bd3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0bd3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0be2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0be2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0bf1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0bf1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0c00` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0c00` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0c0f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0c0f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0c1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0c1e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0d2c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0d2c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0d3b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0d3b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0d4a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0d4a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0d59` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0d59` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0d68` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0d68` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0f81` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0f81` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0f90` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0f90` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0f9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0f9f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0fae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0fae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0fbd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0fbd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0fcc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0fcc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0fdb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0fdb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0fea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0fea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c0ff9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c0ff9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1008` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1008` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1017` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1017` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1026` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1026` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1035` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1035` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1044` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1044` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1053` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1053` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1062` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1062` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1071` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1071` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1080` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1080` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c108f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c108f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c111a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c111a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1129` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1129` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1138` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c1138` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c11b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c11b7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c11c6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c11c6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c11d5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c11d5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c11e4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c11e4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c13b5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c13b5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c16af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c16af` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c1afa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c1afa` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c1aff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c1aff` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c5e5f` | 1 | `CapMex_MultiExposure__vfn1_7e0c5e5f` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c798f` | 1 | `CapMex_MultiExposure__vfn2_7e0c798f` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c79e4` | 1 | `CapMex_MultiExposure__ctordtor_7e0c79e4` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c79f9` | 1 | `CapMex_MultiExposure__vfn0_7e0c79f9` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c79fe` | 1 | `CapMex_MultiExposure__ctordtor_7e0c79fe` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c7a18` | 1 | `CapMex_MultiExposure__vfn0_7e0c7a18` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7aaf` | 1 | `CapMex_MultiExposure__vfn0_7e0c7aaf` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7ace` | 1 | `CapMex_MultiExposure__vfn1_7e0c7ace` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7b34` | 1 | `CapMex_MultiExposure__vfn0_7e0c7b34` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7b43` | 1 | `CapMex_MultiExposure__vfn1_7e0c7b43` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7b9d` | 1 | `CapMex_MultiExposure__vfn0_7e0c7b9d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7bac` | 1 | `CapMex_MultiExposure__vfn1_7e0c7bac` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7c0a` | 1 | `CapMex_MultiExposure__vfn0_7e0c7c0a` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7c29` | 1 | `CapMex_MultiExposure__vfn1_7e0c7c29` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7c98` | 1 | `CapMex_MultiExposure__vfn0_7e0c7c98` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7ca7` | 1 | `CapMex_MultiExposure__vfn1_7e0c7ca7` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7d01` | 1 | `CapMex_MultiExposure__vfn0_7e0c7d01` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7d10` | 1 | `CapMex_MultiExposure__vfn1_7e0c7d10` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7d6a` | 1 | `CapMex_MultiExposure__vfn0_7e0c7d6a` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7d79` | 1 | `CapMex_MultiExposure__vfn1_7e0c7d79` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7df6` | 1 | `CapMex_MultiExposure__vfn1_7e0c7df6` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7eac` | 1 | `CapMex_MultiExposure__vfn0_7e0c7eac` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7f0e` | 1 | `CapMex_MultiExposure__vfn1_7e0c7f0e` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7f78` | 1 | `CapMex_MultiExposure__vfn0_7e0c7f78` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7fbb` | 1 | `CapMex_MultiExposure__vfn0_7e0c7fbb` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c7fda` | 1 | `CapMex_MultiExposure__vfn1_7e0c7fda` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c8044` | 1 | `CapMex_MultiExposure__vfn0_7e0c8044` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c8063` | 1 | `CapMex_MultiExposure__vfn1_7e0c8063` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c80c9` | 1 | `CapMex_MultiExposure__vfn0_7e0c80c9` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c80d8` | 1 | `CapMex_MultiExposure__vfn1_7e0c80d8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c8141` | 1 | `CapMex_MultiExposure__vfn1_7e0c8141` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c819f` | 1 | `CapMex_MultiExposure__vfn0_7e0c819f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c81de` | 1 | `CapMex_MultiExposure__vfn0_7e0c81de` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c81ed` | 1 | `CapMex_MultiExposure__vfn1_7e0c81ed` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c8256` | 1 | `CapMex_MultiExposure__vfn1_7e0c8256` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0c82e2` | 1 | `cls_7e3de260__ctordtor_7e0c82e2` | Constructor or destructor of class `cls_7e3de260` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0c8326` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e0c8326` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8329` | 1 | `cls_7e3de260__ctordtor_7e0c8329` | Constructor or destructor of class `cls_7e3de260` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0c833a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0c833a` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c834a` | 1 | `cls_7e3de260__vfn0_7e0c834a` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3de260`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0c837a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0c837a` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c838a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e0c838a` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c839a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0c839a` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c83aa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e0c83aa` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c83ba` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0c83ba` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c83ca` | 1 | `cls_7e3de260__vfn1_7e0c83ca` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3de260`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0c83da` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c83da` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c83ea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0c83ea` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c83fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0c83fa` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c840a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0c840a` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c841a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e0c841a` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c842a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c842a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c843a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0c843a` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c844a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0c844a` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c845a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e0c845a` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c846a` | 1 | `cls_7e3de260__vfn2_7e0c846a` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3de260`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0c849a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e0c849a` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e0c84a8` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84b6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e0c84b6` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84c4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e0c84c4` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84d2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e0c84d2` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84e0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0c84e0` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c84f2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0c84f2` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8504` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0c8504` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8512` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0c8512` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8520` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e0c8520` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c852f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e0c852f` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8547` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e0c8547` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8567` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e0c8567` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8575` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e0c8575` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c8583` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e0c8583` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c87b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e0c87b4` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c88b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c88b7` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c8907` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c8907` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c890c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c890c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c8932` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c8932` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c89a4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0c89a4` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c89d7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0c89d7` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c89ee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0c89ee` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c9295` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0c9295` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c92a9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0c92a9` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c930b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c930b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c9361` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c9361` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c945a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0c945a` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c955a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c955a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c95a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c95a8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c95ad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0c95ad` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0c9d5a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0c9d5a` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c9e3e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0c9e3e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c9e70` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0c9e70` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0c9f8b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0c9f8b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ca0c8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ca0c8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ca170` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0ca170` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ca175` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ca175` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0cb2c0` | 1 | `CapMex_MultiExposure__vfn0_7e0cb2c0` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cb2cf` | 1 | `CapMex_MultiExposure__vfn1_7e0cb2cf` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cb329` | 1 | `CapMex_MultiExposure__vfn0_7e0cb329` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cb338` | 1 | `CapMex_MultiExposure__vfn1_7e0cb338` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cb3a1` | 1 | `CapMex_MultiExposure__vfn1_7e0cb3a1` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cb70c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0cb70c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0cb77a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0cb77a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cb879` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0cb879` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0cb92f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0cb92f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cb934` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0cb934` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0cd020` | 1 | `cls_7e3df374__ctordtor_7e0cd020` | Constructor or destructor of class `cls_7e3df374` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0cd037` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e0cd037` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd03a` | 1 | `cls_7e3df374__ctordtor_7e0cd03a` | Constructor or destructor of class `cls_7e3df374` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0cd04b` | 1 | `cls_7e3df374__vfn0_7e0cd04b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3df374`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0cd06c` | 1 | `cls_7e3df374__vfn1_7e0cd06c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3df374`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0cd07c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0cd07c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd08c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd08c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd09c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0cd09c` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd0ac` | 1 | `cls_7e3df374__vfn2_7e0cd0ac` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3df374`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0cd0cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0cd0cd` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd0db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0cd0db` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd0eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0cd0eb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd0f9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0cd0f9` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd108` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0cd108` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd117` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0cd117` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd125` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0cd125` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd134` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0cd134` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd142` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e0cd142` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd151` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e0cd151` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd196` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0cd196` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd1a6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0cd1a6` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd1b6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e0cd1b6` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd1ee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e0cd1ee` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd1fc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e0cd1fc` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd20a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e0cd20a` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd218` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e0cd218` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd227` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e0cd227` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd236` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e0cd236` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd80a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e0cd80a` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd819` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd819` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd828` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd828` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd837` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd837` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd846` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd846` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd855` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd855` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd864` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd864` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd873` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd873` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd882` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd882` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd891` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd891` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8a0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8be` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8cd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8dc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8eb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd8fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd8fa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd909` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd909` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd918` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd918` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd927` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd927` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd936` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd936` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd945` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd945` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd954` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd954` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd963` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd963` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd972` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd972` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd981` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd981` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd990` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd990` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd99f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd99f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9ae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9bd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9bd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9cc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9cc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9db` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9ea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9ea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cd9f9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cd9f9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cda08` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cda08` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cda17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cda17` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cda26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cda26` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cda35` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cda35` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cda44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cda44` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdc79` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdc79` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdc88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdc88` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdc97` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdc97` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdca6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdca6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdcb5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdcb5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdcc4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdcc4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdcd3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdcd3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdce2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdce2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdcf1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdcf1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdd00` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdd00` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdd0f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdd0f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdd1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdd1e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdd2d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdd2d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdd96` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdd96` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdda5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdda5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cddb4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cddb4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cddc3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cddc3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdf84` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdf84` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdf93` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdf93` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfa2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfa2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfb1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfb1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfc0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfc0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfcf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfcf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfde` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfde` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdfed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdfed` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cdffc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0cdffc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce00b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce00b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce01a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce01a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce029` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce029` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce038` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce038` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce047` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce047` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce07e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce07e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce1db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce1db` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce1ea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce1ea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce1f9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce1f9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce208` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce208` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce217` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce217` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce226` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce226` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce235` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce235` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce244` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce244` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce253` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce253` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce262` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce262` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce2e9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce2e9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce2f8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce2f8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ce307` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ce307` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0cf1dd` | 1 | `CapMex_MultiExposure__vfn0_7e0cf1dd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0cfd1b` | 1 | `CapMex_MultiExposure__vfn2_7e0cfd1b` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d3b29` | 1 | `cls_7e5fa2fc__vfn15_7e0d3b29` | Vtable slot 15 (byte offset `+60`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d3d06` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0d3d06` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d443b` | 1 | `CapMex_MultiExposure__vfn5_7e0d443b` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d452e` | 1 | `CapMex_MultiExposure__vfn6_7e0d452e` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d45d7` | 1 | `CapMex_MultiExposure__vfn7_7e0d45d7` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d4650` | 1 | `CapMex_MultiExposure__vfn8_7e0d4650` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d49da` | 1 | `cls_7e5fa2fc__vfn16_7e0d49da` | Vtable slot 16 (byte offset `+64`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d4a59` | 1 | `CapMex_MultiExposure__vfn9_7e0d4a59` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d4af1` | 1 | `cls_7e5fa2fc__vfn17_7e0d4af1` | Vtable slot 17 (byte offset `+68`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d4cbc` | 1 | `cls_7e5fa2fc__vfn18_7e0d4cbc` | Vtable slot 18 (byte offset `+72`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d4ea2` | 1 | `cls_7e5fa2fc__vfn19_7e0d4ea2` | Vtable slot 19 (byte offset `+76`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d5077` | 1 | `cls_7e5fa2fc__vfn20_7e0d5077` | Vtable slot 20 (byte offset `+80`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d525e` | 1 | `cls_7e5fa2fc__vfn21_7e0d525e` | Vtable slot 21 (byte offset `+84`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d543f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0d543f` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d5499` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0d5499` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d5576` | 1 | `CapMex_MultiExposure__vfn5_7e0d5576` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5966` | 1 | `CapMex_MultiExposure__vfn6_7e0d5966` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5977` | 1 | `CapMex_MultiExposure__vfn7_7e0d5977` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5aa5` | 1 | `CapMex_MultiExposure__vfn8_7e0d5aa5` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5ab0` | 1 | `CapMex_MultiExposure__vfn9_7e0d5ab0` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5acd` | 1 | `CapMex_MultiExposure__vfn10_7e0d5acd` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5ae8` | 1 | `CapMex_MultiExposure__vfn11_7e0d5ae8` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5b03` | 1 | `CapMex_MultiExposure__vfn12_7e0d5b03` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5b1e` | 1 | `CapMex_MultiExposure__vfn13_7e0d5b1e` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5b3b` | 1 | `CapMex_MultiExposure__vfn14_7e0d5b3b` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5b56` | 1 | `CapMex_MultiExposure__vfn15_7e0d5b56` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5b80` | 1 | `CapMex_MultiExposure__vfn16_7e0d5b80` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5bcf` | 1 | `CapMex_MultiExposure__vfn17_7e0d5bcf` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5be0` | 1 | `CapMex_MultiExposure__vfn18_7e0d5be0` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5c2f` | 1 | `CapMex_MultiExposure__vfn19_7e0d5c2f` | Vtable slot 19 (byte offset `+76`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5c55` | 1 | `CapMex_MultiExposure__vfn20_7e0d5c55` | Vtable slot 20 (byte offset `+80`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5c66` | 1 | `CapMex_MultiExposure__vfn21_7e0d5c66` | Vtable slot 21 (byte offset `+84`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5ca1` | 1 | `CapMex_MultiExposure__vfn22_7e0d5ca1` | Vtable slot 22 (byte offset `+88`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5cf0` | 1 | `CapMex_MultiExposure__vfn23_7e0d5cf0` | Vtable slot 23 (byte offset `+92`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5d10` | 1 | `CapMex_MultiExposure__vfn24_7e0d5d10` | Vtable slot 24 (byte offset `+96`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d5d21` | 1 | `CapMex_MultiExposure__vfn25_7e0d5d21` | Vtable slot 25 (byte offset `+100`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6184` | 1 | `CapMex_MultiExposure__vfn26_7e0d6184` | Vtable slot 26 (byte offset `+104`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6199` | 1 | `CapMex_MultiExposure__vfn27_7e0d6199` | Vtable slot 27 (byte offset `+108`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d61ae` | 1 | `CapMex_MultiExposure__vfn28_7e0d61ae` | Vtable slot 28 (byte offset `+112`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6209` | 1 | `CapMex_MultiExposure__vfn29_7e0d6209` | Vtable slot 29 (byte offset `+116`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6581` | 1 | `CapMex_MultiExposure__vfn0_7e0d6581` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6590` | 1 | `CapMex_MultiExposure__vfn30_7e0d6590` | Vtable slot 30 (byte offset `+120`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d65ec` | 1 | `CapMex_MultiExposure__vfn0_7e0d65ec` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d65fb` | 1 | `CapMex_MultiExposure__vfn1_7e0d65fb` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6657` | 1 | `CapMex_MultiExposure__vfn0_7e0d6657` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6666` | 1 | `CapMex_MultiExposure__vfn1_7e0d6666` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d66cb` | 1 | `CapMex_MultiExposure__vfn1_7e0d66cb` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6710` | 1 | `CapMex_MultiExposure__ctordtor_7e0d6710` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d672b` | 1 | `CapMex_MultiExposure__vfn0_7e0d672b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6780` | 1 | `CapMex_MultiExposure__ctordtor_7e0d6780` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d679b` | 1 | `CapMex_MultiExposure__vfn0_7e0d679b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d67fa` | 1 | `CapMex_MultiExposure__ctordtor_7e0d67fa` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d6815` | 1 | `CapMex_MultiExposure__vfn0_7e0d6815` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6874` | 1 | `CapMex_MultiExposure__ctordtor_7e0d6874` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d688f` | 1 | `CapMex_MultiExposure__vfn0_7e0d688f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d68ee` | 1 | `CapMex_MultiExposure__ctordtor_7e0d68ee` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d6909` | 1 | `CapMex_MultiExposure__vfn0_7e0d6909` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d6968` | 2 | `CapMex_MultiExposure__ctordtor_7e0d6968` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d6979` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0d6979` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d6988` | 1 | `CapMex_MultiExposure__vfn0_7e0d6988` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d69f8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0d69f8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d6cdd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0d6cdd` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d6d3b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0d6d3b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d7520` | 1 | `CapMex_MultiExposure__vfn5_7e0d7520` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d76a7` | 1 | `cls_7e5fa2fc__vfn22_7e0d76a7` | Vtable slot 22 (byte offset `+88`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d7876` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0d7876` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0d793c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0d793c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d816c` | 1 | `CapMex_MultiExposure__vfn5_7e0d816c` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d81b7` | 1 | `CapMex_MultiExposure__vfn6_7e0d81b7` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d84f7` | 1 | `CapMex_MultiExposure__vfn7_7e0d84f7` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d8ebc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0d8ebc` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d8fbb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0d8fbb` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0d9360` | 1 | `CapMex_MultiExposure__vfn8_7e0d9360` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d98d2` | 1 | `CapMex_MultiExposure__vfn9_7e0d98d2` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0d9eae` | 1 | `cls_7e5fa2fc__vfn23_7e0d9eae` | Vtable slot 23 (byte offset `+92`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0d9fa0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0d9fa0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0da005` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0da005` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0da9a8` | 1 | `CapMex_MultiExposure__vfn2_7e0da9a8` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dab23` | 1 | `CapMex_MultiExposure__vfn0_7e0dab23` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db2a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0db2a8` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0db84f` | 1 | `CapMex_MultiExposure__vfn0_7e0db84f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db85e` | 1 | `CapMex_MultiExposure__vfn8_7e0db85e` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db8ba` | 1 | `CapMex_MultiExposure__vfn0_7e0db8ba` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db8c9` | 1 | `CapMex_MultiExposure__vfn1_7e0db8c9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db929` | 1 | `CapMex_MultiExposure__vfn0_7e0db929` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db938` | 1 | `CapMex_MultiExposure__vfn1_7e0db938` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db9a1` | 1 | `CapMex_MultiExposure__vfn0_7e0db9a1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0db9b0` | 1 | `CapMex_MultiExposure__vfn1_7e0db9b0` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dba24` | 1 | `CapMex_MultiExposure__vfn1_7e0dba24` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dba6f` | 1 | `CapMex_MultiExposure__ctordtor_7e0dba6f` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0dba80` | 1 | `CapMex_MultiExposure__vfn0_7e0dba80` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dba8f` | 1 | `CapMex_MultiExposure__vfn0_7e0dba8f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbafb` | 1 | `CapMex_MultiExposure__vfn0_7e0dbafb` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbb0a` | 1 | `CapMex_MultiExposure__vfn1_7e0dbb0a` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbb66` | 1 | `CapMex_MultiExposure__vfn0_7e0dbb66` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbb75` | 1 | `CapMex_MultiExposure__vfn1_7e0dbb75` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbbd1` | 1 | `CapMex_MultiExposure__vfn0_7e0dbbd1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbbe0` | 1 | `CapMex_MultiExposure__vfn1_7e0dbbe0` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbc3c` | 1 | `CapMex_MultiExposure__vfn0_7e0dbc3c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbc4b` | 1 | `CapMex_MultiExposure__vfn1_7e0dbc4b` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbca7` | 1 | `CapMex_MultiExposure__vfn0_7e0dbca7` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbcb6` | 1 | `CapMex_MultiExposure__vfn1_7e0dbcb6` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbd12` | 1 | `CapMex_MultiExposure__vfn0_7e0dbd12` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbd21` | 1 | `CapMex_MultiExposure__vfn1_7e0dbd21` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbd87` | 1 | `CapMex_MultiExposure__vfn1_7e0dbd87` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbdd2` | 2 | `CapMex_MultiExposure__ctordtor_7e0dbdd2` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0dbde3` | 1 | `CapMex_MultiExposure__vfn0_7e0dbde3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbdf2` | 1 | `CapMex_MultiExposure__vfn0_7e0dbdf2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbe4e` | 1 | `CapMex_MultiExposure__vfn0_7e0dbe4e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbe5d` | 1 | `CapMex_MultiExposure__vfn1_7e0dbe5d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbebd` | 1 | `CapMex_MultiExposure__vfn0_7e0dbebd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbedc` | 1 | `CapMex_MultiExposure__vfn1_7e0dbedc` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbf44` | 1 | `CapMex_MultiExposure__vfn0_7e0dbf44` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbf53` | 1 | `CapMex_MultiExposure__vfn1_7e0dbf53` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbfaf` | 1 | `CapMex_MultiExposure__vfn0_7e0dbfaf` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dbfbe` | 1 | `CapMex_MultiExposure__vfn1_7e0dbfbe` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc01a` | 1 | `CapMex_MultiExposure__vfn0_7e0dc01a` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc029` | 1 | `CapMex_MultiExposure__vfn1_7e0dc029` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc086` | 1 | `CapMex_MultiExposure__vfn0_7e0dc086` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc095` | 1 | `CapMex_MultiExposure__vfn1_7e0dc095` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc0f2` | 1 | `CapMex_MultiExposure__vfn0_7e0dc0f2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc101` | 1 | `CapMex_MultiExposure__vfn1_7e0dc101` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc15e` | 1 | `CapMex_MultiExposure__vfn0_7e0dc15e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc16d` | 1 | `CapMex_MultiExposure__vfn1_7e0dc16d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc1ca` | 1 | `CapMex_MultiExposure__vfn0_7e0dc1ca` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc1d9` | 1 | `CapMex_MultiExposure__vfn1_7e0dc1d9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc236` | 1 | `CapMex_MultiExposure__vfn0_7e0dc236` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc245` | 1 | `CapMex_MultiExposure__vfn1_7e0dc245` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc2a2` | 1 | `CapMex_MultiExposure__vfn0_7e0dc2a2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc2b1` | 1 | `CapMex_MultiExposure__vfn1_7e0dc2b1` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc31d` | 1 | `CapMex_MultiExposure__vfn1_7e0dc31d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dc369` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0dc369` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dc8c8` | 1 | `CapMex_MultiExposure__vfn1_7e0dc8c8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dcb77` | 1 | `CapMex_MultiExposure__vfn3_7e0dcb77` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dcbcb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0dcbcb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dced8` | 1 | `CapMex_MultiExposure__vfn5_7e0dced8` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd127` | 1 | `CapMex_MultiExposure__vfn6_7e0dd127` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd1a0` | 1 | `CapMex_MultiExposure__vfn0_7e0dd1a0` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd1af` | 1 | `CapMex_MultiExposure__vfn7_7e0dd1af` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd1fb` | 1 | `CapMex_MultiExposure__vfn0_7e0dd1fb` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd20a` | 1 | `CapMex_MultiExposure__vfn1_7e0dd20a` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd257` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0dd257` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dd266` | 1 | `CapMex_MultiExposure__vfn1_7e0dd266` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd2fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0dd2fb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dd32e` | 1 | `CapMex_MultiExposure__vfn5_7e0dd32e` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd346` | 1 | `CapMex_MultiExposure__vfn6_7e0dd346` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd38a` | 1 | `CapMex_MultiExposure__vfn7_7e0dd38a` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd42c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0dd42c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dd709` | 1 | `CapMex_MultiExposure__vfn8_7e0dd709` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dd9f8` | 1 | `CapMex_MultiExposure__vfn9_7e0dd9f8` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dda35` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0dda35` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ddf38` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ddf38` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0de092` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0de092` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0de097` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0de097` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0de232` | 1 | `CapMex_MultiExposure__vfn6_7e0de232` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0de272` | 1 | `CapMex_MultiExposure__vfn7_7e0de272` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0de85d` | 1 | `CapMex_MultiExposure__vfn9_7e0de85d` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0def95` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0def95` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0df78c` | 1 | `CapMex_MultiExposure__vfn0_7e0df78c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df79b` | 1 | `CapMex_MultiExposure__vfn10_7e0df79b` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df7f7` | 1 | `CapMex_MultiExposure__vfn0_7e0df7f7` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df806` | 1 | `CapMex_MultiExposure__vfn1_7e0df806` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df862` | 1 | `CapMex_MultiExposure__vfn0_7e0df862` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df871` | 1 | `CapMex_MultiExposure__vfn1_7e0df871` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df8cd` | 1 | `CapMex_MultiExposure__vfn0_7e0df8cd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df8dc` | 1 | `CapMex_MultiExposure__vfn1_7e0df8dc` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df938` | 1 | `CapMex_MultiExposure__vfn0_7e0df938` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df947` | 1 | `CapMex_MultiExposure__vfn1_7e0df947` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df9a3` | 1 | `CapMex_MultiExposure__vfn0_7e0df9a3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0df9b2` | 1 | `CapMex_MultiExposure__vfn1_7e0df9b2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfa0e` | 1 | `CapMex_MultiExposure__vfn0_7e0dfa0e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfa1d` | 1 | `CapMex_MultiExposure__vfn1_7e0dfa1d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfa73` | 1 | `CapMex_MultiExposure__vfn0_7e0dfa73` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfa82` | 1 | `CapMex_MultiExposure__vfn1_7e0dfa82` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfad8` | 1 | `CapMex_MultiExposure__vfn0_7e0dfad8` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfae7` | 1 | `CapMex_MultiExposure__vfn1_7e0dfae7` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfb43` | 1 | `CapMex_MultiExposure__vfn0_7e0dfb43` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfb52` | 1 | `CapMex_MultiExposure__vfn1_7e0dfb52` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfbbd` | 1 | `CapMex_MultiExposure__vfn1_7e0dfbbd` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0dfc11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0dfc11` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0dfcea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0dfcea` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0dfcef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0dfcef` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0dffc5` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e0dffc5` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e004f` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e0e004f` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e00a7` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e0e00a7` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e00ff` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e0e00ff` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e0158` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e0e0158` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e01b4` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e0e01b4` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e01d2` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0e01d2` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e03b4` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e0e03b4` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e0558` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e0e0558` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e059d` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0e059d` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e05bd` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e0e05bd` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e061e` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e0e061e` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e064f` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e0e064f` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e0671` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e0e0671` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e06b3` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0e06b3` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e07f0` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e0e07f0` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e09f7` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e0e09f7` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e0adc` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e0e0adc` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e25af` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0e25af` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e29f3` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0e29f3` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e2a79` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0e2a79` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e2b69` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0e2b69` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e53ca` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0e53ca` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0e554e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0e554e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e5553` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0e5553` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0e5645` | 36 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0e5645` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e5863` | 34 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0e5863` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e593a` | 34 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0e593a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e5cdc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0e5cdc` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e5d0c` | 36 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0e5d0c` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e60cb` | 34 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0e60cb` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e65da` | 36 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0e65da` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e6665` | 34 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e0e6665` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e681e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0e681e` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e6b5f` | 1 | `CapMex_MultiExposure__vfn0_7e0e6b5f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e6fed` | 1 | `CapMex_MultiExposure__vfn0_7e0e6fed` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e6ffc` | 1 | `CapMex_MultiExposure__vfn1_7e0e6ffc` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7058` | 1 | `CapMex_MultiExposure__vfn0_7e0e7058` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7067` | 1 | `CapMex_MultiExposure__vfn1_7e0e7067` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e70c3` | 1 | `CapMex_MultiExposure__vfn0_7e0e70c3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e70d2` | 1 | `CapMex_MultiExposure__vfn1_7e0e70d2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7132` | 1 | `CapMex_MultiExposure__vfn0_7e0e7132` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7141` | 1 | `CapMex_MultiExposure__vfn1_7e0e7141` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e71aa` | 1 | `CapMex_MultiExposure__vfn0_7e0e71aa` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e71b9` | 1 | `CapMex_MultiExposure__vfn1_7e0e71b9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7213` | 1 | `CapMex_MultiExposure__vfn0_7e0e7213` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e7222` | 1 | `CapMex_MultiExposure__vfn1_7e0e7222` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e728b` | 1 | `CapMex_MultiExposure__vfn1_7e0e728b` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e76c4` | 3 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e0e76c4` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e8d3b` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0e8d3b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e8d68` | 1 | `CapMex_MultiExposure__vfn0_7e0e8d68` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8d77` | 1 | `CapMex_MultiExposure__vfn18_7e0e8d77` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8dd1` | 1 | `CapMex_MultiExposure__vfn0_7e0e8dd1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8de0` | 1 | `CapMex_MultiExposure__vfn1_7e0e8de0` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8e3e` | 1 | `CapMex_MultiExposure__vfn0_7e0e8e3e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8e5d` | 1 | `CapMex_MultiExposure__vfn1_7e0e8e5d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8ec3` | 1 | `CapMex_MultiExposure__vfn0_7e0e8ec3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8ed2` | 1 | `CapMex_MultiExposure__vfn1_7e0e8ed2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8f2c` | 1 | `CapMex_MultiExposure__vfn0_7e0e8f2c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8f3b` | 1 | `CapMex_MultiExposure__vfn1_7e0e8f3b` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8f9f` | 1 | `CapMex_MultiExposure__vfn1_7e0e8f9f` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e8fef` | 1 | `CapMex_MultiExposure__ctordtor_7e0e8fef` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0e9000` | 1 | `CapMex_MultiExposure__vfn0_7e0e9000` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e900f` | 1 | `CapMex_MultiExposure__vfn0_7e0e900f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e9069` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0e9069` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e9078` | 1 | `CapMex_MultiExposure__vfn1_7e0e9078` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e0e9189` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0e9189` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e9198` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0e9198` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e91a7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0e91a7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e91b6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0e91b6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0e91c5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0e91c5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3a5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3a5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3b4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3c3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3c3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3d2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3d2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3e1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3e1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3f0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3f0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea3ff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea3ff` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea40e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea40e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea41d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea41d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea42c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea42c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea43b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea43b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea44a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea44a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea459` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea459` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea468` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea468` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea477` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea477` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea486` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea486` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea495` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea495` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4a4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4a4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4b3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4b3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4c2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4c2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4d1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4d1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4e0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4e0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4ef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4ef` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea4fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea4fe` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea50d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea50d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea51c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea51c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea52b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea52b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea53a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea53a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea549` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea549` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea558` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea558` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea567` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea567` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea576` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea576` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea585` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea585` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea594` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea594` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5a3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5a3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5b2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5c1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5c1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5d0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5d0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5df` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5df` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5ee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5ee` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea5fd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea5fd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea60c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea60c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea61b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea61b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea62a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea62a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea639` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea639` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea648` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea648` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea657` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea657` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea666` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea666` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea675` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea675` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea684` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea684` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea693` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea693` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6a2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6a2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6b1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6b1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6c0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6c0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6cf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6cf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6de` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6de` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6ed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6ed` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea6fc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea6fc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea70b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea70b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea71a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea71a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea729` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea729` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea738` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea738` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea747` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea747` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea756` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea756` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea765` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea765` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea774` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea774` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea783` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea783` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea792` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea792` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7a1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7a1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7b0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7b0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7bf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7bf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7ce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7ce` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7dd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7dd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7ec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7ec` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea7fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea7fb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea80a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea80a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea819` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea819` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea828` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea828` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea837` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea837` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea846` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea846` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea855` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea855` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea864` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea864` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea873` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea873` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea882` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea882` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea891` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea891` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8a0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8be` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8cd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8dc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8eb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea8fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea8fa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea909` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea909` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea918` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea918` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea927` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea927` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea936` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea936` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea945` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea945` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea954` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea954` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea963` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea963` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea972` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea972` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea981` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea981` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea990` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea990` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea99f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea99f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9ae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9bd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9bd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9cc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9cc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9db` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9ea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9ea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ea9f9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ea9f9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa08` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa08` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa17` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa26` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa35` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa35` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa44` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa53` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa53` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa62` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa71` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa71` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa80` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa8f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa8f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaa9e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaa9e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaaad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaaad` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaabc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaabc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaacb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaacb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaada` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaada` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaae9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaae9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eaaf8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eaaf8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab07` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab07` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab16` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab16` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab25` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab25` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab34` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab34` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab43` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab43` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab52` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab52` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab61` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab61` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab70` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab70` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0eab7f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0eab7f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebaee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebaee` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebafd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebafd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb0c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb0c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb1b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb1b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb2a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb2a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb39` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb39` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb48` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb48` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb57` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb57` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb66` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb66` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb75` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb75` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb84` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb84` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebb93` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebb93` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebba2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebba2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbb1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbb1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbc0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbc0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbcf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbcf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbde` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbde` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbed` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebbfc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebbfc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc0b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc0b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc1a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc1a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc29` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc29` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc38` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc38` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc47` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc47` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc56` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc56` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc65` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc65` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc74` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc74` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc83` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc83` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebc92` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebc92` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebca1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebca1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcb0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcb0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcbf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcbf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcce` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcdd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcdd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcec` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebcfb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebcfb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd0a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd0a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd19` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd19` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd28` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd28` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd37` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd37` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd46` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd46` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd55` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd55` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd64` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd64` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd73` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd73` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd82` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd82` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebd91` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebd91` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebda0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebda0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebdaf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebdaf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebdbe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebdbe` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebdcd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebdcd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebddc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebddc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebdeb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebdeb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebdfa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebdfa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe09` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe09` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe18` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe18` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe27` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe27` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe36` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe36` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe45` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe45` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe54` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe54` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe63` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe63` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe72` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe72` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe81` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe81` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe90` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe90` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebe9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebe9f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebeae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebeae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebebd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebebd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebecc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebecc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebedb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebedb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebeea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebeea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebef9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebef9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf08` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf08` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf17` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf26` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf35` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf35` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf44` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf53` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf53` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf62` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf71` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf71` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf80` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf8f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf8f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebf9e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebf9e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebfad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebfad` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebfbc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebfbc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebfcb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebfcb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebfda` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebfda` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebfe9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebfe9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ebff8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ebff8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec007` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec007` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec016` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec016` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec025` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec025` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec034` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec034` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec043` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec043` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec052` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec052` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec061` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec061` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec070` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec070` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec07f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec07f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec08e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec08e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec09d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec09d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0ac` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0ac` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0bb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0bb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0ca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0ca` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0d9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0d9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0e8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0e8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec0f7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec0f7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec106` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec106` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec115` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec115` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec124` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec124` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec133` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec133` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec142` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec142` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec151` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec151` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec160` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec160` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec16f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec16f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec17e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec17e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec18d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec18d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec19c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec19c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1ab` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1ab` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1ba` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1ba` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1c9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1c9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1d8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1d8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1e7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec1f6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec1f6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec205` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec205` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec214` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec214` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec223` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec223` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec232` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec232` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec291` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec291` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec2a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0ec2a0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ec734` | 1 | `cls_7e3ead04__ctordtor_7e0ec734` | Constructor or destructor of class `cls_7e3ead04` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ecfda` | 1 | `cls_7e3ead04__vfn0_7e0ecfda` | Vtable slot 0 (byte offset `+0`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ed0f2` | 1 | `cls_7e3ead04__vfn1_7e0ed0f2` | Vtable slot 1 (byte offset `+4`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ed209` | 1 | `cls_7e3ead04__vfn2_7e0ed209` | Vtable slot 2 (byte offset `+8`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ed324` | 1 | `cls_7e3ead04__vfn3_7e0ed324` | Vtable slot 3 (byte offset `+12`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ed3b5` | 1 | `cls_7e3ead04__vfn4_7e0ed3b5` | Vtable slot 4 (byte offset `+16`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ed44d` | 1 | `cls_7e3ead04__vfn5_7e0ed44d` | Vtable slot 5 (byte offset `+20`) of class `cls_7e3ead04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0edfef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0edfef` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0edffe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0edffe` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ee05f` | 1 | `cls_7e5fa2fc__vfn24_7e0ee05f` | Vtable slot 24 (byte offset `+96`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e0ef0ef` | 8 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ef0ef` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0ef2e9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0ef2e9` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0ef2ee` | 7 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0ef2ee` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e0f1a21` | 5 | `MULTI__vfn0_7e0f1a21` | Vtable slot 0 (byte offset `+0`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e0f1bc8` | 7 | `MULTI__vfn1_7e0f1bc8` | Vtable slot 1 (byte offset `+4`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e0f1dda` | 4 | `MULTI__vfn2_7e0f1dda` | Vtable slot 2 (byte offset `+8`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e0f20a0` | 8 | `MULTI__vfn3_7e0f20a0` | Vtable slot 3 (byte offset `+12`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e0f2100` | 8 | `MULTI__vfn4_7e0f2100` | Vtable slot 4 (byte offset `+16`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e0f3d30` | 8 | `CmpSqp_SequencePartsBase__vfn2_7e0f3d30` | Vtable slot 2 (byte offset `+8`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3d54` | 8 | `CmpSqp_SequencePartsBase__vfn3_7e0f3d54` | Vtable slot 3 (byte offset `+12`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3d78` | 8 | `CmpSqp_SequencePartsBase__vfn4_7e0f3d78` | Vtable slot 4 (byte offset `+16`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3d9c` | 8 | `CmpSqp_SequencePartsBase__vfn5_7e0f3d9c` | Vtable slot 5 (byte offset `+20`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3dc0` | 8 | `CmpSqp_SequencePartsBase__vfn6_7e0f3dc0` | Vtable slot 6 (byte offset `+24`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3de4` | 8 | `CmpSqp_SequencePartsBase__vfn7_7e0f3de4` | Vtable slot 7 (byte offset `+28`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3e08` | 8 | `CmpSqp_SequencePartsBase__vfn8_7e0f3e08` | Vtable slot 8 (byte offset `+32`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3e2c` | 8 | `CmpSqp_SequencePartsBase__vfn9_7e0f3e2c` | Vtable slot 9 (byte offset `+36`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3e50` | 8 | `CmpSqp_SequencePartsBase__vfn10_7e0f3e50` | Vtable slot 10 (byte offset `+40`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3e74` | 8 | `CmpSqp_SequencePartsBase__vfn11_7e0f3e74` | Vtable slot 11 (byte offset `+44`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3e98` | 8 | `CmpSqp_SequencePartsBase__vfn12_7e0f3e98` | Vtable slot 12 (byte offset `+48`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3f4f` | 8 | `CmpSqp_SequencePartsBase__vfn14_7e0f3f4f` | Vtable slot 14 (byte offset `+56`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3f6e` | 8 | `CmpSqp_SequencePartsBase__vfn13_7e0f3f6e` | Vtable slot 13 (byte offset `+52`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3fb6` | 8 | `CmpSqp_SequencePartsBase__vfn15_7e0f3fb6` | Vtable slot 15 (byte offset `+60`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f3ffe` | 8 | `CmpSqp_SequencePartsBase__vfn18_7e0f3ffe` | Vtable slot 18 (byte offset `+72`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f407d` | 8 | `CmpSqp_SequencePartsBase__vfn16_7e0f407d` | Vtable slot 16 (byte offset `+64`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f40dc` | 8 | `CmpSqp_SequencePartsBase__vfn17_7e0f40dc` | Vtable slot 17 (byte offset `+68`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f411d` | 8 | `CmpSqp_SequencePartsBase__vfn19_7e0f411d` | Vtable slot 19 (byte offset `+76`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f41a6` | 8 | `CmpSqp_SequencePartsBase__vfn20_7e0f41a6` | Vtable slot 20 (byte offset `+80`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4248` | 8 | `CmpSqp_SequencePartsBase__vfn21_7e0f4248` | Vtable slot 21 (byte offset `+84`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f42ea` | 8 | `CmpSqp_SequencePartsBase__vfn22_7e0f42ea` | Vtable slot 22 (byte offset `+88`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4333` | 8 | `CmpSqp_SequencePartsBase__vfn81_7e0f4333` | Vtable slot 81 (byte offset `+324`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f43ba` | 8 | `CmpSqp_SequencePartsBase__vfn23_7e0f43ba` | Vtable slot 23 (byte offset `+92`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f43f4` | 8 | `CmpSqp_SequencePartsBase__vfn24_7e0f43f4` | Vtable slot 24 (byte offset `+96`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f44f3` | 8 | `CmpSqp_SequencePartsBase__vfn25_7e0f44f3` | Vtable slot 25 (byte offset `+100`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4526` | 8 | `CmpSqp_SequencePartsBase__vfn26_7e0f4526` | Vtable slot 26 (byte offset `+104`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f45b6` | 8 | `CmpSqp_SequencePartsBase__vfn27_7e0f45b6` | Vtable slot 27 (byte offset `+108`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f464b` | 8 | `CmpSqp_SequencePartsBase__vfn28_7e0f464b` | Vtable slot 28 (byte offset `+112`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4685` | 8 | `CmpSqp_SequencePartsBase__vfn29_7e0f4685` | Vtable slot 29 (byte offset `+116`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f479c` | 8 | `CmpSqp_SequencePartsBase__vfn30_7e0f479c` | Vtable slot 30 (byte offset `+120`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f47cf` | 8 | `CmpSqp_SequencePartsBase__vfn31_7e0f47cf` | Vtable slot 31 (byte offset `+124`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4925` | 8 | `CmpSqp_SequencePartsBase__vfn33_7e0f4925` | Vtable slot 33 (byte offset `+132`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f493f` | 8 | `CmpSqp_SequencePartsBase__vfn34_7e0f493f` | Vtable slot 34 (byte offset `+136`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f496b` | 8 | `CmpSqp_SequencePartsBase__vfn35_7e0f496b` | Vtable slot 35 (byte offset `+140`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4997` | 8 | `CmpSqp_SequencePartsBase__vfn36_7e0f4997` | Vtable slot 36 (byte offset `+144`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f49c3` | 8 | `CmpSqp_SequencePartsBase__vfn37_7e0f49c3` | Vtable slot 37 (byte offset `+148`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f49ef` | 8 | `CmpSqp_SequencePartsBase__vfn38_7e0f49ef` | Vtable slot 38 (byte offset `+152`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4a1b` | 8 | `CmpSqp_SequencePartsBase__vfn39_7e0f4a1b` | Vtable slot 39 (byte offset `+156`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4a47` | 8 | `CmpSqp_SequencePartsBase__vfn40_7e0f4a47` | Vtable slot 40 (byte offset `+160`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4a73` | 8 | `CmpSqp_SequencePartsBase__vfn41_7e0f4a73` | Vtable slot 41 (byte offset `+164`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4a9f` | 8 | `CmpSqp_SequencePartsBase__vfn42_7e0f4a9f` | Vtable slot 42 (byte offset `+168`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4acb` | 8 | `CmpSqp_SequencePartsBase__vfn43_7e0f4acb` | Vtable slot 43 (byte offset `+172`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4af7` | 8 | `CmpSqp_SequencePartsBase__vfn44_7e0f4af7` | Vtable slot 44 (byte offset `+176`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4b23` | 8 | `CmpSqp_SequencePartsBase__vfn45_7e0f4b23` | Vtable slot 45 (byte offset `+180`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4b4e` | 8 | `CmpSqp_SequencePartsBase__vfn46_7e0f4b4e` | Vtable slot 46 (byte offset `+184`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4bcd` | 8 | `CmpSqp_SequencePartsBase__vfn47_7e0f4bcd` | Vtable slot 47 (byte offset `+188`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4bf8` | 8 | `CmpSqp_SequencePartsBase__vfn48_7e0f4bf8` | Vtable slot 48 (byte offset `+192`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4cb6` | 8 | `CmpSqp_SequencePartsBase__vfn49_7e0f4cb6` | Vtable slot 49 (byte offset `+196`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4ce1` | 8 | `CmpSqp_SequencePartsBase__vfn50_7e0f4ce1` | Vtable slot 50 (byte offset `+200`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4dcc` | 8 | `CmpSqp_SequencePartsBase__vfn51_7e0f4dcc` | Vtable slot 51 (byte offset `+204`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4df6` | 8 | `CmpSqp_SequencePartsBase__vfn52_7e0f4df6` | Vtable slot 52 (byte offset `+208`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4e22` | 8 | `CmpSqp_SequencePartsBase__vfn53_7e0f4e22` | Vtable slot 53 (byte offset `+212`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4e4e` | 8 | `CmpSqp_SequencePartsBase__vfn54_7e0f4e4e` | Vtable slot 54 (byte offset `+216`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4e7a` | 8 | `CmpSqp_SequencePartsBase__vfn55_7e0f4e7a` | Vtable slot 55 (byte offset `+220`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4ea6` | 8 | `CmpSqp_SequencePartsBase__vfn56_7e0f4ea6` | Vtable slot 56 (byte offset `+224`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4ed2` | 8 | `CmpSqp_SequencePartsBase__vfn57_7e0f4ed2` | Vtable slot 57 (byte offset `+228`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4efe` | 8 | `CmpSqp_SequencePartsBase__vfn58_7e0f4efe` | Vtable slot 58 (byte offset `+232`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4f2a` | 8 | `CmpSqp_SequencePartsBase__vfn59_7e0f4f2a` | Vtable slot 59 (byte offset `+236`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4f56` | 8 | `CmpSqp_SequencePartsBase__vfn60_7e0f4f56` | Vtable slot 60 (byte offset `+240`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4f82` | 8 | `CmpSqp_SequencePartsBase__vfn61_7e0f4f82` | Vtable slot 61 (byte offset `+244`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4f9c` | 8 | `CmpSqp_SequencePartsBase__vfn62_7e0f4f9c` | Vtable slot 62 (byte offset `+248`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4fc8` | 8 | `CmpSqp_SequencePartsBase__vfn63_7e0f4fc8` | Vtable slot 63 (byte offset `+252`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f4ff4` | 8 | `CmpSqp_SequencePartsBase__vfn64_7e0f4ff4` | Vtable slot 64 (byte offset `+256`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5020` | 8 | `CmpSqp_SequencePartsBase__vfn65_7e0f5020` | Vtable slot 65 (byte offset `+260`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f504c` | 8 | `CmpSqp_SequencePartsBase__vfn66_7e0f504c` | Vtable slot 66 (byte offset `+264`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5078` | 8 | `CmpSqp_SequencePartsBase__vfn67_7e0f5078` | Vtable slot 67 (byte offset `+268`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f50a4` | 8 | `CmpSqp_SequencePartsBase__vfn68_7e0f50a4` | Vtable slot 68 (byte offset `+272`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f50d0` | 8 | `CmpSqp_SequencePartsBase__vfn69_7e0f50d0` | Vtable slot 69 (byte offset `+276`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f50fc` | 8 | `CmpSqp_SequencePartsBase__vfn70_7e0f50fc` | Vtable slot 70 (byte offset `+280`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5128` | 8 | `CmpSqp_SequencePartsBase__vfn71_7e0f5128` | Vtable slot 71 (byte offset `+284`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5142` | 8 | `CmpSqp_SequencePartsBase__vfn72_7e0f5142` | Vtable slot 72 (byte offset `+288`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f516e` | 8 | `CmpSqp_SequencePartsBase__vfn73_7e0f516e` | Vtable slot 73 (byte offset `+292`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f519a` | 8 | `CmpSqp_SequencePartsBase__vfn74_7e0f519a` | Vtable slot 74 (byte offset `+296`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f51c6` | 8 | `CmpSqp_SequencePartsBase__vfn75_7e0f51c6` | Vtable slot 75 (byte offset `+300`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f51f2` | 8 | `CmpSqp_SequencePartsBase__vfn76_7e0f51f2` | Vtable slot 76 (byte offset `+304`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f521e` | 8 | `CmpSqp_SequencePartsBase__vfn77_7e0f521e` | Vtable slot 77 (byte offset `+308`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f524a` | 8 | `CmpSqp_SequencePartsBase__vfn78_7e0f524a` | Vtable slot 78 (byte offset `+312`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5276` | 8 | `CmpSqp_SequencePartsBase__vfn79_7e0f5276` | Vtable slot 79 (byte offset `+316`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f52a2` | 8 | `CmpSqp_SequencePartsBase__vfn80_7e0f52a2` | Vtable slot 80 (byte offset `+320`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f52ce` | 8 | `CmpSqp_SequencePartsBase__vfn82_7e0f52ce` | Vtable slot 82 (byte offset `+328`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5334` | 8 | `CmpSqp_SequencePartsBase__vfn83_7e0f5334` | Vtable slot 83 (byte offset `+332`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e0f5532` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e0f5532` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f5c12` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e0f5c12` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f65c0` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e0f65c0` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f71e6` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e0f71e6` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f87c1` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e0f87c1` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f8eee` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e0f8eee` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f98b9` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e0f98b9` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0f9c90` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e0f9c90` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0fa990` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e0fa990` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e0fb7a0` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e0fb7a0` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e100419` | 6 | `CmpSqp_SequencePartsMultiExposure__vfn0_7e100419` | Vtable slot 0 (byte offset `+0`) of class `CmpSqp_SequencePartsMultiExposure`. | Ghidra vtable pass |
+| `0x7e10377e` | 5 | `CmpSqpB__vfn0_7e10377e` | Vtable slot 0 (byte offset `+0`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e10393d` | 8 | `CmpSqpB__vfn1_7e10393d` | Vtable slot 1 (byte offset `+4`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1039b8` | 8 | `CmpSqpB__vfn2_7e1039b8` | Vtable slot 2 (byte offset `+8`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e103a2d` | 7 | `CmpSqpB__vfn3_7e103a2d` | Vtable slot 3 (byte offset `+12`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e103fb7` | 8 | `CmpSqpB__vfn4_7e103fb7` | Vtable slot 4 (byte offset `+16`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1040b5` | 7 | `CmpSqpB__vfn5_7e1040b5` | Vtable slot 5 (byte offset `+20`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e10436e` | 6 | `CmpSqpB__vfn7_7e10436e` | Vtable slot 7 (byte offset `+28`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1044aa` | 7 | `CmpSqpB__vfn8_7e1044aa` | Vtable slot 8 (byte offset `+32`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104556` | 8 | `CmpSqpB__vfn10_7e104556` | Vtable slot 10 (byte offset `+40`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104574` | 6 | `CmpSqpB__vfn9_7e104574` | Vtable slot 9 (byte offset `+36`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1047fe` | 6 | `CmpSqpB__vfn11_7e1047fe` | Vtable slot 11 (byte offset `+44`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104913` | 6 | `CmpSqpB__vfn12_7e104913` | Vtable slot 12 (byte offset `+48`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104b61` | 8 | `CmpSqpB__vfn15_7e104b61` | Vtable slot 15 (byte offset `+60`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104be5` | 8 | `CmpSqpB__vfn13_7e104be5` | Vtable slot 13 (byte offset `+52`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104bf3` | 8 | `CmpSqpB__vfn14_7e104bf3` | Vtable slot 14 (byte offset `+56`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104ceb` | 8 | `CmpSqpB__vfn16_7e104ceb` | Vtable slot 16 (byte offset `+64`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e104d8e` | 8 | `CmpSqpB__vfn17_7e104d8e` | Vtable slot 17 (byte offset `+68`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e106069` | 7 | `CmpSqpB__vfn18_7e106069` | Vtable slot 18 (byte offset `+72`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1067ea` | 7 | `CmpSqpB__vfn19_7e1067ea` | Vtable slot 19 (byte offset `+76`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1068af` | 8 | `CmpSqpB__vfn20_7e1068af` | Vtable slot 20 (byte offset `+80`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e106aae` | 8 | `CmpSqpB__vfn21_7e106aae` | Vtable slot 21 (byte offset `+84`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1072a6` | 8 | `CmpSqpB__vfn22_7e1072a6` | Vtable slot 22 (byte offset `+88`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e10746a` | 8 | `CmpSqpB__vfn23_7e10746a` | Vtable slot 23 (byte offset `+92`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e107840` | 8 | `CmpSqpB__vfn24_7e107840` | Vtable slot 24 (byte offset `+96`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e107945` | 8 | `CmpSqpB__vfn25_7e107945` | Vtable slot 25 (byte offset `+100`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e107ec3` | 7 | `CmpSqpB__vfn26_7e107ec3` | Vtable slot 26 (byte offset `+104`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e10803a` | 6 | `CmpSqpB__vfn27_7e10803a` | Vtable slot 27 (byte offset `+108`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1084d7` | 8 | `CmpSqpB__vfn28_7e1084d7` | Vtable slot 28 (byte offset `+112`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e108d82` | 8 | `CmpSqpB__vfn29_7e108d82` | Vtable slot 29 (byte offset `+116`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e10bffd` | 8 | `CmpShc_ShootingSequenceBase__vfn0_7e10bffd` | Vtable slot 0 (byte offset `+0`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10c048` | 8 | `CmpShc_ShootingSequenceBase__vfn1_7e10c048` | Vtable slot 1 (byte offset `+4`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10c0ba` | 8 | `CmpShc_ShootingSequenceBase__vfn2_7e10c0ba` | Vtable slot 2 (byte offset `+8`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10c12d` | 8 | `CmpShc_ShootingSequenceBase__vfn3_7e10c12d` | Vtable slot 3 (byte offset `+12`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10ee47` | 8 | `CmpShc_ShootingSequenceBase__vfn5_7e10ee47` | Vtable slot 5 (byte offset `+20`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10eeed` | 8 | `CmpShc_ShootingSequenceBase__vfn6_7e10eeed` | Vtable slot 6 (byte offset `+24`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10f4bf` | 7 | `CmpShc_ShootingSequenceBase__vfn7_7e10f4bf` | Vtable slot 7 (byte offset `+28`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e10f929` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e10f929` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e10facb` | 6 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e10facb` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e10fd06` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e10fd06` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e10fe90` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e10fe90` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1103c9` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn34_7e1103c9` | Vtable slot 34 (byte offset `+136`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1107ab` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e1107ab` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110810` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e110810` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110b7f` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e110b7f` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110be4` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e110be4` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110c0f` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e110c0f` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110c74` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e110c74` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110cc7` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e110cc7` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110d36` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e110d36` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110d89` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e110d89` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110df8` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e110df8` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110ed1` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e110ed1` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110f2e` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn25_7e110f2e` | Vtable slot 25 (byte offset `+100`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110f59` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e110f59` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110fb7` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn27_7e110fb7` | Vtable slot 27 (byte offset `+108`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e110fe2` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e110fe2` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111040` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn29_7e111040` | Vtable slot 29 (byte offset `+116`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11106b` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e11106b` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111100` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn31_7e111100` | Vtable slot 31 (byte offset `+124`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11112b` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e11112b` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1111c0` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn33_7e1111c0` | Vtable slot 33 (byte offset `+132`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1111eb` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn35_7e1111eb` | Vtable slot 35 (byte offset `+140`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11125a` | 7 | `OlyHfwOpeSndCtlSoundEvFw__vfn36_7e11125a` | Vtable slot 36 (byte offset `+144`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1112bf` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn37_7e1112bf` | Vtable slot 37 (byte offset `+148`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11132e` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn38_7e11132e` | Vtable slot 38 (byte offset `+152`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1114ad` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn39_7e1114ad` | Vtable slot 39 (byte offset `+156`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1114fe` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn40_7e1114fe` | Vtable slot 40 (byte offset `+160`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1115d4` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn41_7e1115d4` | Vtable slot 41 (byte offset `+164`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111625` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn42_7e111625` | Vtable slot 42 (byte offset `+168`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1116fb` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn43_7e1116fb` | Vtable slot 43 (byte offset `+172`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11174c` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn44_7e11174c` | Vtable slot 44 (byte offset `+176`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11187f` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn45_7e11187f` | Vtable slot 45 (byte offset `+180`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1118d0` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn46_7e1118d0` | Vtable slot 46 (byte offset `+184`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11192b` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn47_7e11192b` | Vtable slot 47 (byte offset `+188`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111a0c` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn48_7e111a0c` | Vtable slot 48 (byte offset `+192`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111ab8` | 8 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e111ab8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e111b62` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn50_7e111b62` | Vtable slot 50 (byte offset `+200`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e111bb3` | 8 | `OlyHfwOpeSndCtlSoundEvFw__vfn51_7e111bb3` | Vtable slot 51 (byte offset `+204`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11313e` | 8 | `CmpShc_ShootingSequenceBase__vfn8_7e11313e` | Vtable slot 8 (byte offset `+32`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1131b2` | 8 | `CmpShc_ShootingSequenceBase__vfn9_7e1131b2` | Vtable slot 9 (byte offset `+36`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1132a1` | 8 | `CmpShc_ShootingSequenceBase__vfn10_7e1132a1` | Vtable slot 10 (byte offset `+40`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1132d2` | 8 | `CmpShc_ShootingSequenceBase__vfn11_7e1132d2` | Vtable slot 11 (byte offset `+44`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113303` | 8 | `CmpShc_ShootingSequenceBase__vfn12_7e113303` | Vtable slot 12 (byte offset `+48`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113334` | 8 | `CmpShc_ShootingSequenceBase__vfn13_7e113334` | Vtable slot 13 (byte offset `+52`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113365` | 8 | `CmpShc_ShootingSequenceBase__vfn14_7e113365` | Vtable slot 14 (byte offset `+56`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113396` | 8 | `CmpShc_ShootingSequenceBase__vfn15_7e113396` | Vtable slot 15 (byte offset `+60`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1133c7` | 8 | `CmpShc_ShootingSequenceBase__vfn16_7e1133c7` | Vtable slot 16 (byte offset `+64`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1133f8` | 8 | `CmpShc_ShootingSequenceBase__vfn17_7e1133f8` | Vtable slot 17 (byte offset `+68`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113429` | 8 | `CmpShc_ShootingSequenceBase__vfn18_7e113429` | Vtable slot 18 (byte offset `+72`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e11345a` | 8 | `CmpShc_ShootingSequenceBase__vfn19_7e11345a` | Vtable slot 19 (byte offset `+76`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e11348b` | 8 | `CmpShc_ShootingSequenceBase__vfn20_7e11348b` | Vtable slot 20 (byte offset `+80`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1134bc` | 8 | `CmpShc_ShootingSequenceBase__vfn21_7e1134bc` | Vtable slot 21 (byte offset `+84`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e1134ed` | 8 | `CmpShc_ShootingSequenceBase__vfn22_7e1134ed` | Vtable slot 22 (byte offset `+88`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e11351e` | 8 | `CmpShc_ShootingSequenceBase__vfn23_7e11351e` | Vtable slot 23 (byte offset `+92`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e11354f` | 8 | `CmpShc_ShootingSequenceBase__vfn24_7e11354f` | Vtable slot 24 (byte offset `+96`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e113580` | 8 | `CmpShc_ShootingSequenceBase__vfn25_7e113580` | Vtable slot 25 (byte offset `+100`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114ad9` | 8 | `CmpShc_ShootingSequenceBase__vfn26_7e114ad9` | Vtable slot 26 (byte offset `+104`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114b0c` | 8 | `CmpShc_ShootingSequenceBase__vfn27_7e114b0c` | Vtable slot 27 (byte offset `+108`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114b4a` | 6 | `CmpShc_ShootingSequenceBase__vfn28_7e114b4a` | Vtable slot 28 (byte offset `+112`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114b56` | 8 | `CmpShc_ShootingSequenceBase__vfn29_7e114b56` | Vtable slot 29 (byte offset `+116`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114b62` | 6 | `CmpShc_ShootingSequenceBase__vfn30_7e114b62` | Vtable slot 30 (byte offset `+120`) of class `CmpShc_ShootingSequenceBase`. | Ghidra vtable pass |
+| `0x7e114cf8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e114cf8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e114d0e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e114d0e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1153b6` | 1 | `CmpSqpB__vfn0_7e1153b6` | Vtable slot 0 (byte offset `+0`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1153d3` | 1 | `CmpSqpB__vfn22_7e1153d3` | Vtable slot 22 (byte offset `+88`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e115480` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e115480` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1154a5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e1154a5` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1154d0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e1154d0` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1154fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e1154fb` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e115526` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e115526` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e115551` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e115551` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11557c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e11557c` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1155a7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn35_7e1155a7` | Vtable slot 35 (byte offset `+140`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1155eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1155eb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e11560d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e11560d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e115d77` | 1 | `MULTI__vfn2_7e115d77` | Vtable slot 2 (byte offset `+8`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e115eac` | 1 | `MULTI__vfn0_7e115eac` | Vtable slot 0 (byte offset `+0`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e116182` | 1 | `CmpSqp_SequencePartsBase__vfn1_7e116182` | Vtable slot 1 (byte offset `+4`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e1176ef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1176ef` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117700` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e117700` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11784e` | 1 | `CmpSqpB__vfn0_7e11784e` | Vtable slot 0 (byte offset `+0`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e1179ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1179ae` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117a46` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e117a46` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117b2f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e117b2f` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117b77` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e117b77` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117bbf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e117bbf` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117c07` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e117c07` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117c4f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e117c4f` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117c97` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn26_7e117c97` | Vtable slot 26 (byte offset `+104`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117ccd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn28_7e117ccd` | Vtable slot 28 (byte offset `+112`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117d03` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e117d03` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117d4b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn34_7e117d4b` | Vtable slot 34 (byte offset `+136`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117d93` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn37_7e117d93` | Vtable slot 37 (byte offset `+148`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117ddb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn36_7e117ddb` | Vtable slot 36 (byte offset `+144`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e117f5c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn38_7e117f5c` | Vtable slot 38 (byte offset `+152`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11802c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e11802c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e118042` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e118042` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e118126` | 1 | `MULTI__vfn2_7e118126` | Vtable slot 2 (byte offset `+8`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e1184d3` | 1 | `CmpSqpB__vfn23_7e1184d3` | Vtable slot 23 (byte offset `+92`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e11852b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e11852b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e11855f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e11855f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1185c2` | 1 | `MULTI__vfn0_7e1185c2` | Vtable slot 0 (byte offset `+0`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e1185ef` | 1 | `MULTI__vfn2_7e1185ef` | Vtable slot 2 (byte offset `+8`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e118734` | 1 | `CmpSqp_SequencePartsBase__vfn82_7e118734` | Vtable slot 82 (byte offset `+328`) of class `CmpSqp_SequencePartsBase`. | Ghidra vtable pass |
+| `0x7e1188d6` | 1 | `CmpSqp_SequencePartsMultiExposure__vfn0_7e1188d6` | Vtable slot 0 (byte offset `+0`) of class `CmpSqp_SequencePartsMultiExposure`. | Ghidra vtable pass |
+| `0x7e118a23` | 1 | `CmpSqpB__vfn7_7e118a23` | Vtable slot 7 (byte offset `+28`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e118a30` | 1 | `CmpSqpB__vfn9_7e118a30` | Vtable slot 9 (byte offset `+36`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e118ab9` | 1 | `CmpSqpB__vfn0_7e118ab9` | Vtable slot 0 (byte offset `+0`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e118b36` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e118b36` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e118b72` | 1 | `CmpSqpB__vfn11_7e118b72` | Vtable slot 11 (byte offset `+44`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e118bc8` | 1 | `CmpSqpB__vfn12_7e118bc8` | Vtable slot 12 (byte offset `+48`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e118c1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e118c1e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e118c4b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e118c4b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e119c80` | 1 | `MULTI__vfn0_7e119c80` | Vtable slot 0 (byte offset `+0`) of class `MULTI`. | Ghidra vtable pass |
+| `0x7e119dcd` | 1 | `CmpSqpB__vfn9_7e119dcd` | Vtable slot 9 (byte offset `+36`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e119e7a` | 1 | `CmpSqpB__vfn11_7e119e7a` | Vtable slot 11 (byte offset `+44`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e119f1e` | 1 | `CmpSqpB__vfn12_7e119f1e` | Vtable slot 12 (byte offset `+48`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e119f8f` | 1 | `CmpSqpB__vfn8_7e119f8f` | Vtable slot 8 (byte offset `+32`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e119fc4` | 1 | `CmpSqpB__vfn26_7e119fc4` | Vtable slot 26 (byte offset `+104`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e119ffd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e119ffd` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a024` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e11a024` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a04b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e11a04b` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a072` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e11a072` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a099` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e11a099` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a0c0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn30_7e11a0c0` | Vtable slot 30 (byte offset `+120`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a0e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn32_7e11a0e7` | Vtable slot 32 (byte offset `+128`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a10e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn35_7e11a10e` | Vtable slot 35 (byte offset `+140`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a140` | 1 | `CmpSqpB__vfn27_7e11a140` | Vtable slot 27 (byte offset `+108`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e11a2b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e11a2b4` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11a2f7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e11a2f7` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11ae76` | 1 | `CmpSqpB__vfn18_7e11ae76` | Vtable slot 18 (byte offset `+72`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e11b1c1` | 1 | `CmpSqpB__vfn5_7e11b1c1` | Vtable slot 5 (byte offset `+20`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e11b226` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e11b226` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e11b237` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e11b237` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11b5fc` | 1 | `CmpSqpB__vfn19_7e11b5fc` | Vtable slot 19 (byte offset `+76`) of class `CmpSqpB`. | Ghidra vtable pass |
+| `0x7e11b6ec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e11b6ec` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e11b7a3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e11b7a3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e11b7a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e11b7a8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e11b83c` | 1 | `CapMex_MultiExposure__vfn0_7e11b83c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e11b9d3` | 1 | `CapMex_MultiExposure__vfn2_7e11b9d3` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e11bdde` | 1 | `CapMex_MultiExposure__vfn5_7e11bdde` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e11c126` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e11c126` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e120a39` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e120a39` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e120c1f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e120c1f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e120c24` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e120c24` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e120f34` | 1 | `CapMex_MultiExposure__vfn0_7e120f34` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1211eb` | 1 | `CapMex_MultiExposure__vfn2_7e1211eb` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e121b72` | 1 | `CapMex_MultiExposure__vfn5_7e121b72` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e121bc2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e121bc2` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e124ff7` | 1 | `CapMex_MultiExposure__vfn8_7e124ff7` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e12500b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e12500b` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e125301` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e125301` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e125354` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e125354` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e125359` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e125359` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e125399` | 1 | `CapMex_MultiExposure__vfn0_7e125399` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1253c6` | 1 | `CapMex_MultiExposure__vfn2_7e1253c6` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e125452` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e125452` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e12572e` | 1 | `CapMex_MultiExposure__vfn8_7e12572e` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e125d8d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e125d8d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e125db2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e125db2` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e125dd9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e125dd9` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e125df5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e125df5` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e125e12` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e125e12` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1261ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1261ae` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e126422` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e126422` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1280e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1280e5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e128237` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e128237` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128539` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e128539` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128598` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e128598` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1285ae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e1285ae` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128762` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e128762` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128ad0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e128ad0` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128bdd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e128bdd` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128caa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e128caa` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e128daa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e128daa` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e129493` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e129493` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e130038` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e130038` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e130361` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e130361` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e130636` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e130636` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e134f91` | 1 | `CapMex_MultiExposure__ctordtor_7e134f91` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e135017` | 1 | `CapMex_MultiExposure__ctordtor_7e135017` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1350cf` | 1 | `CapMex_MultiExposure__ctordtor_7e1350cf` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e135187` | 1 | `CapMex_MultiExposure__ctordtor_7e135187` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1351ad` | 1 | `CapMex_MultiExposure__vfn0_7e1351ad` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e135257` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e135257` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e13543e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e13543e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e135443` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e135443` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e135fe8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e135fe8` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e136aaf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e136aaf` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e136acb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e136acb` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e139fe9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e139fe9` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e140f8d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e140f8d` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1412f4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1412f4` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14160c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e14160c` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14891d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e14891d` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e148968` | 1 | `CapMex_MultiExposure__ctordtor_7e148968` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1489ee` | 1 | `CapMex_MultiExposure__ctordtor_7e1489ee` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148aa6` | 1 | `CapMex_MultiExposure__ctordtor_7e148aa6` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148b5e` | 1 | `CapMex_MultiExposure__ctordtor_7e148b5e` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148b84` | 1 | `CapMex_MultiExposure__vfn0_7e148b84` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e148bdf` | 1 | `CapMex_MultiExposure__ctordtor_7e148bdf` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148c05` | 1 | `CapMex_MultiExposure__vfn0_7e148c05` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e148c9b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e148c9b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148cd8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e148cd8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e148f05` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e148f05` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e148f42` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e148f42` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e148f5e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e148f5e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e148f9a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e148f9a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e149060` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e149060` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1493f3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1493f3` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e149667` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e149667` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14b5a1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e14b5a1` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14b627` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e14b627` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e14b664` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14b664` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14b782` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e14b782` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14b7bf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14b7bf` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14b7db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e14b7db` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e14b800` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14b800` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14c253` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e14c253` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14c5d3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e14c5d3` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14c847` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e14c847` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14e5fd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e14e5fd` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e14e63a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14e63a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14e7fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e14e7fa` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14e837` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14e837` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14e853` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e14e853` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e14e880` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e14e880` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14e8ca` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e14e8ca` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14ec96` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e14ec96` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e14ef0a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e14ef0a` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e151b0c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e151b0c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e151b49` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e151b49` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e151cd3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e151cd3` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e151d10` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e151d10` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e151d2c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e151d2c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e151d51` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e151d51` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e152358` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e152358` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1527b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1527b4` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e152a28` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e152a28` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1567f1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1567f1` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e15682e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15682e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1569b8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1569b8` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1569f5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1569f5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e156a11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e156a11` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e156a45` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e156a45` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e156b97` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e156b97` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e156f9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e156f9f` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e157213` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e157213` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15a953` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e15a953` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e15a990` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15a990` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15ab88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e15ab88` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15abc5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15abc5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15abe1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e15abe1` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e15ac1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15ac1e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15b431` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e15b431` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15b87d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e15b87d` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15baf1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e15baf1` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15f942` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e15f942` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e15f97f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15f97f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15fb77` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e15fb77` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15fbb4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15fbb4` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15fbd0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e15fbd0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e15fbf5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e15fbf5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e15fcb7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e15fcb7` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16003b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e16003b` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1602af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1602af` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e161deb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e161deb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e161e3a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e161e3a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e162006` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e162006` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e162045` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e162045` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e162061` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e162061` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e162093` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e162093` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e162098` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e162098` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1634b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1634b2` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1638f0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1638f0` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e163b64` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e163b64` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e166b61` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e166b61` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e166bac` | 1 | `CapMex_MultiExposure__ctordtor_7e166bac` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e166bc7` | 1 | `CapMex_MultiExposure__vfn0_7e166bc7` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e166c57` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e166c57` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e166c94` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e166c94` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e166e1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e166e1e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e166e5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e166e5b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e166e77` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e166e77` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16708b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e16708b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1670fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1670fe` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1674fd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1674fd` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e167771` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e167771` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16a863` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e16a863` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e16a8a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16a8a0` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16aa2a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e16aa2a` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16aa67` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16aa67` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16aa83` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e16aa83` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e16aaa8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16aaa8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16aac5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e16aac5` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16ae79` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e16ae79` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16b0ed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e16b0ed` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16d6f7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e16d6f7` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e16d734` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16d734` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16d964` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e16d964` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16d9a1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16d9a1` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16d9bd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e16d9bd` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e16d9ee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e16d9ee` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16e022` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e16e022` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16e3be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e16e3be` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e16e632` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e16e632` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1703f4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1703f4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e170431` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e170431` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1705bb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1705bb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1705f8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1705f8` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e170614` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e170614` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e170834` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e170834` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1708a2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1708a2` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1708bc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1708bc` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e170cbb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e170cbb` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e170f2f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e170f2f` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e173f2d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e173f2d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e173f6a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e173f6a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17412a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e17412a` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e174167` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e174167` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e174183` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e174183` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1741ac` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1741ac` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17567f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e17567f` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e175a9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e175a9f` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e175d13` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e175d13` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179401` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e179401` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17943e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e17943e` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179476` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e179476` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1794b3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1794b3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179519` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e179519` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179555` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e179555` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1795b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1795b7` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179600` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e179600` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179624` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e179624` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17963a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e17963a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179881` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e179881` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179d2c` | 1 | `CapMex_MultiExposure__vfn0_7e179d2c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179d3b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e179d3b` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e179d97` | 1 | `CapMex_MultiExposure__vfn0_7e179d97` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179da6` | 1 | `CapMex_MultiExposure__vfn1_7e179da6` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179e07` | 1 | `CapMex_MultiExposure__vfn0_7e179e07` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179e16` | 1 | `CapMex_MultiExposure__vfn1_7e179e16` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179e72` | 1 | `CapMex_MultiExposure__vfn0_7e179e72` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179e81` | 1 | `CapMex_MultiExposure__vfn1_7e179e81` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179edd` | 1 | `CapMex_MultiExposure__vfn0_7e179edd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179eec` | 1 | `CapMex_MultiExposure__vfn1_7e179eec` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179f48` | 1 | `CapMex_MultiExposure__vfn0_7e179f48` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179f57` | 1 | `CapMex_MultiExposure__vfn1_7e179f57` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179fb3` | 1 | `CapMex_MultiExposure__vfn0_7e179fb3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e179fc2` | 1 | `CapMex_MultiExposure__vfn1_7e179fc2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a01e` | 1 | `CapMex_MultiExposure__vfn0_7e17a01e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a02d` | 1 | `CapMex_MultiExposure__vfn1_7e17a02d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a089` | 1 | `CapMex_MultiExposure__vfn0_7e17a089` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a098` | 1 | `CapMex_MultiExposure__vfn1_7e17a098` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a0f6` | 1 | `CapMex_MultiExposure__vfn0_7e17a0f6` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a105` | 1 | `CapMex_MultiExposure__vfn1_7e17a105` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a163` | 1 | `CapMex_MultiExposure__vfn0_7e17a163` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a172` | 1 | `CapMex_MultiExposure__vfn1_7e17a172` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a1d0` | 1 | `CapMex_MultiExposure__vfn0_7e17a1d0` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a1df` | 1 | `CapMex_MultiExposure__vfn1_7e17a1df` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a23d` | 1 | `CapMex_MultiExposure__vfn0_7e17a23d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a24c` | 1 | `CapMex_MultiExposure__vfn1_7e17a24c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a2aa` | 1 | `CapMex_MultiExposure__vfn0_7e17a2aa` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a2b9` | 1 | `CapMex_MultiExposure__vfn1_7e17a2b9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a324` | 1 | `CapMex_MultiExposure__vfn1_7e17a324` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17a3c8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e17a3c8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17a54c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e17a54c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17abff` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e17abff` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17ac59` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e17ac59` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17ac87` | 1 | `CapMex_MultiExposure__vfn0_7e17ac87` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ac96` | 1 | `OlyHfwOpeSndCtlSoundEvFw_sub7e412f98__vfn6_7e17ac96` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw_sub7e412f98`. | Ghidra vtable pass |
+| `0x7e17acf2` | 1 | `CapMex_MultiExposure__vfn0_7e17acf2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ad01` | 1 | `CapMex_MultiExposure__vfn1_7e17ad01` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ad5d` | 1 | `CapMex_MultiExposure__vfn0_7e17ad5d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ad6c` | 1 | `CapMex_MultiExposure__vfn1_7e17ad6c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17adc8` | 1 | `CapMex_MultiExposure__vfn0_7e17adc8` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17add7` | 1 | `CapMex_MultiExposure__vfn1_7e17add7` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ae33` | 1 | `CapMex_MultiExposure__vfn0_7e17ae33` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17ae42` | 1 | `CapMex_MultiExposure__vfn1_7e17ae42` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17aead` | 1 | `CapMex_MultiExposure__vfn1_7e17aead` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17aef8` | 1 | `CapMex_MultiExposure__ctordtor_7e17aef8` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17af0d` | 1 | `CapMex_MultiExposure__vfn0_7e17af0d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17af12` | 1 | `CapMex_MultiExposure__ctordtor_7e17af12` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17af2c` | 1 | `CapMex_MultiExposure__vfn0_7e17af2c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17afa2` | 1 | `CapMex_MultiExposure__vfn0_7e17afa2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17afb1` | 1 | `CapMex_MultiExposure__vfn1_7e17afb1` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b00d` | 1 | `CapMex_MultiExposure__vfn0_7e17b00d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b01c` | 1 | `CapMex_MultiExposure__vfn1_7e17b01c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b078` | 1 | `CapMex_MultiExposure__vfn0_7e17b078` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b087` | 1 | `CapMex_MultiExposure__vfn1_7e17b087` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b0e3` | 1 | `CapMex_MultiExposure__vfn0_7e17b0e3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b0f2` | 1 | `CapMex_MultiExposure__vfn1_7e17b0f2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b14e` | 1 | `CapMex_MultiExposure__vfn0_7e17b14e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b15d` | 1 | `CapMex_MultiExposure__vfn1_7e17b15d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b1b9` | 1 | `CapMex_MultiExposure__vfn0_7e17b1b9` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b1c8` | 1 | `CapMex_MultiExposure__vfn1_7e17b1c8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b224` | 1 | `CapMex_MultiExposure__vfn0_7e17b224` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b233` | 1 | `CapMex_MultiExposure__vfn1_7e17b233` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b29e` | 1 | `CapMex_MultiExposure__vfn1_7e17b29e` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b2e9` | 2 | `CapMex_MultiExposure__ctordtor_7e17b2e9` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17b301` | 1 | `CapMex_MultiExposure__vfn0_7e17b301` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b306` | 2 | `CapMex_MultiExposure__ctordtor_7e17b306` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17b320` | 1 | `CapMex_MultiExposure__vfn0_7e17b320` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b3af` | 1 | `CapMex_MultiExposure__vfn0_7e17b3af` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b3be` | 1 | `CapMex_MultiExposure__vfn1_7e17b3be` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b41a` | 1 | `CapMex_MultiExposure__vfn0_7e17b41a` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b429` | 1 | `CapMex_MultiExposure__vfn1_7e17b429` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b485` | 1 | `CapMex_MultiExposure__vfn0_7e17b485` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b494` | 1 | `CapMex_MultiExposure__vfn1_7e17b494` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b4f0` | 1 | `CapMex_MultiExposure__vfn0_7e17b4f0` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b4ff` | 1 | `CapMex_MultiExposure__vfn1_7e17b4ff` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b55b` | 1 | `CapMex_MultiExposure__vfn0_7e17b55b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b56a` | 1 | `CapMex_MultiExposure__vfn1_7e17b56a` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b5c6` | 1 | `CapMex_MultiExposure__vfn0_7e17b5c6` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b5d5` | 1 | `CapMex_MultiExposure__vfn1_7e17b5d5` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b631` | 1 | `CapMex_MultiExposure__vfn0_7e17b631` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b640` | 1 | `CapMex_MultiExposure__vfn1_7e17b640` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b69c` | 1 | `CapMex_MultiExposure__vfn0_7e17b69c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b6ab` | 1 | `CapMex_MultiExposure__vfn1_7e17b6ab` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b707` | 1 | `CapMex_MultiExposure__vfn0_7e17b707` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b716` | 1 | `CapMex_MultiExposure__vfn1_7e17b716` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b772` | 1 | `CapMex_MultiExposure__vfn0_7e17b772` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b781` | 1 | `CapMex_MultiExposure__vfn1_7e17b781` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b7dd` | 1 | `CapMex_MultiExposure__vfn0_7e17b7dd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b7ec` | 1 | `CapMex_MultiExposure__vfn1_7e17b7ec` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b848` | 1 | `CapMex_MultiExposure__vfn0_7e17b848` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b857` | 1 | `CapMex_MultiExposure__vfn1_7e17b857` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b8c2` | 1 | `CapMex_MultiExposure__vfn1_7e17b8c2` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e17b90d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e17b90d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17ba9d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e17ba9d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17baa2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e17baa2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e17c20e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e17c20e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17c510` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e17c510` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17c654` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e17c654` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17c7ed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e17c7ed` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17c819` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e17c819` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17c82f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e17c82f` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17ca82` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e17ca82` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e17cd17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn13_7e17cd17` | Vtable slot 13 (byte offset `+52`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1841c2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e1841c2` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18a6a5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e18a6a5` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18c0ca` | 1 | `CapMex_MultiExposure__vfn0_7e18c0ca` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e18c0d9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn16_7e18c0d9` | Vtable slot 16 (byte offset `+64`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18c144` | 1 | `CapMex_MultiExposure__vfn1_7e18c144` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e18cffc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e18cffc` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e18d039` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e18d039` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d29e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e18d29e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d2db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e18d2db` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d2f7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e18d2f7` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e18d320` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e18d320` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d453` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e18d453` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d4e0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e18d4e0` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d4f6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e18d4f6` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18d827` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e18d827` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e18da9b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e18da9b` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e190346` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e190346` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e190385` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e190385` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1905eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1905eb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19062a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e19062a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e190646` | 1 | `cls_7e5fa2fc__vfn25_7e190646` | Vtable slot 25 (byte offset `+100`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e191000` | 1 | `cls_7e5fa2fc__vfn26_7e191000` | Vtable slot 26 (byte offset `+104`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e191e17` | 1 | `cls_7e5fa2fc__vfn27_7e191e17` | Vtable slot 27 (byte offset `+108`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e19201c` | 6 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e19201c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e19215f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e19215f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e192164` | 6 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e192164` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e198ac2` | 23 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e198ac2` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e198c5b` | 30 | `OlyHfwOpeSndCtlSoundEvFw__vfn14_7e198c5b` | Vtable slot 14 (byte offset `+56`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19973c` | 28 | `OlyHfwOpeSndCtlSoundEvFw__vfn15_7e19973c` | Vtable slot 15 (byte offset `+60`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19a0fc` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn17_7e19a0fc` | Vtable slot 17 (byte offset `+68`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19a1ea` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn18_7e19a1ea` | Vtable slot 18 (byte offset `+72`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19a803` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn19_7e19a803` | Vtable slot 19 (byte offset `+76`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19a95a` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn20_7e19a95a` | Vtable slot 20 (byte offset `+80`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19ba0f` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn21_7e19ba0f` | Vtable slot 21 (byte offset `+84`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19baae` | 29 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e19baae` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19c365` | 20 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e19c365` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19e5a9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e19e5a9` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19e69f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e19e69f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19e6b6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e19e6b6` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e19ec14` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e19ec14` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a040d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a040d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a044a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a044a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a0667` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1a0667` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a06a4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a06a4` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a06c0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a06c0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a06e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a06e5` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a0702` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a0702` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a0785` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1a0785` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a079b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1a079b` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a0ab4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1a0ab4` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a0d28` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1a0d28` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a2f86` | 14 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a2f86` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a2fa9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a2fa9` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a2fb6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a2fb6` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a3021` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1a3021` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a3038` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1a3038` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a35a8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a35a8` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a4eca` | 3 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a4eca` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a4eef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a4eef` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a587e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a587e` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a58eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1a58eb` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a5902` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1a5902` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a5e72` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a5e72` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a766d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a766d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a76ac` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a76ac` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a7913` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1a7913` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a7952` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a7952` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a79a9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a79a9` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a79e6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a79e6` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a7c4b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1a7c4b` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a7c88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a7c88` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a7ca4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1a7ca4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1a7cdb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1a7cdb` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a82e1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1a82e1` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a83f3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1a83f3` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a8410` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1a8410` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a84bd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1a84bd` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a84d3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1a84d3` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a8844` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1a8844` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1a8ab8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1a8ab8` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ac6fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ac6fb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ac75c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ac75c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1aca28` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1aca28` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1aca67` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1aca67` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1aca83` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1aca83` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1acab9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1acab9` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1acabe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1acabe` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1acdf8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1acdf8` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ad1b1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1ad1b1` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ad284` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ad284` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ad29a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ad29a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ad5eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1ad5eb` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ad85f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1ad85f` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b0476` | 1 | `CapMex_MultiExposure__vfn0_7e1b0476` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0485` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e1b0485` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b04e1` | 1 | `CapMex_MultiExposure__vfn1_7e1b04e1` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b052c` | 1 | `CapMex_MultiExposure__ctordtor_7e1b052c` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0547` | 1 | `CapMex_MultiExposure__vfn0_7e1b0547` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0592` | 1 | `CapMex_MultiExposure__ctordtor_7e1b0592` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b05a3` | 1 | `CapMex_MultiExposure__vfn0_7e1b05a3` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b05b2` | 1 | `CapMex_MultiExposure__vfn0_7e1b05b2` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b060e` | 1 | `CapMex_MultiExposure__vfn0_7e1b060e` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b061d` | 1 | `CapMex_MultiExposure__vfn1_7e1b061d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0679` | 1 | `CapMex_MultiExposure__vfn0_7e1b0679` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0688` | 1 | `CapMex_MultiExposure__vfn1_7e1b0688` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b06ee` | 1 | `CapMex_MultiExposure__vfn1_7e1b06ee` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0739` | 1 | `CapMex_MultiExposure__ctordtor_7e1b0739` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0754` | 1 | `CapMex_MultiExposure__vfn0_7e1b0754` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b079f` | 1 | `CapMex_MultiExposure__ctordtor_7e1b079f` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b07c0` | 1 | `CapMex_MultiExposure__vfn0_7e1b07c0` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0836` | 1 | `CapMex_MultiExposure__ctordtor_7e1b0836` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0851` | 1 | `CapMex_MultiExposure__vfn0_7e1b0851` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b089c` | 1 | `CapMex_MultiExposure__ctordtor_7e1b089c` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b08ad` | 1 | `CapMex_MultiExposure__vfn0_7e1b08ad` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b08bc` | 1 | `CapMex_MultiExposure__vfn0_7e1b08bc` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0918` | 1 | `CapMex_MultiExposure__vfn0_7e1b0918` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0927` | 1 | `CapMex_MultiExposure__vfn1_7e1b0927` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0992` | 1 | `CapMex_MultiExposure__vfn1_7e1b0992` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0a54` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b0a54` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0aa3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b0aa3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b0d11` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1b0d11` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b0d50` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b0d50` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b0d8c` | 1 | `OlyHfwOpeSndCtlSoundEvFw_sub7e41bba0__vfn6_7e1b0d8c` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw_sub7e41bba0`. | Ghidra vtable pass |
+| `0x7e1b0dd7` | 1 | `CapMex_MultiExposure__ctordtor_7e1b0dd7` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0df7` | 1 | `CapMex_MultiExposure__vfn0_7e1b0df7` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1b0e5d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b0e5d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b0e8d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b0e8d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b0e92` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b0e92` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b128a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1b128a` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b1339` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1b1339` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b134f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1b134f` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b1670` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1b1670` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b18e4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1b18e4` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b3f7e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b3f7e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b3fbb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b3fbb` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b41eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1b41eb` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b4228` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b4228` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b4244` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b4244` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b4284` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b4284` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b49e1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1b49e1` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b5693` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1b5693` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b5734` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1b5734` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b574a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1b574a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b5aa3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1b5aa3` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b5d17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1b5d17` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b8a4a` | 6 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b8a4a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1b8a88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1b8a88` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1b8a8d` | 6 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b8a8d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ba86c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1ba86c` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ba8e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ba8e7` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ba8fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ba8fe` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bae6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1bae6e` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bc669` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1bc669` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bc6d0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1bc6d0` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bc9d6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1bc9d6` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bca17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1bca17` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bcab4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1bcab4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bcb36` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1bcb36` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bcf7f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1bcf7f` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bcfbf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1bcfbf` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bcfdc` | 1 | `CapMex_MultiExposure__ctordtor_7e1bcfdc` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bcffc` | 1 | `CapMex_MultiExposure__vfn0_7e1bcffc` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd059` | 1 | `CapMex_MultiExposure__ctordtor_7e1bd059` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bd079` | 1 | `CapMex_MultiExposure__vfn0_7e1bd079` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd0d6` | 1 | `CapMex_MultiExposure__ctordtor_7e1bd0d6` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bd0f6` | 1 | `CapMex_MultiExposure__vfn0_7e1bd0f6` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd153` | 1 | `CapMex_MultiExposure__ctordtor_7e1bd153` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bd164` | 1 | `CapMex_MultiExposure__vfn0_7e1bd164` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd173` | 1 | `CapMex_MultiExposure__vfn0_7e1bd173` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd200` | 1 | `CapMex_MultiExposure__vfn1_7e1bd200` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1bd255` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1bd255` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bd2a1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1bd2a1` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bd2a6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1bd2a6` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1bdcce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1bdcce` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bde5b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn22_7e1bde5b` | Vtable slot 22 (byte offset `+88`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1bdf16` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1bdf16` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1be21d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1be21d` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1be346` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1be346` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1be35c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1be35c` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1be6dd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1be6dd` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1be951` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1be951` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c224d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c224d` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c228a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c228a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c24b7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1c24b7` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c24f4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c24f4` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c2510` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c2510` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c2535` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c2535` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c2552` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1c2552` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c25bf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1c25bf` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c25d5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1c25d5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c28be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1c28be` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c2b32` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1c2b32` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c42d0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c42d0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c430b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c430b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c4310` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c4310` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c433c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1c433c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c4363` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1c4363` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c43a9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1c43a9` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c43c0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1c43c0` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5348` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c5348` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c5385` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c5385` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5545` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1c5545` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5582` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c5582` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c559e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c559e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c55d2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c55d2` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5677` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1c5677` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c56ec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1c56ec` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c579a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1c579a` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5843` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1c5843` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5859` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1c5859` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5bc2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1c5bc2` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c5e36` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1c5e36` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c92b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c92b2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c92ef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c92ef` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c94e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1c94e7` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9524` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c9524` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9540` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c9540` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c9572` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1c9572` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9577` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1c9577` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1c9753` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1c9753` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c97ee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1c97ee` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9804` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1c9804` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9b2d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1c9b2d` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1c9da1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn23_7e1c9da1` | Vtable slot 23 (byte offset `+92`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc3e0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn24_7e1cc3e0` | Vtable slot 24 (byte offset `+96`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc47f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1cc47f` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc4bc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1cc4bc` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc4d8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1cc4d8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1cc567` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1cc567` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc56c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1cc56c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1cc76e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1cc76e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc808` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1cc808` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc81e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1cc81e` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cc91f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1cc91f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cd375` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cd375` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cd384` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cd384` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cd393` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cd393` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cd42d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cd42d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cd43c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cd43c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cda72` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cda72` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cda81` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cda81` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cda90` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cda90` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cda9f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cda9f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdaae` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdaae` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdabd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdabd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdacc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdacc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdadb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdadb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdaea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdaea` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdaf9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdaf9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb08` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb08` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb17` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb17` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb26` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb35` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb35` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb44` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb44` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb53` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb53` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb62` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb71` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb71` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb80` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb8f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb8f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdb9e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdb9e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbad` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbbc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbbc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbcb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbcb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbda` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbda` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbe9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbe9` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdbf8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdbf8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc07` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc07` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc16` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc16` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc25` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc25` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc34` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc34` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc43` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc43` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc52` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc52` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc61` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc61` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc70` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc70` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc7f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc7f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc8e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc8e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdc9d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdc9d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdf85` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdf85` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdf94` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdf94` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfa3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfa3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfb2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfb2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfc1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfc1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfd0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfd0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfdf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfdf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdfee` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdfee` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cdffd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1cdffd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce00c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce00c` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce01b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce01b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce02a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce02a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce039` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce039` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce048` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce048` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce057` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce057` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce066` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce066` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce075` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce075` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce084` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce084` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce093` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce093` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce0a2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce0a2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce198` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce198` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1a7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1a7` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1b6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1b6` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1c5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1c5` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1d4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1d4` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1e3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1e3` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce1f2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce1f2` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce29b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce29b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce309` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce309` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce565` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce565` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce574` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce574` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce583` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce583` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce592` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce592` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5a1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5a1` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5b0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5b0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5bf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5bf` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5ce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5ce` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5dd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5dd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5ec` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5ec` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce5fb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce5fb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce60a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce60a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce619` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce619` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce628` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce628` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce736` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce736` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce745` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce745` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce754` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce754` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce763` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce763` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce772` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce772` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce808` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce808` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce817` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ce817` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce861` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ce861` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ce90a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ce90a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ce963` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ce963` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceafd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ceafd` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceb6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1ceb6e` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceb7d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ceb7d` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceb96` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ceb96` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cebac` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1cebac` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cee39` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1cee39` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1cee65` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1cee65` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cee92` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1cee92` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceebf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ceebf` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ceed5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ceed5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1cf3c4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e1cf3c4` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d16bb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1d16bb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1d16ed` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1d16ed` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d16f2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1d16f2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1d1721` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1d1721` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d175e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1d175e` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d1774` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1d1774` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d19e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1d19e5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1d1a0a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1d1a0a` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d3d1c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1d3d1c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d3d51` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1d3d51` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1d3d67` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1d3d67` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e5249` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e5249` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e52a9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e52a9` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e5388` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e5388` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e5e4c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e5e4c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e5e74` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e5e74` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e5e88` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e5e88` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e617b` | 6 | `CapMex_MultiExposure__vfn5_7e1e617b` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e61a7` | 6 | `CapMex_MultiExposure__vfn3_7e1e61a7` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e61d5` | 16 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e61d5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e6234` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e6234` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e6239` | 17 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e6239` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e63d5` | 19 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e1e63d5` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e6451` | 20 | `CapMex_MultiExposure__vfn0_7e1e6451` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e647d` | 19 | `CapMex_MultiExposure__vfn1_7e1e647d` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e64a6` | 18 | `CapMex_MultiExposure__vfn3_7e1e64a6` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e64b1` | 20 | `CapMex_MultiExposure__vfn4_7e1e64b1` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e64db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e64db` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e650b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e650b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e6522` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e6522` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e67ab` | 1 | `cls_7e5fa2fc__vfn28_7e1e67ab` | Vtable slot 28 (byte offset `+112`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1e6844` | 1 | `CapMex_MultiExposure__ctordtor_7e1e6844` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e685d` | 1 | `CapMex_MultiExposure__vfn0_7e1e685d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e687f` | 1 | `CapMex_MultiExposure__vfn0_7e1e687f` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6905` | 1 | `CapMex_MultiExposure__vfn0_7e1e6905` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6912` | 1 | `CapMex_MultiExposure__vfn1_7e1e6912` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e696c` | 1 | `CapMex_MultiExposure__vfn0_7e1e696c` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6979` | 1 | `CapMex_MultiExposure__vfn1_7e1e6979` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e69d1` | 1 | `CapMex_MultiExposure__vfn0_7e1e69d1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e69de` | 1 | `CapMex_MultiExposure__vfn1_7e1e69de` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6a36` | 1 | `CapMex_MultiExposure__vfn0_7e1e6a36` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6a43` | 1 | `CapMex_MultiExposure__vfn1_7e1e6a43` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6a9b` | 1 | `CapMex_MultiExposure__vfn0_7e1e6a9b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6aa8` | 1 | `CapMex_MultiExposure__vfn1_7e1e6aa8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6b02` | 1 | `CapMex_MultiExposure__vfn0_7e1e6b02` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6b0f` | 1 | `CapMex_MultiExposure__vfn1_7e1e6b0f` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6b67` | 1 | `CapMex_MultiExposure__vfn0_7e1e6b67` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6b74` | 1 | `CapMex_MultiExposure__vfn1_7e1e6b74` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6bcc` | 1 | `CapMex_MultiExposure__vfn0_7e1e6bcc` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6bd9` | 1 | `CapMex_MultiExposure__vfn1_7e1e6bd9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6c31` | 1 | `CapMex_MultiExposure__vfn0_7e1e6c31` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6c59` | 1 | `CapMex_MultiExposure__vfn1_7e1e6c59` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6cb8` | 1 | `CapMex_MultiExposure__vfn0_7e1e6cb8` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6cc5` | 1 | `CapMex_MultiExposure__vfn1_7e1e6cc5` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e6d2c` | 1 | `CapMex_MultiExposure__vfn1_7e1e6d2c` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1e8099` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e8099` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e80e7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e80e7` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e80ec` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e80ec` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e8210` | 86 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e8210` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e825a` | 132 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e825a` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e82af` | 132 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1e82af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e82d4` | 9 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e82d4` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8444` | 10 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e1e8444` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e844f` | 11 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e844f` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e861f` | 9 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e861f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8637` | 132 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1e8637` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e87c6` | 1 | `cls_7e5fa2fc__vfn29_7e1e87c6` | Vtable slot 29 (byte offset `+116`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1e8823` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e8823` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e884f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e884f` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8854` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e8854` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e888b` | 15 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1e888b` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8987` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e8987` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8a0d` | 50 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e1e8a0d` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8a93` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e8a93` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8ab8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e8ab8` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8acf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e8acf` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8da5` | 1 | `cls_7e5fa2fc__vfn30_7e1e8da5` | Vtable slot 30 (byte offset `+120`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1e8e11` | 13 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e8e11` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e8e34` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e8e34` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8e41` | 50 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e8e41` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8e6a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e8e6a` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8e81` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e8e81` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e8e8c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e8e8c` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9162` | 1 | `cls_7e5fa2fc__vfn31_7e1e9162` | Vtable slot 31 (byte offset `+124`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1e9177` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e9177` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e91c3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e91c3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e91e0` | 38 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e1e91e0` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e92c1` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e92c1` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e92d8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e92d8` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e92ef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e92ef` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9710` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e9710` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e9733` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e9733` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9740` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e9740` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9757` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e9757` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e976e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e976e` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9b48` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e9b48` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1e9b6b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1e9b6b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9b97` | 11 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1e9b97` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9c1f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1e9c1f` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9c36` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1e9c36` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9c4d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1e9c4d` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1e9fe0` | 1 | `cls_7e5fa2fc__vfn32_7e1e9fe0` | Vtable slot 32 (byte offset `+128`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ea01b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ea01b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea02a` | 2 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ea02a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ea07b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ea07b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea185` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ea185` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea19f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ea19f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea1aa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ea1aa` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea480` | 1 | `cls_7e5fa2fc__vfn33_7e1ea480` | Vtable slot 33 (byte offset `+132`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ea50f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ea50f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea52c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e1ea52c` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea543` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ea543` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea55a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ea55a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea568` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ea568` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea576` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1ea576` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea5d8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ea5d8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ea6b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ea6b2` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea764` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ea764` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea8d4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ea8d4` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea92c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ea92c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ea9b3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ea9b3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ea9b8` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ea9b8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1eaa00` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1eaa00` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eaaea` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e1eaaea` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eaba0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1eaba0` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eacf4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1eacf4` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eaf4e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1eaf4e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eafcb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1eafcb` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eafe3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1eafe3` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1eb38c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1eb38c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec0e3` | 1 | `cls_7e5fa2fc__vfn34_7e1ec0e3` | Vtable slot 34 (byte offset `+136`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ec139` | 7 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ec139` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ec1a6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ec1a6` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec254` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1ec254` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec297` | 1 | `CapMex_MultiExposure__vfn3_7e1ec297` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ec497` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ec497` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec4c5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ec4c5` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec4db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ec4db` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ec7a4` | 1 | `CapMex_MultiExposure__vfn6_7e1ec7a4` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ed056` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ed056` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed063` | 1 | `CapMex_MultiExposure__vfn7_7e1ed063` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ed152` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed152` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed161` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed161` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed170` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed170` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed17f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed17f` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed18e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed18e` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed19d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed19d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed26e` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ed26e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed291` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ed291` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed3c3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ed3c3` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed564` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed564` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed573` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed573` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed582` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed582` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed591` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed591` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5a0` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5af` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5af` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5be` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5be` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5cd` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5cd` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5dc` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5dc` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5eb` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5eb` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed5fa` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed5fa` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed609` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed609` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed618` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed618` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed627` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed627` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed636` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed636` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed645` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed645` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed654` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed654` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed663` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed663` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed672` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e1ed672` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ed681` | 1 | `cls_7e427c04__ctordtor_7e1ed681` | Constructor or destructor of class `cls_7e427c04` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed6d9` | 1 | `cls_7e427c04__ctordtor_7e1ed6d9` | Constructor or destructor of class `cls_7e427c04` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed6ea` | 2 | `cls_7e427c04__vfn0_7e1ed6ea` | Vtable slot 0 (byte offset `+0`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed6f8` | 2 | `cls_7e427c04__vfn1_7e1ed6f8` | Vtable slot 1 (byte offset `+4`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed706` | 2 | `cls_7e427c04__vfn2_7e1ed706` | Vtable slot 2 (byte offset `+8`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed730` | 2 | `cls_7e427c04__vfn3_7e1ed730` | Vtable slot 3 (byte offset `+12`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed73e` | 2 | `cls_7e427c04__vfn4_7e1ed73e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed74c` | 2 | `cls_7e427c04__vfn5_7e1ed74c` | Vtable slot 5 (byte offset `+20`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1ed75a` | 2 | `cls_7e427c04__vfn6_7e1ed75a` | Vtable slot 6 (byte offset `+24`) of class `cls_7e427c04`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1eef0a` | 0 | `CapMex_MultiExposure__vfn0_7e1eef0a` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1eefa9` | 1 | `CapMex_MultiExposure__vfn0_7e1eefa9` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1eefc8` | 1 | `CapMex_MultiExposure__vfn1_7e1eefc8` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ef047` | 1 | `CapMex_MultiExposure__vfn0_7e1ef047` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ef066` | 1 | `CapMex_MultiExposure__vfn1_7e1ef066` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ef127` | 1 | `CapMex_MultiExposure__vfn1_7e1ef127` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1ef3cf` | 1 | `DevAef_AEAFCtrl__vfn8_7e1ef3cf` | Vtable slot 8 (byte offset `+32`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef3dc` | 1 | `DevAef_AEAFCtrl__vfn13_7e1ef3dc` | Vtable slot 13 (byte offset `+52`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef425` | 1 | `DevAef_AEAFCtrl__vfn12_7e1ef425` | Vtable slot 12 (byte offset `+48`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef688` | 1 | `DevAef_AEAFCtrl__vfn7_7e1ef688` | Vtable slot 7 (byte offset `+28`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef696` | 1 | `DevAef_AEAFCtrl__vfn2_7e1ef696` | Vtable slot 2 (byte offset `+8`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef6a4` | 1 | `DevAef_AEAFCtrl__vfn3_7e1ef6a4` | Vtable slot 3 (byte offset `+12`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef6b2` | 1 | `DevAef_AEAFCtrl__vfn6_7e1ef6b2` | Vtable slot 6 (byte offset `+24`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef6c0` | 1 | `DevAef_AEAFCtrl__ctordtor_7e1ef6c0` | Constructor or destructor of class `DevAef_AEAFCtrl` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ef712` | 1 | `DevAef_AEAFCtrl__ctordtor_7e1ef712` | Constructor or destructor of class `DevAef_AEAFCtrl` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ef750` | 1 | `DevAef_AEAFCtrl__vfn0_7e1ef750` | Vtable slot 0 (byte offset `+0`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef7c6` | 1 | `DevAef_AEAFCtrl__vfn4_7e1ef7c6` | Vtable slot 4 (byte offset `+16`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef7d4` | 1 | `DevAef_AEAFCtrl__vfn0_7e1ef7d4` | Vtable slot 0 (byte offset `+0`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef7e2` | 1 | `DevAef_AEAFCtrl__vfn1_7e1ef7e2` | Vtable slot 1 (byte offset `+4`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef81a` | 1 | `DevAef_AEAFCtrl__vfn9_7e1ef81a` | Vtable slot 9 (byte offset `+36`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef8e3` | 1 | `DevAef_AEAFCtrl__vfn5_7e1ef8e3` | Vtable slot 5 (byte offset `+20`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef90d` | 1 | `DevAef_AEAFCtrl__vfn11_7e1ef90d` | Vtable slot 11 (byte offset `+44`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1ef923` | 3 | `DevAef_AEAFCtrl__vfn2_7e1ef923` | Vtable slot 2 (byte offset `+8`) of class `DevAef_AEAFCtrl`. | Ghidra vtable pass |
+| `0x7e1efb07` | 1 | `cls_7e428a98__ctordtor_7e1efb07` | Constructor or destructor of class `cls_7e428a98` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1efb16` | 1 | `cls_7e428a98__vfn0_7e1efb16` | Vtable slot 0 (byte offset `+0`) of class `cls_7e428a98`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1efece` | 1 | `cls_7e428a98__vfn5_7e1efece` | Vtable slot 5 (byte offset `+20`) of class `cls_7e428a98`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0139` | 1 | `CapMex_MultiExposure__ctordtor_7e1f0139` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f0172` | 1 | `CapMex_MultiExposure__vfn16_7e1f0172` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0186` | 1 | `CapMex_MultiExposure__vfn0_7e1f0186` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0196` | 1 | `CapMex_MultiExposure__vfn1_7e1f0196` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f01a6` | 1 | `CapMex_MultiExposure__vfn2_7e1f01a6` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f01b6` | 1 | `CapMex_MultiExposure__vfn3_7e1f01b6` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f01c6` | 1 | `CapMex_MultiExposure__vfn4_7e1f01c6` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f01d6` | 1 | `CapMex_MultiExposure__vfn5_7e1f01d6` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f01e6` | 1 | `CapMex_MultiExposure__vfn6_7e1f01e6` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0350` | 1 | `CapMex_MultiExposure__vfn7_7e1f0350` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0365` | 1 | `CapMex_MultiExposure__vfn8_7e1f0365` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0434` | 1 | `CapMex_MultiExposure__vfn9_7e1f0434` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0574` | 1 | `CapMex_MultiExposure__vfn10_7e1f0574` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0584` | 1 | `CapMex_MultiExposure__vfn11_7e1f0584` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0594` | 1 | `CapMex_MultiExposure__vfn12_7e1f0594` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f05a4` | 1 | `CapMex_MultiExposure__vfn13_7e1f05a4` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f05b4` | 1 | `CapMex_MultiExposure__vfn14_7e1f05b4` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f05c4` | 1 | `CapMex_MultiExposure__vfn15_7e1f05c4` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0887` | 1 | `CapMex_MultiExposure__vfn17_7e1f0887` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f09ba` | 1 | `cls_7e428f14__ctordtor_7e1f09ba` | Constructor or destructor of class `cls_7e428f14` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f09ea` | 1 | `CapMex_MultiExposure__vfn6_7e1f09ea` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f09fe` | 1 | `cls_7e428f14__vfn0_7e1f09fe` | Vtable slot 0 (byte offset `+0`) of class `cls_7e428f14`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0a4f` | 1 | `cls_7e428f14__vfn1_7e1f0a4f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e428f14`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0a5f` | 1 | `cls_7e428f14__vfn2_7e1f0a5f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e428f14`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0a6f` | 1 | `cls_7e428f14__vfn3_7e1f0a6f` | Vtable slot 3 (byte offset `+12`) of class `cls_7e428f14`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0a7f` | 1 | `cls_7e428f14__vfn4_7e1f0a7f` | Vtable slot 4 (byte offset `+16`) of class `cls_7e428f14`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f0d29` | 1 | `CapMex_MultiExposure__vfn0_7e1f0d29` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0e62` | 1 | `CapMex_MultiExposure__vfn1_7e1f0e62` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0f57` | 1 | `CapMex_MultiExposure__vfn2_7e1f0f57` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f0f74` | 1 | `CapMex_MultiExposure__vfn3_7e1f0f74` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f101f` | 1 | `CapMex_MultiExposure__vfn4_7e1f101f` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f103c` | 1 | `CapMex_MultiExposure__vfn5_7e1f103c` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1985` | 1 | `CapMex_MultiExposure__ctordtor_7e1f1985` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f1a49` | 1 | `CapMex_MultiExposure__vfn20_7e1f1a49` | Vtable slot 20 (byte offset `+80`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1a5d` | 1 | `CapMex_MultiExposure__vfn0_7e1f1a5d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1a73` | 1 | `CapMex_MultiExposure__vfn1_7e1f1a73` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1a89` | 1 | `CapMex_MultiExposure__vfn2_7e1f1a89` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1a9f` | 1 | `CapMex_MultiExposure__vfn3_7e1f1a9f` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1ab5` | 1 | `CapMex_MultiExposure__vfn4_7e1f1ab5` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1acb` | 1 | `CapMex_MultiExposure__vfn5_7e1f1acb` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1ae1` | 1 | `CapMex_MultiExposure__vfn6_7e1f1ae1` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1af7` | 1 | `CapMex_MultiExposure__vfn7_7e1f1af7` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b19` | 1 | `CapMex_MultiExposure__vfn8_7e1f1b19` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b2a` | 1 | `CapMex_MultiExposure__vfn9_7e1f1b2a` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b37` | 1 | `CapMex_MultiExposure__vfn10_7e1f1b37` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b4d` | 1 | `CapMex_MultiExposure__vfn11_7e1f1b4d` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b71` | 1 | `CapMex_MultiExposure__vfn12_7e1f1b71` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b80` | 1 | `CapMex_MultiExposure__vfn13_7e1f1b80` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1b8d` | 1 | `CapMex_MultiExposure__vfn14_7e1f1b8d` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1bb3` | 1 | `CapMex_MultiExposure__vfn15_7e1f1bb3` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1bd8` | 1 | `CapMex_MultiExposure__vfn16_7e1f1bd8` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1bfc` | 1 | `CapMex_MultiExposure__vfn17_7e1f1bfc` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1c25` | 1 | `CapMex_MultiExposure__vfn18_7e1f1c25` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f1c33` | 1 | `CapMex_MultiExposure__vfn19_7e1f1c33` | Vtable slot 19 (byte offset `+76`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f2049` | 1 | `CapMex_MultiExposure__vfn21_7e1f2049` | Vtable slot 21 (byte offset `+84`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f32bd` | 1 | `CapMex_MultiExposure__vfn0_7e1f32bd` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f32ca` | 1 | `CapMex_MultiExposure__vfn1_7e1f32ca` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f332e` | 1 | `CapMex_MultiExposure__vfn2_7e1f332e` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f336b` | 1 | `CapMex_MultiExposure__vfn0_7e1f336b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f3388` | 2 | `CapMex_MultiExposure__vfn4_7e1f3388` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f3460` | 1 | `CapMex_MultiExposure__vfn1_7e1f3460` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f353e` | 1 | `CapMex_MultiExposure__vfn2_7e1f353e` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e1f452b` | 1 | `DevSor__ctordtor_7e1f452b` | Constructor or destructor of class `DevSor` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f454b` | 1 | `DevSor__vfn8_7e1f454b` | Vtable slot 8 (byte offset `+32`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f455f` | 1 | `DevSor__vfn0_7e1f455f` | Vtable slot 0 (byte offset `+0`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f456f` | 1 | `DevSor__vfn1_7e1f456f` | Vtable slot 1 (byte offset `+4`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f457f` | 1 | `DevSor__vfn2_7e1f457f` | Vtable slot 2 (byte offset `+8`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f458f` | 1 | `DevSor__vfn3_7e1f458f` | Vtable slot 3 (byte offset `+12`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f459f` | 1 | `DevSor__vfn4_7e1f459f` | Vtable slot 4 (byte offset `+16`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f4640` | 1 | `DevSor__vfn6_7e1f4640` | Vtable slot 6 (byte offset `+24`) of class `DevSor`. | Ghidra vtable pass |
+| `0x7e1f47b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f47b4` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f4841` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f4841` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f49d0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f49d0` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4a9c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f4a9c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4ae4` | 1 | `OlyHfwOpeSndCtlSoundEvFw_sub7e42984c__vfn6_7e1f4ae4` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw_sub7e42984c`. | Ghidra vtable pass |
+| `0x7e1f4b64` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f4b64` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f4bd9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f4bd9` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4d1e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f4d1e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4db7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f4db7` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4ddf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f4ddf` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f4e2b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f4e2b` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4e30` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f4e30` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f4e59` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f4e59` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4eaf` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f4eaf` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f4ec5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f4ec5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f58d8` | 3 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f58d8` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f5965` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f5965` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f596a` | 3 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f596a` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f59b4` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1f59b4` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5a66` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f5a66` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5a7e` | 5 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f5a7e` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5aa3` | 6 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1f5aa3` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5b87` | 4 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e1f5b87` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5c6f` | 4 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1f5c6f` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5ce2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f5ce2` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5d59` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f5d59` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f5d70` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f5d70` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f6591` | 1 | `cls_7e5fa2fc__vfn35_7e1f6591` | Vtable slot 35 (byte offset `+140`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f65a6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f65a6` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f65d6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f65d6` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f65db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f65db` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f66b5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f66b5` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f66fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f66fe` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f6714` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f6714` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f6ffa` | 3 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f6ffa` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f7087` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f7087` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f708c` | 3 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f708c` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f70d6` | 4 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1f70d6` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f726d` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f726d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7376` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e1f7376` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f73e9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f73e9` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7460` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f7460` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7477` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f7477` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7687` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1f7687` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7afa` | 1 | `cls_7e5fa2fc__vfn36_7e1f7afa` | Vtable slot 36 (byte offset `+144`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e1f7b6e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f7b6e` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f7bef` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f7bef` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7d62` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f7d62` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7e06` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f7e06` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f7e4e` | 1 | `OlyHfwOpeSndCtlSoundEvFw_sub7e429ee8__vfn6_7e1f7e4e` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw_sub7e429ee8`. | Ghidra vtable pass |
+| `0x7e1f7ece` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f7ece` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f7f59` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f7f59` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f8033` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f8033` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f80f3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f80f3` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f811b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f811b` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f8174` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1f8174` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f8179` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1f8179` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1f81a2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f81a2` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f821e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e1f821e` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f84d6` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e1f84d6` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f857b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1f857b` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f85e5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1f85e5` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f865e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1f865e` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f8674` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1f8674` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f8856` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn9_7e1f8856` | Vtable slot 9 (byte offset `+36`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1f8e26` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e1f8e26` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fd7a2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1fd7a2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1fd7ce` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1fd7ce` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fd7d3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1fd7d3` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1fd7fe` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1fd7fe` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fd83b` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1fd83b` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fd851` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1fd851` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fda80` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1fda80` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fdd50` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1fdd50` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe1d3` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn6_7e1fe1d3` | Vtable slot 6 (byte offset `+24`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe28c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1fe28c` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe330` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1fe330` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe358` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1fe358` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1fe3ad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1fe3ad` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe3b2` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1fe3b2` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1fe3db` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1fe3db` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe466` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1fe466` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe4ad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e1fe4ad` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe551` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1fe551` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe59e` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1fe59e` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe5b4` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1fe5b4` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fe6b9` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn8_7e1fe6b9` | Vtable slot 8 (byte offset `+32`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1fec4a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e1fec4a` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff225` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e1ff225` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff2c7` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ff2c7` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff359` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ff359` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff37f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1ff37f` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e1ff3a0` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e1ff3a0` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff3ad` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn10_7e1ff3ad` | Vtable slot 10 (byte offset `+40`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff468` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e1ff468` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff48f` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e1ff48f` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ff4a5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e1ff4a5` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e1ffc6c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e1ffc6c` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2006b5` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e2006b5` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e20072c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e20072c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e200731` | 1 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e200731` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e200768` | 2 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e200768` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e200b94` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e200b94` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e200c03` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e200c03` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e200c1a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e200c1a` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e20134d` | 1 | `CapMex_MultiExposure__vfn0_7e20134d` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e201e15` | 1 | `CapMex_MultiExposure__vfn1_7e201e15` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e201e4b` | 1 | `CapMex_MultiExposure__vfn0_7e201e4b` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e201e5a` | 1 | `CapMex_MultiExposure__vfn4_7e201e5a` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e201eb9` | 1 | `CapMex_MultiExposure__vfn1_7e201eb9` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20252b` | 1 | `cls_7e42b234__vfn0_7e20252b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42b234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e202550` | 1 | `cls_7e42b234__vfn1_7e202550` | Vtable slot 1 (byte offset `+4`) of class `cls_7e42b234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20257b` | 1 | `cls_7e42b234__vfn2_7e20257b` | Vtable slot 2 (byte offset `+8`) of class `cls_7e42b234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e202649` | 1 | `cls_7e42b33c__ctordtor_7e202649` | Constructor or destructor of class `cls_7e42b33c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20267e` | 1 | `cls_7e42b33c__ctordtor_7e20267e` | Constructor or destructor of class `cls_7e42b33c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e202692` | 1 | `cls_7e42b33c__vfn0_7e202692` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2026a8` | 1 | `cls_7e42b33c__vfn1_7e2026a8` | Vtable slot 1 (byte offset `+4`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2026be` | 1 | `cls_7e42b33c__vfn2_7e2026be` | Vtable slot 2 (byte offset `+8`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2026d4` | 1 | `cls_7e42b33c__vfn3_7e2026d4` | Vtable slot 3 (byte offset `+12`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2026e1` | 1 | `cls_7e42b33c__vfn4_7e2026e1` | Vtable slot 4 (byte offset `+16`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20278f` | 1 | `cls_7e42b33c__vfn5_7e20278f` | Vtable slot 5 (byte offset `+20`) of class `cls_7e42b33c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e203598` | 1 | `DevBlu_Bluetooth__ctordtor_7e203598` | Constructor or destructor of class `DevBlu_Bluetooth` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e2035af` | 1 | `DevBlu_Bluetooth__vfn38_7e2035af` | Vtable slot 38 (byte offset `+152`) of class `DevBlu_Bluetooth`. | Ghidra vtable pass |
+| `0x7e20380f` | 1 | `DevBlu_Bluetooth__vfn10_7e20380f` | Vtable slot 10 (byte offset `+40`) of class `DevBlu_Bluetooth`. | Ghidra vtable pass |
+| `0x7e203ede` | 1 | `CapMex_MultiExposure__vfn0_7e203ede` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203f01` | 1 | `CapMex_MultiExposure__vfn1_7e203f01` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203f11` | 1 | `CapMex_MultiExposure__vfn2_7e203f11` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203f6e` | 1 | `CapMex_MultiExposure__vfn4_7e203f6e` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203f8d` | 1 | `CapMex_MultiExposure__vfn5_7e203f8d` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203fa4` | 1 | `CapMex_MultiExposure__vfn6_7e203fa4` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203fc1` | 1 | `CapMex_MultiExposure__vfn7_7e203fc1` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e203fda` | 1 | `CapMex_MultiExposure__vfn8_7e203fda` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204024` | 1 | `CapMex_MultiExposure__vfn9_7e204024` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204377` | 1 | `CapMex_MultiExposure__ctordtor_7e204377` | Constructor or destructor of class `CapMex_MultiExposure` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e2043cd` | 1 | `CapMex_MultiExposure__vfn24_7e2043cd` | Vtable slot 24 (byte offset `+96`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2043e1` | 1 | `CapMex_MultiExposure__vfn0_7e2043e1` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204402` | 1 | `CapMex_MultiExposure__vfn1_7e204402` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204423` | 1 | `CapMex_MultiExposure__vfn2_7e204423` | Vtable slot 2 (byte offset `+8`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204444` | 1 | `CapMex_MultiExposure__vfn3_7e204444` | Vtable slot 3 (byte offset `+12`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204465` | 1 | `CapMex_MultiExposure__vfn4_7e204465` | Vtable slot 4 (byte offset `+16`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204486` | 1 | `CapMex_MultiExposure__vfn5_7e204486` | Vtable slot 5 (byte offset `+20`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2044a7` | 1 | `CapMex_MultiExposure__vfn6_7e2044a7` | Vtable slot 6 (byte offset `+24`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2044c8` | 1 | `CapMex_MultiExposure__vfn7_7e2044c8` | Vtable slot 7 (byte offset `+28`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2044e9` | 1 | `CapMex_MultiExposure__vfn8_7e2044e9` | Vtable slot 8 (byte offset `+32`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20450a` | 1 | `CapMex_MultiExposure__vfn9_7e20450a` | Vtable slot 9 (byte offset `+36`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20452b` | 1 | `CapMex_MultiExposure__vfn10_7e20452b` | Vtable slot 10 (byte offset `+40`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20454c` | 1 | `CapMex_MultiExposure__vfn11_7e20454c` | Vtable slot 11 (byte offset `+44`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20456d` | 1 | `CapMex_MultiExposure__vfn12_7e20456d` | Vtable slot 12 (byte offset `+48`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20458e` | 1 | `CapMex_MultiExposure__vfn13_7e20458e` | Vtable slot 13 (byte offset `+52`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2045af` | 1 | `CapMex_MultiExposure__vfn14_7e2045af` | Vtable slot 14 (byte offset `+56`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2045d0` | 1 | `CapMex_MultiExposure__vfn15_7e2045d0` | Vtable slot 15 (byte offset `+60`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2045f1` | 1 | `CapMex_MultiExposure__vfn16_7e2045f1` | Vtable slot 16 (byte offset `+64`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204646` | 1 | `CapMex_MultiExposure__vfn17_7e204646` | Vtable slot 17 (byte offset `+68`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20469d` | 1 | `CapMex_MultiExposure__vfn18_7e20469d` | Vtable slot 18 (byte offset `+72`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2046f4` | 1 | `CapMex_MultiExposure__vfn19_7e2046f4` | Vtable slot 19 (byte offset `+76`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204748` | 1 | `CapMex_MultiExposure__vfn20_7e204748` | Vtable slot 20 (byte offset `+80`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20479c` | 1 | `CapMex_MultiExposure__vfn21_7e20479c` | Vtable slot 21 (byte offset `+84`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e2047f2` | 1 | `CapMex_MultiExposure__vfn22_7e2047f2` | Vtable slot 22 (byte offset `+88`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204846` | 1 | `CapMex_MultiExposure__vfn23_7e204846` | Vtable slot 23 (byte offset `+92`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204ae9` | 1 | `CapMex_MultiExposure__vfn50_7e204ae9` | Vtable slot 50 (byte offset `+200`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204afd` | 1 | `CapMex_MultiExposure__vfn43_7e204afd` | Vtable slot 43 (byte offset `+172`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b10` | 1 | `CapMex_MultiExposure__vfn44_7e204b10` | Vtable slot 44 (byte offset `+176`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b23` | 1 | `CapMex_MultiExposure__vfn49_7e204b23` | Vtable slot 49 (byte offset `+196`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b30` | 1 | `CapMex_MultiExposure__vfn31_7e204b30` | Vtable slot 31 (byte offset `+124`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b44` | 1 | `CapMex_MultiExposure__vfn36_7e204b44` | Vtable slot 36 (byte offset `+144`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b58` | 1 | `CapMex_MultiExposure__vfn45_7e204b58` | Vtable slot 45 (byte offset `+180`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b70` | 1 | `CapMex_MultiExposure__vfn30_7e204b70` | Vtable slot 30 (byte offset `+120`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b88` | 1 | `CapMex_MultiExposure__vfn37_7e204b88` | Vtable slot 37 (byte offset `+148`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204b9c` | 1 | `CapMex_MultiExposure__vfn40_7e204b9c` | Vtable slot 40 (byte offset `+160`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204bb0` | 1 | `CapMex_MultiExposure__vfn39_7e204bb0` | Vtable slot 39 (byte offset `+156`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204bc4` | 1 | `CapMex_MultiExposure__vfn38_7e204bc4` | Vtable slot 38 (byte offset `+152`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204bd8` | 1 | `CapMex_MultiExposure__vfn35_7e204bd8` | Vtable slot 35 (byte offset `+140`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204bf0` | 1 | `CapMex_MultiExposure__vfn32_7e204bf0` | Vtable slot 32 (byte offset `+128`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c08` | 1 | `CapMex_MultiExposure__vfn34_7e204c08` | Vtable slot 34 (byte offset `+136`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c20` | 1 | `CapMex_MultiExposure__vfn41_7e204c20` | Vtable slot 41 (byte offset `+164`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c34` | 1 | `CapMex_MultiExposure__vfn33_7e204c34` | Vtable slot 33 (byte offset `+132`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c4c` | 1 | `CapMex_MultiExposure__vfn29_7e204c4c` | Vtable slot 29 (byte offset `+116`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c60` | 1 | `CapMex_MultiExposure__vfn27_7e204c60` | Vtable slot 27 (byte offset `+108`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c75` | 1 | `CapMex_MultiExposure__vfn28_7e204c75` | Vtable slot 28 (byte offset `+112`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c89` | 1 | `CapMex_MultiExposure__vfn48_7e204c89` | Vtable slot 48 (byte offset `+192`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204c96` | 1 | `CapMex_MultiExposure__vfn25_7e204c96` | Vtable slot 25 (byte offset `+100`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204ca3` | 1 | `CapMex_MultiExposure__vfn26_7e204ca3` | Vtable slot 26 (byte offset `+104`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204cb1` | 1 | `CapMex_MultiExposure__vfn46_7e204cb1` | Vtable slot 46 (byte offset `+184`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204cc5` | 1 | `CapMex_MultiExposure__vfn42_7e204cc5` | Vtable slot 42 (byte offset `+168`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204ce5` | 1 | `CapMex_MultiExposure__vfn47_7e204ce5` | Vtable slot 47 (byte offset `+188`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204ddc` | 1 | `CapMex_MultiExposure__vfn0_7e204ddc` | Vtable slot 0 (byte offset `+0`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204dfb` | 1 | `CapMex_MultiExposure__vfn51_7e204dfb` | Vtable slot 51 (byte offset `+204`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e204e51` | 1 | `CapMex_MultiExposure__vfn1_7e204e51` | Vtable slot 1 (byte offset `+4`) of class `CapMex_MultiExposure`. | Ghidra vtable pass |
+| `0x7e20500f` | 6 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e20500f` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e20503d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e20503d` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2050e2` | 1 | `cls_7e42c09c__ctordtor_7e2050e2` | Constructor or destructor of class `cls_7e42c09c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2050f3` | 1 | `cls_7e42c09c__vfn0_7e2050f3` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42c09c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2054cb` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e2054cb` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e2054f0` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e2054f0` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e205513` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e205513` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e205518` | 4 | `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e205518` | Constructor or destructor of class `OlyHfwOpeSndCtlSoundEvFw` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e20559c` | 1 | `cls_7e42c1d4__ctordtor_7e20559c` | Constructor or destructor of class `cls_7e42c1d4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e205622` | 1 | `cls_7e42c1d4__vfn0_7e205622` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42c1d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e205711` | 1 | `cls_7e42c1d4__vfn1_7e205711` | Vtable slot 1 (byte offset `+4`) of class `cls_7e42c1d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e205888` | 1 | `cls_7e42c1d4__vfn3_7e205888` | Vtable slot 3 (byte offset `+12`) of class `cls_7e42c1d4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e206b0c` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn0_7e206b0c` | Vtable slot 0 (byte offset `+0`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e206bf7` | 155 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e206bf7` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e206ce5` | 97 | `OlyHfwOpeSndCtlSoundEvFw__vfn2_7e206ce5` | Vtable slot 2 (byte offset `+8`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e206dc6` | 229 | `OlyHfwOpeSndCtlSoundEvFw__vfn7_7e206dc6` | Vtable slot 7 (byte offset `+28`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e206e03` | 97 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e206e03` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e206f33` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e206f33` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e207022` | 229 | `OlyHfwOpeSndCtlSoundEvFw__vfn11_7e207022` | Vtable slot 11 (byte offset `+44`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2070d8` | 97 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e2070d8` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2071bf` | 76 | `OlyHfwOpeSndCtlSoundEvFw__vfn3_7e2071bf` | Vtable slot 3 (byte offset `+12`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2071dc` | 76 | `OlyHfwOpeSndCtlSoundEvFw__vfn4_7e2071dc` | Vtable slot 4 (byte offset `+16`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2072cd` | 229 | `OlyHfwOpeSndCtlSoundEvFw__vfn12_7e2072cd` | Vtable slot 12 (byte offset `+48`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e207362` | 229 | `OlyHfwOpeSndCtlSoundEvFw__vfn5_7e207362` | Vtable slot 5 (byte offset `+20`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2074f7` | 1 | `cls_7e5fa2fc__vfn37_7e2074f7` | Vtable slot 37 (byte offset `+148`) of class `cls_7e5fa2fc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e207528` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e207528` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e207535` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e207535` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e20760d` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e20760d` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e20761a` | 1 | `OlyHfwOpeSndCtlSoundEvFw__vfn1_7e20761a` | Vtable slot 1 (byte offset `+4`) of class `OlyHfwOpeSndCtlSoundEvFw`. | Ghidra vtable pass |
+| `0x7e2077c1` | 1 | `cls_7e42c868__ctordtor_7e2077c1` | Constructor or destructor of class `cls_7e42c868` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20781d` | 1 | `cls_7e42c868__vfn0_7e20781d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42c868`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e207822` | 2 | `cls_7e42c868__ctordtor_7e207822` | Constructor or destructor of class `cls_7e42c868` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e207986` | 3 | `cls_7e36d630__vfn1_7e207986` | Vtable slot 1 (byte offset `+4`) of class `cls_7e36d630`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2079e1` | 3 | `cls_7e36d630__vfn2_7e2079e1` | Vtable slot 2 (byte offset `+8`) of class `cls_7e36d630`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e207a7f` | 2 | `cls_7e36d630__vfn3_7e207a7f` | Vtable slot 3 (byte offset `+12`) of class `cls_7e36d630`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e207ac5` | 3 | `cls_7e36d630__vfn4_7e207ac5` | Vtable slot 4 (byte offset `+16`) of class `cls_7e36d630`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2082c3` | 1 | `cls_7e42cbd8__ctordtor_7e2082c3` | Constructor or destructor of class `cls_7e42cbd8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e208302` | 1 | `cls_7e42cbd8__vfn0_7e208302` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42cbd8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e208307` | 1 | `cls_7e42cbd8__ctordtor_7e208307` | Constructor or destructor of class `cls_7e42cbd8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e208959` | 1 | `cls_7e42cd2c__ctordtor_7e208959` | Constructor or destructor of class `cls_7e42cd2c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e208eeb` | 1 | `cls_7e42cd2c__vfn0_7e208eeb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42cd2c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20961b` | 1 | `cls_7e42ce3c__ctordtor_7e20961b` | Constructor or destructor of class `cls_7e42ce3c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e209672` | 1 | `cls_7e42ce3c__vfn0_7e209672` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42ce3c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e209cd3` | 4 | `cls_7e42d6a8__ctordtor_7e209cd3` | Constructor or destructor of class `cls_7e42d6a8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e209e9b` | 3 | `cls_7e42d6a8__ctordtor_7e209e9b` | Constructor or destructor of class `cls_7e42d6a8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20a9d3` | 1 | `cls_7e42d6a8__vfn44_7e20a9d3` | Vtable slot 44 (byte offset `+176`) of class `cls_7e42d6a8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd0f` | 1 | `cls_7e42f8e8__vfn0_7e20cd0f` | Vtable slot 0 (byte offset `+0`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd1a` | 0 | `cls_7e42f8e8__vfn1_7e20cd1a` | Vtable slot 1 (byte offset `+4`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd25` | 0 | `cls_7e42f8e8__vfn2_7e20cd25` | Vtable slot 2 (byte offset `+8`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd30` | 2 | `cls_7e42f8e8__vfn3_7e20cd30` | Vtable slot 3 (byte offset `+12`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd3b` | 1 | `cls_7e42f8e8__vfn4_7e20cd3b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd48` | 1 | `cls_7e42f8e8__vfn7_7e20cd48` | Vtable slot 7 (byte offset `+28`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd55` | 1 | `cls_7e42f8e8__vfn8_7e20cd55` | Vtable slot 8 (byte offset `+32`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd7f` | 1 | `cls_7e42f8e8__vfn9_7e20cd7f` | Vtable slot 9 (byte offset `+36`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cd97` | 1 | `cls_7e42f8e8__vfn10_7e20cd97` | Vtable slot 10 (byte offset `+40`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cda4` | 1 | `cls_7e42f8e8__vfn11_7e20cda4` | Vtable slot 11 (byte offset `+44`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cdaf` | 1 | `cls_7e42f8e8__vfn12_7e20cdaf` | Vtable slot 12 (byte offset `+48`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cdba` | 1 | `cls_7e42f8e8__vfn13_7e20cdba` | Vtable slot 13 (byte offset `+52`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cdc5` | 1 | `cls_7e42f8e8__vfn14_7e20cdc5` | Vtable slot 14 (byte offset `+56`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cdd9` | 1 | `cls_7e42f8e8__vfn15_7e20cdd9` | Vtable slot 15 (byte offset `+60`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cde4` | 1 | `cls_7e42f8e8__vfn16_7e20cde4` | Vtable slot 16 (byte offset `+64`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cdef` | 1 | `cls_7e42f8e8__vfn17_7e20cdef` | Vtable slot 17 (byte offset `+68`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20ce0c` | 1 | `cls_7e42f8e8__vfn18_7e20ce0c` | Vtable slot 18 (byte offset `+72`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20ce2d` | 1 | `cls_7e42f8e8__vfn20_7e20ce2d` | Vtable slot 20 (byte offset `+80`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20ce7a` | 1 | `cls_7e42f8e8__vfn21_7e20ce7a` | Vtable slot 21 (byte offset `+84`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20ce86` | 1 | `cls_7e42f8e8__vfn5_7e20ce86` | Vtable slot 5 (byte offset `+20`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf15` | 1 | `cls_7e42f8e8__vfn22_7e20cf15` | Vtable slot 22 (byte offset `+88`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf20` | 1 | `cls_7e42f8e8__vfn23_7e20cf20` | Vtable slot 23 (byte offset `+92`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf2b` | 1 | `cls_7e42f8e8__vfn24_7e20cf2b` | Vtable slot 24 (byte offset `+96`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf38` | 1 | `cls_7e42f8e8__vfn25_7e20cf38` | Vtable slot 25 (byte offset `+100`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf43` | 1 | `cls_7e42f8e8__vfn26_7e20cf43` | Vtable slot 26 (byte offset `+104`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf4e` | 1 | `cls_7e42f8e8__vfn27_7e20cf4e` | Vtable slot 27 (byte offset `+108`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf6b` | 1 | `cls_7e42f8e8__vfn28_7e20cf6b` | Vtable slot 28 (byte offset `+112`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e20cf7f` | 1 | `cls_7e42f8e8__vfn29_7e20cf7f` | Vtable slot 29 (byte offset `+116`) of class `cls_7e42f8e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22089c` | 1 | `cls_7e45382c__vfn0_7e22089c` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2208b9` | 1 | `cls_7e45382c__vfn1_7e2208b9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e220925` | 1 | `cls_7e45382c__vfn2_7e220925` | Vtable slot 2 (byte offset `+8`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e220943` | 1 | `cls_7e45382c__vfn3_7e220943` | Vtable slot 3 (byte offset `+12`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2209c3` | 1 | `cls_7e45382c__vfn4_7e2209c3` | Vtable slot 4 (byte offset `+16`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2209d2` | 1 | `cls_7e45382c__vfn5_7e2209d2` | Vtable slot 5 (byte offset `+20`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2209f5` | 1 | `cls_7e45382c__vfn6_7e2209f5` | Vtable slot 6 (byte offset `+24`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e220a05` | 1 | `cls_7e45382c__vfn7_7e220a05` | Vtable slot 7 (byte offset `+28`) of class `cls_7e45382c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e221c20` | 1 | `cls_7e4538b4__ctordtor_7e221c20` | Constructor or destructor of class `cls_7e4538b4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e221c33` | 1 | `cls_7e4538b4__vfn0_7e221c33` | Vtable slot 0 (byte offset `+0`) of class `cls_7e4538b4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223954` | 2 | `cls_7e45bf70__ctordtor_7e223954` | Constructor or destructor of class `cls_7e45bf70` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223998` | 1 | `cls_7e45bf70__vfn0_7e223998` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45bf70`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22399d` | 2 | `cls_7e45bf70__ctordtor_7e22399d` | Constructor or destructor of class `cls_7e45bf70` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223d83` | 2 | `cls_7e45c060__ctordtor_7e223d83` | Constructor or destructor of class `cls_7e45c060` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223db0` | 1 | `cls_7e45c060__vfn0_7e223db0` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45c060`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223db3` | 2 | `cls_7e45c060__ctordtor_7e223db3` | Constructor or destructor of class `cls_7e45c060` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223dc4` | 3 | `cls_7e42cbd8__vfn1_7e223dc4` | Vtable slot 1 (byte offset `+4`) of class `cls_7e42cbd8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223dcf` | 3 | `cls_7e42cbd8__vfn2_7e223dcf` | Vtable slot 2 (byte offset `+8`) of class `cls_7e42cbd8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223e9b` | 1 | `cls_7e45c0f4__ctordtor_7e223e9b` | Constructor or destructor of class `cls_7e45c0f4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223eaa` | 1 | `cls_7e45c0f4__ctordtor_7e223eaa` | Constructor or destructor of class `cls_7e45c0f4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e223eb9` | 1 | `cls_7e45c0f4__vfn0_7e223eb9` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45c0f4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22b5b7` | 4 | `cls_7e45e2c0__ctordtor_7e22b5b7` | Constructor or destructor of class `cls_7e45e2c0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22b893` | 243 | `cls_7e45e2c0__vfn11_7e22b893` | Vtable slot 11 (byte offset `+44`) of class `cls_7e45e2c0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22baef` | 246 | `cls_7e45e2c0__vfn16_7e22baef` | Vtable slot 16 (byte offset `+64`) of class `cls_7e45e2c0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22d2be` | 1 | `cls_7e45e4b8__ctordtor_7e22d2be` | Constructor or destructor of class `cls_7e45e4b8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e22d44a` | 1 | `cls_7e45e4b8__vfn0_7e22d44a` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45e4b8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e23046c` | 2 | `cls_7e45ea78__ctordtor_7e23046c` | Constructor or destructor of class `cls_7e45ea78` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2304ea` | 1 | `cls_7e45ea78__vfn0_7e2304ea` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45ea78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2332dd` | 1 | `cls_7e45f2d0__vfn0_7e2332dd` | Vtable slot 0 (byte offset `+0`) of class `cls_7e45f2d0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2332e2` | 3 | `cls_7e45f2d0__ctordtor_7e2332e2` | Constructor or destructor of class `cls_7e45f2d0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e25511a` | 1 | `cls_7e46d8e0__ctordtor_7e25511a` | Constructor or destructor of class `cls_7e46d8e0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e255131` | 1 | `cls_7e46d8e0__vfn0_7e255131` | Vtable slot 0 (byte offset `+0`) of class `cls_7e46d8e0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e255233` | 1 | `cls_7e46d8e0__ctordtor_7e255233` | Constructor or destructor of class `cls_7e46d8e0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e25e6ac` | 1 | `cls_7e46f158__ctordtor_7e25e6ac` | Constructor or destructor of class `cls_7e46f158` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e25e706` | 1 | `cls_7e46f158__vfn0_7e25e706` | Vtable slot 0 (byte offset `+0`) of class `cls_7e46f158`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e260dcb` | 1 | `cls_7e46fa30__vfn0_7e260dcb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e46fa30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e262041` | 1 | `cls_7e46fa30__vfn11_7e262041` | Vtable slot 11 (byte offset `+44`) of class `cls_7e46fa30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e262a20` | 1 | `cls_7e46ff94__vfn0_7e262a20` | Vtable slot 0 (byte offset `+0`) of class `cls_7e46ff94`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e26706d` | 1 | `cls_7e471d00__vfn0_7e26706d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e267070` | 1 | `cls_7e471d00__ctordtor_7e267070` | Constructor or destructor of class `cls_7e471d00` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e267081` | 1 | `cls_7e471d00__vfn1_7e267081` | Vtable slot 1 (byte offset `+4`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e26708d` | 1 | `cls_7e471d00__vfn2_7e26708d` | Vtable slot 2 (byte offset `+8`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e26709a` | 1 | `cls_7e471d00__vfn3_7e26709a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2670a7` | 1 | `cls_7e471d00__vfn5_7e2670a7` | Vtable slot 5 (byte offset `+20`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2670b3` | 1 | `cls_7e471d00__vfn4_7e2670b3` | Vtable slot 4 (byte offset `+16`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2670c0` | 1 | `cls_7e471d00__vfn6_7e2670c0` | Vtable slot 6 (byte offset `+24`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2670cd` | 1 | `cls_7e471d00__vfn7_7e2670cd` | Vtable slot 7 (byte offset `+28`) of class `cls_7e471d00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2671d2` | 1 | `cls_7e471e58__vfn0_7e2671d2` | Vtable slot 0 (byte offset `+0`) of class `cls_7e471e58`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2671d7` | 1 | `cls_7e471e58__ctordtor_7e2671d7` | Constructor or destructor of class `cls_7e471e58` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2719ca` | 2 | `OlyApiShooting__vfn0_7e2719ca` | Vtable slot 0 (byte offset `+0`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271a1d` | 1 | `OlyApiShooting__vfn1_7e271a1d` | Vtable slot 1 (byte offset `+4`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271acd` | 1 | `OlyApiShooting__vfn2_7e271acd` | Vtable slot 2 (byte offset `+8`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271bfa` | 1 | `OlyApiShooting__vfn3_7e271bfa` | Vtable slot 3 (byte offset `+12`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271e04` | 1 | `OlyApiShooting__vfn4_7e271e04` | Vtable slot 4 (byte offset `+16`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271e80` | 1 | `OlyApiShooting__vfn5_7e271e80` | Vtable slot 5 (byte offset `+20`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271f07` | 1 | `OlyApiShooting__vfn6_7e271f07` | Vtable slot 6 (byte offset `+24`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e271f64` | 1 | `OlyApiShooting__vfn7_7e271f64` | Vtable slot 7 (byte offset `+28`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e27247c` | 1 | `OlyApiShooting__vfn8_7e27247c` | Vtable slot 8 (byte offset `+32`) of class `OlyApiShooting`. | Ghidra vtable pass |
+| `0x7e27284f` | 3 | `OlyApiShooting__ctordtor_7e27284f` | Constructor or destructor of class `OlyApiShooting` (a function that stores this class's vtable into an object). | Ghidra vtable pass |
+| `0x7e294081` | 1 | `cls_7e4f7a7c__vfn0_7e294081` | Vtable slot 0 (byte offset `+0`) of class `cls_7e4f7a7c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2a2388` | 1 | `cls_7e5189ac__vfn0_7e2a2388` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5189ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2a3a9e` | 1 | `cls_7e5189ac__ctordtor_7e2a3a9e` | Constructor or destructor of class `cls_7e5189ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2b12d0` | 1 | `cls_7e530350__vfn0_7e2b12d0` | Vtable slot 0 (byte offset `+0`) of class `cls_7e530350`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2b166c` | 1 | `cls_7e5305f0__ctordtor_7e2b166c` | Constructor or destructor of class `cls_7e5305f0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2b169d` | 1 | `cls_7e5305f0__vfn0_7e2b169d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5305f0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2c3f8e` | 1 | `cls_7e56bcbc__vfn0_7e2c3f8e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e56bcbc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2c55b1` | 1 | `cls_7e56bcbc__ctordtor_7e2c55b1` | Constructor or destructor of class `cls_7e56bcbc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2c9bd1` | 1 | `SsCommon__vfn1_7e2c9bd1` | Vtable slot 1 (byte offset `+4`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2c9bf6` | 1 | `SsCommon__vfn2_7e2c9bf6` | Vtable slot 2 (byte offset `+8`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2c9d31` | 1 | `SsCommon__vfn3_7e2c9d31` | Vtable slot 3 (byte offset `+12`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2ca206` | 1 | `SsCommon__vfn4_7e2ca206` | Vtable slot 4 (byte offset `+16`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2ca2d4` | 1 | `SsCommon__vfn5_7e2ca2d4` | Vtable slot 5 (byte offset `+20`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2ca3c8` | 1 | `SsCommon__vfn0_7e2ca3c8` | Vtable slot 0 (byte offset `+0`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2ca836` | 1 | `SsCommon__vfn7_7e2ca836` | Vtable slot 7 (byte offset `+28`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2ca981` | 1 | `SsCommon__vfn8_7e2ca981` | Vtable slot 8 (byte offset `+32`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2cab73` | 1 | `SsCommon__vfn9_7e2cab73` | Vtable slot 9 (byte offset `+36`) of class `SsCommon`. | Ghidra vtable pass |
+| `0x7e2cd1cb` | 32 | `cls_7e599948__vfn0_7e2cd1cb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e599948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cd1d0` | 10 | `cls_7e593518__ctordtor_7e2cd1d0` | Constructor or destructor of class `cls_7e593518` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cd8ba` | 1 | `cls_7e593518__ctordtor_7e2cd8ba` | Constructor or destructor of class `cls_7e593518` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cd946` | 1 | `cls_7e593518__vfn1_7e2cd946` | Vtable slot 1 (byte offset `+4`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdb3e` | 2 | `cls_7e593518__vfn0_7e2cdb3e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cde5c` | 1 | `cls_7e593518__vfn3_7e2cde5c` | Vtable slot 3 (byte offset `+12`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdeb0` | 1 | `cls_7e593518__vfn4_7e2cdeb0` | Vtable slot 4 (byte offset `+16`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdf04` | 1 | `cls_7e593518__vfn5_7e2cdf04` | Vtable slot 5 (byte offset `+20`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdf58` | 1 | `cls_7e593518__vfn6_7e2cdf58` | Vtable slot 6 (byte offset `+24`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdfac` | 1 | `cls_7e593518__vfn7_7e2cdfac` | Vtable slot 7 (byte offset `+28`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2cdff8` | 1 | `cls_7e593518__vfn8_7e2cdff8` | Vtable slot 8 (byte offset `+32`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ce050` | 2 | `cls_7e593518__vfn9_7e2ce050` | Vtable slot 9 (byte offset `+36`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ce1e3` | 1 | `cls_7e593518__vfn10_7e2ce1e3` | Vtable slot 10 (byte offset `+40`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ce262` | 3 | `cls_7e593518__vfn2_7e2ce262` | Vtable slot 2 (byte offset `+8`) of class `cls_7e593518`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d0706` | 1 | `cls_7e599948__ctordtor_7e2d0706` | Constructor or destructor of class `cls_7e599948` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d074d` | 1 | `cls_7e599948__vfn1_7e2d074d` | Vtable slot 1 (byte offset `+4`) of class `cls_7e599948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d075e` | 1 | `cls_7e599948__vfn2_7e2d075e` | Vtable slot 2 (byte offset `+8`) of class `cls_7e599948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d076f` | 1 | `cls_7e599948__vfn4_7e2d076f` | Vtable slot 4 (byte offset `+16`) of class `cls_7e599948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d0780` | 1 | `cls_7e599948__vfn3_7e2d0780` | Vtable slot 3 (byte offset `+12`) of class `cls_7e599948`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2d0792` | 1 | `cls_7e599948__ctordtor_7e2d0792` | Constructor or destructor of class `cls_7e599948` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dc800` | 1 | `cls_7e5a1f54__ctordtor_7e2dc800` | Constructor or destructor of class `cls_7e5a1f54` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dc866` | 3 | `cls_7e5a1f54__vfn0_7e2dc866` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dc9ee` | 1 | `cls_7e5a1f54__vfn1_7e2dc9ee` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dca21` | 1 | `cls_7e5a1f54__vfn2_7e2dca21` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcb09` | 1 | `cls_7e5a1f54__vfn3_7e2dcb09` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcbf1` | 1 | `cls_7e5a1f54__vfn4_7e2dcbf1` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcc82` | 1 | `cls_7e5a1f54__vfn5_7e2dcc82` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcd13` | 1 | `cls_7e5a1f54__vfn6_7e2dcd13` | Vtable slot 6 (byte offset `+24`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcd6d` | 1 | `cls_7e5a1f54__vfn7_7e2dcd6d` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dce72` | 1 | `cls_7e5a1f54__vfn8_7e2dce72` | Vtable slot 8 (byte offset `+32`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2dcf39` | 1 | `cls_7e5a1f54__vfn9_7e2dcf39` | Vtable slot 9 (byte offset `+36`) of class `cls_7e5a1f54`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e035b` | 2 | `cls_7e5a860c__ctordtor_7e2e035b` | Constructor or destructor of class `cls_7e5a860c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e046f` | 0 | `cls_7e5a860c__vfn1_7e2e046f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5a860c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e047e` | 1 | `cls_7e5a860c__vfn0_7e2e047e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5a860c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e1b4b` | 1 | `cls_7e5a9fe4__ctordtor_7e2e1b4b` | Constructor or destructor of class `cls_7e5a9fe4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e1b7c` | 0 | `cls_7e5a9fe4__vfn1_7e2e1b7c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5a9fe4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e1bd6` | 1 | `cls_7e5a9fe4__vfn0_7e2e1bd6` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5a9fe4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e38e8` | 1 | `cls_7e5aa6e0__ctordtor_7e2e38e8` | Constructor or destructor of class `cls_7e5aa6e0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e3919` | 0 | `cls_7e5aa6e0__vfn1_7e2e3919` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5aa6e0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e3973` | 1 | `cls_7e5aa6e0__vfn0_7e2e3973` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5aa6e0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e8a3e` | 1 | `cls_7e5ac798__ctordtor_7e2e8a3e` | Constructor or destructor of class `cls_7e5ac798` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e8af9` | 0 | `cls_7e5ac798__vfn1_7e2e8af9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5ac798`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2e8b53` | 1 | `cls_7e5ac798__vfn0_7e2e8b53` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5ac798`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec4f5` | 1 | `cls_7e5b102c__ctordtor_7e2ec4f5` | Constructor or destructor of class `cls_7e5b102c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec51a` | 1 | `cls_7e5b102c__ctordtor_7e2ec51a` | Constructor or destructor of class `cls_7e5b102c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec662` | 1 | `cls_7e5b102c__vfn1_7e2ec662` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5b102c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec673` | 1 | `cls_7e5b102c__vfn2_7e2ec673` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5b102c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec684` | 1 | `cls_7e5b102c__vfn3_7e2ec684` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5b102c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2ec696` | 1 | `cls_7e5b102c__vfn4_7e2ec696` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5b102c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3597` | 1 | `cls_7e5b4d34__ctordtor_7e2f3597` | Constructor or destructor of class `cls_7e5b4d34` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f35bc` | 1 | `cls_7e5b4d34__ctordtor_7e2f35bc` | Constructor or destructor of class `cls_7e5b4d34` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3641` | 1 | `cls_7e5b3924__ctordtor_7e2f3641` | Constructor or destructor of class `cls_7e5b3924` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3917` | 1 | `cls_7e5b4d34__vfn1_7e2f3917` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5b4d34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3928` | 1 | `cls_7e5b4d34__vfn2_7e2f3928` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5b4d34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3939` | 1 | `cls_7e5b4d34__vfn3_7e2f3939` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5b4d34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f394b` | 1 | `cls_7e5b4d34__vfn4_7e2f394b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5b4d34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3b96` | 26 | `cls_7e5b3924__vfn0_7e2f3b96` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3c94` | 24 | `cls_7e5b3924__vfn1_7e2f3c94` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f3db9` | 24 | `cls_7e5b3924__vfn2_7e2f3db9` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f4050` | 24 | `cls_7e5b3924__vfn3_7e2f4050` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f4301` | 24 | `cls_7e5b3924__vfn4_7e2f4301` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f44a3` | 24 | `cls_7e5b3924__vfn5_7e2f44a3` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5b3924`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f6a51` | 1 | `IOlyApiShooting__vfn0_7e2f6a51` | Vtable slot 0 (byte offset `+0`) of class `IOlyApiShooting`. | Ghidra vtable pass |
+| `0x7e2f6c08` | 1 | `IOlyApiShooting__vfn5_7e2f6c08` | Vtable slot 5 (byte offset `+20`) of class `IOlyApiShooting`. | Ghidra vtable pass |
+| `0x7e2f6c2b` | 1 | `IOlyApiShooting__vfn6_7e2f6c2b` | Vtable slot 6 (byte offset `+24`) of class `IOlyApiShooting`. | Ghidra vtable pass |
+| `0x7e2f6c4e` | 1 | `IOlyApiShooting__vfn7_7e2f6c4e` | Vtable slot 7 (byte offset `+28`) of class `IOlyApiShooting`. | Ghidra vtable pass |
+| `0x7e2f6d27` | 1 | `cls_7e5b5d94__ctordtor_7e2f6d27` | Constructor or destructor of class `cls_7e5b5d94` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f6e1f` | 0 | `cls_7e5b5d94__vfn2_7e2f6e1f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5b5d94`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f6e2e` | 1 | `cls_7e5b5d94__vfn1_7e2f6e2e` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5b5d94`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f6fe6` | 2 | `cls_7e5b5d94__vfn0_7e2f6fe6` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5b5d94`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f83dd` | 1 | `cls_7e5b8178__ctordtor_7e2f83dd` | Constructor or destructor of class `cls_7e5b8178` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f8591` | 0 | `cls_7e5b8178__vfn1_7e2f8591` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5b8178`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e2f87ac` | 1 | `cls_7e5b8178__vfn0_7e2f87ac` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5b8178`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e301cd3` | 0 | `cls_7e5a860c__vfn2_7e301cd3` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5a860c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e311b02` | 1 | `OlyApiPlayIndex__vfn0_7e311b02` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e311c04` | 1 | `OlyApiPlayIndex__vfn5_7e311c04` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e311d3c` | 1 | `OlyApiPlayIndex__vfn1_7e311d3c` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e311da5` | 1 | `OlyApiPlayIndex__vfn2_7e311da5` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e311fe6` | 1 | `OlyApiPlayIndex__vfn6_7e311fe6` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e31204f` | 1 | `OlyApiPlayIndex__vfn7_7e31204f` | Vtable slot 7 (byte offset `+28`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e3120d6` | 1 | `OlyApiPlayIndex__vfn9_7e3120d6` | Vtable slot 9 (byte offset `+36`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e312137` | 1 | `OlyApiPlayIndex__vfn10_7e312137` | Vtable slot 10 (byte offset `+40`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e31216f` | 1 | `OlyApiPlayIndex__vfn0_7e31216f` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e312309` | 1 | `OlyApiPlayIndex__vfn4_7e312309` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e312584` | 1 | `OlyApiPlayIndex__vfn12_7e312584` | Vtable slot 12 (byte offset `+48`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e312611` | 9 | `OlyApiPlayIndex__vfn14_7e312611` | Vtable slot 14 (byte offset `+56`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e3132cb` | 1 | `OlyApiPlayIndex__vfn11_7e3132cb` | Vtable slot 11 (byte offset `+44`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e3133bb` | 1 | `OlyApiPlayIndex__vfn19_7e3133bb` | Vtable slot 19 (byte offset `+76`) of class `OlyApiPlayIndex`. | Ghidra vtable pass |
+| `0x7e313d8e` | 1 | `OlyApiPlaySelect__vfn0_7e313d8e` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313da9` | 1 | `OlyApiPlaySelect__vfn1_7e313da9` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313dfc` | 1 | `OlyApiPlaySelect__vfn2_7e313dfc` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313e4f` | 1 | `OlyApiPlaySelect__vfn3_7e313e4f` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313ea2` | 1 | `OlyApiPlaySelect__vfn4_7e313ea2` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313eb6` | 1 | `OlyApiPlaySelect__vfn5_7e313eb6` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313eca` | 1 | `OlyApiPlaySelect__vfn6_7e313eca` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313ee5` | 1 | `OlyApiPlaySelect__vfn7_7e313ee5` | Vtable slot 7 (byte offset `+28`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313f00` | 1 | `OlyApiPlaySelect__vfn8_7e313f00` | Vtable slot 8 (byte offset `+32`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313f1b` | 1 | `OlyApiPlaySelect__vfn9_7e313f1b` | Vtable slot 9 (byte offset `+36`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e313f9a` | 1 | `OlyApiPlaySelect__vfn3_7e313f9a` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3140d1` | 1 | `OlyApiPlaySelect__vfn13_7e3140d1` | Vtable slot 13 (byte offset `+52`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3140e5` | 1 | `OlyApiPlaySelect__vfn2_7e3140e5` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31448c` | 1 | `OlyApiPlaySelect__vfn10_7e31448c` | Vtable slot 10 (byte offset `+40`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3144a0` | 6 | `OlyApiPlaySelect__vfn30_7e3144a0` | Vtable slot 30 (byte offset `+120`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31450c` | 1 | `OlyApiPlaySelect__vfn14_7e31450c` | Vtable slot 14 (byte offset `+56`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314528` | 1 | `OlyApiPlaySelect__vfn12_7e314528` | Vtable slot 12 (byte offset `+48`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314b2e` | 1 | `OlyApiPlaySelect__vfn15_7e314b2e` | Vtable slot 15 (byte offset `+60`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314b58` | 1 | `OlyApiPlaySelect__vfn17_7e314b58` | Vtable slot 17 (byte offset `+68`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314b76` | 1 | `OlyApiPlaySelect__vfn18_7e314b76` | Vtable slot 18 (byte offset `+72`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314c27` | 1 | `OlyApiPlaySelect__vfn20_7e314c27` | Vtable slot 20 (byte offset `+80`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314c34` | 1 | `OlyApiPlaySelect__vfn22_7e314c34` | Vtable slot 22 (byte offset `+88`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314c48` | 1 | `OlyApiPlaySelect__vfn27_7e314c48` | Vtable slot 27 (byte offset `+108`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314c7b` | 1 | `OlyApiPlaySelect__vfn21_7e314c7b` | Vtable slot 21 (byte offset `+84`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314c99` | 1 | `OlyApiPlaySelect__vfn25_7e314c99` | Vtable slot 25 (byte offset `+100`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314d31` | 1 | `OlyApiPlaySelect__vfn23_7e314d31` | Vtable slot 23 (byte offset `+92`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e314f2d` | 1 | `OlyApiPlaySelect__vfn16_7e314f2d` | Vtable slot 16 (byte offset `+64`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315334` | 1 | `OlyApiPlaySelect__vfn28_7e315334` | Vtable slot 28 (byte offset `+112`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3153f1` | 1 | `OlyApiPlaySelect__vfn29_7e3153f1` | Vtable slot 29 (byte offset `+116`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31547d` | 1 | `OlyApiPlaySelect__vfn26_7e31547d` | Vtable slot 26 (byte offset `+104`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315539` | 1 | `OlyApiPlaySelect__vfn11_7e315539` | Vtable slot 11 (byte offset `+44`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3155c4` | 1 | `OlyApiPlaySelect__vfn24_7e3155c4` | Vtable slot 24 (byte offset `+96`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315601` | 1 | `OlyApiPlaySelect__vfn0_7e315601` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315679` | 1 | `OlyApiPlaySelect__vfn0_7e315679` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31568d` | 1 | `OlyApiPlaySelect__vfn1_7e31568d` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3156ca` | 1 | `OlyApiPlaySelect__vfn4_7e3156ca` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31573f` | 1 | `OlyApiPlaySelect__vfn2_7e31573f` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315756` | 1 | `OlyApiPlaySelect__vfn3_7e315756` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e31576d` | 1 | `OlyApiPlaySelect__vfn6_7e31576d` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315783` | 1 | `OlyApiPlaySelect__vfn7_7e315783` | Vtable slot 7 (byte offset `+28`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e315c9c` | 1 | `OlyApiPlaySingleFrame__vfn0_7e315c9c` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e315d47` | 1 | `OlyApiPlaySingleFrame__vfn4_7e315d47` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e315e21` | 1 | `OlyApiPlaySingleFrame__vfn5_7e315e21` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e315e99` | 1 | `OlyApiPlaySingleFrame__vfn7_7e315e99` | Vtable slot 7 (byte offset `+28`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e315ef2` | 1 | `OlyApiPlaySingleFrame__vfn28_7e315ef2` | Vtable slot 28 (byte offset `+112`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3161ff` | 1 | `OlyApiPlaySingleFrame__vfn22_7e3161ff` | Vtable slot 22 (byte offset `+88`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31674d` | 1 | `OlyApiPlaySingleFrame__vfn1_7e31674d` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e316c0c` | 1 | `OlyApiPlaySingleFrame__vfn2_7e316c0c` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e316c36` | 1 | `OlyApiPlaySingleFrame__vfn3_7e316c36` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e316c51` | 1 | `OlyApiPlaySingleFrame__vfn30_7e316c51` | Vtable slot 30 (byte offset `+120`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e316ef6` | 1 | `OlyApiPlaySingleFrame__vfn32_7e316ef6` | Vtable slot 32 (byte offset `+128`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e316f21` | 1 | `OlyApiPlaySingleFrame__vfn0_7e316f21` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e317115` | 1 | `OlyApiPlaySingleFrame__vfn33_7e317115` | Vtable slot 33 (byte offset `+132`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31715f` | 1 | `OlyApiPlaySingleFrame__vfn1_7e31715f` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3175d1` | 1 | `OlyApiPlaySingleFrame__vfn10_7e3175d1` | Vtable slot 10 (byte offset `+40`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e317639` | 1 | `OlyApiPlaySingleFrame__vfn12_7e317639` | Vtable slot 12 (byte offset `+48`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e317692` | 1 | `OlyApiPlaySingleFrame__vfn13_7e317692` | Vtable slot 13 (byte offset `+52`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3176eb` | 1 | `OlyApiPlaySingleFrame__vfn15_7e3176eb` | Vtable slot 15 (byte offset `+60`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31770d` | 1 | `OlyApiPlaySingleFrame__vfn14_7e31770d` | Vtable slot 14 (byte offset `+56`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e317766` | 1 | `OlyApiPlaySingleFrame__vfn31_7e317766` | Vtable slot 31 (byte offset `+124`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31795d` | 1 | `OlyApiPlaySingleFrame__vfn9_7e31795d` | Vtable slot 9 (byte offset `+36`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3179ba` | 1 | `OlyApiPlaySingleFrame__vfn11_7e3179ba` | Vtable slot 11 (byte offset `+44`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318593` | 1 | `OlyApiPlaySingleFrame__vfn21_7e318593` | Vtable slot 21 (byte offset `+84`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3185f7` | 1 | `OlyApiPlaySingleFrame__vfn24_7e3185f7` | Vtable slot 24 (byte offset `+96`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318669` | 1 | `OlyApiPlaySingleFrame__vfn25_7e318669` | Vtable slot 25 (byte offset `+100`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3186db` | 1 | `OlyApiPlaySingleFrame__vfn29_7e3186db` | Vtable slot 29 (byte offset `+116`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31895b` | 1 | `OlyApiPlaySingleFrame__vfn17_7e31895b` | Vtable slot 17 (byte offset `+68`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318976` | 1 | `OlyApiPlaySingleFrame__vfn18_7e318976` | Vtable slot 18 (byte offset `+72`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318991` | 1 | `OlyApiPlaySingleFrame__vfn19_7e318991` | Vtable slot 19 (byte offset `+76`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3189d5` | 1 | `OlyApiPlaySingleFrame__vfn20_7e3189d5` | Vtable slot 20 (byte offset `+80`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318e98` | 1 | `OlyApiPlaySingleFrame__vfn23_7e318e98` | Vtable slot 23 (byte offset `+92`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318f3d` | 1 | `OlyApiPlaySingleFrame__vfn0_7e318f3d` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e318f97` | 1 | `OlyApiPlaySingleFrame__vfn6_7e318f97` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31900f` | 1 | `OlyApiPlaySingleFrame__vfn8_7e31900f` | Vtable slot 8 (byte offset `+32`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3190ee` | 1 | `OlyApiPlaySingleFrame__vfn3_7e3190ee` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319242` | 1 | `OlyApiPlaySingleFrame__vfn4_7e319242` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3195d7` | 1 | `OlyApiPlaySingleFrame__vfn5_7e3195d7` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3196b3` | 1 | `OlyApiPlaySingleFrame__vfn34_7e3196b3` | Vtable slot 34 (byte offset `+136`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3197a2` | 1 | `OlyApiPlaySingleFrame__vfn1_7e3197a2` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3197b9` | 1 | `OlyApiPlaySingleFrame__vfn6_7e3197b9` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319895` | 1 | `OlyApiPlaySingleFrame__vfn7_7e319895` | Vtable slot 7 (byte offset `+28`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319942` | 1 | `OlyApiPlaySingleFrame__vfn8_7e319942` | Vtable slot 8 (byte offset `+32`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319996` | 1 | `OlyApiPlaySingleFrame__vfn40_7e319996` | Vtable slot 40 (byte offset `+160`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3199b2` | 1 | `OlyApiPlaySingleFrame__vfn41_7e3199b2` | Vtable slot 41 (byte offset `+164`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e3199ce` | 14 | `OlyApiPlaySingleFrame__vfn42_7e3199ce` | Vtable slot 42 (byte offset `+168`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319a02` | 1 | `OlyApiPlaySingleFrame__vfn3_7e319a02` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319a41` | 1 | `OlyApiPlaySingleFrame__vfn9_7e319a41` | Vtable slot 9 (byte offset `+36`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319a57` | 1 | `OlyApiPlaySingleFrame__vfn10_7e319a57` | Vtable slot 10 (byte offset `+40`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319aa1` | 1 | `OlyApiPlaySingleFrame__vfn11_7e319aa1` | Vtable slot 11 (byte offset `+44`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319ab6` | 1 | `OlyApiPlaySingleFrame__vfn12_7e319ab6` | Vtable slot 12 (byte offset `+48`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319afc` | 1 | `OlyApiPlaySingleFrame__vfn13_7e319afc` | Vtable slot 13 (byte offset `+52`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319b11` | 1 | `OlyApiPlaySingleFrame__vfn14_7e319b11` | Vtable slot 14 (byte offset `+56`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319b26` | 1 | `OlyApiPlaySingleFrame__vfn15_7e319b26` | Vtable slot 15 (byte offset `+60`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319b3b` | 1 | `OlyApiPlaySingleFrame__vfn16_7e319b3b` | Vtable slot 16 (byte offset `+64`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319b5f` | 1 | `OlyApiPlaySingleFrame__vfn17_7e319b5f` | Vtable slot 17 (byte offset `+68`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319b6b` | 1 | `OlyApiPlaySingleFrame__vfn18_7e319b6b` | Vtable slot 18 (byte offset `+72`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319ba4` | 1 | `OlyApiPlaySingleFrame__vfn19_7e319ba4` | Vtable slot 19 (byte offset `+76`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319bb0` | 1 | `OlyApiPlaySingleFrame__vfn20_7e319bb0` | Vtable slot 20 (byte offset `+80`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319be9` | 1 | `OlyApiPlaySingleFrame__vfn21_7e319be9` | Vtable slot 21 (byte offset `+84`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319bf5` | 1 | `OlyApiPlaySingleFrame__vfn22_7e319bf5` | Vtable slot 22 (byte offset `+88`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319c01` | 1 | `OlyApiPlaySingleFrame__vfn23_7e319c01` | Vtable slot 23 (byte offset `+92`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319c0d` | 1 | `OlyApiPlaySingleFrame__vfn24_7e319c0d` | Vtable slot 24 (byte offset `+96`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319cdf` | 1 | `OlyApiPlaySingleFrame__vfn25_7e319cdf` | Vtable slot 25 (byte offset `+100`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319df6` | 1 | `OlyApiPlaySingleFrame__vfn26_7e319df6` | Vtable slot 26 (byte offset `+104`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319e25` | 1 | `OlyApiPlaySingleFrame__vfn27_7e319e25` | Vtable slot 27 (byte offset `+108`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319e49` | 1 | `OlyApiPlaySingleFrame__vfn28_7e319e49` | Vtable slot 28 (byte offset `+112`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e319f63` | 1 | `OlyApiPlaySingleFrame__vfn29_7e319f63` | Vtable slot 29 (byte offset `+116`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a223` | 1 | `OlyApiPlaySingleFrame__vfn31_7e31a223` | Vtable slot 31 (byte offset `+124`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a2da` | 1 | `OlyApiPlaySingleFrame__vfn32_7e31a2da` | Vtable slot 32 (byte offset `+128`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a2ef` | 1 | `OlyApiPlaySingleFrame__vfn33_7e31a2ef` | Vtable slot 33 (byte offset `+132`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a47a` | 1 | `OlyApiPlaySingleFrame__vfn35_7e31a47a` | Vtable slot 35 (byte offset `+140`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a50a` | 1 | `OlyApiPlaySingleFrame__vfn37_7e31a50a` | Vtable slot 37 (byte offset `+148`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31a8b0` | 1 | `OlyApiPlaySingleFrame__vfn36_7e31a8b0` | Vtable slot 36 (byte offset `+144`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31af84` | 1 | `OlyApiPlaySingleFrame__vfn39_7e31af84` | Vtable slot 39 (byte offset `+156`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31aff2` | 1 | `OlyApiPlaySingleFrame__vfn40_7e31aff2` | Vtable slot 40 (byte offset `+160`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b060` | 1 | `OlyApiPlaySingleFrame__vfn41_7e31b060` | Vtable slot 41 (byte offset `+164`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b1b3` | 1 | `OlyApiPlaySingleFrame__vfn42_7e31b1b3` | Vtable slot 42 (byte offset `+168`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b207` | 1 | `OlyApiPlaySingleFrame__vfn43_7e31b207` | Vtable slot 43 (byte offset `+172`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b25b` | 1 | `OlyApiPlaySingleFrame__vfn45_7e31b25b` | Vtable slot 45 (byte offset `+180`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b2c1` | 1 | `OlyApiPlaySingleFrame__vfn38_7e31b2c1` | Vtable slot 38 (byte offset `+152`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b312` | 1 | `OlyApiPlaySingleFrame__vfn46_7e31b312` | Vtable slot 46 (byte offset `+184`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b3a8` | 1 | `OlyApiPlaySingleFrame__vfn47_7e31b3a8` | Vtable slot 47 (byte offset `+188`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b3d9` | 1 | `OlyApiPlaySingleFrame__vfn48_7e31b3d9` | Vtable slot 48 (byte offset `+192`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b3ef` | 1 | `OlyApiPlaySingleFrame__vfn49_7e31b3ef` | Vtable slot 49 (byte offset `+196`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b406` | 1 | `OlyApiPlaySingleFrame__vfn51_7e31b406` | Vtable slot 51 (byte offset `+204`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b41f` | 1 | `OlyApiPlaySingleFrame__vfn52_7e31b41f` | Vtable slot 52 (byte offset `+208`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b4d0` | 1 | `OlyApiPlaySingleFrame__vfn50_7e31b4d0` | Vtable slot 50 (byte offset `+200`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b583` | 1 | `OlyApiPlaySingleFrame__vfn53_7e31b583` | Vtable slot 53 (byte offset `+212`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b6a7` | 1 | `OlyApiPlaySingleFrame__vfn54_7e31b6a7` | Vtable slot 54 (byte offset `+216`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b6e4` | 1 | `OlyApiPlaySingleFrame__vfn55_7e31b6e4` | Vtable slot 55 (byte offset `+220`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b71a` | 1 | `OlyApiPlaySingleFrame__vfn56_7e31b71a` | Vtable slot 56 (byte offset `+224`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b750` | 1 | `OlyApiPlaySingleFrame__vfn2_7e31b750` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b777` | 1 | `OlyApiPlaySingleFrame__vfn58_7e31b777` | Vtable slot 58 (byte offset `+232`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b87b` | 1 | `OlyApiPlaySingleFrame__vfn59_7e31b87b` | Vtable slot 59 (byte offset `+236`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b937` | 1 | `OlyApiPlaySingleFrame__vfn60_7e31b937` | Vtable slot 60 (byte offset `+240`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31b9f5` | 1 | `OlyApiPlaySingleFrame__vfn61_7e31b9f5` | Vtable slot 61 (byte offset `+244`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31ba60` | 1 | `OlyApiPlaySingleFrame__vfn62_7e31ba60` | Vtable slot 62 (byte offset `+248`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bacb` | 1 | `OlyApiPlaySingleFrame__vfn64_7e31bacb` | Vtable slot 64 (byte offset `+256`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bba9` | 1 | `OlyApiPlaySingleFrame__vfn26_7e31bba9` | Vtable slot 26 (byte offset `+104`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bbfd` | 1 | `OlyApiPlaySingleFrame__vfn65_7e31bbfd` | Vtable slot 65 (byte offset `+260`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bc30` | 1 | `OlyApiPlaySingleFrame__vfn66_7e31bc30` | Vtable slot 66 (byte offset `+264`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bd44` | 1 | `OlyApiPlaySingleFrame__vfn16_7e31bd44` | Vtable slot 16 (byte offset `+64`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31bd84` | 1 | `OlyApiPlaySingleFrame__vfn57_7e31bd84` | Vtable slot 57 (byte offset `+228`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31cae0` | 1 | `OlyApiPlaySingleFrame__vfn44_7e31cae0` | Vtable slot 44 (byte offset `+176`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31cd05` | 1 | `OlyApiPlaySingleFrame__vfn63_7e31cd05` | Vtable slot 63 (byte offset `+252`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31e464` | 1 | `OlyApiPlaySingleFrame__vfn0_7e31e464` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31e4e8` | 1 | `OlyApiPlaySingleFrame__vfn1_7e31e4e8` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31e5a9` | 1 | `OlyApiPlaySingleFrame__vfn4_7e31e5a9` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31e8e8` | 1 | `OlyApiPlaySingleFrame__vfn2_7e31e8e8` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySingleFrame`. | Ghidra vtable pass |
+| `0x7e31ede6` | 1 | `cls_7e5c20e8__vfn0_7e31ede6` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c20e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e31ee5a` | 1 | `cls_7e5c20e8__vfn1_7e31ee5a` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c20e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e31efd8` | 1 | `cls_7e5c20e8__vfn2_7e31efd8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c20e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e31f152` | 1 | `cls_7e5c20e8__vfn3_7e31f152` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c20e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e31f1c2` | 1 | `cls_7e5c20e8__ctordtor_7e31f1c2` | Constructor or destructor of class `cls_7e5c20e8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e31f383` | 1 | `cls_7e5c20e8__vfn4_7e31f383` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5c20e8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320080` | 1 | `cls_7e5c2234__vfn0_7e320080` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3200e7` | 1 | `cls_7e5c2234__vfn1_7e3200e7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32027f` | 1 | `cls_7e5c2234__vfn2_7e32027f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320410` | 1 | `cls_7e5c2234__vfn3_7e320410` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320436` | 1 | `cls_7e5c2234__ctordtor_7e320436` | Constructor or destructor of class `cls_7e5c2234` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3204c8` | 1 | `cls_7e5c2234__ctordtor_7e3204c8` | Constructor or destructor of class `cls_7e5c2234` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320654` | 1 | `cls_7e5c2234__vfn4_7e320654` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3206bb` | 1 | `cls_7e5c2234__vfn5_7e3206bb` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32078c` | 1 | `cls_7e5c2234__vfn6_7e32078c` | Vtable slot 6 (byte offset `+24`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32083c` | 1 | `cls_7e5c2234__vfn7_7e32083c` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32090d` | 1 | `cls_7e5c2234__vfn8_7e32090d` | Vtable slot 8 (byte offset `+32`) of class `cls_7e5c2234`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320b68` | 1 | `cls_7e5c2328__vfn0_7e320b68` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2328`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320bdc` | 1 | `cls_7e5c2328__vfn1_7e320bdc` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2328`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320d5a` | 1 | `cls_7e5c2328__vfn2_7e320d5a` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2328`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320e7a` | 1 | `cls_7e5c2328__vfn3_7e320e7a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2328`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e320eea` | 1 | `cls_7e5c2328__ctordtor_7e320eea` | Constructor or destructor of class `cls_7e5c2328` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e321054` | 1 | `cls_7e5c2384__ctordtor_7e321054` | Constructor or destructor of class `cls_7e5c2384` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e321088` | 1 | `cls_7e5c2384__vfn1_7e321088` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2384`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e321094` | 0 | `cls_7e5c2384__vfn2_7e321094` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2384`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e322048` | 2 | `cls_7e5c2384__vfn0_7e322048` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2384`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e322073` | 0 | `cls_7e5c2678__vfn0_7e322073` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2678`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32225c` | 0 | `cls_7e5c2678__vfn1_7e32225c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2678`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e322291` | 1 | `cls_7e5c2678__ctordtor_7e322291` | Constructor or destructor of class `cls_7e5c2678` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3222b4` | 1 | `cls_7e5c2678__ctordtor_7e3222b4` | Constructor or destructor of class `cls_7e5c2678` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e322333` | 0 | `cls_7e5c2678__vfn2_7e322333` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2678`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e322370` | 0 | `cls_7e5c2678__vfn3_7e322370` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2678`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32390c` | 0 | `cls_7e5c2b34__vfn1_7e32390c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2b34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3239ec` | 1 | `cls_7e5c2b34__ctordtor_7e3239ec` | Constructor or destructor of class `cls_7e5c2b34` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324563` | 1 | `cls_7e5c2b34__vfn2_7e324563` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2b34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324596` | 0 | `cls_7e5c2b34__vfn3_7e324596` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2b34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3246f2` | 1 | `cls_7e5c2b34__vfn4_7e3246f2` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5c2b34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324725` | 0 | `cls_7e5c2b34__vfn5_7e324725` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5c2b34`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324d08` | 1 | `cls_7e5c2bd0__ctordtor_7e324d08` | Constructor or destructor of class `cls_7e5c2bd0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324e16` | 5 | `cls_7e5c2bd0__vfn0_7e324e16` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324e2e` | 1 | `cls_7e5c2bd0__vfn1_7e324e2e` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324e48` | 1 | `cls_7e5c2c00__vfn1_7e324e48` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2c00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324e96` | 1 | `cls_7e5c2bd0__vfn2_7e324e96` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324ec8` | 1 | `cls_7e5c2c00__vfn2_7e324ec8` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2c00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324f08` | 1 | `cls_7e5c2bd0__vfn3_7e324f08` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324f3a` | 1 | `cls_7e5c2c00__vfn3_7e324f3a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5c2c00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324f7a` | 2 | `cls_7e5c2bd0__vfn4_7e324f7a` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e324fcc` | 2 | `cls_7e5c2bd0__vfn5_7e324fcc` | Vtable slot 5 (byte offset `+20`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32501e` | 2 | `cls_7e5c2bd0__vfn6_7e32501e` | Vtable slot 6 (byte offset `+24`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32506a` | 1 | `cls_7e5c2bd0__vfn7_7e32506a` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e325096` | 1 | `cls_7e5c2c00__vfn7_7e325096` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5c2c00`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e325128` | 2 | `cls_7e5c2bd0__vfn8_7e325128` | Vtable slot 8 (byte offset `+32`) of class `cls_7e5c2bd0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3252c7` | 1 | `cls_7e5c2cdc__ctordtor_7e3252c7` | Constructor or destructor of class `cls_7e5c2cdc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e325e14` | 2 | `cls_7e5c2cdc__vfn0_7e325e14` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5c2cdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e325e75` | 2 | `cls_7e5c2cdc__vfn2_7e325e75` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5c2cdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e325ed7` | 4 | `cls_7e5c2cdc__vfn1_7e325ed7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5c2cdc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e32a545` | 1 | `Wizard_1n_Right_Viewer__vfn0_7e32a545` | Vtable slot 0 (byte offset `+0`) of class `Wizard_1n_Right_Viewer`. | Ghidra vtable pass |
+| `0x7e32a6cf` | 1 | `Wizard_1n_Right_Viewer__vfn2_7e32a6cf` | Vtable slot 2 (byte offset `+8`) of class `Wizard_1n_Right_Viewer`. | Ghidra vtable pass |
+| `0x7e33aa5f` | 60 | `cls_7e5e0458__ctordtor_7e33aa5f` | Constructor or destructor of class `cls_7e5e0458` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e33aaeb` | 1 | `cls_7e5e0458__vfn0_7e33aaeb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5e0458`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e33ab29` | 0 | `cls_7e5e0458__vfn1_7e33ab29` | Vtable slot 1 (byte offset `+4`) of class `cls_7e5e0458`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e33ab5f` | 0 | `cls_7e5e0458__vfn2_7e33ab5f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5e0458`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e33bdbd` | 68 | `userMenuPlayWiz_RawJpeg__vfn2_7e33bdbd` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e34244c` | 2 | `GCPnl_Calender__vfn2_7e34244c` | Vtable slot 2 (byte offset `+8`) of class `GCPnl_Calender`. | Ghidra vtable pass |
+| `0x7e3449eb` | 2 | `cls_7e5e8b44__ctordtor_7e3449eb` | Constructor or destructor of class `cls_7e5e8b44` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e344ac7` | 2 | `cls_7e5e8b44__vfn0_7e344ac7` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5e8b44`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e344b8a` | 1 | `cls_7e5e8b44__vfn2_7e344b8a` | Vtable slot 2 (byte offset `+8`) of class `cls_7e5e8b44`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e344c00` | 1 | `cls_7e5e8b44__vfn3_7e344c00` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5e8b44`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34962a` | 2 | `cls_7e5eb110__ctordtor_7e34962a` | Constructor or destructor of class `cls_7e5eb110` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e349639` | 1 | `cls_7e5eb110__vfn0_7e349639` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5eb110`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3499f7` | 2 | `cls_7e5eb110__vfn7_7e3499f7` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5eb110`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34a0e8` | 1 | `cls_7e5f0160__ctordtor_7e34a0e8` | Constructor or destructor of class `cls_7e5f0160` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34a0f7` | 1 | `cls_7e5f0160__vfn0_7e34a0f7` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5f0160`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34a76f` | 1 | `cls_7e5f0160__vfn7_7e34a76f` | Vtable slot 7 (byte offset `+28`) of class `cls_7e5f0160`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34a88e` | 1 | `cls_7e5f01a0__ctordtor_7e34a88e` | Constructor or destructor of class `cls_7e5f01a0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34a89d` | 1 | `cls_7e5f01a0__vfn0_7e34a89d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e5f01a0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e34f44e` | 11 | `userMenuPlayWiz_RawJpeg__vfn0_7e34f44e` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e34f592` | 27 | `OlyApiPlaySelect__vfn0_7e34f592` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f5aa` | 19 | `OlyApiPlaySelect__vfn1_7e34f5aa` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f5ee` | 25 | `OlyApiPlaySelect__vfn2_7e34f5ee` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f7ed` | 22 | `OlyApiPlaySelect__vfn3_7e34f7ed` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f85c` | 23 | `OlyApiPlaySelect__vfn4_7e34f85c` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f873` | 25 | `userMenuPlayWiz_RawJpeg__vfn1_7e34f873` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e34f8fd` | 21 | `OlyApiPlaySelect__vfn5_7e34f8fd` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f9df` | 25 | `OlyApiPlaySelect__vfn0_7e34f9df` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34f9fb` | 26 | `OlyApiPlaySelect__vfn0_7e34f9fb` | Vtable slot 0 (byte offset `+0`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e34feb2` | 5 | `userMenuPlayWiz_RawJpeg__vfn1_7e34feb2` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e350e9a` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e350e9a` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e3519c1` | 1 | `userMenuRec2_CompScale__vfn0_7e3519c1` | Vtable slot 0 (byte offset `+0`) of class `userMenuRec2_CompScale`. | Ghidra vtable pass |
+| `0x7e351aea` | 1 | `userMenuRec2_CompScale__vfn1_7e351aea` | Vtable slot 1 (byte offset `+4`) of class `userMenuRec2_CompScale`. | Ghidra vtable pass |
+| `0x7e3529a4` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e3529a4` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e353030` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e353030` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e3530f4` | 1 | `userMenuPlay_CompScale__vfn2_7e3530f4` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlay_CompScale`. | Ghidra vtable pass |
+| `0x7e353264` | 1 | `OlyApiPlaySelect__vfn1_7e353264` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e353e2a` | 1 | `userMenuPlay_CompScale__vfn2_7e353e2a` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlay_CompScale`. | Ghidra vtable pass |
+| `0x7e353fce` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e353fce` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e354183` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e354183` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e3544a1` | 1 | `OlyApiPlaySelect__vfn1_7e3544a1` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3544e4` | 1 | `OlyApiPlaySelect__vfn2_7e3544e4` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3545f7` | 1 | `OlyApiPlaySelect__vfn3_7e3545f7` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e35473b` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35473b` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e354944` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e354944` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e354f16` | 1 | `userMenuPlay_CompScale__vfn2_7e354f16` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlay_CompScale`. | Ghidra vtable pass |
+| `0x7e35539b` | 1 | `userMenuPlay_RawEditCustom__vfn0_7e35539b` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlay_RawEditCustom`. | Ghidra vtable pass |
+| `0x7e355568` | 1 | `cls_7e5f6270__ctordtor_7e355568` | Constructor or destructor of class `cls_7e5f6270` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e3556ee` | 1 | `cls_7e5f6270__ctordtor_7e3556ee` | Constructor or destructor of class `cls_7e5f6270` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e35571d` | 1 | `cls_7e5f6270__vfn3_7e35571d` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5f6270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e35573e` | 1 | `cls_7e5f6270__vfn4_7e35573e` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5f6270`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e355ba5` | 1 | `cls_7e5f6388__ctordtor_7e355ba5` | Constructor or destructor of class `cls_7e5f6388` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e355f95` | 1 | `cls_7e5f6388__ctordtor_7e355f95` | Constructor or destructor of class `cls_7e5f6388` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e355fd2` | 1 | `cls_7e5f6388__vfn3_7e355fd2` | Vtable slot 3 (byte offset `+12`) of class `cls_7e5f6388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e355ff3` | 1 | `cls_7e5f6388__vfn4_7e355ff3` | Vtable slot 4 (byte offset `+16`) of class `cls_7e5f6388`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e358497` | 1 | `OlyApiPlaySelect__vfn1_7e358497` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3584aa` | 1 | `OlyApiPlaySelect__vfn2_7e3584aa` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3585c9` | 1 | `OlyApiPlaySelect__vfn3_7e3585c9` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358871` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e358871` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e3588bb` | 1 | `OlyApiPlaySelect__vfn3_7e3588bb` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3588f9` | 1 | `OlyApiPlaySelect__vfn4_7e3588f9` | Vtable slot 4 (byte offset `+16`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e35892b` | 1 | `OlyApiPlaySelect__vfn5_7e35892b` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358944` | 1 | `OlyApiPlaySelect__vfn6_7e358944` | Vtable slot 6 (byte offset `+24`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358b4f` | 1 | `OlyApiPlaySelect__vfn1_7e358b4f` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358e22` | 1 | `OlyApiPlaySelect__vfn3_7e358e22` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358e52` | 1 | `OlyApiPlaySelect__vfn2_7e358e52` | Vtable slot 2 (byte offset `+8`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e358f9d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e358f9d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e358fbd` | 1 | `OlyApiPlaySelect__vfn1_7e358fbd` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e359004` | 1 | `OlyApiPlaySelect__vfn3_7e359004` | Vtable slot 3 (byte offset `+12`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3590c2` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e3590c2` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e3590ec` | 1 | `OlyApiPlaySelect__vfn5_7e3590ec` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e3591f6` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e3591f6` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35922f` | 1 | `OlyApiPlaySelect__vfn1_7e35922f` | Vtable slot 1 (byte offset `+4`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e35961d` | 1 | `userMenuPlay_CompScale__vfn2_7e35961d` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlay_CompScale`. | Ghidra vtable pass |
+| `0x7e359b10` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e359b10` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e359b87` | 1 | `OlyApiPlaySelect__vfn5_7e359b87` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e359cec` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e359cec` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e359d16` | 1 | `OlyApiPlaySelect__vfn5_7e359d16` | Vtable slot 5 (byte offset `+20`) of class `OlyApiPlaySelect`. | Ghidra vtable pass |
+| `0x7e35a4ae` | 1 | `userMenuPlay_CompScale__vfn2_7e35a4ae` | Vtable slot 2 (byte offset `+8`) of class `userMenuPlay_CompScale`. | Ghidra vtable pass |
+| `0x7e35a70d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35a70d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35a724` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35a724` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35a8d0` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35a8d0` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35a8e7` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35a8e7` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35aa2c` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35aa2c` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35aa43` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35aa43` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ab7c` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35ab7c` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ab93` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35ab93` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ace7` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35ace7` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35acfe` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35acfe` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ae5a` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35ae5a` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ae71` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35ae71` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35afd9` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35afd9` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35aff0` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35aff0` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b13e` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b13e` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b155` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b155` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b2aa` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b2aa` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b2c1` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b2c1` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b41d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b41d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b434` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b434` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b59c` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b59c` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b5b3` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b5b3` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b824` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b824` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b83b` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b83b` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b93d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35b93d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35b954` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35b954` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35bb49` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35bb49` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35bbc2` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35bbc2` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35bca6` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35bca6` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35bda2` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35bda2` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35beff` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35beff` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35bff1` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35bff1` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35c16f` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35c16f` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35c31f` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35c31f` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35c61d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35c61d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35c645` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35c645` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35cbf0` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35cbf0` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35cdc6` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35cdc6` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35ce4d` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35ce4d` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35cf34` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35cf34` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35cfb0` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35cfb0` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35cfc9` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35cfc9` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35d039` | 1 | `userMenuPlayWiz_RawJpeg__vfn0_7e35d039` | Vtable slot 0 (byte offset `+0`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e35d425` | 1 | `userMenuPlayWiz_RawJpeg__vfn1_7e35d425` | Vtable slot 1 (byte offset `+4`) of class `userMenuPlayWiz_RawJpeg`. | Ghidra vtable pass |
+| `0x7e6e1458` | 1 | `cls_7e76e044__ctordtor_7e6e1458` | Constructor or destructor of class `cls_7e76e044` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e6e1545` | 1 | `cls_7e76e044__ctordtor_7e6e1545` | Constructor or destructor of class `cls_7e76e044` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e6e1b44` | 1 | `cls_7e76e044__vfn2_7e6e1b44` | Vtable slot 2 (byte offset `+8`) of class `cls_7e76e044`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e6e1b83` | 1 | `cls_7e76e044__vfn0_7e6e1b83` | Vtable slot 0 (byte offset `+0`) of class `cls_7e76e044`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e6e1b90` | 1 | `cls_7e76e044__vfn1_7e6e1b90` | Vtable slot 1 (byte offset `+4`) of class `cls_7e76e044`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e6e1bb0` | 1 | `cls_7e76e044__vfn3_7e6e1bb0` | Vtable slot 3 (byte offset `+12`) of class `cls_7e76e044`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c7b5` | 1 | `cls_7e7819ac__ctordtor_7e70c7b5` | Constructor or destructor of class `cls_7e7819ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c810` | 1 | `cls_7e7819ac__ctordtor_7e70c810` | Constructor or destructor of class `cls_7e7819ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c86b` | 1 | `cls_7e7819ac__ctordtor_7e70c86b` | Constructor or destructor of class `cls_7e7819ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c8c6` | 1 | `cls_7e7819ac__ctordtor_7e70c8c6` | Constructor or destructor of class `cls_7e7819ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c93a` | 8 | `cls_7e7819ac__vfn0_7e70c93a` | Vtable slot 0 (byte offset `+0`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c9c1` | 4 | `cls_7e7819ac__vfn6_7e70c9c1` | Vtable slot 6 (byte offset `+24`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70c9eb` | 1 | `cls_7e7819ac__vfn3_7e70c9eb` | Vtable slot 3 (byte offset `+12`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70ca9f` | 1 | `cls_7e7819ac__vfn8_7e70ca9f` | Vtable slot 8 (byte offset `+32`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70cb43` | 1 | `cls_7e7819ac__vfn52_7e70cb43` | Vtable slot 52 (byte offset `+208`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70cbff` | 1 | `cls_7e7819ac__vfn57_7e70cbff` | Vtable slot 57 (byte offset `+228`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70cca8` | 1 | `cls_7e7819ac__vfn63_7e70cca8` | Vtable slot 63 (byte offset `+252`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70cd36` | 1 | `cls_7e7819ac__vfn64_7e70cd36` | Vtable slot 64 (byte offset `+256`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70ce50` | 1 | `cls_7e7819ac__vfn44_7e70ce50` | Vtable slot 44 (byte offset `+176`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e70cf5f` | 1 | `cls_7e7819ac__vfn94_7e70cf5f` | Vtable slot 94 (byte offset `+376`) of class `cls_7e7819ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e712762` | 1 | `cls_7e78494c__ctordtor_7e712762` | Constructor or destructor of class `cls_7e78494c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e712819` | 1 | `cls_7e78494c__vfn0_7e712819` | Vtable slot 0 (byte offset `+0`) of class `cls_7e78494c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7128bc` | 0 | `cls_7e78494c__vfn2_7e7128bc` | Vtable slot 2 (byte offset `+8`) of class `cls_7e78494c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d80d5` | 1 | `cls_7e8916b0__ctordtor_7e7d80d5` | Constructor or destructor of class `cls_7e8916b0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d81fb` | 1 | `cls_7e8916b0__vfn0_7e7d81fb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d8208` | 1 | `cls_7e8916b0__vfn3_7e7d8208` | Vtable slot 3 (byte offset `+12`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d826b` | 1 | `cls_7e8916b0__vfn4_7e7d826b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d82cf` | 1 | `cls_7e8916b0__vfn18_7e7d82cf` | Vtable slot 18 (byte offset `+72`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d83ed` | 1 | `cls_7e8916b0__vfn21_7e7d83ed` | Vtable slot 21 (byte offset `+84`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d83fe` | 1 | `cls_7e8916b0__vfn85_7e7d83fe` | Vtable slot 85 (byte offset `+340`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d843b` | 1 | `cls_7e8916b0__vfn26_7e7d843b` | Vtable slot 26 (byte offset `+104`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d844c` | 1 | `cls_7e8916b0__vfn90_7e7d844c` | Vtable slot 90 (byte offset `+360`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d860e` | 1 | `cls_7e8916b0__vfn27_7e7d860e` | Vtable slot 27 (byte offset `+108`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d8657` | 1 | `cls_7e8916b0__vfn30_7e7d8657` | Vtable slot 30 (byte offset `+120`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d867c` | 1 | `cls_7e8916b0__vfn37_7e7d867c` | Vtable slot 37 (byte offset `+148`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d86c5` | 1 | `cls_7e8916b0__vfn40_7e7d86c5` | Vtable slot 40 (byte offset `+160`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d86f0` | 1 | `cls_7e8916b0__vfn42_7e7d86f0` | Vtable slot 42 (byte offset `+168`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d871b` | 1 | `cls_7e8916b0__vfn46_7e7d871b` | Vtable slot 46 (byte offset `+184`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d8726` | 1 | `cls_7e8916b0__vfn47_7e7d8726` | Vtable slot 47 (byte offset `+188`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7d87d8` | 1 | `cls_7e8916b0__vfn35_7e7d87d8` | Vtable slot 35 (byte offset `+140`) of class `cls_7e8916b0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7e98fb` | 8 | `cls_7e896a50__vfn2_7e7e98fb` | Vtable slot 2 (byte offset `+8`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7ea3d0` | 8 | `cls_7e896a50__vfn1_7e7ea3d0` | Vtable slot 1 (byte offset `+4`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7ea8a4` | 8 | `cls_7e896a50__vfn0_7e7ea8a4` | Vtable slot 0 (byte offset `+0`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7eac7b` | 8 | `cls_7e896a50__vfn3_7e7eac7b` | Vtable slot 3 (byte offset `+12`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7ead13` | 8 | `cls_7e896a50__vfn4_7e7ead13` | Vtable slot 4 (byte offset `+16`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7eb0c0` | 8 | `cls_7e896a50__vfn5_7e7eb0c0` | Vtable slot 5 (byte offset `+20`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7eb14f` | 8 | `cls_7e896a50__vfn6_7e7eb14f` | Vtable slot 6 (byte offset `+24`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7eb17a` | 8 | `cls_7e896a50__vfn7_7e7eb17a` | Vtable slot 7 (byte offset `+28`) of class `cls_7e896a50`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f053c` | 1 | `cls_7e896a50__ctordtor_7e7f053c` | Constructor or destructor of class `cls_7e896a50` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1884` | 2 | `cls_7e8d97a4__vfn0_7e7f1884` | Vtable slot 0 (byte offset `+0`) of class `cls_7e8d97a4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1922` | 11 | `cls_7e899754__ctordtor_7e7f1922` | Constructor or destructor of class `cls_7e899754` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f193c` | 1 | `cls_7e899754__vfn0_7e7f193c` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f195a` | 5 | `cls_7e899754__vfn1_7e7f195a` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f19d6` | 5 | `cls_7e899754__vfn2_7e7f19d6` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1a4e` | 5 | `cls_7e899754__vfn3_7e7f1a4e` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1af2` | 5 | `cls_7e899754__vfn4_7e7f1af2` | Vtable slot 4 (byte offset `+16`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1baa` | 5 | `cls_7e899754__vfn5_7e7f1baa` | Vtable slot 5 (byte offset `+20`) of class `cls_7e899754`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1cd8` | 11 | `cls_7e899780__ctordtor_7e7f1cd8` | Constructor or destructor of class `cls_7e899780` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1cec` | 1 | `cls_7e899780__vfn0_7e7f1cec` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1cf1` | 12 | `cls_7e899780__ctordtor_7e7f1cf1` | Constructor or destructor of class `cls_7e899780` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1d29` | 2 | `cls_7e899780__vfn1_7e7f1d29` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1d6a` | 2 | `cls_7e899780__vfn2_7e7f1d6a` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1da1` | 2 | `cls_7e899780__vfn3_7e7f1da1` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1e08` | 2 | `cls_7e899780__vfn4_7e7f1e08` | Vtable slot 4 (byte offset `+16`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f1e7e` | 2 | `cls_7e899780__vfn5_7e7f1e7e` | Vtable slot 5 (byte offset `+20`) of class `cls_7e899780`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f5d00` | 3 | `cls_7e899a0c__vfn1_7e7f5d00` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f89ec` | 1 | `cls_7e899a0c__ctordtor_7e7f89ec` | Constructor or destructor of class `cls_7e899a0c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f926a` | 2 | `cls_7e899a0c__vfn2_7e7f926a` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f929e` | 2 | `cls_7e899a0c__vfn3_7e7f929e` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f92ad` | 2 | `cls_7e899a0c__vfn4_7e7f92ad` | Vtable slot 4 (byte offset `+16`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f92bc` | 2 | `cls_7e899a0c__vfn5_7e7f92bc` | Vtable slot 5 (byte offset `+20`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7f92cd` | 2 | `cls_7e899a0c__vfn6_7e7f92cd` | Vtable slot 6 (byte offset `+24`) of class `cls_7e899a0c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7fc7b5` | 1 | `cls_7e899be4__ctordtor_7e7fc7b5` | Constructor or destructor of class `cls_7e899be4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7fc7d5` | 1 | `cls_7e899be4__vfn0_7e7fc7d5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899be4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7fca07` | 1 | `cls_7e8d97a4__vfn1_7e7fca07` | Vtable slot 1 (byte offset `+4`) of class `cls_7e8d97a4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7fd269` | 1 | `cls_7e8d97a4__vfn2_7e7fd269` | Vtable slot 2 (byte offset `+8`) of class `cls_7e8d97a4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e7fd2b4` | 1 | `cls_7e899be4__vfn1_7e7fd2b4` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899be4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e800ff2` | 1 | `cls_7e899e78__ctordtor_7e800ff2` | Constructor or destructor of class `cls_7e899e78` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801001` | 1 | `cls_7e899e78__vfn0_7e801001` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899e78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80102f` | 1 | `cls_7e899e78__vfn1_7e80102f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899e78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801041` | 1 | `cls_7e899e78__vfn2_7e801041` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899e78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801053` | 1 | `cls_7e899e78__vfn3_7e801053` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899e78`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801096` | 1 | `cls_7e899ea0__ctordtor_7e801096` | Constructor or destructor of class `cls_7e899ea0` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8010a5` | 1 | `cls_7e899ea0__vfn0_7e8010a5` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899ea0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8010d3` | 1 | `cls_7e899ea0__vfn1_7e8010d3` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899ea0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8010e5` | 1 | `cls_7e899ea0__vfn2_7e8010e5` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899ea0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8010f7` | 1 | `cls_7e899ea0__vfn3_7e8010f7` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899ea0`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801166` | 1 | `cls_7e899ec8__ctordtor_7e801166` | Constructor or destructor of class `cls_7e899ec8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801175` | 1 | `cls_7e899ec8__vfn0_7e801175` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801186` | 1 | `cls_7e899ec8__vfn1_7e801186` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801213` | 1 | `cls_7e899ec8__vfn2_7e801213` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8012bb` | 1 | `cls_7e899ec8__vfn3_7e8012bb` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8012ef` | 1 | `cls_7e899ec8__vfn4_7e8012ef` | Vtable slot 4 (byte offset `+16`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801339` | 1 | `cls_7e899ec8__vfn5_7e801339` | Vtable slot 5 (byte offset `+20`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80137f` | 1 | `cls_7e899ec8__vfn6_7e80137f` | Vtable slot 6 (byte offset `+24`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8013aa` | 1 | `cls_7e899ec8__vfn7_7e8013aa` | Vtable slot 7 (byte offset `+28`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8016bf` | 1 | `cls_7e899ec8__vfn8_7e8016bf` | Vtable slot 8 (byte offset `+32`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8017a0` | 1 | `cls_7e899ec8__vfn9_7e8017a0` | Vtable slot 9 (byte offset `+36`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8017b8` | 1 | `cls_7e899ec8__vfn10_7e8017b8` | Vtable slot 10 (byte offset `+40`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8017d1` | 1 | `cls_7e899ec8__vfn11_7e8017d1` | Vtable slot 11 (byte offset `+44`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8017eb` | 1 | `cls_7e899ec8__vfn12_7e8017eb` | Vtable slot 12 (byte offset `+48`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801804` | 1 | `cls_7e899ec8__vfn13_7e801804` | Vtable slot 13 (byte offset `+52`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80182c` | 1 | `cls_7e899ec8__vfn14_7e80182c` | Vtable slot 14 (byte offset `+56`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801847` | 1 | `cls_7e899ec8__vfn15_7e801847` | Vtable slot 15 (byte offset `+60`) of class `cls_7e899ec8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801da0` | 1 | `cls_7e899f30__ctordtor_7e801da0` | Constructor or destructor of class `cls_7e899f30` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801dcd` | 1 | `cls_7e899f30__vfn0_7e801dcd` | Vtable slot 0 (byte offset `+0`) of class `cls_7e899f30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801dd2` | 2 | `cls_7e899f30__ctordtor_7e801dd2` | Constructor or destructor of class `cls_7e899f30` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801f14` | 1 | `cls_7e899f30__vfn2_7e801f14` | Vtable slot 2 (byte offset `+8`) of class `cls_7e899f30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e801fde` | 1 | `cls_7e899f30__vfn3_7e801fde` | Vtable slot 3 (byte offset `+12`) of class `cls_7e899f30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8020ef` | 1 | `cls_7e899f30__vfn1_7e8020ef` | Vtable slot 1 (byte offset `+4`) of class `cls_7e899f30`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e802f65` | 1 | `cls_7e89a094__ctordtor_7e802f65` | Constructor or destructor of class `cls_7e89a094` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e802fa8` | 1 | `cls_7e89a094__vfn0_7e802fa8` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a094`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e802fab` | 2 | `cls_7e89a094__ctordtor_7e802fab` | Constructor or destructor of class `cls_7e89a094` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80308f` | 1 | `cls_7e89a094__vfn1_7e80308f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89a094`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8030ab` | 1 | `cls_7e89a094__vfn2_7e8030ab` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89a094`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80312a` | 1 | `cls_7e89a0c4__ctordtor_7e80312a` | Constructor or destructor of class `cls_7e89a0c4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803157` | 1 | `cls_7e89a0c4__vfn0_7e803157` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80315c` | 2 | `cls_7e89a0c4__ctordtor_7e80315c` | Constructor or destructor of class `cls_7e89a0c4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8032ad` | 1 | `cls_7e89a0c4__vfn10_7e8032ad` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80332e` | 1 | `cls_7e89a0c4__vfn1_7e80332e` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80334e` | 1 | `cls_7e89a0c4__vfn2_7e80334e` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803366` | 1 | `cls_7e89a0c4__vfn3_7e803366` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803376` | 1 | `cls_7e89a0c4__vfn4_7e803376` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803386` | 1 | `cls_7e89a0c4__vfn5_7e803386` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803396` | 1 | `cls_7e89a0c4__vfn6_7e803396` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8033b1` | 1 | `cls_7e89a0c4__vfn7_7e8033b1` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8033ec` | 1 | `cls_7e89a0c4__vfn8_7e8033ec` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803417` | 1 | `cls_7e89a0c4__vfn9_7e803417` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803456` | 1 | `cls_7e89a0c4__vfn11_7e803456` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e803472` | 1 | `cls_7e89a0c4__vfn12_7e803472` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89a0c4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80873b` | 1 | `cls_7e89a3ac__ctordtor_7e80873b` | Constructor or destructor of class `cls_7e89a3ac` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80875d` | 1 | `cls_7e89a3ac__vfn0_7e80875d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a3ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80878b` | 1 | `cls_7e89a3ac__vfn1_7e80878b` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89a3ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80b410` | 1 | `cls_7e89a3ac__vfn3_7e80b410` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89a3ac`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80fd41` | 1 | `cls_7e89a558__ctordtor_7e80fd41` | Constructor or destructor of class `cls_7e89a558` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e80fd58` | 1 | `cls_7e89a558__vfn0_7e80fd58` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a558`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81013c` | 2 | `cls_7e89a558__ctordtor_7e81013c` | Constructor or destructor of class `cls_7e89a558` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810da4` | 2 | `cls_7e89a620__ctordtor_7e810da4` | Constructor or destructor of class `cls_7e89a620` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810db9` | 1 | `cls_7e89a620__vfn0_7e810db9` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a620`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810e51` | 1 | `cls_7e89a64c__ctordtor_7e810e51` | Constructor or destructor of class `cls_7e89a64c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810ec1` | 1 | `cls_7e89a64c__vfn0_7e810ec1` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a64c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810ec6` | 1 | `cls_7e89a64c__ctordtor_7e810ec6` | Constructor or destructor of class `cls_7e89a64c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e810f19` | 2 | `cls_7e89a64c__vfn2_7e810f19` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89a64c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81102f` | 2 | `cls_7e89a64c__vfn1_7e81102f` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89a64c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e811bbc` | 1 | `cls_7e89a874__ctordtor_7e811bbc` | Constructor or destructor of class `cls_7e89a874` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e811bd6` | 1 | `cls_7e89a874__ctordtor_7e811bd6` | Constructor or destructor of class `cls_7e89a874` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e811be0` | 1 | `cls_7e89a874__vfn0_7e811be0` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e812da4` | 1 | `cls_7e89a874__vfn1_7e812da4` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e813325` | 1 | `cls_7e89a874__vfn2_7e813325` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e814132` | 1 | `cls_7e89a874__vfn3_7e814132` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81451b` | 1 | `cls_7e89a874__vfn7_7e81451b` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e814814` | 1 | `cls_7e89a874__vfn4_7e814814` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e814996` | 1 | `cls_7e89a874__vfn5_7e814996` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e814d95` | 1 | `cls_7e89a874__vfn6_7e814d95` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89a874`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816b79` | 1 | `cls_7e89adcc__ctordtor_7e816b79` | Constructor or destructor of class `cls_7e89adcc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816b9d` | 1 | `cls_7e89adcc__vfn0_7e816b9d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816ba0` | 1 | `cls_7e89adcc__ctordtor_7e816ba0` | Constructor or destructor of class `cls_7e89adcc` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816bb7` | 2 | `cls_7e89adcc__vfn1_7e816bb7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816bf7` | 1 | `cls_7e89adcc__vfn2_7e816bf7` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816e89` | 1 | `cls_7e89adcc__vfn3_7e816e89` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e816f43` | 1 | `cls_7e89adcc__vfn4_7e816f43` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e817009` | 1 | `cls_7e89adcc__vfn6_7e817009` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81704f` | 1 | `cls_7e89adcc__vfn5_7e81704f` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e817cad` | 1 | `cls_7e89adcc__vfn7_7e817cad` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e817d72` | 1 | `cls_7e89adcc__vfn10_7e817d72` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e817f95` | 1 | `cls_7e89adcc__vfn12_7e817f95` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e818024` | 1 | `cls_7e89adcc__vfn11_7e818024` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8180b9` | 1 | `cls_7e89adcc__vfn9_7e8180b9` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e818af2` | 1 | `cls_7e89adcc__vfn8_7e818af2` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e818b61` | 1 | `cls_7e89adcc__vfn13_7e818b61` | Vtable slot 13 (byte offset `+52`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e818bfe` | 1 | `cls_7e89adcc__vfn14_7e818bfe` | Vtable slot 14 (byte offset `+56`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e818e80` | 1 | `cls_7e89adcc__vfn15_7e818e80` | Vtable slot 15 (byte offset `+60`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e819049` | 1 | `cls_7e89adcc__vfn16_7e819049` | Vtable slot 16 (byte offset `+64`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e819081` | 1 | `cls_7e89adcc__vfn17_7e819081` | Vtable slot 17 (byte offset `+68`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8190a3` | 2 | `cls_7e89adcc__vfn18_7e8190a3` | Vtable slot 18 (byte offset `+72`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8190ae` | 1 | `cls_7e89adcc__vfn19_7e8190ae` | Vtable slot 19 (byte offset `+76`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8191e2` | 1 | `cls_7e89adcc__vfn20_7e8191e2` | Vtable slot 20 (byte offset `+80`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e819330` | 1 | `cls_7e89adcc__vfn21_7e819330` | Vtable slot 21 (byte offset `+84`) of class `cls_7e89adcc`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ab58` | 1 | `cls_7e89af60__ctordtor_7e81ab58` | Constructor or destructor of class `cls_7e89af60` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ab9b` | 1 | `cls_7e89af60__vfn0_7e81ab9b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89af60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ab9e` | 2 | `cls_7e89af60__ctordtor_7e81ab9e` | Constructor or destructor of class `cls_7e89af60` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ac86` | 1 | `cls_7e89af60__vfn1_7e81ac86` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89af60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81acbf` | 1 | `cls_7e89af60__vfn2_7e81acbf` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89af60`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ad6c` | 1 | `cls_7e89afb4__ctordtor_7e81ad6c` | Constructor or destructor of class `cls_7e89afb4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ad9e` | 1 | `cls_7e89afb4__vfn0_7e81ad9e` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81ada3` | 2 | `cls_7e89afb4__ctordtor_7e81ada3` | Constructor or destructor of class `cls_7e89afb4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81af8e` | 1 | `cls_7e89afb4__vfn10_7e81af8e` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b031` | 1 | `cls_7e89afb4__vfn1_7e81b031` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b05b` | 1 | `cls_7e89afb4__vfn2_7e81b05b` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b075` | 1 | `cls_7e89afb4__vfn3_7e81b075` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b085` | 1 | `cls_7e89afb4__vfn4_7e81b085` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b095` | 1 | `cls_7e89afb4__vfn5_7e81b095` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b0a5` | 1 | `cls_7e89afb4__vfn6_7e81b0a5` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b0bd` | 1 | `cls_7e89afb4__vfn7_7e81b0bd` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b0fa` | 1 | `cls_7e89afb4__vfn8_7e81b0fa` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b180` | 1 | `cls_7e89afb4__vfn9_7e81b180` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b1ce` | 1 | `cls_7e89afb4__vfn11_7e81b1ce` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e81b1df` | 1 | `cls_7e89afb4__vfn12_7e81b1df` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89afb4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e821114` | 1 | `cls_7e89b364__ctordtor_7e821114` | Constructor or destructor of class `cls_7e89b364` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82119c` | 1 | `cls_7e89b364__vfn0_7e82119c` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8211a1` | 3 | `cls_7e89b364__ctordtor_7e8211a1` | Constructor or destructor of class `cls_7e89b364` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e821266` | 1 | `cls_7e89b364__vfn1_7e821266` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82151c` | 1 | `cls_7e89b364__vfn2_7e82151c` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82160a` | 1 | `cls_7e89b364__vfn3_7e82160a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e821654` | 1 | `cls_7e89b364__vfn4_7e821654` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e821666` | 1 | `cls_7e89b364__vfn9_7e821666` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e821d50` | 1 | `cls_7e89b364__vfn12_7e821d50` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e822167` | 1 | `cls_7e89b364__vfn5_7e822167` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e822464` | 1 | `cls_7e89b364__vfn7_7e822464` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e822676` | 1 | `cls_7e89b364__vfn8_7e822676` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e823329` | 1 | `cls_7e89b364__vfn6_7e823329` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e824d1c` | 1 | `cls_7e89b364__vfn10_7e824d1c` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e824df2` | 1 | `cls_7e89b364__vfn11_7e824df2` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825aba` | 3 | `cls_7e89b364__vfn13_7e825aba` | Vtable slot 13 (byte offset `+52`) of class `cls_7e89b364`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825b5a` | 1 | `cls_7e89b4e4__ctordtor_7e825b5a` | Constructor or destructor of class `cls_7e89b4e4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825bd6` | 1 | `cls_7e89b4e4__vfn0_7e825bd6` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825bdb` | 2 | `cls_7e89b4e4__ctordtor_7e825bdb` | Constructor or destructor of class `cls_7e89b4e4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825c55` | 1 | `cls_7e89b4e4__vfn1_7e825c55` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825f30` | 1 | `cls_7e89b4e4__vfn2_7e825f30` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e825fd7` | 1 | `cls_7e89b4e4__vfn3_7e825fd7` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e826021` | 1 | `cls_7e89b4e4__vfn4_7e826021` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e826033` | 1 | `cls_7e89b4e4__vfn9_7e826033` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82615f` | 1 | `cls_7e89b4e4__vfn12_7e82615f` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82629e` | 1 | `cls_7e89b4e4__vfn5_7e82629e` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82632b` | 1 | `cls_7e89b4e4__vfn7_7e82632b` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82642c` | 1 | `cls_7e89b4e4__vfn8_7e82642c` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e826f01` | 1 | `cls_7e89b4e4__vfn6_7e826f01` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8285a5` | 1 | `cls_7e89b4e4__vfn10_7e8285a5` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82865d` | 1 | `cls_7e89b4e4__vfn11_7e82865d` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89b4e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828b71` | 1 | `cls_7e89b670__ctordtor_7e828b71` | Constructor or destructor of class `cls_7e89b670` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828baa` | 1 | `cls_7e89b670__vfn0_7e828baa` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b670`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828baf` | 1 | `cls_7e89b670__ctordtor_7e828baf` | Constructor or destructor of class `cls_7e89b670` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828beb` | 1 | `cls_7e89b670__vfn1_7e828beb` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b670`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828ca4` | 2 | `cls_7e89b670__vfn2_7e828ca4` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b670`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e828efb` | 1 | `cls_7e89b670__vfn4_7e828efb` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89b670`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ea3c` | 1 | `cls_7e89b930__ctordtor_7e82ea3c` | Constructor or destructor of class `cls_7e89b930` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ea4b` | 1 | `cls_7e89b930__vfn0_7e82ea4b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ea83` | 1 | `cls_7e89b930__vfn1_7e82ea83` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eaac` | 1 | `cls_7e89b930__vfn2_7e82eaac` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eac9` | 1 | `cls_7e89b930__vfn3_7e82eac9` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eaef` | 1 | `cls_7e89b930__vfn4_7e82eaef` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eb0c` | 1 | `cls_7e89b930__vfn5_7e82eb0c` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eb27` | 1 | `cls_7e89b930__vfn6_7e82eb27` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eb44` | 1 | `cls_7e89b930__vfn7_7e82eb44` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89b930`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eb62` | 1 | `cls_7e89b95c__ctordtor_7e82eb62` | Constructor or destructor of class `cls_7e89b95c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eb71` | 1 | `cls_7e89b95c__vfn0_7e82eb71` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b95c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82eba9` | 1 | `cls_7e89b95c__vfn1_7e82eba9` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b95c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ebd2` | 1 | `cls_7e89b95c__vfn2_7e82ebd2` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b95c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ebef` | 1 | `cls_7e89b95c__vfn3_7e82ebef` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89b95c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ec70` | 1 | `cls_7e89b990__ctordtor_7e82ec70` | Constructor or destructor of class `cls_7e89b990` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ec7f` | 1 | `cls_7e89b990__vfn0_7e82ec7f` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89b990`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ecb7` | 1 | `cls_7e89b990__vfn1_7e82ecb7` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89b990`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ece0` | 1 | `cls_7e89b990__vfn2_7e82ece0` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89b990`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e82ecfd` | 1 | `cls_7e89b990__vfn3_7e82ecfd` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89b990`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83370f` | 1 | `cls_7e89bc4c__ctordtor_7e83370f` | Constructor or destructor of class `cls_7e89bc4c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833731` | 1 | `cls_7e89bc4c__vfn0_7e833731` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833749` | 1 | `cls_7e89bc4c__vfn1_7e833749` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8337bc` | 1 | `cls_7e89bc4c__vfn2_7e8337bc` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8337ec` | 1 | `cls_7e89bc4c__vfn3_7e8337ec` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83381b` | 1 | `cls_7e89bc4c__vfn4_7e83381b` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8338a5` | 1 | `cls_7e89bc4c__vfn5_7e8338a5` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8339b0` | 1 | `cls_7e89bc4c__vfn7_7e8339b0` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833b6d` | 1 | `cls_7e89bc4c__vfn6_7e833b6d` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833bfe` | 1 | `cls_7e89bc4c__vfn8_7e833bfe` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89bc4c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833cd2` | 1 | `cls_7e89bc74__ctordtor_7e833cd2` | Constructor or destructor of class `cls_7e89bc74` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833cf4` | 1 | `cls_7e89bc74__vfn0_7e833cf4` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833d0c` | 1 | `cls_7e89bc74__vfn1_7e833d0c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833db9` | 1 | `cls_7e89bc74__vfn2_7e833db9` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833de7` | 1 | `cls_7e89bc74__vfn3_7e833de7` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833e53` | 1 | `cls_7e89bc74__vfn4_7e833e53` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e833f15` | 1 | `cls_7e89bc74__vfn5_7e833f15` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83401d` | 1 | `cls_7e89bc74__vfn7_7e83401d` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834250` | 1 | `cls_7e89bc74__vfn6_7e834250` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8342e3` | 1 | `cls_7e89bc74__vfn8_7e8342e3` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89bc74`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834766` | 1 | `cls_7e89bc9c__ctordtor_7e834766` | Constructor or destructor of class `cls_7e89bc9c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83479b` | 1 | `cls_7e89bc9c__vfn0_7e83479b` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8347d0` | 1 | `cls_7e89bc9c__vfn1_7e8347d0` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834843` | 1 | `cls_7e89bc9c__vfn2_7e834843` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834880` | 1 | `cls_7e89bc9c__vfn5_7e834880` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8348dc` | 1 | `cls_7e89bc9c__vfn6_7e8348dc` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8348f7` | 1 | `cls_7e89bc9c__vfn7_7e8348f7` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834953` | 1 | `cls_7e89bc9c__vfn9_7e834953` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8349be` | 1 | `cls_7e89bc9c__vfn8_7e8349be` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8349e5` | 1 | `cls_7e89bc9c__vfn3_7e8349e5` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834a0f` | 1 | `cls_7e89bc9c__vfn4_7e834a0f` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834a39` | 1 | `cls_7e89bc9c__vfn10_7e834a39` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834a76` | 1 | `cls_7e89bc9c__vfn11_7e834a76` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89bc9c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834cf6` | 1 | `cls_7e89bd28__ctordtor_7e834cf6` | Constructor or destructor of class `cls_7e89bd28` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834d18` | 1 | `cls_7e89bd28__vfn0_7e834d18` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834d1b` | 1 | `cls_7e89bd28__ctordtor_7e834d1b` | Constructor or destructor of class `cls_7e89bd28` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834d30` | 2 | `cls_7e89bd28__vfn1_7e834d30` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834d64` | 1 | `cls_7e89bd28__vfn2_7e834d64` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834db7` | 1 | `cls_7e89bd28__vfn3_7e834db7` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834dec` | 1 | `cls_7e89bd28__vfn4_7e834dec` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834e13` | 1 | `cls_7e89bd28__vfn5_7e834e13` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834f21` | 1 | `cls_7e89bd28__vfn6_7e834f21` | Vtable slot 6 (byte offset `+24`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e834f6a` | 1 | `cls_7e89bd28__vfn7_7e834f6a` | Vtable slot 7 (byte offset `+28`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e835015` | 1 | `cls_7e89bd28__vfn8_7e835015` | Vtable slot 8 (byte offset `+32`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83506d` | 1 | `cls_7e89bd28__vfn9_7e83506d` | Vtable slot 9 (byte offset `+36`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83515c` | 1 | `cls_7e89bd28__vfn10_7e83515c` | Vtable slot 10 (byte offset `+40`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83518f` | 1 | `cls_7e89bd28__vfn11_7e83518f` | Vtable slot 11 (byte offset `+44`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e835205` | 1 | `cls_7e89bd28__vfn12_7e835205` | Vtable slot 12 (byte offset `+48`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e835232` | 1 | `cls_7e89bd28__vfn13_7e835232` | Vtable slot 13 (byte offset `+52`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83527f` | 1 | `cls_7e89bd28__vfn14_7e83527f` | Vtable slot 14 (byte offset `+56`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8352f8` | 1 | `cls_7e89bd28__vfn15_7e8352f8` | Vtable slot 15 (byte offset `+60`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e835345` | 1 | `cls_7e89bd28__vfn16_7e835345` | Vtable slot 16 (byte offset `+64`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e835391` | 1 | `cls_7e89bd28__vfn17_7e835391` | Vtable slot 17 (byte offset `+68`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8353c4` | 1 | `cls_7e89bd28__vfn18_7e8353c4` | Vtable slot 18 (byte offset `+72`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8354e7` | 1 | `cls_7e89bd28__vfn19_7e8354e7` | Vtable slot 19 (byte offset `+76`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83566f` | 1 | `cls_7e89bd28__vfn20_7e83566f` | Vtable slot 20 (byte offset `+80`) of class `cls_7e89bd28`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83e986` | 3 | `cls_7e89c210__ctordtor_7e83e986` | Constructor or destructor of class `cls_7e89c210` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83eb7c` | 2 | `cls_7e89c434__vfn1_7e83eb7c` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83ec6f` | 2 | `cls_7e89c434__vfn2_7e83ec6f` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83ed84` | 2 | `cls_7e89c434__vfn4_7e83ed84` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83ee0a` | 2 | `cls_7e89c434__vfn5_7e83ee0a` | Vtable slot 5 (byte offset `+20`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f013` | 2 | `cls_7e89c210__ctordtor_7e83f013` | Constructor or destructor of class `cls_7e89c210` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f032` | 3 | `cls_7e89c210__ctordtor_7e83f032` | Constructor or destructor of class `cls_7e89c210` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f04c` | 3 | `cls_7e89c210__vfn2_7e83f04c` | Vtable slot 2 (byte offset `+8`) of class `cls_7e89c210`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f096` | 3 | `cls_7e89c210__vfn0_7e83f096` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89c210`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f0be` | 2 | `cls_7e89c210__vfn1_7e83f0be` | Vtable slot 1 (byte offset `+4`) of class `cls_7e89c210`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f172` | 1 | `cls_7e89c210__vfn4_7e83f172` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89c210`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f19e` | 3 | `cls_7e89c210__vfn3_7e83f19e` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89c210`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f74d` | 1 | `cls_7e89c434__ctordtor_7e83f74d` | Constructor or destructor of class `cls_7e89c434` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f778` | 1 | `cls_7e89c434__vfn0_7e83f778` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e83f790` | 1 | `cls_7e89c434__vfn3_7e83f790` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89c434`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e84191d` | 1 | `cls_7e89c514__ctordtor_7e84191d` | Constructor or destructor of class `cls_7e89c514` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e84192c` | 1 | `cls_7e89c514__ctordtor_7e84192c` | Constructor or destructor of class `cls_7e89c514` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e841944` | 1 | `cls_7e89c514__vfn4_7e841944` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89c514`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e841970` | 1 | `cls_7e89e45c__ctordtor_7e841970` | Constructor or destructor of class `cls_7e89e45c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e841996` | 1 | `cls_7e89e45c__vfn0_7e841996` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89e45c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8419ae` | 1 | `cls_7e89e45c__vfn3_7e8419ae` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89e45c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e841c62` | 1 | `cls_7e89e45c__ctordtor_7e841c62` | Constructor or destructor of class `cls_7e89e45c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8517f6` | 2 | `cls_7e89f8e4__ctordtor_7e8517f6` | Constructor or destructor of class `cls_7e89f8e4` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e851805` | 1 | `cls_7e89f8e4__vfn0_7e851805` | Vtable slot 0 (byte offset `+0`) of class `cls_7e89f8e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e85181a` | 1 | `cls_7e89f8e4__vfn3_7e85181a` | Vtable slot 3 (byte offset `+12`) of class `cls_7e89f8e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e851827` | 1 | `cls_7e89f8e4__vfn4_7e851827` | Vtable slot 4 (byte offset `+16`) of class `cls_7e89f8e4`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e856a5c` | 1 | `cls_7e8a179c__ctordtor_7e856a5c` | Constructor or destructor of class `cls_7e8a179c` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e856be4` | 2 | `cls_7e8a1cd8__ctordtor_7e856be4` | Constructor or destructor of class `cls_7e8a1cd8` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e856f21` | 17 | `cls_7e8a1cd8__vfn0_7e856f21` | Vtable slot 0 (byte offset `+0`) of class `cls_7e8a1cd8`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e857b0e` | 1 | `cls_7e8a179c__vfn5_7e857b0e` | Vtable slot 5 (byte offset `+20`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e857c45` | 1 | `cls_7e8a179c__vfn6_7e857c45` | Vtable slot 6 (byte offset `+24`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e859c7d` | 1 | `cls_7e8a2718__ctordtor_7e859c7d` | Constructor or destructor of class `cls_7e8a2718` (a function that stores this class's vtable into an object). Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e85a15d` | 11 | `cls_7e8a2718__vfn0_7e85a15d` | Vtable slot 0 (byte offset `+0`) of class `cls_7e8a2718`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e85c218` | 1 | `cls_7e8a179c__vfn7_7e85c218` | Vtable slot 7 (byte offset `+28`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e85f5be` | 1 | `cls_7e8a179c__vfn2_7e85f5be` | Vtable slot 2 (byte offset `+8`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e860030` | 1 | `cls_7e8a179c__vfn3_7e860030` | Vtable slot 3 (byte offset `+12`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e8639fb` | 2 | `cls_7e8a179c__vfn0_7e8639fb` | Vtable slot 0 (byte offset `+0`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e863b71` | 2 | `cls_7e8a179c__vfn1_7e863b71` | Vtable slot 1 (byte offset `+4`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
+| `0x7e863c17` | 1 | `cls_7e8a179c__vfn4_7e863c17` | Vtable slot 4 (byte offset `+16`) of class `cls_7e8a179c`. Class identified only by its vtable address. | Ghidra vtable pass |
