@@ -28,7 +28,9 @@ on desktop is the weakest part; isolate behind PtpTransport so it can be swapped
 ## Milestones (revised 2026-11-11)
 Reordered after the RE results: the SD-card update path needs no USB at all, and OM Workspace's
 `0x94xx` SDK command set does not apply to the Mark I (`usb-protocol/sdk-opcode-compat.md`).
-`app/` is still empty; nothing below is built yet.
+Milestone 1 and the file-writing half of milestone 2 exist in `app/` as a JVM command line (2026-11-12).
+Deviation from the plan above: the core talks to the network through a small `HttpTransport` interface
+and the JVM implements it with `java.net.http`; ktor can supply the other platforms later.
 1. `commonMain` core + CLI: firmware container parse/verify (port of `tools/omfw.py`), update-server
    XML client, download + sha256 check.
 2. v1 firmware update, all desktop platforms + Android: query server, download the body BIN, write it

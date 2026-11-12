@@ -21,7 +21,7 @@ Committed:
 - `docs/workspace/`       OM Workspace internals: ORF format, RAW decode, plugins, model selection
 - `docs/hardware/`        boot/reset code, on-chip I/O registers, display pipeline (from firmware)
 - `tools/`                our own unpack/repack/patch/resource tools; `tools/ghidra/` headless scripts
-- `app/`                  replacement app (not started)
+- `app/`                  replacement app (Kotlin Multiplatform; milestone 1: firmware download/verify)
 
 Local only (gitignored; third-party material is not redistributed):
 - `firmware/stock/`       official firmware image, decoded blocks, extracted resources

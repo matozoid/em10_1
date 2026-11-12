@@ -141,7 +141,9 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   is an MN10300 assembler and linker (binutils) but no C compiler, and no payload build setup.
 - **ROM pictures at `0x46560000` are not extracted.** The only remaining route is a patch that dumps
   flash to SD or forces the shell up (`mods/firmware-modding.md`).
-- **KMP app**: `app/` is an empty directory. Plan in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+- **KMP app**: milestone 1 only (`app/`, JVM command line: query the update server, download, verify,
+  copy the official file to a card). No camera transport, no UI yet. Plan in
+  [`ARCHITECTURE.md`](ARCHITECTURE.md), details in `app/README.md`.
 - Stock firmware 1.0–1.3 BINs are not available.
 
 ## Open RE items
