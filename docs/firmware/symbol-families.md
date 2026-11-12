@@ -6139,3 +6139,3115 @@ status codes; their meaning is not established.
 | `0x7e8816f4` | 1 | `ret_0_7e8816f4` | `return 0` and nothing else. | pattern scan |
 | `0x7e8824c2` | 1 | `ret_0_7e8824c2` | `return 0` and nothing else. | pattern scan |
 | `0x7e88251b` | 1 | `ret_0_7e88251b` | `return 0` and nothing else. | pattern scan |
+
+## One-instruction accessors, empty functions and thunks
+Functions whose whole body is one instruction plus return, classified from their disassembly on 2026-11-12.
+The name says what the instruction does; the trailing address keeps names unique.
+- `get_[u16_|u8_]f<off>_<addr>` / `set_[u16_|u8_]f<off>_<addr>`: read or write one field of the object in `a0`.
+- `global_[u16_|u8_]<address>_get|set_<addr>`: read or write one global variable.
+- `ret_ptr_<value>_<addr>`: return a fixed address (a static object or table) in `a0`.
+- `nop_<addr>`: empty function (`retf`), typically a virtual method a class leaves empty.
+- `thunk_to_<target>_<addr>`: `call target; ret`.
+
+Counts: set 977, global 720, get 542, nop 405, thunk 308, ret 146. Total 3098.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d9918fe` | 5 | `thunk_to_7d9999f9_7d9918fe` | Plain thunk: `call 0x7d9999f9; ret`. | disassembly |
+| `0x7d992220` | 1 | `global_60000078_set_7d992220` | `*0x60000078 = d0`. | disassembly |
+| `0x7d992229` | 1 | `global_604ef2e0_set_7d992229` | `*0x604ef2e0 = d0`. | disassembly |
+| `0x7d992232` | 1 | `global_604ef2e8_set_7d992232` | `*0x604ef2e8 = d0`. | disassembly |
+| `0x7d9929c5` | 4 | `ret_ptr_6055f808_7d9929c5` | `return 0x6055f808` (a fixed address, in `a0`). | disassembly |
+| `0x7d996bc0` | 1 | `global_60682958_set_7d996bc0` | `*0x60682958 = d0`. | disassembly |
+| `0x7d996f53` | 1 | `nop_7d996f53` | Empty function: `retf`. | disassembly |
+| `0x7d999add` | 2 | `nop_7d999add` | Empty function: `retf`. | disassembly |
+| `0x7d9a35a8` | 1 | `nop_7d9a35a8` | Empty function: `retf`. | disassembly |
+| `0x7d9b109f` | 1 | `global_u8_606bad49_get_7d9b109f` | Leaf `return (u8)*0x606bad49`. | disassembly |
+| `0x7d9b12ef` | 19 | `global_u8_a0a67cba_get_7d9b12ef` | Leaf `return (u8)*0xa0a67cba`. | disassembly |
+| `0x7d9b1342` | 1 | `global_u16_8ff001a4_set_7d9b1342` | `*(u16*)0x8ff001a4 = d0`. | disassembly |
+| `0x7d9b1490` | 4 | `global_u8_608525b4_set_7d9b1490` | `*(u8*)0x608525b4 = d0`. | disassembly |
+| `0x7d9c3dfc` | 1 | `nop_7d9c3dfc` | Empty function: `retf`. | disassembly |
+| `0x7d9c3dff` | 1 | `nop_7d9c3dff` | Empty function: `retf`. | disassembly |
+| `0x7d9c4a3d` | 3 | `nop_7d9c4a3d` | Empty function: `retf`. | disassembly |
+| `0x7d9c6e5c` | 1 | `nop_7d9c6e5c` | Empty function: `retf`. | disassembly |
+| `0x7d9c6e5f` | 1 | `nop_7d9c6e5f` | Empty function: `retf`. | disassembly |
+| `0x7d9c6e62` | 1 | `nop_7d9c6e62` | Empty function: `retf`. | disassembly |
+| `0x7d9ca2f2` | 2 | `global_8ff00090_get_7d9ca2f2` | Leaf `return *0x8ff00090`. | disassembly |
+| `0x7d9ca2fb` | 1 | `global_8ff000a0_set_7d9ca2fb` | `*0x8ff000a0 = d0`. | disassembly |
+| `0x7d9ca304` | 2 | `global_8ff000a4_set_7d9ca304` | `*0x8ff000a4 = d0`. | disassembly |
+| `0x7d9ca30d` | 2 | `global_8ff000ac_get_7d9ca30d` | Leaf `return *0x8ff000ac`. | disassembly |
+| `0x7d9ca730` | 2 | `global_8ff000bc_get_7d9ca730` | Leaf `return *0x8ff000bc`. | disassembly |
+| `0x7d9ca739` | 1 | `global_8ff000cc_set_7d9ca739` | `*0x8ff000cc = d0`. | disassembly |
+| `0x7d9ca88f` | 2 | `global_u8_a0a15e24_get_7d9ca88f` | Leaf `return (u8)*0xa0a15e24`. | disassembly |
+| `0x7d9ca898` | 2 | `global_8ff00068_get_7d9ca898` | Leaf `return *0x8ff00068`. | disassembly |
+| `0x7d9ca8a1` | 4 | `global_8ff00074_get_7d9ca8a1` | Leaf `return *0x8ff00074`. | disassembly |
+| `0x7d9cb288` | 4 | `global_u8_60000070_set_7d9cb288` | `*(u8*)0x60000070 = d0`. | disassembly |
+| `0x7d9cb291` | 1 | `global_u8_60000071_set_7d9cb291` | `*(u8*)0x60000071 = d0`. | disassembly |
+| `0x7d9cdcdc` | 1 | `global_60001138_set_7d9cdcdc` | `*0x60001138 = d0`. | disassembly |
+| `0x7d9cdce5` | 1 | `global_60001138_get_7d9cdce5` | Leaf `return *0x60001138`. | disassembly |
+| `0x7d9cff11` | 1 | `thunk_to_7d99459f_7d9cff11` | Plain thunk: `call 0x7d99459f; ret`. | disassembly |
+| `0x7d9d181c` | 5 | `set_f12_7d9d181c` | `*(this+12) = a1`. | disassembly |
+| `0x7d9d1822` | 5 | `set_f16_7d9d1822` | `*(this+16) = a1`. | disassembly |
+| `0x7d9d1828` | 5 | `set_f20_7d9d1828` | `*(this+20) = d0`. | disassembly |
+| `0x7d9d1836` | 7 | `set_u8_f2_7d9d1836` | `*(u8*)(this+2) = d0`. | disassembly |
+| `0x7d9d1842` | 5 | `get_u8_f2_7d9d1842` | Leaf `return (u8)*(this+2)`. | disassembly |
+| `0x7d9d1850` | 1 | `get_f12_7d9d1850` | Leaf `return *(this+12)`. | disassembly |
+| `0x7d9d185e` | 4 | `get_f16_7d9d185e` | Leaf `return *(this+16)`. | disassembly |
+| `0x7d9d1864` | 9 | `get_f20_7d9d1864` | Leaf `return *(this+20)`. | disassembly |
+| `0x7d9d2cb9` | 1 | `global_u16_a0a5354c_get_7d9d2cb9` | Leaf `return (u16)*0xa0a5354c`. | disassembly |
+| `0x7d9d43e6` | 1 | `nop_7d9d43e6` | Empty function: `retf`. | disassembly |
+| `0x7d9d44d1` | 1 | `nop_7d9d44d1` | Empty function: `retf`. | disassembly |
+| `0x7d9d5151` | 6 | `global_u8_a0a5375c_get_7d9d5151` | Leaf `return (u8)*0xa0a5375c`. | disassembly |
+| `0x7d9d515a` | 1 | `global_u8_a0a5375c_set_7d9d515a` | `*(u8*)0xa0a5375c = d0`. | disassembly |
+| `0x7d9d5163` | 3 | `global_u8_a0a5375d_set_7d9d5163` | `*(u8*)0xa0a5375d = d0`. | disassembly |
+| `0x7d9d516c` | 1 | `global_u8_a0a5375d_get_7d9d516c` | Leaf `return (u8)*0xa0a5375d`. | disassembly |
+| `0x7d9d5175` | 15 | `global_u16_a0a5375e_get_7d9d5175` | Leaf `return (u16)*0xa0a5375e`. | disassembly |
+| `0x7d9d51a2` | 8 | `global_u16_a0a53760_get_7d9d51a2` | Leaf `return (u16)*0xa0a53760`. | disassembly |
+| `0x7d9d51ab` | 3 | `global_u16_a0a53760_set_7d9d51ab` | `*(u16*)0xa0a53760 = d0`. | disassembly |
+| `0x7d9d51b4` | 7 | `global_u8_a0a53762_set_7d9d51b4` | `*(u8*)0xa0a53762 = d0`. | disassembly |
+| `0x7d9d51bd` | 1 | `global_u8_a0a53762_get_7d9d51bd` | Leaf `return (u8)*0xa0a53762`. | disassembly |
+| `0x7d9d51cf` | 1 | `global_u16_a0a53768_set_7d9d51cf` | `*(u16*)0xa0a53768 = d0`. | disassembly |
+| `0x7d9d51d8` | 1 | `global_u16_a0a53768_get_7d9d51d8` | Leaf `return (u16)*0xa0a53768`. | disassembly |
+| `0x7d9d51e1` | 28 | `nop_7d9d51e1` | Empty function: `retf`. | disassembly |
+| `0x7d9d51ee` | 3 | `global_u16_a0a53764_set_7d9d51ee` | `*(u16*)0xa0a53764 = d0`. | disassembly |
+| `0x7d9d5201` | 1 | `global_u16_a0a53766_set_7d9d5201` | `*(u16*)0xa0a53766 = d0`. | disassembly |
+| `0x7d9da768` | 1 | `nop_7d9da768` | Empty function: `retf`. | disassembly |
+| `0x7d9db57b` | 1 | `nop_7d9db57b` | Empty function: `retf`. | disassembly |
+| `0x7d9db637` | 6 | `global_u16_a0a53dae_get_7d9db637` | Leaf `return (u16)*0xa0a53dae`. | disassembly |
+| `0x7d9db6ff` | 1 | `global_u8_a0a53db0_get_7d9db6ff` | Leaf `return (u8)*0xa0a53db0`. | disassembly |
+| `0x7d9db910` | 1 | `global_98e00070_get_7d9db910` | Leaf `return *0x98e00070`. | disassembly |
+| `0x7d9db919` | 1 | `global_98e00080_get_7d9db919` | Leaf `return *0x98e00080`. | disassembly |
+| `0x7d9db922` | 1 | `global_a0a53db4_get_7d9db922` | Leaf `return *0xa0a53db4`. | disassembly |
+| `0x7d9db935` | 1 | `nop_7d9db935` | Empty function: `retf`. | disassembly |
+| `0x7d9db938` | 2 | `nop_7d9db938` | Empty function: `retf`. | disassembly |
+| `0x7d9db93b` | 1 | `nop_7d9db93b` | Empty function: `retf`. | disassembly |
+| `0x7d9db93e` | 3 | `nop_7d9db93e` | Empty function: `retf`. | disassembly |
+| `0x7d9dbc2f` | 1 | `nop_7d9dbc2f` | Empty function: `retf`. | disassembly |
+| `0x7d9dbc32` | 9 | `global_u8_a0a53dbc_get_7d9dbc32` | Leaf `return (u8)*0xa0a53dbc`. | disassembly |
+| `0x7d9dc0a5` | 2 | `global_u16_a0a53de2_get_7d9dc0a5` | Leaf `return (u16)*0xa0a53de2`. | disassembly |
+| `0x7d9dc141` | 2 | `global_u16_a0a53de8_set_7d9dc141` | `*(u16*)0xa0a53de8 = d0`. | disassembly |
+| `0x7d9dc14a` | 1 | `global_u16_a0a53dea_set_7d9dc14a` | `*(u16*)0xa0a53dea = d0`. | disassembly |
+| `0x7d9dc153` | 1 | `global_u16_a0a53de4_get_7d9dc153` | Leaf `return (u16)*0xa0a53de4`. | disassembly |
+| `0x7d9dc16b` | 3 | `global_u16_a0a53de6_get_7d9dc16b` | Leaf `return (u16)*0xa0a53de6`. | disassembly |
+| `0x7d9dc1a4` | 6 | `global_u8_a0a53dd8_get_7d9dc1a4` | Leaf `return (u8)*0xa0a53dd8`. | disassembly |
+| `0x7d9dc1ad` | 2 | `global_u8_a0a53dd8_set_7d9dc1ad` | `*(u8*)0xa0a53dd8 = d0`. | disassembly |
+| `0x7d9dc1b6` | 2 | `global_u8_a0a53dd9_get_7d9dc1b6` | Leaf `return (u8)*0xa0a53dd9`. | disassembly |
+| `0x7d9dc1bf` | 2 | `global_u8_a0a53dd9_set_7d9dc1bf` | `*(u8*)0xa0a53dd9 = d0`. | disassembly |
+| `0x7d9dc1c8` | 6 | `global_u8_a0a53dda_get_7d9dc1c8` | Leaf `return (u8)*0xa0a53dda`. | disassembly |
+| `0x7d9dc1d1` | 3 | `global_u8_a0a53dda_set_7d9dc1d1` | `*(u8*)0xa0a53dda = d0`. | disassembly |
+| `0x7d9dc1fe` | 4 | `global_u8_a0a53ddb_get_7d9dc1fe` | Leaf `return (u8)*0xa0a53ddb`. | disassembly |
+| `0x7d9dc207` | 2 | `global_a0a53dec_set_7d9dc207` | `*0xa0a53dec = d0`. | disassembly |
+| `0x7d9dcac7` | 1 | `nop_7d9dcac7` | Empty function: `retf`. | disassembly |
+| `0x7d9dcfb7` | 4 | `global_99700000_set_7d9dcfb7` | `*0x99700000 = d0`. | disassembly |
+| `0x7d9dcfc0` | 1 | `global_99700000_get_7d9dcfc0` | Leaf `return *0x99700000`. | disassembly |
+| `0x7d9df2ba` | 2 | `global_u16_60560a50_get_7d9df2ba` | Leaf `return (u16)*0x60560a50`. | disassembly |
+| `0x7d9e06cf` | 5 | `global_u8_a0a54ad0_get_7d9e06cf` | Leaf `return (u8)*0xa0a54ad0`. | disassembly |
+| `0x7d9e06d8` | 2 | `global_u8_a0a54ad1_get_7d9e06d8` | Leaf `return (u8)*0xa0a54ad1`. | disassembly |
+| `0x7d9e1f97` | 1 | `nop_7d9e1f97` | Empty function: `retf`. | disassembly |
+| `0x7d9e1f9a` | 1 | `nop_7d9e1f9a` | Empty function: `retf`. | disassembly |
+| `0x7d9e3245` | 2 | `global_u16_60560aaa_get_7d9e3245` | Leaf `return (u16)*0x60560aaa`. | disassembly |
+| `0x7d9e3d1b` | 3 | `nop_7d9e3d1b` | Empty function: `retf`. | disassembly |
+| `0x7d9e3d1e` | 1 | `nop_7d9e3d1e` | Empty function: `retf`. | disassembly |
+| `0x7d9e672e` | 2 | `global_u16_60561730_get_7d9e672e` | Leaf `return (u16)*0x60561730`. | disassembly |
+| `0x7d9e7361` | 1 | `nop_7d9e7361` | Empty function: `retf`. | disassembly |
+| `0x7d9e7521` | 1 | `nop_7d9e7521` | Empty function: `retf`. | disassembly |
+| `0x7d9ead70` | 1 | `nop_7d9ead70` | Empty function: `retf`. | disassembly |
+| `0x7d9ead73` | 1 | `nop_7d9ead73` | Empty function: `retf`. | disassembly |
+| `0x7d9eb69e` | 2 | `global_u16_60561880_get_7d9eb69e` | Leaf `return (u16)*0x60561880`. | disassembly |
+| `0x7d9ed995` | 1 | `nop_7d9ed995` | Empty function: `retf`. | disassembly |
+| `0x7da675e9` | 2 | `global_u16_6000112c_get_7da675e9` | Leaf `return (u16)*0x6000112c`. | disassembly |
+| `0x7da82f08` | 8 | `thunk_to_7d9c5ce5_7da82f08` | Plain thunk: `call 0x7d9c5ce5; ret`. | disassembly |
+| `0x7da82f12` | 1 | `thunk_to_7d9c5d07_7da82f12` | Plain thunk: `call 0x7d9c5d07; ret`. | disassembly |
+| `0x7da88210` | 2 | `global_u8_6044a14c_get_7da88210` | Leaf `return (u8)*0x6044a14c`. | disassembly |
+| `0x7da882ae` | 1 | `global_u16_606b7cbc_get_7da882ae` | Leaf `return (u16)*0x606b7cbc`. | disassembly |
+| `0x7da8880b` | 14 | `get_u8_f1_7da8880b` | Leaf `return (u8)*(this+1)`. | disassembly |
+| `0x7da8882c` | 2 | `get_u16_f18_7da8882c` | Leaf `return (u16)*(this+18)`. | disassembly |
+| `0x7da88832` | 1 | `get_u8_f20_7da88832` | Leaf `return (u8)*(this+20)`. | disassembly |
+| `0x7da88c28` | 2 | `global_u16_606b7d8c_get_7da88c28` | Leaf `return (u16)*0x606b7d8c`. | disassembly |
+| `0x7da88f5d` | 1 | `global_a0a5a6f0_get_7da88f5d` | Leaf `return *0xa0a5a6f0`. | disassembly |
+| `0x7da896cc` | 2 | `thunk_to_7d9e6adf_7da896cc` | Plain thunk: `call 0x7d9e6adf; ret`. | disassembly |
+| `0x7da8a0cb` | 4 | `thunk_to_7d9e6b22_7da8a0cb` | Plain thunk: `call 0x7d9e6b22; ret`. | disassembly |
+| `0x7da8a776` | 1 | `nop_7da8a776` | Empty function: `retf`. | disassembly |
+| `0x7da8a779` | 1 | `nop_7da8a779` | Empty function: `retf`. | disassembly |
+| `0x7da8a77c` | 1 | `nop_7da8a77c` | Empty function: `retf`. | disassembly |
+| `0x7da8a788` | 1 | `nop_7da8a788` | Empty function: `retf`. | disassembly |
+| `0x7da8a78b` | 1 | `nop_7da8a78b` | Empty function: `retf`. | disassembly |
+| `0x7da8a78e` | 1 | `nop_7da8a78e` | Empty function: `retf`. | disassembly |
+| `0x7da8a97d` | 1 | `nop_7da8a97d` | Empty function: `retf`. | disassembly |
+| `0x7da8b0fb` | 1 | `global_a0a5c6a8_get_7da8b0fb` | Leaf `return *0xa0a5c6a8`. | disassembly |
+| `0x7da8b45f` | 1 | `nop_7da8b45f` | Empty function: `retf`. | disassembly |
+| `0x7da8b7ed` | 3 | `global_606b7f98_get_7da8b7ed` | Leaf `return *0x606b7f98`. | disassembly |
+| `0x7da8d50e` | 1 | `nop_7da8d50e` | Empty function: `retf`. | disassembly |
+| `0x7da8d514` | 1 | `nop_7da8d514` | Empty function: `retf`. | disassembly |
+| `0x7da8d586` | 1 | `nop_7da8d586` | Empty function: `retf`. | disassembly |
+| `0x7da8d6d1` | 1 | `nop_7da8d6d1` | Empty function: `retf`. | disassembly |
+| `0x7da8d8f2` | 2 | `nop_7da8d8f2` | Empty function: `retf`. | disassembly |
+| `0x7da8e709` | 1 | `global_606b8560_set_7da8e709` | `*0x606b8560 = d0`. | disassembly |
+| `0x7da8f5dd` | 2 | `nop_7da8f5dd` | Empty function: `retf`. | disassembly |
+| `0x7da8f5e0` | 2 | `nop_7da8f5e0` | Empty function: `retf`. | disassembly |
+| `0x7da904b6` | 1 | `global_606b86a0_set_7da904b6` | `*0x606b86a0 = a0`. | disassembly |
+| `0x7da906aa` | 9 | `global_u8_606b869c_set_7da906aa` | `*(u8*)0x606b869c = d0`. | disassembly |
+| `0x7da906b3` | 6 | `global_u8_606b869c_get_7da906b3` | Leaf `return (u8)*0x606b869c`. | disassembly |
+| `0x7da98fa0` | 21 | `global_606ba77c_get_7da98fa0` | Leaf `return *0x606ba77c`. | disassembly |
+| `0x7daa38e0` | 2 | `global_u8_606bad45_get_7daa38e0` | Leaf `return (u8)*0x606bad45`. | disassembly |
+| `0x7daa5062` | 1 | `ret_ptr_606bad98_7daa5062` | `return 0x606bad98` (a fixed address, in `a0`). | disassembly |
+| `0x7daa51e3` | 4 | `global_u16_606badb0_get_7daa51e3` | Leaf `return (u16)*0x606badb0`. | disassembly |
+| `0x7daa5236` | 4 | `global_u16_606badb2_get_7daa5236` | Leaf `return (u16)*0x606badb2`. | disassembly |
+| `0x7daa5313` | 1 | `global_u8_606badbd_get_7daa5313` | Leaf `return (u8)*0x606badbd`. | disassembly |
+| `0x7daa531c` | 1 | `global_u8_606badbd_get_7daa531c` | Leaf `return (u8)*0x606badbd`. | disassembly |
+| `0x7daa682e` | 3 | `ret_ptr_606badcc_7daa682e` | `return 0x606badcc` (a fixed address, in `a0`). | disassembly |
+| `0x7daa6837` | 2 | `ret_ptr_606badec_7daa6837` | `return 0x606badec` (a fixed address, in `a0`). | disassembly |
+| `0x7daa6840` | 5 | `ret_ptr_606badcc_7daa6840` | `return 0x606badcc` (a fixed address, in `a0`). | disassembly |
+| `0x7daa6b9d` | 5 | `global_u16_606bb396_get_7daa6b9d` | Leaf `return (u16)*0x606bb396`. | disassembly |
+| `0x7daa6ba6` | 1 | `global_u16_606bb39a_set_7daa6ba6` | `*(u16*)0x606bb39a = d0`. | disassembly |
+| `0x7daa6baf` | 7 | `global_u16_606bb39a_get_7daa6baf` | Leaf `return (u16)*0x606bb39a`. | disassembly |
+| `0x7daa762b` | 1 | `global_606bb4d4_set_7daa762b` | `*0x606bb4d4 = a0`. | disassembly |
+| `0x7daaa110` | 1 | `ret_ptr_606bb426_7daaa110` | `return 0x606bb426` (a fixed address, in `a0`). | disassembly |
+| `0x7daaa119` | 8 | `global_u16_a0a650e4_get_7daaa119` | Leaf `return (u16)*0xa0a650e4`. | disassembly |
+| `0x7daaa122` | 3 | `global_u16_a0a650e4_set_7daaa122` | `*(u16*)0xa0a650e4 = d0`. | disassembly |
+| `0x7daaa379` | 2 | `global_u16_606bb45e_set_7daaa379` | `*(u16*)0x606bb45e = d0`. | disassembly |
+| `0x7daaa517` | 1 | `global_606bb4bc_set_7daaa517` | `*0x606bb4bc = a0`. | disassembly |
+| `0x7daaa7e2` | 1 | `ret_ptr_606bb164_7daaa7e2` | `return 0x606bb164` (a fixed address, in `a0`). | disassembly |
+| `0x7daaa811` | 2 | `global_u8_606bb490_set_7daaa811` | `*(u8*)0x606bb490 = d0`. | disassembly |
+| `0x7daaa81a` | 5 | `global_u8_606bb490_get_7daaa81a` | Leaf `return (u8)*0x606bb490`. | disassembly |
+| `0x7dabc5f2` | 2 | `global_u16_606bb7aa_get_7dabc5f2` | Leaf `return (u16)*0x606bb7aa`. | disassembly |
+| `0x7dac0faa` | 1 | `global_u8_606bb96a_get_7dac0faa` | Leaf `return (u8)*0x606bb96a`. | disassembly |
+| `0x7dac11ca` | 4 | `global_u16_606bb972_get_7dac11ca` | Leaf `return (u16)*0x606bb972`. | disassembly |
+| `0x7dac4741` | 2 | `global_u16_606c4b4c_get_7dac4741` | Leaf `return (u16)*0x606c4b4c`. | disassembly |
+| `0x7dac4c74` | 2 | `global_u8_606c4b52_get_7dac4c74` | Leaf `return (u8)*0x606c4b52`. | disassembly |
+| `0x7dac4f8a` | 7 | `global_u16_606c4b54_get_7dac4f8a` | Leaf `return (u16)*0x606c4b54`. | disassembly |
+| `0x7dac617f` | 1 | `nop_7dac617f` | Empty function: `retf`. | disassembly |
+| `0x7dac6182` | 1 | `global_u16_606c4cd8_get_7dac6182` | Leaf `return (u16)*0x606c4cd8`. | disassembly |
+| `0x7dac966d` | 1 | `global_u8_606c5895_set_7dac966d` | `*(u8*)0x606c5895 = d0`. | disassembly |
+| `0x7daca4e7` | 3 | `global_u16_606c5898_set_7daca4e7` | `*(u16*)0x606c5898 = d0`. | disassembly |
+| `0x7daca4f0` | 9 | `global_u16_606c5898_get_7daca4f0` | Leaf `return (u16)*0x606c5898`. | disassembly |
+| `0x7daca4f9` | 8 | `global_u16_606c589a_set_7daca4f9` | `*(u16*)0x606c589a = d0`. | disassembly |
+| `0x7daca502` | 10 | `global_u16_606c589a_get_7daca502` | Leaf `return (u16)*0x606c589a`. | disassembly |
+| `0x7daca50b` | 3 | `global_606c589c_set_7daca50b` | `*0x606c589c = d0`. | disassembly |
+| `0x7daca514` | 9 | `global_606c589c_get_7daca514` | Leaf `return *0x606c589c`. | disassembly |
+| `0x7daca51d` | 2 | `global_606c5880_set_7daca51d` | `*0x606c5880 = a0`. | disassembly |
+| `0x7daca526` | 2 | `global_606c5884_set_7daca526` | `*0x606c5884 = a0`. | disassembly |
+| `0x7daceffe` | 1 | `global_u16_606c5a0c_get_7daceffe` | Leaf `return (u16)*0x606c5a0c`. | disassembly |
+| `0x7dacf007` | 1 | `global_u16_606c5a0e_get_7dacf007` | Leaf `return (u16)*0x606c5a0e`. | disassembly |
+| `0x7dacf6a9` | 2 | `global_u8_606c5a25_get_7dacf6a9` | Leaf `return (u8)*0x606c5a25`. | disassembly |
+| `0x7dacf6b2` | 1 | `global_u16_606c5a1e_get_7dacf6b2` | Leaf `return (u16)*0x606c5a1e`. | disassembly |
+| `0x7dacf6c4` | 1 | `global_u16_606c5a18_set_7dacf6c4` | `*(u16*)0x606c5a18 = d0`. | disassembly |
+| `0x7dacf721` | 2 | `global_u8_606c5a24_set_7dacf721` | `*(u8*)0x606c5a24 = d0`. | disassembly |
+| `0x7dacf917` | 2 | `global_u8_606c5a28_get_7dacf917` | Leaf `return (u8)*0x606c5a28`. | disassembly |
+| `0x7dad0387` | 1 | `global_u16_606c5b7c_get_7dad0387` | Leaf `return (u16)*0x606c5b7c`. | disassembly |
+| `0x7dad0390` | 1 | `nop_7dad0390` | Empty function: `retf`. | disassembly |
+| `0x7dad0700` | 1 | `nop_7dad0700` | Empty function: `retf`. | disassembly |
+| `0x7dad0aa5` | 2 | `thunk_to_7d996f9c_7dad0aa5` | Plain thunk: `call 0x7d996f9c; ret`. | disassembly |
+| `0x7dad0be9` | 6 | `nop_7dad0be9` | Empty function: `retf`. | disassembly |
+| `0x7dad180c` | 2 | `global_606c5f20_set_7dad180c` | `*0x606c5f20 = d0`. | disassembly |
+| `0x7dad191f` | 1 | `global_606c5fa4_set_7dad191f` | `*0x606c5fa4 = d0`. | disassembly |
+| `0x7dad1f48` | 1 | `global_606c611c_set_7dad1f48` | `*0x606c611c = d0`. | disassembly |
+| `0x7dad3b51` | 2 | `global_u16_606c61d6_get_7dad3b51` | Leaf `return (u16)*0x606c61d6`. | disassembly |
+| `0x7dad3b5a` | 1 | `global_u16_606c61d4_get_7dad3b5a` | Leaf `return (u16)*0x606c61d4`. | disassembly |
+| `0x7dad3b63` | 1 | `global_u16_606c61d2_set_7dad3b63` | `*(u16*)0x606c61d2 = d0`. | disassembly |
+| `0x7dad4338` | 1 | `global_u16_606c6304_set_7dad4338` | `*(u16*)0x606c6304 = d0`. | disassembly |
+| `0x7dad49cd` | 1 | `nop_7dad49cd` | Empty function: `retf`. | disassembly |
+| `0x7dad4ce6` | 4 | `nop_7dad4ce6` | Empty function: `retf`. | disassembly |
+| `0x7dadccc9` | 8 | `global_u16_606c63ac_get_7dadccc9` | Leaf `return (u16)*0x606c63ac`. | disassembly |
+| `0x7dadccd2` | 1 | `global_u16_606c63b4_get_7dadccd2` | Leaf `return (u16)*0x606c63b4`. | disassembly |
+| `0x7dadd319` | 1 | `global_6044a880_get_7dadd319` | Leaf `return *0x6044a880`. | disassembly |
+| `0x7dae243f` | 1 | `global_606c6424_get_7dae243f` | Leaf `return *0x606c6424`. | disassembly |
+| `0x7daf937d` | 7 | `global_u8_606c6616_get_7daf937d` | Leaf `return (u8)*0x606c6616`. | disassembly |
+| `0x7daf9386` | 4 | `global_u8_606c6617_get_7daf9386` | Leaf `return (u8)*0x606c6617`. | disassembly |
+| `0x7daf938f` | 4 | `global_u8_606c6618_get_7daf938f` | Leaf `return (u8)*0x606c6618`. | disassembly |
+| `0x7daf946e` | 6 | `global_u8_606c6619_get_7daf946e` | Leaf `return (u8)*0x606c6619`. | disassembly |
+| `0x7daf988a` | 3 | `global_u16_606c657a_get_7daf988a` | Leaf `return (u16)*0x606c657a`. | disassembly |
+| `0x7daf9977` | 1 | `nop_7daf9977` | Empty function: `retf`. | disassembly |
+| `0x7dafac64` | 2 | `global_u8_606c6695_get_7dafac64` | Leaf `return (u8)*0x606c6695`. | disassembly |
+| `0x7dafac6d` | 3 | `global_u8_606c6694_get_7dafac6d` | Leaf `return (u8)*0x606c6694`. | disassembly |
+| `0x7dafad89` | 1 | `get_u16_f4_7dafad89` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7dafdecc` | 2 | `global_606c6ca8_get_7dafdecc` | Leaf `return *0x606c6ca8`. | disassembly |
+| `0x7db022bc` | 1 | `thunk_to_7de5e134_7db022bc` | Plain thunk: `call 0x7de5e134; ret`. | disassembly |
+| `0x7db02870` | 1 | `global_606c88b4_set_7db02870` | `*0x606c88b4 = a0`. | disassembly |
+| `0x7db03068` | 6 | `global_u16_606c88bc_get_7db03068` | Leaf `return (u16)*0x606c88bc`. | disassembly |
+| `0x7db03071` | 6 | `global_u16_606c88be_get_7db03071` | Leaf `return (u16)*0x606c88be`. | disassembly |
+| `0x7db0a43c` | 2 | `nop_7db0a43c` | Empty function: `retf`. | disassembly |
+| `0x7db0b2c5` | 2 | `nop_7db0b2c5` | Empty function: `retf`. | disassembly |
+| `0x7db0bb92` | 1 | `global_u8_606c9115_get_7db0bb92` | Leaf `return (u8)*0x606c9115`. | disassembly |
+| `0x7db0bbb5` | 1 | `global_606c9244_get_7db0bbb5` | Leaf `return *0x606c9244`. | disassembly |
+| `0x7db0bc47` | 2 | `global_u16_606c9290_get_7db0bc47` | Leaf `return (u16)*0x606c9290`. | disassembly |
+| `0x7db0f39c` | 1 | `global_606c9664_get_7db0f39c` | Leaf `return *0x606c9664`. | disassembly |
+| `0x7db0f676` | 1 | `nop_7db0f676` | Empty function: `retf`. | disassembly |
+| `0x7db0fa8b` | 2 | `nop_7db0fa8b` | Empty function: `retf`. | disassembly |
+| `0x7db0fe12` | 2 | `nop_7db0fe12` | Empty function: `retf`. | disassembly |
+| `0x7db12bc3` | 3 | `global_u16_606c9a48_get_7db12bc3` | Leaf `return (u16)*0x606c9a48`. | disassembly |
+| `0x7db12be2` | 2 | `thunk_to_7daf3632_7db12be2` | Plain thunk: `call 0x7daf3632; ret`. | disassembly |
+| `0x7db12c02` | 1 | `thunk_to_7daf3a72_7db12c02` | Plain thunk: `call 0x7daf3a72; ret`. | disassembly |
+| `0x7db12c34` | 7 | `global_606c9a2c_get_7db12c34` | Leaf `return *0x606c9a2c`. | disassembly |
+| `0x7db12c3d` | 1 | `global_u16_606c9a34_get_7db12c3d` | Leaf `return (u16)*0x606c9a34`. | disassembly |
+| `0x7db12c46` | 2 | `global_u8_606c9a36_get_7db12c46` | Leaf `return (u8)*0x606c9a36`. | disassembly |
+| `0x7db12cc0` | 1 | `global_606c9a6c_set_7db12cc0` | `*0x606c9a6c = a0`. | disassembly |
+| `0x7db12f0a` | 1 | `nop_7db12f0a` | Empty function: `retf`. | disassembly |
+| `0x7db13260` | 1 | `nop_7db13260` | Empty function: `retf`. | disassembly |
+| `0x7db13435` | 1 | `global_606c9a8c_get_7db13435` | Leaf `return *0x606c9a8c`. | disassembly |
+| `0x7db13447` | 1 | `global_606c9a98_get_7db13447` | Leaf `return *0x606c9a98`. | disassembly |
+| `0x7db13450` | 1 | `thunk_to_7db50429_7db13450` | Plain thunk: `call 0x7db50429; ret`. | disassembly |
+| `0x7db1345a` | 5 | `thunk_to_7db50433_7db1345a` | Plain thunk: `call 0x7db50433; ret`. | disassembly |
+| `0x7db14eae` | 7 | `global_u16_606c9a72_set_7db14eae` | `*(u16*)0x606c9a72 = d0`. | disassembly |
+| `0x7db1ff24` | 7 | `nop_7db1ff24` | Empty function: `retf`. | disassembly |
+| `0x7db1ff27` | 17 | `nop_7db1ff27` | Empty function: `retf`. | disassembly |
+| `0x7db2004c` | 1 | `global_606c9d5c_set_7db2004c` | `*0x606c9d5c = d0`. | disassembly |
+| `0x7db20055` | 9 | `global_606c9d5c_get_7db20055` | Leaf `return *0x606c9d5c`. | disassembly |
+| `0x7db20f8b` | 1 | `global_u16_606c9d64_set_7db20f8b` | `*(u16*)0x606c9d64 = d0`. | disassembly |
+| `0x7db20f94` | 3 | `global_u16_606c9d64_get_7db20f94` | Leaf `return (u16)*0x606c9d64`. | disassembly |
+| `0x7db214af` | 1 | `nop_7db214af` | Empty function: `retf`. | disassembly |
+| `0x7db22099` | 9 | `global_606ce3e0_set_7db22099` | `*0x606ce3e0 = a0`. | disassembly |
+| `0x7db2a111` | 13 | `global_u8_606ce414_get_7db2a111` | Leaf `return (u8)*0x606ce414`. | disassembly |
+| `0x7db2a648` | 1 | `nop_7db2a648` | Empty function: `retf`. | disassembly |
+| `0x7db38f0e` | 2 | `ret_ptr_7dbeb4e4_7db38f0e` | `return 0x7dbeb4e4` (a fixed address, in `a0`). | disassembly |
+| `0x7db38f17` | 1 | `ret_ptr_7dbebd54_7db38f17` | `return 0x7dbebd54` (a fixed address, in `a0`). | disassembly |
+| `0x7db38f20` | 1 | `ret_ptr_7dbec76c_7db38f20` | `return 0x7dbec76c` (a fixed address, in `a0`). | disassembly |
+| `0x7db38f29` | 1 | `ret_ptr_7dbeaa94_7db38f29` | `return 0x7dbeaa94` (a fixed address, in `a0`). | disassembly |
+| `0x7db38f32` | 2 | `ret_ptr_7dbebf5c_7db38f32` | `return 0x7dbebf5c` (a fixed address, in `a0`). | disassembly |
+| `0x7db38f3b` | 2 | `ret_ptr_7dbebf84_7db38f3b` | `return 0x7dbebf84` (a fixed address, in `a0`). | disassembly |
+| `0x7db50429` | 1 | `thunk_to_7db25720_7db50429` | Plain thunk: `call 0x7db25720; ret`. | disassembly |
+| `0x7db50433` | 1 | `thunk_to_7db25740_7db50433` | Plain thunk: `call 0x7db25740; ret`. | disassembly |
+| `0x7db5418c` | 2 | `global_9b000588_get_7db5418c` | Leaf `return *0x9b000588`. | disassembly |
+| `0x7db54e20` | 8 | `nop_7db54e20` | Empty function: `retf`. | disassembly |
+| `0x7db55486` | 1 | `global_9b0003d8_get_7db55486` | Leaf `return *0x9b0003d8`. | disassembly |
+| `0x7db5f1e7` | 3 | `get_f116_7db5f1e7` | Leaf `return *(this+116)`. | disassembly |
+| `0x7db5f201` | 3 | `get_f120_7db5f201` | Leaf `return *(this+120)`. | disassembly |
+| `0x7db64745` | 2 | `get_f120_7db64745` | Leaf `return *(this+120)`. | disassembly |
+| `0x7db6475f` | 2 | `get_f124_7db6475f` | Leaf `return *(this+124)`. | disassembly |
+| `0x7db64dc3` | 1 | `global_988000bc_set_7db64dc3` | `*0x988000bc = d0`. | disassembly |
+| `0x7db65b0b` | 5 | `global_u8_606ef5c9_get_7db65b0b` | Leaf `return (u8)*0x606ef5c9`. | disassembly |
+| `0x7db65b14` | 1 | `global_u8_606ef5ca_get_7db65b14` | Leaf `return (u8)*0x606ef5ca`. | disassembly |
+| `0x7db65b1d` | 1 | `global_u8_606ef5cb_get_7db65b1d` | Leaf `return (u8)*0x606ef5cb`. | disassembly |
+| `0x7db65b26` | 1 | `global_u8_606ef5cc_get_7db65b26` | Leaf `return (u8)*0x606ef5cc`. | disassembly |
+| `0x7db65b2f` | 1 | `global_u8_606ef5cd_get_7db65b2f` | Leaf `return (u8)*0x606ef5cd`. | disassembly |
+| `0x7db65b38` | 3 | `global_u8_606ef5cf_get_7db65b38` | Leaf `return (u8)*0x606ef5cf`. | disassembly |
+| `0x7db65f82` | 58 | `nop_7db65f82` | Empty function: `retf`. | disassembly |
+| `0x7db65f85` | 1 | `nop_7db65f85` | Empty function: `retf`. | disassembly |
+| `0x7db65f88` | 1 | `nop_7db65f88` | Empty function: `retf`. | disassembly |
+| `0x7db65f8b` | 1 | `nop_7db65f8b` | Empty function: `retf`. | disassembly |
+| `0x7db674ef` | 1 | `global_6044ab4c_set_7db674ef` | `*0x6044ab4c = d0`. | disassembly |
+| `0x7db67c64` | 1 | `thunk_to_7db72f3a_7db67c64` | Plain thunk: `call 0x7db72f3a; ret`. | disassembly |
+| `0x7db67d38` | 4 | `thunk_to_7db720ad_7db67d38` | Plain thunk: `call 0x7db720ad; ret`. | disassembly |
+| `0x7db67dfd` | 1 | `thunk_to_7db7024f_7db67dfd` | Plain thunk: `call 0x7db7024f; ret`. | disassembly |
+| `0x7db69eea` | 3 | `global_u16_606ef604_get_7db69eea` | Leaf `return (u16)*0x606ef604`. | disassembly |
+| `0x7db69ef3` | 2 | `global_606ef600_get_7db69ef3` | Leaf `return *0x606ef600`. | disassembly |
+| `0x7db6b7b0` | 1 | `global_6044abf0_set_7db6b7b0` | `*0x6044abf0 = a0`. | disassembly |
+| `0x7db6b7fd` | 1 | `nop_7db6b7fd` | Empty function: `retf`. | disassembly |
+| `0x7db6b800` | 1 | `nop_7db6b800` | Empty function: `retf`. | disassembly |
+| `0x7db6b803` | 1 | `nop_7db6b803` | Empty function: `retf`. | disassembly |
+| `0x7db6b806` | 1 | `nop_7db6b806` | Empty function: `retf`. | disassembly |
+| `0x7db6b829` | 1 | `global_u16_606ef862_get_7db6b829` | Leaf `return (u16)*0x606ef862`. | disassembly |
+| `0x7db6ca1a` | 1 | `ret_ptr_7dc18024_7db6ca1a` | `return 0x7dc18024` (a fixed address, in `a0`). | disassembly |
+| `0x7db6feea` | 1 | `global_u8_606f16fb_set_7db6feea` | `*(u8*)0x606f16fb = d0`. | disassembly |
+| `0x7db6fef3` | 1 | `global_u8_606f16fb_get_7db6fef3` | Leaf `return (u8)*0x606f16fb`. | disassembly |
+| `0x7db6fefc` | 1 | `global_u8_606f16fc_set_7db6fefc` | `*(u8*)0x606f16fc = d0`. | disassembly |
+| `0x7db701cd` | 1 | `nop_7db701cd` | Empty function: `retf`. | disassembly |
+| `0x7db70246` | 2 | `global_u8_606f1714_set_7db70246` | `*(u8*)0x606f1714 = d0`. | disassembly |
+| `0x7db7024f` | 2 | `nop_7db7024f` | Empty function: `retf`. | disassembly |
+| `0x7db72f3a` | 2 | `ret_ptr_7dc35238_7db72f3a` | `return 0x7dc35238` (a fixed address, in `a0`). | disassembly |
+| `0x7db72f49` | 1 | `ret_ptr_7dc37a74_7db72f49` | `return 0x7dc37a74` (a fixed address, in `a0`). | disassembly |
+| `0x7db76616` | 3 | `nop_7db76616` | Empty function: `retf`. | disassembly |
+| `0x7db76619` | 3 | `nop_7db76619` | Empty function: `retf`. | disassembly |
+| `0x7db7d2a8` | 1 | `nop_7db7d2a8` | Empty function: `retf`. | disassembly |
+| `0x7db814a8` | 1 | `ret_ptr_606f5bdc_7db814a8` | `return 0x606f5bdc` (a fixed address, in `a0`). | disassembly |
+| `0x7db814c5` | 3 | `ret_ptr_606f5c00_7db814c5` | `return 0x606f5c00` (a fixed address, in `a0`). | disassembly |
+| `0x7db814ce` | 1 | `ret_ptr_606f5c24_7db814ce` | `return 0x606f5c24` (a fixed address, in `a0`). | disassembly |
+| `0x7db814d7` | 1 | `global_u16_606f5dfc_get_7db814d7` | Leaf `return (u16)*0x606f5dfc`. | disassembly |
+| `0x7db816cf` | 1 | `global_u16_606f5df8_get_7db816cf` | Leaf `return (u16)*0x606f5df8`. | disassembly |
+| `0x7db81713` | 1 | `global_u16_606f5c1a_get_7db81713` | Leaf `return (u16)*0x606f5c1a`. | disassembly |
+| `0x7db82a23` | 7 | `global_u16_606f5df6_get_7db82a23` | Leaf `return (u16)*0x606f5df6`. | disassembly |
+| `0x7db82a2c` | 11 | `global_u16_606f5df6_set_7db82a2c` | `*(u16*)0x606f5df6 = d0`. | disassembly |
+| `0x7db83a8f` | 1 | `global_u8_606f5e64_get_7db83a8f` | Leaf `return (u8)*0x606f5e64`. | disassembly |
+| `0x7db83fb5` | 3 | `global_u16_606f5f10_get_7db83fb5` | Leaf `return (u16)*0x606f5f10`. | disassembly |
+| `0x7db83fbe` | 4 | `thunk_to_7d9e0ffc_7db83fbe` | Plain thunk: `call 0x7d9e0ffc; ret`. | disassembly |
+| `0x7db8476b` | 1 | `thunk_to_7db797fc_7db8476b` | Plain thunk: `call 0x7db797fc; ret`. | disassembly |
+| `0x7db88930` | 2 | `thunk_to_7db7992a_7db88930` | Plain thunk: `call 0x7db7992a; ret`. | disassembly |
+| `0x7db88a86` | 1 | `thunk_to_7db7d726_7db88a86` | Plain thunk: `call 0x7db7d726; ret`. | disassembly |
+| `0x7db897ed` | 1 | `thunk_to_7e7ca90d_7db897ed` | Plain thunk: `call 0x7e7ca90d; ret`. | disassembly |
+| `0x7db918a8` | 1 | `global_u16_606f7b90_set_7db918a8` | `*(u16*)0x606f7b90 = d0`. | disassembly |
+| `0x7db91bd6` | 11 | `global_a0a66600_get_7db91bd6` | Leaf `return *0xa0a66600`. | disassembly |
+| `0x7db91bdf` | 1 | `global_a0a66600_set_7db91bdf` | `*0xa0a66600 = d0`. | disassembly |
+| `0x7db94a7f` | 8 | `global_u8_606fcc10_set_7db94a7f` | `*(u8*)0x606fcc10 = d0`. | disassembly |
+| `0x7db983bd` | 18 | `nop_7db983bd` | Empty function: `retf`. | disassembly |
+| `0x7db9f597` | 1 | `nop_7db9f597` | Empty function: `retf`. | disassembly |
+| `0x7dba01d2` | 1 | `thunk_to_7de3bdb0_7dba01d2` | Plain thunk: `call 0x7de3bdb0; ret`. | disassembly |
+| `0x7dba3d75` | 11 | `thunk_to_7da8b7ed_7dba3d75` | Plain thunk: `call 0x7da8b7ed; ret`. | disassembly |
+| `0x7dba3e70` | 2 | `thunk_to_7dacc94b_7dba3e70` | Plain thunk: `call 0x7dacc94b; ret`. | disassembly |
+| `0x7dba3e91` | 11 | `thunk_to_7e6a8a68_7dba3e91` | Plain thunk: `call 0x7e6a8a68; ret`. | disassembly |
+| `0x7dba3ebd` | 6 | `thunk_to_7db930b6_7dba3ebd` | Plain thunk: `call 0x7db930b6; ret`. | disassembly |
+| `0x7dba3edd` | 1 | `thunk_to_47001668_7dba3edd` | Plain thunk: `call 0x47001668; ret`. | disassembly |
+| `0x7dba3ee7` | 7 | `thunk_to_7da87b6f_7dba3ee7` | Plain thunk: `call 0x7da87b6f; ret`. | disassembly |
+| `0x7dba402b` | 1 | `thunk_to_7da896cc_7dba402b` | Plain thunk: `call 0x7da896cc; ret`. | disassembly |
+| `0x7dba4035` | 1 | `thunk_to_7da8c054_7dba4035` | Plain thunk: `call 0x7da8c054; ret`. | disassembly |
+| `0x7dba405e` | 2 | `thunk_to_7da88208_7dba405e` | Plain thunk: `call 0x7da88208; ret`. | disassembly |
+| `0x7dba41b3` | 2 | `nop_7dba41b3` | Empty function: `retf`. | disassembly |
+| `0x7dba41ba` | 1 | `nop_7dba41ba` | Empty function: `retf`. | disassembly |
+| `0x7dba67de` | 1 | `global_6044ad18_get_7dba67de` | Leaf `return *0x6044ad18`. | disassembly |
+| `0x7dba929e` | 1 | `global_6044ad64_set_7dba929e` | `*0x6044ad64 = a0`. | disassembly |
+| `0x7dba92a7` | 1 | `global_6044ad5c_set_7dba92a7` | `*0x6044ad5c = a0`. | disassembly |
+| `0x7dba92b0` | 1 | `global_6044ad68_set_7dba92b0` | `*0x6044ad68 = a0`. | disassembly |
+| `0x7dba94a6` | 1 | `global_606fe214_set_7dba94a6` | `*0x606fe214 = a0`. | disassembly |
+| `0x7dbaa084` | 1 | `global_606fe224_set_7dbaa084` | `*0x606fe224 = d0`. | disassembly |
+| `0x7dbaa3ae` | 1 | `nop_7dbaa3ae` | Empty function: `retf`. | disassembly |
+| `0x7dbaae16` | 14 | `global_a0a67cc8_get_7dbaae16` | Leaf `return *0xa0a67cc8`. | disassembly |
+| `0x7dbaafc6` | 9 | `thunk_to_7dbb7562_7dbaafc6` | Plain thunk: `call 0x7dbb7562; ret`. | disassembly |
+| `0x7dbaafe9` | 2 | `thunk_to_7dbb7511_7dbaafe9` | Plain thunk: `call 0x7dbb7511; ret`. | disassembly |
+| `0x7dbaaff3` | 2 | `thunk_to_7dbb7537_7dbaaff3` | Plain thunk: `call 0x7dbb7537; ret`. | disassembly |
+| `0x7dbaaffd` | 1 | `thunk_to_7dbb7559_7dbaaffd` | Plain thunk: `call 0x7dbb7559; ret`. | disassembly |
+| `0x7dbab2ac` | 1 | `nop_7dbab2ac` | Empty function: `retf`. | disassembly |
+| `0x7dbab2af` | 2 | `thunk_to_7dbb7911_7dbab2af` | Plain thunk: `call 0x7dbb7911; ret`. | disassembly |
+| `0x7dbab2b9` | 1 | `thunk_to_7dbb7923_7dbab2b9` | Plain thunk: `call 0x7dbb7923; ret`. | disassembly |
+| `0x7dbab34a` | 5 | `global_a0a67ccc_get_7dbab34a` | Leaf `return *0xa0a67ccc`. | disassembly |
+| `0x7dbab35e` | 2 | `thunk_to_7db13450_7dbab35e` | Plain thunk: `call 0x7db13450; ret`. | disassembly |
+| `0x7dbabc15` | 1 | `nop_7dbabc15` | Empty function: `retf`. | disassembly |
+| `0x7dbabc18` | 1 | `global_606fe4e8_set_7dbabc18` | `*0x606fe4e8 = d0`. | disassembly |
+| `0x7dbac30b` | 8 | `global_606fe3f8_get_7dbac30b` | Leaf `return *0x606fe3f8`. | disassembly |
+| `0x7dbad66d` | 1 | `ret_ptr_7dc6fc08_7dbad66d` | `return 0x7dc6fc08` (a fixed address, in `a0`). | disassembly |
+| `0x7dbade37` | 1 | `nop_7dbade37` | Empty function: `retf`. | disassembly |
+| `0x7dbae05b` | 1 | `global_u8_606fe525_get_7dbae05b` | Leaf `return (u8)*0x606fe525`. | disassembly |
+| `0x7dbae4dd` | 2 | `global_u16_606fe522_get_7dbae4dd` | Leaf `return (u16)*0x606fe522`. | disassembly |
+| `0x7dbae672` | 2 | `global_606fe52c_get_7dbae672` | Leaf `return *0x606fe52c`. | disassembly |
+| `0x7dbae7d8` | 2 | `global_u8_606fe530_set_7dbae7d8` | `*(u8*)0x606fe530 = d0`. | disassembly |
+| `0x7dbae81d` | 1 | `global_u16_606fe676_set_7dbae81d` | `*(u16*)0x606fe676 = d0`. | disassembly |
+| `0x7dbb1119` | 5 | `nop_7dbb1119` | Empty function: `retf`. | disassembly |
+| `0x7dbb111c` | 1 | `nop_7dbb111c` | Empty function: `retf`. | disassembly |
+| `0x7dbb111f` | 1 | `nop_7dbb111f` | Empty function: `retf`. | disassembly |
+| `0x7dbb18a5` | 2 | `nop_7dbb18a5` | Empty function: `retf`. | disassembly |
+| `0x7dbb2769` | 4 | `global_u16_a0a67cdc_set_7dbb2769` | `*(u16*)0xa0a67cdc = d0`. | disassembly |
+| `0x7dbb2aee` | 1 | `global_u8_60701fba_get_7dbb2aee` | Leaf `return (u8)*0x60701fba`. | disassembly |
+| `0x7dbb2af7` | 1 | `global_u8_60702065_get_7dbb2af7` | Leaf `return (u8)*0x60702065`. | disassembly |
+| `0x7dbb2b00` | 1 | `global_u8_60702066_get_7dbb2b00` | Leaf `return (u8)*0x60702066`. | disassembly |
+| `0x7dbb4811` | 4 | `thunk_to_7d9e28a2_7dbb4811` | Plain thunk: `call 0x7d9e28a2; ret`. | disassembly |
+| `0x7dbb5029` | 3 | `nop_7dbb5029` | Empty function: `retf`. | disassembly |
+| `0x7dbb533c` | 1 | `nop_7dbb533c` | Empty function: `retf`. | disassembly |
+| `0x7dbb74e2` | 1 | `global_a0a67ce4_get_7dbb74e2` | Leaf `return *0xa0a67ce4`. | disassembly |
+| `0x7dbb7559` | 1 | `global_a0a6837c_get_7dbb7559` | Leaf `return *0xa0a6837c`. | disassembly |
+| `0x7dbb7562` | 1 | `global_a0a68314_get_7dbb7562` | Leaf `return *0xa0a68314`. | disassembly |
+| `0x7dbb7ce2` | 2 | `global_u8_a0a68376_set_7dbb7ce2` | `*(u8*)0xa0a68376 = d0`. | disassembly |
+| `0x7dbb7ceb` | 3 | `global_u8_a0a68376_get_7dbb7ceb` | Leaf `return (u8)*0xa0a68376`. | disassembly |
+| `0x7dbb98e1` | 2 | `global_9c000204_get_7dbb98e1` | Leaf `return *0x9c000204`. | disassembly |
+| `0x7dbb9a5c` | 1 | `global_9c001c40_get_7dbb9a5c` | Leaf `return *0x9c001c40`. | disassembly |
+| `0x7dbb9b19` | 3 | `global_9c00022c_set_7dbb9b19` | `*0x9c00022c = d0`. | disassembly |
+| `0x7dbbae8e` | 1 | `nop_7dbbae8e` | Empty function: `retf`. | disassembly |
+| `0x7dbbb590` | 1 | `nop_7dbbb590` | Empty function: `retf`. | disassembly |
+| `0x7dbbb593` | 1 | `nop_7dbbb593` | Empty function: `retf`. | disassembly |
+| `0x7dbbb59b` | 1 | `nop_7dbbb59b` | Empty function: `retf`. | disassembly |
+| `0x7dbbb5a8` | 1 | `nop_7dbbb5a8` | Empty function: `retf`. | disassembly |
+| `0x7dbbb5ab` | 1 | `nop_7dbbb5ab` | Empty function: `retf`. | disassembly |
+| `0x7dbbba5a` | 1 | `nop_7dbbba5a` | Empty function: `retf`. | disassembly |
+| `0x7dbbc569` | 1 | `nop_7dbbc569` | Empty function: `retf`. | disassembly |
+| `0x7dbbc587` | 1 | `nop_7dbbc587` | Empty function: `retf`. | disassembly |
+| `0x7dbbc865` | 1 | `global_60702408_set_7dbbc865` | `*0x60702408 = d0`. | disassembly |
+| `0x7dbbc9d0` | 3 | `global_60702410_get_7dbbc9d0` | Leaf `return *0x60702410`. | disassembly |
+| `0x7dbbdb20` | 5 | `nop_7dbbdb20` | Empty function: `retf`. | disassembly |
+| `0x7dbbdb23` | 2 | `nop_7dbbdb23` | Empty function: `retf`. | disassembly |
+| `0x7dbbdb26` | 4 | `nop_7dbbdb26` | Empty function: `retf`. | disassembly |
+| `0x7dc9d281` | 1 | `thunk_to_7da8b7f6_7dc9d281` | Plain thunk: `call 0x7da8b7f6; ret`. | disassembly |
+| `0x7dc9d28b` | 1 | `thunk_to_7da8a788_7dc9d28b` | Plain thunk: `call 0x7da8a788; ret`. | disassembly |
+| `0x7dd41b19` | 3 | `global_60709528_get_7dd41b19` | Leaf `return *0x60709528`. | disassembly |
+| `0x7dd41b22` | 1 | `global_6070951c_set_7dd41b22` | `*0x6070951c = d0`. | disassembly |
+| `0x7dd42008` | 1 | `global_60709600_get_7dd42008` | Leaf `return *0x60709600`. | disassembly |
+| `0x7dd42011` | 1 | `global_607095fc_set_7dd42011` | `*0x607095fc = d0`. | disassembly |
+| `0x7dd42b0c` | 3 | `global_u16_60709cf4_get_7dd42b0c` | Leaf `return (u16)*0x60709cf4`. | disassembly |
+| `0x7dd42b15` | 2 | `global_u16_60709cf6_get_7dd42b15` | Leaf `return (u16)*0x60709cf6`. | disassembly |
+| `0x7dd50559` | 1 | `nop_7dd50559` | Empty function: `retf`. | disassembly |
+| `0x7dd55501` | 1 | `global_6044c4a4_get_7dd55501` | Leaf `return *0x6044c4a4`. | disassembly |
+| `0x7dd65673` | 1 | `thunk_to_7d9c106e_7dd65673` | Plain thunk: `call 0x7d9c106e; ret`. | disassembly |
+| `0x7dd65948` | 1 | `global_u16_6070f568_get_7dd65948` | Leaf `return (u16)*0x6070f568`. | disassembly |
+| `0x7dd6a17e` | 12 | `nop_7dd6a17e` | Empty function: `retf`. | disassembly |
+| `0x7dd6a91a` | 2 | `thunk_to_7d9c1606_7dd6a91a` | Plain thunk: `call 0x7d9c1606; ret`. | disassembly |
+| `0x7dd6a924` | 2 | `thunk_to_7d9c16f9_7dd6a924` | Plain thunk: `call 0x7d9c16f9; ret`. | disassembly |
+| `0x7dd6a92e` | 1 | `nop_7dd6a92e` | Empty function: `retf`. | disassembly |
+| `0x7dd6a997` | 9 | `ret_ptr_6070fa9c_7dd6a997` | `return 0x6070fa9c` (a fixed address, in `a0`). | disassembly |
+| `0x7dd6b335` | 1 | `nop_7dd6b335` | Empty function: `retf`. | disassembly |
+| `0x7dd6d08b` | 1 | `nop_7dd6d08b` | Empty function: `retf`. | disassembly |
+| `0x7dd6d091` | 1 | `nop_7dd6d091` | Empty function: `retf`. | disassembly |
+| `0x7dd6d1d4` | 1 | `nop_7dd6d1d4` | Empty function: `retf`. | disassembly |
+| `0x7dd70ebd` | 3 | `global_6070fb78_get_7dd70ebd` | Leaf `return *0x6070fb78`. | disassembly |
+| `0x7dd763b6` | 2 | `global_u16_a0a6aab2_get_7dd763b6` | Leaf `return (u16)*0xa0a6aab2`. | disassembly |
+| `0x7dd763bf` | 1 | `global_u16_a0a6aab4_get_7dd763bf` | Leaf `return (u16)*0xa0a6aab4`. | disassembly |
+| `0x7dd79ae5` | 10 | `ret_ptr_6070ffe0_7dd79ae5` | `return 0x6070ffe0` (a fixed address, in `a0`). | disassembly |
+| `0x7dd79c65` | 1 | `global_u16_60710384_get_7dd79c65` | Leaf `return (u16)*0x60710384`. | disassembly |
+| `0x7dd7a70b` | 3 | `ret_ptr_60710392_7dd7a70b` | `return 0x60710392` (a fixed address, in `a0`). | disassembly |
+| `0x7dd7a71f` | 4 | `ret_ptr_60710078_7dd7a71f` | `return 0x60710078` (a fixed address, in `a0`). | disassembly |
+| `0x7dd7b454` | 1 | `nop_7dd7b454` | Empty function: `retf`. | disassembly |
+| `0x7dd7b457` | 2 | `thunk_to_7ddab1a8_7dd7b457` | Plain thunk: `call 0x7ddab1a8; ret`. | disassembly |
+| `0x7dd7b625` | 14 | `ret_ptr_60710468_7dd7b625` | `return 0x60710468` (a fixed address, in `a0`). | disassembly |
+| `0x7dd7f787` | 6 | `global_u8_607105b7_set_7dd7f787` | `*(u8*)0x607105b7 = d0`. | disassembly |
+| `0x7dd7f790` | 2 | `global_u8_607105b6_set_7dd7f790` | `*(u8*)0x607105b6 = d0`. | disassembly |
+| `0x7dd83ec9` | 2 | `global_u8_607109dc_get_7dd83ec9` | Leaf `return (u8)*0x607109dc`. | disassembly |
+| `0x7dd83ed2` | 3 | `global_60710920_get_7dd83ed2` | Leaf `return *0x60710920`. | disassembly |
+| `0x7dd83f05` | 4 | `global_60710924_get_7dd83f05` | Leaf `return *0x60710924`. | disassembly |
+| `0x7dd83f37` | 2 | `global_60710928_get_7dd83f37` | Leaf `return *0x60710928`. | disassembly |
+| `0x7dd83fb2` | 8 | `global_u8_607109df_set_7dd83fb2` | `*(u8*)0x607109df = d0`. | disassembly |
+| `0x7dd8406b` | 1 | `global_u16_607109e2_set_7dd8406b` | `*(u16*)0x607109e2 = d0`. | disassembly |
+| `0x7dd85d65` | 2 | `global_u16_607109fc_set_7dd85d65` | `*(u16*)0x607109fc = d0`. | disassembly |
+| `0x7dd85d6e` | 4 | `global_u16_607109fc_get_7dd85d6e` | Leaf `return (u16)*0x607109fc`. | disassembly |
+| `0x7dd85e52` | 4 | `global_u16_607109fe_get_7dd85e52` | Leaf `return (u16)*0x607109fe`. | disassembly |
+| `0x7dd86a13` | 4 | `ret_ptr_60710ae8_7dd86a13` | `return 0x60710ae8` (a fixed address, in `a0`). | disassembly |
+| `0x7dd8945e` | 1 | `global_60710b88_get_7dd8945e` | Leaf `return *0x60710b88`. | disassembly |
+| `0x7dd90cf8` | 1 | `nop_7dd90cf8` | Empty function: `retf`. | disassembly |
+| `0x7ddab1a8` | 1 | `nop_7ddab1a8` | Empty function: `retf`. | disassembly |
+| `0x7ddab1b5` | 1 | `nop_7ddab1b5` | Empty function: `retf`. | disassembly |
+| `0x7ddab1d5` | 1 | `nop_7ddab1d5` | Empty function: `retf`. | disassembly |
+| `0x7ddb2c31` | 1 | `nop_7ddb2c31` | Empty function: `retf`. | disassembly |
+| `0x7ddb3abe` | 1 | `nop_7ddb3abe` | Empty function: `retf`. | disassembly |
+| `0x7ddb3ac1` | 1 | `nop_7ddb3ac1` | Empty function: `retf`. | disassembly |
+| `0x7ddb3b55` | 4 | `thunk_to_7d9c1250_7ddb3b55` | Plain thunk: `call 0x7d9c1250; ret`. | disassembly |
+| `0x7ddb3b5f` | 2 | `thunk_to_7d9c1429_7ddb3b5f` | Plain thunk: `call 0x7d9c1429; ret`. | disassembly |
+| `0x7ddb3b69` | 1 | `thunk_to_7d9c132d_7ddb3b69` | Plain thunk: `call 0x7d9c132d; ret`. | disassembly |
+| `0x7ddb3ba5` | 6 | `thunk_to_7d9c5599_7ddb3ba5` | Plain thunk: `call 0x7d9c5599; ret`. | disassembly |
+| `0x7ddbd4c0` | 5 | `ret_ptr_60711c88_7ddbd4c0` | `return 0x60711c88` (a fixed address, in `a0`). | disassembly |
+| `0x7ddbea78` | 1 | `nop_7ddbea78` | Empty function: `retf`. | disassembly |
+| `0x7ddc1b91` | 1 | `nop_7ddc1b91` | Empty function: `retf`. | disassembly |
+| `0x7ddc9334` | 7 | `ret_ptr_60711d64_7ddc9334` | `return 0x60711d64` (a fixed address, in `a0`). | disassembly |
+| `0x7ddc9ef2` | 5 | `global_60711d98_get_7ddc9ef2` | Leaf `return *0x60711d98`. | disassembly |
+| `0x7ddc9efb` | 2 | `global_60711d9c_get_7ddc9efb` | Leaf `return *0x60711d9c`. | disassembly |
+| `0x7ddcf438` | 1 | `global_a0a6b898_get_7ddcf438` | Leaf `return *0xa0a6b898`. | disassembly |
+| `0x7ddd1af9` | 1 | `global_u8_a0a6ea9c_set_7ddd1af9` | `*(u8*)0xa0a6ea9c = d0`. | disassembly |
+| `0x7ddd6134` | 1 | `nop_7ddd6134` | Empty function: `retf`. | disassembly |
+| `0x7ddd727b` | 1 | `nop_7ddd727b` | Empty function: `retf`. | disassembly |
+| `0x7ddd8993` | 2 | `ret_ptr_7df0fd68_7ddd8993` | `return 0x7df0fd68` (a fixed address, in `a0`). | disassembly |
+| `0x7dde4c07` | 2 | `ret_ptr_a0a6f4bc_7dde4c07` | `return 0xa0a6f4bc` (a fixed address, in `a0`). | disassembly |
+| `0x7dde4d32` | 1 | `nop_7dde4d32` | Empty function: `retf`. | disassembly |
+| `0x7dde7a6d` | 4 | `ret_ptr_7df0dde0_7dde7a6d` | `return 0x7df0dde0` (a fixed address, in `a0`). | disassembly |
+| `0x7de00a78` | 1 | `thunk_to_7ddeea86_7de00a78` | Plain thunk: `call 0x7ddeea86; ret`. | disassembly |
+| `0x7de07fd0` | 1 | `nop_7de07fd0` | Empty function: `retf`. | disassembly |
+| `0x7de1e4a8` | 2 | `global_a0a711cc_get_7de1e4a8` | Leaf `return *0xa0a711cc`. | disassembly |
+| `0x7de29cf0` | 3 | `global_u16_6044c9cc_get_7de29cf0` | Leaf `return (u16)*0x6044c9cc`. | disassembly |
+| `0x7de2d729` | 1 | `global_6073cef0_set_7de2d729` | `*0x6073cef0 = d0`. | disassembly |
+| `0x7de35a03` | 1 | `global_u8_6073cf1e_set_7de35a03` | `*(u8*)0x6073cf1e = d0`. | disassembly |
+| `0x7de36470` | 3 | `global_u16_6073cf64_set_7de36470` | `*(u16*)0x6073cf64 = d0`. | disassembly |
+| `0x7de36ecc` | 2 | `global_u16_6073f678_set_7de36ecc` | `*(u16*)0x6073f678 = d0`. | disassembly |
+| `0x7de45e8e` | 1 | `get_u16_f14_7de45e8e` | Leaf `return (u16)*(this+14)`. | disassembly |
+| `0x7de46717` | 3 | `global_u16_607409f8_set_7de46717` | `*(u16*)0x607409f8 = d0`. | disassembly |
+| `0x7de46720` | 1 | `global_u16_607409f8_get_7de46720` | Leaf `return (u16)*0x607409f8`. | disassembly |
+| `0x7de46729` | 2 | `global_u16_607409fa_set_7de46729` | `*(u16*)0x607409fa = d0`. | disassembly |
+| `0x7de46732` | 1 | `global_u16_607409fa_get_7de46732` | Leaf `return (u16)*0x607409fa`. | disassembly |
+| `0x7de4673b` | 1 | `global_u16_607409fc_set_7de4673b` | `*(u16*)0x607409fc = d0`. | disassembly |
+| `0x7de46744` | 1 | `global_u16_607409fc_get_7de46744` | Leaf `return (u16)*0x607409fc`. | disassembly |
+| `0x7de477e1` | 2 | `thunk_to_7d9c199e_7de477e1` | Plain thunk: `call 0x7d9c199e; ret`. | disassembly |
+| `0x7de477eb` | 3 | `thunk_to_7d9c12c3_7de477eb` | Plain thunk: `call 0x7d9c12c3; ret`. | disassembly |
+| `0x7de47819` | 2 | `thunk_to_7d9c1564_7de47819` | Plain thunk: `call 0x7d9c1564; ret`. | disassembly |
+| `0x7de47823` | 4 | `thunk_to_7d9c1606_7de47823` | Plain thunk: `call 0x7d9c1606; ret`. | disassembly |
+| `0x7de4782d` | 4 | `thunk_to_7d9c16f9_7de4782d` | Plain thunk: `call 0x7d9c16f9; ret`. | disassembly |
+| `0x7de48d4c` | 6 | `nop_7de48d4c` | Empty function: `retf`. | disassembly |
+| `0x7de4aa68` | 4 | `global_u8_60740f00_get_7de4aa68` | Leaf `return (u8)*0x60740f00`. | disassembly |
+| `0x7de4aa71` | 4 | `global_u8_60740f00_set_7de4aa71` | `*(u8*)0x60740f00 = d0`. | disassembly |
+| `0x7de4fd57` | 1 | `global_u8_60742032_get_7de4fd57` | Leaf `return (u8)*0x60742032`. | disassembly |
+| `0x7de4fd60` | 2 | `global_u8_60742033_get_7de4fd60` | Leaf `return (u8)*0x60742033`. | disassembly |
+| `0x7de4fd69` | 2 | `global_u8_60742035_get_7de4fd69` | Leaf `return (u8)*0x60742035`. | disassembly |
+| `0x7de52420` | 5 | `thunk_to_7d996f64_7de52420` | Plain thunk: `call 0x7d996f64; ret`. | disassembly |
+| `0x7de5245e` | 4 | `thunk_to_7d996f9c_7de5245e` | Plain thunk: `call 0x7d996f9c; ret`. | disassembly |
+| `0x7de53c35` | 11 | `thunk_to_7d999a53_7de53c35` | Plain thunk: `call 0x7d999a53; ret`. | disassembly |
+| `0x7de54388` | 8 | `nop_7de54388` | Empty function: `retf`. | disassembly |
+| `0x7de5438b` | 7 | `nop_7de5438b` | Empty function: `retf`. | disassembly |
+| `0x7de55808` | 1 | `global_u16_a0a750d4_get_7de55808` | Leaf `return (u16)*0xa0a750d4`. | disassembly |
+| `0x7de55d6e` | 1 | `nop_7de55d6e` | Empty function: `retf`. | disassembly |
+| `0x7de5634b` | 4 | `ret_ptr_00000000_7de5634b` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7de56644` | 5 | `get_u16_f20_7de56644` | Leaf `return (u16)*(this+20)`. | disassembly |
+| `0x7de566ed` | 1 | `get_u8_f30_7de566ed` | Leaf `return (u8)*(this+30)`. | disassembly |
+| `0x7de5707b` | 2 | `thunk_to_7d9c1606_7de5707b` | Plain thunk: `call 0x7d9c1606; ret`. | disassembly |
+| `0x7de5793f` | 1 | `nop_7de5793f` | Empty function: `retf`. | disassembly |
+| `0x7de58a71` | 1 | `global_607426f8_get_7de58a71` | Leaf `return *0x607426f8`. | disassembly |
+| `0x7de58a7a` | 1 | `global_607426fc_get_7de58a7a` | Leaf `return *0x607426fc`. | disassembly |
+| `0x7de58aaf` | 1 | `nop_7de58aaf` | Empty function: `retf`. | disassembly |
+| `0x7de5f43b` | 2 | `nop_7de5f43b` | Empty function: `retf`. | disassembly |
+| `0x7de5f43e` | 1 | `nop_7de5f43e` | Empty function: `retf`. | disassembly |
+| `0x7de62feb` | 1 | `nop_7de62feb` | Empty function: `retf`. | disassembly |
+| `0x7de65898` | 3 | `ret_ptr_609fa510_7de65898` | `return 0x609fa510` (a fixed address, in `a0`). | disassembly |
+| `0x7de663b6` | 4 | `ret_ptr_a0a75dd0_7de663b6` | `return 0xa0a75dd0` (a fixed address, in `a0`). | disassembly |
+| `0x7de66bb7` | 1 | `nop_7de66bb7` | Empty function: `retf`. | disassembly |
+| `0x7de682d4` | 2 | `global_609fa8a8_set_7de682d4` | `*0x609fa8a8 = d0`. | disassembly |
+| `0x7de682f5` | 6 | `global_609fa8bc_set_7de682f5` | `*0x609fa8bc = d0`. | disassembly |
+| `0x7de6855e` | 4 | `global_u8_609fa8b8_set_7de6855e` | `*(u8*)0x609fa8b8 = d0`. | disassembly |
+| `0x7de6da27` | 7 | `global_u8_a0a771b9_set_7de6da27` | `*(u8*)0xa0a771b9 = d0`. | disassembly |
+| `0x7de6dadd` | 8 | `global_a0a771c0_set_7de6dadd` | `*0xa0a771c0 = d0`. | disassembly |
+| `0x7de6dae6` | 2 | `global_a0a77238_set_7de6dae6` | `*0xa0a77238 = d0`. | disassembly |
+| `0x7de6daef` | 1 | `global_a0a77238_get_7de6daef` | Leaf `return *0xa0a77238`. | disassembly |
+| `0x7de6e2ef` | 1 | `global_u8_a0a771ba_set_7de6e2ef` | `*(u8*)0xa0a771ba = d0`. | disassembly |
+| `0x7de6e2f8` | 1 | `global_u8_a0a771bb_set_7de6e2f8` | `*(u8*)0xa0a771bb = d0`. | disassembly |
+| `0x7de6e301` | 3 | `global_u8_a0a77274_set_7de6e301` | `*(u8*)0xa0a77274 = d0`. | disassembly |
+| `0x7de6e361` | 1 | `global_u8_a0a771bc_set_7de6e361` | `*(u8*)0xa0a771bc = d0`. | disassembly |
+| `0x7de6ee76` | 2 | `global_a0a7729c_set_7de6ee76` | `*0xa0a7729c = d0`. | disassembly |
+| `0x7de7337a` | 1 | `global_a0a77960_set_7de7337a` | `*0xa0a77960 = d0`. | disassembly |
+| `0x7de7339b` | 1 | `global_a0a77b14_set_7de7339b` | `*0xa0a77b14 = d0`. | disassembly |
+| `0x7de733ad` | 1 | `ret_ptr_a0a776a2_7de733ad` | `return 0xa0a776a2` (a fixed address, in `a0`). | disassembly |
+| `0x7de73407` | 2 | `global_a0a77b30_set_7de73407` | `*0xa0a77b30 = d0`. | disassembly |
+| `0x7de7345e` | 3 | `global_u16_a0a77b3c_set_7de7345e` | `*(u16*)0xa0a77b3c = d0`. | disassembly |
+| `0x7de73480` | 4 | `global_u16_a0a77b1a_set_7de73480` | `*(u16*)0xa0a77b1a = d0`. | disassembly |
+| `0x7de734a2` | 4 | `global_u16_a0a77988_set_7de734a2` | `*(u16*)0xa0a77988 = d0`. | disassembly |
+| `0x7de74559` | 1 | `global_609fb390_set_7de74559` | `*0x609fb390 = d0`. | disassembly |
+| `0x7de7457a` | 1 | `global_609fb370_set_7de7457a` | `*0x609fb370 = d0`. | disassembly |
+| `0x7de7473b` | 2 | `ret_ptr_609fb36c_7de7473b` | `return 0x609fb36c` (a fixed address, in `a0`). | disassembly |
+| `0x7de747e8` | 2 | `global_609fb3b0_set_7de747e8` | `*0x609fb3b0 = d0`. | disassembly |
+| `0x7de747f1` | 1 | `global_609fb3b0_get_7de747f1` | Leaf `return *0x609fb3b0`. | disassembly |
+| `0x7de74e87` | 1 | `global_u8_609fb3b4_set_7de74e87` | `*(u8*)0x609fb3b4 = d0`. | disassembly |
+| `0x7de74e90` | 1 | `global_u8_609fb3b5_set_7de74e90` | `*(u8*)0x609fb3b5 = d0`. | disassembly |
+| `0x7de74e99` | 3 | `ret_ptr_609fb3b4_7de74e99` | `return 0x609fb3b4` (a fixed address, in `a0`). | disassembly |
+| `0x7de7589c` | 15 | `ret_ptr_609fb3c0_7de7589c` | `return 0x609fb3c0` (a fixed address, in `a0`). | disassembly |
+| `0x7de76319` | 1 | `thunk_to_7de45f9c_7de76319` | Plain thunk: `call 0x7de45f9c; ret`. | disassembly |
+| `0x7de80547` | 2 | `global_a0a77bfc_set_7de80547` | `*0xa0a77bfc = d0`. | disassembly |
+| `0x7de81733` | 3 | `global_609fb3f0_set_7de81733` | `*0x609fb3f0 = d0`. | disassembly |
+| `0x7de82462` | 1 | `nop_7de82462` | Empty function: `retf`. | disassembly |
+| `0x7de82e08` | 1 | `thunk_to_7dea8c97_7de82e08` | Plain thunk: `call 0x7dea8c97; ret`. | disassembly |
+| `0x7de8736a` | 2 | `global_a0a8f020_get_7de8736a` | Leaf `return *0xa0a8f020`. | disassembly |
+| `0x7de927d7` | 1 | `nop_7de927d7` | Empty function: `retf`. | disassembly |
+| `0x7de927da` | 1 | `nop_7de927da` | Empty function: `retf`. | disassembly |
+| `0x7de936cf` | 1 | `nop_7de936cf` | Empty function: `retf`. | disassembly |
+| `0x7de936d2` | 1 | `nop_7de936d2` | Empty function: `retf`. | disassembly |
+| `0x7de936d5` | 1 | `nop_7de936d5` | Empty function: `retf`. | disassembly |
+| `0x7de9643f` | 1 | `nop_7de9643f` | Empty function: `retf`. | disassembly |
+| `0x7de96605` | 1 | `get_u16_f84_7de96605` | Leaf `return (u16)*(this+84)`. | disassembly |
+| `0x7de9a6ea` | 1 | `global_6074f720_get_7de9a6ea` | Leaf `return *0x6074f720`. | disassembly |
+| `0x7de9a6f3` | 1 | `global_6074f724_get_7de9a6f3` | Leaf `return *0x6074f724`. | disassembly |
+| `0x7de9a833` | 1 | `global_6074f71c_get_7de9a833` | Leaf `return *0x6074f71c`. | disassembly |
+| `0x7dea22aa` | 1 | `global_u16_a0a8f9ea_set_7dea22aa` | `*(u16*)0xa0a8f9ea = d0`. | disassembly |
+| `0x7dea3131` | 4 | `nop_7dea3131` | Empty function: `retf`. | disassembly |
+| `0x7dea9469` | 3 | `global_u16_6074fbf8_get_7dea9469` | Leaf `return (u16)*0x6074fbf8`. | disassembly |
+| `0x7deab1e1` | 1 | `ret_ptr_00000000_7deab1e1` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7deab1e6` | 1 | `ret_ptr_00000000_7deab1e6` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7deaca0d` | 3 | `global_u16_6074fc06_set_7deaca0d` | `*(u16*)0x6074fc06 = d0`. | disassembly |
+| `0x7dead09f` | 1 | `global_a0a8fc54_set_7dead09f` | `*0xa0a8fc54 = a0`. | disassembly |
+| `0x7deb0824` | 1 | `global_6044cec4_set_7deb0824` | `*0x6044cec4 = d0`. | disassembly |
+| `0x7deb3804` | 1 | `global_a0a9033c_set_7deb3804` | `*0xa0a9033c = a0`. | disassembly |
+| `0x7deb6c0f` | 1 | `nop_7deb6c0f` | Empty function: `retf`. | disassembly |
+| `0x7deb7121` | 1 | `thunk_to_7decb19c_7deb7121` | Plain thunk: `call 0x7decb19c; ret`. | disassembly |
+| `0x7deb7145` | 1 | `thunk_to_7ded2ebd_7deb7145` | Plain thunk: `call 0x7ded2ebd; ret`. | disassembly |
+| `0x7deb715a` | 2 | `global_60750280_set_7deb715a` | `*0x60750280 = d0`. | disassembly |
+| `0x7deb71b5` | 1 | `thunk_to_7decef12_7deb71b5` | Plain thunk: `call 0x7decef12; ret`. | disassembly |
+| `0x7deb71bf` | 7 | `thunk_to_7decb023_7deb71bf` | Plain thunk: `call 0x7decb023; ret`. | disassembly |
+| `0x7deb74ec` | 1 | `ret_ptr_60750290_7deb74ec` | `return 0x60750290` (a fixed address, in `a0`). | disassembly |
+| `0x7deb861d` | 2 | `global_u16_60750320_set_7deb861d` | `*(u16*)0x60750320 = d0`. | disassembly |
+| `0x7debb919` | 2 | `global_u8_60750528_set_7debb919` | `*(u8*)0x60750528 = d0`. | disassembly |
+| `0x7debb94e` | 1 | `global_u16_60750534_set_7debb94e` | `*(u16*)0x60750534 = d0`. | disassembly |
+| `0x7debbc40` | 2 | `global_u8_60750564_set_7debbc40` | `*(u8*)0x60750564 = d0`. | disassembly |
+| `0x7debca5e` | 1 | `nop_7debca5e` | Empty function: `retf`. | disassembly |
+| `0x7dec2167` | 1 | `global_60752298_set_7dec2167` | `*0x60752298 = a0`. | disassembly |
+| `0x7dec4cc3` | 2 | `global_u8_607523c8_get_7dec4cc3` | Leaf `return (u8)*0x607523c8`. | disassembly |
+| `0x7dec4ccc` | 1 | `global_u8_607523c8_set_7dec4ccc` | `*(u8*)0x607523c8 = d0`. | disassembly |
+| `0x7dec4cd5` | 1 | `global_607523cc_get_7dec4cd5` | Leaf `return *0x607523cc`. | disassembly |
+| `0x7dec4cde` | 1 | `global_607523d0_get_7dec4cde` | Leaf `return *0x607523d0`. | disassembly |
+| `0x7dec557e` | 1 | `global_60752854_get_7dec557e` | Leaf `return *0x60752854`. | disassembly |
+| `0x7dec5983` | 2 | `ret_ptr_6075285c_7dec5983` | `return 0x6075285c` (a fixed address, in `a0`). | disassembly |
+| `0x7dec6e5b` | 2 | `thunk_to_7dae2e9f_7dec6e5b` | Plain thunk: `call 0x7dae2e9f; ret`. | disassembly |
+| `0x7dec9170` | 2 | `global_u16_60752980_set_7dec9170` | `*(u16*)0x60752980 = d0`. | disassembly |
+| `0x7dec9179` | 1 | `global_60752984_set_7dec9179` | `*0x60752984 = d0`. | disassembly |
+| `0x7dec9182` | 1 | `global_u8_60752988_set_7dec9182` | `*(u8*)0x60752988 = d0`. | disassembly |
+| `0x7deca775` | 3 | `global_6075299c_set_7deca775` | `*0x6075299c = a0`. | disassembly |
+| `0x7decb023` | 1 | `ret_ptr_7df65de4_7decb023` | `return 0x7df65de4` (a fixed address, in `a0`). | disassembly |
+| `0x7decb0cd` | 3 | `ret_ptr_607529b8_7decb0cd` | `return 0x607529b8` (a fixed address, in `a0`). | disassembly |
+| `0x7decb0d6` | 7 | `ret_ptr_60752ce0_7decb0d6` | `return 0x60752ce0` (a fixed address, in `a0`). | disassembly |
+| `0x7decb72d` | 1 | `global_u8_60753008_get_7decb72d` | Leaf `return (u8)*0x60753008`. | disassembly |
+| `0x7decb8dc` | 1 | `ret_ptr_60755730_7decb8dc` | `return 0x60755730` (a fixed address, in `a0`). | disassembly |
+| `0x7decb8e5` | 1 | `ret_ptr_60756198_7decb8e5` | `return 0x60756198` (a fixed address, in `a0`). | disassembly |
+| `0x7decd349` | 1 | `global_u8_60756350_set_7decd349` | `*(u8*)0x60756350 = d0`. | disassembly |
+| `0x7decdf07` | 2 | `global_u8_607563b2_get_7decdf07` | Leaf `return (u8)*0x607563b2`. | disassembly |
+| `0x7decdf10` | 1 | `global_u8_607563b2_set_7decdf10` | `*(u8*)0x607563b2 = d0`. | disassembly |
+| `0x7dece052` | 1 | `global_u8_607563b8_set_7dece052` | `*(u8*)0x607563b8 = d0`. | disassembly |
+| `0x7dece05b` | 1 | `global_u8_607563b8_get_7dece05b` | Leaf `return (u8)*0x607563b8`. | disassembly |
+| `0x7ded05f2` | 2 | `ret_ptr_60756bec_7ded05f2` | `return 0x60756bec` (a fixed address, in `a0`). | disassembly |
+| `0x7ded06a9` | 1 | `ret_ptr_60756cc4_7ded06a9` | `return 0x60756cc4` (a fixed address, in `a0`). | disassembly |
+| `0x7ded27d1` | 1 | `thunk_to_7d9c16f9_7ded27d1` | Plain thunk: `call 0x7d9c16f9; ret`. | disassembly |
+| `0x7ded3cbe` | 1 | `global_u16_60758c78_set_7ded3cbe` | `*(u16*)0x60758c78 = d0`. | disassembly |
+| `0x7ded3d57` | 2 | `global_u16_60758c7a_set_7ded3d57` | `*(u16*)0x60758c7a = d0`. | disassembly |
+| `0x7ded3d69` | 1 | `global_u8_60758c7e_set_7ded3d69` | `*(u8*)0x60758c7e = d0`. | disassembly |
+| `0x7ded3d7b` | 2 | `global_u16_60758c7c_set_7ded3d7b` | `*(u16*)0x60758c7c = d0`. | disassembly |
+| `0x7ded3d84` | 1 | `global_60758c80_get_7ded3d84` | Leaf `return *0x60758c80`. | disassembly |
+| `0x7ded3d8d` | 1 | `global_60758c80_set_7ded3d8d` | `*0x60758c80 = d0`. | disassembly |
+| `0x7dfc032a` | 1 | `get_f20_7dfc032a` | Leaf `return *(this+20)`. | disassembly |
+| `0x7dfc0407` | 1 | `set_f20_7dfc0407` | `*(this+20) = d0`. | disassembly |
+| `0x7dfc04ad` | 1 | `nop_7dfc04ad` | Empty function: `retf`. | disassembly |
+| `0x7dfc04b0` | 1 | `set_f16_7dfc04b0` | `*(this+16) = d0`. | disassembly |
+| `0x7dfc04b6` | 14 | `get_f24_7dfc04b6` | Leaf `return *(this+24)`. | disassembly |
+| `0x7dfc0a26` | 1 | `set_f4_7dfc0a26` | `*(this+4) = a1`. | disassembly |
+| `0x7dfc0a2c` | 1 | `set_f8_7dfc0a2c` | `*(this+8) = a1`. | disassembly |
+| `0x7dfc0a32` | 1 | `set_f12_7dfc0a32` | `*(this+12) = a1`. | disassembly |
+| `0x7dfc1363` | 3 | `global_6044cf40_get_7dfc1363` | Leaf `return *0x6044cf40`. | disassembly |
+| `0x7dfc139a` | 3 | `global_6044cf50_get_7dfc139a` | Leaf `return *0x6044cf50`. | disassembly |
+| `0x7dfc13a3` | 12 | `global_6044cf54_get_7dfc13a3` | Leaf `return *0x6044cf54`. | disassembly |
+| `0x7dfc13b5` | 2 | `global_6044cf64_get_7dfc13b5` | Leaf `return *0x6044cf64`. | disassembly |
+| `0x7dfc13be` | 13 | `global_6044cfc4_get_7dfc13be` | Leaf `return *0x6044cfc4`. | disassembly |
+| `0x7dfc13c7` | 11 | `global_6044cf68_get_7dfc13c7` | Leaf `return *0x6044cf68`. | disassembly |
+| `0x7dfc13d0` | 1 | `global_6044cf6c_get_7dfc13d0` | Leaf `return *0x6044cf6c`. | disassembly |
+| `0x7dfc13f8` | 7 | `global_6044cf7c_get_7dfc13f8` | Leaf `return *0x6044cf7c`. | disassembly |
+| `0x7dfc1401` | 1 | `global_6044cf80_get_7dfc1401` | Leaf `return *0x6044cf80`. | disassembly |
+| `0x7dfc142a` | 2 | `global_6044cf94_get_7dfc142a` | Leaf `return *0x6044cf94`. | disassembly |
+| `0x7dfc147e` | 6 | `global_u16_6044cf9c_get_7dfc147e` | Leaf `return (u16)*0x6044cf9c`. | disassembly |
+| `0x7dfc14ce` | 5 | `global_6044cfa0_get_7dfc14ce` | Leaf `return *0x6044cfa0`. | disassembly |
+| `0x7dfc14d7` | 3 | `global_6044cfa4_get_7dfc14d7` | Leaf `return *0x6044cfa4`. | disassembly |
+| `0x7dfc14e0` | 7 | `global_6044cfa8_get_7dfc14e0` | Leaf `return *0x6044cfa8`. | disassembly |
+| `0x7dfc14e9` | 7 | `global_6044cfb0_get_7dfc14e9` | Leaf `return *0x6044cfb0`. | disassembly |
+| `0x7dfc1520` | 1 | `global_6044cfb8_get_7dfc1520` | Leaf `return *0x6044cfb8`. | disassembly |
+| `0x7dfc1529` | 6 | `global_6044cfbc_get_7dfc1529` | Leaf `return *0x6044cfbc`. | disassembly |
+| `0x7dfc1532` | 2 | `global_6044cfc0_get_7dfc1532` | Leaf `return *0x6044cfc0`. | disassembly |
+| `0x7dfc1593` | 4 | `global_6044cfcc_get_7dfc1593` | Leaf `return *0x6044cfcc`. | disassembly |
+| `0x7dfc17ed` | 2 | `global_6044cf40_set_7dfc17ed` | `*0x6044cf40 = d0`. | disassembly |
+| `0x7dfc1819` | 3 | `global_6044cf50_set_7dfc1819` | `*0x6044cf50 = d0`. | disassembly |
+| `0x7dfc1822` | 2 | `global_6044cf54_set_7dfc1822` | `*0x6044cf54 = d0`. | disassembly |
+| `0x7dfc182b` | 1 | `global_6044cf58_set_7dfc182b` | `*0x6044cf58 = d0`. | disassembly |
+| `0x7dfc1900` | 3 | `global_6044cf64_set_7dfc1900` | `*0x6044cf64 = d0`. | disassembly |
+| `0x7dfc1912` | 10 | `global_6044cf68_set_7dfc1912` | `*0x6044cf68 = d0`. | disassembly |
+| `0x7dfc1947` | 1 | `global_6044cf78_set_7dfc1947` | `*0x6044cf78 = d0`. | disassembly |
+| `0x7dfc1950` | 7 | `global_6044cf7c_set_7dfc1950` | `*0x6044cf7c = d0`. | disassembly |
+| `0x7dfc1959` | 3 | `global_6044cf80_set_7dfc1959` | `*0x6044cf80 = d0`. | disassembly |
+| `0x7dfc1979` | 9 | `global_6044cf94_set_7dfc1979` | `*0x6044cf94 = d0`. | disassembly |
+| `0x7dfc19da` | 1 | `global_u16_6044cf9c_set_7dfc19da` | `*(u16*)0x6044cf9c = d0`. | disassembly |
+| `0x7dfc19e3` | 3 | `global_6044cfa0_set_7dfc19e3` | `*0x6044cfa0 = d0`. | disassembly |
+| `0x7dfc19ec` | 3 | `global_6044cfa4_set_7dfc19ec` | `*0x6044cfa4 = d0`. | disassembly |
+| `0x7dfc19f5` | 4 | `global_6044cfa8_set_7dfc19f5` | `*0x6044cfa8 = d0`. | disassembly |
+| `0x7dfc1a15` | 2 | `nop_7dfc1a15` | Empty function: `retf`. | disassembly |
+| `0x7dfc1a18` | 15 | `global_6044cfbc_set_7dfc1a18` | `*0x6044cfbc = d0`. | disassembly |
+| `0x7dfc1a21` | 2 | `global_6044cfc0_set_7dfc1a21` | `*0x6044cfc0 = d0`. | disassembly |
+| `0x7dfc1a2a` | 1 | `global_6044cfc8_set_7dfc1a2a` | `*0x6044cfc8 = d0`. | disassembly |
+| `0x7dfc1a8b` | 2 | `global_6044cfcc_set_7dfc1a8b` | `*0x6044cfcc = d0`. | disassembly |
+| `0x7dfc1e76` | 1 | `ret_ptr_6075abc8_7dfc1e76` | `return 0x6075abc8` (a fixed address, in `a0`). | disassembly |
+| `0x7dfc1e7f` | 3 | `global_u16_6044d0bc_get_7dfc1e7f` | Leaf `return (u16)*0x6044d0bc`. | disassembly |
+| `0x7dfc1eb3` | 1 | `global_6044d0cc_get_7dfc1eb3` | Leaf `return *0x6044d0cc`. | disassembly |
+| `0x7dfc1ebc` | 6 | `global_6044d0c8_get_7dfc1ebc` | Leaf `return *0x6044d0c8`. | disassembly |
+| `0x7dfc1ec5` | 12 | `global_6044cfd8_get_7dfc1ec5` | Leaf `return *0x6044cfd8`. | disassembly |
+| `0x7dfc1ed7` | 1 | `global_6044cfe0_get_7dfc1ed7` | Leaf `return *0x6044cfe0`. | disassembly |
+| `0x7dfc1ee9` | 2 | `global_6044cfe8_get_7dfc1ee9` | Leaf `return *0x6044cfe8`. | disassembly |
+| `0x7dfc1fb9` | 1 | `global_6044d03c_get_7dfc1fb9` | Leaf `return *0x6044d03c`. | disassembly |
+| `0x7dfc1fcb` | 13 | `global_6044d044_get_7dfc1fcb` | Leaf `return *0x6044d044`. | disassembly |
+| `0x7dfc2010` | 3 | `global_6044d09c_get_7dfc2010` | Leaf `return *0x6044d09c`. | disassembly |
+| `0x7dfc2019` | 7 | `global_u8_6044d0a0_get_7dfc2019` | Leaf `return (u8)*0x6044d0a0`. | disassembly |
+| `0x7dfc2022` | 2 | `ret_ptr_6075ace8_7dfc2022` | `return 0x6075ace8` (a fixed address, in `a0`). | disassembly |
+| `0x7dfc202b` | 5 | `global_6044d0a4_get_7dfc202b` | Leaf `return *0x6044d0a4`. | disassembly |
+| `0x7dfc2046` | 3 | `global_6044d0d8_get_7dfc2046` | Leaf `return *0x6044d0d8`. | disassembly |
+| `0x7dfc204f` | 1 | `global_6044d0b8_get_7dfc204f` | Leaf `return *0x6044d0b8`. | disassembly |
+| `0x7dfc2058` | 2 | `global_6044d0c4_get_7dfc2058` | Leaf `return *0x6044d0c4`. | disassembly |
+| `0x7dfc2799` | 2 | `global_6044d0d0_get_7dfc2799` | Leaf `return *0x6044d0d0`. | disassembly |
+| `0x7dfc27a2` | 3 | `global_6044d0d4_get_7dfc27a2` | Leaf `return *0x6044d0d4`. | disassembly |
+| `0x7dfc27ba` | 1 | `global_6044d0dc_get_7dfc27ba` | Leaf `return *0x6044d0dc`. | disassembly |
+| `0x7dfc27c3` | 4 | `global_u16_6044d0bc_set_7dfc27c3` | `*(u16*)0x6044d0bc = d0`. | disassembly |
+| `0x7dfc27f5` | 2 | `global_6044d0cc_set_7dfc27f5` | `*0x6044d0cc = d0`. | disassembly |
+| `0x7dfc27fe` | 2 | `global_6044d0c8_set_7dfc27fe` | `*0x6044d0c8 = d0`. | disassembly |
+| `0x7dfc2807` | 2 | `global_6044cfd8_set_7dfc2807` | `*0x6044cfd8 = d0`. | disassembly |
+| `0x7dfc2810` | 2 | `global_6044cfdc_set_7dfc2810` | `*0x6044cfdc = d0`. | disassembly |
+| `0x7dfc2819` | 3 | `global_6044d0d0_set_7dfc2819` | `*0x6044d0d0 = d0`. | disassembly |
+| `0x7dfc2822` | 12 | `global_6044cfe0_set_7dfc2822` | `*0x6044cfe0 = d0`. | disassembly |
+| `0x7dfc282b` | 3 | `global_6044cfe4_set_7dfc282b` | `*0x6044cfe4 = d0`. | disassembly |
+| `0x7dfc2834` | 3 | `global_6044d0d4_set_7dfc2834` | `*0x6044d0d4 = d0`. | disassembly |
+| `0x7dfc283d` | 1 | `global_6044cfe8_set_7dfc283d` | `*0x6044cfe8 = d0`. | disassembly |
+| `0x7dfc288f` | 3 | `global_6044d008_set_7dfc288f` | `*0x6044d008 = d0`. | disassembly |
+| `0x7dfc2b29` | 1 | `global_6044d0ac_set_7dfc2b29` | `*0x6044d0ac = d0`. | disassembly |
+| `0x7dfc2b4b` | 1 | `global_6044d0d8_set_7dfc2b4b` | `*0x6044d0d8 = d0`. | disassembly |
+| `0x7dfc2b54` | 2 | `global_6044d0dc_set_7dfc2b54` | `*0x6044d0dc = d0`. | disassembly |
+| `0x7dfc2b5d` | 1 | `global_6044d0b8_set_7dfc2b5d` | `*0x6044d0b8 = d0`. | disassembly |
+| `0x7dfc2b66` | 3 | `global_6044d0c4_set_7dfc2b66` | `*0x6044d0c4 = d0`. | disassembly |
+| `0x7dfc3d5d` | 11 | `nop_7dfc3d5d` | Empty function: `retf`. | disassembly |
+| `0x7dfc3d64` | 4 | `nop_7dfc3d64` | Empty function: `retf`. | disassembly |
+| `0x7dfc3d67` | 5 | `nop_7dfc3d67` | Empty function: `retf`. | disassembly |
+| `0x7dfc3d6e` | 3 | `get_f4_7dfc3d6e` | Leaf `return *(this+4)`. | disassembly |
+| `0x7dfc3d74` | 3 | `get_f8_7dfc3d74` | Leaf `return *(this+8)`. | disassembly |
+| `0x7dfc4a48` | 28 | `nop_7dfc4a48` | Empty function: `retf`. | disassembly |
+| `0x7dfc4b2c` | 1 | `set_f20_7dfc4b2c` | `*(this+20) = d0`. | disassembly |
+| `0x7dfc4ba8` | 1 | `nop_7dfc4ba8` | Empty function: `retf`. | disassembly |
+| `0x7dfc633c` | 1 | `set_f40_7dfc633c` | `*(this+40) = d0`. | disassembly |
+| `0x7dfc6392` | 2 | `set_f44_7dfc6392` | `*(this+44) = d0`. | disassembly |
+| `0x7dfc6683` | 7 | `nop_7dfc6683` | Empty function: `retf`. | disassembly |
+| `0x7dfc6731` | 21 | `ret_ptr_00000000_7dfc6731` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7dfc676c` | 38 | `get_f4_7dfc676c` | Leaf `return *(this+4)`. | disassembly |
+| `0x7dfc6772` | 32 | `get_f8_7dfc6772` | Leaf `return *(this+8)`. | disassembly |
+| `0x7dfc6e6e` | 28 | `get_u16_f2_7dfc6e6e` | Leaf `return (u16)*(this+2)`. | disassembly |
+| `0x7dfc7040` | 1 | `global_6044d154_set_7dfc7040` | `*0x6044d154 = a0`. | disassembly |
+| `0x7dfc713e` | 1 | `set_f20_7dfc713e` | `*(this+20) = a1`. | disassembly |
+| `0x7dfc7b52` | 1 | `get_u8_f8_7dfc7b52` | Leaf `return (u8)*(this+8)`. | disassembly |
+| `0x7dfc7ff8` | 2 | `thunk_to_7dfef8a7_7dfc7ff8` | Plain thunk: `call 0x7dfef8a7; ret`. | disassembly |
+| `0x7dfc849d` | 1 | `set_f12_7dfc849d` | `*(this+12) = a1`. | disassembly |
+| `0x7dfc84c6` | 1 | `thunk_to_7dfefc4b_7dfc84c6` | Plain thunk: `call 0x7dfefc4b; ret`. | disassembly |
+| `0x7dfc84d0` | 1 | `thunk_to_7dfefc41_7dfc84d0` | Plain thunk: `call 0x7dfefc41; ret`. | disassembly |
+| `0x7dfc869c` | 1 | `thunk_to_7dff0387_7dfc869c` | Plain thunk: `call 0x7dff0387; ret`. | disassembly |
+| `0x7dfcb890` | 5 | `thunk_to_7dff1859_7dfcb890` | Plain thunk: `call 0x7dff1859; ret`. | disassembly |
+| `0x7dfcbb5d` | 21 | `nop_7dfcbb5d` | Empty function: `retf`. | disassembly |
+| `0x7dfcbb60` | 23 | `nop_7dfcbb60` | Empty function: `retf`. | disassembly |
+| `0x7dfcbec0` | 1 | `thunk_to_7dba44cc_7dfcbec0` | Plain thunk: `call 0x7dba44cc; ret`. | disassembly |
+| `0x7dfcbeca` | 54 | `nop_7dfcbeca` | Empty function: `retf`. | disassembly |
+| `0x7dfcbfbb` | 1 | `thunk_to_7dba12a7_7dfcbfbb` | Plain thunk: `call 0x7dba12a7; ret`. | disassembly |
+| `0x7dfcc7f0` | 1 | `thunk_to_7dba3a23_7dfcc7f0` | Plain thunk: `call 0x7dba3a23; ret`. | disassembly |
+| `0x7dfcd11c` | 2 | `ret_ptr_00000000_7dfcd11c` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7dfcd184` | 2 | `set_f44_7dfcd184` | `*(this+44) = a1`. | disassembly |
+| `0x7dfce9a2` | 7 | `set_f4_7dfce9a2` | `*(this+4) = a1`. | disassembly |
+| `0x7dfcea1d` | 8 | `set_f8_7dfcea1d` | `*(this+8) = a1`. | disassembly |
+| `0x7dfcf28b` | 1 | `set_f8_7dfcf28b` | `*(this+8) = a1`. | disassembly |
+| `0x7dfcf2e8` | 1 | `set_f4_7dfcf2e8` | `*(this+4) = a1`. | disassembly |
+| `0x7dfcf2fd` | 1 | `set_f8_7dfcf2fd` | `*(this+8) = a1`. | disassembly |
+| `0x7dfcf35d` | 1 | `set_f12_7dfcf35d` | `*(this+12) = a1`. | disassembly |
+| `0x7dfcf363` | 1 | `set_f16_7dfcf363` | `*(this+16) = a1`. | disassembly |
+| `0x7dfcf369` | 1 | `set_f20_7dfcf369` | `*(this+20) = a1`. | disassembly |
+| `0x7dfcf36f` | 1 | `set_f24_7dfcf36f` | `*(this+24) = a1`. | disassembly |
+| `0x7dfcf375` | 1 | `set_f28_7dfcf375` | `*(this+28) = a1`. | disassembly |
+| `0x7dfcf399` | 1 | `set_f32_7dfcf399` | `*(this+32) = a1`. | disassembly |
+| `0x7dfcf39f` | 1 | `set_f36_7dfcf39f` | `*(this+36) = a1`. | disassembly |
+| `0x7dfcf3a5` | 1 | `set_f40_7dfcf3a5` | `*(this+40) = a1`. | disassembly |
+| `0x7dfcf535` | 1 | `global_6044e5cc_set_7dfcf535` | `*0x6044e5cc = d0`. | disassembly |
+| `0x7dfcfb9b` | 1 | `ret_ptr_00000000_7dfcfb9b` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7dfcfba0` | 1 | `get_u16_f4_7dfcfba0` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7dfcfbd8` | 2 | `set_u16_f4_7dfcfbd8` | `*(u16*)(this+4) = d0`. | disassembly |
+| `0x7dfd09e8` | 1 | `set_f204_7dfd09e8` | `*(this+204) = a1`. | disassembly |
+| `0x7dfd0cfa` | 8 | `thunk_to_7dff1859_7dfd0cfa` | Plain thunk: `call 0x7dff1859; ret`. | disassembly |
+| `0x7dfd2f8e` | 1 | `set_f220_7dfd2f8e` | `*(this+220) = a1`. | disassembly |
+| `0x7dfd2f95` | 1 | `set_f228_7dfd2f95` | `*(this+228) = a1`. | disassembly |
+| `0x7dfd33b6` | 2 | `global_6044e628_get_7dfd33b6` | Leaf `return *0x6044e628`. | disassembly |
+| `0x7dfd4220` | 1 | `get_f32_7dfd4220` | Leaf `return *(this+32)`. | disassembly |
+| `0x7dfd45fb` | 1 | `set_f40_7dfd45fb` | `*(this+40) = a1`. | disassembly |
+| `0x7dfd514b` | 1 | `global_6044e634_set_7dfd514b` | `*0x6044e634 = a0`. | disassembly |
+| `0x7dfd5c37` | 5 | `nop_7dfd5c37` | Empty function: `retf`. | disassembly |
+| `0x7dfd6103` | 2 | `get_f4_7dfd6103` | Leaf `return *(this+4)`. | disassembly |
+| `0x7dfd616b` | 1 | `set_f180_7dfd616b` | `*(this+180) = a1`. | disassembly |
+| `0x7dfde31d` | 2 | `set_f24_7dfde31d` | `*(this+24) = d0`. | disassembly |
+| `0x7dfe07d1` | 1 | `set_f96_7dfe07d1` | `*(this+96) = a1`. | disassembly |
+| `0x7dfe07d7` | 1 | `get_f28_7dfe07d7` | Leaf `return *(this+28)`. | disassembly |
+| `0x7dfe07dd` | 4 | `set_f28_7dfe07dd` | `*(this+28) = d0`. | disassembly |
+| `0x7dfe3ac8` | 1 | `global_6044e65c_set_7dfe3ac8` | `*0x6044e65c = d0`. | disassembly |
+| `0x7dfe6772` | 1 | `set_f8_7dfe6772` | `*(this+8) = a1`. | disassembly |
+| `0x7dfe6778` | 1 | `set_f12_7dfe6778` | `*(this+12) = a1`. | disassembly |
+| `0x7dfe677e` | 1 | `set_f16_7dfe677e` | `*(this+16) = a1`. | disassembly |
+| `0x7dfe6857` | 11 | `set_u16_f52_7dfe6857` | `*(u16*)(this+52) = d0`. | disassembly |
+| `0x7dfe685d` | 5 | `get_u16_f52_7dfe685d` | Leaf `return (u16)*(this+52)`. | disassembly |
+| `0x7dfe69e8` | 12 | `get_u16_f48_7dfe69e8` | Leaf `return (u16)*(this+48)`. | disassembly |
+| `0x7dfe69ee` | 7 | `set_u16_f48_7dfe69ee` | `*(u16*)(this+48) = d0`. | disassembly |
+| `0x7dfe69f4` | 9 | `get_u16_f50_7dfe69f4` | Leaf `return (u16)*(this+50)`. | disassembly |
+| `0x7dfe69fa` | 6 | `set_u16_f50_7dfe69fa` | `*(u16*)(this+50) = d0`. | disassembly |
+| `0x7dfe74b3` | 4 | `set_f220_7dfe74b3` | `*(this+220) = d0`. | disassembly |
+| `0x7dfe768e` | 6 | `set_f224_7dfe768e` | `*(this+224) = a1`. | disassembly |
+| `0x7dfe7dbd` | 2 | `set_f220_7dfe7dbd` | `*(this+220) = d0`. | disassembly |
+| `0x7dfe7e20` | 2 | `set_f224_7dfe7e20` | `*(this+224) = a1`. | disassembly |
+| `0x7dfe8ba0` | 1 | `nop_7dfe8ba0` | Empty function: `retf`. | disassembly |
+| `0x7dfe8bcb` | 10 | `get_f36_7dfe8bcb` | Leaf `return *(this+36)`. | disassembly |
+| `0x7dfe8bd1` | 10 | `get_f40_7dfe8bd1` | Leaf `return *(this+40)`. | disassembly |
+| `0x7dfe8bdc` | 3 | `get_f4_7dfe8bdc` | Leaf `return *(this+4)`. | disassembly |
+| `0x7dfe8be2` | 3 | `get_f8_7dfe8be2` | Leaf `return *(this+8)`. | disassembly |
+| `0x7dfe8be8` | 1 | `get_u16_f12_7dfe8be8` | Leaf `return (u16)*(this+12)`. | disassembly |
+| `0x7dfe8c18` | 1 | `get_u16_f14_7dfe8c18` | Leaf `return (u16)*(this+14)`. | disassembly |
+| `0x7dfe8c1e` | 1 | `get_u16_f16_7dfe8c1e` | Leaf `return (u16)*(this+16)`. | disassembly |
+| `0x7dfe8c24` | 1 | `get_u16_f18_7dfe8c24` | Leaf `return (u16)*(this+18)`. | disassembly |
+| `0x7dfe8c2a` | 1 | `get_u16_f20_7dfe8c2a` | Leaf `return (u16)*(this+20)`. | disassembly |
+| `0x7dfe8c30` | 10 | `get_f44_7dfe8c30` | Leaf `return *(this+44)`. | disassembly |
+| `0x7dfe8d1f` | 2 | `set_f4_7dfe8d1f` | `*(this+4) = d0`. | disassembly |
+| `0x7dfe8d25` | 2 | `set_f8_7dfe8d25` | `*(this+8) = d0`. | disassembly |
+| `0x7dfe8d2b` | 1 | `set_u16_f12_7dfe8d2b` | `*(u16*)(this+12) = d0`. | disassembly |
+| `0x7dfe8d3d` | 1 | `set_u16_f14_7dfe8d3d` | `*(u16*)(this+14) = d0`. | disassembly |
+| `0x7dfe8d43` | 1 | `set_u16_f16_7dfe8d43` | `*(u16*)(this+16) = d0`. | disassembly |
+| `0x7dfe8d49` | 1 | `set_u16_f18_7dfe8d49` | `*(u16*)(this+18) = d0`. | disassembly |
+| `0x7dfe8d4f` | 1 | `set_u16_f20_7dfe8d4f` | `*(u16*)(this+20) = d0`. | disassembly |
+| `0x7dfe90ba` | 1 | `set_f184_7dfe90ba` | `*(this+184) = a1`. | disassembly |
+| `0x7dfe90c4` | 2 | `thunk_to_7dfd0cfa_7dfe90c4` | Plain thunk: `call 0x7dfd0cfa; ret`. | disassembly |
+| `0x7dfea3d6` | 1 | `set_f8_7dfea3d6` | `*(this+8) = a1`. | disassembly |
+| `0x7dfea3dc` | 1 | `set_f12_7dfea3dc` | `*(this+12) = a1`. | disassembly |
+| `0x7dfea3e2` | 1 | `set_f16_7dfea3e2` | `*(this+16) = a1`. | disassembly |
+| `0x7dfea43c` | 2 | `set_f220_7dfea43c` | `*(this+220) = d0`. | disassembly |
+| `0x7dfeabea` | 1 | `nop_7dfeabea` | Empty function: `retf`. | disassembly |
+| `0x7dfeabed` | 7 | `get_f176_7dfeabed` | Leaf `return *(this+176)`. | disassembly |
+| `0x7dfeabf4` | 7 | `get_f180_7dfeabf4` | Leaf `return *(this+180)`. | disassembly |
+| `0x7dfeabfb` | 2 | `get_f168_7dfeabfb` | Leaf `return *(this+168)`. | disassembly |
+| `0x7dfeac02` | 2 | `get_f172_7dfeac02` | Leaf `return *(this+172)`. | disassembly |
+| `0x7dfeac17` | 1 | `get_u16_f164_7dfeac17` | Leaf `return (u16)*(this+164)`. | disassembly |
+| `0x7dfeac29` | 1 | `set_f168_7dfeac29` | `*(this+168) = d0`. | disassembly |
+| `0x7dfeac30` | 1 | `set_f172_7dfeac30` | `*(this+172) = d0`. | disassembly |
+| `0x7dfeac43` | 1 | `set_u16_f164_7dfeac43` | `*(u16*)(this+164) = d0`. | disassembly |
+| `0x7dfeace9` | 1 | `set_f180_7dfeace9` | `*(this+180) = a1`. | disassembly |
+| `0x7dfeacf3` | 2 | `thunk_to_7dfd0cfa_7dfeacf3` | Plain thunk: `call 0x7dfd0cfa; ret`. | disassembly |
+| `0x7dfeb3b7` | 2 | `global_6044e670_get_7dfeb3b7` | Leaf `return *0x6044e670`. | disassembly |
+| `0x7dfeb3c0` | 1 | `global_6044e670_set_7dfeb3c0` | `*0x6044e670 = d0`. | disassembly |
+| `0x7dfed0be` | 3 | `set_f4_7dfed0be` | `*(this+4) = a1`. | disassembly |
+| `0x7dfed17b` | 3 | `get_f204_7dfed17b` | Leaf `return *(this+204)`. | disassembly |
+| `0x7dfed182` | 5 | `get_f208_7dfed182` | Leaf `return *(this+208)`. | disassembly |
+| `0x7dfed189` | 1 | `get_u16_f220_7dfed189` | Leaf `return (u16)*(this+220)`. | disassembly |
+| `0x7dfed19b` | 2 | `set_u16_f220_7dfed19b` | `*(u16*)(this+220) = d0`. | disassembly |
+| `0x7dfed1a2` | 1 | `set_f568_7dfed1a2` | `*(this+568) = a1`. | disassembly |
+| `0x7dfed1a9` | 1 | `set_f572_7dfed1a9` | `*(this+572) = a1`. | disassembly |
+| `0x7dfed1b0` | 1 | `set_f576_7dfed1b0` | `*(this+576) = a1`. | disassembly |
+| `0x7dfed3d6` | 1 | `set_f184_7dfed3d6` | `*(this+184) = a1`. | disassembly |
+| `0x7dfed3dd` | 1 | `set_f188_7dfed3dd` | `*(this+188) = a1`. | disassembly |
+| `0x7dfed3e7` | 1 | `thunk_to_7dfd0cfa_7dfed3e7` | Plain thunk: `call 0x7dfd0cfa; ret`. | disassembly |
+| `0x7dfeee33` | 1 | `nop_7dfeee33` | Empty function: `retf`. | disassembly |
+| `0x7dfef504` | 2 | `nop_7dfef504` | Empty function: `retf`. | disassembly |
+| `0x7dfef53e` | 1 | `nop_7dfef53e` | Empty function: `retf`. | disassembly |
+| `0x7dfef541` | 1 | `nop_7dfef541` | Empty function: `retf`. | disassembly |
+| `0x7dfef615` | 1 | `nop_7dfef615` | Empty function: `retf`. | disassembly |
+| `0x7dfef62b` | 1 | `nop_7dfef62b` | Empty function: `retf`. | disassembly |
+| `0x7dfef62e` | 1 | `nop_7dfef62e` | Empty function: `retf`. | disassembly |
+| `0x7dfef631` | 1 | `nop_7dfef631` | Empty function: `retf`. | disassembly |
+| `0x7dfef634` | 1 | `nop_7dfef634` | Empty function: `retf`. | disassembly |
+| `0x7dfefb0e` | 1 | `global_6044e698_set_7dfefb0e` | `*0x6044e698 = d0`. | disassembly |
+| `0x7dff0f25` | 4 | `set_f4_7dff0f25` | `*(this+4) = d0`. | disassembly |
+| `0x7dff0f2b` | 14 | `get_f24_7dff0f2b` | Leaf `return *(this+24)`. | disassembly |
+| `0x7dff0f67` | 11 | `get_u16_f28_7dff0f67` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7dff1660` | 26 | `set_f132_7dff1660` | `*(this+132) = d0`. | disassembly |
+| `0x7dff1859` | 3 | `thunk_to_7e206f38_7dff1859` | Plain thunk: `call 0x7e206f38; ret`. | disassembly |
+| `0x7dff193d` | 1 | `nop_7dff193d` | Empty function: `retf`. | disassembly |
+| `0x7dff22b9` | 1 | `set_f4_7dff22b9` | `*(this+4) = d0`. | disassembly |
+| `0x7dff71a6` | 1 | `set_f4_7dff71a6` | `*(this+4) = a1`. | disassembly |
+| `0x7dff72ac` | 1 | `global_6044e950_set_7dff72ac` | `*0x6044e950 = d0`. | disassembly |
+| `0x7dff7a86` | 4 | `thunk_to_7dfccdd4_7dff7a86` | Plain thunk: `call 0x7dfccdd4; ret`. | disassembly |
+| `0x7dff83e1` | 21 | `thunk_to_7dfce306_7dff83e1` | Plain thunk: `call 0x7dfce306; ret`. | disassembly |
+| `0x7dff90c6` | 1 | `global_6044e960_set_7dff90c6` | `*0x6044e960 = d0`. | disassembly |
+| `0x7dff9627` | 1 | `global_6044e968_set_7dff9627` | `*0x6044e968 = d0`. | disassembly |
+| `0x7dff9a15` | 1 | `nop_7dff9a15` | Empty function: `retf`. | disassembly |
+| `0x7e02211e` | 8 | `thunk_to_7dfe3eda_7e02211e` | Plain thunk: `call 0x7dfe3eda; ret`. | disassembly |
+| `0x7e0246bd` | 4 | `thunk_to_7dfd4095_7e0246bd` | Plain thunk: `call 0x7dfd4095; ret`. | disassembly |
+| `0x7e024935` | 10 | `thunk_to_7dfea9e5_7e024935` | Plain thunk: `call 0x7dfea9e5; ret`. | disassembly |
+| `0x7e024e86` | 7 | `thunk_to_7e0380ad_7e024e86` | Plain thunk: `call 0x7e0380ad; ret`. | disassembly |
+| `0x7e024fcc` | 6 | `thunk_to_7e038591_7e024fcc` | Plain thunk: `call 0x7e038591; ret`. | disassembly |
+| `0x7e025401` | 5 | `thunk_to_7e038d46_7e025401` | Plain thunk: `call 0x7e038d46; ret`. | disassembly |
+| `0x7e025a4b` | 14 | `thunk_to_7e03987e_7e025a4b` | Plain thunk: `call 0x7e03987e; ret`. | disassembly |
+| `0x7e026023` | 13 | `thunk_to_7e03a34a_7e026023` | Plain thunk: `call 0x7e03a34a; ret`. | disassembly |
+| `0x7e02627e` | 5 | `thunk_to_7e03a842_7e02627e` | Plain thunk: `call 0x7e03a842; ret`. | disassembly |
+| `0x7e0264d5` | 5 | `thunk_to_7e03acb8_7e0264d5` | Plain thunk: `call 0x7e03acb8; ret`. | disassembly |
+| `0x7e026730` | 5 | `thunk_to_7e03b21c_7e026730` | Plain thunk: `call 0x7e03b21c; ret`. | disassembly |
+| `0x7e026b31` | 9 | `thunk_to_7e03bcc0_7e026b31` | Plain thunk: `call 0x7e03bcc0; ret`. | disassembly |
+| `0x7e026d6c` | 3 | `thunk_to_7e03c155_7e026d6c` | Plain thunk: `call 0x7e03c155; ret`. | disassembly |
+| `0x7e027227` | 12 | `thunk_to_7e03c9c4_7e027227` | Plain thunk: `call 0x7e03c9c4; ret`. | disassembly |
+| `0x7e027f83` | 11 | `thunk_to_7e03cecf_7e027f83` | Plain thunk: `call 0x7e03cecf; ret`. | disassembly |
+| `0x7e028779` | 7 | `thunk_to_7e03ec2a_7e028779` | Plain thunk: `call 0x7e03ec2a; ret`. | disassembly |
+| `0x7e0289e9` | 5 | `thunk_to_7e03eff5_7e0289e9` | Plain thunk: `call 0x7e03eff5; ret`. | disassembly |
+| `0x7e028b87` | 4 | `thunk_to_7e04468b_7e028b87` | Plain thunk: `call 0x7e04468b; ret`. | disassembly |
+| `0x7e028cda` | 3 | `thunk_to_7e0442ad_7e028cda` | Plain thunk: `call 0x7e0442ad; ret`. | disassembly |
+| `0x7e028e16` | 2 | `thunk_to_7e04b4b3_7e028e16` | Plain thunk: `call 0x7e04b4b3; ret`. | disassembly |
+| `0x7e02927b` | 9 | `thunk_to_7e045445_7e02927b` | Plain thunk: `call 0x7e045445; ret`. | disassembly |
+| `0x7e029bce` | 22 | `thunk_to_7dfd5dc9_7e029bce` | Plain thunk: `call 0x7dfd5dc9; ret`. | disassembly |
+| `0x7e029da8` | 6 | `thunk_to_7e045a9b_7e029da8` | Plain thunk: `call 0x7e045a9b; ret`. | disassembly |
+| `0x7e02a7ba` | 20 | `thunk_to_7e0469ae_7e02a7ba` | Plain thunk: `call 0x7e0469ae; ret`. | disassembly |
+| `0x7e02aeb8` | 16 | `thunk_to_7e0475e0_7e02aeb8` | Plain thunk: `call 0x7e0475e0; ret`. | disassembly |
+| `0x7e02b365` | 13 | `thunk_to_7dfd76a3_7e02b365` | Plain thunk: `call 0x7dfd76a3; ret`. | disassembly |
+| `0x7e02b67f` | 9 | `thunk_to_7e047cfd_7e02b67f` | Plain thunk: `call 0x7e047cfd; ret`. | disassembly |
+| `0x7e02b8de` | 5 | `thunk_to_7e048089_7e02b8de` | Plain thunk: `call 0x7e048089; ret`. | disassembly |
+| `0x7e02beda` | 13 | `thunk_to_7e048caa_7e02beda` | Plain thunk: `call 0x7e048caa; ret`. | disassembly |
+| `0x7e02cf89` | 9 | `thunk_to_7e04b275_7e02cf89` | Plain thunk: `call 0x7e04b275; ret`. | disassembly |
+| `0x7e02d198` | 4 | `thunk_to_7e04ab37_7e02d198` | Plain thunk: `call 0x7e04ab37; ret`. | disassembly |
+| `0x7e02d2cb` | 2 | `thunk_to_7e04b58d_7e02d2cb` | Plain thunk: `call 0x7e04b58d; ret`. | disassembly |
+| `0x7e02d958` | 15 | `thunk_to_7e04c024_7e02d958` | Plain thunk: `call 0x7e04c024; ret`. | disassembly |
+| `0x7e02dd76` | 12 | `thunk_to_7e04c95e_7e02dd76` | Plain thunk: `call 0x7e04c95e; ret`. | disassembly |
+| `0x7e02dec9` | 3 | `thunk_to_7e04cbfd_7e02dec9` | Plain thunk: `call 0x7e04cbfd; ret`. | disassembly |
+| `0x7e02e298` | 8 | `thunk_to_7e04d258_7e02e298` | Plain thunk: `call 0x7e04d258; ret`. | disassembly |
+| `0x7e02ec50` | 23 | `thunk_to_7e04e54f_7e02ec50` | Plain thunk: `call 0x7e04e54f; ret`. | disassembly |
+| `0x7e02f032` | 2 | `thunk_to_7dfeb3c9_7e02f032` | Plain thunk: `call 0x7dfeb3c9; ret`. | disassembly |
+| `0x7e02fd97` | 1 | `set_f4_7e02fd97` | `*(this+4) = a1`. | disassembly |
+| `0x7e034444` | 15 | `thunk_to_7e04f712_7e034444` | Plain thunk: `call 0x7e04f712; ret`. | disassembly |
+| `0x7e03458b` | 1 | `ret_ptr_00000000_7e03458b` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e034926` | 7 | `thunk_to_7e0500f5_7e034926` | Plain thunk: `call 0x7e0500f5; ret`. | disassembly |
+| `0x7e036715` | 1 | `set_f8_7e036715` | `*(this+8) = a1`. | disassembly |
+| `0x7e0368c9` | 1 | `nop_7e0368c9` | Empty function: `retf`. | disassembly |
+| `0x7e0372a2` | 1 | `set_f180_7e0372a2` | `*(this+180) = a1`. | disassembly |
+| `0x7e0372ac` | 2 | `thunk_to_7dfd0cfa_7e0372ac` | Plain thunk: `call 0x7dfd0cfa; ret`. | disassembly |
+| `0x7e03b694` | 3 | `nop_7e03b694` | Empty function: `retf`. | disassembly |
+| `0x7e03c143` | 1 | `set_f32_7e03c143` | `*(this+32) = a1`. | disassembly |
+| `0x7e03c376` | 3 | `nop_7e03c376` | Empty function: `retf`. | disassembly |
+| `0x7e03c37d` | 1 | `get_f12_7e03c37d` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e03c383` | 1 | `get_f4_7e03c383` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e03c389` | 2 | `get_f8_7e03c389` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e03c393` | 3 | `set_f12_7e03c393` | `*(this+12) = d0`. | disassembly |
+| `0x7e03ca1d` | 1 | `nop_7e03ca1d` | Empty function: `retf`. | disassembly |
+| `0x7e03f0e8` | 1 | `set_f12_7e03f0e8` | `*(this+12) = a1`. | disassembly |
+| `0x7e03f1c7` | 1 | `get_f156_7e03f1c7` | Leaf `return *(this+156)`. | disassembly |
+| `0x7e03f1ce` | 1 | `get_f172_7e03f1ce` | Leaf `return *(this+172)`. | disassembly |
+| `0x7e03f1d5` | 1 | `get_f176_7e03f1d5` | Leaf `return *(this+176)`. | disassembly |
+| `0x7e03f279` | 8 | `nop_7e03f279` | Empty function: `retf`. | disassembly |
+| `0x7e03f9e3` | 1 | `nop_7e03f9e3` | Empty function: `retf`. | disassembly |
+| `0x7e03fd31` | 1 | `thunk_to_7e206f38_7e03fd31` | Plain thunk: `call 0x7e206f38; ret`. | disassembly |
+| `0x7e0447de` | 1 | `set_f192_7e0447de` | `*(this+192) = a1`. | disassembly |
+| `0x7e0447e8` | 1 | `thunk_to_7dfd0cfa_7e0447e8` | Plain thunk: `call 0x7dfd0cfa; ret`. | disassembly |
+| `0x7e04d578` | 1 | `thunk_to_7db893e3_7e04d578` | Plain thunk: `call 0x7db893e3; ret`. | disassembly |
+| `0x7e04e650` | 1 | `get_f8_7e04e650` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e04e656` | 1 | `get_f12_7e04e656` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e04e67a` | 2 | `set_f8_7e04e67a` | `*(this+8) = d0`. | disassembly |
+| `0x7e04e680` | 2 | `set_f12_7e04e680` | `*(this+12) = d0`. | disassembly |
+| `0x7e04e746` | 3 | `ret_ptr_00000000_7e04e746` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e04e76e` | 12 | `get_f4_7e04e76e` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e04e8cf` | 2 | `ret_ptr_00000000_7e04e8cf` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e04ea6c` | 2 | `get_f4_7e04ea6c` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e04ea72` | 2 | `get_f8_7e04ea72` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e04ea78` | 2 | `get_f12_7e04ea78` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e04ea7e` | 2 | `get_f20_7e04ea7e` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e04eacc` | 2 | `get_f16_7e04eacc` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e04f7c5` | 1 | `get_f12_7e04f7c5` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e04f7cb` | 3 | `get_f16_7e04f7cb` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e05073e` | 7 | `global_u16_6044eebc_get_7e05073e` | Leaf `return (u16)*0x6044eebc`. | disassembly |
+| `0x7e050846` | 2 | `set_f12_7e050846` | `*(this+12) = d0`. | disassembly |
+| `0x7e050926` | 1 | `get_f20_7e050926` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e05092c` | 1 | `get_f28_7e05092c` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e05097e` | 5 | `get_f16_7e05097e` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e050da5` | 1 | `set_u8_f36_7e050da5` | `*(u8*)(this+36) = d0`. | disassembly |
+| `0x7e051153` | 1 | `get_f16_7e051153` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e051159` | 1 | `get_f20_7e051159` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e051461` | 45 | `nop_7e051461` | Empty function: `retf`. | disassembly |
+| `0x7e052554` | 2 | `global_u8_6044eefd_get_7e052554` | Leaf `return (u8)*0x6044eefd`. | disassembly |
+| `0x7e052c61` | 1 | `global_6044eef0_set_7e052c61` | `*0x6044eef0 = d0`. | disassembly |
+| `0x7e052c6a` | 1 | `global_6044eef4_set_7e052c6a` | `*0x6044eef4 = d0`. | disassembly |
+| `0x7e052c9e` | 1 | `global_u8_6044eefd_set_7e052c9e` | `*(u8*)0x6044eefd = d0`. | disassembly |
+| `0x7e052d64` | 10 | `nop_7e052d64` | Empty function: `retf`. | disassembly |
+| `0x7e052d67` | 10 | `nop_7e052d67` | Empty function: `retf`. | disassembly |
+| `0x7e052d6a` | 1 | `thunk_to_7dba3e70_7e052d6a` | Plain thunk: `call 0x7dba3e70; ret`. | disassembly |
+| `0x7e052ddb` | 1 | `ret_ptr_00000000_7e052ddb` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e053c85` | 1 | `set_f16_7e053c85` | `*(this+16) = d0`. | disassembly |
+| `0x7e056667` | 1 | `nop_7e056667` | Empty function: `retf`. | disassembly |
+| `0x7e057067` | 3 | `thunk_to_7dff71b7_7e057067` | Plain thunk: `call 0x7dff71b7; ret`. | disassembly |
+| `0x7e057071` | 1 | `thunk_to_7dff8bfc_7e057071` | Plain thunk: `call 0x7dff8bfc; ret`. | disassembly |
+| `0x7e05707b` | 1 | `thunk_to_7dff897e_7e05707b` | Plain thunk: `call 0x7dff897e; ret`. | disassembly |
+| `0x7e057093` | 1 | `thunk_to_7dff84cb_7e057093` | Plain thunk: `call 0x7dff84cb; ret`. | disassembly |
+| `0x7e05709d` | 1 | `thunk_to_7dff89f9_7e05709d` | Plain thunk: `call 0x7dff89f9; ret`. | disassembly |
+| `0x7e0570a7` | 2 | `thunk_to_7dff8ee2_7e0570a7` | Plain thunk: `call 0x7dff8ee2; ret`. | disassembly |
+| `0x7e0570b1` | 1 | `thunk_to_7dff854a_7e0570b1` | Plain thunk: `call 0x7dff854a; ret`. | disassembly |
+| `0x7e0570bb` | 1 | `thunk_to_7dff8a72_7e0570bb` | Plain thunk: `call 0x7dff8a72; ret`. | disassembly |
+| `0x7e0570c5` | 2 | `thunk_to_7dff8fd4_7e0570c5` | Plain thunk: `call 0x7dff8fd4; ret`. | disassembly |
+| `0x7e0570cf` | 6 | `thunk_to_7dff888c_7e0570cf` | Plain thunk: `call 0x7dff888c; ret`. | disassembly |
+| `0x7e0570d9` | 1 | `thunk_to_7dff86b5_7e0570d9` | Plain thunk: `call 0x7dff86b5; ret`. | disassembly |
+| `0x7e0570f1` | 2 | `thunk_to_7dff8f5b_7e0570f1` | Plain thunk: `call 0x7dff8f5b; ret`. | disassembly |
+| `0x7e0570fb` | 1 | `thunk_to_7dff872e_7e0570fb` | Plain thunk: `call 0x7dff872e; ret`. | disassembly |
+| `0x7e057113` | 1 | `thunk_to_7dff94bd_7e057113` | Plain thunk: `call 0x7dff94bd; ret`. | disassembly |
+| `0x7e05711d` | 1 | `thunk_to_7dff9536_7e05711d` | Plain thunk: `call 0x7dff9536; ret`. | disassembly |
+| `0x7e057127` | 1 | `thunk_to_7dff95af_7e057127` | Plain thunk: `call 0x7dff95af; ret`. | disassembly |
+| `0x7e057197` | 1 | `set_f40_7e057197` | `*(this+40) = a1`. | disassembly |
+| `0x7e0575cd` | 2 | `nop_7e0575cd` | Empty function: `retf`. | disassembly |
+| `0x7e0580cd` | 1 | `nop_7e0580cd` | Empty function: `retf`. | disassembly |
+| `0x7e0580d0` | 2 | `nop_7e0580d0` | Empty function: `retf`. | disassembly |
+| `0x7e0580d3` | 1 | `nop_7e0580d3` | Empty function: `retf`. | disassembly |
+| `0x7e0580d6` | 2 | `nop_7e0580d6` | Empty function: `retf`. | disassembly |
+| `0x7e058fe2` | 2 | `get_f304_7e058fe2` | Leaf `return *(this+304)`. | disassembly |
+| `0x7e059318` | 2 | `get_f300_7e059318` | Leaf `return *(this+300)`. | disassembly |
+| `0x7e059517` | 2 | `set_f284_7e059517` | `*(this+284) = a1`. | disassembly |
+| `0x7e05951e` | 2 | `set_f288_7e05951e` | `*(this+288) = a1`. | disassembly |
+| `0x7e059525` | 2 | `set_f292_7e059525` | `*(this+292) = a1`. | disassembly |
+| `0x7e05952c` | 2 | `set_f296_7e05952c` | `*(this+296) = a1`. | disassembly |
+| `0x7e059533` | 2 | `set_f300_7e059533` | `*(this+300) = a1`. | disassembly |
+| `0x7e0597a2` | 1 | `get_f288_7e0597a2` | Leaf `return *(this+288)`. | disassembly |
+| `0x7e0597a9` | 3 | `get_f284_7e0597a9` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e0597b0` | 3 | `get_f292_7e0597b0` | Leaf `return *(this+292)`. | disassembly |
+| `0x7e0597b7` | 1 | `get_f296_7e0597b7` | Leaf `return *(this+296)`. | disassembly |
+| `0x7e0597be` | 5 | `get_f276_7e0597be` | Leaf `return *(this+276)`. | disassembly |
+| `0x7e059ced` | 2 | `get_u16_f400_7e059ced` | Leaf `return (u16)*(this+400)`. | disassembly |
+| `0x7e059dbe` | 1 | `set_f404_7e059dbe` | `*(this+404) = a1`. | disassembly |
+| `0x7e05b8ec` | 17 | `get_f48_7e05b8ec` | Leaf `return *(this+48)`. | disassembly |
+| `0x7e05b902` | 1 | `get_f52_7e05b902` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e05ba31` | 2 | `set_f52_7e05ba31` | `*(this+52) = d0`. | disassembly |
+| `0x7e05c269` | 1 | `nop_7e05c269` | Empty function: `retf`. | disassembly |
+| `0x7e05c3da` | 4 | `set_f56_7e05c3da` | `*(this+56) = d0`. | disassembly |
+| `0x7e05c3e0` | 1 | `get_f60_7e05c3e0` | Leaf `return *(this+60)`. | disassembly |
+| `0x7e05c3fd` | 1 | `set_f64_7e05c3fd` | `*(this+64) = a1`. | disassembly |
+| `0x7e05c427` | 2 | `set_f60_7e05c427` | `*(this+60) = a1`. | disassembly |
+| `0x7e05d255` | 2 | `nop_7e05d255` | Empty function: `retf`. | disassembly |
+| `0x7e05ea89` | 2 | `get_f2412_7e05ea89` | Leaf `return *(this+2412)`. | disassembly |
+| `0x7e06516f` | 2 | `set_u8_f2362_7e06516f` | `*(u8*)(this+2362) = d0`. | disassembly |
+| `0x7e065259` | 3 | `set_u8_f2342_7e065259` | `*(u8*)(this+2342) = d0`. | disassembly |
+| `0x7e0660ca` | 4 | `get_f3636_7e0660ca` | Leaf `return *(this+3636)`. | disassembly |
+| `0x7e0672b5` | 1 | `global_6044f73c_set_7e0672b5` | `*0x6044f73c = d0`. | disassembly |
+| `0x7e0672be` | 2 | `set_f3636_7e0672be` | `*(this+3636) = d0`. | disassembly |
+| `0x7e0672c5` | 2 | `set_u8_f2221_7e0672c5` | `*(u8*)(this+2221) = d0`. | disassembly |
+| `0x7e067302` | 1 | `set_u8_f2213_7e067302` | `*(u8*)(this+2213) = d0`. | disassembly |
+| `0x7e068346` | 3 | `set_f2272_7e068346` | `*(this+2272) = d0`. | disassembly |
+| `0x7e06834d` | 3 | `set_f2276_7e06834d` | `*(this+2276) = d0`. | disassembly |
+| `0x7e078060` | 2 | `get_f2216_7e078060` | Leaf `return *(this+2216)`. | disassembly |
+| `0x7e07b9fe` | 2 | `set_f2216_7e07b9fe` | `*(this+2216) = d0`. | disassembly |
+| `0x7e07ba92` | 1 | `set_f5252_7e07ba92` | `*(this+5252) = a1`. | disassembly |
+| `0x7e07c90e` | 2 | `global_u8_6075d619_get_7e07c90e` | Leaf `return (u8)*0x6075d619`. | disassembly |
+| `0x7e07cd9d` | 6 | `global_u16_6075d640_get_7e07cd9d` | Leaf `return (u16)*0x6075d640`. | disassembly |
+| `0x7e07cda6` | 9 | `global_u16_6075d640_set_7e07cda6` | `*(u16*)0x6075d640 = d0`. | disassembly |
+| `0x7e07d02e` | 1 | `global_6044fd24_get_7e07d02e` | Leaf `return *0x6044fd24`. | disassembly |
+| `0x7e07d037` | 1 | `get_f284_7e07d037` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e07d03e` | 2 | `get_f7924_7e07d03e` | Leaf `return *(this+7924)`. | disassembly |
+| `0x7e07dc6b` | 1 | `set_f8108_7e07dc6b` | `*(this+8108) = a1`. | disassembly |
+| `0x7e07e43f` | 1 | `set_f24_7e07e43f` | `*(this+24) = a1`. | disassembly |
+| `0x7e07e4f4` | 1 | `thunk_to_7e1e67f6_7e07e4f4` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e07e584` | 2 | `get_u8_f36_7e07e584` | Leaf `return (u8)*(this+36)`. | disassembly |
+| `0x7e07e5a4` | 2 | `get_u16_f28_7e07e5a4` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7e07e5aa` | 2 | `get_f32_7e07e5aa` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e07e5d1` | 1 | `set_u16_f28_7e07e5d1` | `*(u16*)(this+28) = d0`. | disassembly |
+| `0x7e07e5d7` | 1 | `set_f32_7e07e5d7` | `*(this+32) = d0`. | disassembly |
+| `0x7e07e661` | 1 | `set_f40_7e07e661` | `*(this+40) = a1`. | disassembly |
+| `0x7e07e6ac` | 1 | `get_u8_f36_7e07e6ac` | Leaf `return (u8)*(this+36)`. | disassembly |
+| `0x7e07e6b2` | 1 | `get_f24_7e07e6b2` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e07e6b8` | 1 | `get_u16_f28_7e07e6b8` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7e07e6be` | 1 | `get_f32_7e07e6be` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e07e6c4` | 1 | `set_f24_7e07e6c4` | `*(this+24) = d0`. | disassembly |
+| `0x7e07e6d1` | 1 | `set_u16_f28_7e07e6d1` | `*(u16*)(this+28) = d0`. | disassembly |
+| `0x7e07e6d7` | 1 | `set_f32_7e07e6d7` | `*(this+32) = d0`. | disassembly |
+| `0x7e07e769` | 1 | `set_f40_7e07e769` | `*(this+40) = a1`. | disassembly |
+| `0x7e07e85a` | 1 | `thunk_to_7e1e67f6_7e07e85a` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e07ed52` | 1 | `nop_7e07ed52` | Empty function: `retf`. | disassembly |
+| `0x7e07f4f5` | 1 | `set_f4_7e07f4f5` | `*(this+4) = a1`. | disassembly |
+| `0x7e07fb44` | 2 | `get_f312_7e07fb44` | Leaf `return *(this+312)`. | disassembly |
+| `0x7e08005a` | 1 | `set_f316_7e08005a` | `*(this+316) = a1`. | disassembly |
+| `0x7e08045d` | 1 | `get_f328_7e08045d` | Leaf `return *(this+328)`. | disassembly |
+| `0x7e080469` | 2 | `get_f344_7e080469` | Leaf `return *(this+344)`. | disassembly |
+| `0x7e081479` | 2 | `get_u16_f322_7e081479` | Leaf `return (u16)*(this+322)`. | disassembly |
+| `0x7e08148e` | 1 | `set_f416_7e08148e` | `*(this+416) = a1`. | disassembly |
+| `0x7e08150f` | 1 | `set_f452_7e08150f` | `*(this+452) = a1`. | disassembly |
+| `0x7e081516` | 1 | `set_f456_7e081516` | `*(this+456) = a1`. | disassembly |
+| `0x7e08151d` | 1 | `set_f460_7e08151d` | `*(this+460) = a1`. | disassembly |
+| `0x7e081524` | 1 | `set_f464_7e081524` | `*(this+464) = a1`. | disassembly |
+| `0x7e08152b` | 1 | `set_f468_7e08152b` | `*(this+468) = a1`. | disassembly |
+| `0x7e081532` | 1 | `set_f472_7e081532` | `*(this+472) = a1`. | disassembly |
+| `0x7e081539` | 1 | `set_f476_7e081539` | `*(this+476) = a1`. | disassembly |
+| `0x7e081540` | 1 | `set_f480_7e081540` | `*(this+480) = a1`. | disassembly |
+| `0x7e081547` | 1 | `set_f484_7e081547` | `*(this+484) = a1`. | disassembly |
+| `0x7e08154e` | 1 | `set_f488_7e08154e` | `*(this+488) = a1`. | disassembly |
+| `0x7e081555` | 1 | `set_f492_7e081555` | `*(this+492) = a1`. | disassembly |
+| `0x7e08155c` | 1 | `set_f496_7e08155c` | `*(this+496) = a1`. | disassembly |
+| `0x7e08240c` | 3 | `get_f4_7e08240c` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e082412` | 1 | `set_f4_7e082412` | `*(this+4) = a1`. | disassembly |
+| `0x7e082418` | 1 | `set_f8_7e082418` | `*(this+8) = a1`. | disassembly |
+| `0x7e08241e` | 1 | `set_f12_7e08241e` | `*(this+12) = a1`. | disassembly |
+| `0x7e082424` | 1 | `set_f16_7e082424` | `*(this+16) = a1`. | disassembly |
+| `0x7e08242a` | 1 | `set_f20_7e08242a` | `*(this+20) = a1`. | disassembly |
+| `0x7e082430` | 1 | `set_f24_7e082430` | `*(this+24) = a1`. | disassembly |
+| `0x7e082436` | 1 | `set_f28_7e082436` | `*(this+28) = a1`. | disassembly |
+| `0x7e08243c` | 1 | `set_f32_7e08243c` | `*(this+32) = a1`. | disassembly |
+| `0x7e082442` | 1 | `set_f36_7e082442` | `*(this+36) = a1`. | disassembly |
+| `0x7e082448` | 1 | `set_f40_7e082448` | `*(this+40) = a1`. | disassembly |
+| `0x7e08244e` | 1 | `set_f44_7e08244e` | `*(this+44) = a1`. | disassembly |
+| `0x7e082454` | 1 | `set_f48_7e082454` | `*(this+48) = a1`. | disassembly |
+| `0x7e0824e6` | 5 | `nop_7e0824e6` | Empty function: `retf`. | disassembly |
+| `0x7e08308a` | 2 | `get_f412_7e08308a` | Leaf `return *(this+412)`. | disassembly |
+| `0x7e0834ff` | 1 | `global_6044fd5c_set_7e0834ff` | `*0x6044fd5c = d0`. | disassembly |
+| `0x7e0836ac` | 1 | `nop_7e0836ac` | Empty function: `retf`. | disassembly |
+| `0x7e0840ed` | 7 | `thunk_to_7e1e67f6_7e0840ed` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0851d0` | 9 | `global_u16_6044fd64_get_7e0851d0` | Leaf `return (u16)*0x6044fd64`. | disassembly |
+| `0x7e0851d9` | 3 | `global_6044fd68_get_7e0851d9` | Leaf `return *0x6044fd68`. | disassembly |
+| `0x7e085240` | 5 | `global_u16_6044fd64_set_7e085240` | `*(u16*)0x6044fd64 = d0`. | disassembly |
+| `0x7e0854f2` | 3 | `global_u8_6076164c_get_7e0854f2` | Leaf `return (u8)*0x6076164c`. | disassembly |
+| `0x7e08550d` | 2 | `global_60761650_get_7e08550d` | Leaf `return *0x60761650`. | disassembly |
+| `0x7e08556a` | 1 | `global_u8_6076164c_set_7e08556a` | `*(u8*)0x6076164c = d0`. | disassembly |
+| `0x7e086404` | 2 | `global_u8_6075e6e2_get_7e086404` | Leaf `return (u8)*0x6075e6e2`. | disassembly |
+| `0x7e0865c4` | 4 | `global_u8_6075e79e_get_7e0865c4` | Leaf `return (u8)*0x6075e79e`. | disassembly |
+| `0x7e0865cd` | 6 | `get_u8_f284_7e0865cd` | Leaf `return (u8)*(this+284)`. | disassembly |
+| `0x7e086844` | 1 | `global_u8_6075e79f_get_7e086844` | Leaf `return (u8)*0x6075e79f`. | disassembly |
+| `0x7e08691e` | 1 | `global_u16_6075e734_get_7e08691e` | Leaf `return (u16)*0x6075e734`. | disassembly |
+| `0x7e086994` | 12 | `ret_ptr_6075e738_7e086994` | `return 0x6075e738` (a fixed address, in `a0`). | disassembly |
+| `0x7e08699d` | 1 | `global_u16_6076156c_get_7e08699d` | Leaf `return (u16)*0x6076156c`. | disassembly |
+| `0x7e0869a6` | 4 | `ret_ptr_6075e748_7e0869a6` | `return 0x6075e748` (a fixed address, in `a0`). | disassembly |
+| `0x7e086b72` | 4 | `global_u16_6076155e_get_7e086b72` | Leaf `return (u16)*0x6076155e`. | disassembly |
+| `0x7e086b7b` | 8 | `global_u8_60761560_get_7e086b7b` | Leaf `return (u8)*0x60761560`. | disassembly |
+| `0x7e086b84` | 1 | `global_u8_60761561_get_7e086b84` | Leaf `return (u8)*0x60761561`. | disassembly |
+| `0x7e086b97` | 14 | `global_u16_6044fd84_get_7e086b97` | Leaf `return (u16)*0x6044fd84`. | disassembly |
+| `0x7e086de1` | 5 | `global_u16_6075e79c_get_7e086de1` | Leaf `return (u16)*0x6075e79c`. | disassembly |
+| `0x7e086ea6` | 2 | `global_u16_60761574_get_7e086ea6` | Leaf `return (u16)*0x60761574`. | disassembly |
+| `0x7e086eaf` | 1 | `global_6044fd88_get_7e086eaf` | Leaf `return *0x6044fd88`. | disassembly |
+| `0x7e087442` | 5 | `global_u16_6076156e_set_7e087442` | `*(u16*)0x6076156e = d0`. | disassembly |
+| `0x7e087d59` | 7 | `set_u8_f284_7e087d59` | `*(u8*)(this+284) = d0`. | disassembly |
+| `0x7e087e8c` | 4 | `global_u16_6076156c_set_7e087e8c` | `*(u16*)0x6076156c = d0`. | disassembly |
+| `0x7e087ec5` | 4 | `global_u8_6076155c_set_7e087ec5` | `*(u8*)0x6076155c = d0`. | disassembly |
+| `0x7e087ece` | 3 | `global_u16_6076155e_set_7e087ece` | `*(u16*)0x6076155e = d0`. | disassembly |
+| `0x7e087fd3` | 6 | `global_u16_6075e79c_set_7e087fd3` | `*(u16*)0x6075e79c = d0`. | disassembly |
+| `0x7e088051` | 1 | `global_u16_6076157e_set_7e088051` | `*(u16*)0x6076157e = d0`. | disassembly |
+| `0x7e088b6e` | 11 | `global_u16_60761674_set_7e088b6e` | `*(u16*)0x60761674 = d0`. | disassembly |
+| `0x7e08931d` | 2 | `get_f292_7e08931d` | Leaf `return *(this+292)`. | disassembly |
+| `0x7e089324` | 19 | `global_u16_6044fd70_get_7e089324` | Leaf `return (u16)*0x6044fd70`. | disassembly |
+| `0x7e08932d` | 8 | `get_u16_f304_7e08932d` | Leaf `return (u16)*(this+304)`. | disassembly |
+| `0x7e0893b2` | 6 | `get_f308_7e0893b2` | Leaf `return *(this+308)`. | disassembly |
+| `0x7e0893b9` | 4 | `get_f312_7e0893b9` | Leaf `return *(this+312)`. | disassembly |
+| `0x7e0893fd` | 5 | `set_f292_7e0893fd` | `*(this+292) = d0`. | disassembly |
+| `0x7e089404` | 13 | `global_u16_6044fd70_set_7e089404` | `*(u16*)0x6044fd70 = d0`. | disassembly |
+| `0x7e08b1aa` | 1 | `global_u8_60761548_set_7e08b1aa` | `*(u8*)0x60761548 = d0`. | disassembly |
+| `0x7e08b2c6` | 1 | `thunk_to_7e07e938_7e08b2c6` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e08be8f` | 1 | `thunk_to_7db9e88f_7e08be8f` | Plain thunk: `call 0x7db9e88f; ret`. | disassembly |
+| `0x7e08c02c` | 2 | `get_f328_7e08c02c` | Leaf `return *(this+328)`. | disassembly |
+| `0x7e08c068` | 2 | `get_f340_7e08c068` | Leaf `return *(this+340)`. | disassembly |
+| `0x7e08c32c` | 3 | `get_f264_7e08c32c` | Leaf `return *(this+264)`. | disassembly |
+| `0x7e08c333` | 1 | `get_f280_7e08c333` | Leaf `return *(this+280)`. | disassembly |
+| `0x7e08c681` | 1 | `thunk_to_7db9f5f3_7e08c681` | Plain thunk: `call 0x7db9f5f3; ret`. | disassembly |
+| `0x7e08cb9f` | 12 | `set_f260_7e08cb9f` | `*(this+260) = d0`. | disassembly |
+| `0x7e08cbb8` | 12 | `set_f264_7e08cbb8` | `*(this+264) = d0`. | disassembly |
+| `0x7e08cbbf` | 2 | `set_f328_7e08cbbf` | `*(this+328) = d0`. | disassembly |
+| `0x7e08cc72` | 2 | `nop_7e08cc72` | Empty function: `retf`. | disassembly |
+| `0x7e08d072` | 1 | `thunk_to_7dba26c4_7e08d072` | Plain thunk: `call 0x7dba26c4; ret`. | disassembly |
+| `0x7e08d722` | 3 | `set_f272_7e08d722` | `*(this+272) = d0`. | disassembly |
+| `0x7e08e6ec` | 1 | `get_f272_7e08e6ec` | Leaf `return *(this+272)`. | disassembly |
+| `0x7e08e6f3` | 6 | `get_f276_7e08e6f3` | Leaf `return *(this+276)`. | disassembly |
+| `0x7e08e6fa` | 9 | `set_f276_7e08e6fa` | `*(this+276) = d0`. | disassembly |
+| `0x7e08e701` | 1 | `set_f2812_7e08e701` | `*(this+2812) = a1`. | disassembly |
+| `0x7e08ef6b` | 1 | `set_f24_7e08ef6b` | `*(this+24) = a1`. | disassembly |
+| `0x7e08effe` | 1 | `set_f24_7e08effe` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f091` | 1 | `set_f24_7e08f091` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f124` | 1 | `set_f24_7e08f124` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f143` | 1 | `thunk_to_7e1e67f6_7e08f143` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e08f1a9` | 1 | `thunk_to_7e1e67f6_7e08f1a9` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e08f283` | 1 | `set_f24_7e08f283` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f31b` | 1 | `set_f24_7e08f31b` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f3ae` | 1 | `set_f24_7e08f3ae` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f441` | 1 | `set_f24_7e08f441` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f4d4` | 1 | `set_f24_7e08f4d4` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f73b` | 1 | `set_f24_7e08f73b` | `*(this+24) = a1`. | disassembly |
+| `0x7e08f7ce` | 1 | `set_f24_7e08f7ce` | `*(this+24) = a1`. | disassembly |
+| `0x7e0906f0` | 1 | `global_6044fddc_get_7e0906f0` | Leaf `return *0x6044fddc`. | disassembly |
+| `0x7e09114d` | 8 | `get_f388_7e09114d` | Leaf `return *(this+388)`. | disassembly |
+| `0x7e09253f` | 2 | `global_6044fddc_set_7e09253f` | `*0x6044fddc = d0`. | disassembly |
+| `0x7e09256e` | 4 | `set_f308_7e09256e` | `*(this+308) = d0`. | disassembly |
+| `0x7e092575` | 2 | `set_f312_7e092575` | `*(this+312) = d0`. | disassembly |
+| `0x7e092c54` | 1 | `set_f316_7e092c54` | `*(this+316) = d0`. | disassembly |
+| `0x7e092c5b` | 5 | `set_f388_7e092c5b` | `*(this+388) = d0`. | disassembly |
+| `0x7e092f72` | 3 | `set_f320_7e092f72` | `*(this+320) = d0`. | disassembly |
+| `0x7e09437c` | 3 | `nop_7e09437c` | Empty function: `retf`. | disassembly |
+| `0x7e094391` | 4 | `nop_7e094391` | Empty function: `retf`. | disassembly |
+| `0x7e094397` | 1 | `nop_7e094397` | Empty function: `retf`. | disassembly |
+| `0x7e096c5e` | 5 | `global_6044fdd8_get_7e096c5e` | Leaf `return *0x6044fdd8`. | disassembly |
+| `0x7e09791d` | 1 | `set_f648_7e09791d` | `*(this+648) = a1`. | disassembly |
+| `0x7e097fb5` | 4 | `set_f36_7e097fb5` | `*(this+36) = d0`. | disassembly |
+| `0x7e097fbb` | 1 | `set_f44_7e097fbb` | `*(this+44) = a1`. | disassembly |
+| `0x7e097fc1` | 1 | `get_f36_7e097fc1` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e09802c` | 1 | `thunk_to_7dba0d3c_7e09802c` | Plain thunk: `call 0x7dba0d3c; ret`. | disassembly |
+| `0x7e098051` | 1 | `thunk_to_7db9f4f1_7e098051` | Plain thunk: `call 0x7db9f4f1; ret`. | disassembly |
+| `0x7e0980db` | 1 | `get_f304_7e0980db` | Leaf `return *(this+304)`. | disassembly |
+| `0x7e0980e2` | 1 | `thunk_to_7db9f493_7e0980e2` | Plain thunk: `call 0x7db9f493; ret`. | disassembly |
+| `0x7e0980ec` | 3 | `get_f312_7e0980ec` | Leaf `return *(this+312)`. | disassembly |
+| `0x7e098106` | 1 | `get_f300_7e098106` | Leaf `return *(this+300)`. | disassembly |
+| `0x7e09889c` | 1 | `global_u16_6044fee4_set_7e09889c` | `*(u16*)0x6044fee4 = d0`. | disassembly |
+| `0x7e098996` | 2 | `set_f300_7e098996` | `*(this+300) = d0`. | disassembly |
+| `0x7e098c7d` | 7 | `get_f284_7e098c7d` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e098c84` | 1 | `get_u16_f292_7e098c84` | Leaf `return (u16)*(this+292)`. | disassembly |
+| `0x7e098c8e` | 1 | `thunk_to_7e07e938_7e098c8e` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e099849` | 2 | `get_u16_f284_7e099849` | Leaf `return (u16)*(this+284)`. | disassembly |
+| `0x7e099850` | 1 | `get_u16_f6796_7e099850` | Leaf `return (u16)*(this+6796)`. | disassembly |
+| `0x7e099ad9` | 1 | `get_u16_f6794_7e099ad9` | Leaf `return (u16)*(this+6794)`. | disassembly |
+| `0x7e099c3f` | 2 | `set_u16_f284_7e099c3f` | `*(u16*)(this+284) = d0`. | disassembly |
+| `0x7e099c46` | 2 | `set_u16_f6796_7e099c46` | `*(u16*)(this+6796) = d0`. | disassembly |
+| `0x7e099cdf` | 2 | `set_u16_f6794_7e099cdf` | `*(u16*)(this+6794) = d0`. | disassembly |
+| `0x7e09ace1` | 1 | `set_f10024_7e09ace1` | `*(this+10024) = a1`. | disassembly |
+| `0x7e09ace8` | 1 | `set_f10028_7e09ace8` | `*(this+10028) = a1`. | disassembly |
+| `0x7e09acf2` | 1 | `thunk_to_7e07e938_7e09acf2` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e09b2fd` | 1 | `set_f4_7e09b2fd` | `*(this+4) = a1`. | disassembly |
+| `0x7e09bb67` | 2 | `get_f284_7e09bb67` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e09bb6e` | 2 | `get_u16_f288_7e09bb6e` | Leaf `return (u16)*(this+288)`. | disassembly |
+| `0x7e09bb91` | 2 | `set_f284_7e09bb91` | `*(this+284) = d0`. | disassembly |
+| `0x7e09bb98` | 2 | `set_u16_f288_7e09bb98` | `*(u16*)(this+288) = d0`. | disassembly |
+| `0x7e09bba4` | 1 | `set_f292_7e09bba4` | `*(this+292) = a1`. | disassembly |
+| `0x7e09bbab` | 1 | `set_f296_7e09bbab` | `*(this+296) = a1`. | disassembly |
+| `0x7e09bbb5` | 1 | `thunk_to_7e07e938_7e09bbb5` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e09c026` | 1 | `set_f4_7e09c026` | `*(this+4) = a1`. | disassembly |
+| `0x7e09c0e4` | 1 | `nop_7e09c0e4` | Empty function: `retf`. | disassembly |
+| `0x7e09f6ca` | 1 | `set_u16_f640_7e09f6ca` | `*(u16*)(this+640) = d0`. | disassembly |
+| `0x7e09f711` | 1 | `thunk_to_7e07e938_7e09f711` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e09fe9b` | 1 | `set_f4_7e09fe9b` | `*(this+4) = a1`. | disassembly |
+| `0x7e09ff57` | 1 | `nop_7e09ff57` | Empty function: `retf`. | disassembly |
+| `0x7e0a017b` | 1 | `nop_7e0a017b` | Empty function: `retf`. | disassembly |
+| `0x7e0a024d` | 1 | `thunk_to_7e07e938_7e0a024d` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a076c` | 1 | `set_f4_7e0a076c` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a1c60` | 4 | `set_f324_7e0a1c60` | `*(this+324) = d0`. | disassembly |
+| `0x7e0a1c67` | 2 | `get_f324_7e0a1c67` | Leaf `return *(this+324)`. | disassembly |
+| `0x7e0a2001` | 3 | `get_u16_f356_7e0a2001` | Leaf `return (u16)*(this+356)`. | disassembly |
+| `0x7e0a2744` | 1 | `set_f412_7e0a2744` | `*(this+412) = a1`. | disassembly |
+| `0x7e0a274b` | 1 | `set_f416_7e0a274b` | `*(this+416) = a1`. | disassembly |
+| `0x7e0a2755` | 1 | `thunk_to_7e07e938_7e0a2755` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a2d8d` | 1 | `set_f4_7e0a2d8d` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a3480` | 1 | `thunk_to_7e07e938_7e0a3480` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a3729` | 2 | `nop_7e0a3729` | Empty function: `retf`. | disassembly |
+| `0x7e0a3879` | 1 | `thunk_to_7e07e938_7e0a3879` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a449f` | 1 | `thunk_to_7e07e938_7e0a449f` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a490a` | 1 | `set_f364_7e0a490a` | `*(this+364) = a1`. | disassembly |
+| `0x7e0a5532` | 1 | `get_f940_7e0a5532` | Leaf `return *(this+940)`. | disassembly |
+| `0x7e0a578f` | 1 | `set_u16_f260_7e0a578f` | `*(u16*)(this+260) = d0`. | disassembly |
+| `0x7e0a593f` | 2 | `set_f660_7e0a593f` | `*(this+660) = d0`. | disassembly |
+| `0x7e0a6119` | 1 | `get_u16_f336_7e0a6119` | Leaf `return (u16)*(this+336)`. | disassembly |
+| `0x7e0a6120` | 1 | `set_f892_7e0a6120` | `*(this+892) = a1`. | disassembly |
+| `0x7e0a6127` | 2 | `get_f896_7e0a6127` | Leaf `return *(this+896)`. | disassembly |
+| `0x7e0a612e` | 1 | `set_f896_7e0a612e` | `*(this+896) = a1`. | disassembly |
+| `0x7e0a6135` | 2 | `get_f900_7e0a6135` | Leaf `return *(this+900)`. | disassembly |
+| `0x7e0a613c` | 1 | `set_f900_7e0a613c` | `*(this+900) = a1`. | disassembly |
+| `0x7e0a6143` | 1 | `set_f904_7e0a6143` | `*(this+904) = a1`. | disassembly |
+| `0x7e0a614a` | 1 | `set_f908_7e0a614a` | `*(this+908) = a1`. | disassembly |
+| `0x7e0a6151` | 1 | `set_f912_7e0a6151` | `*(this+912) = a1`. | disassembly |
+| `0x7e0a6158` | 2 | `get_f916_7e0a6158` | Leaf `return *(this+916)`. | disassembly |
+| `0x7e0a615f` | 1 | `set_f916_7e0a615f` | `*(this+916) = a1`. | disassembly |
+| `0x7e0a6166` | 2 | `get_f920_7e0a6166` | Leaf `return *(this+920)`. | disassembly |
+| `0x7e0a616d` | 1 | `set_f920_7e0a616d` | `*(this+920) = a1`. | disassembly |
+| `0x7e0a6174` | 1 | `get_f924_7e0a6174` | Leaf `return *(this+924)`. | disassembly |
+| `0x7e0a617b` | 1 | `set_f924_7e0a617b` | `*(this+924) = a1`. | disassembly |
+| `0x7e0a6182` | 2 | `get_f928_7e0a6182` | Leaf `return *(this+928)`. | disassembly |
+| `0x7e0a6189` | 1 | `set_f928_7e0a6189` | `*(this+928) = a1`. | disassembly |
+| `0x7e0a6190` | 1 | `set_f932_7e0a6190` | `*(this+932) = a1`. | disassembly |
+| `0x7e0a6197` | 1 | `get_f936_7e0a6197` | Leaf `return *(this+936)`. | disassembly |
+| `0x7e0a619e` | 1 | `set_f936_7e0a619e` | `*(this+936) = a1`. | disassembly |
+| `0x7e0a72ed` | 1 | `set_f4_7e0a72ed` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a7427` | 4 | `ret_ptr_00000000_7e0a7427` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e0a76c8` | 1 | `set_f260_7e0a76c8` | `*(this+260) = a1`. | disassembly |
+| `0x7e0a76cf` | 1 | `set_f264_7e0a76cf` | `*(this+264) = a1`. | disassembly |
+| `0x7e0a76d6` | 1 | `set_f268_7e0a76d6` | `*(this+268) = a1`. | disassembly |
+| `0x7e0a76dd` | 1 | `set_f272_7e0a76dd` | `*(this+272) = a1`. | disassembly |
+| `0x7e0a76e4` | 1 | `set_f276_7e0a76e4` | `*(this+276) = a1`. | disassembly |
+| `0x7e0a76ee` | 1 | `thunk_to_7e1e8e6d_7e0a76ee` | Plain thunk: `call 0x7e1e8e6d; ret`. | disassembly |
+| `0x7e0a7e03` | 1 | `set_f4_7e0a7e03` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a7e09` | 1 | `set_f8_7e0a7e09` | `*(this+8) = a1`. | disassembly |
+| `0x7e0a7e0f` | 1 | `set_f12_7e0a7e0f` | `*(this+12) = a1`. | disassembly |
+| `0x7e0a7fd0` | 1 | `set_f296_7e0a7fd0` | `*(this+296) = a1`. | disassembly |
+| `0x7e0a7fda` | 1 | `thunk_to_7e07e938_7e0a7fda` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a8364` | 1 | `set_f4_7e0a8364` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a86bd` | 1 | `set_f296_7e0a86bd` | `*(this+296) = a1`. | disassembly |
+| `0x7e0a86c4` | 1 | `set_f300_7e0a86c4` | `*(this+300) = a1`. | disassembly |
+| `0x7e0a86cb` | 1 | `set_f304_7e0a86cb` | `*(this+304) = a1`. | disassembly |
+| `0x7e0a86d2` | 1 | `set_f312_7e0a86d2` | `*(this+312) = a1`. | disassembly |
+| `0x7e0a86d9` | 3 | `set_f316_7e0a86d9` | `*(this+316) = a1`. | disassembly |
+| `0x7e0a86e0` | 1 | `set_f320_7e0a86e0` | `*(this+320) = a1`. | disassembly |
+| `0x7e0a86ea` | 1 | `thunk_to_7e07e938_7e0a86ea` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0a8e46` | 1 | `set_f4_7e0a8e46` | `*(this+4) = a1`. | disassembly |
+| `0x7e0a8e4c` | 1 | `set_f8_7e0a8e4c` | `*(this+8) = a1`. | disassembly |
+| `0x7e0a8e52` | 1 | `set_f12_7e0a8e52` | `*(this+12) = a1`. | disassembly |
+| `0x7e0a8e58` | 1 | `set_f16_7e0a8e58` | `*(this+16) = a1`. | disassembly |
+| `0x7e0a9387` | 1 | `get_f268_7e0a9387` | Leaf `return *(this+268)`. | disassembly |
+| `0x7e0a9cdf` | 1 | `set_f392_7e0a9cdf` | `*(this+392) = a1`. | disassembly |
+| `0x7e0a9ce6` | 1 | `set_f396_7e0a9ce6` | `*(this+396) = a1`. | disassembly |
+| `0x7e0a9ced` | 1 | `set_f400_7e0a9ced` | `*(this+400) = a1`. | disassembly |
+| `0x7e0a9cf4` | 1 | `set_f404_7e0a9cf4` | `*(this+404) = a1`. | disassembly |
+| `0x7e0a9cfb` | 1 | `set_f408_7e0a9cfb` | `*(this+408) = a1`. | disassembly |
+| `0x7e0a9d02` | 1 | `set_f412_7e0a9d02` | `*(this+412) = a1`. | disassembly |
+| `0x7e0a9d09` | 1 | `set_f416_7e0a9d09` | `*(this+416) = a1`. | disassembly |
+| `0x7e0a9d10` | 1 | `set_f420_7e0a9d10` | `*(this+420) = a1`. | disassembly |
+| `0x7e0a9d17` | 1 | `set_f424_7e0a9d17` | `*(this+424) = a1`. | disassembly |
+| `0x7e0a9d1e` | 1 | `set_f428_7e0a9d1e` | `*(this+428) = a1`. | disassembly |
+| `0x7e0a9d25` | 1 | `set_f432_7e0a9d25` | `*(this+432) = a1`. | disassembly |
+| `0x7e0a9d2c` | 1 | `set_f436_7e0a9d2c` | `*(this+436) = a1`. | disassembly |
+| `0x7e0a9d33` | 1 | `set_f440_7e0a9d33` | `*(this+440) = a1`. | disassembly |
+| `0x7e0a9d3a` | 1 | `set_f444_7e0a9d3a` | `*(this+444) = a1`. | disassembly |
+| `0x7e0a9d41` | 1 | `set_f448_7e0a9d41` | `*(this+448) = a1`. | disassembly |
+| `0x7e0aa513` | 1 | `set_f4_7e0aa513` | `*(this+4) = a1`. | disassembly |
+| `0x7e0aa519` | 1 | `set_f8_7e0aa519` | `*(this+8) = a1`. | disassembly |
+| `0x7e0aa51f` | 1 | `set_f12_7e0aa51f` | `*(this+12) = a1`. | disassembly |
+| `0x7e0aa525` | 1 | `set_f16_7e0aa525` | `*(this+16) = a1`. | disassembly |
+| `0x7e0aa52b` | 1 | `set_f20_7e0aa52b` | `*(this+20) = a1`. | disassembly |
+| `0x7e0aa531` | 1 | `set_f24_7e0aa531` | `*(this+24) = a1`. | disassembly |
+| `0x7e0aa537` | 1 | `set_f28_7e0aa537` | `*(this+28) = a1`. | disassembly |
+| `0x7e0aa53d` | 1 | `set_f32_7e0aa53d` | `*(this+32) = a1`. | disassembly |
+| `0x7e0aa543` | 1 | `set_f36_7e0aa543` | `*(this+36) = a1`. | disassembly |
+| `0x7e0aa549` | 1 | `set_f40_7e0aa549` | `*(this+40) = a1`. | disassembly |
+| `0x7e0aa54f` | 1 | `set_f44_7e0aa54f` | `*(this+44) = a1`. | disassembly |
+| `0x7e0ab437` | 1 | `nop_7e0ab437` | Empty function: `retf`. | disassembly |
+| `0x7e0ab43a` | 1 | `global_60763ecc_get_7e0ab43a` | Leaf `return *0x60763ecc`. | disassembly |
+| `0x7e0ab443` | 2 | `global_60763ecc_set_7e0ab443` | `*0x60763ecc = d0`. | disassembly |
+| `0x7e0ab44c` | 2 | `global_60763ed0_get_7e0ab44c` | Leaf `return *0x60763ed0`. | disassembly |
+| `0x7e0ab455` | 2 | `global_60763ed0_set_7e0ab455` | `*0x60763ed0 = d0`. | disassembly |
+| `0x7e0ab45e` | 2 | `global_60763ed4_get_7e0ab45e` | Leaf `return *0x60763ed4`. | disassembly |
+| `0x7e0ab467` | 2 | `global_60763ed4_set_7e0ab467` | `*0x60763ed4 = d0`. | disassembly |
+| `0x7e0ab470` | 2 | `global_60763ed8_get_7e0ab470` | Leaf `return *0x60763ed8`. | disassembly |
+| `0x7e0ab479` | 2 | `global_60763ed8_set_7e0ab479` | `*0x60763ed8 = d0`. | disassembly |
+| `0x7e0ab482` | 2 | `global_60763edc_get_7e0ab482` | Leaf `return *0x60763edc`. | disassembly |
+| `0x7e0ab48b` | 2 | `global_60763edc_set_7e0ab48b` | `*0x60763edc = d0`. | disassembly |
+| `0x7e0ab4d0` | 1 | `global_607652e0_get_7e0ab4d0` | Leaf `return *0x607652e0`. | disassembly |
+| `0x7e0ab4d9` | 2 | `global_607652e0_set_7e0ab4d9` | `*0x607652e0 = d0`. | disassembly |
+| `0x7e0ab4e2` | 1 | `get_u16_f260_7e0ab4e2` | Leaf `return (u16)*(this+260)`. | disassembly |
+| `0x7e0ab4e9` | 2 | `set_u16_f260_7e0ab4e9` | `*(u16*)(this+260) = d0`. | disassembly |
+| `0x7e0ab4f0` | 9 | `get_u16_f262_7e0ab4f0` | Leaf `return (u16)*(this+262)`. | disassembly |
+| `0x7e0ab4f7` | 2 | `set_u16_f262_7e0ab4f7` | `*(u16*)(this+262) = d0`. | disassembly |
+| `0x7e0ab512` | 1 | `global_6044ff54_get_7e0ab512` | Leaf `return *0x6044ff54`. | disassembly |
+| `0x7e0ab51b` | 1 | `set_f264_7e0ab51b` | `*(this+264) = a1`. | disassembly |
+| `0x7e0ab522` | 1 | `set_f268_7e0ab522` | `*(this+268) = a1`. | disassembly |
+| `0x7e0ab529` | 1 | `set_f272_7e0ab529` | `*(this+272) = a1`. | disassembly |
+| `0x7e0ab530` | 1 | `set_f276_7e0ab530` | `*(this+276) = a1`. | disassembly |
+| `0x7e0ab537` | 1 | `set_f280_7e0ab537` | `*(this+280) = a1`. | disassembly |
+| `0x7e0ab53e` | 1 | `set_f284_7e0ab53e` | `*(this+284) = a1`. | disassembly |
+| `0x7e0ab545` | 1 | `set_f288_7e0ab545` | `*(this+288) = a1`. | disassembly |
+| `0x7e0ab54f` | 1 | `thunk_to_7e1e8e6d_7e0ab54f` | Plain thunk: `call 0x7e1e8e6d; ret`. | disassembly |
+| `0x7e0abc2b` | 1 | `set_f4_7e0abc2b` | `*(this+4) = a1`. | disassembly |
+| `0x7e0abc31` | 1 | `set_f8_7e0abc31` | `*(this+8) = a1`. | disassembly |
+| `0x7e0abc37` | 1 | `set_f12_7e0abc37` | `*(this+12) = a1`. | disassembly |
+| `0x7e0abc3d` | 1 | `set_f16_7e0abc3d` | `*(this+16) = a1`. | disassembly |
+| `0x7e0abcb2` | 1 | `set_f24_7e0abcb2` | `*(this+24) = a1`. | disassembly |
+| `0x7e0ac7df` | 2 | `set_f308_7e0ac7df` | `*(this+308) = a1`. | disassembly |
+| `0x7e0ac7e6` | 2 | `set_f312_7e0ac7e6` | `*(this+312) = a1`. | disassembly |
+| `0x7e0ac7ed` | 1 | `set_f320_7e0ac7ed` | `*(this+320) = a1`. | disassembly |
+| `0x7e0ac7f4` | 1 | `set_f324_7e0ac7f4` | `*(this+324) = a1`. | disassembly |
+| `0x7e0ac7fb` | 1 | `set_f328_7e0ac7fb` | `*(this+328) = a1`. | disassembly |
+| `0x7e0ac802` | 1 | `set_f332_7e0ac802` | `*(this+332) = a1`. | disassembly |
+| `0x7e0acfea` | 1 | `set_f4_7e0acfea` | `*(this+4) = a1`. | disassembly |
+| `0x7e0acff0` | 2 | `set_f8_7e0acff0` | `*(this+8) = a1`. | disassembly |
+| `0x7e0acff6` | 2 | `set_f12_7e0acff6` | `*(this+12) = a1`. | disassembly |
+| `0x7e0ad327` | 1 | `thunk_to_7e07e938_7e0ad327` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0ad8d8` | 1 | `set_f4_7e0ad8d8` | `*(this+4) = a1`. | disassembly |
+| `0x7e0ae251` | 1 | `set_f516_7e0ae251` | `*(this+516) = a1`. | disassembly |
+| `0x7e0ae258` | 1 | `set_f520_7e0ae258` | `*(this+520) = a1`. | disassembly |
+| `0x7e0ae25f` | 2 | `get_f528_7e0ae25f` | Leaf `return *(this+528)`. | disassembly |
+| `0x7e0ae266` | 1 | `set_f528_7e0ae266` | `*(this+528) = a1`. | disassembly |
+| `0x7e0ae26d` | 2 | `get_f532_7e0ae26d` | Leaf `return *(this+532)`. | disassembly |
+| `0x7e0ae274` | 1 | `set_f532_7e0ae274` | `*(this+532) = a1`. | disassembly |
+| `0x7e0ae27b` | 2 | `get_f536_7e0ae27b` | Leaf `return *(this+536)`. | disassembly |
+| `0x7e0ae282` | 1 | `set_f536_7e0ae282` | `*(this+536) = a1`. | disassembly |
+| `0x7e0ae289` | 2 | `get_f540_7e0ae289` | Leaf `return *(this+540)`. | disassembly |
+| `0x7e0ae290` | 1 | `set_f540_7e0ae290` | `*(this+540) = a1`. | disassembly |
+| `0x7e0ae297` | 2 | `get_f544_7e0ae297` | Leaf `return *(this+544)`. | disassembly |
+| `0x7e0ae29e` | 1 | `set_f544_7e0ae29e` | `*(this+544) = a1`. | disassembly |
+| `0x7e0ae2a5` | 2 | `get_f548_7e0ae2a5` | Leaf `return *(this+548)`. | disassembly |
+| `0x7e0ae2ac` | 1 | `set_f548_7e0ae2ac` | `*(this+548) = a1`. | disassembly |
+| `0x7e0ae2b3` | 2 | `get_f552_7e0ae2b3` | Leaf `return *(this+552)`. | disassembly |
+| `0x7e0ae2ba` | 1 | `set_f552_7e0ae2ba` | `*(this+552) = a1`. | disassembly |
+| `0x7e0aeadc` | 1 | `thunk_to_7e0840ed_7e0aeadc` | Plain thunk: `call 0x7e0840ed; ret`. | disassembly |
+| `0x7e0aeb72` | 1 | `thunk_to_7e0840ed_7e0aeb72` | Plain thunk: `call 0x7e0840ed; ret`. | disassembly |
+| `0x7e0aec08` | 1 | `thunk_to_7e0840ed_7e0aec08` | Plain thunk: `call 0x7e0840ed; ret`. | disassembly |
+| `0x7e0aefca` | 1 | `set_f4_7e0aefca` | `*(this+4) = a1`. | disassembly |
+| `0x7e0afcc5` | 6 | `get_f408_7e0afcc5` | Leaf `return *(this+408)`. | disassembly |
+| `0x7e0afccc` | 2 | `get_f412_7e0afccc` | Leaf `return *(this+412)`. | disassembly |
+| `0x7e0afcd3` | 1 | `get_f284_7e0afcd3` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e0b0c34` | 1 | `global_u16_6044ff70_set_7e0b0c34` | `*(u16*)0x6044ff70 = d0`. | disassembly |
+| `0x7e0b0dde` | 2 | `nop_7e0b0dde` | Empty function: `retf`. | disassembly |
+| `0x7e0b1d5d` | 2 | `get_f320_7e0b1d5d` | Leaf `return *(this+320)`. | disassembly |
+| `0x7e0b1d64` | 2 | `get_f360_7e0b1d64` | Leaf `return *(this+360)`. | disassembly |
+| `0x7e0b1d6b` | 5 | `get_f420_7e0b1d6b` | Leaf `return *(this+420)`. | disassembly |
+| `0x7e0b1d72` | 3 | `set_f420_7e0b1d72` | `*(this+420) = d0`. | disassembly |
+| `0x7e0b205a` | 1 | `thunk_to_7dba3721_7e0b205a` | Plain thunk: `call 0x7dba3721; ret`. | disassembly |
+| `0x7e0b219b` | 1 | `thunk_to_7e07e938_7e0b219b` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0b249e` | 1 | `ret_ptr_00000000_7e0b249e` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e0b2a63` | 1 | `get_f260_7e0b2a63` | Leaf `return *(this+260)`. | disassembly |
+| `0x7e0b2a6a` | 1 | `global_u8_60765666_get_7e0b2a6a` | Leaf `return (u8)*0x60765666`. | disassembly |
+| `0x7e0b3c83` | 1 | `set_f368_7e0b3c83` | `*(this+368) = a1`. | disassembly |
+| `0x7e0b3c8a` | 1 | `set_f372_7e0b3c8a` | `*(this+372) = a1`. | disassembly |
+| `0x7e0b3c91` | 1 | `set_f376_7e0b3c91` | `*(this+376) = a1`. | disassembly |
+| `0x7e0b3c98` | 1 | `set_f380_7e0b3c98` | `*(this+380) = a1`. | disassembly |
+| `0x7e0b3c9f` | 1 | `set_f384_7e0b3c9f` | `*(this+384) = a1`. | disassembly |
+| `0x7e0b3ca6` | 1 | `set_f388_7e0b3ca6` | `*(this+388) = a1`. | disassembly |
+| `0x7e0b3cad` | 1 | `set_f396_7e0b3cad` | `*(this+396) = a1`. | disassembly |
+| `0x7e0b3cb4` | 1 | `set_f400_7e0b3cb4` | `*(this+400) = a1`. | disassembly |
+| `0x7e0b3cbb` | 1 | `set_f404_7e0b3cbb` | `*(this+404) = a1`. | disassembly |
+| `0x7e0b3cc2` | 1 | `set_f408_7e0b3cc2` | `*(this+408) = a1`. | disassembly |
+| `0x7e0b3cc9` | 1 | `set_f412_7e0b3cc9` | `*(this+412) = a1`. | disassembly |
+| `0x7e0b3cd0` | 1 | `set_f416_7e0b3cd0` | `*(this+416) = a1`. | disassembly |
+| `0x7e0b4e47` | 1 | `set_f24_7e0b4e47` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b4f0c` | 1 | `set_f24_7e0b4f0c` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b4fd1` | 1 | `set_f24_7e0b4fd1` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b52ba` | 1 | `set_f4_7e0b52ba` | `*(this+4) = a1`. | disassembly |
+| `0x7e0b52c0` | 1 | `set_f8_7e0b52c0` | `*(this+8) = a1`. | disassembly |
+| `0x7e0b52c6` | 1 | `set_f12_7e0b52c6` | `*(this+12) = a1`. | disassembly |
+| `0x7e0b52cc` | 1 | `set_f20_7e0b52cc` | `*(this+20) = a1`. | disassembly |
+| `0x7e0b52d2` | 1 | `set_f24_7e0b52d2` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b52d8` | 1 | `set_f28_7e0b52d8` | `*(this+28) = a1`. | disassembly |
+| `0x7e0b52de` | 1 | `set_f32_7e0b52de` | `*(this+32) = a1`. | disassembly |
+| `0x7e0b53ed` | 1 | `nop_7e0b53ed` | Empty function: `retf`. | disassembly |
+| `0x7e0b5b70` | 2 | `thunk_to_7dba3c56_7e0b5b70` | Plain thunk: `call 0x7dba3c56; ret`. | disassembly |
+| `0x7e0b5db4` | 1 | `thunk_to_7e07e938_7e0b5db4` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0b6218` | 1 | `set_f4_7e0b6218` | `*(this+4) = a1`. | disassembly |
+| `0x7e0b6492` | 1 | `set_f264_7e0b6492` | `*(this+264) = a1`. | disassembly |
+| `0x7e0b6499` | 1 | `set_f268_7e0b6499` | `*(this+268) = a1`. | disassembly |
+| `0x7e0b64a3` | 1 | `thunk_to_7e1e8e6d_7e0b64a3` | Plain thunk: `call 0x7e1e8e6d; ret`. | disassembly |
+| `0x7e0b69a4` | 1 | `set_f4_7e0b69a4` | `*(this+4) = a1`. | disassembly |
+| `0x7e0b69aa` | 1 | `set_f8_7e0b69aa` | `*(this+8) = a1`. | disassembly |
+| `0x7e0b6d0d` | 1 | `set_f20_7e0b6d0d` | `*(this+20) = a1`. | disassembly |
+| `0x7e0b6db3` | 1 | `set_f24_7e0b6db3` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b6e4e` | 1 | `set_f24_7e0b6e4e` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b6eaa` | 1 | `set_f24_7e0b6eaa` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b70e6` | 1 | `set_f300_7e0b70e6` | `*(this+300) = a1`. | disassembly |
+| `0x7e0b70ed` | 1 | `set_f304_7e0b70ed` | `*(this+304) = a1`. | disassembly |
+| `0x7e0b70f4` | 1 | `set_f308_7e0b70f4` | `*(this+308) = a1`. | disassembly |
+| `0x7e0b70fb` | 1 | `set_f312_7e0b70fb` | `*(this+312) = a1`. | disassembly |
+| `0x7e0b7102` | 1 | `set_f316_7e0b7102` | `*(this+316) = a1`. | disassembly |
+| `0x7e0b7109` | 1 | `set_f320_7e0b7109` | `*(this+320) = a1`. | disassembly |
+| `0x7e0b7110` | 1 | `set_f324_7e0b7110` | `*(this+324) = a1`. | disassembly |
+| `0x7e0b7117` | 1 | `set_f328_7e0b7117` | `*(this+328) = a1`. | disassembly |
+| `0x7e0b711e` | 1 | `set_f332_7e0b711e` | `*(this+332) = a1`. | disassembly |
+| `0x7e0b7128` | 1 | `thunk_to_7e1e8e6d_7e0b7128` | Plain thunk: `call 0x7e1e8e6d; ret`. | disassembly |
+| `0x7e0b77cb` | 1 | `set_f4_7e0b77cb` | `*(this+4) = a1`. | disassembly |
+| `0x7e0b77d1` | 1 | `set_f8_7e0b77d1` | `*(this+8) = a1`. | disassembly |
+| `0x7e0b77d7` | 1 | `set_f12_7e0b77d7` | `*(this+12) = a1`. | disassembly |
+| `0x7e0b77dd` | 1 | `set_f16_7e0b77dd` | `*(this+16) = a1`. | disassembly |
+| `0x7e0b77e3` | 1 | `set_f20_7e0b77e3` | `*(this+20) = a1`. | disassembly |
+| `0x7e0b84ad` | 1 | `get_u16_f298_7e0b84ad` | Leaf `return (u16)*(this+298)`. | disassembly |
+| `0x7e0b875b` | 1 | `set_f284_7e0b875b` | `*(this+284) = d0`. | disassembly |
+| `0x7e0b8ae0` | 1 | `set_f780_7e0b8ae0` | `*(this+780) = a1`. | disassembly |
+| `0x7e0b8ae7` | 1 | `set_f784_7e0b8ae7` | `*(this+784) = a1`. | disassembly |
+| `0x7e0b8aee` | 1 | `set_f788_7e0b8aee` | `*(this+788) = a1`. | disassembly |
+| `0x7e0b8af5` | 1 | `set_f792_7e0b8af5` | `*(this+792) = a1`. | disassembly |
+| `0x7e0b8afc` | 1 | `set_f796_7e0b8afc` | `*(this+796) = a1`. | disassembly |
+| `0x7e0b8b03` | 1 | `set_f800_7e0b8b03` | `*(this+800) = a1`. | disassembly |
+| `0x7e0b8b0a` | 1 | `set_f804_7e0b8b0a` | `*(this+804) = a1`. | disassembly |
+| `0x7e0b8b11` | 1 | `set_f808_7e0b8b11` | `*(this+808) = a1`. | disassembly |
+| `0x7e0b8b18` | 1 | `set_f812_7e0b8b18` | `*(this+812) = a1`. | disassembly |
+| `0x7e0b8b1f` | 1 | `set_f816_7e0b8b1f` | `*(this+816) = a1`. | disassembly |
+| `0x7e0b8b26` | 1 | `set_f820_7e0b8b26` | `*(this+820) = a1`. | disassembly |
+| `0x7e0b8b2d` | 1 | `set_f824_7e0b8b2d` | `*(this+824) = a1`. | disassembly |
+| `0x7e0b8b34` | 1 | `set_f828_7e0b8b34` | `*(this+828) = a1`. | disassembly |
+| `0x7e0b8b3b` | 1 | `set_f832_7e0b8b3b` | `*(this+832) = a1`. | disassembly |
+| `0x7e0b8b42` | 1 | `set_f836_7e0b8b42` | `*(this+836) = a1`. | disassembly |
+| `0x7e0b9f69` | 1 | `set_f24_7e0b9f69` | `*(this+24) = a1`. | disassembly |
+| `0x7e0b9fd2` | 1 | `set_f24_7e0b9fd2` | `*(this+24) = a1`. | disassembly |
+| `0x7e0ba03b` | 1 | `set_f24_7e0ba03b` | `*(this+24) = a1`. | disassembly |
+| `0x7e0ba4da` | 1 | `set_f4_7e0ba4da` | `*(this+4) = a1`. | disassembly |
+| `0x7e0ba4e0` | 1 | `set_f8_7e0ba4e0` | `*(this+8) = a1`. | disassembly |
+| `0x7e0ba4e6` | 1 | `set_f12_7e0ba4e6` | `*(this+12) = a1`. | disassembly |
+| `0x7e0ba4ec` | 1 | `set_f16_7e0ba4ec` | `*(this+16) = a1`. | disassembly |
+| `0x7e0ba4f2` | 1 | `set_f20_7e0ba4f2` | `*(this+20) = a1`. | disassembly |
+| `0x7e0ba4f8` | 1 | `set_f24_7e0ba4f8` | `*(this+24) = a1`. | disassembly |
+| `0x7e0ba4fe` | 1 | `set_f28_7e0ba4fe` | `*(this+28) = a1`. | disassembly |
+| `0x7e0ba504` | 1 | `set_f32_7e0ba504` | `*(this+32) = a1`. | disassembly |
+| `0x7e0ba50a` | 1 | `set_f36_7e0ba50a` | `*(this+36) = a1`. | disassembly |
+| `0x7e0ba5cd` | 1 | `set_f24_7e0ba5cd` | `*(this+24) = a1`. | disassembly |
+| `0x7e0ba636` | 1 | `set_f24_7e0ba636` | `*(this+24) = a1`. | disassembly |
+| `0x7e0baee1` | 1 | `set_f404_7e0baee1` | `*(this+404) = a1`. | disassembly |
+| `0x7e0baee8` | 1 | `set_f408_7e0baee8` | `*(this+408) = a1`. | disassembly |
+| `0x7e0baeef` | 1 | `set_f432_7e0baeef` | `*(this+432) = a1`. | disassembly |
+| `0x7e0baef6` | 1 | `set_f436_7e0baef6` | `*(this+436) = a1`. | disassembly |
+| `0x7e0baefd` | 1 | `set_f440_7e0baefd` | `*(this+440) = a1`. | disassembly |
+| `0x7e0baf04` | 1 | `set_f444_7e0baf04` | `*(this+444) = a1`. | disassembly |
+| `0x7e0baf0b` | 1 | `set_f448_7e0baf0b` | `*(this+448) = a1`. | disassembly |
+| `0x7e0baf12` | 1 | `set_f452_7e0baf12` | `*(this+452) = a1`. | disassembly |
+| `0x7e0baf19` | 1 | `set_f456_7e0baf19` | `*(this+456) = a1`. | disassembly |
+| `0x7e0baf20` | 1 | `set_f460_7e0baf20` | `*(this+460) = a1`. | disassembly |
+| `0x7e0baf27` | 1 | `set_f536_7e0baf27` | `*(this+536) = a1`. | disassembly |
+| `0x7e0baf2e` | 1 | `set_f592_7e0baf2e` | `*(this+592) = a1`. | disassembly |
+| `0x7e0baf35` | 1 | `set_f596_7e0baf35` | `*(this+596) = a1`. | disassembly |
+| `0x7e0bcbc7` | 1 | `set_f4_7e0bcbc7` | `*(this+4) = a1`. | disassembly |
+| `0x7e0bcbcd` | 1 | `set_f8_7e0bcbcd` | `*(this+8) = a1`. | disassembly |
+| `0x7e0bcbd3` | 1 | `set_f12_7e0bcbd3` | `*(this+12) = a1`. | disassembly |
+| `0x7e0bcbd9` | 1 | `set_f16_7e0bcbd9` | `*(this+16) = a1`. | disassembly |
+| `0x7e0bcbdf` | 1 | `set_f20_7e0bcbdf` | `*(this+20) = a1`. | disassembly |
+| `0x7e0bcbe5` | 1 | `set_f24_7e0bcbe5` | `*(this+24) = a1`. | disassembly |
+| `0x7e0bcbeb` | 1 | `set_f28_7e0bcbeb` | `*(this+28) = a1`. | disassembly |
+| `0x7e0bcbf1` | 1 | `set_f32_7e0bcbf1` | `*(this+32) = a1`. | disassembly |
+| `0x7e0bcbf7` | 1 | `set_f36_7e0bcbf7` | `*(this+36) = a1`. | disassembly |
+| `0x7e0bcbfd` | 1 | `set_f40_7e0bcbfd` | `*(this+40) = a1`. | disassembly |
+| `0x7e0bdf2c` | 2 | `set_f1276_7e0bdf2c` | `*(this+1276) = a1`. | disassembly |
+| `0x7e0bdf33` | 1 | `set_f1284_7e0bdf33` | `*(this+1284) = a1`. | disassembly |
+| `0x7e0bdf3a` | 1 | `set_f1288_7e0bdf3a` | `*(this+1288) = a1`. | disassembly |
+| `0x7e0bdf41` | 1 | `set_f1292_7e0bdf41` | `*(this+1292) = a1`. | disassembly |
+| `0x7e0bdf48` | 1 | `set_f1296_7e0bdf48` | `*(this+1296) = a1`. | disassembly |
+| `0x7e0bebd4` | 1 | `set_f4_7e0bebd4` | `*(this+4) = a1`. | disassembly |
+| `0x7e0bebda` | 1 | `set_f8_7e0bebda` | `*(this+8) = a1`. | disassembly |
+| `0x7e0bebe0` | 1 | `set_f12_7e0bebe0` | `*(this+12) = a1`. | disassembly |
+| `0x7e0bebe6` | 1 | `set_f16_7e0bebe6` | `*(this+16) = a1`. | disassembly |
+| `0x7e0bebec` | 1 | `set_f20_7e0bebec` | `*(this+20) = a1`. | disassembly |
+| `0x7e0bf03f` | 3 | `get_f292_7e0bf03f` | Leaf `return *(this+292)`. | disassembly |
+| `0x7e0bf0e4` | 1 | `set_f300_7e0bf0e4` | `*(this+300) = a1`. | disassembly |
+| `0x7e0bf0eb` | 1 | `set_f304_7e0bf0eb` | `*(this+304) = a1`. | disassembly |
+| `0x7e0bf0f2` | 1 | `set_f308_7e0bf0f2` | `*(this+308) = a1`. | disassembly |
+| `0x7e0bf0f9` | 1 | `set_f312_7e0bf0f9` | `*(this+312) = a1`. | disassembly |
+| `0x7e0bf100` | 1 | `set_f316_7e0bf100` | `*(this+316) = a1`. | disassembly |
+| `0x7e0bf10a` | 1 | `thunk_to_7e07e938_7e0bf10a` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0bfb6f` | 1 | `set_f4_7e0bfb6f` | `*(this+4) = a1`. | disassembly |
+| `0x7e0bfb75` | 1 | `set_f8_7e0bfb75` | `*(this+8) = a1`. | disassembly |
+| `0x7e0bfb7b` | 1 | `set_f12_7e0bfb7b` | `*(this+12) = a1`. | disassembly |
+| `0x7e0bfb81` | 1 | `set_f16_7e0bfb81` | `*(this+16) = a1`. | disassembly |
+| `0x7e0bfe11` | 1 | `set_f4_7e0bfe11` | `*(this+4) = a1`. | disassembly |
+| `0x7e0bfe17` | 1 | `set_f8_7e0bfe17` | `*(this+8) = a1`. | disassembly |
+| `0x7e0c036f` | 1 | `set_f388_7e0c036f` | `*(this+388) = a1`. | disassembly |
+| `0x7e0c0376` | 1 | `set_f392_7e0c0376` | `*(this+392) = a1`. | disassembly |
+| `0x7e0c0380` | 1 | `thunk_to_7e07e938_7e0c0380` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0c11f8` | 1 | `nop_7e0c11f8` | Empty function: `retf`. | disassembly |
+| `0x7e0c1203` | 1 | `nop_7e0c1203` | Empty function: `retf`. | disassembly |
+| `0x7e0c1206` | 1 | `nop_7e0c1206` | Empty function: `retf`. | disassembly |
+| `0x7e0c1209` | 3 | `nop_7e0c1209` | Empty function: `retf`. | disassembly |
+| `0x7e0c1212` | 1 | `nop_7e0c1212` | Empty function: `retf`. | disassembly |
+| `0x7e0c1224` | 1 | `nop_7e0c1224` | Empty function: `retf`. | disassembly |
+| `0x7e0c1227` | 3 | `nop_7e0c1227` | Empty function: `retf`. | disassembly |
+| `0x7e0c122f` | 1 | `nop_7e0c122f` | Empty function: `retf`. | disassembly |
+| `0x7e0c1232` | 1 | `nop_7e0c1232` | Empty function: `retf`. | disassembly |
+| `0x7e0c123a` | 2 | `get_u16_f2_7e0c123a` | Leaf `return (u16)*(this+2)`. | disassembly |
+| `0x7e0c1245` | 1 | `set_u16_f2_7e0c1245` | `*(u16*)(this+2) = d0`. | disassembly |
+| `0x7e0c1254` | 1 | `nop_7e0c1254` | Empty function: `retf`. | disassembly |
+| `0x7e0c1261` | 1 | `nop_7e0c1261` | Empty function: `retf`. | disassembly |
+| `0x7e0c126c` | 1 | `nop_7e0c126c` | Empty function: `retf`. | disassembly |
+| `0x7e0c126f` | 1 | `nop_7e0c126f` | Empty function: `retf`. | disassembly |
+| `0x7e0c2bf7` | 1 | `get_f3352_7e0c2bf7` | Leaf `return *(this+3352)`. | disassembly |
+| `0x7e0c312f` | 1 | `set_f3352_7e0c312f` | `*(this+3352) = d0`. | disassembly |
+| `0x7e0c39a7` | 1 | `get_f3256_7e0c39a7` | Leaf `return *(this+3256)`. | disassembly |
+| `0x7e0c3ee8` | 1 | `set_f4140_7e0c3ee8` | `*(this+4140) = a1`. | disassembly |
+| `0x7e0c3eef` | 1 | `set_f4144_7e0c3eef` | `*(this+4144) = a1`. | disassembly |
+| `0x7e0c3ef6` | 1 | `set_f4148_7e0c3ef6` | `*(this+4148) = a1`. | disassembly |
+| `0x7e0c3efd` | 1 | `set_f4152_7e0c3efd` | `*(this+4152) = a1`. | disassembly |
+| `0x7e0c3f04` | 1 | `set_f4156_7e0c3f04` | `*(this+4156) = a1`. | disassembly |
+| `0x7e0c3f0b` | 1 | `set_f4164_7e0c3f0b` | `*(this+4164) = a1`. | disassembly |
+| `0x7e0c3f12` | 1 | `set_f4168_7e0c3f12` | `*(this+4168) = a1`. | disassembly |
+| `0x7e0c3f19` | 1 | `set_f4172_7e0c3f19` | `*(this+4172) = a1`. | disassembly |
+| `0x7e0c3f20` | 1 | `set_f4176_7e0c3f20` | `*(this+4176) = a1`. | disassembly |
+| `0x7e0c3f27` | 1 | `set_f4180_7e0c3f27` | `*(this+4180) = a1`. | disassembly |
+| `0x7e0c3f2e` | 1 | `set_f4184_7e0c3f2e` | `*(this+4184) = a1`. | disassembly |
+| `0x7e0c3f35` | 1 | `set_f4188_7e0c3f35` | `*(this+4188) = a1`. | disassembly |
+| `0x7e0c3f3c` | 1 | `set_f4192_7e0c3f3c` | `*(this+4192) = a1`. | disassembly |
+| `0x7e0c3f43` | 1 | `set_f4196_7e0c3f43` | `*(this+4196) = a1`. | disassembly |
+| `0x7e0c3f4a` | 1 | `set_f4200_7e0c3f4a` | `*(this+4200) = a1`. | disassembly |
+| `0x7e0c3f51` | 1 | `set_f4204_7e0c3f51` | `*(this+4204) = a1`. | disassembly |
+| `0x7e0c3f58` | 1 | `set_f4208_7e0c3f58` | `*(this+4208) = a1`. | disassembly |
+| `0x7e0c3f5f` | 1 | `set_f4212_7e0c3f5f` | `*(this+4212) = a1`. | disassembly |
+| `0x7e0c3f66` | 1 | `set_f4216_7e0c3f66` | `*(this+4216) = a1`. | disassembly |
+| `0x7e0c3f6d` | 1 | `set_f4220_7e0c3f6d` | `*(this+4220) = a1`. | disassembly |
+| `0x7e0c3f74` | 1 | `set_f4224_7e0c3f74` | `*(this+4224) = a1`. | disassembly |
+| `0x7e0c3f7b` | 1 | `set_f4228_7e0c3f7b` | `*(this+4228) = a1`. | disassembly |
+| `0x7e0c7a88` | 1 | `set_f24_7e0c7a88` | `*(this+24) = a1`. | disassembly |
+| `0x7e0c85d3` | 1 | `set_f12_7e0c85d3` | `*(this+12) = a1`. | disassembly |
+| `0x7e0c85d9` | 1 | `set_f16_7e0c85d9` | `*(this+16) = a1`. | disassembly |
+| `0x7e0c85df` | 1 | `set_f20_7e0c85df` | `*(this+20) = a1`. | disassembly |
+| `0x7e0c85e5` | 1 | `set_f24_7e0c85e5` | `*(this+24) = a1`. | disassembly |
+| `0x7e0c85eb` | 1 | `set_f28_7e0c85eb` | `*(this+28) = a1`. | disassembly |
+| `0x7e0c85f1` | 1 | `set_f32_7e0c85f1` | `*(this+32) = a1`. | disassembly |
+| `0x7e0c85f7` | 1 | `set_f36_7e0c85f7` | `*(this+36) = a1`. | disassembly |
+| `0x7e0c85fd` | 1 | `set_f40_7e0c85fd` | `*(this+40) = a1`. | disassembly |
+| `0x7e0c8603` | 1 | `set_f44_7e0c8603` | `*(this+44) = a1`. | disassembly |
+| `0x7e0c8609` | 1 | `set_f48_7e0c8609` | `*(this+48) = a1`. | disassembly |
+| `0x7e0c860f` | 1 | `set_f52_7e0c860f` | `*(this+52) = a1`. | disassembly |
+| `0x7e0c8615` | 1 | `set_f56_7e0c8615` | `*(this+56) = a1`. | disassembly |
+| `0x7e0c861b` | 1 | `set_f60_7e0c861b` | `*(this+60) = a1`. | disassembly |
+| `0x7e0c8621` | 1 | `set_f64_7e0c8621` | `*(this+64) = a1`. | disassembly |
+| `0x7e0c8627` | 1 | `set_f68_7e0c8627` | `*(this+68) = a1`. | disassembly |
+| `0x7e0c862d` | 1 | `set_f72_7e0c862d` | `*(this+72) = a1`. | disassembly |
+| `0x7e0c8633` | 1 | `set_f76_7e0c8633` | `*(this+76) = a1`. | disassembly |
+| `0x7e0c87fb` | 1 | `nop_7e0c87fb` | Empty function: `retf`. | disassembly |
+| `0x7e0c892b` | 1 | `set_u16_f288_7e0c892b` | `*(u16*)(this+288) = d0`. | disassembly |
+| `0x7e0c8a77` | 2 | `set_f292_7e0c8a77` | `*(this+292) = a1`. | disassembly |
+| `0x7e0c8a7e` | 1 | `set_f296_7e0c8a7e` | `*(this+296) = a1`. | disassembly |
+| `0x7e0c8a85` | 1 | `get_f300_7e0c8a85` | Leaf `return *(this+300)`. | disassembly |
+| `0x7e0c8a8c` | 2 | `set_f300_7e0c8a8c` | `*(this+300) = a1`. | disassembly |
+| `0x7e0c8a93` | 1 | `set_f304_7e0c8a93` | `*(this+304) = a1`. | disassembly |
+| `0x7e0c8a9a` | 1 | `set_f308_7e0c8a9a` | `*(this+308) = a1`. | disassembly |
+| `0x7e0c8aa1` | 1 | `set_f312_7e0c8aa1` | `*(this+312) = a1`. | disassembly |
+| `0x7e0c8aa8` | 1 | `set_f316_7e0c8aa8` | `*(this+316) = a1`. | disassembly |
+| `0x7e0c8ab2` | 1 | `thunk_to_7e07e938_7e0c8ab2` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0c9370` | 1 | `set_f4_7e0c9370` | `*(this+4) = a1`. | disassembly |
+| `0x7e0c9376` | 1 | `set_f8_7e0c9376` | `*(this+8) = a1`. | disassembly |
+| `0x7e0c937c` | 1 | `set_f12_7e0c937c` | `*(this+12) = a1`. | disassembly |
+| `0x7e0c9382` | 1 | `set_f16_7e0c9382` | `*(this+16) = a1`. | disassembly |
+| `0x7e0c94a1` | 1 | `nop_7e0c94a1` | Empty function: `retf`. | disassembly |
+| `0x7e0c95cc` | 1 | `get_f292_7e0c95cc` | Leaf `return *(this+292)`. | disassembly |
+| `0x7e0c97e7` | 1 | `set_f296_7e0c97e7` | `*(this+296) = a1`. | disassembly |
+| `0x7e0c97ee` | 1 | `set_f308_7e0c97ee` | `*(this+308) = a1`. | disassembly |
+| `0x7e0c97f5` | 1 | `set_f312_7e0c97f5` | `*(this+312) = a1`. | disassembly |
+| `0x7e0c97fc` | 1 | `set_f316_7e0c97fc` | `*(this+316) = a1`. | disassembly |
+| `0x7e0c9806` | 1 | `thunk_to_7e07e938_7e0c9806` | Plain thunk: `call 0x7e07e938; ret`. | disassembly |
+| `0x7e0c9e7e` | 1 | `set_f8_7e0c9e7e` | `*(this+8) = a1`. | disassembly |
+| `0x7e0c9e84` | 1 | `set_f12_7e0c9e84` | `*(this+12) = a1`. | disassembly |
+| `0x7e0c9e8a` | 1 | `set_f16_7e0c9e8a` | `*(this+16) = a1`. | disassembly |
+| `0x7e0c9e90` | 1 | `set_f20_7e0c9e90` | `*(this+20) = a1`. | disassembly |
+| `0x7e0c9fe8` | 1 | `nop_7e0c9fe8` | Empty function: `retf`. | disassembly |
+| `0x7e0ca51a` | 1 | `global_u8_60765ce0_get_7e0ca51a` | Leaf `return (u8)*0x60765ce0`. | disassembly |
+| `0x7e0ca523` | 1 | `global_u8_604503c0_get_7e0ca523` | Leaf `return (u8)*0x604503c0`. | disassembly |
+| `0x7e0caaa1` | 1 | `get_u8_f284_7e0caaa1` | Leaf `return (u8)*(this+284)`. | disassembly |
+| `0x7e0cae5a` | 1 | `set_f364_7e0cae5a` | `*(this+364) = a1`. | disassembly |
+| `0x7e0cae61` | 1 | `set_f376_7e0cae61` | `*(this+376) = a1`. | disassembly |
+| `0x7e0cae68` | 1 | `set_f380_7e0cae68` | `*(this+380) = a1`. | disassembly |
+| `0x7e0cae6f` | 1 | `set_f384_7e0cae6f` | `*(this+384) = a1`. | disassembly |
+| `0x7e0cae76` | 1 | `set_f388_7e0cae76` | `*(this+388) = a1`. | disassembly |
+| `0x7e0cae7d` | 1 | `set_f392_7e0cae7d` | `*(this+392) = a1`. | disassembly |
+| `0x7e0cb66c` | 1 | `set_f4_7e0cb66c` | `*(this+4) = a1`. | disassembly |
+| `0x7e0cb672` | 1 | `set_f8_7e0cb672` | `*(this+8) = a1`. | disassembly |
+| `0x7e0cb678` | 1 | `set_f12_7e0cb678` | `*(this+12) = a1`. | disassembly |
+| `0x7e0cb67e` | 1 | `set_f16_7e0cb67e` | `*(this+16) = a1`. | disassembly |
+| `0x7e0cb684` | 1 | `set_f20_7e0cb684` | `*(this+20) = a1`. | disassembly |
+| `0x7e0cb68a` | 1 | `set_f24_7e0cb68a` | `*(this+24) = a1`. | disassembly |
+| `0x7e0cb7c1` | 1 | `nop_7e0cb7c1` | Empty function: `retf`. | disassembly |
+| `0x7e0cc2be` | 4 | `global_u16_607663a0_set_7e0cc2be` | `*(u16*)0x607663a0 = d0`. | disassembly |
+| `0x7e0cc335` | 1 | `get_u16_f316_7e0cc335` | Leaf `return (u16)*(this+316)`. | disassembly |
+| `0x7e0cc373` | 1 | `global_607663a8_set_7e0cc373` | `*0x607663a8 = d0`. | disassembly |
+| `0x7e0cc37c` | 1 | `global_607663ac_set_7e0cc37c` | `*0x607663ac = d0`. | disassembly |
+| `0x7e0cc385` | 1 | `global_60450458_set_7e0cc385` | `*0x60450458 = d0`. | disassembly |
+| `0x7e0cc38e` | 1 | `global_u16_607663b0_set_7e0cc38e` | `*(u16*)0x607663b0 = d0`. | disassembly |
+| `0x7e0cc397` | 1 | `global_u16_6076639e_set_7e0cc397` | `*(u16*)0x6076639e = d0`. | disassembly |
+| `0x7e0cc66d` | 2 | `global_u16_607663a0_get_7e0cc66d` | Leaf `return (u16)*0x607663a0`. | disassembly |
+| `0x7e0ccc18` | 1 | `set_f408_7e0ccc18` | `*(this+408) = a1`. | disassembly |
+| `0x7e0ccc1f` | 1 | `set_f420_7e0ccc1f` | `*(this+420) = a1`. | disassembly |
+| `0x7e0ccc26` | 1 | `set_f424_7e0ccc26` | `*(this+424) = a1`. | disassembly |
+| `0x7e0ccc2d` | 1 | `set_f428_7e0ccc2d` | `*(this+428) = a1`. | disassembly |
+| `0x7e0cd24b` | 1 | `set_f4_7e0cd24b` | `*(this+4) = a1`. | disassembly |
+| `0x7e0cd251` | 1 | `set_f8_7e0cd251` | `*(this+8) = a1`. | disassembly |
+| `0x7e0cd257` | 1 | `set_f12_7e0cd257` | `*(this+12) = a1`. | disassembly |
+| `0x7e0cd25d` | 1 | `set_f16_7e0cd25d` | `*(this+16) = a1`. | disassembly |
+| `0x7e0d02be` | 1 | `nop_7e0d02be` | Empty function: `retf`. | disassembly |
+| `0x7e0d3483` | 2 | `nop_7e0d3483` | Empty function: `retf`. | disassembly |
+| `0x7e0d3498` | 1 | `get_f3788_7e0d3498` | Leaf `return *(this+3788)`. | disassembly |
+| `0x7e0d349f` | 1 | `set_f3796_7e0d349f` | `*(this+3796) = a1`. | disassembly |
+| `0x7e0d34a6` | 1 | `set_f3800_7e0d34a6` | `*(this+3800) = a1`. | disassembly |
+| `0x7e0d34ad` | 1 | `get_f3864_7e0d34ad` | Leaf `return *(this+3864)`. | disassembly |
+| `0x7e0d34b4` | 1 | `set_f3876_7e0d34b4` | `*(this+3876) = a1`. | disassembly |
+| `0x7e0d34bb` | 1 | `get_f3880_7e0d34bb` | Leaf `return *(this+3880)`. | disassembly |
+| `0x7e0d36b4` | 3 | `set_f3788_7e0d36b4` | `*(this+3788) = a1`. | disassembly |
+| `0x7e0d36da` | 1 | `set_f3864_7e0d36da` | `*(this+3864) = a1`. | disassembly |
+| `0x7e0d36e1` | 3 | `set_f3880_7e0d36e1` | `*(this+3880) = a1`. | disassembly |
+| `0x7e0d4725` | 1 | `thunk_to_7e1e64de_7e0d4725` | Plain thunk: `call 0x7e1e64de; ret`. | disassembly |
+| `0x7e0d5b76` | 13 | `thunk_to_7dfc1ece_7e0d5b76` | Plain thunk: `call 0x7dfc1ece; ret`. | disassembly |
+| `0x7e0d625e` | 1 | `set_f204_7e0d625e` | `*(this+204) = a1`. | disassembly |
+| `0x7e0d6265` | 1 | `set_f208_7e0d6265` | `*(this+208) = a1`. | disassembly |
+| `0x7e0d626c` | 1 | `set_f216_7e0d626c` | `*(this+216) = a1`. | disassembly |
+| `0x7e0d6721` | 1 | `thunk_to_7e1e67f6_7e0d6721` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0d6791` | 1 | `thunk_to_7e1e67f6_7e0d6791` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0d680b` | 1 | `thunk_to_7e1e67f6_7e0d680b` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0d6885` | 1 | `thunk_to_7e1e67f6_7e0d6885` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0d68ff` | 1 | `thunk_to_7e1e67f6_7e0d68ff` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0d6a10` | 1 | `thunk_to_7e1e64de_7e0d6a10` | Plain thunk: `call 0x7e1e64de; ret`. | disassembly |
+| `0x7e0d71cb` | 1 | `get_f256_7e0d71cb` | Leaf `return *(this+256)`. | disassembly |
+| `0x7e0d71e9` | 1 | `get_f264_7e0d71e9` | Leaf `return *(this+264)`. | disassembly |
+| `0x7e0d7283` | 3 | `set_f256_7e0d7283` | `*(this+256) = a1`. | disassembly |
+| `0x7e0d72a9` | 3 | `set_f264_7e0d72a9` | `*(this+264) = a1`. | disassembly |
+| `0x7e0d79f7` | 1 | `get_f188_7e0d79f7` | Leaf `return *(this+188)`. | disassembly |
+| `0x7e0d7acb` | 1 | `global_u16_60450768_set_7e0d7acb` | `*(u16*)0x60450768 = d0`. | disassembly |
+| `0x7e0d83a5` | 5 | `nop_7e0d83a5` | Empty function: `retf`. | disassembly |
+| `0x7e0d83a8` | 4 | `nop_7e0d83a8` | Empty function: `retf`. | disassembly |
+| `0x7e0d8575` | 1 | `get_f224_7e0d8575` | Leaf `return *(this+224)`. | disassembly |
+| `0x7e0d8609` | 1 | `nop_7e0d8609` | Empty function: `retf`. | disassembly |
+| `0x7e0d8ea7` | 1 | `set_f436_7e0d8ea7` | `*(this+436) = a1`. | disassembly |
+| `0x7e0d8eae` | 1 | `set_f440_7e0d8eae` | `*(this+440) = a1`. | disassembly |
+| `0x7e0d8eb5` | 1 | `set_f452_7e0d8eb5` | `*(this+452) = a1`. | disassembly |
+| `0x7e0da779` | 1 | `global_60450838_get_7e0da779` | Leaf `return *0x60450838`. | disassembly |
+| `0x7e0da782` | 1 | `get_f184_7e0da782` | Leaf `return *(this+184)`. | disassembly |
+| `0x7e0db29a` | 1 | `set_f252_7e0db29a` | `*(this+252) = a1`. | disassembly |
+| `0x7e0db2a1` | 1 | `set_f256_7e0db2a1` | `*(this+256) = a1`. | disassembly |
+| `0x7e0db833` | 1 | `nop_7e0db833` | Empty function: `retf`. | disassembly |
+| `0x7e0dbd7d` | 1 | `thunk_to_7e1e67f6_7e0dbd7d` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0dcbc4` | 1 | `get_f1964_7e0dcbc4` | Leaf `return *(this+1964)`. | disassembly |
+| `0x7e0dcc7f` | 1 | `set_f1964_7e0dcc7f` | `*(this+1964) = a1`. | disassembly |
+| `0x7e0de98d` | 1 | `nop_7e0de98d` | Empty function: `retf`. | disassembly |
+| `0x7e0def6b` | 1 | `get_f996_7e0def6b` | Leaf `return *(this+996)`. | disassembly |
+| `0x7e0def72` | 1 | `set_f1000_7e0def72` | `*(this+1000) = a1`. | disassembly |
+| `0x7e0def79` | 1 | `get_f1004_7e0def79` | Leaf `return *(this+1004)`. | disassembly |
+| `0x7e0def80` | 1 | `set_f1004_7e0def80` | `*(this+1004) = a1`. | disassembly |
+| `0x7e0def87` | 1 | `set_f1020_7e0def87` | `*(this+1020) = a1`. | disassembly |
+| `0x7e0def8e` | 1 | `get_f1028_7e0def8e` | Leaf `return *(this+1028)`. | disassembly |
+| `0x7e0df0ad` | 3 | `set_f996_7e0df0ad` | `*(this+996) = a1`. | disassembly |
+| `0x7e0df0d3` | 3 | `set_f1028_7e0df0d3` | `*(this+1028) = a1`. | disassembly |
+| `0x7e0dfdf7` | 4 | `thunk_to_7dfc2022_7e0dfdf7` | Plain thunk: `call 0x7dfc2022; ret`. | disassembly |
+| `0x7e0e066e` | 3 | `nop_7e0e066e` | Empty function: `retf`. | disassembly |
+| `0x7e0e0997` | 2 | `nop_7e0e0997` | Empty function: `retf`. | disassembly |
+| `0x7e0e0c95` | 3 | `nop_7e0e0c95` | Empty function: `retf`. | disassembly |
+| `0x7e0e0dc2` | 3 | `nop_7e0e0dc2` | Empty function: `retf`. | disassembly |
+| `0x7e0e2b54` | 1 | `set_f1836_7e0e2b54` | `*(this+1836) = a1`. | disassembly |
+| `0x7e0e2b5b` | 1 | `set_f1876_7e0e2b5b` | `*(this+1876) = a1`. | disassembly |
+| `0x7e0e2b62` | 1 | `set_f1884_7e0e2b62` | `*(this+1884) = a1`. | disassembly |
+| `0x7e0e585c` | 37 | `set_f264_7e0e585c` | `*(this+264) = a1`. | disassembly |
+| `0x7e0e65d7` | 6 | `nop_7e0e65d7` | Empty function: `retf`. | disassembly |
+| `0x7e0e67bb` | 2 | `set_f516_7e0e67bb` | `*(this+516) = a1`. | disassembly |
+| `0x7e0e7193` | 4 | `set_f24_7e0e7193` | `*(this+24) = d0`. | disassembly |
+| `0x7e0e74ba` | 1 | `nop_7e0e74ba` | Empty function: `retf`. | disassembly |
+| `0x7e0e8c60` | 1 | `set_f928_7e0e8c60` | `*(this+928) = a1`. | disassembly |
+| `0x7e0e8c67` | 1 | `set_f940_7e0e8c67` | `*(this+940) = a1`. | disassembly |
+| `0x7e0e8f95` | 1 | `thunk_to_7e1e67f6_7e0e8f95` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e0ec3e3` | 1 | `nop_7e0ec3e3` | Empty function: `retf`. | disassembly |
+| `0x7e0ec71c` | 1 | `global_u16_60450850_set_7e0ec71c` | `*(u16*)0x60450850 = d0`. | disassembly |
+| `0x7e0ecb72` | 7 | `nop_7e0ecb72` | Empty function: `retf`. | disassembly |
+| `0x7e0ecd09` | 4 | `nop_7e0ecd09` | Empty function: `retf`. | disassembly |
+| `0x7e0ecf2a` | 5 | `nop_7e0ecf2a` | Empty function: `retf`. | disassembly |
+| `0x7e0ecfbd` | 4 | `nop_7e0ecfbd` | Empty function: `retf`. | disassembly |
+| `0x7e0ed2b7` | 1 | `set_f16_7e0ed2b7` | `*(this+16) = d0`. | disassembly |
+| `0x7e0edf98` | 1 | `set_f28_7e0edf98` | `*(this+28) = a1`. | disassembly |
+| `0x7e0edf9e` | 1 | `set_f124_7e0edf9e` | `*(this+124) = a1`. | disassembly |
+| `0x7e0edfa4` | 1 | `set_f128_7e0edfa4` | `*(this+128) = a1`. | disassembly |
+| `0x7e0edfab` | 2 | `set_f132_7e0edfab` | `*(this+132) = a1`. | disassembly |
+| `0x7e0edfb2` | 1 | `set_f152_7e0edfb2` | `*(this+152) = a1`. | disassembly |
+| `0x7e0edfb9` | 1 | `set_f164_7e0edfb9` | `*(this+164) = a1`. | disassembly |
+| `0x7e0edfc0` | 1 | `set_f168_7e0edfc0` | `*(this+168) = a1`. | disassembly |
+| `0x7e0edfc7` | 1 | `set_f172_7e0edfc7` | `*(this+172) = a1`. | disassembly |
+| `0x7e0edfce` | 1 | `set_f176_7e0edfce` | `*(this+176) = a1`. | disassembly |
+| `0x7e0edfd5` | 1 | `set_f116_7e0edfd5` | `*(this+116) = a1`. | disassembly |
+| `0x7e0edfdb` | 1 | `set_u16_f20_7e0edfdb` | `*(u16*)(this+20) = d0`. | disassembly |
+| `0x7e0edfe1` | 1 | `get_f184_7e0edfe1` | Leaf `return *(this+184)`. | disassembly |
+| `0x7e0edfe8` | 1 | `set_f184_7e0edfe8` | `*(this+184) = d0`. | disassembly |
+| `0x7e0f265b` | 1 | `global_60450898_get_7e0f265b` | Leaf `return *0x60450898`. | disassembly |
+| `0x7e0f2fce` | 1 | `thunk_to_7e107a76_7e0f2fce` | Plain thunk: `call 0x7e107a76; ret`. | disassembly |
+| `0x7e10002e` | 4 | `global_604508e0_set_7e10002e` | `*0x604508e0 = d0`. | disassembly |
+| `0x7e100048` | 1 | `global_u16_604508e4_set_7e100048` | `*(u16*)0x604508e4 = d0`. | disassembly |
+| `0x7e100ac4` | 4 | `thunk_to_7db9d268_7e100ac4` | Plain thunk: `call 0x7db9d268; ret`. | disassembly |
+| `0x7e102649` | 2 | `nop_7e102649` | Empty function: `retf`. | disassembly |
+| `0x7e103933` | 5 | `thunk_to_7dfc138b_7e103933` | Plain thunk: `call 0x7dfc138b; ret`. | disassembly |
+| `0x7e104d69` | 6 | `thunk_to_7dfc2046_7e104d69` | Plain thunk: `call 0x7dfc2046; ret`. | disassembly |
+| `0x7e104d87` | 1 | `get_f220_7e104d87` | Leaf `return *(this+220)`. | disassembly |
+| `0x7e1073ef` | 4 | `set_f224_7e1073ef` | `*(this+224) = d0`. | disassembly |
+| `0x7e107bf6` | 10 | `thunk_to_7dfc2b4b_7e107bf6` | Plain thunk: `call 0x7dfc2b4b; ret`. | disassembly |
+| `0x7e107c00` | 6 | `set_f220_7e107c00` | `*(this+220) = d0`. | disassembly |
+| `0x7e10abb2` | 1 | `global_604508fc_get_7e10abb2` | Leaf `return *0x604508fc`. | disassembly |
+| `0x7e10ebbb` | 1 | `thunk_to_7e0ff9ff_7e10ebbb` | Plain thunk: `call 0x7e0ff9ff; ret`. | disassembly |
+| `0x7e10f52d` | 1 | `set_f320_7e10f52d` | `*(this+320) = a1`. | disassembly |
+| `0x7e10f534` | 1 | `set_f464_7e10f534` | `*(this+464) = a1`. | disassembly |
+| `0x7e10f53b` | 1 | `set_f468_7e10f53b` | `*(this+468) = a1`. | disassembly |
+| `0x7e10f542` | 1 | `set_f472_7e10f542` | `*(this+472) = a1`. | disassembly |
+| `0x7e10f549` | 1 | `set_f476_7e10f549` | `*(this+476) = a1`. | disassembly |
+| `0x7e10f550` | 1 | `set_f480_7e10f550` | `*(this+480) = a1`. | disassembly |
+| `0x7e10f557` | 1 | `set_f484_7e10f557` | `*(this+484) = a1`. | disassembly |
+| `0x7e10f55e` | 1 | `set_f488_7e10f55e` | `*(this+488) = a1`. | disassembly |
+| `0x7e10f565` | 1 | `set_f492_7e10f565` | `*(this+492) = a1`. | disassembly |
+| `0x7e10f56c` | 1 | `set_f496_7e10f56c` | `*(this+496) = a1`. | disassembly |
+| `0x7e10f573` | 1 | `set_f500_7e10f573` | `*(this+500) = a1`. | disassembly |
+| `0x7e10f57a` | 1 | `set_f504_7e10f57a` | `*(this+504) = a1`. | disassembly |
+| `0x7e10f581` | 1 | `set_f508_7e10f581` | `*(this+508) = a1`. | disassembly |
+| `0x7e10f588` | 1 | `set_f512_7e10f588` | `*(this+512) = a1`. | disassembly |
+| `0x7e10f58f` | 1 | `set_f524_7e10f58f` | `*(this+524) = a1`. | disassembly |
+| `0x7e10f596` | 1 | `set_f528_7e10f596` | `*(this+528) = a1`. | disassembly |
+| `0x7e10f59d` | 2 | `set_f532_7e10f59d` | `*(this+532) = a1`. | disassembly |
+| `0x7e10f5a4` | 1 | `set_f536_7e10f5a4` | `*(this+536) = a1`. | disassembly |
+| `0x7e10f5ab` | 1 | `set_f540_7e10f5ab` | `*(this+540) = a1`. | disassembly |
+| `0x7e10f5b2` | 1 | `set_f544_7e10f5b2` | `*(this+544) = a1`. | disassembly |
+| `0x7e10f5b9` | 1 | `set_f548_7e10f5b9` | `*(this+548) = a1`. | disassembly |
+| `0x7e10f5c0` | 1 | `set_f556_7e10f5c0` | `*(this+556) = a1`. | disassembly |
+| `0x7e10f5c7` | 1 | `set_f560_7e10f5c7` | `*(this+560) = a1`. | disassembly |
+| `0x7e10f5ce` | 1 | `set_f552_7e10f5ce` | `*(this+552) = a1`. | disassembly |
+| `0x7e10f5d5` | 2 | `set_f568_7e10f5d5` | `*(this+568) = a1`. | disassembly |
+| `0x7e10f5dc` | 1 | `set_f576_7e10f5dc` | `*(this+576) = a1`. | disassembly |
+| `0x7e10f5e3` | 1 | `set_f580_7e10f5e3` | `*(this+580) = a1`. | disassembly |
+| `0x7e10f5ea` | 2 | `set_f584_7e10f5ea` | `*(this+584) = a1`. | disassembly |
+| `0x7e10f5f1` | 1 | `set_f592_7e10f5f1` | `*(this+592) = a1`. | disassembly |
+| `0x7e10f5f8` | 1 | `set_f612_7e10f5f8` | `*(this+612) = a1`. | disassembly |
+| `0x7e10f5ff` | 1 | `set_f620_7e10f5ff` | `*(this+620) = a1`. | disassembly |
+| `0x7e10f606` | 2 | `set_f588_7e10f606` | `*(this+588) = a1`. | disassembly |
+| `0x7e10f60d` | 1 | `global_604508b4_get_7e10f60d` | Leaf `return *0x604508b4`. | disassembly |
+| `0x7e10f616` | 4 | `global_604508b4_set_7e10f616` | `*0x604508b4 = d0`. | disassembly |
+| `0x7e10f61f` | 2 | `set_f628_7e10f61f` | `*(this+628) = a1`. | disassembly |
+| `0x7e113dd8` | 1 | `nop_7e113dd8` | Empty function: `retf`. | disassembly |
+| `0x7e1140dd` | 1 | `nop_7e1140dd` | Empty function: `retf`. | disassembly |
+| `0x7e1140e0` | 1 | `nop_7e1140e0` | Empty function: `retf`. | disassembly |
+| `0x7e114310` | 2 | `nop_7e114310` | Empty function: `retf`. | disassembly |
+| `0x7e1143b7` | 1 | `nop_7e1143b7` | Empty function: `retf`. | disassembly |
+| `0x7e11459c` | 2 | `global_60450914_get_7e11459c` | Leaf `return *0x60450914`. | disassembly |
+| `0x7e114ba6` | 1 | `set_f448_7e114ba6` | `*(this+448) = a1`. | disassembly |
+| `0x7e114bad` | 1 | `set_f452_7e114bad` | `*(this+452) = a1`. | disassembly |
+| `0x7e114bb4` | 1 | `set_f456_7e114bb4` | `*(this+456) = a1`. | disassembly |
+| `0x7e114bbb` | 1 | `set_f460_7e114bbb` | `*(this+460) = a1`. | disassembly |
+| `0x7e114c14` | 1 | `global_60450900_get_7e114c14` | Leaf `return *0x60450900`. | disassembly |
+| `0x7e11b10e` | 6 | `set_u16_f672_7e11b10e` | `*(u16*)(this+672) = d0`. | disassembly |
+| `0x7e11b115` | 2 | `get_u16_f672_7e11b115` | Leaf `return (u16)*(this+672)`. | disassembly |
+| `0x7e12500e` | 1 | `thunk_to_7e1e64de_7e12500e` | Plain thunk: `call 0x7e1e64de; ret`. | disassembly |
+| `0x7e125dc1` | 1 | `thunk_to_7e19774d_7e125dc1` | Plain thunk: `call 0x7e19774d; ret`. | disassembly |
+| `0x7e125dd0` | 10 | `ret_ptr_60450cec_7e125dd0` | `return 0x60450cec` (a fixed address, in `a0`). | disassembly |
+| `0x7e125e15` | 1 | `thunk_to_7e19e5ac_7e125e15` | Plain thunk: `call 0x7e19e5ac; ret`. | disassembly |
+| `0x7e1283e4` | 5 | `set_f7548_7e1283e4` | `*(this+7548) = d0`. | disassembly |
+| `0x7e128530` | 13 | `ret_ptr_60450cf4_7e128530` | `return 0x60450cf4` (a fixed address, in `a0`). | disassembly |
+| `0x7e12bd04` | 1 | `get_f7548_7e12bd04` | Leaf `return *(this+7548)`. | disassembly |
+| `0x7e134fa2` | 1 | `thunk_to_7e1e67f6_7e134fa2` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e13502f` | 1 | `thunk_to_7e1e67f6_7e13502f` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e135040` | 1 | `get_f24_7e135040` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e135046` | 1 | `get_f28_7e135046` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e13504c` | 2 | `set_f24_7e13504c` | `*(this+24) = d0`. | disassembly |
+| `0x7e1350e7` | 1 | `thunk_to_7e1e67f6_7e1350e7` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1350f8` | 1 | `get_f24_7e1350f8` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e1350fe` | 1 | `get_f28_7e1350fe` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e135104` | 2 | `set_f24_7e135104` | `*(this+24) = d0`. | disassembly |
+| `0x7e13519c` | 1 | `thunk_to_7e1e67f6_7e13519c` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e135fdf` | 11 | `ret_ptr_60450d44_7e135fdf` | `return 0x60450d44` (a fixed address, in `a0`). | disassembly |
+| `0x7e140f7f` | 1 | `set_f15632_7e140f7f` | `*(this+15632) = a1`. | disassembly |
+| `0x7e140f86` | 1 | `set_f15636_7e140f86` | `*(this+15636) = a1`. | disassembly |
+| `0x7e148979` | 1 | `thunk_to_7e1e67f6_7e148979` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e148a06` | 1 | `thunk_to_7e1e67f6_7e148a06` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e148a17` | 1 | `get_f24_7e148a17` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e148a1d` | 1 | `get_f28_7e148a1d` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e148a23` | 2 | `set_f24_7e148a23` | `*(this+24) = d0`. | disassembly |
+| `0x7e148abe` | 1 | `thunk_to_7e1e67f6_7e148abe` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e148acf` | 1 | `get_f24_7e148acf` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e148ad5` | 1 | `get_f28_7e148ad5` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e148adb` | 2 | `set_f24_7e148adb` | `*(this+24) = d0`. | disassembly |
+| `0x7e148b73` | 1 | `thunk_to_7e1e67f6_7e148b73` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e148bf4` | 1 | `thunk_to_7e1e67f6_7e148bf4` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e14903b` | 10 | `ret_ptr_60450d88_7e14903b` | `return 0x60450d88` (a fixed address, in `a0`). | disassembly |
+| `0x7e14c24a` | 10 | `ret_ptr_60450d9c_7e14c24a` | `return 0x60450d9c` (a fixed address, in `a0`). | disassembly |
+| `0x7e14c256` | 1 | `thunk_to_7e19e5ac_7e14c256` | Plain thunk: `call 0x7e19e5ac; ret`. | disassembly |
+| `0x7e14e894` | 12 | `ret_ptr_60450da8_7e14e894` | `return 0x60450da8` (a fixed address, in `a0`). | disassembly |
+| `0x7e14e8cd` | 1 | `thunk_to_7e1a2fb9_7e14e8cd` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e152333` | 12 | `ret_ptr_60450db4_7e152333` | `return 0x60450db4` (a fixed address, in `a0`). | disassembly |
+| `0x7e15235b` | 1 | `thunk_to_7e1a2fb9_7e15235b` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e156a8d` | 12 | `ret_ptr_60450dc0_7e156a8d` | `return 0x60450dc0` (a fixed address, in `a0`). | disassembly |
+| `0x7e156b9a` | 1 | `thunk_to_7e1a2fb9_7e156b9a` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e15ac32` | 12 | `ret_ptr_60450dcc_7e15ac32` | `return 0x60450dcc` (a fixed address, in `a0`). | disassembly |
+| `0x7e15b434` | 1 | `thunk_to_7e1a2fb9_7e15b434` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e15fc04` | 12 | `ret_ptr_60450de0_7e15fc04` | `return 0x60450de0` (a fixed address, in `a0`). | disassembly |
+| `0x7e15fcba` | 1 | `thunk_to_7e1a2fb9_7e15fcba` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e1620b7` | 12 | `ret_ptr_60450dec_7e1620b7` | `return 0x60450dec` (a fixed address, in `a0`). | disassembly |
+| `0x7e1634a4` | 1 | `set_f1296_7e1634a4` | `*(this+1296) = a1`. | disassembly |
+| `0x7e1634ab` | 1 | `set_f1300_7e1634ab` | `*(this+1300) = a1`. | disassembly |
+| `0x7e1634b5` | 1 | `thunk_to_7e1a2fb9_7e1634b5` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e166b57` | 1 | `thunk_to_7e1e67f6_7e166b57` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e166bbd` | 1 | `thunk_to_7e1e67f6_7e166bbd` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e166f33` | 12 | `ret_ptr_60450df4_7e166f33` | `return 0x60450df4` (a fixed address, in `a0`). | disassembly |
+| `0x7e16aab7` | 12 | `ret_ptr_60450e00_7e16aab7` | `return 0x60450e00` (a fixed address, in `a0`). | disassembly |
+| `0x7e16aac8` | 1 | `thunk_to_7e1a2fb9_7e16aac8` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e16dea7` | 12 | `ret_ptr_60450e0c_7e16dea7` | `return 0x60450e0c` (a fixed address, in `a0`). | disassembly |
+| `0x7e16e025` | 1 | `thunk_to_7e1a2fb9_7e16e025` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e17064b` | 12 | `ret_ptr_60450e18_7e17064b` | `return 0x60450e18` (a fixed address, in `a0`). | disassembly |
+| `0x7e175659` | 12 | `ret_ptr_60450e24_7e175659` | `return 0x60450e24` (a fixed address, in `a0`). | disassembly |
+| `0x7e175682` | 1 | `thunk_to_7e1a2fb9_7e175682` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e17af83` | 1 | `set_f24_7e17af83` | `*(this+24) = a1`. | disassembly |
+| `0x7e17b382` | 1 | `set_f24_7e17b382` | `*(this+24) = a1`. | disassembly |
+| `0x7e17b390` | 1 | `set_f28_7e17b390` | `*(this+28) = a1`. | disassembly |
+| `0x7e17bf9c` | 2 | `nop_7e17bf9c` | Empty function: `retf`. | disassembly |
+| `0x7e17c5f2` | 1 | `set_f1268_7e17c5f2` | `*(this+1268) = a1`. | disassembly |
+| `0x7e17c600` | 14 | `set_f1272_7e17c600` | `*(this+1272) = a1`. | disassembly |
+| `0x7e17c607` | 1 | `set_f1276_7e17c607` | `*(this+1276) = a1`. | disassembly |
+| `0x7e17c60e` | 1 | `set_f1284_7e17c60e` | `*(this+1284) = a1`. | disassembly |
+| `0x7e17c615` | 1 | `set_f1292_7e17c615` | `*(this+1292) = a1`. | disassembly |
+| `0x7e17c61c` | 1 | `set_f1296_7e17c61c` | `*(this+1296) = a1`. | disassembly |
+| `0x7e17c623` | 1 | `set_f1304_7e17c623` | `*(this+1304) = a1`. | disassembly |
+| `0x7e17c62a` | 1 | `set_f1308_7e17c62a` | `*(this+1308) = a1`. | disassembly |
+| `0x7e17c631` | 1 | `set_f1336_7e17c631` | `*(this+1336) = a1`. | disassembly |
+| `0x7e17c638` | 1 | `set_f1340_7e17c638` | `*(this+1340) = a1`. | disassembly |
+| `0x7e17c63f` | 1 | `set_f1344_7e17c63f` | `*(this+1344) = a1`. | disassembly |
+| `0x7e17c646` | 1 | `set_f1348_7e17c646` | `*(this+1348) = a1`. | disassembly |
+| `0x7e17c64d` | 1 | `set_f1352_7e17c64d` | `*(this+1352) = a1`. | disassembly |
+| `0x7e18c18f` | 1 | `nop_7e18c18f` | Empty function: `retf`. | disassembly |
+| `0x7e18c192` | 1 | `nop_7e18c192` | Empty function: `retf`. | disassembly |
+| `0x7e18caaf` | 2 | `set_f24_7e18caaf` | `*(this+24) = d0`. | disassembly |
+| `0x7e18d35b` | 11 | `ret_ptr_60450e40_7e18d35b` | `return 0x60450e40` (a fixed address, in `a0`). | disassembly |
+| `0x7e18d456` | 1 | `thunk_to_7e1a5881_7e18d456` | Plain thunk: `call 0x7e1a5881; ret`. | disassembly |
+| `0x7e1929cb` | 1 | `global_u8_60450e51_get_7e1929cb` | Leaf `return (u8)*0x60450e51`. | disassembly |
+| `0x7e194e5f` | 2 | `global_60451e4c_get_7e194e5f` | Leaf `return *0x60451e4c`. | disassembly |
+| `0x7e196bd4` | 21 | `nop_7e196bd4` | Empty function: `retf`. | disassembly |
+| `0x7e1973a9` | 28 | `nop_7e1973a9` | Empty function: `retf`. | disassembly |
+| `0x7e198a86` | 1 | `global_u8_60450e58_get_7e198a86` | Leaf `return (u8)*0x60450e58`. | disassembly |
+| `0x7e19e56a` | 9 | `set_f916_7e19e56a` | `*(this+916) = a1`. | disassembly |
+| `0x7e19e571` | 2 | `set_f920_7e19e571` | `*(this+920) = a1`. | disassembly |
+| `0x7e19e578` | 13 | `set_f924_7e19e578` | `*(this+924) = a1`. | disassembly |
+| `0x7e19e57f` | 11 | `set_f928_7e19e57f` | `*(this+928) = a1`. | disassembly |
+| `0x7e19e58d` | 1 | `get_f936_7e19e58d` | Leaf `return *(this+936)`. | disassembly |
+| `0x7e19e5a2` | 3 | `set_f944_7e19e5a2` | `*(this+944) = a1`. | disassembly |
+| `0x7e1a06f9` | 10 | `ret_ptr_60451ec0_7e1a06f9` | `return 0x60451ec0` (a fixed address, in `a0`). | disassembly |
+| `0x7e1a5881` | 3 | `thunk_to_7e1ba86f_7e1a5881` | Plain thunk: `call 0x7e1ba86f; ret`. | disassembly |
+| `0x7e1a82d8` | 10 | `ret_ptr_60451ecc_7e1a82d8` | `return 0x60451ecc` (a fixed address, in `a0`). | disassembly |
+| `0x7e1a8413` | 1 | `thunk_to_7e1ba86f_7e1a8413` | Plain thunk: `call 0x7e1ba86f; ret`. | disassembly |
+| `0x7e1accd2` | 10 | `ret_ptr_60451f50_7e1accd2` | `return 0x60451f50` (a fixed address, in `a0`). | disassembly |
+| `0x7e1ad195` | 1 | `set_f1092_7e1ad195` | `*(this+1092) = a1`. | disassembly |
+| `0x7e1ad19c` | 1 | `set_f1096_7e1ad19c` | `*(this+1096) = a1`. | disassembly |
+| `0x7e1ad1a3` | 1 | `set_f1100_7e1ad1a3` | `*(this+1100) = a1`. | disassembly |
+| `0x7e1ad1aa` | 1 | `set_f1104_7e1ad1aa` | `*(this+1104) = a1`. | disassembly |
+| `0x7e1ad1b4` | 1 | `thunk_to_7e1ba86f_7e1ad1b4` | Plain thunk: `call 0x7e1ba86f; ret`. | disassembly |
+| `0x7e1b053d` | 1 | `thunk_to_7e1e67f6_7e1b053d` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1b06e4` | 1 | `thunk_to_7e1e67f6_7e1b06e4` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1b074a` | 1 | `thunk_to_7e1e67f6_7e1b074a` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1b07b0` | 1 | `thunk_to_7e1e67f6_7e1b07b0` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1b07ba` | 1 | `set_f24_7e1b07ba` | `*(this+24) = d0`. | disassembly |
+| `0x7e1b0847` | 1 | `thunk_to_7e1e67f6_7e1b0847` | Plain thunk: `call 0x7e1e67f6; ret`. | disassembly |
+| `0x7e1b10cf` | 11 | `ret_ptr_60451f90_7e1b10cf` | `return 0x60451f90` (a fixed address, in `a0`). | disassembly |
+| `0x7e1b127c` | 1 | `set_f8744_7e1b127c` | `*(this+8744) = a1`. | disassembly |
+| `0x7e1b1283` | 1 | `set_f8748_7e1b1283` | `*(this+8748) = a1`. | disassembly |
+| `0x7e1b128d` | 1 | `thunk_to_7e1ba86f_7e1b128d` | Plain thunk: `call 0x7e1ba86f; ret`. | disassembly |
+| `0x7e1b49d8` | 12 | `ret_ptr_60451fa0_7e1b49d8` | `return 0x60451fa0` (a fixed address, in `a0`). | disassembly |
+| `0x7e1b5696` | 1 | `thunk_to_7e1a2fb9_7e1b5696` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e1ba865` | 1 | `set_f1088_7e1ba865` | `*(this+1088) = a1`. | disassembly |
+| `0x7e1ba86f` | 6 | `thunk_to_7e19e5ac_7e1ba86f` | Plain thunk: `call 0x7e19e5ac; ret`. | disassembly |
+| `0x7e1bd1f4` | 1 | `get_f24_7e1bd1f4` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e1bd1fa` | 1 | `set_f24_7e1bd1fa` | `*(this+24) = d0`. | disassembly |
+| `0x7e1bdcc5` | 14 | `ret_ptr_60452014_7e1bdcc5` | `return 0x60452014` (a fixed address, in `a0`). | disassembly |
+| `0x7e1be1bb` | 1 | `set_f1096_7e1be1bb` | `*(this+1096) = a1`. | disassembly |
+| `0x7e1be1c2` | 1 | `get_f1100_7e1be1c2` | Leaf `return *(this+1100)`. | disassembly |
+| `0x7e1be1c9` | 2 | `set_f1100_7e1be1c9` | `*(this+1100) = a1`. | disassembly |
+| `0x7e1be1d0` | 1 | `get_f1104_7e1be1d0` | Leaf `return *(this+1104)`. | disassembly |
+| `0x7e1be1d7` | 2 | `set_f1104_7e1be1d7` | `*(this+1104) = a1`. | disassembly |
+| `0x7e1be1de` | 1 | `get_f1108_7e1be1de` | Leaf `return *(this+1108)`. | disassembly |
+| `0x7e1be1e5` | 2 | `set_f1108_7e1be1e5` | `*(this+1108) = a1`. | disassembly |
+| `0x7e1be1ec` | 1 | `get_f1112_7e1be1ec` | Leaf `return *(this+1112)`. | disassembly |
+| `0x7e1be1f3` | 2 | `set_f1112_7e1be1f3` | `*(this+1112) = a1`. | disassembly |
+| `0x7e1be1fa` | 1 | `set_f1116_7e1be1fa` | `*(this+1116) = a1`. | disassembly |
+| `0x7e1be201` | 1 | `set_f1120_7e1be201` | `*(this+1120) = a1`. | disassembly |
+| `0x7e1be208` | 1 | `set_f1124_7e1be208` | `*(this+1124) = a1`. | disassembly |
+| `0x7e1be20f` | 1 | `set_f1128_7e1be20f` | `*(this+1128) = a1`. | disassembly |
+| `0x7e1be216` | 1 | `set_f1132_7e1be216` | `*(this+1132) = a1`. | disassembly |
+| `0x7e1c2549` | 10 | `ret_ptr_60452024_7e1c2549` | `return 0x60452024` (a fixed address, in `a0`). | disassembly |
+| `0x7e1c2555` | 1 | `thunk_to_7e19e5ac_7e1c2555` | Plain thunk: `call 0x7e19e5ac; ret`. | disassembly |
+| `0x7e1c435c` | 2 | `get_f564_7e1c435c` | Leaf `return *(this+564)`. | disassembly |
+| `0x7e1c566e` | 16 | `ret_ptr_60452030_7e1c566e` | `return 0x60452030` (a fixed address, in `a0`). | disassembly |
+| `0x7e1c579d` | 1 | `thunk_to_7e1a2fb9_7e1c579d` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e1c9597` | 12 | `ret_ptr_60452044_7e1c9597` | `return 0x60452044` (a fixed address, in `a0`). | disassembly |
+| `0x7e1c9756` | 1 | `thunk_to_7e1a2fb9_7e1c9756` | Plain thunk: `call 0x7e1a2fb9; ret`. | disassembly |
+| `0x7e1cc736` | 1 | `set_f368_7e1cc736` | `*(this+368) = a1`. | disassembly |
+| `0x7e1cc73d` | 1 | `set_f372_7e1cc73d` | `*(this+372) = a1`. | disassembly |
+| `0x7e1cc744` | 1 | `set_f376_7e1cc744` | `*(this+376) = a1`. | disassembly |
+| `0x7e1cc74b` | 1 | `set_f380_7e1cc74b` | `*(this+380) = a1`. | disassembly |
+| `0x7e1cc752` | 1 | `set_f384_7e1cc752` | `*(this+384) = a1`. | disassembly |
+| `0x7e1cc759` | 1 | `set_f388_7e1cc759` | `*(this+388) = a1`. | disassembly |
+| `0x7e1cc760` | 1 | `set_f392_7e1cc760` | `*(this+392) = a1`. | disassembly |
+| `0x7e1cc767` | 1 | `set_f396_7e1cc767` | `*(this+396) = a1`. | disassembly |
+| `0x7e1ceb80` | 1 | `thunk_to_7e1e64de_7e1ceb80` | Plain thunk: `call 0x7e1e64de; ret`. | disassembly |
+| `0x7e1cee95` | 1 | `thunk_to_7e0e2b6c_7e1cee95` | Plain thunk: `call 0x7e0e2b6c; ret`. | disassembly |
+| `0x7e1d170c` | 1 | `set_f184_7e1d170c` | `*(this+184) = a1`. | disassembly |
+| `0x7e1d1713` | 1 | `set_f188_7e1d1713` | `*(this+188) = a1`. | disassembly |
+| `0x7e1d171a` | 1 | `set_f192_7e1d171a` | `*(this+192) = a1`. | disassembly |
+| `0x7e1d1724` | 1 | `thunk_to_7e1e64de_7e1d1724` | Plain thunk: `call 0x7e1e64de; ret`. | disassembly |
+| `0x7e1d1bd5` | 2 | `nop_7e1d1bd5` | Empty function: `retf`. | disassembly |
+| `0x7e1d1c20` | 5 | `nop_7e1d1c20` | Empty function: `retf`. | disassembly |
+| `0x7e1d2eab` | 2 | `nop_7e1d2eab` | Empty function: `retf`. | disassembly |
+| `0x7e1d2eae` | 2 | `nop_7e1d2eae` | Empty function: `retf`. | disassembly |
+| `0x7e1d313a` | 1 | `nop_7e1d313a` | Empty function: `retf`. | disassembly |
+| `0x7e1d3299` | 2 | `nop_7e1d3299` | Empty function: `retf`. | disassembly |
+| `0x7e1d333e` | 2 | `nop_7e1d333e` | Empty function: `retf`. | disassembly |
+| `0x7e1d3494` | 2 | `nop_7e1d3494` | Empty function: `retf`. | disassembly |
+| `0x7e1d34f1` | 2 | `nop_7e1d34f1` | Empty function: `retf`. | disassembly |
+| `0x7e1d3684` | 2 | `nop_7e1d3684` | Empty function: `retf`. | disassembly |
+| `0x7e1d3729` | 2 | `nop_7e1d3729` | Empty function: `retf`. | disassembly |
+| `0x7e1d3bbc` | 1 | `nop_7e1d3bbc` | Empty function: `retf`. | disassembly |
+| `0x7e1d3c29` | 2 | `nop_7e1d3c29` | Empty function: `retf`. | disassembly |
+| `0x7e1d3c50` | 2 | `nop_7e1d3c50` | Empty function: `retf`. | disassembly |
+| `0x7e1d3c53` | 2 | `nop_7e1d3c53` | Empty function: `retf`. | disassembly |
+| `0x7e1d3d1f` | 1 | `thunk_to_7e0d34db_7e1d3d1f` | Plain thunk: `call 0x7e0d34db; ret`. | disassembly |
+| `0x7e1e49df` | 6 | `global_60452070_get_7e1e49df` | Leaf `return *0x60452070`. | disassembly |
+| `0x7e1e49e8` | 1 | `global_60452064_set_7e1e49e8` | `*0x60452064 = a0`. | disassembly |
+| `0x7e1e49f1` | 2 | `global_60452068_set_7e1e49f1` | `*0x60452068 = a0`. | disassembly |
+| `0x7e1e49fa` | 2 | `global_6045206c_set_7e1e49fa` | `*0x6045206c = a0`. | disassembly |
+| `0x7e1e5114` | 3 | `thunk_to_7dfc0154_7e1e5114` | Plain thunk: `call 0x7dfc0154; ret`. | disassembly |
+| `0x7e1e63bf` | 37 | `nop_7e1e63bf` | Empty function: `retf`. | disassembly |
+| `0x7e1e64a3` | 18 | `nop_7e1e64a3` | Empty function: `retf`. | disassembly |
+| `0x7e1e64bf` | 1 | `get_f168_7e1e64bf` | Leaf `return *(this+168)`. | disassembly |
+| `0x7e1e64d4` | 9 | `set_f172_7e1e64d4` | `*(this+172) = a1`. | disassembly |
+| `0x7e1e6832` | 10 | `set_f20_7e1e6832` | `*(this+20) = a1`. | disassembly |
+| `0x7e1e6873` | 1 | `set_f28_7e1e6873` | `*(this+28) = d0`. | disassembly |
+| `0x7e1e6879` | 1 | `set_f36_7e1e6879` | `*(this+36) = d0`. | disassembly |
+| `0x7e1e7722` | 1 | `nop_7e1e7722` | Empty function: `retf`. | disassembly |
+| `0x7e1e77f8` | 6 | `thunk_to_7dfc3ef5_7e1e77f8` | Plain thunk: `call 0x7dfc3ef5; ret`. | disassembly |
+| `0x7e1e7b64` | 1 | `thunk_to_7dfc3e83_7e1e7b64` | Plain thunk: `call 0x7dfc3e83; ret`. | disassembly |
+| `0x7e1e7b6e` | 1 | `thunk_to_7dfc3f5f_7e1e7b6e` | Plain thunk: `call 0x7dfc3f5f; ret`. | disassembly |
+| `0x7e1e7ff0` | 21 | `set_f4_7e1e7ff0` | `*(this+4) = a1`. | disassembly |
+| `0x7e1e843f` | 82 | `ret_ptr_00000000_7e1e843f` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e1e878c` | 1 | `set_u16_f118_7e1e878c` | `*(u16*)(this+118) = d0`. | disassembly |
+| `0x7e1e8792` | 1 | `set_f132_7e1e8792` | `*(this+132) = d0`. | disassembly |
+| `0x7e1e87a5` | 2 | `get_f136_7e1e87a5` | Leaf `return *(this+136)`. | disassembly |
+| `0x7e1e87ac` | 2 | `set_f136_7e1e87ac` | `*(this+136) = d0`. | disassembly |
+| `0x7e1e881b` | 6 | `nop_7e1e881b` | Empty function: `retf`. | disassembly |
+| `0x7e1e881e` | 6 | `ret_ptr_00000000_7e1e881e` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e1eaf40` | 1 | `set_f316_7e1eaf40` | `*(this+316) = a1`. | disassembly |
+| `0x7e1eaf47` | 1 | `set_f320_7e1eaf47` | `*(this+320) = a1`. | disassembly |
+| `0x7e1ec20e` | 5 | `get_f184_7e1ec20e` | Leaf `return *(this+184)`. | disassembly |
+| `0x7e1ed0a8` | 1 | `nop_7e1ed0a8` | Empty function: `retf`. | disassembly |
+| `0x7e1ed0ab` | 1 | `ret_ptr_00000000_7e1ed0ab` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e1ee610` | 1 | `set_f36_7e1ee610` | `*(this+36) = a1`. | disassembly |
+| `0x7e1ee616` | 1 | `set_f40_7e1ee616` | `*(this+40) = a1`. | disassembly |
+| `0x7e1ee61c` | 1 | `set_f44_7e1ee61c` | `*(this+44) = a1`. | disassembly |
+| `0x7e1ee622` | 1 | `set_f48_7e1ee622` | `*(this+48) = a1`. | disassembly |
+| `0x7e1ee628` | 1 | `set_f52_7e1ee628` | `*(this+52) = a1`. | disassembly |
+| `0x7e1ee62e` | 1 | `set_f56_7e1ee62e` | `*(this+56) = a1`. | disassembly |
+| `0x7e1ee634` | 1 | `set_f60_7e1ee634` | `*(this+60) = a1`. | disassembly |
+| `0x7e1ee63a` | 1 | `set_f64_7e1ee63a` | `*(this+64) = a1`. | disassembly |
+| `0x7e1ee640` | 1 | `set_f68_7e1ee640` | `*(this+68) = a1`. | disassembly |
+| `0x7e1ee646` | 1 | `set_f72_7e1ee646` | `*(this+72) = a1`. | disassembly |
+| `0x7e1ee64c` | 1 | `set_f76_7e1ee64c` | `*(this+76) = a1`. | disassembly |
+| `0x7e1ee652` | 1 | `set_f80_7e1ee652` | `*(this+80) = a1`. | disassembly |
+| `0x7e1ee658` | 1 | `set_f84_7e1ee658` | `*(this+84) = a1`. | disassembly |
+| `0x7e1ee65e` | 1 | `set_f88_7e1ee65e` | `*(this+88) = a1`. | disassembly |
+| `0x7e1ee664` | 1 | `set_f92_7e1ee664` | `*(this+92) = a1`. | disassembly |
+| `0x7e1ef00c` | 1 | `set_f24_7e1ef00c` | `*(this+24) = a1`. | disassembly |
+| `0x7e1ef012` | 1 | `set_f28_7e1ef012` | `*(this+28) = a1`. | disassembly |
+| `0x7e1ef0c2` | 1 | `set_f24_7e1ef0c2` | `*(this+24) = a1`. | disassembly |
+| `0x7e1ef0c8` | 1 | `set_f28_7e1ef0c8` | `*(this+28) = a1`. | disassembly |
+| `0x7e1ef160` | 1 | `set_f28_7e1ef160` | `*(this+28) = a1`. | disassembly |
+| `0x7e1ef166` | 2 | `set_f32_7e1ef166` | `*(this+32) = a1`. | disassembly |
+| `0x7e1ef2e9` | 1 | `nop_7e1ef2e9` | Empty function: `retf`. | disassembly |
+| `0x7e1ef9e0` | 1 | `set_f8_7e1ef9e0` | `*(this+8) = a1`. | disassembly |
+| `0x7e1ef9e6` | 1 | `set_f12_7e1ef9e6` | `*(this+12) = a1`. | disassembly |
+| `0x7e1ef9ec` | 1 | `set_f16_7e1ef9ec` | `*(this+16) = a1`. | disassembly |
+| `0x7e1ef9f2` | 1 | `set_f20_7e1ef9f2` | `*(this+20) = a1`. | disassembly |
+| `0x7e1ef9f8` | 1 | `set_f24_7e1ef9f8` | `*(this+24) = a1`. | disassembly |
+| `0x7e1ef9fe` | 1 | `set_f28_7e1ef9fe` | `*(this+28) = a1`. | disassembly |
+| `0x7e1efa04` | 1 | `set_f32_7e1efa04` | `*(this+32) = a1`. | disassembly |
+| `0x7e1efa0a` | 1 | `set_f36_7e1efa0a` | `*(this+36) = a1`. | disassembly |
+| `0x7e1efa10` | 1 | `set_f40_7e1efa10` | `*(this+40) = a1`. | disassembly |
+| `0x7e1efa16` | 1 | `set_f44_7e1efa16` | `*(this+44) = a1`. | disassembly |
+| `0x7e1efa1c` | 1 | `set_f48_7e1efa1c` | `*(this+48) = a1`. | disassembly |
+| `0x7e1efa22` | 1 | `set_f52_7e1efa22` | `*(this+52) = a1`. | disassembly |
+| `0x7e1efa28` | 1 | `set_f56_7e1efa28` | `*(this+56) = a1`. | disassembly |
+| `0x7e1efb04` | 1 | `nop_7e1efb04` | Empty function: `retf`. | disassembly |
+| `0x7e1f0093` | 1 | `nop_7e1f0093` | Empty function: `retf`. | disassembly |
+| `0x7e1f05d4` | 1 | `set_f4_7e1f05d4` | `*(this+4) = a1`. | disassembly |
+| `0x7e1f05da` | 1 | `set_f8_7e1f05da` | `*(this+8) = a1`. | disassembly |
+| `0x7e1f05e0` | 1 | `set_f12_7e1f05e0` | `*(this+12) = a1`. | disassembly |
+| `0x7e1f05e6` | 1 | `set_f16_7e1f05e6` | `*(this+16) = a1`. | disassembly |
+| `0x7e1f05ec` | 1 | `set_f20_7e1f05ec` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f05f2` | 1 | `set_f24_7e1f05f2` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f05f8` | 1 | `set_f28_7e1f05f8` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f05fe` | 1 | `set_f32_7e1f05fe` | `*(this+32) = a1`. | disassembly |
+| `0x7e1f0604` | 1 | `set_f36_7e1f0604` | `*(this+36) = a1`. | disassembly |
+| `0x7e1f060a` | 1 | `set_f40_7e1f060a` | `*(this+40) = a1`. | disassembly |
+| `0x7e1f0764` | 1 | `nop_7e1f0764` | Empty function: `retf`. | disassembly |
+| `0x7e1f089d` | 14 | `set_f24_7e1f089d` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f0947` | 1 | `nop_7e1f0947` | Empty function: `retf`. | disassembly |
+| `0x7e1f10d3` | 1 | `set_f4_7e1f10d3` | `*(this+4) = a1`. | disassembly |
+| `0x7e1f10d9` | 1 | `set_f8_7e1f10d9` | `*(this+8) = a1`. | disassembly |
+| `0x7e1f10df` | 1 | `set_f12_7e1f10df` | `*(this+12) = a1`. | disassembly |
+| `0x7e1f10e5` | 1 | `set_f16_7e1f10e5` | `*(this+16) = a1`. | disassembly |
+| `0x7e1f10eb` | 1 | `set_f20_7e1f10eb` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f10f1` | 1 | `set_f24_7e1f10f1` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f10f7` | 1 | `set_f28_7e1f10f7` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f11b2` | 24 | `set_f24_7e1f11b2` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f11b8` | 24 | `set_f28_7e1f11b8` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f120c` | 1 | `nop_7e1f120c` | Empty function: `retf`. | disassembly |
+| `0x7e1f1944` | 1 | `nop_7e1f1944` | Empty function: `retf`. | disassembly |
+| `0x7e1f1c41` | 1 | `set_f8_7e1f1c41` | `*(this+8) = a1`. | disassembly |
+| `0x7e1f1c47` | 1 | `get_f12_7e1f1c47` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e1f1c4d` | 1 | `set_f12_7e1f1c4d` | `*(this+12) = a1`. | disassembly |
+| `0x7e1f1c53` | 1 | `get_f16_7e1f1c53` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e1f1c59` | 1 | `set_f16_7e1f1c59` | `*(this+16) = a1`. | disassembly |
+| `0x7e1f1c5f` | 1 | `get_f20_7e1f1c5f` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e1f1c65` | 1 | `set_f20_7e1f1c65` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f1c6b` | 1 | `get_f24_7e1f1c6b` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e1f1c71` | 1 | `set_f24_7e1f1c71` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f1c77` | 1 | `get_f28_7e1f1c77` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e1f1c7d` | 1 | `set_f28_7e1f1c7d` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f1c83` | 1 | `get_f32_7e1f1c83` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e1f1c89` | 1 | `set_f32_7e1f1c89` | `*(this+32) = a1`. | disassembly |
+| `0x7e1f1e72` | 1 | `nop_7e1f1e72` | Empty function: `retf`. | disassembly |
+| `0x7e1f3083` | 1 | `set_f84_7e1f3083` | `*(this+84) = a1`. | disassembly |
+| `0x7e1f3089` | 1 | `set_f88_7e1f3089` | `*(this+88) = a1`. | disassembly |
+| `0x7e1f308f` | 1 | `get_f92_7e1f308f` | Leaf `return *(this+92)`. | disassembly |
+| `0x7e1f3095` | 1 | `set_f92_7e1f3095` | `*(this+92) = a1`. | disassembly |
+| `0x7e1f309b` | 1 | `set_f96_7e1f309b` | `*(this+96) = a1`. | disassembly |
+| `0x7e1f30a1` | 1 | `get_f100_7e1f30a1` | Leaf `return *(this+100)`. | disassembly |
+| `0x7e1f30a7` | 1 | `set_f100_7e1f30a7` | `*(this+100) = a1`. | disassembly |
+| `0x7e1f30ad` | 1 | `set_f104_7e1f30ad` | `*(this+104) = a1`. | disassembly |
+| `0x7e1f30b3` | 1 | `get_f108_7e1f30b3` | Leaf `return *(this+108)`. | disassembly |
+| `0x7e1f30b9` | 1 | `set_f108_7e1f30b9` | `*(this+108) = a1`. | disassembly |
+| `0x7e1f30bf` | 1 | `set_f112_7e1f30bf` | `*(this+112) = a1`. | disassembly |
+| `0x7e1f30c5` | 1 | `get_f116_7e1f30c5` | Leaf `return *(this+116)`. | disassembly |
+| `0x7e1f30cb` | 1 | `set_f116_7e1f30cb` | `*(this+116) = a1`. | disassembly |
+| `0x7e1f30d1` | 1 | `set_f120_7e1f30d1` | `*(this+120) = a1`. | disassembly |
+| `0x7e1f30d7` | 1 | `get_f124_7e1f30d7` | Leaf `return *(this+124)`. | disassembly |
+| `0x7e1f30dd` | 1 | `set_f124_7e1f30dd` | `*(this+124) = a1`. | disassembly |
+| `0x7e1f30e3` | 1 | `set_f128_7e1f30e3` | `*(this+128) = a1`. | disassembly |
+| `0x7e1f30ea` | 1 | `get_f132_7e1f30ea` | Leaf `return *(this+132)`. | disassembly |
+| `0x7e1f30f1` | 1 | `set_f132_7e1f30f1` | `*(this+132) = a1`. | disassembly |
+| `0x7e1f30f8` | 1 | `get_f136_7e1f30f8` | Leaf `return *(this+136)`. | disassembly |
+| `0x7e1f30ff` | 1 | `set_f136_7e1f30ff` | `*(this+136) = a1`. | disassembly |
+| `0x7e1f3106` | 1 | `set_f140_7e1f3106` | `*(this+140) = a1`. | disassembly |
+| `0x7e1f310d` | 1 | `get_f144_7e1f310d` | Leaf `return *(this+144)`. | disassembly |
+| `0x7e1f3114` | 1 | `set_f144_7e1f3114` | `*(this+144) = a1`. | disassembly |
+| `0x7e1f311b` | 1 | `set_f148_7e1f311b` | `*(this+148) = a1`. | disassembly |
+| `0x7e1f3122` | 1 | `set_f152_7e1f3122` | `*(this+152) = a1`. | disassembly |
+| `0x7e1f3129` | 1 | `set_f156_7e1f3129` | `*(this+156) = a1`. | disassembly |
+| `0x7e1f3130` | 1 | `set_f160_7e1f3130` | `*(this+160) = a1`. | disassembly |
+| `0x7e1f3137` | 6 | `get_f164_7e1f3137` | Leaf `return *(this+164)`. | disassembly |
+| `0x7e1f313e` | 1 | `set_f164_7e1f313e` | `*(this+164) = a1`. | disassembly |
+| `0x7e1f3145` | 2 | `get_f168_7e1f3145` | Leaf `return *(this+168)`. | disassembly |
+| `0x7e1f314c` | 1 | `set_f168_7e1f314c` | `*(this+168) = a1`. | disassembly |
+| `0x7e1f3153` | 1 | `set_f172_7e1f3153` | `*(this+172) = a1`. | disassembly |
+| `0x7e1f315a` | 1 | `get_f176_7e1f315a` | Leaf `return *(this+176)`. | disassembly |
+| `0x7e1f3161` | 1 | `set_f176_7e1f3161` | `*(this+176) = a1`. | disassembly |
+| `0x7e1f3168` | 1 | `set_f180_7e1f3168` | `*(this+180) = a1`. | disassembly |
+| `0x7e1f316f` | 1 | `get_f184_7e1f316f` | Leaf `return *(this+184)`. | disassembly |
+| `0x7e1f3176` | 1 | `set_f184_7e1f3176` | `*(this+184) = a1`. | disassembly |
+| `0x7e1f32a0` | 2 | `set_f56_7e1f32a0` | `*(this+56) = d0`. | disassembly |
+| `0x7e1f32a6` | 1 | `nop_7e1f32a6` | Empty function: `retf`. | disassembly |
+| `0x7e1f32a9` | 1 | `ret_ptr_00000000_7e1f32a9` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e1f3352` | 1 | `set_u16_f36_7e1f3352` | `*(u16*)(this+36) = d0`. | disassembly |
+| `0x7e1f3670` | 1 | `nop_7e1f3670` | Empty function: `retf`. | disassembly |
+| `0x7e1f38f4` | 1 | `get_f24_7e1f38f4` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e1f38fa` | 1 | `set_f24_7e1f38fa` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f395f` | 1 | `nop_7e1f395f` | Empty function: `retf`. | disassembly |
+| `0x7e1f3c63` | 1 | `set_f4_7e1f3c63` | `*(this+4) = a1`. | disassembly |
+| `0x7e1f3c69` | 1 | `set_f8_7e1f3c69` | `*(this+8) = a1`. | disassembly |
+| `0x7e1f3db9` | 1 | `set_f20_7e1f3db9` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f43c6` | 1 | `set_f20_7e1f43c6` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f43cc` | 1 | `set_f24_7e1f43cc` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f43d2` | 1 | `set_f28_7e1f43d2` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f43d8` | 1 | `set_f32_7e1f43d8` | `*(this+32) = a1`. | disassembly |
+| `0x7e1f43de` | 1 | `set_f36_7e1f43de` | `*(this+36) = a1`. | disassembly |
+| `0x7e1f43e4` | 1 | `set_f40_7e1f43e4` | `*(this+40) = a1`. | disassembly |
+| `0x7e1f44bb` | 1 | `nop_7e1f44bb` | Empty function: `retf`. | disassembly |
+| `0x7e1f46dc` | 1 | `set_f4_7e1f46dc` | `*(this+4) = a1`. | disassembly |
+| `0x7e1f46e2` | 1 | `set_f8_7e1f46e2` | `*(this+8) = a1`. | disassembly |
+| `0x7e1f46e8` | 1 | `set_f12_7e1f46e8` | `*(this+12) = a1`. | disassembly |
+| `0x7e1f46ee` | 1 | `set_f16_7e1f46ee` | `*(this+16) = a1`. | disassembly |
+| `0x7e1f46f4` | 1 | `set_f20_7e1f46f4` | `*(this+20) = a1`. | disassembly |
+| `0x7e1f46fa` | 1 | `set_f24_7e1f46fa` | `*(this+24) = a1`. | disassembly |
+| `0x7e1f4700` | 1 | `set_f28_7e1f4700` | `*(this+28) = a1`. | disassembly |
+| `0x7e1f475e` | 1 | `ret_ptr_00000000_7e1f475e` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e1f4763` | 1 | `thunk_to_7e1e881b_7e1f4763` | Plain thunk: `call 0x7e1e881b; ret`. | disassembly |
+| `0x7e1f5cbf` | 3 | `set_f304_7e1f5cbf` | `*(this+304) = a1`. | disassembly |
+| `0x7e1f5cd4` | 3 | `set_f324_7e1f5cd4` | `*(this+324) = a1`. | disassembly |
+| `0x7e1f5cdb` | 3 | `set_f328_7e1f5cdb` | `*(this+328) = a1`. | disassembly |
+| `0x7e1f5ce5` | 3 | `thunk_to_7e1e9743_7e1f5ce5` | Plain thunk: `call 0x7e1e9743; ret`. | disassembly |
+| `0x7e1f66a0` | 1 | `set_f336_7e1f66a0` | `*(this+336) = a1`. | disassembly |
+| `0x7e1f66a7` | 1 | `set_f340_7e1f66a7` | `*(this+340) = a1`. | disassembly |
+| `0x7e1f66ae` | 1 | `set_f344_7e1f66ae` | `*(this+344) = a1`. | disassembly |
+| `0x7e1f7183` | 7 | `nop_7e1f7183` | Empty function: `retf`. | disassembly |
+| `0x7e1f72d1` | 7 | `nop_7e1f72d1` | Empty function: `retf`. | disassembly |
+| `0x7e1f73d4` | 3 | `set_f316_7e1f73d4` | `*(this+316) = a1`. | disassembly |
+| `0x7e1f73db` | 3 | `set_f320_7e1f73db` | `*(this+320) = a1`. | disassembly |
+| `0x7e1f73e2` | 3 | `set_f324_7e1f73e2` | `*(this+324) = a1`. | disassembly |
+| `0x7e1f73ec` | 3 | `thunk_to_7e1e9c22_7e1f73ec` | Plain thunk: `call 0x7e1e9c22; ret`. | disassembly |
+| `0x7e1f85d0` | 1 | `set_f356_7e1f85d0` | `*(this+356) = a1`. | disassembly |
+| `0x7e1f85d7` | 1 | `set_f360_7e1f85d7` | `*(this+360) = a1`. | disassembly |
+| `0x7e1f85de` | 1 | `set_f364_7e1f85de` | `*(this+364) = a1`. | disassembly |
+| `0x7e1fd7f0` | 1 | `set_f336_7e1fd7f0` | `*(this+336) = a1`. | disassembly |
+| `0x7e1fd7f7` | 1 | `set_f340_7e1fd7f7` | `*(this+340) = a1`. | disassembly |
+| `0x7e1fe543` | 1 | `set_f368_7e1fe543` | `*(this+368) = a1`. | disassembly |
+| `0x7e1fe54a` | 1 | `set_f372_7e1fe54a` | `*(this+372) = a1`. | disassembly |
+| `0x7e200b86` | 1 | `set_f432_7e200b86` | `*(this+432) = a1`. | disassembly |
+| `0x7e200b8d` | 1 | `set_f436_7e200b8d` | `*(this+436) = a1`. | disassembly |
+| `0x7e200b97` | 1 | `thunk_to_7e1f5ce5_7e200b97` | Plain thunk: `call 0x7e1f5ce5; ret`. | disassembly |
+| `0x7e201e22` | 6 | `get_f4_7e201e22` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e201e28` | 6 | `get_u16_f8_7e201e28` | Leaf `return (u16)*(this+8)`. | disassembly |
+| `0x7e201e2e` | 9 | `set_f4_7e201e2e` | `*(this+4) = d0`. | disassembly |
+| `0x7e201e34` | 9 | `set_u16_f8_7e201e34` | `*(u16*)(this+8) = d0`. | disassembly |
+| `0x7e201ef8` | 2 | `nop_7e201ef8` | Empty function: `retf`. | disassembly |
+| `0x7e201efb` | 2 | `ret_ptr_00000000_7e201efb` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e201f0f` | 1 | `nop_7e201f0f` | Empty function: `retf`. | disassembly |
+| `0x7e201f12` | 3 | `nop_7e201f12` | Empty function: `retf`. | disassembly |
+| `0x7e201f19` | 2 | `set_f4_7e201f19` | `*(this+4) = d0`. | disassembly |
+| `0x7e201f1f` | 2 | `set_f8_7e201f1f` | `*(this+8) = d0`. | disassembly |
+| `0x7e201f25` | 2 | `set_f12_7e201f25` | `*(this+12) = d0`. | disassembly |
+| `0x7e201f2f` | 3 | `get_f4_7e201f2f` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e201f35` | 1 | `get_f8_7e201f35` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e201f3b` | 1 | `get_f12_7e201f3b` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e201f76` | 1 | `nop_7e201f76` | Empty function: `retf`. | disassembly |
+| `0x7e202318` | 1 | `nop_7e202318` | Empty function: `retf`. | disassembly |
+| `0x7e20242b` | 1 | `set_f4_7e20242b` | `*(this+4) = a1`. | disassembly |
+| `0x7e202431` | 1 | `set_f8_7e202431` | `*(this+8) = a1`. | disassembly |
+| `0x7e202437` | 1 | `set_f12_7e202437` | `*(this+12) = a1`. | disassembly |
+| `0x7e20243d` | 1 | `set_f16_7e20243d` | `*(this+16) = a1`. | disassembly |
+| `0x7e202443` | 1 | `set_f20_7e202443` | `*(this+20) = a1`. | disassembly |
+| `0x7e2024b4` | 1 | `nop_7e2024b4` | Empty function: `retf`. | disassembly |
+| `0x7e202519` | 1 | `nop_7e202519` | Empty function: `retf`. | disassembly |
+| `0x7e202626` | 1 | `nop_7e202626` | Empty function: `retf`. | disassembly |
+| `0x7e20291a` | 1 | `get_f4_7e20291a` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e202920` | 1 | `set_f4_7e202920` | `*(this+4) = a1`. | disassembly |
+| `0x7e202926` | 1 | `set_f8_7e202926` | `*(this+8) = a1`. | disassembly |
+| `0x7e20292c` | 1 | `get_f12_7e20292c` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e202932` | 1 | `set_f12_7e202932` | `*(this+12) = a1`. | disassembly |
+| `0x7e202938` | 1 | `get_f16_7e202938` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e20293e` | 1 | `set_f16_7e20293e` | `*(this+16) = a1`. | disassembly |
+| `0x7e2029c0` | 1 | `global_604521a4_get_7e2029c0` | Leaf `return *0x604521a4`. | disassembly |
+| `0x7e202f56` | 1 | `nop_7e202f56` | Empty function: `retf`. | disassembly |
+| `0x7e202f59` | 1 | `nop_7e202f59` | Empty function: `retf`. | disassembly |
+| `0x7e202f5c` | 1 | `get_f24_7e202f5c` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e202f62` | 1 | `get_f28_7e202f62` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e202fa0` | 1 | `get_f64_7e202fa0` | Leaf `return *(this+64)`. | disassembly |
+| `0x7e202fb3` | 1 | `get_f76_7e202fb3` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e202fd1` | 1 | `get_f8_7e202fd1` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e202fd7` | 1 | `get_f88_7e202fd7` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e203004` | 1 | `get_f96_7e203004` | Leaf `return *(this+96)`. | disassembly |
+| `0x7e203017` | 1 | `get_f108_7e203017` | Leaf `return *(this+108)`. | disassembly |
+| `0x7e20301d` | 1 | `get_f20_7e20301d` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e203023` | 1 | `set_f24_7e203023` | `*(this+24) = d0`. | disassembly |
+| `0x7e203029` | 1 | `set_f28_7e203029` | `*(this+28) = d0`. | disassembly |
+| `0x7e203059` | 1 | `set_f64_7e203059` | `*(this+64) = d0`. | disassembly |
+| `0x7e203068` | 1 | `set_f76_7e203068` | `*(this+76) = d0`. | disassembly |
+| `0x7e20307e` | 1 | `set_f8_7e20307e` | `*(this+8) = d0`. | disassembly |
+| `0x7e2030b9` | 1 | `set_f96_7e2030b9` | `*(this+96) = d0`. | disassembly |
+| `0x7e2030c8` | 1 | `set_f108_7e2030c8` | `*(this+108) = d0`. | disassembly |
+| `0x7e2030ce` | 1 | `set_f20_7e2030ce` | `*(this+20) = d0`. | disassembly |
+| `0x7e2032a4` | 1 | `get_f20_7e2032a4` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e2034ec` | 2 | `get_f8_7e2034ec` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e20355a` | 1 | `nop_7e20355a` | Empty function: `retf`. | disassembly |
+| `0x7e203e86` | 1 | `set_f4_7e203e86` | `*(this+4) = a1`. | disassembly |
+| `0x7e203e8c` | 1 | `set_f8_7e203e8c` | `*(this+8) = a1`. | disassembly |
+| `0x7e203e92` | 1 | `set_f12_7e203e92` | `*(this+12) = a1`. | disassembly |
+| `0x7e203e98` | 1 | `set_f16_7e203e98` | `*(this+16) = a1`. | disassembly |
+| `0x7e203f56` | 1 | `nop_7e203f56` | Empty function: `retf`. | disassembly |
+| `0x7e2041a0` | 1 | `nop_7e2041a0` | Empty function: `retf`. | disassembly |
+| `0x7e20489b` | 1 | `set_f4_7e20489b` | `*(this+4) = a1`. | disassembly |
+| `0x7e2048a1` | 2 | `get_f8_7e2048a1` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e2048a7` | 1 | `set_f8_7e2048a7` | `*(this+8) = a1`. | disassembly |
+| `0x7e2048ad` | 2 | `set_f12_7e2048ad` | `*(this+12) = a1`. | disassembly |
+| `0x7e2048b3` | 2 | `get_f16_7e2048b3` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e2048b9` | 1 | `set_f16_7e2048b9` | `*(this+16) = a1`. | disassembly |
+| `0x7e2048bf` | 2 | `get_f20_7e2048bf` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e2048c5` | 1 | `set_f20_7e2048c5` | `*(this+20) = a1`. | disassembly |
+| `0x7e2048cb` | 2 | `get_f28_7e2048cb` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e2048d1` | 1 | `set_f28_7e2048d1` | `*(this+28) = a1`. | disassembly |
+| `0x7e2048d7` | 2 | `get_f32_7e2048d7` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e2048dd` | 1 | `set_f32_7e2048dd` | `*(this+32) = a1`. | disassembly |
+| `0x7e2048e3` | 1 | `set_f36_7e2048e3` | `*(this+36) = a1`. | disassembly |
+| `0x7e2048e9` | 2 | `get_f40_7e2048e9` | Leaf `return *(this+40)`. | disassembly |
+| `0x7e2048ef` | 1 | `set_f40_7e2048ef` | `*(this+40) = a1`. | disassembly |
+| `0x7e2048f5` | 2 | `get_f44_7e2048f5` | Leaf `return *(this+44)`. | disassembly |
+| `0x7e2048fb` | 1 | `set_f44_7e2048fb` | `*(this+44) = a1`. | disassembly |
+| `0x7e204901` | 1 | `set_f48_7e204901` | `*(this+48) = a1`. | disassembly |
+| `0x7e204907` | 2 | `get_f52_7e204907` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e20490d` | 1 | `set_f52_7e20490d` | `*(this+52) = a1`. | disassembly |
+| `0x7e204913` | 2 | `get_f56_7e204913` | Leaf `return *(this+56)`. | disassembly |
+| `0x7e204919` | 1 | `set_f56_7e204919` | `*(this+56) = a1`. | disassembly |
+| `0x7e20491f` | 1 | `set_f60_7e20491f` | `*(this+60) = a1`. | disassembly |
+| `0x7e204925` | 2 | `get_f64_7e204925` | Leaf `return *(this+64)`. | disassembly |
+| `0x7e20492b` | 2 | `get_f68_7e20492b` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e204931` | 1 | `set_f72_7e204931` | `*(this+72) = a1`. | disassembly |
+| `0x7e204937` | 2 | `get_f76_7e204937` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e20493d` | 3 | `set_f76_7e20493d` | `*(this+76) = a1`. | disassembly |
+| `0x7e204943` | 2 | `get_f80_7e204943` | Leaf `return *(this+80)`. | disassembly |
+| `0x7e204949` | 1 | `set_f80_7e204949` | `*(this+80) = a1`. | disassembly |
+| `0x7e20494f` | 1 | `set_f84_7e20494f` | `*(this+84) = a1`. | disassembly |
+| `0x7e204955` | 2 | `get_f88_7e204955` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e20495b` | 1 | `set_f88_7e20495b` | `*(this+88) = a1`. | disassembly |
+| `0x7e204961` | 2 | `get_f92_7e204961` | Leaf `return *(this+92)`. | disassembly |
+| `0x7e204967` | 1 | `set_f92_7e204967` | `*(this+92) = a1`. | disassembly |
+| `0x7e20496d` | 1 | `set_f96_7e20496d` | `*(this+96) = a1`. | disassembly |
+| `0x7e204973` | 2 | `get_f100_7e204973` | Leaf `return *(this+100)`. | disassembly |
+| `0x7e204979` | 1 | `set_f100_7e204979` | `*(this+100) = a1`. | disassembly |
+| `0x7e204ad8` | 1 | `nop_7e204ad8` | Empty function: `retf`. | disassembly |
+| `0x7e204cfa` | 1 | `set_f4_7e204cfa` | `*(this+4) = a1`. | disassembly |
+| `0x7e204e0b` | 1 | `set_f24_7e204e0b` | `*(this+24) = a1`. | disassembly |
+| `0x7e204e61` | 1 | `set_f24_7e204e61` | `*(this+24) = a1`. | disassembly |
+| `0x7e204f9c` | 1 | `set_f4_7e204f9c` | `*(this+4) = a1`. | disassembly |
+| `0x7e204fa2` | 1 | `set_f8_7e204fa2` | `*(this+8) = a1`. | disassembly |
+| `0x7e204fa8` | 1 | `set_f12_7e204fa8` | `*(this+12) = a1`. | disassembly |
+| `0x7e204fae` | 1 | `set_f16_7e204fae` | `*(this+16) = a1`. | disassembly |
+| `0x7e204fb4` | 1 | `set_f20_7e204fb4` | `*(this+20) = a1`. | disassembly |
+| `0x7e2050a6` | 9 | `set_f8_7e2050a6` | `*(this+8) = d0`. | disassembly |
+| `0x7e2050ac` | 2 | `set_f12_7e2050ac` | `*(this+12) = d0`. | disassembly |
+| `0x7e2053ad` | 9 | `nop_7e2053ad` | Empty function: `retf`. | disassembly |
+| `0x7e205596` | 4 | `set_u16_f44_7e205596` | `*(u16*)(this+44) = d0`. | disassembly |
+| `0x7e20578c` | 2 | `get_f20_7e20578c` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e205b00` | 1 | `thunk_to_7e205a8f_7e205b00` | Plain thunk: `call 0x7e205a8f; ret`. | disassembly |
+| `0x7e205dae` | 1 | `nop_7e205dae` | Empty function: `retf`. | disassembly |
+| `0x7e205df4` | 17 | `ret_ptr_604521ec_7e205df4` | `return 0x604521ec` (a fixed address, in `a0`). | disassembly |
+| `0x7e205dfd` | 1 | `nop_7e205dfd` | Empty function: `retf`. | disassembly |
+| `0x7e206632` | 1 | `thunk_to_7d9a19d2_7e206632` | Plain thunk: `call 0x7d9a19d2; ret`. | disassembly |
+| `0x7e20748c` | 3 | `get_f12_7e20748c` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e20749e` | 1 | `get_f16_7e20749e` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e2074a4` | 4 | `set_f16_7e2074a4` | `*(this+16) = d0`. | disassembly |
+| `0x7e2074f1` | 1 | `set_f12_7e2074f1` | `*(this+12) = d0`. | disassembly |
+| `0x7e207c73` | 1 | `set_f52_7e207c73` | `*(this+52) = a1`. | disassembly |
+| `0x7e207e3d` | 1 | `set_f4_7e207e3d` | `*(this+4) = d0`. | disassembly |
+| `0x7e207e43` | 3 | `get_f52_7e207e43` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e207ea9` | 1 | `nop_7e207ea9` | Empty function: `retf`. | disassembly |
+| `0x7e207ed1` | 1 | `nop_7e207ed1` | Empty function: `retf`. | disassembly |
+| `0x7e208020` | 4 | `global_60452214_get_7e208020` | Leaf `return *0x60452214`. | disassembly |
+| `0x7e208029` | 1 | `global_6076d614_get_7e208029` | Leaf `return *0x6076d614`. | disassembly |
+| `0x7e208032` | 1 | `global_6076d61c_get_7e208032` | Leaf `return *0x6076d61c`. | disassembly |
+| `0x7e2088b1` | 2 | `get_f32_7e2088b1` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e2088b7` | 1 | `get_f52_7e2088b7` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e208933` | 3 | `set_f52_7e208933` | `*(this+52) = a1`. | disassembly |
+| `0x7e20aca9` | 5 | `global_6076d628_get_7e20aca9` | Leaf `return *0x6076d628`. | disassembly |
+| `0x7e20b3da` | 4 | `global_6076d624_set_7e20b3da` | `*0x6076d624 = d0`. | disassembly |
+| `0x7e20b3ed` | 3 | `global_6076d624_get_7e20b3ed` | Leaf `return *0x6076d624`. | disassembly |
+| `0x7e20b5ea` | 2 | `global_60452230_get_7e20b5ea` | Leaf `return *0x60452230`. | disassembly |
+| `0x7e20bd40` | 7 | `global_60452238_set_7e20bd40` | `*0x60452238 = d0`. | disassembly |
+| `0x7e20ca3c` | 2 | `global_6076d638_get_7e20ca3c` | Leaf `return *0x6076d638`. | disassembly |
+| `0x7e20d4d3` | 5 | `global_6076d64c_set_7e20d4d3` | `*0x6076d64c = d0`. | disassembly |
+| `0x7e20d616` | 3 | `global_6076d654_set_7e20d616` | `*0x6076d654 = d0`. | disassembly |
+| `0x7e20d61f` | 2 | `global_6076d654_get_7e20d61f` | Leaf `return *0x6076d654`. | disassembly |
+| `0x7e20d632` | 14 | `global_6076d658_get_7e20d632` | Leaf `return *0x6076d658`. | disassembly |
+| `0x7e20d8dd` | 3 | `global_6076d65c_get_7e20d8dd` | Leaf `return *0x6076d65c`. | disassembly |
+| `0x7e20d8e6` | 1 | `global_6076d65c_set_7e20d8e6` | `*0x6076d65c = d0`. | disassembly |
+| `0x7e20e536` | 1 | `global_6076d674_get_7e20e536` | Leaf `return *0x6076d674`. | disassembly |
+| `0x7e20e53f` | 1 | `global_6076d678_get_7e20e53f` | Leaf `return *0x6076d678`. | disassembly |
+| `0x7e20e824` | 1 | `global_6076d67c_get_7e20e824` | Leaf `return *0x6076d67c`. | disassembly |
+| `0x7e20e82d` | 2 | `global_6076d680_set_7e20e82d` | `*0x6076d680 = d0`. | disassembly |
+| `0x7e20eb0f` | 3 | `global_6045224c_get_7e20eb0f` | Leaf `return *0x6045224c`. | disassembly |
+| `0x7e20ec16` | 2 | `global_6076d684_get_7e20ec16` | Leaf `return *0x6076d684`. | disassembly |
+| `0x7e20ecbe` | 19 | `global_6076d688_set_7e20ecbe` | `*0x6076d688 = d0`. | disassembly |
+| `0x7e20ecc7` | 1 | `global_6076d688_get_7e20ecc7` | Leaf `return *0x6076d688`. | disassembly |
+| `0x7e20ecd0` | 3 | `global_60452250_set_7e20ecd0` | `*0x60452250 = d0`. | disassembly |
+| `0x7e20f910` | 14 | `global_6076d68c_get_7e20f910` | Leaf `return *0x6076d68c`. | disassembly |
+| `0x7e20fbfa` | 3 | `global_6076d694_get_7e20fbfa` | Leaf `return *0x6076d694`. | disassembly |
+| `0x7e2102f8` | 15 | `global_60452264_get_7e2102f8` | Leaf `return *0x60452264`. | disassembly |
+| `0x7e210884` | 1 | `global_6076d6d0_set_7e210884` | `*0x6076d6d0 = a0`. | disassembly |
+| `0x7e21114f` | 2 | `global_6076d6d4_set_7e21114f` | `*0x6076d6d4 = d0`. | disassembly |
+| `0x7e211158` | 1 | `global_6076d6d4_get_7e211158` | Leaf `return *0x6076d6d4`. | disassembly |
+| `0x7e211161` | 8 | `global_6076d6dc_set_7e211161` | `*0x6076d6dc = d0`. | disassembly |
+| `0x7e21116a` | 1 | `global_6076d6dc_get_7e21116a` | Leaf `return *0x6076d6dc`. | disassembly |
+| `0x7e211502` | 1 | `global_6076d6d8_get_7e211502` | Leaf `return *0x6076d6d8`. | disassembly |
+| `0x7e211998` | 2 | `global_6076d6e0_set_7e211998` | `*0x6076d6e0 = d0`. | disassembly |
+| `0x7e2119a1` | 1 | `global_6076d6e0_get_7e2119a1` | Leaf `return *0x6076d6e0`. | disassembly |
+| `0x7e212784` | 1 | `global_6076d6ec_get_7e212784` | Leaf `return *0x6076d6ec`. | disassembly |
+| `0x7e2139c4` | 1 | `global_604522ac_get_7e2139c4` | Leaf `return *0x604522ac`. | disassembly |
+| `0x7e213db9` | 2 | `global_6076d754_get_7e213db9` | Leaf `return *0x6076d754`. | disassembly |
+| `0x7e213dc2` | 3 | `global_6076d754_set_7e213dc2` | `*0x6076d754 = d0`. | disassembly |
+| `0x7e213ff3` | 4 | `global_604522b8_get_7e213ff3` | Leaf `return *0x604522b8`. | disassembly |
+| `0x7e215763` | 1 | `global_604522c4_get_7e215763` | Leaf `return *0x604522c4`. | disassembly |
+| `0x7e21576c` | 5 | `global_604522c4_set_7e21576c` | `*0x604522c4 = d0`. | disassembly |
+| `0x7e2159fb` | 1 | `global_604522c0_get_7e2159fb` | Leaf `return *0x604522c0`. | disassembly |
+| `0x7e215ae5` | 1 | `global_6076d768_set_7e215ae5` | `*0x6076d768 = d0`. | disassembly |
+| `0x7e215aee` | 2 | `global_6076d768_get_7e215aee` | Leaf `return *0x6076d768`. | disassembly |
+| `0x7e215da4` | 13 | `global_604522cc_set_7e215da4` | `*0x604522cc = d0`. | disassembly |
+| `0x7e215dad` | 4 | `global_604522cc_get_7e215dad` | Leaf `return *0x604522cc`. | disassembly |
+| `0x7e215e84` | 3 | `global_u8_60452384_set_7e215e84` | `*(u8*)0x60452384 = d0`. | disassembly |
+| `0x7e215e8d` | 1 | `global_u8_60452384_get_7e215e8d` | Leaf `return (u8)*0x60452384`. | disassembly |
+| `0x7e2182b5` | 4 | `global_6045239c_set_7e2182b5` | `*0x6045239c = d0`. | disassembly |
+| `0x7e2182be` | 2 | `global_60452398_get_7e2182be` | Leaf `return *0x60452398`. | disassembly |
+| `0x7e2182c7` | 3 | `global_6045239c_get_7e2182c7` | Leaf `return *0x6045239c`. | disassembly |
+| `0x7e21a2e2` | 5 | `global_604523b4_set_7e21a2e2` | `*0x604523b4 = d0`. | disassembly |
+| `0x7e21a2eb` | 2 | `global_604523b4_get_7e21a2eb` | Leaf `return *0x604523b4`. | disassembly |
+| `0x7e21a661` | 2 | `global_6076d77c_get_7e21a661` | Leaf `return *0x6076d77c`. | disassembly |
+| `0x7e21aff0` | 2 | `global_6076d784_get_7e21aff0` | Leaf `return *0x6076d784`. | disassembly |
+| `0x7e21aff9` | 3 | `global_6076d784_set_7e21aff9` | `*0x6076d784 = d0`. | disassembly |
+| `0x7e21b002` | 1 | `global_6076d790_get_7e21b002` | Leaf `return *0x6076d790`. | disassembly |
+| `0x7e21b2f9` | 1 | `global_6076d794_get_7e21b2f9` | Leaf `return *0x6076d794`. | disassembly |
+| `0x7e21b302` | 1 | `global_604523b8_set_7e21b302` | `*0x604523b8 = d0`. | disassembly |
+| `0x7e21b943` | 8 | `ret_ptr_00000000_7e21b943` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e21ba8d` | 4 | `set_f68_7e21ba8d` | `*(this+68) = a1`. | disassembly |
+| `0x7e21bbba` | 4 | `get_f76_7e21bbba` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e21bbc0` | 2 | `get_f80_7e21bbc0` | Leaf `return *(this+80)`. | disassembly |
+| `0x7e21bd8e` | 1 | `global_6076d7a8_get_7e21bd8e` | Leaf `return *0x6076d7a8`. | disassembly |
+| `0x7e21c16c` | 7 | `global_6076d7ac_get_7e21c16c` | Leaf `return *0x6076d7ac`. | disassembly |
+| `0x7e21cfde` | 2 | `global_6076d7b0_set_7e21cfde` | `*0x6076d7b0 = d0`. | disassembly |
+| `0x7e21cfe7` | 8 | `global_6076d7b0_get_7e21cfe7` | Leaf `return *0x6076d7b0`. | disassembly |
+| `0x7e21dac0` | 1 | `global_6076d7b8_set_7e21dac0` | `*0x6076d7b8 = d0`. | disassembly |
+| `0x7e21dfc8` | 1 | `global_604523bc_set_7e21dfc8` | `*0x604523bc = d0`. | disassembly |
+| `0x7e21f570` | 2 | `global_6076d7c8_get_7e21f570` | Leaf `return *0x6076d7c8`. | disassembly |
+| `0x7e21fcec` | 1 | `global_6076d7d4_get_7e21fcec` | Leaf `return *0x6076d7d4`. | disassembly |
+| `0x7e22082f` | 1 | `global_604523c0_set_7e22082f` | `*0x604523c0 = a0`. | disassembly |
+| `0x7e220afb` | 1 | `set_f116_7e220afb` | `*(this+116) = a1`. | disassembly |
+| `0x7e220b01` | 1 | `set_f120_7e220b01` | `*(this+120) = a1`. | disassembly |
+| `0x7e220b07` | 1 | `set_f124_7e220b07` | `*(this+124) = a1`. | disassembly |
+| `0x7e221c18` | 1 | `nop_7e221c18` | Empty function: `retf`. | disassembly |
+| `0x7e221c1b` | 1 | `ret_ptr_00000000_7e221c1b` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e221de6` | 1 | `get_f12_7e221de6` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e221e2b` | 3 | `set_f12_7e221e2b` | `*(this+12) = a1`. | disassembly |
+| `0x7e223779` | 1 | `global_6076d7d8_set_7e223779` | `*0x6076d7d8 = a0`. | disassembly |
+| `0x7e223782` | 1 | `global_6076d7dc_set_7e223782` | `*0x6076d7dc = a0`. | disassembly |
+| `0x7e22378b` | 1 | `global_6076d7e0_set_7e22378b` | `*0x6076d7e0 = a0`. | disassembly |
+| `0x7e223b0d` | 2 | `set_f28_7e223b0d` | `*(this+28) = a1`. | disassembly |
+| `0x7e223b13` | 2 | `set_f32_7e223b13` | `*(this+32) = a1`. | disassembly |
+| `0x7e223b3f` | 1 | `get_f24_7e223b3f` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e223ce7` | 1 | `thunk_to_7e208307_7e223ce7` | Plain thunk: `call 0x7e208307; ret`. | disassembly |
+| `0x7e223cf1` | 1 | `nop_7e223cf1` | Empty function: `retf`. | disassembly |
+| `0x7e223e8f` | 4 | `get_f4_7e223e8f` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e223e95` | 2 | `set_f4_7e223e95` | `*(this+4) = d0`. | disassembly |
+| `0x7e223f07` | 2 | `set_f12_7e223f07` | `*(this+12) = d0`. | disassembly |
+| `0x7e2255e0` | 2 | `global_u16_60772fd0_set_7e2255e0` | `*(u16*)0x60772fd0 = d0`. | disassembly |
+| `0x7e225957` | 3 | `nop_7e225957` | Empty function: `retf`. | disassembly |
+| `0x7e2265d4` | 1 | `global_u8_60452fda_set_7e2265d4` | `*(u8*)0x60452fda = d0`. | disassembly |
+| `0x7e2265dd` | 1 | `global_u8_60452fda_get_7e2265dd` | Leaf `return (u8)*0x60452fda`. | disassembly |
+| `0x7e226ee6` | 1 | `global_60452fdc_set_7e226ee6` | `*0x60452fdc = d0`. | disassembly |
+| `0x7e2271e2` | 1 | `global_u8_60452fc0_get_7e2271e2` | Leaf `return (u8)*0x60452fc0`. | disassembly |
+| `0x7e2280ea` | 2 | `global_u16_607733bc_get_7e2280ea` | Leaf `return (u16)*0x607733bc`. | disassembly |
+| `0x7e2283fe` | 3 | `ret_ptr_60773438_7e2283fe` | `return 0x60773438` (a fixed address, in `a0`). | disassembly |
+| `0x7e228d08` | 1 | `global_u16_607736ea_get_7e228d08` | Leaf `return (u16)*0x607736ea`. | disassembly |
+| `0x7e228d11` | 2 | `global_u16_607736ea_set_7e228d11` | `*(u16*)0x607736ea = d0`. | disassembly |
+| `0x7e228e22` | 4 | `global_6045309c_get_7e228e22` | Leaf `return *0x6045309c`. | disassembly |
+| `0x7e228eda` | 3 | `global_u16_604530a0_get_7e228eda` | Leaf `return (u16)*0x604530a0`. | disassembly |
+| `0x7e22ccbb` | 4 | `get_u16_f12_7e22ccbb` | Leaf `return (u16)*(this+12)`. | disassembly |
+| `0x7e22ceb9` | 1 | `get_f4_7e22ceb9` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e22d0c4` | 2 | `set_f8_7e22d0c4` | `*(this+8) = a1`. | disassembly |
+| `0x7e22f0b4` | 5 | `get_f1188_7e22f0b4` | Leaf `return *(this+1188)`. | disassembly |
+| `0x7e22f6a2` | 4 | `set_u8_f1373_7e22f6a2` | `*(u8*)(this+1373) = d0`. | disassembly |
+| `0x7e22fb48` | 4 | `get_f2012_7e22fb48` | Leaf `return *(this+2012)`. | disassembly |
+| `0x7e23004e` | 3 | `set_f16_7e23004e` | `*(this+16) = a1`. | disassembly |
+| `0x7e230054` | 3 | `get_f16_7e230054` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e23241d` | 33 | `get_u8_f76_7e23241d` | Leaf `return (u8)*(this+76)`. | disassembly |
+| `0x7e23245c` | 41 | `get_u8_f68_7e23245c` | Leaf `return (u8)*(this+68)`. | disassembly |
+| `0x7e2325bd` | 30 | `get_u8_f104_7e2325bd` | Leaf `return (u8)*(this+104)`. | disassembly |
+| `0x7e232c92` | 2 | `ret_ptr_7e232d71_7e232c92` | `return 0x7e232d71` (a fixed address, in `a0`). | disassembly |
+| `0x7e232d93` | 2 | `set_u16_f20_7e232d93` | `*(u16*)(this+20) = d0`. | disassembly |
+| `0x7e232e0f` | 10 | `get_u16_f4_7e232e0f` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e233481` | 17 | `get_f72_7e233481` | Leaf `return *(this+72)`. | disassembly |
+| `0x7e23b48e` | 2 | `thunk_to_7e2265a5_7e23b48e` | Plain thunk: `call 0x7e2265a5; ret`. | disassembly |
+| `0x7e23b572` | 5 | `get_u16_f676_7e23b572` | Leaf `return (u16)*(this+676)`. | disassembly |
+| `0x7e23b8f0` | 8 | `get_f24_7e23b8f0` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e23b8f6` | 19 | `nop_7e23b8f6` | Empty function: `retf`. | disassembly |
+| `0x7e23bd7a` | 3 | `get_u8_f660_7e23bd7a` | Leaf `return (u8)*(this+660)`. | disassembly |
+| `0x7e23c07c` | 8 | `set_u16_f48_7e23c07c` | `*(u16*)(this+48) = d0`. | disassembly |
+| `0x7e23c13f` | 23 | `set_u16_f52_7e23c13f` | `*(u16*)(this+52) = d0`. | disassembly |
+| `0x7e23c7f4` | 2 | `global_u8_604543d8_get_7e23c7f4` | Leaf `return (u8)*0x604543d8`. | disassembly |
+| `0x7e23d1df` | 3 | `global_u8_604543e0_get_7e23d1df` | Leaf `return (u8)*0x604543e0`. | disassembly |
+| `0x7e23d4cc` | 2 | `get_f776_7e23d4cc` | Leaf `return *(this+776)`. | disassembly |
+| `0x7e23e052` | 10 | `get_u8_f73_7e23e052` | Leaf `return (u8)*(this+73)`. | disassembly |
+| `0x7e23ee72` | 54 | `get_f16_7e23ee72` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e23eea9` | 2 | `set_f4_7e23eea9` | `*(this+4) = d0`. | disassembly |
+| `0x7e23eeaf` | 23 | `get_f4_7e23eeaf` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e23eeca` | 5 | `set_f8_7e23eeca` | `*(this+8) = d0`. | disassembly |
+| `0x7e23eed0` | 1 | `get_f8_7e23eed0` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e23eed6` | 3 | `set_f12_7e23eed6` | `*(this+12) = d0`. | disassembly |
+| `0x7e23eedc` | 2 | `get_f12_7e23eedc` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e23f036` | 2 | `get_u8_f72_7e23f036` | Leaf `return (u8)*(this+72)`. | disassembly |
+| `0x7e23f0e3` | 1 | `get_f68_7e23f0e3` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e23f579` | 6 | `get_u16_f80_7e23f579` | Leaf `return (u16)*(this+80)`. | disassembly |
+| `0x7e23fe8f` | 23 | `get_f116_7e23fe8f` | Leaf `return *(this+116)`. | disassembly |
+| `0x7e23ff2a` | 10 | `set_f132_7e23ff2a` | `*(this+132) = d0`. | disassembly |
+| `0x7e23ff31` | 3 | `get_f132_7e23ff31` | Leaf `return *(this+132)`. | disassembly |
+| `0x7e23ff38` | 4 | `set_f136_7e23ff38` | `*(this+136) = d0`. | disassembly |
+| `0x7e23ff3f` | 2 | `get_f136_7e23ff3f` | Leaf `return *(this+136)`. | disassembly |
+| `0x7e23ff46` | 4 | `set_f140_7e23ff46` | `*(this+140) = d0`. | disassembly |
+| `0x7e23ff4d` | 2 | `get_f140_7e23ff4d` | Leaf `return *(this+140)`. | disassembly |
+| `0x7e23ff54` | 11 | `get_f92_7e23ff54` | Leaf `return *(this+92)`. | disassembly |
+| `0x7e23ff5a` | 2 | `set_f152_7e23ff5a` | `*(this+152) = d0`. | disassembly |
+| `0x7e23ff61` | 1 | `get_f152_7e23ff61` | Leaf `return *(this+152)`. | disassembly |
+| `0x7e24016d` | 2 | `set_f316_7e24016d` | `*(this+316) = d0`. | disassembly |
+| `0x7e24017b` | 2 | `set_f320_7e24017b` | `*(this+320) = d0`. | disassembly |
+| `0x7e240182` | 1 | `get_f320_7e240182` | Leaf `return *(this+320)`. | disassembly |
+| `0x7e24036e` | 3 | `set_u8_f324_7e24036e` | `*(u8*)(this+324) = d0`. | disassembly |
+| `0x7e240375` | 1 | `get_u8_f324_7e240375` | Leaf `return (u8)*(this+324)`. | disassembly |
+| `0x7e2403e5` | 4 | `set_f332_7e2403e5` | `*(this+332) = d0`. | disassembly |
+| `0x7e2403ec` | 4 | `get_f332_7e2403ec` | Leaf `return *(this+332)`. | disassembly |
+| `0x7e240420` | 4 | `global_604543f4_set_7e240420` | `*0x604543f4 = d0`. | disassembly |
+| `0x7e240429` | 4 | `global_604543f4_get_7e240429` | Leaf `return *0x604543f4`. | disassembly |
+| `0x7e240569` | 1 | `thunk_to_7e337f21_7e240569` | Plain thunk: `call 0x7e337f21; ret`. | disassembly |
+| `0x7e240602` | 3 | `thunk_to_7e226fbc_7e240602` | Plain thunk: `call 0x7e226fbc; ret`. | disassembly |
+| `0x7e24067f` | 2 | `set_f4_7e24067f` | `*(this+4) = d0`. | disassembly |
+| `0x7e240685` | 3 | `get_f4_7e240685` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e2414df` | 3 | `get_u16_f8_7e2414df` | Leaf `return (u16)*(this+8)`. | disassembly |
+| `0x7e2414e5` | 2 | `set_u16_f10_7e2414e5` | `*(u16*)(this+10) = d0`. | disassembly |
+| `0x7e2414eb` | 3 | `get_u16_f10_7e2414eb` | Leaf `return (u16)*(this+10)`. | disassembly |
+| `0x7e241564` | 12 | `set_f28_7e241564` | `*(this+28) = d0`. | disassembly |
+| `0x7e24156a` | 14 | `get_f28_7e24156a` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e241a68` | 4 | `get_f6876_7e241a68` | Leaf `return *(this+6876)`. | disassembly |
+| `0x7e243804` | 4 | `set_f6860_7e243804` | `*(this+6860) = d0`. | disassembly |
+| `0x7e24380b` | 3 | `get_f6860_7e24380b` | Leaf `return *(this+6860)`. | disassembly |
+| `0x7e243812` | 4 | `set_f6856_7e243812` | `*(this+6856) = d0`. | disassembly |
+| `0x7e243819` | 1 | `get_f6856_7e243819` | Leaf `return *(this+6856)`. | disassembly |
+| `0x7e243820` | 2 | `set_f6864_7e243820` | `*(this+6864) = d0`. | disassembly |
+| `0x7e243827` | 1 | `get_f6864_7e243827` | Leaf `return *(this+6864)`. | disassembly |
+| `0x7e243835` | 1 | `get_f6868_7e243835` | Leaf `return *(this+6868)`. | disassembly |
+| `0x7e243861` | 1 | `get_f6872_7e243861` | Leaf `return *(this+6872)`. | disassembly |
+| `0x7e243c24` | 1 | `get_f6888_7e243c24` | Leaf `return *(this+6888)`. | disassembly |
+| `0x7e243e92` | 1 | `set_f6892_7e243e92` | `*(this+6892) = d0`. | disassembly |
+| `0x7e243fa7` | 4 | `set_f6896_7e243fa7` | `*(this+6896) = d0`. | disassembly |
+| `0x7e243fae` | 2 | `get_f6896_7e243fae` | Leaf `return *(this+6896)`. | disassembly |
+| `0x7e244306` | 3 | `set_f12_7e244306` | `*(this+12) = d0`. | disassembly |
+| `0x7e24430c` | 5 | `get_f12_7e24430c` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e244312` | 2 | `set_f16_7e244312` | `*(this+16) = d0`. | disassembly |
+| `0x7e244318` | 2 | `get_f16_7e244318` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e24431e` | 2 | `set_f8_7e24431e` | `*(this+8) = d0`. | disassembly |
+| `0x7e244324` | 1 | `get_f8_7e244324` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e244540` | 1 | `get_u8_f4_7e244540` | Leaf `return (u8)*(this+4)`. | disassembly |
+| `0x7e244721` | 1 | `get_f20_7e244721` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e244727` | 1 | `set_f20_7e244727` | `*(this+20) = d0`. | disassembly |
+| `0x7e244ae5` | 2 | `set_u16_f32_7e244ae5` | `*(u16*)(this+32) = d0`. | disassembly |
+| `0x7e244aeb` | 16 | `get_u16_f32_7e244aeb` | Leaf `return (u16)*(this+32)`. | disassembly |
+| `0x7e244af1` | 9 | `set_f24_7e244af1` | `*(this+24) = d0`. | disassembly |
+| `0x7e244af7` | 11 | `get_f24_7e244af7` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e244afd` | 14 | `set_f28_7e244afd` | `*(this+28) = d0`. | disassembly |
+| `0x7e244b03` | 2 | `get_f28_7e244b03` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e245ebf` | 1 | `set_f36_7e245ebf` | `*(this+36) = d0`. | disassembly |
+| `0x7e245ec5` | 5 | `get_f36_7e245ec5` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e245fbb` | 9 | `set_f40_7e245fbb` | `*(this+40) = d0`. | disassembly |
+| `0x7e245fc1` | 5 | `get_f40_7e245fc1` | Leaf `return *(this+40)`. | disassembly |
+| `0x7e24641d` | 17 | `get_f56_7e24641d` | Leaf `return *(this+56)`. | disassembly |
+| `0x7e246423` | 5 | `set_f56_7e246423` | `*(this+56) = d0`. | disassembly |
+| `0x7e246cfe` | 6 | `set_f16_7e246cfe` | `*(this+16) = d0`. | disassembly |
+| `0x7e246d52` | 2 | `get_f20_7e246d52` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e246d58` | 2 | `get_f24_7e246d58` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e247340` | 9 | `nop_7e247340` | Empty function: `retf`. | disassembly |
+| `0x7e247990` | 5 | `set_f36_7e247990` | `*(this+36) = d0`. | disassembly |
+| `0x7e24816d` | 1 | `set_f40_7e24816d` | `*(this+40) = d0`. | disassembly |
+| `0x7e248173` | 1 | `get_f40_7e248173` | Leaf `return *(this+40)`. | disassembly |
+| `0x7e248179` | 2 | `set_f24_7e248179` | `*(this+24) = d0`. | disassembly |
+| `0x7e24817f` | 2 | `set_f20_7e24817f` | `*(this+20) = d0`. | disassembly |
+| `0x7e248185` | 1 | `set_f52_7e248185` | `*(this+52) = d0`. | disassembly |
+| `0x7e24818b` | 1 | `get_f52_7e24818b` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e248191` | 2 | `set_u8_f60_7e248191` | `*(u8*)(this+60) = d0`. | disassembly |
+| `0x7e248197` | 2 | `get_u8_f60_7e248197` | Leaf `return (u8)*(this+60)`. | disassembly |
+| `0x7e24819d` | 3 | `get_f68_7e24819d` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e2481a3` | 14 | `set_f68_7e2481a3` | `*(this+68) = d0`. | disassembly |
+| `0x7e2481a9` | 6 | `get_f72_7e2481a9` | Leaf `return *(this+72)`. | disassembly |
+| `0x7e2481af` | 4 | `set_f72_7e2481af` | `*(this+72) = d0`. | disassembly |
+| `0x7e2481b5` | 4 | `set_f76_7e2481b5` | `*(this+76) = d0`. | disassembly |
+| `0x7e2481bb` | 2 | `get_f76_7e2481bb` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e2481e1` | 1 | `get_f80_7e2481e1` | Leaf `return *(this+80)`. | disassembly |
+| `0x7e2481e7` | 2 | `set_f84_7e2481e7` | `*(this+84) = d0`. | disassembly |
+| `0x7e2481ed` | 1 | `get_f84_7e2481ed` | Leaf `return *(this+84)`. | disassembly |
+| `0x7e248248` | 5 | `set_f88_7e248248` | `*(this+88) = d0`. | disassembly |
+| `0x7e24824e` | 1 | `get_f88_7e24824e` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e248254` | 2 | `global_6045441c_set_7e248254` | `*0x6045441c = d0`. | disassembly |
+| `0x7e24834b` | 2 | `set_u8_f12_7e24834b` | `*(u8*)(this+12) = d0`. | disassembly |
+| `0x7e248351` | 1 | `get_u8_f12_7e248351` | Leaf `return (u8)*(this+12)`. | disassembly |
+| `0x7e248357` | 7 | `set_f16_7e248357` | `*(this+16) = d0`. | disassembly |
+| `0x7e24835d` | 11 | `get_f16_7e24835d` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e248363` | 31 | `set_f20_7e248363` | `*(this+20) = d0`. | disassembly |
+| `0x7e248369` | 7 | `get_f20_7e248369` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e24836f` | 1 | `set_f32_7e24836f` | `*(this+32) = d0`. | disassembly |
+| `0x7e248375` | 7 | `set_f36_7e248375` | `*(this+36) = d0`. | disassembly |
+| `0x7e248381` | 16 | `set_f40_7e248381` | `*(this+40) = d0`. | disassembly |
+| `0x7e248387` | 2 | `get_f40_7e248387` | Leaf `return *(this+40)`. | disassembly |
+| `0x7e24838d` | 6 | `set_f24_7e24838d` | `*(this+24) = d0`. | disassembly |
+| `0x7e248393` | 5 | `get_f24_7e248393` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e248399` | 10 | `set_f28_7e248399` | `*(this+28) = d0`. | disassembly |
+| `0x7e24839f` | 3 | `get_f28_7e24839f` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e2483a5` | 1 | `set_f44_7e2483a5` | `*(this+44) = d0`. | disassembly |
+| `0x7e2483ab` | 1 | `get_f44_7e2483ab` | Leaf `return *(this+44)`. | disassembly |
+| `0x7e24cc9f` | 2 | `get_f56_7e24cc9f` | Leaf `return *(this+56)`. | disassembly |
+| `0x7e24cd17` | 2 | `set_f60_7e24cd17` | `*(this+60) = d0`. | disassembly |
+| `0x7e24cd1d` | 6 | `set_f64_7e24cd1d` | `*(this+64) = d0`. | disassembly |
+| `0x7e24cd23` | 16 | `get_f64_7e24cd23` | Leaf `return *(this+64)`. | disassembly |
+| `0x7e24cd29` | 3 | `set_f68_7e24cd29` | `*(this+68) = d0`. | disassembly |
+| `0x7e24cd2f` | 3 | `get_f68_7e24cd2f` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e24cd35` | 2 | `set_f72_7e24cd35` | `*(this+72) = d0`. | disassembly |
+| `0x7e24cd3b` | 3 | `get_f72_7e24cd3b` | Leaf `return *(this+72)`. | disassembly |
+| `0x7e24cd41` | 11 | `set_f76_7e24cd41` | `*(this+76) = d0`. | disassembly |
+| `0x7e24cd47` | 3 | `get_f76_7e24cd47` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e24ced6` | 9 | `set_f80_7e24ced6` | `*(this+80) = d0`. | disassembly |
+| `0x7e24cedc` | 9 | `get_f80_7e24cedc` | Leaf `return *(this+80)`. | disassembly |
+| `0x7e24cf77` | 12 | `set_f88_7e24cf77` | `*(this+88) = d0`. | disassembly |
+| `0x7e24cf7d` | 5 | `get_f88_7e24cf7d` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e24cfbd` | 2 | `get_f48_7e24cfbd` | Leaf `return *(this+48)`. | disassembly |
+| `0x7e24d012` | 7 | `get_f52_7e24d012` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e24dd53` | 8 | `set_f92_7e24dd53` | `*(this+92) = d0`. | disassembly |
+| `0x7e24dd59` | 5 | `get_f96_7e24dd59` | Leaf `return *(this+96)`. | disassembly |
+| `0x7e24dd5f` | 14 | `set_f96_7e24dd5f` | `*(this+96) = d0`. | disassembly |
+| `0x7e24dda1` | 3 | `get_f100_7e24dda1` | Leaf `return *(this+100)`. | disassembly |
+| `0x7e24dda7` | 6 | `set_f100_7e24dda7` | `*(this+100) = d0`. | disassembly |
+| `0x7e24ddad` | 3 | `set_f104_7e24ddad` | `*(this+104) = d0`. | disassembly |
+| `0x7e24ddb3` | 2 | `get_f104_7e24ddb3` | Leaf `return *(this+104)`. | disassembly |
+| `0x7e24e0f1` | 1 | `set_f128_7e24e0f1` | `*(this+128) = d0`. | disassembly |
+| `0x7e24e0f8` | 1 | `get_f128_7e24e0f8` | Leaf `return *(this+128)`. | disassembly |
+| `0x7e24e1c3` | 1 | `set_u16_f136_7e24e1c3` | `*(u16*)(this+136) = d0`. | disassembly |
+| `0x7e24e1ca` | 1 | `get_u16_f136_7e24e1ca` | Leaf `return (u16)*(this+136)`. | disassembly |
+| `0x7e24e219` | 1 | `set_u8_f148_7e24e219` | `*(u8*)(this+148) = d0`. | disassembly |
+| `0x7e24e220` | 1 | `get_u8_f148_7e24e220` | Leaf `return (u8)*(this+148)`. | disassembly |
+| `0x7e24e227` | 1 | `set_f152_7e24e227` | `*(this+152) = d0`. | disassembly |
+| `0x7e24e22e` | 1 | `get_f152_7e24e22e` | Leaf `return *(this+152)`. | disassembly |
+| `0x7e24e32e` | 2 | `set_f156_7e24e32e` | `*(this+156) = d0`. | disassembly |
+| `0x7e24e335` | 2 | `get_f156_7e24e335` | Leaf `return *(this+156)`. | disassembly |
+| `0x7e24e33c` | 8 | `set_f160_7e24e33c` | `*(this+160) = d0`. | disassembly |
+| `0x7e24e343` | 1 | `get_f160_7e24e343` | Leaf `return *(this+160)`. | disassembly |
+| `0x7e24e351` | 7 | `get_f164_7e24e351` | Leaf `return *(this+164)`. | disassembly |
+| `0x7e24eb14` | 1 | `get_f168_7e24eb14` | Leaf `return *(this+168)`. | disassembly |
+| `0x7e24eb22` | 3 | `get_f172_7e24eb22` | Leaf `return *(this+172)`. | disassembly |
+| `0x7e24eb29` | 8 | `set_f172_7e24eb29` | `*(this+172) = d0`. | disassembly |
+| `0x7e24ed3f` | 26 | `set_f12_7e24ed3f` | `*(this+12) = d0`. | disassembly |
+| `0x7e24ed45` | 49 | `get_f12_7e24ed45` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e24ed4b` | 5 | `set_f16_7e24ed4b` | `*(this+16) = d0`. | disassembly |
+| `0x7e24ed51` | 2 | `get_f16_7e24ed51` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e24ed76` | 23 | `get_f20_7e24ed76` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e24f238` | 6 | `get_f36_7e24f238` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e24fb6a` | 11 | `get_u8_f28_7e24fb6a` | Leaf `return (u8)*(this+28)`. | disassembly |
+| `0x7e24fc91` | 18 | `set_f32_7e24fc91` | `*(this+32) = d0`. | disassembly |
+| `0x7e24fc97` | 2 | `get_f32_7e24fc97` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e24fd7e` | 1 | `nop_7e24fd7e` | Empty function: `retf`. | disassembly |
+| `0x7e24ff33` | 2 | `global_60454428_set_7e24ff33` | `*0x60454428 = a0`. | disassembly |
+| `0x7e255fe1` | 4 | `get_u8_f224_7e255fe1` | Leaf `return (u8)*(this+224)`. | disassembly |
+| `0x7e256344` | 4 | `get_u8_f222_7e256344` | Leaf `return (u8)*(this+222)`. | disassembly |
+| `0x7e256b87` | 7 | `get_u8_f225_7e256b87` | Leaf `return (u8)*(this+225)`. | disassembly |
+| `0x7e257445` | 18 | `get_f4_7e257445` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e257e41` | 5 | `set_u8_f104_7e257e41` | `*(u8*)(this+104) = d0`. | disassembly |
+| `0x7e257e47` | 4 | `get_u8_f104_7e257e47` | Leaf `return (u8)*(this+104)`. | disassembly |
+| `0x7e257e7d` | 4 | `set_f108_7e257e7d` | `*(this+108) = d0`. | disassembly |
+| `0x7e2581f5` | 2 | `get_u16_f128_7e2581f5` | Leaf `return (u16)*(this+128)`. | disassembly |
+| `0x7e258394` | 2 | `get_u8_f160_7e258394` | Leaf `return (u8)*(this+160)`. | disassembly |
+| `0x7e25891e` | 9 | `get_u8_f180_7e25891e` | Leaf `return (u8)*(this+180)`. | disassembly |
+| `0x7e258e04` | 19 | `ret_ptr_7e258e98_7e258e04` | `return 0x7e258e98` (a fixed address, in `a0`). | disassembly |
+| `0x7e258e49` | 37 | `set_f12_7e258e49` | `*(this+12) = d0`. | disassembly |
+| `0x7e258e4f` | 22 | `get_f12_7e258e4f` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e25bcc5` | 9 | `set_f28_7e25bcc5` | `*(this+28) = a1`. | disassembly |
+| `0x7e25bccb` | 3 | `get_f28_7e25bccb` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e25bcd1` | 8 | `set_f32_7e25bcd1` | `*(this+32) = a1`. | disassembly |
+| `0x7e25be0a` | 3 | `get_u16_f4_7e25be0a` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e25bf8c` | 15 | `set_u8_f70_7e25bf8c` | `*(u8*)(this+70) = d0`. | disassembly |
+| `0x7e25bf92` | 15 | `get_u8_f70_7e25bf92` | Leaf `return (u8)*(this+70)`. | disassembly |
+| `0x7e25bfaa` | 2 | `get_f36_7e25bfaa` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e25c7ae` | 2 | `set_u8_f73_7e25c7ae` | `*(u8*)(this+73) = d0`. | disassembly |
+| `0x7e25c7b4` | 5 | `get_u8_f73_7e25c7b4` | Leaf `return (u8)*(this+73)`. | disassembly |
+| `0x7e25e4fd` | 2 | `get_u8_f781_7e25e4fd` | Leaf `return (u8)*(this+781)`. | disassembly |
+| `0x7e25ed05` | 3 | `get_u16_f190_7e25ed05` | Leaf `return (u16)*(this+190)`. | disassembly |
+| `0x7e25ed35` | 2 | `get_u16_f188_7e25ed35` | Leaf `return (u16)*(this+188)`. | disassembly |
+| `0x7e25ef99` | 5 | `get_u8_f196_7e25ef99` | Leaf `return (u8)*(this+196)`. | disassembly |
+| `0x7e25f13e` | 2 | `get_f180_7e25f13e` | Leaf `return *(this+180)`. | disassembly |
+| `0x7e25f165` | 4 | `get_u16_f184_7e25f165` | Leaf `return (u16)*(this+184)`. | disassembly |
+| `0x7e25fa0e` | 4 | `get_u16_f226_7e25fa0e` | Leaf `return (u16)*(this+226)`. | disassembly |
+| `0x7e25fa15` | 4 | `get_u16_f224_7e25fa15` | Leaf `return (u16)*(this+224)`. | disassembly |
+| `0x7e261758` | 2 | `get_f192_7e261758` | Leaf `return *(this+192)`. | disassembly |
+| `0x7e2625dd` | 2 | `get_u16_f128_7e2625dd` | Leaf `return (u16)*(this+128)`. | disassembly |
+| `0x7e262ad4` | 4 | `get_u8_f130_7e262ad4` | Leaf `return (u8)*(this+130)`. | disassembly |
+| `0x7e262b60` | 2 | `get_u8_f131_7e262b60` | Leaf `return (u8)*(this+131)`. | disassembly |
+| `0x7e263dac` | 2 | `get_u16_f128_7e263dac` | Leaf `return (u16)*(this+128)`. | disassembly |
+| `0x7e263dba` | 3 | `get_u16_f130_7e263dba` | Leaf `return (u16)*(this+130)`. | disassembly |
+| `0x7e263f59` | 2 | `get_u8_f135_7e263f59` | Leaf `return (u8)*(this+135)`. | disassembly |
+| `0x7e264552` | 6 | `get_u8_f134_7e264552` | Leaf `return (u8)*(this+134)`. | disassembly |
+| `0x7e264b78` | 12 | `get_f144_7e264b78` | Leaf `return *(this+144)`. | disassembly |
+| `0x7e265475` | 4 | `get_f176_7e265475` | Leaf `return *(this+176)`. | disassembly |
+| `0x7e26671c` | 2 | `get_u16_f128_7e26671c` | Leaf `return (u16)*(this+128)`. | disassembly |
+| `0x7e266fc2` | 2 | `get_f132_7e266fc2` | Leaf `return *(this+132)`. | disassembly |
+| `0x7e267011` | 1 | `thunk_to_7e22ccee_7e267011` | Plain thunk: `call 0x7e22ccee; ret`. | disassembly |
+| `0x7e26701b` | 1 | `thunk_to_7e22ccfa_7e26701b` | Plain thunk: `call 0x7e22ccfa; ret`. | disassembly |
+| `0x7e268f5d` | 4 | `get_u8_f190_7e268f5d` | Leaf `return (u8)*(this+190)`. | disassembly |
+| `0x7e26efb7` | 3 | `global_u8_60847c3a_set_7e26efb7` | `*(u8*)0x60847c3a = d0`. | disassembly |
+| `0x7e26f2ef` | 3 | `nop_7e26f2ef` | Empty function: `retf`. | disassembly |
+| `0x7e270c70` | 2 | `set_u16_f676_7e270c70` | `*(u16*)(this+676) = d0`. | disassembly |
+| `0x7e2960c9` | 1 | `nop_7e2960c9` | Empty function: `retf`. | disassembly |
+| `0x7e2997bf` | 2 | `nop_7e2997bf` | Empty function: `retf`. | disassembly |
+| `0x7e2c624c` | 1 | `global_6045e1bc_set_7e2c624c` | `*0x6045e1bc = a0`. | disassembly |
+| `0x7e2cac9d` | 5 | `ret_ptr_608481b8_7e2cac9d` | `return 0x608481b8` (a fixed address, in `a0`). | disassembly |
+| `0x7e2cacc3` | 3 | `get_f4_7e2cacc3` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e2cd0af` | 1 | `global_6045e35c_get_7e2cd0af` | Leaf `return *0x6045e35c`. | disassembly |
+| `0x7e2cd0b8` | 4 | `global_6045e35c_set_7e2cd0b8` | `*0x6045e35c = d0`. | disassembly |
+| `0x7e2cd6d7` | 3 | `global_6045e344_get_7e2cd6d7` | Leaf `return *0x6045e344`. | disassembly |
+| `0x7e2cd6e0` | 10 | `global_6045e348_set_7e2cd6e0` | `*0x6045e348 = d0`. | disassembly |
+| `0x7e2cd752` | 2 | `global_6045e350_set_7e2cd752` | `*0x6045e350 = a0`. | disassembly |
+| `0x7e2cd75b` | 2 | `global_6045e350_get_7e2cd75b` | Leaf `return *0x6045e350`. | disassembly |
+| `0x7e2cd79a` | 6 | `global_6045e358_get_7e2cd79a` | Leaf `return *0x6045e358`. | disassembly |
+| `0x7e2ce5ed` | 10 | `ret_ptr_608481c0_7e2ce5ed` | `return 0x608481c0` (a fixed address, in `a0`). | disassembly |
+| `0x7e2ce9bf` | 1 | `get_u16_f3852_7e2ce9bf` | Leaf `return (u16)*(this+3852)`. | disassembly |
+| `0x7e2cec92` | 2 | `get_u8_f10_7e2cec92` | Leaf `return (u8)*(this+10)`. | disassembly |
+| `0x7e2cecc8` | 2 | `get_u8_f11_7e2cecc8` | Leaf `return (u8)*(this+11)`. | disassembly |
+| `0x7e2ced3e` | 6 | `global_u8_608490dc_get_7e2ced3e` | Leaf `return (u8)*0x608490dc`. | disassembly |
+| `0x7e2ced85` | 3 | `set_f3856_7e2ced85` | `*(this+3856) = d0`. | disassembly |
+| `0x7e2ced8c` | 1 | `get_f3856_7e2ced8c` | Leaf `return *(this+3856)`. | disassembly |
+| `0x7e2d023d` | 9 | `ret_ptr_608490e0_7e2d023d` | `return 0x608490e0` (a fixed address, in `a0`). | disassembly |
+| `0x7e2d02f9` | 1 | `get_u16_f4_7e2d02f9` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e2d03cf` | 16 | `ret_ptr_608490f0_7e2d03cf` | `return 0x608490f0` (a fixed address, in `a0`). | disassembly |
+| `0x7e2d041d` | 1 | `get_u16_f2192_7e2d041d` | Leaf `return (u16)*(this+2192)`. | disassembly |
+| `0x7e2d04ba` | 4 | `get_u16_f4_7e2d04ba` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e2d0500` | 9 | `ret_ptr_60849984_7e2d0500` | `return 0x60849984` (a fixed address, in `a0`). | disassembly |
+| `0x7e2d064b` | 2 | `get_f16_7e2d064b` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e2d6da0` | 3 | `ret_ptr_6084999c_7e2d6da0` | `return 0x6084999c` (a fixed address, in `a0`). | disassembly |
+| `0x7e2d6dbc` | 1 | `set_f4_7e2d6dbc` | `*(this+4) = d0`. | disassembly |
+| `0x7e2d6dc2` | 1 | `get_f4_7e2d6dc2` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e2d87f9` | 3 | `get_u16_f50_7e2d87f9` | Leaf `return (u16)*(this+50)`. | disassembly |
+| `0x7e2dfff0` | 3 | `ret_ptr_608499a8_7e2dfff0` | `return 0x608499a8` (a fixed address, in `a0`). | disassembly |
+| `0x7e2e4fd1` | 7 | `get_f20_7e2e4fd1` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e2e508f` | 14 | `get_u16_f24_7e2e508f` | Leaf `return (u16)*(this+24)`. | disassembly |
+| `0x7e2e5095` | 6 | `get_u16_f28_7e2e5095` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7e2e509b` | 4 | `get_u16_f26_7e2e509b` | Leaf `return (u16)*(this+26)`. | disassembly |
+| `0x7e2e9c42` | 6 | `ret_ptr_60849ea0_7e2e9c42` | `return 0x60849ea0` (a fixed address, in `a0`). | disassembly |
+| `0x7e2ef986` | 2 | `ret_ptr_60849eac_7e2ef986` | `return 0x60849eac` (a fixed address, in `a0`). | disassembly |
+| `0x7e2f34cc` | 10 | `ret_ptr_60849eb0_7e2f34cc` | `return 0x60849eb0` (a fixed address, in `a0`). | disassembly |
+| `0x7e2f34eb` | 2 | `set_u16_f4_7e2f34eb` | `*(u16*)(this+4) = d0`. | disassembly |
+| `0x7e2f34f1` | 2 | `get_u16_f4_7e2f34f1` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e2f6ffb` | 8 | `ret_ptr_60849eb8_7e2f6ffb` | `return 0x60849eb8` (a fixed address, in `a0`). | disassembly |
+| `0x7e2fff91` | 2 | `nop_7e2fff91` | Empty function: `retf`. | disassembly |
+| `0x7e30610f` | 1 | `nop_7e30610f` | Empty function: `retf`. | disassembly |
+| `0x7e31ed24` | 7 | `set_f8_7e31ed24` | `*(this+8) = a1`. | disassembly |
+| `0x7e31ed79` | 19 | `set_f12_7e31ed79` | `*(this+12) = d0`. | disassembly |
+| `0x7e31ed7f` | 6 | `get_f12_7e31ed7f` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e31edad` | 5 | `nop_7e31edad` | Empty function: `retf`. | disassembly |
+| `0x7e31edb0` | 5 | `ret_ptr_00000000_7e31edb0` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e327679` | 2 | `global_6045fe68_get_7e327679` | Leaf `return *0x6045fe68`. | disassembly |
+| `0x7e3276c7` | 2 | `global_u16_6045fe6c_get_7e3276c7` | Leaf `return (u16)*0x6045fe6c`. | disassembly |
+| `0x7e33589f` | 3 | `global_60460184_set_7e33589f` | `*0x60460184 = a0`. | disassembly |
+| `0x7e3371a8` | 7 | `global_604601b0_get_7e3371a8` | Leaf `return *0x604601b0`. | disassembly |
+| `0x7e3371ec` | 1 | `global_604601b4_get_7e3371ec` | Leaf `return *0x604601b4`. | disassembly |
+| `0x7e337594` | 1 | `nop_7e337594` | Empty function: `retf`. | disassembly |
+| `0x7e338708` | 1 | `global_u16_60460232_set_7e338708` | `*(u16*)0x60460232 = d0`. | disassembly |
+| `0x7e33876e` | 1 | `global_604602a4_get_7e33876e` | Leaf `return *0x604602a4`. | disassembly |
+| `0x7e338be0` | 1 | `global_60460300_get_7e338be0` | Leaf `return *0x60460300`. | disassembly |
+| `0x7e338be9` | 1 | `global_60460304_get_7e338be9` | Leaf `return *0x60460304`. | disassembly |
+| `0x7e338f51` | 13 | `global_604602d8_set_7e338f51` | `*0x604602d8 = d0`. | disassembly |
+| `0x7e338f5a` | 5 | `global_604602d8_get_7e338f5a` | Leaf `return *0x604602d8`. | disassembly |
+| `0x7e3390f3` | 1 | `global_60460310_get_7e3390f3` | Leaf `return *0x60460310`. | disassembly |
+| `0x7e3392f9` | 1 | `global_60460320_get_7e3392f9` | Leaf `return *0x60460320`. | disassembly |
+| `0x7e3393ab` | 3 | `global_u16_6046032c_set_7e3393ab` | `*(u16*)0x6046032c = d0`. | disassembly |
+| `0x7e3393d9` | 5 | `global_u16_6046032e_get_7e3393d9` | Leaf `return (u16)*0x6046032e`. | disassembly |
+| `0x7e3394fd` | 2 | `global_u16_60460334_set_7e3394fd` | `*(u16*)0x60460334 = d0`. | disassembly |
+| `0x7e339506` | 1 | `global_u16_60460334_get_7e339506` | Leaf `return (u16)*0x60460334`. | disassembly |
+| `0x7e33950f` | 1 | `global_u16_6046033c_get_7e33950f` | Leaf `return (u16)*0x6046033c`. | disassembly |
+| `0x7e339518` | 3 | `global_u16_6046033e_get_7e339518` | Leaf `return (u16)*0x6046033e`. | disassembly |
+| `0x7e339521` | 2 | `global_u16_60460340_get_7e339521` | Leaf `return (u16)*0x60460340`. | disassembly |
+| `0x7e33994d` | 2 | `get_u8_f70_7e33994d` | Leaf `return (u8)*(this+70)`. | disassembly |
+| `0x7e339953` | 1 | `get_u8_f71_7e339953` | Leaf `return (u8)*(this+71)`. | disassembly |
+| `0x7e33abda` | 10 | `set_u8_f4_7e33abda` | `*(u8*)(this+4) = d0`. | disassembly |
+| `0x7e33abe0` | 6 | `get_u8_f4_7e33abe0` | Leaf `return (u8)*(this+4)`. | disassembly |
+| `0x7e33abe6` | 12 | `set_f8_7e33abe6` | `*(this+8) = d0`. | disassembly |
+| `0x7e33b3fe` | 1 | `nop_7e33b3fe` | Empty function: `retf`. | disassembly |
+| `0x7e33b401` | 1 | `nop_7e33b401` | Empty function: `retf`. | disassembly |
+| `0x7e33b528` | 5 | `nop_7e33b528` | Empty function: `retf`. | disassembly |
+| `0x7e33b55c` | 10 | `get_u8_f16_7e33b55c` | Leaf `return (u8)*(this+16)`. | disassembly |
+| `0x7e33b562` | 1 | `set_u8_f16_7e33b562` | `*(u8*)(this+16) = d0`. | disassembly |
+| `0x7e33b568` | 4 | `get_u8_f17_7e33b568` | Leaf `return (u8)*(this+17)`. | disassembly |
+| `0x7e33b656` | 5 | `set_f12_7e33b656` | `*(this+12) = d0`. | disassembly |
+| `0x7e33b65c` | 17 | `get_f12_7e33b65c` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e33c1ef` | 10 | `set_u16_f28_7e33c1ef` | `*(u16*)(this+28) = d0`. | disassembly |
+| `0x7e33c1f5` | 3 | `get_u16_f28_7e33c1f5` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7e33c2d7` | 3 | `global_u16_604603a8_get_7e33c2d7` | Leaf `return (u16)*0x604603a8`. | disassembly |
+| `0x7e33c327` | 1 | `global_604603b0_get_7e33c327` | Leaf `return *0x604603b0`. | disassembly |
+| `0x7e33c33a` | 2 | `global_u16_604603b6_get_7e33c33a` | Leaf `return (u16)*0x604603b6`. | disassembly |
+| `0x7e33c343` | 1 | `global_u16_604603b6_set_7e33c343` | `*(u16*)0x604603b6 = d0`. | disassembly |
+| `0x7e33c5d9` | 1 | `global_604603b8_set_7e33c5d9` | `*0x604603b8 = d0`. | disassembly |
+| `0x7e33c5f8` | 1 | `ret_ptr_00000000_7e33c5f8` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e33cc21` | 7 | `set_f64_7e33cc21` | `*(this+64) = d0`. | disassembly |
+| `0x7e33cc27` | 6 | `get_f64_7e33cc27` | Leaf `return *(this+64)`. | disassembly |
+| `0x7e33cc2d` | 7 | `set_f68_7e33cc2d` | `*(this+68) = d0`. | disassembly |
+| `0x7e33cc33` | 1 | `get_f68_7e33cc33` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e33cc39` | 2 | `set_f72_7e33cc39` | `*(this+72) = d0`. | disassembly |
+| `0x7e33cc3f` | 1 | `get_f72_7e33cc3f` | Leaf `return *(this+72)`. | disassembly |
+| `0x7e33cc45` | 2 | `set_f76_7e33cc45` | `*(this+76) = d0`. | disassembly |
+| `0x7e33cc4b` | 1 | `get_f76_7e33cc4b` | Leaf `return *(this+76)`. | disassembly |
+| `0x7e33cc51` | 2 | `set_f80_7e33cc51` | `*(this+80) = d0`. | disassembly |
+| `0x7e33cc57` | 1 | `get_f80_7e33cc57` | Leaf `return *(this+80)`. | disassembly |
+| `0x7e33cc5d` | 6 | `set_f84_7e33cc5d` | `*(this+84) = d0`. | disassembly |
+| `0x7e33cc63` | 10 | `get_f84_7e33cc63` | Leaf `return *(this+84)`. | disassembly |
+| `0x7e33cc82` | 8 | `get_u16_f88_7e33cc82` | Leaf `return (u16)*(this+88)`. | disassembly |
+| `0x7e33cc88` | 4 | `set_f92_7e33cc88` | `*(this+92) = d0`. | disassembly |
+| `0x7e33cc8e` | 4 | `get_f92_7e33cc8e` | Leaf `return *(this+92)`. | disassembly |
+| `0x7e33cc99` | 1 | `nop_7e33cc99` | Empty function: `retf`. | disassembly |
+| `0x7e33cca1` | 1 | `nop_7e33cca1` | Empty function: `retf`. | disassembly |
+| `0x7e33d98e` | 4 | `thunk_to_7dfe3727_7e33d98e` | Plain thunk: `call 0x7dfe3727; ret`. | disassembly |
+| `0x7e33d998` | 7 | `thunk_to_7dfe377d_7e33d998` | Plain thunk: `call 0x7dfe377d; ret`. | disassembly |
+| `0x7e33ddf2` | 2 | `global_60460468_get_7e33ddf2` | Leaf `return *0x60460468`. | disassembly |
+| `0x7e33de76` | 6 | `global_60460428_get_7e33de76` | Leaf `return *0x60460428`. | disassembly |
+| `0x7e33decd` | 1 | `global_6046043c_get_7e33decd` | Leaf `return *0x6046043c`. | disassembly |
+| `0x7e33df22` | 6 | `global_u16_60460440_get_7e33df22` | Leaf `return (u16)*0x60460440`. | disassembly |
+| `0x7e33df2b` | 11 | `global_u16_60460440_set_7e33df2b` | `*(u16*)0x60460440 = d0`. | disassembly |
+| `0x7e33df43` | 6 | `global_60460434_get_7e33df43` | Leaf `return *0x60460434`. | disassembly |
+| `0x7e33df4c` | 1 | `global_6046046c_get_7e33df4c` | Leaf `return *0x6046046c`. | disassembly |
+| `0x7e33df55` | 3 | `global_6046046c_set_7e33df55` | `*0x6046046c = d0`. | disassembly |
+| `0x7e33df5e` | 2 | `global_60460474_get_7e33df5e` | Leaf `return *0x60460474`. | disassembly |
+| `0x7e3402f2` | 1 | `nop_7e3402f2` | Empty function: `retf`. | disassembly |
+| `0x7e34034a` | 1 | `nop_7e34034a` | Empty function: `retf`. | disassembly |
+| `0x7e340563` | 36 | `set_u16_f4_7e340563` | `*(u16*)(this+4) = d0`. | disassembly |
+| `0x7e340569` | 23 | `get_u16_f4_7e340569` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e34056f` | 16 | `set_u16_f6_7e34056f` | `*(u16*)(this+6) = d0`. | disassembly |
+| `0x7e340575` | 8 | `get_u16_f6_7e340575` | Leaf `return (u16)*(this+6)`. | disassembly |
+| `0x7e34057b` | 30 | `set_u16_f8_7e34057b` | `*(u16*)(this+8) = d0`. | disassembly |
+| `0x7e340581` | 16 | `get_u16_f8_7e340581` | Leaf `return (u16)*(this+8)`. | disassembly |
+| `0x7e340587` | 16 | `set_u16_f10_7e340587` | `*(u16*)(this+10) = d0`. | disassembly |
+| `0x7e34058d` | 8 | `get_u16_f10_7e34058d` | Leaf `return (u16)*(this+10)`. | disassembly |
+| `0x7e340593` | 13 | `set_u16_f12_7e340593` | `*(u16*)(this+12) = d0`. | disassembly |
+| `0x7e340599` | 2 | `get_u16_f12_7e340599` | Leaf `return (u16)*(this+12)`. | disassembly |
+| `0x7e3405d7` | 6 | `set_f16_7e3405d7` | `*(this+16) = d0`. | disassembly |
+| `0x7e3405dd` | 2 | `get_f16_7e3405dd` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e3405e3` | 16 | `set_f20_7e3405e3` | `*(this+20) = d0`. | disassembly |
+| `0x7e3405e9` | 3 | `get_f20_7e3405e9` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e3405ef` | 2 | `set_f24_7e3405ef` | `*(this+24) = d0`. | disassembly |
+| `0x7e3405f5` | 1 | `get_f24_7e3405f5` | Leaf `return *(this+24)`. | disassembly |
+| `0x7e3405fb` | 5 | `set_u16_f28_7e3405fb` | `*(u16*)(this+28) = d0`. | disassembly |
+| `0x7e340601` | 1 | `get_u16_f28_7e340601` | Leaf `return (u16)*(this+28)`. | disassembly |
+| `0x7e340607` | 5 | `set_u16_f30_7e340607` | `*(u16*)(this+30) = d0`. | disassembly |
+| `0x7e34060d` | 1 | `get_u16_f30_7e34060d` | Leaf `return (u16)*(this+30)`. | disassembly |
+| `0x7e340613` | 2 | `set_f32_7e340613` | `*(this+32) = d0`. | disassembly |
+| `0x7e340619` | 11 | `set_u16_f48_7e340619` | `*(u16*)(this+48) = d0`. | disassembly |
+| `0x7e34061f` | 3 | `get_u16_f48_7e34061f` | Leaf `return (u16)*(this+48)`. | disassembly |
+| `0x7e340625` | 8 | `set_f36_7e340625` | `*(this+36) = d0`. | disassembly |
+| `0x7e34062b` | 4 | `get_f36_7e34062b` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e340631` | 6 | `set_u16_f40_7e340631` | `*(u16*)(this+40) = d0`. | disassembly |
+| `0x7e340637` | 4 | `get_u16_f40_7e340637` | Leaf `return (u16)*(this+40)`. | disassembly |
+| `0x7e34063d` | 6 | `set_u16_f42_7e34063d` | `*(u16*)(this+42) = d0`. | disassembly |
+| `0x7e340643` | 4 | `get_u16_f42_7e340643` | Leaf `return (u16)*(this+42)`. | disassembly |
+| `0x7e340649` | 3 | `set_f52_7e340649` | `*(this+52) = d0`. | disassembly |
+| `0x7e34064f` | 2 | `get_f52_7e34064f` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e340655` | 4 | `set_f44_7e340655` | `*(this+44) = d0`. | disassembly |
+| `0x7e34065b` | 1 | `get_f44_7e34065b` | Leaf `return *(this+44)`. | disassembly |
+| `0x7e340661` | 2 | `nop_7e340661` | Empty function: `retf`. | disassembly |
+| `0x7e340664` | 2 | `nop_7e340664` | Empty function: `retf`. | disassembly |
+| `0x7e349622` | 2 | `nop_7e349622` | Empty function: `retf`. | disassembly |
+| `0x7e349625` | 2 | `ret_ptr_00000000_7e349625` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e349bbf` | 39 | `get_u16_f8_7e349bbf` | Leaf `return (u16)*(this+8)`. | disassembly |
+| `0x7e349bc5` | 17 | `get_u16_f4_7e349bc5` | Leaf `return (u16)*(this+4)`. | disassembly |
+| `0x7e349cd1` | 3 | `set_u16_f10_7e349cd1` | `*(u16*)(this+10) = d0`. | disassembly |
+| `0x7e349cf7` | 9 | `set_f48_7e349cf7` | `*(this+48) = d0`. | disassembly |
+| `0x7e349d29` | 1 | `get_f12_7e349d29` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e34ba36` | 9 | `get_f36_7e34ba36` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e34bb34` | 1 | `get_u8_f32_7e34bb34` | Leaf `return (u8)*(this+32)`. | disassembly |
+| `0x7e34bb70` | 3 | `get_u8_f12_7e34bb70` | Leaf `return (u8)*(this+12)`. | disassembly |
+| `0x7e34bb90` | 2 | `get_f56_7e34bb90` | Leaf `return *(this+56)`. | disassembly |
+| `0x7e34bba0` | 10 | `get_f28_7e34bba0` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e34bbb3` | 5 | `get_f48_7e34bbb3` | Leaf `return *(this+48)`. | disassembly |
+| `0x7e34bbcf` | 2 | `get_f52_7e34bbcf` | Leaf `return *(this+52)`. | disassembly |
+| `0x7e34c301` | 5 | `global_u8_60460ec8_set_7e34c301` | `*(u8*)0x60460ec8 = d0`. | disassembly |
+| `0x7e34c30a` | 4 | `global_u8_60460ec8_get_7e34c30a` | Leaf `return (u8)*0x60460ec8`. | disassembly |
+| `0x7e34c313` | 5 | `global_u8_60460ec9_set_7e34c313` | `*(u8*)0x60460ec9 = d0`. | disassembly |
+| `0x7e34c31c` | 4 | `global_u8_60460ec9_get_7e34c31c` | Leaf `return (u8)*0x60460ec9`. | disassembly |
+| `0x7e34c325` | 9 | `global_u8_60460eca_set_7e34c325` | `*(u8*)0x60460eca = d0`. | disassembly |
+| `0x7e34c32e` | 5 | `global_u8_60460eca_get_7e34c32e` | Leaf `return (u8)*0x60460eca`. | disassembly |
+| `0x7e34c43c` | 4 | `global_u8_60460ecb_set_7e34c43c` | `*(u8*)0x60460ecb = d0`. | disassembly |
+| `0x7e34c445` | 1 | `global_u8_60460ecb_get_7e34c445` | Leaf `return (u8)*0x60460ecb`. | disassembly |
+| `0x7e34cbe6` | 1 | `global_60460ed8_get_7e34cbe6` | Leaf `return *0x60460ed8`. | disassembly |
+| `0x7e34cbef` | 1 | `global_60460ed8_set_7e34cbef` | `*0x60460ed8 = d0`. | disassembly |
+| `0x7e34cbf8` | 5 | `get_u16_f1048_7e34cbf8` | Leaf `return (u16)*(this+1048)`. | disassembly |
+| `0x7e34cbff` | 3 | `get_u16_f1050_7e34cbff` | Leaf `return (u16)*(this+1050)`. | disassembly |
+| `0x7e34dc73` | 2 | `global_60460f0c_get_7e34dc73` | Leaf `return *0x60460f0c`. | disassembly |
+| `0x7e34dc7c` | 1 | `global_60460f0c_set_7e34dc7c` | `*0x60460f0c = d0`. | disassembly |
+| `0x7e34e26d` | 1 | `nop_7e34e26d` | Empty function: `retf`. | disassembly |
+| `0x7e34e850` | 1 | `nop_7e34e850` | Empty function: `retf`. | disassembly |
+| `0x7e34e918` | 1 | `nop_7e34e918` | Empty function: `retf`. | disassembly |
+| `0x7e34ec81` | 1 | `nop_7e34ec81` | Empty function: `retf`. | disassembly |
+| `0x7e351df7` | 5 | `global_u16_608519f0_get_7e351df7` | Leaf `return (u16)*0x608519f0`. | disassembly |
+| `0x7e352706` | 2 | `global_60460f78_get_7e352706` | Leaf `return *0x60460f78`. | disassembly |
+| `0x7e352b1a` | 2 | `global_60460f80_set_7e352b1a` | `*0x60460f80 = d0`. | disassembly |
+| `0x7e352b23` | 3 | `global_60460f80_get_7e352b23` | Leaf `return *0x60460f80`. | disassembly |
+| `0x7e353705` | 1 | `nop_7e353705` | Empty function: `retf`. | disassembly |
+| `0x7e353e18` | 1 | `global_u8_60460f95_get_7e353e18` | Leaf `return (u8)*0x60460f95`. | disassembly |
+| `0x7e353e21` | 2 | `global_u8_60460f95_set_7e353e21` | `*(u8*)0x60460f95 = d0`. | disassembly |
+| `0x7e353f82` | 3 | `set_f200_7e353f82` | `*(this+200) = d0`. | disassembly |
+| `0x7e353f89` | 1 | `get_f200_7e353f89` | Leaf `return *(this+200)`. | disassembly |
+| `0x7e354dd1` | 1 | `nop_7e354dd1` | Empty function: `retf`. | disassembly |
+| `0x7e354ef2` | 1 | `global_60460fa4_set_7e354ef2` | `*0x60460fa4 = d0`. | disassembly |
+| `0x7e354efb` | 2 | `set_u16_f200_7e354efb` | `*(u16*)(this+200) = d0`. | disassembly |
+| `0x7e354f02` | 1 | `get_u16_f200_7e354f02` | Leaf `return (u16)*(this+200)`. | disassembly |
+| `0x7e355711` | 4 | `get_u16_f52_7e355711` | Leaf `return (u16)*(this+52)`. | disassembly |
+| `0x7e355717` | 2 | `get_u16_f50_7e355717` | Leaf `return (u16)*(this+50)`. | disassembly |
+| `0x7e355760` | 3 | `get_f64_7e355760` | Leaf `return *(this+64)`. | disassembly |
+| `0x7e355fc6` | 3 | `get_u16_f58_7e355fc6` | Leaf `return (u16)*(this+58)`. | disassembly |
+| `0x7e355fcc` | 2 | `get_u16_f56_7e355fcc` | Leaf `return (u16)*(this+56)`. | disassembly |
+| `0x7e356029` | 5 | `get_u16_f54_7e356029` | Leaf `return (u16)*(this+54)`. | disassembly |
+| `0x7e35602f` | 1 | `get_u16_f68_7e35602f` | Leaf `return (u16)*(this+68)`. | disassembly |
+| `0x7e3595ee` | 1 | `nop_7e3595ee` | Empty function: `retf`. | disassembly |
+| `0x7e35a15c` | 1 | `nop_7e35a15c` | Empty function: `retf`. | disassembly |
+| `0x7e35a288` | 1 | `global_60460fd4_set_7e35a288` | `*0x60460fd4 = d0`. | disassembly |
+| `0x7e35a291` | 2 | `set_u16_f200_7e35a291` | `*(u16*)(this+200) = d0`. | disassembly |
+| `0x7e35a298` | 1 | `get_u16_f200_7e35a298` | Leaf `return (u16)*(this+200)`. | disassembly |
+| `0x7e35caa5` | 1 | `get_f20_7e35caa5` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e35cdbd` | 1 | `nop_7e35cdbd` | Empty function: `retf`. | disassembly |
+| `0x7e35cdc0` | 1 | `nop_7e35cdc0` | Empty function: `retf`. | disassembly |
+| `0x7e35cdc3` | 1 | `nop_7e35cdc3` | Empty function: `retf`. | disassembly |
+| `0x7e35cf2b` | 1 | `nop_7e35cf2b` | Empty function: `retf`. | disassembly |
+| `0x7e35cf2e` | 1 | `nop_7e35cf2e` | Empty function: `retf`. | disassembly |
+| `0x7e35cf31` | 1 | `nop_7e35cf31` | Empty function: `retf`. | disassembly |
+| `0x7e35d82d` | 1 | `global_60461040_set_7e35d82d` | `*0x60461040 = d0`. | disassembly |
+| `0x7e6a0305` | 1 | `nop_7e6a0305` | Empty function: `retf`. | disassembly |
+| `0x7e6a1dfe` | 1 | `nop_7e6a1dfe` | Empty function: `retf`. | disassembly |
+| `0x7e6a20c9` | 5 | `global_60852404_set_7e6a20c9` | `*0x60852404 = d0`. | disassembly |
+| `0x7e6a20d2` | 1 | `global_60852404_get_7e6a20d2` | Leaf `return *0x60852404`. | disassembly |
+| `0x7e6a3534` | 2 | `thunk_to_7d996f64_7e6a3534` | Plain thunk: `call 0x7d996f64; ret`. | disassembly |
+| `0x7e6a3574` | 1 | `thunk_to_7d996f9c_7e6a3574` | Plain thunk: `call 0x7d996f9c; ret`. | disassembly |
+| `0x7e6a646f` | 2 | `nop_7e6a646f` | Empty function: `retf`. | disassembly |
+| `0x7e6a80da` | 2 | `global_u16_6085268e_set_7e6a80da` | `*(u16*)0x6085268e = d0`. | disassembly |
+| `0x7e6ac295` | 9 | `global_u16_60852f12_get_7e6ac295` | Leaf `return (u16)*0x60852f12`. | disassembly |
+| `0x7e6ac29e` | 9 | `global_u16_60852f14_set_7e6ac29e` | `*(u16*)0x60852f14 = d0`. | disassembly |
+| `0x7e6ac2a7` | 19 | `global_u16_60852f14_get_7e6ac2a7` | Leaf `return (u16)*0x60852f14`. | disassembly |
+| `0x7e6ae225` | 7 | `thunk_to_7e6c682b_7e6ae225` | Plain thunk: `call 0x7e6c682b; ret`. | disassembly |
+| `0x7e6ae22f` | 8 | `thunk_to_7e6c6868_7e6ae22f` | Plain thunk: `call 0x7e6c6868; ret`. | disassembly |
+| `0x7e6ae411` | 35 | `global_u16_60461800_set_7e6ae411` | `*(u16*)0x60461800 = d0`. | disassembly |
+| `0x7e6ae81d` | 6 | `global_60853790_set_7e6ae81d` | `*0x60853790 = d0`. | disassembly |
+| `0x7e6b0570` | 1 | `global_u16_60857080_get_7e6b0570` | Leaf `return (u16)*0x60857080`. | disassembly |
+| `0x7e6b05ad` | 4 | `global_u16_60856f1a_get_7e6b05ad` | Leaf `return (u16)*0x60856f1a`. | disassembly |
+| `0x7e6b06a3` | 2 | `global_60857078_get_7e6b06a3` | Leaf `return *0x60857078`. | disassembly |
+| `0x7e6b1138` | 3 | `global_u16_60856f18_get_7e6b1138` | Leaf `return (u16)*0x60856f18`. | disassembly |
+| `0x7e6b1e26` | 1 | `global_u16_60856f18_get_7e6b1e26` | Leaf `return (u16)*0x60856f18`. | disassembly |
+| `0x7e6b4808` | 3 | `global_608598b8_get_7e6b4808` | Leaf `return *0x608598b8`. | disassembly |
+| `0x7e6c6331` | 2 | `nop_7e6c6331` | Empty function: `retf`. | disassembly |
+| `0x7e6c6334` | 2 | `nop_7e6c6334` | Empty function: `retf`. | disassembly |
+| `0x7e6c8d25` | 1 | `nop_7e6c8d25` | Empty function: `retf`. | disassembly |
+| `0x7e6cd222` | 1 | `global_u8_608572a2_get_7e6cd222` | Leaf `return (u8)*0x608572a2`. | disassembly |
+| `0x7e6d2301` | 5 | `nop_7e6d2301` | Empty function: `retf`. | disassembly |
+| `0x7e6d5e1e` | 1 | `nop_7e6d5e1e` | Empty function: `retf`. | disassembly |
+| `0x7e6d66b6` | 20 | `nop_7e6d66b6` | Empty function: `retf`. | disassembly |
+| `0x7e6d6f7b` | 2 | `global_60461b80_set_7e6d6f7b` | `*0x60461b80 = d0`. | disassembly |
+| `0x7e6d89c6` | 2 | `nop_7e6d89c6` | Empty function: `retf`. | disassembly |
+| `0x7e6dd0aa` | 1 | `global_u8_7cc09ea5_get_7e6dd0aa` | Leaf `return (u8)*0x7cc09ea5`. | disassembly |
+| `0x7e6e207d` | 3 | `nop_7e6e207d` | Empty function: `retf`. | disassembly |
+| `0x7e6e25f2` | 1 | `global_u16_60461bae_get_7e6e25f2` | Leaf `return (u16)*0x60461bae`. | disassembly |
+| `0x7e6e25fb` | 9 | `global_u16_60461bb0_get_7e6e25fb` | Leaf `return (u16)*0x60461bb0`. | disassembly |
+| `0x7e6e996f` | 1 | `nop_7e6e996f` | Empty function: `retf`. | disassembly |
+| `0x7e6ea3f7` | 1 | `thunk_to_7e6c6162_7e6ea3f7` | Plain thunk: `call 0x7e6c6162; ret`. | disassembly |
+| `0x7e6ea49a` | 1 | `nop_7e6ea49a` | Empty function: `retf`. | disassembly |
+| `0x7e6f987a` | 4 | `global_u8_60461f14_set_7e6f987a` | `*(u8*)0x60461f14 = d0`. | disassembly |
+| `0x7e6fc314` | 2 | `global_a0a912f8_get_7e6fc314` | Leaf `return *0xa0a912f8`. | disassembly |
+| `0x7e6fc31d` | 1 | `global_a0a912f8_set_7e6fc31d` | `*0xa0a912f8 = d0`. | disassembly |
+| `0x7e6fdf0e` | 2 | `global_u16_608e926e_set_7e6fdf0e` | `*(u16*)0x608e926e = d0`. | disassembly |
+| `0x7e6fdf17` | 4 | `global_u16_608e926e_get_7e6fdf17` | Leaf `return (u16)*0x608e926e`. | disassembly |
+| `0x7e6ffb72` | 1 | `global_u8_60461f30_set_7e6ffb72` | `*(u8*)0x60461f30 = d0`. | disassembly |
+| `0x7e6ffb7b` | 1 | `global_u8_60461f30_get_7e6ffb7b` | Leaf `return (u8)*0x60461f30`. | disassembly |
+| `0x7e6ffd9c` | 2 | `thunk_to_7d996faa_7e6ffd9c` | Plain thunk: `call 0x7d996faa; ret`. | disassembly |
+| `0x7e6ffda6` | 2 | `thunk_to_7d996fb8_7e6ffda6` | Plain thunk: `call 0x7d996fb8; ret`. | disassembly |
+| `0x7e700408` | 1 | `ret_ptr_60462054_7e700408` | `return 0x60462054` (a fixed address, in `a0`). | disassembly |
+| `0x7e700451` | 1 | `global_60462084_get_7e700451` | Leaf `return *0x60462084`. | disassembly |
+| `0x7e70045a` | 1 | `global_60462088_get_7e70045a` | Leaf `return *0x60462088`. | disassembly |
+| `0x7e700dfe` | 1 | `global_604620c4_set_7e700dfe` | `*0x604620c4 = d0`. | disassembly |
+| `0x7e700e07` | 1 | `global_604620c8_set_7e700e07` | `*0x604620c8 = d0`. | disassembly |
+| `0x7e7011c5` | 2 | `nop_7e7011c5` | Empty function: `retf`. | disassembly |
+| `0x7e7020fd` | 1 | `global_608e9808_get_7e7020fd` | Leaf `return *0x608e9808`. | disassembly |
+| `0x7e702106` | 1 | `global_608e97f0_get_7e702106` | Leaf `return *0x608e97f0`. | disassembly |
+| `0x7e70287b` | 2 | `global_608e97ec_get_7e70287b` | Leaf `return *0x608e97ec`. | disassembly |
+| `0x7e702be3` | 1 | `thunk_to_7e716334_7e702be3` | Plain thunk: `call 0x7e716334; ret`. | disassembly |
+| `0x7e702bed` | 1 | `thunk_to_7e7162e3_7e702bed` | Plain thunk: `call 0x7e7162e3; ret`. | disassembly |
+| `0x7e704bb0` | 2 | `global_u16_60462198_set_7e704bb0` | `*(u16*)0x60462198 = d0`. | disassembly |
+| `0x7e704bb9` | 1 | `global_u16_60462198_get_7e704bb9` | Leaf `return (u16)*0x60462198`. | disassembly |
+| `0x7e7071d3` | 3 | `thunk_to_7d996e85_7e7071d3` | Plain thunk: `call 0x7d996e85; ret`. | disassembly |
+| `0x7e7071dd` | 1 | `thunk_to_7da886b4_7e7071dd` | Plain thunk: `call 0x7da886b4; ret`. | disassembly |
+| `0x7e7071e7` | 2 | `thunk_to_7d9999f9_7e7071e7` | Plain thunk: `call 0x7d9999f9; ret`. | disassembly |
+| `0x7e709315` | 1 | `global_a0a92378_get_7e709315` | Leaf `return *0xa0a92378`. | disassembly |
+| `0x7e709769` | 3 | `global_a0a922a4_set_7e709769` | `*0xa0a922a4 = d0`. | disassembly |
+| `0x7e709772` | 1 | `global_u16_a0a922a0_set_7e709772` | `*(u16*)0xa0a922a0 = d0`. | disassembly |
+| `0x7e70977b` | 2 | `global_a0a9234c_get_7e70977b` | Leaf `return *0xa0a9234c`. | disassembly |
+| `0x7e7097ad` | 1 | `global_a0a922a8_set_7e7097ad` | `*0xa0a922a8 = d0`. | disassembly |
+| `0x7e7097b6` | 1 | `global_a0a922a8_get_7e7097b6` | Leaf `return *0xa0a922a8`. | disassembly |
+| `0x7e7097bf` | 1 | `global_u8_a0a922a2_set_7e7097bf` | `*(u8*)0xa0a922a2 = d0`. | disassembly |
+| `0x7e70a089` | 1 | `nop_7e70a089` | Empty function: `retf`. | disassembly |
+| `0x7e70b2e0` | 4 | `global_a0a924f8_get_7e70b2e0` | Leaf `return *0xa0a924f8`. | disassembly |
+| `0x7e70bb3e` | 1 | `global_a0a9258c_get_7e70bb3e` | Leaf `return *0xa0a9258c`. | disassembly |
+| `0x7e70f0ce` | 3 | `global_a0a92590_get_7e70f0ce` | Leaf `return *0xa0a92590`. | disassembly |
+| `0x7e70f123` | 5 | `global_a0a92594_get_7e70f123` | Leaf `return *0xa0a92594`. | disassembly |
+| `0x7e7124e9` | 3 | `ret_ptr_7e78461f_7e7124e9` | `return 0x7e78461f` (a fixed address, in `a0`). | disassembly |
+| `0x7e7160a7` | 1 | `global_u8_6046239c_set_7e7160a7` | `*(u8*)0x6046239c = d0`. | disassembly |
+| `0x7e7217f3` | 2 | `global_6091c0a8_get_7e7217f3` | Leaf `return *0x6091c0a8`. | disassembly |
+| `0x7e72181c` | 5 | `global_u8_6091c098_set_7e72181c` | `*(u8*)0x6091c098 = d0`. | disassembly |
+| `0x7e7240dd` | 18 | `ret_ptr_00000000_7e7240dd` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e74fc10` | 2 | `nop_7e74fc10` | Empty function: `retf`. | disassembly |
+| `0x7e754ef1` | 4 | `nop_7e754ef1` | Empty function: `retf`. | disassembly |
+| `0x7e759152` | 1 | `ret_ptr_7e7a170c_7e759152` | `return 0x7e7a170c` (a fixed address, in `a0`). | disassembly |
+| `0x7e7c01f6` | 1 | `global_u16_a0936640_set_7e7c01f6` | `*(u16*)0xa0936640 = d0`. | disassembly |
+| `0x7e7c01ff` | 2 | `global_u16_a0936640_get_7e7c01ff` | Leaf `return (u16)*0xa0936640`. | disassembly |
+| `0x7e7c55e7` | 9 | `thunk_to_7d9c1982_7e7c55e7` | Plain thunk: `call 0x7d9c1982; ret`. | disassembly |
+| `0x7e7c73d0` | 1 | `nop_7e7c73d0` | Empty function: `retf`. | disassembly |
+| `0x7e7c7487` | 4 | `thunk_to_7d996e85_7e7c7487` | Plain thunk: `call 0x7d996e85; ret`. | disassembly |
+| `0x7e7c7491` | 5 | `thunk_to_7d9999f9_7e7c7491` | Plain thunk: `call 0x7d9999f9; ret`. | disassembly |
+| `0x7e7c8158` | 2 | `thunk_to_7d996f56_7e7c8158` | Plain thunk: `call 0x7d996f56; ret`. | disassembly |
+| `0x7e7c8162` | 4 | `thunk_to_7d996f64_7e7c8162` | Plain thunk: `call 0x7d996f64; ret`. | disassembly |
+| `0x7e7c8180` | 5 | `thunk_to_7d996fc6_7e7c8180` | Plain thunk: `call 0x7d996fc6; ret`. | disassembly |
+| `0x7e7c818a` | 4 | `thunk_to_7d996fd4_7e7c818a` | Plain thunk: `call 0x7d996fd4; ret`. | disassembly |
+| `0x7e7c8194` | 1 | `nop_7e7c8194` | Empty function: `retf`. | disassembly |
+| `0x7e7c8197` | 3 | `ret_ptr_a91f5400_7e7c8197` | `return 0xa91f5400` (a fixed address, in `a0`). | disassembly |
+| `0x7e7c8247` | 1 | `thunk_to_7d9c1982_7e7c8247` | Plain thunk: `call 0x7d9c1982; ret`. | disassembly |
+| `0x7e7c8e08` | 1 | `global_u16_60463714_set_7e7c8e08` | `*(u16*)0x60463714 = d0`. | disassembly |
+| `0x7e7c8e11` | 6 | `global_u16_60463718_get_7e7c8e11` | Leaf `return (u16)*0x60463718`. | disassembly |
+| `0x7e7c8e1a` | 4 | `global_u16_60463718_set_7e7c8e1a` | `*(u16*)0x60463718 = d0`. | disassembly |
+| `0x7e7c9309` | 5 | `thunk_to_7da83710_7e7c9309` | Plain thunk: `call 0x7da83710; ret`. | disassembly |
+| `0x7e7c931d` | 4 | `thunk_to_7da836f1_7e7c931d` | Plain thunk: `call 0x7da836f1; ret`. | disassembly |
+| `0x7e7c99d9` | 1 | `global_u16_604637c6_set_7e7c99d9` | `*(u16*)0x604637c6 = d0`. | disassembly |
+| `0x7e7ca43a` | 1 | `nop_7e7ca43a` | Empty function: `retf`. | disassembly |
+| `0x7e7ca43d` | 8 | `thunk_to_7e718f08_7e7ca43d` | Plain thunk: `call 0x7e718f08; ret`. | disassembly |
+| `0x7e7ca447` | 1 | `thunk_to_7e71ae92_7e7ca447` | Plain thunk: `call 0x7e71ae92; ret`. | disassembly |
+| `0x7e7caa83` | 15 | `global_u16_a093793e_get_7e7caa83` | Leaf `return (u16)*0xa093793e`. | disassembly |
+| `0x7e7cbd77` | 4 | `global_u16_a0937958_get_7e7cbd77` | Leaf `return (u16)*0xa0937958`. | disassembly |
+| `0x7e7ce2d8` | 1 | `nop_7e7ce2d8` | Empty function: `retf`. | disassembly |
+| `0x7e7ce2db` | 1 | `nop_7e7ce2db` | Empty function: `retf`. | disassembly |
+| `0x7e7ce2de` | 1 | `nop_7e7ce2de` | Empty function: `retf`. | disassembly |
+| `0x7e7ce4dc` | 1 | `global_u16_a0937fb0_set_7e7ce4dc` | `*(u16*)0xa0937fb0 = d0`. | disassembly |
+| `0x7e7ce71d` | 1 | `ret_ptr_7e88fcae_7e7ce71d` | `return 0x7e88fcae` (a fixed address, in `a0`). | disassembly |
+| `0x7e7cfc3c` | 1 | `global_a0938f98_set_7e7cfc3c` | `*0xa0938f98 = d0`. | disassembly |
+| `0x7e7cfc45` | 1 | `global_a0938f98_get_7e7cfc45` | Leaf `return *0xa0938f98`. | disassembly |
+| `0x7e7d0223` | 4 | `ret_ptr_bd42f800_7e7d0223` | `return 0xbd42f800` (a fixed address, in `a0`). | disassembly |
+| `0x7e7d041a` | 5 | `global_u16_a0938f7c_set_7e7d041a` | `*(u16*)0xa0938f7c = d0`. | disassembly |
+| `0x7e7d2486` | 6 | `thunk_to_7d996f8e_7e7d2486` | Plain thunk: `call 0x7d996f8e; ret`. | disassembly |
+| `0x7e7d249e` | 2 | `thunk_to_7d996f56_7e7d249e` | Plain thunk: `call 0x7d996f56; ret`. | disassembly |
+| `0x7e7d3e6a` | 1 | `nop_7e7d3e6a` | Empty function: `retf`. | disassembly |
+| `0x7e7d3e6d` | 1 | `nop_7e7d3e6d` | Empty function: `retf`. | disassembly |
+| `0x7e7d3e70` | 1 | `nop_7e7d3e70` | Empty function: `retf`. | disassembly |
+| `0x7e7d43f5` | 1 | `global_60463ec4_set_7e7d43f5` | `*0x60463ec4 = d0`. | disassembly |
+| `0x7e7d6324` | 1 | `nop_7e7d6324` | Empty function: `retf`. | disassembly |
+| `0x7e7d8e67` | 1 | `thunk_to_7d9c5851_7e7d8e67` | Plain thunk: `call 0x7d9c5851; ret`. | disassembly |
+| `0x7e7d908a` | 11 | `global_u16_a0939874_set_7e7d908a` | `*(u16*)0xa0939874 = d0`. | disassembly |
+| `0x7e7d9093` | 13 | `global_u16_a0939874_get_7e7d9093` | Leaf `return (u16)*0xa0939874`. | disassembly |
+| `0x7e7d9142` | 7 | `ret_ptr_a0939878_7e7d9142` | `return 0xa0939878` (a fixed address, in `a0`). | disassembly |
+| `0x7e7d915e` | 3 | `ret_ptr_a0939888_7e7d915e` | `return 0xa0939888` (a fixed address, in `a0`). | disassembly |
+| `0x7e7d9b12` | 11 | `thunk_to_7d996f72_7e7d9b12` | Plain thunk: `call 0x7d996f72; ret`. | disassembly |
+| `0x7e7d9b1c` | 1 | `thunk_to_7d996faa_7e7d9b1c` | Plain thunk: `call 0x7d996faa; ret`. | disassembly |
+| `0x7e7d9b26` | 11 | `thunk_to_7d996f80_7e7d9b26` | Plain thunk: `call 0x7d996f80; ret`. | disassembly |
+| `0x7e7d9b30` | 1 | `thunk_to_7d996fb8_7e7d9b30` | Plain thunk: `call 0x7d996fb8; ret`. | disassembly |
+| `0x7e7d9c4a` | 1 | `nop_7e7d9c4a` | Empty function: `retf`. | disassembly |
+| `0x7e7d9ff7` | 11 | `get_f8_7e7d9ff7` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e7da3d9` | 10 | `ret_ptr_a09398e4_7e7da3d9` | `return 0xa09398e4` (a fixed address, in `a0`). | disassembly |
+| `0x7e7da701` | 4 | `global_u16_a0939908_set_7e7da701` | `*(u16*)0xa0939908 = d0`. | disassembly |
+| `0x7e7da70a` | 7 | `global_u16_a0939908_get_7e7da70a` | Leaf `return (u16)*0xa0939908`. | disassembly |
+| `0x7e7da724` | 1 | `global_u16_60463f10_get_7e7da724` | Leaf `return (u16)*0x60463f10`. | disassembly |
+| `0x7e7dc2d9` | 2 | `global_u16_a093a0c8_get_7e7dc2d9` | Leaf `return (u16)*0xa093a0c8`. | disassembly |
+| `0x7e7dce7e` | 4 | `global_u16_a093a1e0_set_7e7dce7e` | `*(u16*)0xa093a1e0 = d0`. | disassembly |
+| `0x7e7dd220` | 1 | `nop_7e7dd220` | Empty function: `retf`. | disassembly |
+| `0x7e7dd9fe` | 1 | `thunk_to_7e87d182_7e7dd9fe` | Plain thunk: `call 0x7e87d182; ret`. | disassembly |
+| `0x7e7dda1a` | 7 | `thunk_to_7e87d3d0_7e7dda1a` | Plain thunk: `call 0x7e87d3d0; ret`. | disassembly |
+| `0x7e7e02e9` | 1 | `global_60a05ef0_set_7e7e02e9` | `*0x60a05ef0 = a0`. | disassembly |
+| `0x7e7e0369` | 2 | `thunk_to_7d999a53_7e7e0369` | Plain thunk: `call 0x7d999a53; ret`. | disassembly |
+| `0x7e7e0373` | 5 | `thunk_to_7da886fb_7e7e0373` | Plain thunk: `call 0x7da886fb; ret`. | disassembly |
+| `0x7e7e056f` | 1 | `ret_ptr_00000000_7e7e056f` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e7e070d` | 2 | `global_a093a330_get_7e7e070d` | Leaf `return *0xa093a330`. | disassembly |
+| `0x7e7e08d1` | 1 | `nop_7e7e08d1` | Empty function: `retf`. | disassembly |
+| `0x7e7e0fee` | 1 | `global_u8_60463f18_set_7e7e0fee` | `*(u8*)0x60463f18 = d0`. | disassembly |
+| `0x7e7e44f1` | 1 | `set_f60_7e7e44f1` | `*(this+60) = a1`. | disassembly |
+| `0x7e7f0915` | 1 | `ret_ptr_7e896778_7e7f0915` | `return 0x7e896778` (a fixed address, in `a0`). | disassembly |
+| `0x7e7f0a32` | 1 | `ret_ptr_7e89660c_7e7f0a32` | `return 0x7e89660c` (a fixed address, in `a0`). | disassembly |
+| `0x7e7f156a` | 18 | `thunk_to_7e843137_7e7f156a` | Plain thunk: `call 0x7e843137; ret`. | disassembly |
+| `0x7e7f1574` | 2 | `thunk_to_7e843078_7e7f1574` | Plain thunk: `call 0x7e843078; ret`. | disassembly |
+| `0x7e7f157e` | 1 | `thunk_to_7e843137_7e7f157e` | Plain thunk: `call 0x7e843137; ret`. | disassembly |
+| `0x7e7f1c5a` | 6 | `get_f12_7e7f1c5a` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e7f1f5d` | 2 | `get_f4_7e7f1f5d` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e7f4e9b` | 2 | `get_f248_7e7f4e9b` | Leaf `return *(this+248)`. | disassembly |
+| `0x7e7f5bc5` | 3 | `get_f168_7e7f5bc5` | Leaf `return *(this+168)`. | disassembly |
+| `0x7e7f5be0` | 4 | `get_f164_7e7f5be0` | Leaf `return *(this+164)`. | disassembly |
+| `0x7e7f5cfa` | 7 | `get_f8_7e7f5cfa` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e7f60e2` | 13 | `nop_7e7f60e2` | Empty function: `retf`. | disassembly |
+| `0x7e7f7336` | 4 | `get_f88_7e7f7336` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e7f816e` | 4 | `get_f68_7e7f816e` | Leaf `return *(this+68)`. | disassembly |
+| `0x7e7f87cb` | 2 | `ret_ptr_7e7f1567_7e7f87cb` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e7fada2` | 2 | `ret_ptr_7e7f1567_7e7fada2` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e7faf20` | 2 | `ret_ptr_7e7f1567_7e7faf20` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e7fdbf9` | 4 | `get_f84_7e7fdbf9` | Leaf `return *(this+84)`. | disassembly |
+| `0x7e7fdbff` | 2 | `get_f84_7e7fdbff` | Leaf `return *(this+84)`. | disassembly |
+| `0x7e7fdc05` | 2 | `get_f88_7e7fdc05` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e7ffff6` | 27 | `get_f116_7e7ffff6` | Leaf `return *(this+116)`. | disassembly |
+| `0x7e800f22` | 3 | `nop_7e800f22` | Empty function: `retf`. | disassembly |
+| `0x7e800f25` | 3 | `ret_ptr_7e7f1567_7e800f25` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e80113a` | 2 | `nop_7e80113a` | Empty function: `retf`. | disassembly |
+| `0x7e80113d` | 2 | `ret_ptr_7e7f1567_7e80113d` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e801bf1` | 4 | `get_u8_f20_7e801bf1` | Leaf `return (u8)*(this+20)`. | disassembly |
+| `0x7e802f49` | 2 | `nop_7e802f49` | Empty function: `retf`. | disassembly |
+| `0x7e802f4c` | 2 | `ret_ptr_7e7f1567_7e802f4c` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e803993` | 1 | `nop_7e803993` | Empty function: `retf`. | disassembly |
+| `0x7e803cd2` | 2 | `nop_7e803cd2` | Empty function: `retf`. | disassembly |
+| `0x7e804ef7` | 4 | `get_f88_7e804ef7` | Leaf `return *(this+88)`. | disassembly |
+| `0x7e804f03` | 13 | `get_f92_7e804f03` | Leaf `return *(this+92)`. | disassembly |
+| `0x7e8050c5` | 2 | `ret_ptr_7e7f1567_7e8050c5` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e807d44` | 1 | `get_f132_7e807d44` | Leaf `return *(this+132)`. | disassembly |
+| `0x7e807e12` | 2 | `get_f48_7e807e12` | Leaf `return *(this+48)`. | disassembly |
+| `0x7e807e18` | 1 | `get_f44_7e807e18` | Leaf `return *(this+44)`. | disassembly |
+| `0x7e807e1e` | 2 | `get_f28_7e807e1e` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e807e24` | 1 | `get_f12_7e807e24` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e807e2a` | 1 | `get_f16_7e807e2a` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e807e66` | 1 | `get_f140_7e807e66` | Leaf `return *(this+140)`. | disassembly |
+| `0x7e807e6d` | 1 | `get_f144_7e807e6d` | Leaf `return *(this+144)`. | disassembly |
+| `0x7e807e74` | 4 | `get_f148_7e807e74` | Leaf `return *(this+148)`. | disassembly |
+| `0x7e8086ff` | 2 | `get_u8_f1097_7e8086ff` | Leaf `return (u8)*(this+1097)`. | disassembly |
+| `0x7e80c621` | 1 | `nop_7e80c621` | Empty function: `retf`. | disassembly |
+| `0x7e80cb57` | 1 | `set_f424_7e80cb57` | `*(this+424) = d0`. | disassembly |
+| `0x7e80cb6d` | 1 | `set_f440_7e80cb6d` | `*(this+440) = d0`. | disassembly |
+| `0x7e80cb74` | 1 | `get_f284_7e80cb74` | Leaf `return *(this+284)`. | disassembly |
+| `0x7e80cb7b` | 1 | `set_f288_7e80cb7b` | `*(this+288) = d0`. | disassembly |
+| `0x7e80cb82` | 1 | `set_f452_7e80cb82` | `*(this+452) = d0`. | disassembly |
+| `0x7e80cb89` | 1 | `set_f292_7e80cb89` | `*(this+292) = d0`. | disassembly |
+| `0x7e810d35` | 2 | `set_f32_7e810d35` | `*(this+32) = a1`. | disassembly |
+| `0x7e810d3b` | 4 | `get_f32_7e810d3b` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e810d9e` | 2 | `get_f36_7e810d9e` | Leaf `return *(this+36)`. | disassembly |
+| `0x7e815239` | 6 | `get_f464_7e815239` | Leaf `return *(this+464)`. | disassembly |
+| `0x7e815240` | 2 | `set_f464_7e815240` | `*(this+464) = d0`. | disassembly |
+| `0x7e815247` | 2 | `get_f456_7e815247` | Leaf `return *(this+456)`. | disassembly |
+| `0x7e81524e` | 2 | `get_f460_7e81524e` | Leaf `return *(this+460)`. | disassembly |
+| `0x7e816087` | 5 | `get_f4152_7e816087` | Leaf `return *(this+4152)`. | disassembly |
+| `0x7e81608e` | 2 | `get_f4156_7e81608e` | Leaf `return *(this+4156)`. | disassembly |
+| `0x7e8160a0` | 3 | `get_f3168_7e8160a0` | Leaf `return *(this+3168)`. | disassembly |
+| `0x7e8160a7` | 4 | `get_f3164_7e8160a7` | Leaf `return *(this+3164)`. | disassembly |
+| `0x7e819598` | 5 | `set_f28_7e819598` | `*(this+28) = d0`. | disassembly |
+| `0x7e81ab3c` | 2 | `nop_7e81ab3c` | Empty function: `retf`. | disassembly |
+| `0x7e81ab3f` | 2 | `ret_ptr_7e7f1567_7e81ab3f` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e8207f3` | 2 | `set_f408_7e8207f3` | `*(this+408) = d0`. | disassembly |
+| `0x7e8207fa` | 1 | `set_f524_7e8207fa` | `*(this+524) = d0`. | disassembly |
+| `0x7e820801` | 1 | `set_f548_7e820801` | `*(this+548) = d0`. | disassembly |
+| `0x7e823178` | 1 | `get_f128_7e823178` | Leaf `return *(this+128)`. | disassembly |
+| `0x7e82318e` | 1 | `get_f500_7e82318e` | Leaf `return *(this+500)`. | disassembly |
+| `0x7e823195` | 1 | `get_f220_7e823195` | Leaf `return *(this+220)`. | disassembly |
+| `0x7e8231bb` | 1 | `get_f264_7e8231bb` | Leaf `return *(this+264)`. | disassembly |
+| `0x7e8231c2` | 1 | `get_f296_7e8231c2` | Leaf `return *(this+296)`. | disassembly |
+| `0x7e8231c9` | 1 | `get_f340_7e8231c9` | Leaf `return *(this+340)`. | disassembly |
+| `0x7e823214` | 1 | `get_f512_7e823214` | Leaf `return *(this+512)`. | disassembly |
+| `0x7e82321b` | 1 | `get_f376_7e82321b` | Leaf `return *(this+376)`. | disassembly |
+| `0x7e82586f` | 3 | `ret_ptr_7e7f1567_7e82586f` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e826de4` | 1 | `get_f128_7e826de4` | Leaf `return *(this+128)`. | disassembly |
+| `0x7e826deb` | 1 | `get_f220_7e826deb` | Leaf `return *(this+220)`. | disassembly |
+| `0x7e826e11` | 1 | `get_f264_7e826e11` | Leaf `return *(this+264)`. | disassembly |
+| `0x7e826e18` | 1 | `get_f296_7e826e18` | Leaf `return *(this+296)`. | disassembly |
+| `0x7e826e1f` | 1 | `get_f340_7e826e1f` | Leaf `return *(this+340)`. | disassembly |
+| `0x7e826e55` | 1 | `get_f492_7e826e55` | Leaf `return *(this+492)`. | disassembly |
+| `0x7e826e5c` | 1 | `get_f376_7e826e5c` | Leaf `return *(this+376)`. | disassembly |
+| `0x7e826eae` | 1 | `get_f576_7e826eae` | Leaf `return *(this+576)`. | disassembly |
+| `0x7e826eb5` | 1 | `get_f524_7e826eb5` | Leaf `return *(this+524)`. | disassembly |
+| `0x7e828b6a` | 1 | `set_f744_7e828b6a` | `*(this+744) = d0`. | disassembly |
+| `0x7e8299c7` | 1 | `get_f128_7e8299c7` | Leaf `return *(this+128)`. | disassembly |
+| `0x7e8299ce` | 1 | `get_f492_7e8299ce` | Leaf `return *(this+492)`. | disassembly |
+| `0x7e8299f4` | 1 | `get_f264_7e8299f4` | Leaf `return *(this+264)`. | disassembly |
+| `0x7e8299fb` | 1 | `get_f296_7e8299fb` | Leaf `return *(this+296)`. | disassembly |
+| `0x7e829a40` | 1 | `get_f524_7e829a40` | Leaf `return *(this+524)`. | disassembly |
+| `0x7e829a47` | 1 | `get_f548_7e829a47` | Leaf `return *(this+548)`. | disassembly |
+| `0x7e829a5d` | 1 | `get_f384_7e829a5d` | Leaf `return *(this+384)`. | disassembly |
+| `0x7e829a64` | 1 | `get_f340_7e829a64` | Leaf `return *(this+340)`. | disassembly |
+| `0x7e829a98` | 1 | `get_f592_7e829a98` | Leaf `return *(this+592)`. | disassembly |
+| `0x7e829aaf` | 1 | `get_f700_7e829aaf` | Leaf `return *(this+700)`. | disassembly |
+| `0x7e82ea1b` | 3 | `ret_ptr_7e7f1567_7e82ea1b` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e82ea24` | 1 | `get_f8_7e82ea24` | Leaf `return *(this+8)`. | disassembly |
+| `0x7e82ede7` | 1 | `nop_7e82ede7` | Empty function: `retf`. | disassembly |
+| `0x7e82edea` | 1 | `ret_ptr_7e7f1567_7e82edea` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e8326fd` | 1 | `nop_7e8326fd` | Empty function: `retf`. | disassembly |
+| `0x7e832b66` | 2 | `get_f12_7e832b66` | Leaf `return *(this+12)`. | disassembly |
+| `0x7e832b6c` | 2 | `get_f28_7e832b6c` | Leaf `return *(this+28)`. | disassembly |
+| `0x7e832b72` | 2 | `get_f32_7e832b72` | Leaf `return *(this+32)`. | disassembly |
+| `0x7e832c22` | 1 | `get_f48_7e832c22` | Leaf `return *(this+48)`. | disassembly |
+| `0x7e832cf6` | 2 | `get_f44_7e832cf6` | Leaf `return *(this+44)`. | disassembly |
+| `0x7e8335a5` | 2 | `get_u8_f90_7e8335a5` | Leaf `return (u8)*(this+90)`. | disassembly |
+| `0x7e8335eb` | 4 | `set_f160_7e8335eb` | `*(this+160) = d0`. | disassembly |
+| `0x7e8335f2` | 2 | `get_f132_7e8335f2` | Leaf `return *(this+132)`. | disassembly |
+| `0x7e8335f9` | 1 | `get_f164_7e8335f9` | Leaf `return *(this+164)`. | disassembly |
+| `0x7e834430` | 1 | `nop_7e834430` | Empty function: `retf`. | disassembly |
+| `0x7e83e62e` | 3 | `nop_7e83e62e` | Empty function: `retf`. | disassembly |
+| `0x7e83e97d` | 1 | `global_6047f714_get_7e83e97d` | Leaf `return *0x6047f714`. | disassembly |
+| `0x7e83ea4e` | 1 | `thunk_to_7e7f172b_7e83ea4e` | Plain thunk: `call 0x7e7f172b; ret`. | disassembly |
+| `0x7e83eb51` | 1 | `thunk_to_7e7f1781_7e83eb51` | Plain thunk: `call 0x7e7f1781; ret`. | disassembly |
+| `0x7e83eb73` | 2 | `ret_ptr_7e7f1567_7e83eb73` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e83efde` | 2 | `ret_ptr_7e7f1567_7e83efde` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e83f447` | 6 | `get_f4_7e83f447` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e83f476` | 2 | `ret_ptr_7e7f1567_7e83f476` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e842fea` | 10 | `get_f16_7e842fea` | Leaf `return *(this+16)`. | disassembly |
+| `0x7e842ff0` | 9 | `get_f20_7e842ff0` | Leaf `return *(this+20)`. | disassembly |
+| `0x7e84300a` | 2 | `ret_ptr_7e7f1567_7e84300a` | `return 0x7e7f1567` (a fixed address, in `a0`). | disassembly |
+| `0x7e850e61` | 3 | `thunk_to_7ddd10a7_7e850e61` | Plain thunk: `call 0x7ddd10a7; ret`. | disassembly |
+| `0x7e850eaf` | 3 | `thunk_to_7ddd1348_7e850eaf` | Plain thunk: `call 0x7ddd1348; ret`. | disassembly |
+| `0x7e8510e0` | 1 | `nop_7e8510e0` | Empty function: `retf`. | disassembly |
+| `0x7e8514ad` | 1 | `nop_7e8514ad` | Empty function: `retf`. | disassembly |
+| `0x7e8517ee` | 1 | `nop_7e8517ee` | Empty function: `retf`. | disassembly |
+| `0x7e8517f1` | 1 | `ret_ptr_00000000_7e8517f1` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e851817` | 4 | `nop_7e851817` | Empty function: `retf`. | disassembly |
+| `0x7e85186b` | 17 | `ret_ptr_60481da8_7e85186b` | `return 0x60481da8` (a fixed address, in `a0`). | disassembly |
+| `0x7e8540e7` | 2 | `get_f4_7e8540e7` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e8540ed` | 1 | `nop_7e8540ed` | Empty function: `retf`. | disassembly |
+| `0x7e8540f0` | 5 | `nop_7e8540f0` | Empty function: `retf`. | disassembly |
+| `0x7e8540f3` | 7 | `nop_7e8540f3` | Empty function: `retf`. | disassembly |
+| `0x7e8540f6` | 2 | `nop_7e8540f6` | Empty function: `retf`. | disassembly |
+| `0x7e8540f9` | 5 | `nop_7e8540f9` | Empty function: `retf`. | disassembly |
+| `0x7e854222` | 7 | `nop_7e854222` | Empty function: `retf`. | disassembly |
+| `0x7e854225` | 1 | `nop_7e854225` | Empty function: `retf`. | disassembly |
+| `0x7e854228` | 5 | `nop_7e854228` | Empty function: `retf`. | disassembly |
+| `0x7e8543ce` | 4 | `get_f4_7e8543ce` | Leaf `return *(this+4)`. | disassembly |
+| `0x7e8543d4` | 4 | `nop_7e8543d4` | Empty function: `retf`. | disassembly |
+| `0x7e8543d7` | 9 | `nop_7e8543d7` | Empty function: `retf`. | disassembly |
+| `0x7e854b1e` | 2 | `nop_7e854b1e` | Empty function: `retf`. | disassembly |
+| `0x7e854b21` | 1 | `nop_7e854b21` | Empty function: `retf`. | disassembly |
+| `0x7e8554f4` | 1 | `nop_7e8554f4` | Empty function: `retf`. | disassembly |
+| `0x7e867ad0` | 1 | `nop_7e867ad0` | Empty function: `retf`. | disassembly |
+| `0x7e86b82c` | 1 | `nop_7e86b82c` | Empty function: `retf`. | disassembly |
+| `0x7e87001c` | 1 | `nop_7e87001c` | Empty function: `retf`. | disassembly |
+| `0x7e8755ca` | 4 | `thunk_to_7e88d09e_7e8755ca` | Plain thunk: `call 0x7e88d09e; ret`. | disassembly |
+| `0x7e8767e3` | 1 | `nop_7e8767e3` | Empty function: `retf`. | disassembly |
+| `0x7e87ab4e` | 1 | `nop_7e87ab4e` | Empty function: `retf`. | disassembly |
+| `0x7e87ad36` | 1 | `nop_7e87ad36` | Empty function: `retf`. | disassembly |
+| `0x7e87cc3c` | 1 | `nop_7e87cc3c` | Empty function: `retf`. | disassembly |
+| `0x7e87d5be` | 1 | `nop_7e87d5be` | Empty function: `retf`. | disassembly |
+| `0x7e87d5c1` | 1 | `nop_7e87d5c1` | Empty function: `retf`. | disassembly |
+| `0x7e87d75e` | 19 | `nop_7e87d75e` | Empty function: `retf`. | disassembly |
+| `0x7e881f1c` | 2 | `thunk_to_7d9a173b_7e881f1c` | Plain thunk: `call 0x7d9a173b; ret`. | disassembly |
+| `0x7e882003` | 1 | `thunk_to_7d9a1c14_7e882003` | Plain thunk: `call 0x7d9a1c14; ret`. | disassembly |
+| `0x7e8839c0` | 1 | `ret_ptr_60482368_7e8839c0` | `return 0x60482368` (a fixed address, in `a0`). | disassembly |
+| `0x7e883c97` | 1 | `nop_7e883c97` | Empty function: `retf`. | disassembly |
+| `0x7e883c9a` | 1 | `global_604823d4_set_7e883c9a` | `*0x604823d4 = a0`. | disassembly |
+| `0x7e88b34c` | 3 | `global_604823e8_set_7e88b34c` | `*0x604823e8 = a0`. | disassembly |
+| `0x7e88cd9f` | 2 | `ret_ptr_00000000_7e88cd9f` | `return 0x00000000` (a fixed address, in `a0`). | disassembly |
+| `0x7e88cda4` | 1 | `thunk_to_7d9a19d2_7e88cda4` | Plain thunk: `call 0x7d9a19d2; ret`. | disassembly |
+| `0x7e88d148` | 1 | `thunk_to_7e87d5c1_7e88d148` | Plain thunk: `call 0x7e87d5c1; ret`. | disassembly |
+| `0x7e9daad3` | 2 | `global_8ff0009c_get_7e9daad3` | Leaf `return *0x8ff0009c`. | disassembly |
+| `0x7e9dab2a` | 2 | `global_8ff000c8_get_7e9dab2a` | Leaf `return *0x8ff000c8`. | disassembly |
+| `0x7e9dae68` | 1 | `global_98e00098_get_7e9dae68` | Leaf `return *0x98e00098`. | disassembly |
