@@ -148,6 +148,9 @@ Prioritised list of app, client and firmware-idea work: [`ISSUES.md`](ISSUES.md)
   [`ARCHITECTURE.md`](ARCHITECTURE.md), details in `app/README.md`.
 - Stock firmware 1.0–1.3 BINs are not available.
 
+Related outside projects (OM-3 and E-P7 firmware mods with the same CPU and card-update method, an
+emulator for this firmware family): [`mods/related-projects.md`](mods/related-projects.md).
+
 ## Open RE items
 - What starts the SD scanner task at power-on (OK held), and whether that code is inside block 0.
 - Re-derive the task registry names from the names the boot code logs (ids are shifted by one).

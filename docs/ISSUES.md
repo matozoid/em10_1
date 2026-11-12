@@ -25,6 +25,8 @@ firmware is flashed. Every **flash** item is therefore parked as an idea; its re
 4. **C8** — a live-view window; it unlocks most of the tethering features.
 5. **A1** — move the Wi-Fi client into the app's shared code once C1–C3 have confirmed the protocol.
 6. **M0** — find out on paper whether the firmware already contains unused Wi-Fi features.
+   **M12** alongside it: see whether the emulator can run this firmware; that decides how testable any
+   modification idea is.
 7. **A3, A4** — the two big user-facing screens: import and remote control.
 
 ## Wi-Fi client (`tools/emcam.py`)
@@ -75,6 +77,8 @@ paper research that would tell us what such a modification would involve.
 | Id | P | Issue | Value | Effort | Risk | Depends | Status |
 |---|---|---|---|---|---|---|---|
 | M0 | 2 | Research: does the E-M10 firmware contain unused Wi-Fi handlers that the E-M1 exposes (movie start/stop, `get_screennail`, more properties)? Decides whether M1–M3 are small switches or new code | high | M | none | – | open |
+| M12 | 2 | Research: try the E-M10 Mark I firmware in the OM-Emu emulator (listed there as "surveyed, not tried"; the Mark II–IV are ported). A working port would let changes be tested without the camera. See `mods/related-projects.md` | high | L | none | – | open |
+| M13 | 3 | Research: read the Caduceus E-P7 and OM-3 notes for methods that transfer (code placement, card-loaded code, patcher with checksum, on-card debug log) and for which of their features could exist on a 2014 body | med | M | none | – | open |
 | M10 | 3 | Research: a build setup for patch code (assembler and linker scripts for code placed in the free area of block 0, checked against the "never patch" list) | med | M | none | – | open |
 | M11 | 3 | Research: the open flash-safety questions in `STATUS.md` (what selects the card update at power-on, recovery after a failed write). Prerequisite for ever un-parking a flash item | high | L | none | – | open |
 | M1 | – | Movie start and stop over Wi-Fi (the E-M1 has `startmovietake` / `stopmovietake`) | med | ? | flash | M0 | parked |
