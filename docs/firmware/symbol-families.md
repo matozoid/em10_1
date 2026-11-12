@@ -4384,3 +4384,1758 @@ Listed 2026-11-12 from block-0 function entries whose bytes match exactly:
 | `0x7e83364d` | 1 | `obj_set1_f144_7e83364d` | `*(this+144) = 1`. | pattern scan |
 | `0x7e87e83e` | 1 | `entry_thunk_7e87e83e` | `call` to the body directly after it (`0x7e87e846`, register-save mask `0xe0`, frame 20) and `ret`: the separate entry stub the compiler emits in front of a body that saves registers. | pattern scan |
 | `0x7e88d140` | 1 | `entry_thunk_7e88d140` | `call` to the body directly after it (`0x7e88d148`, register-save mask `0x00`, frame 4) and `ret`: the separate entry stub the compiler emits in front of a body that saves registers. | pattern scan |
+
+## Shared-body entry stubs (pattern family)
+8-byte functions `call X,[regs],N; ret` whose target `X` is **not** the code right after them: a second
+entry point into an existing body, with its own register-save mask. Many are Cmp component state helpers
+that share one body per class. 1299 listed, named `entry_stub_<address>`; the role column gives the body.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d992218` | 15 | `entry_stub_7d992218` | `call 0x7d9999f9,[mask 0xa0],40; ret` — second entry into the body at `0x7d9999f9`. | pattern scan |
+| `0x7d992f05` | 1 | `entry_stub_7d992f05` | `call 0x7d99449d,[mask 0xf0],48; ret` — second entry into the body at `0x7d99449d`. | pattern scan |
+| `0x7d994804` | 2 | `entry_stub_7d994804` | `call 0x7d994aa5,[mask 0x00],4; ret` — second entry into the body at `0x7d994aa5`. | pattern scan |
+| `0x7d994987` | 4 | `entry_stub_7d994987` | `call 0x7d994eae,[mask 0xf0],32; ret` — second entry into the body at `0x7d994eae`. | pattern scan |
+| `0x7d995095` | 5 | `entry_stub_7d995095` | `call 0x7d9965b5,[mask 0xe0],24; ret` — second entry into the body at `0x7d9965b5`. | pattern scan |
+| `0x7d9950bb` | 1 | `entry_stub_7d9950bb` | `call 0x7d995be5,[mask 0xf0],40; ret` — second entry into the body at `0x7d995be5`. | pattern scan |
+| `0x7d9950c3` | 1 | `entry_stub_7d9950c3` | `call 0x7d995d1e,[mask 0xf0],56; ret` — second entry into the body at `0x7d995d1e`. | pattern scan |
+| `0x7d9a19ca` | 7 | `entry_stub_7d9a19ca` | `call 0x7d9a18fe,[mask 0xf0],20; ret` — second entry into the body at `0x7d9a18fe`. | pattern scan |
+| `0x7d9b163d` | 1 | `entry_stub_7d9b163d` | `call 0x7d9b14a3,[mask 0x00],4; ret` — second entry into the body at `0x7d9b14a3`. | pattern scan |
+| `0x7d9dbf0a` | 1 | `entry_stub_7d9dbf0a` | `call 0x7d9dcac7,[mask 0x00],0; ret` — second entry into the body at `0x7d9dcac7`. | pattern scan |
+| `0x7d9dc21a` | 2 | `entry_stub_7d9dc21a` | `call 0x7d9dcae1,[mask 0x00],0; ret` — second entry into the body at `0x7d9dcae1`. | pattern scan |
+| `0x7d9df37d` | 1 | `entry_stub_7d9df37d` | `call 0x7d9dedaa,[mask 0x00],0; ret` — second entry into the body at `0x7d9dedaa`. | pattern scan |
+| `0x7d9df385` | 4 | `entry_stub_7d9df385` | `call 0x7d9dedb6,[mask 0x80],4; ret` — second entry into the body at `0x7d9dedb6`. | pattern scan |
+| `0x7d9df38d` | 2 | `entry_stub_7d9df38d` | `call 0x7d9dee16,[mask 0x00],0; ret` — second entry into the body at `0x7d9dee16`. | pattern scan |
+| `0x7d9df395` | 1 | `entry_stub_7d9df395` | `call 0x7d9dee5a,[mask 0x80],4; ret` — second entry into the body at `0x7d9dee5a`. | pattern scan |
+| `0x7d9df39d` | 1 | `entry_stub_7d9df39d` | `call 0x7d9dee96,[mask 0x00],0; ret` — second entry into the body at `0x7d9dee96`. | pattern scan |
+| `0x7d9e039e` | 1 | `entry_stub_7d9e039e` | `call 0x7d9df3ae,[mask 0x00],4; ret` — second entry into the body at `0x7d9df3ae`. | pattern scan |
+| `0x7d9e03a6` | 1 | `entry_stub_7d9e03a6` | `call 0x7d9dfc58,[mask 0x00],0; ret` — second entry into the body at `0x7d9dfc58`. | pattern scan |
+| `0x7d9e03ae` | 2 | `entry_stub_7d9e03ae` | `call 0x7d9df3c0,[mask 0x00],0; ret` — second entry into the body at `0x7d9df3c0`. | pattern scan |
+| `0x7d9e03b6` | 1 | `entry_stub_7d9e03b6` | `call 0x7d9df3fe,[mask 0x00],0; ret` — second entry into the body at `0x7d9df3fe`. | pattern scan |
+| `0x7d9e04d0` | 1 | `entry_stub_7d9e04d0` | `call 0x7d9e0217,[mask 0xf0],16; ret` — second entry into the body at `0x7d9e0217`. | pattern scan |
+| `0x7d9e55ec` | 2 | `entry_stub_7d9e55ec` | `call 0x7d9e55fc,[mask 0xf0],28; ret` — second entry into the body at `0x7d9e55fc`. | pattern scan |
+| `0x7d9e55f4` | 1 | `entry_stub_7d9e55f4` | `call 0x7d9e55ec,[mask 0x00],4; ret` — second entry into the body at `0x7d9e55ec`. | pattern scan |
+| `0x7d9e56df` | 1 | `entry_stub_7d9e56df` | `call 0x7d9e5e7d,[mask 0xf0],60; ret` — second entry into the body at `0x7d9e5e7d`. | pattern scan |
+| `0x7d9e56e7` | 1 | `entry_stub_7d9e56e7` | `call 0x7d9e5eff,[mask 0xf0],60; ret` — second entry into the body at `0x7d9e5eff`. | pattern scan |
+| `0x7d9e5a12` | 1 | `entry_stub_7d9e5a12` | `call 0x7d9e5c01,[mask 0x00],0; ret` — second entry into the body at `0x7d9e5c01`. | pattern scan |
+| `0x7d9e6b22` | 3 | `entry_stub_7d9e6b22` | `call 0x7d9e7434,[mask 0x20],8; ret` — second entry into the body at `0x7d9e7434`. | pattern scan |
+| `0x7d9e6b89` | 3 | `entry_stub_7d9e6b89` | `call 0x7d9e7491,[mask 0x00],4; ret` — second entry into the body at `0x7d9e7491`. | pattern scan |
+| `0x7d9e6b91` | 1 | `entry_stub_7d9e6b91` | `call 0x7d9e74ef,[mask 0x00],4; ret` — second entry into the body at `0x7d9e74ef`. | pattern scan |
+| `0x7d9e6b99` | 1 | `entry_stub_7d9e6b99` | `call 0x7d9e74bd,[mask 0x00],4; ret` — second entry into the body at `0x7d9e74bd`. | pattern scan |
+| `0x7d9e6ba1` | 1 | `entry_stub_7d9e6ba1` | `call 0x7d9e74d4,[mask 0x00],4; ret` — second entry into the body at `0x7d9e74d4`. | pattern scan |
+| `0x7d9e6ba9` | 1 | `entry_stub_7d9e6ba9` | `call 0x7d9e7506,[mask 0x00],4; ret` — second entry into the body at `0x7d9e7506`. | pattern scan |
+| `0x7d9ead76` | 2 | `entry_stub_7d9ead76` | `call 0x7d9e7524,[mask 0xe0],16; ret` — second entry into the body at `0x7d9e7524`. | pattern scan |
+| `0x7d9ed281` | 2 | `entry_stub_7d9ed281` | `call 0x7d9e75f5,[mask 0xc0],12; ret` — second entry into the body at `0x7d9e75f5`. | pattern scan |
+| `0x7d9ed289` | 1 | `entry_stub_7d9ed289` | `call 0x7d9e834f,[mask 0x00],4; ret` — second entry into the body at `0x7d9e834f`. | pattern scan |
+| `0x7da88208` | 1 | `entry_stub_7da88208` | `call 0x7da882b7,[mask 0x00],0; ret` — second entry into the body at `0x7da882b7`. | pattern scan |
+| `0x7da88219` | 1 | `entry_stub_7da88219` | `call 0x7da883f6,[mask 0xe0],16; ret` — second entry into the body at `0x7da883f6`. | pattern scan |
+| `0x7da8a5c5` | 1 | `entry_stub_7da8a5c5` | `call 0x7da8b45f,[mask 0x00],0; ret` — second entry into the body at `0x7da8b45f`. | pattern scan |
+| `0x7dabc5cd` | 1 | `entry_stub_7dabc5cd` | `call 0x7dabc40c,[mask 0x00],4; ret` — second entry into the body at `0x7dabc40c`. | pattern scan |
+| `0x7dac5542` | 1 | `entry_stub_7dac5542` | `call 0x7dac12da,[mask 0x00],4; ret` — second entry into the body at `0x7dac12da`. | pattern scan |
+| `0x7dacb066` | 2 | `entry_stub_7dacb066` | `call 0x7dacb086,[mask 0xb0],16; ret` — second entry into the body at `0x7dacb086`. | pattern scan |
+| `0x7dad0432` | 2 | `entry_stub_7dad0432` | `call 0x7dad4341,[mask 0x00],0; ret` — second entry into the body at `0x7dad4341`. | pattern scan |
+| `0x7dadd9d3` | 2 | `entry_stub_7dadd9d3` | `call 0x7dae06e3,[mask 0x00],4; ret` — second entry into the body at `0x7dae06e3`. | pattern scan |
+| `0x7dafdaf3` | 1 | `entry_stub_7dafdaf3` | `call 0x7dafdec1,[mask 0x00],0; ret` — second entry into the body at `0x7dafdec1`. | pattern scan |
+| `0x7dafec4d` | 1 | `entry_stub_7dafec4d` | `call 0x7dafae2a,[mask 0xf0],40; ret` — second entry into the body at `0x7dafae2a`. | pattern scan |
+| `0x7dafefef` | 1 | `entry_stub_7dafefef` | `call 0x7dafae2a,[mask 0xf0],40; ret` — second entry into the body at `0x7dafae2a`. | pattern scan |
+| `0x7daff405` | 1 | `entry_stub_7daff405` | `call 0x7dafae2a,[mask 0xf0],40; ret` — second entry into the body at `0x7dafae2a`. | pattern scan |
+| `0x7db0bbbe` | 1 | `entry_stub_7db0bbbe` | `call 0x7db10fe1,[mask 0x00],0; ret` — second entry into the body at `0x7db10fe1`. | pattern scan |
+| `0x7db523a8` | 3 | `entry_stub_7db523a8` | `call 0x7db54172,[mask 0x00],0; ret` — second entry into the body at `0x7db54172`. | pattern scan |
+| `0x7db523b0` | 2 | `entry_stub_7db523b0` | `call 0x7db5417f,[mask 0x00],0; ret` — second entry into the body at `0x7db5417f`. | pattern scan |
+| `0x7db52664` | 1 | `entry_stub_7db52664` | `call 0x7db52754,[mask 0x00],0; ret` — second entry into the body at `0x7db52754`. | pattern scan |
+| `0x7db61608` | 1 | `entry_stub_7db61608` | `call 0x7db6184b,[mask 0x20],12; ret` — second entry into the body at `0x7db6184b`. | pattern scan |
+| `0x7db67c8b` | 1 | `entry_stub_7db67c8b` | `call 0x7db69ef3,[mask 0x00],0; ret` — second entry into the body at `0x7db69ef3`. | pattern scan |
+| `0x7db67c93` | 1 | `entry_stub_7db67c93` | `call 0x7db69f27,[mask 0x00],4; ret` — second entry into the body at `0x7db69f27`. | pattern scan |
+| `0x7db67c9b` | 4 | `entry_stub_7db67c9b` | `call 0x7db6a043,[mask 0x00],4; ret` — second entry into the body at `0x7db6a043`. | pattern scan |
+| `0x7db67d27` | 1 | `entry_stub_7db67d27` | `call 0x7db6b7b0,[mask 0x00],0; ret` — second entry into the body at `0x7db6b7b0`. | pattern scan |
+| `0x7db67d75` | 3 | `entry_stub_7db67d75` | `call 0x7db6d246,[mask 0xc0],12; ret` — second entry into the body at `0x7db6d246`. | pattern scan |
+| `0x7db67d7d` | 1 | `entry_stub_7db67d7d` | `call 0x7db6d27e,[mask 0xc0],12; ret` — second entry into the body at `0x7db6d27e`. | pattern scan |
+| `0x7db67d85` | 1 | `entry_stub_7db67d85` | `call 0x7db6d80b,[mask 0x00],4; ret` — second entry into the body at `0x7db6d80b`. | pattern scan |
+| `0x7db67d8d` | 7 | `entry_stub_7db67d8d` | `call 0x7db6de4b,[mask 0x00],4; ret` — second entry into the body at `0x7db6de4b`. | pattern scan |
+| `0x7db67dab` | 2 | `entry_stub_7db67dab` | `call 0x7db6df1a,[mask 0xa0],16; ret` — second entry into the body at `0x7db6df1a`. | pattern scan |
+| `0x7db67db3` | 3 | `entry_stub_7db67db3` | `call 0x7db6df80,[mask 0xa0],16; ret` — second entry into the body at `0x7db6df80`. | pattern scan |
+| `0x7db67dbb` | 2 | `entry_stub_7db67dbb` | `call 0x7db6e04c,[mask 0x00],4; ret` — second entry into the body at `0x7db6e04c`. | pattern scan |
+| `0x7db67dc3` | 1 | `entry_stub_7db67dc3` | `call 0x7db6e8ef,[mask 0x00],4; ret` — second entry into the body at `0x7db6e8ef`. | pattern scan |
+| `0x7db67dcb` | 1 | `entry_stub_7db67dcb` | `call 0x7db6e910,[mask 0x00],4; ret` — second entry into the body at `0x7db6e910`. | pattern scan |
+| `0x7db68347` | 1 | `entry_stub_7db68347` | `call 0x7db69ef3,[mask 0x00],0; ret` — second entry into the body at `0x7db69ef3`. | pattern scan |
+| `0x7db6dd8a` | 1 | `entry_stub_7db6dd8a` | `call 0x7db6e216,[mask 0x00],4; ret` — second entry into the body at `0x7db6e216`. | pattern scan |
+| `0x7db6e074` | 1 | `entry_stub_7db6e074` | `call 0x7db6e8c3,[mask 0x00],4; ret` — second entry into the body at `0x7db6e8c3`. | pattern scan |
+| `0x7db6e20e` | 1 | `entry_stub_7db6e20e` | `call 0x7db6e22d,[mask 0x80],8; ret` — second entry into the body at `0x7db6e22d`. | pattern scan |
+| `0x7db853d2` | 1 | `entry_stub_7db853d2` | `call 0x7db8476b,[mask 0x00],4; ret` — second entry into the body at `0x7db8476b`. | pattern scan |
+| `0x7db880d7` | 4 | `entry_stub_7db880d7` | `call 0x7db853d2,[mask 0x00],4; ret` — second entry into the body at `0x7db853d2`. | pattern scan |
+| `0x7dbab353` | 1 | `entry_stub_7dbab353` | `call 0x7dbad659,[mask 0x00],0; ret` — second entry into the body at `0x7dbad659`. | pattern scan |
+| `0x7dbb521a` | 1 | `entry_stub_7dbb521a` | `call 0x7dbb6358,[mask 0x00],4; ret` — second entry into the body at `0x7dbb6358`. | pattern scan |
+| `0x7dbb52bc` | 1 | `entry_stub_7dbb52bc` | `call 0x7dbb6358,[mask 0x00],4; ret` — second entry into the body at `0x7dbb6358`. | pattern scan |
+| `0x7dbb5994` | 2 | `entry_stub_7dbb5994` | `call 0x7dbb7595,[mask 0x80],8; ret` — second entry into the body at `0x7dbb7595`. | pattern scan |
+| `0x7dbb75a7` | 1 | `entry_stub_7dbb75a7` | `call 0x7dbb95d4,[mask 0x00],0; ret` — second entry into the body at `0x7dbb95d4`. | pattern scan |
+| `0x7dbb78f4` | 1 | `entry_stub_7dbb78f4` | `call 0x7dbb98c2,[mask 0x00],0; ret` — second entry into the body at `0x7dbb98c2`. | pattern scan |
+| `0x7dbb7923` | 1 | `entry_stub_7dbb7923` | `call 0x7dbb882e,[mask 0x00],0; ret` — second entry into the body at `0x7dbb882e`. | pattern scan |
+| `0x7dbb9304` | 6 | `entry_stub_7dbb9304` | `call 0x7dbba2ca,[mask 0xe0],16; ret` — second entry into the body at `0x7dbba2ca`. | pattern scan |
+| `0x7dd49572` | 1 | `entry_stub_7dd49572` | `call 0x7dd48ad0,[mask 0x00],4; ret` — second entry into the body at `0x7dd48ad0`. | pattern scan |
+| `0x7dd4957a` | 1 | `entry_stub_7dd4957a` | `call 0x7dd4959a,[mask 0x00],0; ret` — second entry into the body at `0x7dd4959a`. | pattern scan |
+| `0x7dd49582` | 1 | `entry_stub_7dd49582` | `call 0x7dd49a34,[mask 0x00],0; ret` — second entry into the body at `0x7dd49a34`. | pattern scan |
+| `0x7dd4958a` | 1 | `entry_stub_7dd4958a` | `call 0x7dd48bc2,[mask 0x80],8; ret` — second entry into the body at `0x7dd48bc2`. | pattern scan |
+| `0x7dd49592` | 1 | `entry_stub_7dd49592` | `call 0x7dd48c52,[mask 0x80],8; ret` — second entry into the body at `0x7dd48c52`. | pattern scan |
+| `0x7dd7f799` | 1 | `entry_stub_7dd7f799` | `call 0x7dd7d962,[mask 0xf0],44; ret` — second entry into the body at `0x7dd7d962`. | pattern scan |
+| `0x7ddd9f66` | 1 | `entry_stub_7ddd9f66` | `call 0x7ddd9b50,[mask 0xf0],36; ret` — second entry into the body at `0x7ddd9b50`. | pattern scan |
+| `0x7dddbec2` | 1 | `entry_stub_7dddbec2` | `call 0x7dddc079,[mask 0x80],4; ret` — second entry into the body at `0x7dddc079`. | pattern scan |
+| `0x7dddebec` | 1 | `entry_stub_7dddebec` | `call 0x7dddf346,[mask 0xf0],116; ret` — second entry into the body at `0x7dddf346`. | pattern scan |
+| `0x7ddeeadd` | 10 | `entry_stub_7ddeeadd` | `call 0x7ddeea86,[mask 0x20],8; ret` — second entry into the body at `0x7ddeea86`. | pattern scan |
+| `0x7ddeeb1d` | 3 | `entry_stub_7ddeeb1d` | `call 0x7ddeea86,[mask 0x20],8; ret` — second entry into the body at `0x7ddeea86`. | pattern scan |
+| `0x7ddf3743` | 1 | `entry_stub_7ddf3743` | `call 0x7ddf5391,[mask 0x20],8; ret` — second entry into the body at `0x7ddf5391`. | pattern scan |
+| `0x7de0255a` | 9 | `entry_stub_7de0255a` | `call 0x7de0261e,[mask 0xf0],16; ret` — second entry into the body at `0x7de0261e`. | pattern scan |
+| `0x7de08e40` | 1 | `entry_stub_7de08e40` | `call 0x7de08f3c,[mask 0xf0],52; ret` — second entry into the body at `0x7de08f3c`. | pattern scan |
+| `0x7de09add` | 1 | `entry_stub_7de09add` | `call 0x7de09e0b,[mask 0xf0],20; ret` — second entry into the body at `0x7de09e0b`. | pattern scan |
+| `0x7de15ffb` | 1 | `entry_stub_7de15ffb` | `call 0x7de15b22,[mask 0x00],0; ret` — second entry into the body at `0x7de15b22`. | pattern scan |
+| `0x7de2b904` | 2 | `entry_stub_7de2b904` | `call 0x7de2b965,[mask 0xb0],16; ret` — second entry into the body at `0x7de2b965`. | pattern scan |
+| `0x7de2b915` | 2 | `entry_stub_7de2b915` | `call 0x7de2baeb,[mask 0xb0],16; ret` — second entry into the body at `0x7de2baeb`. | pattern scan |
+| `0x7de2b95d` | 1 | `entry_stub_7de2b95d` | `call 0x7de2be4f,[mask 0x00],4; ret` — second entry into the body at `0x7de2be4f`. | pattern scan |
+| `0x7de3bdb0` | 1 | `entry_stub_7de3bdb0` | `call 0x7de3ec8f,[mask 0x00],0; ret` — second entry into the body at `0x7de3ec8f`. | pattern scan |
+| `0x7de44e8e` | 1 | `entry_stub_7de44e8e` | `call 0x7de4538e,[mask 0xf0],40; ret` — second entry into the body at `0x7de4538e`. | pattern scan |
+| `0x7de44e96` | 1 | `entry_stub_7de44e96` | `call 0x7de4538e,[mask 0xf0],40; ret` — second entry into the body at `0x7de4538e`. | pattern scan |
+| `0x7de44e9e` | 2 | `entry_stub_7de44e9e` | `call 0x7de4506f,[mask 0xf0],28; ret` — second entry into the body at `0x7de4506f`. | pattern scan |
+| `0x7de44ea6` | 2 | `entry_stub_7de44ea6` | `call 0x7de452d7,[mask 0xb0],20; ret` — second entry into the body at `0x7de452d7`. | pattern scan |
+| `0x7de45f9c` | 3 | `entry_stub_7de45f9c` | `call 0x7de46205,[mask 0xf0],48; ret` — second entry into the body at `0x7de46205`. | pattern scan |
+| `0x7de4ac45` | 1 | `entry_stub_7de4ac45` | `call 0x7de5213e,[mask 0x00],0; ret` — second entry into the body at `0x7de5213e`. | pattern scan |
+| `0x7de4ee7d` | 4 | `entry_stub_7de4ee7d` | `call 0x7de4cb89,[mask 0x00],4; ret` — second entry into the body at `0x7de4cb89`. | pattern scan |
+| `0x7de5a324` | 4 | `entry_stub_7de5a324` | `call 0x7de5bb82,[mask 0xf0],16; ret` — second entry into the body at `0x7de5bb82`. | pattern scan |
+| `0x7de81f2d` | 3 | `entry_stub_7de81f2d` | `call 0x7de82462,[mask 0x00],0; ret` — second entry into the body at `0x7de82462`. | pattern scan |
+| `0x7dea9133` | 4 | `entry_stub_7dea9133` | `call 0x7dea90d4,[mask 0x20],16; ret` — second entry into the body at `0x7dea90d4`. | pattern scan |
+| `0x7deb37c6` | 1 | `entry_stub_7deb37c6` | `call 0x7deb3ea3,[mask 0x00],0; ret` — second entry into the body at `0x7deb3ea3`. | pattern scan |
+| `0x7deb7163` | 1 | `entry_stub_7deb7163` | `call 0x7deb74ec,[mask 0x00],0; ret` — second entry into the body at `0x7deb74ec`. | pattern scan |
+| `0x7debb957` | 1 | `entry_stub_7debb957` | `call 0x7debbaca,[mask 0x80],4; ret` — second entry into the body at `0x7debbaca`. | pattern scan |
+| `0x7dec2365` | 19 | `entry_stub_7dec2365` | `call 0x7dec23ff,[mask 0x00],0; ret` — second entry into the body at `0x7dec23ff`. | pattern scan |
+| `0x7ded1213` | 1 | `entry_stub_7ded1213` | `call 0x7ded1228,[mask 0x00],0; ret` — second entry into the body at `0x7ded1228`. | pattern scan |
+| `0x7ded3f0d` | 1 | `entry_stub_7ded3f0d` | `call 0x7ded402a,[mask 0x80],4; ret` — second entry into the body at `0x7ded402a`. | pattern scan |
+| `0x7dfc3eed` | 5 | `entry_stub_7dfc3eed` | `call 0x7dfc3eb8,[mask 0x00],0; ret` — second entry into the body at `0x7dfc3eb8`. | pattern scan |
+| `0x7dfc5647` | 1 | `entry_stub_7dfc5647` | `call 0x7dfc5544,[mask 0x00],4; ret` — second entry into the body at `0x7dfc5544`. | pattern scan |
+| `0x7dfc5fdd` | 1 | `entry_stub_7dfc5fdd` | `call 0x7dfc5f56,[mask 0x00],4; ret` — second entry into the body at `0x7dfc5f56`. | pattern scan |
+| `0x7dfc6498` | 1 | `entry_stub_7dfc6498` | `call 0x7dfc6466,[mask 0x00],4; ret` — second entry into the body at `0x7dfc6466`. | pattern scan |
+| `0x7dfc7f18` | 1 | `entry_stub_7dfc7f18` | `call 0x7dfc5b83,[mask 0x00],4; ret` — second entry into the body at `0x7dfc5b83`. | pattern scan |
+| `0x7dfc8254` | 1 | `entry_stub_7dfc8254` | `call 0x7dfc2061,[mask 0x00],16; ret` — second entry into the body at `0x7dfc2061`. | pattern scan |
+| `0x7dfc84be` | 1 | `entry_stub_7dfc84be` | `call 0x7dfc5c9a,[mask 0x80],8; ret` — second entry into the body at `0x7dfc5c9a`. | pattern scan |
+| `0x7dfcb8c1` | 1 | `entry_stub_7dfcb8c1` | `call 0x7dfcb8dd,[mask 0x20],8; ret` — second entry into the body at `0x7dfcb8dd`. | pattern scan |
+| `0x7dfcb937` | 1 | `entry_stub_7dfcb937` | `call 0x7dfcb979,[mask 0x00],4; ret` — second entry into the body at `0x7dfcb979`. | pattern scan |
+| `0x7dfcb98e` | 1 | `entry_stub_7dfcb98e` | `call 0x7dfcb9b4,[mask 0x00],4; ret` — second entry into the body at `0x7dfcb9b4`. | pattern scan |
+| `0x7dfcf7cb` | 3 | `entry_stub_7dfcf7cb` | `call 0x7dfcb890,[mask 0x00],4; ret` — second entry into the body at `0x7dfcb890`. | pattern scan |
+| `0x7dfcf7fa` | 1 | `entry_stub_7dfcf7fa` | `call 0x7dfcf816,[mask 0x20],8; ret` — second entry into the body at `0x7dfcf816`. | pattern scan |
+| `0x7dfcf870` | 1 | `entry_stub_7dfcf870` | `call 0x7dfcf8b2,[mask 0x00],4; ret` — second entry into the body at `0x7dfcf8b2`. | pattern scan |
+| `0x7dfcf8c7` | 1 | `entry_stub_7dfcf8c7` | `call 0x7dfcf8ed,[mask 0x00],4; ret` — second entry into the body at `0x7dfcf8ed`. | pattern scan |
+| `0x7dfd09f2` | 2 | `entry_stub_7dfd09f2` | `call 0x7dfd0cfa,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0cfa`. | pattern scan |
+| `0x7dfd0a2f` | 1 | `entry_stub_7dfd0a2f` | `call 0x7dfd0a4b,[mask 0x20],8; ret` — second entry into the body at `0x7dfd0a4b`. | pattern scan |
+| `0x7dfd0aa5` | 1 | `entry_stub_7dfd0aa5` | `call 0x7dfd0ae7,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0ae7`. | pattern scan |
+| `0x7dfd0afc` | 1 | `entry_stub_7dfd0afc` | `call 0x7dfd0b74,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0b74`. | pattern scan |
+| `0x7dfd0d2b` | 1 | `entry_stub_7dfd0d2b` | `call 0x7dfd0d47,[mask 0x20],8; ret` — second entry into the body at `0x7dfd0d47`. | pattern scan |
+| `0x7dfd0da1` | 1 | `entry_stub_7dfd0da1` | `call 0x7dfd0de3,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0de3`. | pattern scan |
+| `0x7dfd0df8` | 1 | `entry_stub_7dfd0df8` | `call 0x7dfd0e70,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0e70`. | pattern scan |
+| `0x7dfd1059` | 1 | `entry_stub_7dfd1059` | `call 0x7dfd1075,[mask 0x20],8; ret` — second entry into the body at `0x7dfd1075`. | pattern scan |
+| `0x7dfd10cf` | 1 | `entry_stub_7dfd10cf` | `call 0x7dfd1111,[mask 0x00],4; ret` — second entry into the body at `0x7dfd1111`. | pattern scan |
+| `0x7dfd1126` | 1 | `entry_stub_7dfd1126` | `call 0x7dfd114c,[mask 0x00],4; ret` — second entry into the body at `0x7dfd114c`. | pattern scan |
+| `0x7dfd5188` | 1 | `entry_stub_7dfd5188` | `call 0x7dfd51a4,[mask 0x20],8; ret` — second entry into the body at `0x7dfd51a4`. | pattern scan |
+| `0x7dfd51fe` | 1 | `entry_stub_7dfd51fe` | `call 0x7dfd5240,[mask 0x00],4; ret` — second entry into the body at `0x7dfd5240`. | pattern scan |
+| `0x7dfd5255` | 1 | `entry_stub_7dfd5255` | `call 0x7dfd5286,[mask 0x00],4; ret` — second entry into the body at `0x7dfd5286`. | pattern scan |
+| `0x7dfd6175` | 2 | `entry_stub_7dfd6175` | `call 0x7dfd0cfa,[mask 0x00],4; ret` — second entry into the body at `0x7dfd0cfa`. | pattern scan |
+| `0x7dfd61b2` | 1 | `entry_stub_7dfd61b2` | `call 0x7dfd61ce,[mask 0x20],8; ret` — second entry into the body at `0x7dfd61ce`. | pattern scan |
+| `0x7dfd6228` | 1 | `entry_stub_7dfd6228` | `call 0x7dfd626a,[mask 0x00],4; ret` — second entry into the body at `0x7dfd626a`. | pattern scan |
+| `0x7dfd627f` | 1 | `entry_stub_7dfd627f` | `call 0x7dfd62f7,[mask 0x00],4; ret` — second entry into the body at `0x7dfd62f7`. | pattern scan |
+| `0x7dfd6993` | 1 | `entry_stub_7dfd6993` | `call 0x7dfd69af,[mask 0x20],8; ret` — second entry into the body at `0x7dfd69af`. | pattern scan |
+| `0x7dfd6a09` | 1 | `entry_stub_7dfd6a09` | `call 0x7dfd6a4b,[mask 0x00],4; ret` — second entry into the body at `0x7dfd6a4b`. | pattern scan |
+| `0x7dfd6a60` | 1 | `entry_stub_7dfd6a60` | `call 0x7dfd6ad8,[mask 0x00],4; ret` — second entry into the body at `0x7dfd6ad8`. | pattern scan |
+| `0x7dfe76d7` | 1 | `entry_stub_7dfe76d7` | `call 0x7dfe76f3,[mask 0x20],8; ret` — second entry into the body at `0x7dfe76f3`. | pattern scan |
+| `0x7dfe774d` | 1 | `entry_stub_7dfe774d` | `call 0x7dfe778f,[mask 0x00],4; ret` — second entry into the body at `0x7dfe778f`. | pattern scan |
+| `0x7dfe77a4` | 1 | `entry_stub_7dfe77a4` | `call 0x7dfe77d5,[mask 0x00],4; ret` — second entry into the body at `0x7dfe77d5`. | pattern scan |
+| `0x7dfe7e69` | 1 | `entry_stub_7dfe7e69` | `call 0x7dfe7e85,[mask 0x20],8; ret` — second entry into the body at `0x7dfe7e85`. | pattern scan |
+| `0x7dfe7edf` | 1 | `entry_stub_7dfe7edf` | `call 0x7dfe7f21,[mask 0x00],4; ret` — second entry into the body at `0x7dfe7f21`. | pattern scan |
+| `0x7dfe7f36` | 1 | `entry_stub_7dfe7f36` | `call 0x7dfe7f5c,[mask 0x00],4; ret` — second entry into the body at `0x7dfe7f5c`. | pattern scan |
+| `0x7dfe9103` | 1 | `entry_stub_7dfe9103` | `call 0x7dfe911f,[mask 0x20],8; ret` — second entry into the body at `0x7dfe911f`. | pattern scan |
+| `0x7dfe9179` | 1 | `entry_stub_7dfe9179` | `call 0x7dfe91bb,[mask 0x00],4; ret` — second entry into the body at `0x7dfe91bb`. | pattern scan |
+| `0x7dfe91d0` | 1 | `entry_stub_7dfe91d0` | `call 0x7dfe9248,[mask 0x00],4; ret` — second entry into the body at `0x7dfe9248`. | pattern scan |
+| `0x7dfea4d3` | 1 | `entry_stub_7dfea4d3` | `call 0x7dfea4ef,[mask 0x20],8; ret` — second entry into the body at `0x7dfea4ef`. | pattern scan |
+| `0x7dfea549` | 1 | `entry_stub_7dfea549` | `call 0x7dfea58b,[mask 0x00],4; ret` — second entry into the body at `0x7dfea58b`. | pattern scan |
+| `0x7dfea5a0` | 1 | `entry_stub_7dfea5a0` | `call 0x7dfea5c6,[mask 0x00],4; ret` — second entry into the body at `0x7dfea5c6`. | pattern scan |
+| `0x7dfead32` | 1 | `entry_stub_7dfead32` | `call 0x7dfead4e,[mask 0x20],8; ret` — second entry into the body at `0x7dfead4e`. | pattern scan |
+| `0x7dfeada8` | 1 | `entry_stub_7dfeada8` | `call 0x7dfeadea,[mask 0x00],4; ret` — second entry into the body at `0x7dfeadea`. | pattern scan |
+| `0x7dfeadff` | 1 | `entry_stub_7dfeadff` | `call 0x7dfeae77,[mask 0x00],4; ret` — second entry into the body at `0x7dfeae77`. | pattern scan |
+| `0x7dfed431` | 1 | `entry_stub_7dfed431` | `call 0x7dfed44d,[mask 0x20],8; ret` — second entry into the body at `0x7dfed44d`. | pattern scan |
+| `0x7dfed4a9` | 1 | `entry_stub_7dfed4a9` | `call 0x7dfed4eb,[mask 0x00],4; ret` — second entry into the body at `0x7dfed4eb`. | pattern scan |
+| `0x7dfed500` | 1 | `entry_stub_7dfed500` | `call 0x7dfed578,[mask 0x00],4; ret` — second entry into the body at `0x7dfed578`. | pattern scan |
+| `0x7dff188a` | 1 | `entry_stub_7dff188a` | `call 0x7dff18a6,[mask 0x20],8; ret` — second entry into the body at `0x7dff18a6`. | pattern scan |
+| `0x7dff18e6` | 1 | `entry_stub_7dff18e6` | `call 0x7dff1928,[mask 0x00],4; ret` — second entry into the body at `0x7dff1928`. | pattern scan |
+| `0x7e0369cf` | 1 | `entry_stub_7e0369cf` | `call 0x7e0369eb,[mask 0x20],8; ret` — second entry into the body at `0x7e0369eb`. | pattern scan |
+| `0x7e036a45` | 1 | `entry_stub_7e036a45` | `call 0x7e036a87,[mask 0x00],4; ret` — second entry into the body at `0x7e036a87`. | pattern scan |
+| `0x7e036a9c` | 1 | `entry_stub_7e036a9c` | `call 0x7e036ac2,[mask 0x00],4; ret` — second entry into the body at `0x7e036ac2`. | pattern scan |
+| `0x7e0372eb` | 1 | `entry_stub_7e0372eb` | `call 0x7e037307,[mask 0x20],8; ret` — second entry into the body at `0x7e037307`. | pattern scan |
+| `0x7e037361` | 1 | `entry_stub_7e037361` | `call 0x7e0373a3,[mask 0x00],4; ret` — second entry into the body at `0x7e0373a3`. | pattern scan |
+| `0x7e0373b8` | 1 | `entry_stub_7e0373b8` | `call 0x7e037430,[mask 0x00],4; ret` — second entry into the body at `0x7e037430`. | pattern scan |
+| `0x7e037759` | 1 | `entry_stub_7e037759` | `call 0x7e037775,[mask 0x20],8; ret` — second entry into the body at `0x7e037775`. | pattern scan |
+| `0x7e0377cf` | 1 | `entry_stub_7e0377cf` | `call 0x7e037811,[mask 0x00],4; ret` — second entry into the body at `0x7e037811`. | pattern scan |
+| `0x7e037826` | 1 | `entry_stub_7e037826` | `call 0x7e03784c,[mask 0x00],4; ret` — second entry into the body at `0x7e03784c`. | pattern scan |
+| `0x7e03eff5` | 1 | `entry_stub_7e03eff5` | `call 0x7e03eeab,[mask 0x00],4; ret` — second entry into the body at `0x7e03eeab`. | pattern scan |
+| `0x7e040714` | 1 | `entry_stub_7e040714` | `call 0x7e040351,[mask 0xf0],36; ret` — second entry into the body at `0x7e040351`. | pattern scan |
+| `0x7e040913` | 1 | `entry_stub_7e040913` | `call 0x7e04079d,[mask 0xf0],48; ret` — second entry into the body at `0x7e04079d`. | pattern scan |
+| `0x7e040962` | 4 | `entry_stub_7e040962` | `call 0x7e040913,[mask 0x00],4; ret` — second entry into the body at `0x7e040913`. | pattern scan |
+| `0x7e04161a` | 1 | `entry_stub_7e04161a` | `call 0x7e0402ee,[mask 0xa0],12; ret` — second entry into the body at `0x7e0402ee`. | pattern scan |
+| `0x7e041d03` | 1 | `entry_stub_7e041d03` | `call 0x7e041c6a,[mask 0xa0],12; ret` — second entry into the body at `0x7e041c6a`. | pattern scan |
+| `0x7e041e6d` | 14 | `entry_stub_7e041e6d` | `call 0x7e041b59,[mask 0xf0],48; ret` — second entry into the body at `0x7e041b59`. | pattern scan |
+| `0x7e042362` | 1 | `entry_stub_7e042362` | `call 0x7e041e6d,[mask 0x00],4; ret` — second entry into the body at `0x7e041e6d`. | pattern scan |
+| `0x7e0423eb` | 1 | `entry_stub_7e0423eb` | `call 0x7e041e6d,[mask 0x00],4; ret` — second entry into the body at `0x7e041e6d`. | pattern scan |
+| `0x7e044827` | 1 | `entry_stub_7e044827` | `call 0x7e044843,[mask 0x20],8; ret` — second entry into the body at `0x7e044843`. | pattern scan |
+| `0x7e04489d` | 1 | `entry_stub_7e04489d` | `call 0x7e0448df,[mask 0x00],4; ret` — second entry into the body at `0x7e0448df`. | pattern scan |
+| `0x7e0448f4` | 1 | `entry_stub_7e0448f4` | `call 0x7e04496c,[mask 0x00],4; ret` — second entry into the body at `0x7e04496c`. | pattern scan |
+| `0x7e04e54f` | 1 | `entry_stub_7e04e54f` | `call 0x7e04d658,[mask 0x00],4; ret` — second entry into the body at `0x7e04d658`. | pattern scan |
+| `0x7e050dcb` | 2 | `entry_stub_7e050dcb` | `call 0x7e050dab,[mask 0x20],8; ret` — second entry into the body at `0x7e050dab`. | pattern scan |
+| `0x7e052090` | 1 | `entry_stub_7e052090` | `call 0x7e0520ac,[mask 0x20],8; ret` — second entry into the body at `0x7e0520ac`. | pattern scan |
+| `0x7e052106` | 1 | `entry_stub_7e052106` | `call 0x7e052148,[mask 0x00],4; ret` — second entry into the body at `0x7e052148`. | pattern scan |
+| `0x7e05215d` | 1 | `entry_stub_7e05215d` | `call 0x7e052176,[mask 0x00],4; ret` — second entry into the body at `0x7e052176`. | pattern scan |
+| `0x7e059b40` | 1 | `entry_stub_7e059b40` | `call 0x7e059db0,[mask 0x00],0; ret` — second entry into the body at `0x7e059db0`. | pattern scan |
+| `0x7e059dc5` | 1 | `entry_stub_7e059dc5` | `call 0x7e059dbe,[mask 0x00],0; ret` — second entry into the body at `0x7e059dbe`. | pattern scan |
+| `0x7e05c26c` | 5 | `entry_stub_7e05c26c` | `call 0x7e05b711,[mask 0x30],12; ret` — second entry into the body at `0x7e05b711`. | pattern scan |
+| `0x7e05c274` | 5 | `entry_stub_7e05c274` | `call 0x7e05baa2,[mask 0x30],12; ret` — second entry into the body at `0x7e05baa2`. | pattern scan |
+| `0x7e05c27c` | 3 | `entry_stub_7e05c27c` | `call 0x7e05baa2,[mask 0x30],12; ret` — second entry into the body at `0x7e05baa2`. | pattern scan |
+| `0x7e05cb5d` | 1 | `entry_stub_7e05cb5d` | `call 0x7e05cd23,[mask 0x20],8; ret` — second entry into the body at `0x7e05cd23`. | pattern scan |
+| `0x7e05d05f` | 1 | `entry_stub_7e05d05f` | `call 0x7e05d0e1,[mask 0x00],4; ret` — second entry into the body at `0x7e05d0e1`. | pattern scan |
+| `0x7e05d135` | 1 | `entry_stub_7e05d135` | `call 0x7e05d1cc,[mask 0x00],4; ret` — second entry into the body at `0x7e05d1cc`. | pattern scan |
+| `0x7e07e667` | 1 | `entry_stub_7e07e667` | `call 0x7e07e661,[mask 0x00],0; ret` — second entry into the body at `0x7e07e661`. | pattern scan |
+| `0x7e07e76f` | 1 | `entry_stub_7e07e76f` | `call 0x7e07e769,[mask 0x00],0; ret` — second entry into the body at `0x7e07e769`. | pattern scan |
+| `0x7e07f0f4` | 1 | `entry_stub_7e07f0f4` | `call 0x7e07e938,[mask 0x00],4; ret` — second entry into the body at `0x7e07e938`. | pattern scan |
+| `0x7e081bca` | 1 | `entry_stub_7e081bca` | `call 0x7e08202d,[mask 0x00],4; ret` — second entry into the body at `0x7e08202d`. | pattern scan |
+| `0x7e082025` | 1 | `entry_stub_7e082025` | `call 0x7e081c68,[mask 0xa0],12; ret` — second entry into the body at `0x7e081c68`. | pattern scan |
+| `0x7e087165` | 10 | `entry_stub_7e087165` | `call 0x7e085318,[mask 0x80],16; ret` — second entry into the body at `0x7e085318`. | pattern scan |
+| `0x7e088110` | 2 | `entry_stub_7e088110` | `call 0x7e0870e7,[mask 0x00],4; ret` — second entry into the body at `0x7e0870e7`. | pattern scan |
+| `0x7e08bec3` | 1 | `entry_stub_7e08bec3` | `call 0x7e08be99,[mask 0x80],8; ret` — second entry into the body at `0x7e08be99`. | pattern scan |
+| `0x7e08cc55` | 3 | `entry_stub_7e08cc55` | `call 0x7e08d537,[mask 0xf0],80; ret` — second entry into the body at `0x7e08d537`. | pattern scan |
+| `0x7e08cec0` | 1 | `entry_stub_7e08cec0` | `call 0x7e08d4bc,[mask 0x30],16; ret` — second entry into the body at `0x7e08d4bc`. | pattern scan |
+| `0x7e08d68a` | 1 | `entry_stub_7e08d68a` | `call 0x7e08d7aa,[mask 0x00],4; ret` — second entry into the body at `0x7e08d7aa`. | pattern scan |
+| `0x7e08ef71` | 1 | `entry_stub_7e08ef71` | `call 0x7e08ef6b,[mask 0x00],0; ret` — second entry into the body at `0x7e08ef6b`. | pattern scan |
+| `0x7e08f004` | 1 | `entry_stub_7e08f004` | `call 0x7e08effe,[mask 0x00],0; ret` — second entry into the body at `0x7e08effe`. | pattern scan |
+| `0x7e08f097` | 1 | `entry_stub_7e08f097` | `call 0x7e08f091,[mask 0x00],0; ret` — second entry into the body at `0x7e08f091`. | pattern scan |
+| `0x7e08f12a` | 1 | `entry_stub_7e08f12a` | `call 0x7e08f124,[mask 0x00],0; ret` — second entry into the body at `0x7e08f124`. | pattern scan |
+| `0x7e08f289` | 1 | `entry_stub_7e08f289` | `call 0x7e08f283,[mask 0x00],0; ret` — second entry into the body at `0x7e08f283`. | pattern scan |
+| `0x7e08f321` | 1 | `entry_stub_7e08f321` | `call 0x7e08f31b,[mask 0x00],0; ret` — second entry into the body at `0x7e08f31b`. | pattern scan |
+| `0x7e08f3b4` | 1 | `entry_stub_7e08f3b4` | `call 0x7e08f3ae,[mask 0x00],0; ret` — second entry into the body at `0x7e08f3ae`. | pattern scan |
+| `0x7e08f447` | 1 | `entry_stub_7e08f447` | `call 0x7e08f441,[mask 0x00],0; ret` — second entry into the body at `0x7e08f441`. | pattern scan |
+| `0x7e08f4da` | 1 | `entry_stub_7e08f4da` | `call 0x7e08f4d4,[mask 0x00],0; ret` — second entry into the body at `0x7e08f4d4`. | pattern scan |
+| `0x7e08f741` | 1 | `entry_stub_7e08f741` | `call 0x7e08f73b,[mask 0x00],0; ret` — second entry into the body at `0x7e08f73b`. | pattern scan |
+| `0x7e08f7d4` | 1 | `entry_stub_7e08f7d4` | `call 0x7e08f7ce,[mask 0x00],0; ret` — second entry into the body at `0x7e08f7ce`. | pattern scan |
+| `0x7e095561` | 1 | `entry_stub_7e095561` | `call 0x7e095aa5,[mask 0x30],20; ret` — second entry into the body at `0x7e095aa5`. | pattern scan |
+| `0x7e0955e4` | 2 | `entry_stub_7e0955e4` | `call 0x7e095aa5,[mask 0x30],20; ret` — second entry into the body at `0x7e095aa5`. | pattern scan |
+| `0x7e096ddb` | 2 | `entry_stub_7e096ddb` | `call 0x7e09439f,[mask 0xa0],28; ret` — second entry into the body at `0x7e09439f`. | pattern scan |
+| `0x7e096de3` | 2 | `entry_stub_7e096de3` | `call 0x7e094464,[mask 0xa0],28; ret` — second entry into the body at `0x7e094464`. | pattern scan |
+| `0x7e097d1b` | 1 | `entry_stub_7e097d1b` | `call 0x7e097fc7,[mask 0x00],0; ret` — second entry into the body at `0x7e097fc7`. | pattern scan |
+| `0x7e0a0083` | 1 | `entry_stub_7e0a0083` | `call 0x7e0a00cc,[mask 0x00],0; ret` — second entry into the body at `0x7e0a00cc`. | pattern scan |
+| `0x7e0a00aa` | 2 | `entry_stub_7e0a00aa` | `call 0x7e0a00f5,[mask 0xe0],16; ret` — second entry into the body at `0x7e0a00f5`. | pattern scan |
+| `0x7e0a2737` | 1 | `entry_stub_7e0a2737` | `call 0x7e0a25fe,[mask 0x00],0; ret` — second entry into the body at `0x7e0a25fe`. | pattern scan |
+| `0x7e0a682a` | 1 | `entry_stub_7e0a682a` | `call 0x7e0a668a,[mask 0xa0],12; ret` — second entry into the body at `0x7e0a668a`. | pattern scan |
+| `0x7e0a6970` | 1 | `entry_stub_7e0a6970` | `call 0x7e0a69a1,[mask 0x00],4; ret` — second entry into the body at `0x7e0a69a1`. | pattern scan |
+| `0x7e0a6cd0` | 1 | `entry_stub_7e0a6cd0` | `call 0x7e0a6a4f,[mask 0xf0],32; ret` — second entry into the body at `0x7e0a6a4f`. | pattern scan |
+| `0x7e0a6cd8` | 1 | `entry_stub_7e0a6cd8` | `call 0x7e0a6cfe,[mask 0x00],4; ret` — second entry into the body at `0x7e0a6cfe`. | pattern scan |
+| `0x7e0a6e52` | 1 | `entry_stub_7e0a6e52` | `call 0x7e0a6fd1,[mask 0x00],4; ret` — second entry into the body at `0x7e0a6fd1`. | pattern scan |
+| `0x7e0a7ab8` | 1 | `entry_stub_7e0a7ab8` | `call 0x7e0a7af1,[mask 0x00],4; ret` — second entry into the body at `0x7e0a7af1`. | pattern scan |
+| `0x7e0a7bf9` | 1 | `entry_stub_7e0a7bf9` | `call 0x7e0a7c8b,[mask 0x00],4; ret` — second entry into the body at `0x7e0a7c8b`. | pattern scan |
+| `0x7e0a887f` | 1 | `entry_stub_7e0a887f` | `call 0x7e0a87dc,[mask 0xa0],12; ret` — second entry into the body at `0x7e0a87dc`. | pattern scan |
+| `0x7e0a9367` | 1 | `entry_stub_7e0a9367` | `call 0x7e0a9a65,[mask 0x20],12; ret` — second entry into the body at `0x7e0a9a65`. | pattern scan |
+| `0x7e0a936f` | 1 | `entry_stub_7e0a936f` | `call 0x7e0a9c83,[mask 0x20],12; ret` — second entry into the body at `0x7e0a9c83`. | pattern scan |
+| `0x7e0ad459` | 1 | `entry_stub_7e0ad459` | `call 0x7e0ad3ba,[mask 0xa0],12; ret` — second entry into the body at `0x7e0ad3ba`. | pattern scan |
+| `0x7e0ad599` | 1 | `entry_stub_7e0ad599` | `call 0x7e0ad497,[mask 0xa0],16; ret` — second entry into the body at `0x7e0ad497`. | pattern scan |
+| `0x7e0ae06c` | 1 | `entry_stub_7e0ae06c` | `call 0x7e0addf0,[mask 0x00],4; ret` — second entry into the body at `0x7e0addf0`. | pattern scan |
+| `0x7e0ae0fe` | 1 | `entry_stub_7e0ae0fe` | `call 0x7e0adeaf,[mask 0xb0],40; ret` — second entry into the body at `0x7e0adeaf`. | pattern scan |
+| `0x7e0ae1a1` | 1 | `entry_stub_7e0ae1a1` | `call 0x7e0adff3,[mask 0x80],8; ret` — second entry into the body at `0x7e0adff3`. | pattern scan |
+| `0x7e0ae598` | 1 | `entry_stub_7e0ae598` | `call 0x7e0ae40d,[mask 0xa0],12; ret` — second entry into the body at `0x7e0ae40d`. | pattern scan |
+| `0x7e0b444a` | 1 | `entry_stub_7e0b444a` | `call 0x7e0b40e1,[mask 0xa0],12; ret` — second entry into the body at `0x7e0b40e1`. | pattern scan |
+| `0x7e0b4903` | 1 | `entry_stub_7e0b4903` | `call 0x7e0b44a4,[mask 0xa0],12; ret` — second entry into the body at `0x7e0b44a4`. | pattern scan |
+| `0x7e0b4d88` | 1 | `entry_stub_7e0b4d88` | `call 0x7e0b4ab0,[mask 0xa0],12; ret` — second entry into the body at `0x7e0b4ab0`. | pattern scan |
+| `0x7e0b4e4d` | 1 | `entry_stub_7e0b4e4d` | `call 0x7e0b4e47,[mask 0x00],0; ret` — second entry into the body at `0x7e0b4e47`. | pattern scan |
+| `0x7e0b4f12` | 1 | `entry_stub_7e0b4f12` | `call 0x7e0b4f0c,[mask 0x00],0; ret` — second entry into the body at `0x7e0b4f0c`. | pattern scan |
+| `0x7e0b4fd7` | 1 | `entry_stub_7e0b4fd7` | `call 0x7e0b4fd1,[mask 0x00],0; ret` — second entry into the body at `0x7e0b4fd1`. | pattern scan |
+| `0x7e0b900f` | 2 | `entry_stub_7e0b900f` | `call 0x7e0b9030,[mask 0x00],4; ret` — second entry into the body at `0x7e0b9030`. | pattern scan |
+| `0x7e0b90a5` | 1 | `entry_stub_7e0b90a5` | `call 0x7e0b9b58,[mask 0x00],4; ret` — second entry into the body at `0x7e0b9b58`. | pattern scan |
+| `0x7e0b9f0a` | 1 | `entry_stub_7e0b9f0a` | `call 0x7e0b9cc5,[mask 0xf0],52; ret` — second entry into the body at `0x7e0b9cc5`. | pattern scan |
+| `0x7e0bbd27` | 1 | `entry_stub_7e0bbd27` | `call 0x7e0bb6f3,[mask 0xa0],12; ret` — second entry into the body at `0x7e0bb6f3`. | pattern scan |
+| `0x7e0bc556` | 1 | `entry_stub_7e0bc556` | `call 0x7e0bbfb4,[mask 0xa0],12; ret` — second entry into the body at `0x7e0bbfb4`. | pattern scan |
+| `0x7e0bf505` | 1 | `entry_stub_7e0bf505` | `call 0x7e0bf5b5,[mask 0x00],4; ret` — second entry into the body at `0x7e0bf5b5`. | pattern scan |
+| `0x7e0bf65a` | 1 | `entry_stub_7e0bf65a` | `call 0x7e0bf96d,[mask 0x00],4; ret` — second entry into the body at `0x7e0bf96d`. | pattern scan |
+| `0x7e0c458c` | 1 | `entry_stub_7e0c458c` | `call 0x7e0c46a5,[mask 0x00],4; ret` — second entry into the body at `0x7e0c46a5`. | pattern scan |
+| `0x7e0c49d3` | 1 | `entry_stub_7e0c49d3` | `call 0x7e0c4a0c,[mask 0x00],4; ret` — second entry into the body at `0x7e0c4a0c`. | pattern scan |
+| `0x7e0c4b9f` | 1 | `entry_stub_7e0c4b9f` | `call 0x7e0c4bf1,[mask 0x20],8; ret` — second entry into the body at `0x7e0c4bf1`. | pattern scan |
+| `0x7e0c4f4e` | 2 | `entry_stub_7e0c4f4e` | `call 0x7e0c4f7c,[mask 0x00],4; ret` — second entry into the body at `0x7e0c4f7c`. | pattern scan |
+| `0x7e0c5105` | 2 | `entry_stub_7e0c5105` | `call 0x7e0c5133,[mask 0x00],4; ret` — second entry into the body at `0x7e0c5133`. | pattern scan |
+| `0x7e0c52bc` | 2 | `entry_stub_7e0c52bc` | `call 0x7e0c55c6,[mask 0x00],4; ret` — second entry into the body at `0x7e0c55c6`. | pattern scan |
+| `0x7e0c55be` | 1 | `entry_stub_7e0c55be` | `call 0x7e0c5355,[mask 0xa0],12; ret` — second entry into the body at `0x7e0c5355`. | pattern scan |
+| `0x7e0c65a4` | 1 | `entry_stub_7e0c65a4` | `call 0x7e0c6275,[mask 0xa0],12; ret` — second entry into the body at `0x7e0c6275`. | pattern scan |
+| `0x7e0c68d1` | 1 | `entry_stub_7e0c68d1` | `call 0x7e0c6840,[mask 0xa0],12; ret` — second entry into the body at `0x7e0c6840`. | pattern scan |
+| `0x7e0c7953` | 1 | `entry_stub_7e0c7953` | `call 0x7e0c775d,[mask 0xa0],12; ret` — second entry into the body at `0x7e0c775d`. | pattern scan |
+| `0x7e0d33dd` | 1 | `entry_stub_7e0d33dd` | `call 0x7e0cefdf,[mask 0xf0],56; ret` — second entry into the body at `0x7e0cefdf`. | pattern scan |
+| `0x7e0d5aa8` | 1 | `entry_stub_7e0d5aa8` | `call 0x7e0d5aed,[mask 0x20],8; ret` — second entry into the body at `0x7e0d5aed`. | pattern scan |
+| `0x7e0d6ec0` | 2 | `entry_stub_7e0d6ec0` | `call 0x7e0d71b1,[mask 0x20],4; ret` — second entry into the body at `0x7e0d71b1`. | pattern scan |
+| `0x7e0d6ec8` | 2 | `entry_stub_7e0d6ec8` | `call 0x7e0d71b1,[mask 0x20],4; ret` — second entry into the body at `0x7e0d71b1`. | pattern scan |
+| `0x7e0d79ef` | 1 | `entry_stub_7e0d79ef` | `call 0x7e0d7ba6,[mask 0xf0],80; ret` — second entry into the body at `0x7e0d7ba6`. | pattern scan |
+| `0x7e0d928e` | 1 | `entry_stub_7e0d928e` | `call 0x7e0d92c8,[mask 0x00],4; ret` — second entry into the body at `0x7e0d92c8`. | pattern scan |
+| `0x7e0d93f9` | 1 | `entry_stub_7e0d93f9` | `call 0x7e0d941a,[mask 0x00],4; ret` — second entry into the body at `0x7e0d941a`. | pattern scan |
+| `0x7e0d94cc` | 1 | `entry_stub_7e0d94cc` | `call 0x7e0d9672,[mask 0x00],4; ret` — second entry into the body at `0x7e0d9672`. | pattern scan |
+| `0x7e0d99a2` | 1 | `entry_stub_7e0d99a2` | `call 0x7e0d97b1,[mask 0xb0],32; ret` — second entry into the body at `0x7e0d97b1`. | pattern scan |
+| `0x7e0db54a` | 1 | `entry_stub_7e0db54a` | `call 0x7e0db72f,[mask 0x00],4; ret` — second entry into the body at `0x7e0db72f`. | pattern scan |
+| `0x7e0df4e4` | 1 | `entry_stub_7e0df4e4` | `call 0x7e0df505,[mask 0x00],4; ret` — second entry into the body at `0x7e0df505`. | pattern scan |
+| `0x7e0df586` | 1 | `entry_stub_7e0df586` | `call 0x7e0df5b4,[mask 0x00],4; ret` — second entry into the body at `0x7e0df5b4`. | pattern scan |
+| `0x7e0df663` | 1 | `entry_stub_7e0df663` | `call 0x7e0df684,[mask 0x00],4; ret` — second entry into the body at `0x7e0df684`. | pattern scan |
+| `0x7e0e2db9` | 1 | `entry_stub_7e0e2db9` | `call 0x7e0e2d62,[mask 0xa0],12; ret` — second entry into the body at `0x7e0e2d62`. | pattern scan |
+| `0x7e0e2f2d` | 1 | `entry_stub_7e0e2f2d` | `call 0x7e0e2e89,[mask 0xa0],12; ret` — second entry into the body at `0x7e0e2e89`. | pattern scan |
+| `0x7e0e35d1` | 1 | `entry_stub_7e0e35d1` | `call 0x7e0e30b9,[mask 0xa0],12; ret` — second entry into the body at `0x7e0e30b9`. | pattern scan |
+| `0x7e0e4f29` | 5 | `entry_stub_7e0e4f29` | `call 0x7e0e378c,[mask 0xf0],56; ret` — second entry into the body at `0x7e0e378c`. | pattern scan |
+| `0x7e0e5299` | 1 | `entry_stub_7e0e5299` | `call 0x7e0e4f29,[mask 0x00],4; ret` — second entry into the body at `0x7e0e4f29`. | pattern scan |
+| `0x7e0e6a03` | 1 | `entry_stub_7e0e6a03` | `call 0x7e0e69ac,[mask 0xa0],12; ret` — second entry into the body at `0x7e0e69ac`. | pattern scan |
+| `0x7e0e6d08` | 1 | `entry_stub_7e0e6d08` | `call 0x7e0e6ac1,[mask 0xa0],12; ret` — second entry into the body at `0x7e0e6ac1`. | pattern scan |
+| `0x7e0e7514` | 1 | `entry_stub_7e0e7514` | `call 0x7e0e5f4f,[mask 0x20],60; ret` — second entry into the body at `0x7e0e5f4f`. | pattern scan |
+| `0x7e0e7841` | 1 | `entry_stub_7e0e7841` | `call 0x7e0e608d,[mask 0x00],4; ret` — second entry into the body at `0x7e0e608d`. | pattern scan |
+| `0x7e0ecd34` | 1 | `entry_stub_7e0ecd34` | `call 0x7e0ed452,[mask 0xf0],44; ret` — second entry into the body at `0x7e0ed452`. | pattern scan |
+| `0x7e0ece85` | 1 | `entry_stub_7e0ece85` | `call 0x7e0ed452,[mask 0xf0],44; ret` — second entry into the body at `0x7e0ed452`. | pattern scan |
+| `0x7e0ecfd2` | 1 | `entry_stub_7e0ecfd2` | `call 0x7e0ed452,[mask 0xf0],44; ret` — second entry into the body at `0x7e0ed452`. | pattern scan |
+| `0x7e0fbc83` | 1 | `entry_stub_7e0fbc83` | `call 0x7e0fbd09,[mask 0xf0],40; ret` — second entry into the body at `0x7e0fbd09`. | pattern scan |
+| `0x7e10c243` | 1 | `entry_stub_7e10c243` | `call 0x7e108a1f,[mask 0xf0],24; ret` — second entry into the body at `0x7e108a1f`. | pattern scan |
+| `0x7e10c24b` | 1 | `entry_stub_7e10c24b` | `call 0x7e108a1f,[mask 0xf0],24; ret` — second entry into the body at `0x7e108a1f`. | pattern scan |
+| `0x7e10c3d9` | 1 | `entry_stub_7e10c3d9` | `call 0x7e108677,[mask 0xf0],40; ret` — second entry into the body at `0x7e108677`. | pattern scan |
+| `0x7e10c3e1` | 1 | `entry_stub_7e10c3e1` | `call 0x7e108677,[mask 0xf0],40; ret` — second entry into the body at `0x7e108677`. | pattern scan |
+| `0x7e10c5f8` | 1 | `entry_stub_7e10c5f8` | `call 0x7e10c68a,[mask 0xb0],20; ret` — second entry into the body at `0x7e10c68a`. | pattern scan |
+| `0x7e10c600` | 1 | `entry_stub_7e10c600` | `call 0x7e10c68a,[mask 0xb0],20; ret` — second entry into the body at `0x7e10c68a`. | pattern scan |
+| `0x7e10ca08` | 1 | `entry_stub_7e10ca08` | `call 0x7e10cb9b,[mask 0xb0],24; ret` — second entry into the body at `0x7e10cb9b`. | pattern scan |
+| `0x7e10ca10` | 1 | `entry_stub_7e10ca10` | `call 0x7e10cb9b,[mask 0xb0],24; ret` — second entry into the body at `0x7e10cb9b`. | pattern scan |
+| `0x7e10ced5` | 1 | `entry_stub_7e10ced5` | `call 0x7e10cf67,[mask 0xb0],20; ret` — second entry into the body at `0x7e10cf67`. | pattern scan |
+| `0x7e10cedd` | 1 | `entry_stub_7e10cedd` | `call 0x7e10cf67,[mask 0xb0],20; ret` — second entry into the body at `0x7e10cf67`. | pattern scan |
+| `0x7e10d256` | 1 | `entry_stub_7e10d256` | `call 0x7e10d2ee,[mask 0xb0],20; ret` — second entry into the body at `0x7e10d2ee`. | pattern scan |
+| `0x7e10d25e` | 1 | `entry_stub_7e10d25e` | `call 0x7e10d2ee,[mask 0xb0],20; ret` — second entry into the body at `0x7e10d2ee`. | pattern scan |
+| `0x7e10f3e6` | 1 | `entry_stub_7e10f3e6` | `call 0x7e10f365,[mask 0xa0],12; ret` — second entry into the body at `0x7e10f365`. | pattern scan |
+| `0x7e111f19` | 1 | `entry_stub_7e111f19` | `call 0x7e112382,[mask 0xf0],32; ret` — second entry into the body at `0x7e112382`. | pattern scan |
+| `0x7e111f21` | 1 | `entry_stub_7e111f21` | `call 0x7e112382,[mask 0xf0],32; ret` — second entry into the body at `0x7e112382`. | pattern scan |
+| `0x7e111fbc` | 1 | `entry_stub_7e111fbc` | `call 0x7e112382,[mask 0xf0],32; ret` — second entry into the body at `0x7e112382`. | pattern scan |
+| `0x7e111fc4` | 1 | `entry_stub_7e111fc4` | `call 0x7e112382,[mask 0xf0],32; ret` — second entry into the body at `0x7e112382`. | pattern scan |
+| `0x7e1121e4` | 1 | `entry_stub_7e1121e4` | `call 0x7e11275e,[mask 0xf0],52; ret` — second entry into the body at `0x7e11275e`. | pattern scan |
+| `0x7e1121ec` | 1 | `entry_stub_7e1121ec` | `call 0x7e11275e,[mask 0xf0],52; ret` — second entry into the body at `0x7e11275e`. | pattern scan |
+| `0x7e112372` | 1 | `entry_stub_7e112372` | `call 0x7e112946,[mask 0xf0],104; ret` — second entry into the body at `0x7e112946`. | pattern scan |
+| `0x7e11237a` | 1 | `entry_stub_7e11237a` | `call 0x7e112b49,[mask 0xf0],60; ret` — second entry into the body at `0x7e112b49`. | pattern scan |
+| `0x7e113e4a` | 1 | `entry_stub_7e113e4a` | `call 0x7e1147df,[mask 0x20],8; ret` — second entry into the body at `0x7e1147df`. | pattern scan |
+| `0x7e113e52` | 1 | `entry_stub_7e113e52` | `call 0x7e1147df,[mask 0x20],8; ret` — second entry into the body at `0x7e1147df`. | pattern scan |
+| `0x7e113e5a` | 1 | `entry_stub_7e113e5a` | `call 0x7e1147f0,[mask 0x20],8; ret` — second entry into the body at `0x7e1147f0`. | pattern scan |
+| `0x7e114136` | 1 | `entry_stub_7e114136` | `call 0x7e114814,[mask 0x00],4; ret` — second entry into the body at `0x7e114814`. | pattern scan |
+| `0x7e11413e` | 1 | `entry_stub_7e11413e` | `call 0x7e114814,[mask 0x00],4; ret` — second entry into the body at `0x7e114814`. | pattern scan |
+| `0x7e114146` | 1 | `entry_stub_7e114146` | `call 0x7e11481e,[mask 0x00],4; ret` — second entry into the body at `0x7e11481e`. | pattern scan |
+| `0x7e11445b` | 1 | `entry_stub_7e11445b` | `call 0x7e114830,[mask 0x20],8; ret` — second entry into the body at `0x7e114830`. | pattern scan |
+| `0x7e114463` | 1 | `entry_stub_7e114463` | `call 0x7e11484f,[mask 0x20],8; ret` — second entry into the body at `0x7e11484f`. | pattern scan |
+| `0x7e11446b` | 1 | `entry_stub_7e11446b` | `call 0x7e11484f,[mask 0x20],8; ret` — second entry into the body at `0x7e11484f`. | pattern scan |
+| `0x7e114628` | 2 | `entry_stub_7e114628` | `call 0x7e1145a5,[mask 0xb0],48; ret` — second entry into the body at `0x7e1145a5`. | pattern scan |
+| `0x7e114828` | 17 | `entry_stub_7e114828` | `call 0x7e11488f,[mask 0xa0],20; ret` — second entry into the body at `0x7e11488f`. | pattern scan |
+| `0x7e11510a` | 2 | `entry_stub_7e11510a` | `call 0x7e115218,[mask 0x20],8; ret` — second entry into the body at `0x7e115218`. | pattern scan |
+| `0x7e118aac` | 1 | `entry_stub_7e118aac` | `call 0x7e118aac,[mask 0x00],4; ret` — second entry into the body at `0x7e118aac`. | pattern scan |
+| `0x7e11c4fd` | 1 | `entry_stub_7e11c4fd` | `call 0x7e11c51e,[mask 0x00],4; ret` — second entry into the body at `0x7e11c51e`. | pattern scan |
+| `0x7e11e18a` | 1 | `entry_stub_7e11e18a` | `call 0x7e11f88c,[mask 0x00],4; ret` — second entry into the body at `0x7e11f88c`. | pattern scan |
+| `0x7e11ecb6` | 1 | `entry_stub_7e11ecb6` | `call 0x7e11e75f,[mask 0xa0],12; ret` — second entry into the body at `0x7e11e75f`. | pattern scan |
+| `0x7e11ecd3` | 1 | `entry_stub_7e11ecd3` | `call 0x7e11e75f,[mask 0xa0],12; ret` — second entry into the body at `0x7e11e75f`. | pattern scan |
+| `0x7e11ecf0` | 1 | `entry_stub_7e11ecf0` | `call 0x7e11e75f,[mask 0xa0],12; ret` — second entry into the body at `0x7e11e75f`. | pattern scan |
+| `0x7e120458` | 1 | `entry_stub_7e120458` | `call 0x7e11ff5b,[mask 0xf0],52; ret` — second entry into the body at `0x7e11ff5b`. | pattern scan |
+| `0x7e1225ed` | 1 | `entry_stub_7e1225ed` | `call 0x7e12267f,[mask 0x00],4; ret` — second entry into the body at `0x7e12267f`. | pattern scan |
+| `0x7e123224` | 1 | `entry_stub_7e123224` | `call 0x7e122c2e,[mask 0xa0],12; ret` — second entry into the body at `0x7e122c2e`. | pattern scan |
+| `0x7e123361` | 1 | `entry_stub_7e123361` | `call 0x7e12327f,[mask 0xa0],12; ret` — second entry into the body at `0x7e12327f`. | pattern scan |
+| `0x7e123650` | 1 | `entry_stub_7e123650` | `call 0x7e12356e,[mask 0xa0],12; ret` — second entry into the body at `0x7e12356e`. | pattern scan |
+| `0x7e1241b6` | 1 | `entry_stub_7e1241b6` | `call 0x7e1241fb,[mask 0x00],4; ret` — second entry into the body at `0x7e1241fb`. | pattern scan |
+| `0x7e124506` | 1 | `entry_stub_7e124506` | `call 0x7e12454b,[mask 0x00],4; ret` — second entry into the body at `0x7e12454b`. | pattern scan |
+| `0x7e124a0e` | 1 | `entry_stub_7e124a0e` | `call 0x7e124a53,[mask 0x00],4; ret` — second entry into the body at `0x7e124a53`. | pattern scan |
+| `0x7e12603e` | 1 | `entry_stub_7e12603e` | `call 0x7e125fe6,[mask 0xa0],12; ret` — second entry into the body at `0x7e125fe6`. | pattern scan |
+| `0x7e126361` | 1 | `entry_stub_7e126361` | `call 0x7e12611a,[mask 0xa0],12; ret` — second entry into the body at `0x7e12611a`. | pattern scan |
+| `0x7e126d6f` | 1 | `entry_stub_7e126d6f` | `call 0x7e126bc2,[mask 0xa0],12; ret` — second entry into the body at `0x7e126bc2`. | pattern scan |
+| `0x7e126de8` | 1 | `entry_stub_7e126de8` | `call 0x7e126d8d,[mask 0xa0],12; ret` — second entry into the body at `0x7e126d8d`. | pattern scan |
+| `0x7e127070` | 1 | `entry_stub_7e127070` | `call 0x7e127015,[mask 0xa0],12; ret` — second entry into the body at `0x7e127015`. | pattern scan |
+| `0x7e1270e9` | 1 | `entry_stub_7e1270e9` | `call 0x7e12708e,[mask 0xa0],12; ret` — second entry into the body at `0x7e12708e`. | pattern scan |
+| `0x7e127162` | 1 | `entry_stub_7e127162` | `call 0x7e127107,[mask 0xa0],12; ret` — second entry into the body at `0x7e127107`. | pattern scan |
+| `0x7e1271db` | 1 | `entry_stub_7e1271db` | `call 0x7e127180,[mask 0xa0],12; ret` — second entry into the body at `0x7e127180`. | pattern scan |
+| `0x7e127254` | 1 | `entry_stub_7e127254` | `call 0x7e1271f9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1271f9`. | pattern scan |
+| `0x7e1272cd` | 1 | `entry_stub_7e1272cd` | `call 0x7e127272,[mask 0xa0],12; ret` — second entry into the body at `0x7e127272`. | pattern scan |
+| `0x7e127346` | 1 | `entry_stub_7e127346` | `call 0x7e1272eb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1272eb`. | pattern scan |
+| `0x7e1273bf` | 1 | `entry_stub_7e1273bf` | `call 0x7e127364,[mask 0xa0],12; ret` — second entry into the body at `0x7e127364`. | pattern scan |
+| `0x7e127438` | 1 | `entry_stub_7e127438` | `call 0x7e1273dd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1273dd`. | pattern scan |
+| `0x7e1274b1` | 1 | `entry_stub_7e1274b1` | `call 0x7e127456,[mask 0xa0],12; ret` — second entry into the body at `0x7e127456`. | pattern scan |
+| `0x7e127675` | 1 | `entry_stub_7e127675` | `call 0x7e12761a,[mask 0xa0],12; ret` — second entry into the body at `0x7e12761a`. | pattern scan |
+| `0x7e127995` | 1 | `entry_stub_7e127995` | `call 0x7e127693,[mask 0xa0],12; ret` — second entry into the body at `0x7e127693`. | pattern scan |
+| `0x7e127a0e` | 1 | `entry_stub_7e127a0e` | `call 0x7e1279b3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1279b3`. | pattern scan |
+| `0x7e127a95` | 1 | `entry_stub_7e127a95` | `call 0x7e127a3a,[mask 0xa0],12; ret` — second entry into the body at `0x7e127a3a`. | pattern scan |
+| `0x7e127b0e` | 1 | `entry_stub_7e127b0e` | `call 0x7e127ab3,[mask 0xa0],12; ret` — second entry into the body at `0x7e127ab3`. | pattern scan |
+| `0x7e127b87` | 1 | `entry_stub_7e127b87` | `call 0x7e127b2c,[mask 0xa0],12; ret` — second entry into the body at `0x7e127b2c`. | pattern scan |
+| `0x7e1301f1` | 1 | `entry_stub_7e1301f1` | `call 0x7e130199,[mask 0xa0],12; ret` — second entry into the body at `0x7e130199`. | pattern scan |
+| `0x7e130514` | 1 | `entry_stub_7e130514` | `call 0x7e1302cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1302cd`. | pattern scan |
+| `0x7e130da3` | 1 | `entry_stub_7e130da3` | `call 0x7e130df5,[mask 0x00],4; ret` — second entry into the body at `0x7e130df5`. | pattern scan |
+| `0x7e131483` | 1 | `entry_stub_7e131483` | `call 0x7e1348d8,[mask 0x00],4; ret` — second entry into the body at `0x7e1348d8`. | pattern scan |
+| `0x7e13181c` | 1 | `entry_stub_7e13181c` | `call 0x7e1317cc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1317cc`. | pattern scan |
+| `0x7e1326c7` | 1 | `entry_stub_7e1326c7` | `call 0x7e1324fc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1324fc`. | pattern scan |
+| `0x7e132b01` | 1 | `entry_stub_7e132b01` | `call 0x7e13272f,[mask 0xa0],12; ret` — second entry into the body at `0x7e13272f`. | pattern scan |
+| `0x7e132bcb` | 1 | `entry_stub_7e132bcb` | `call 0x7e132b1f,[mask 0xa0],12; ret` — second entry into the body at `0x7e132b1f`. | pattern scan |
+| `0x7e132d11` | 1 | `entry_stub_7e132d11` | `call 0x7e132c33,[mask 0xa0],12; ret` — second entry into the body at `0x7e132c33`. | pattern scan |
+| `0x7e132f7c` | 1 | `entry_stub_7e132f7c` | `call 0x7e132d2f,[mask 0xa0],12; ret` — second entry into the body at `0x7e132d2f`. | pattern scan |
+| `0x7e1332d8` | 1 | `entry_stub_7e1332d8` | `call 0x7e132f9a,[mask 0xa0],12; ret` — second entry into the body at `0x7e132f9a`. | pattern scan |
+| `0x7e1334ee` | 1 | `entry_stub_7e1334ee` | `call 0x7e1332f6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1332f6`. | pattern scan |
+| `0x7e1335fa` | 1 | `entry_stub_7e1335fa` | `call 0x7e13350c,[mask 0xa0],12; ret` — second entry into the body at `0x7e13350c`. | pattern scan |
+| `0x7e133706` | 1 | `entry_stub_7e133706` | `call 0x7e133618,[mask 0xa0],12; ret` — second entry into the body at `0x7e133618`. | pattern scan |
+| `0x7e133931` | 1 | `entry_stub_7e133931` | `call 0x7e13376e,[mask 0xa0],12; ret` — second entry into the body at `0x7e13376e`. | pattern scan |
+| `0x7e133be6` | 1 | `entry_stub_7e133be6` | `call 0x7e13394f,[mask 0xa0],12; ret` — second entry into the body at `0x7e13394f`. | pattern scan |
+| `0x7e133d3f` | 1 | `entry_stub_7e133d3f` | `call 0x7e133c04,[mask 0xa0],12; ret` — second entry into the body at `0x7e133c04`. | pattern scan |
+| `0x7e133e3b` | 1 | `entry_stub_7e133e3b` | `call 0x7e133d5d,[mask 0xa0],12; ret` — second entry into the body at `0x7e133d5d`. | pattern scan |
+| `0x7e133f5e` | 1 | `entry_stub_7e133f5e` | `call 0x7e133e59,[mask 0xa0],12; ret` — second entry into the body at `0x7e133e59`. | pattern scan |
+| `0x7e13406c` | 1 | `entry_stub_7e13406c` | `call 0x7e133f7c,[mask 0xa0],12; ret` — second entry into the body at `0x7e133f7c`. | pattern scan |
+| `0x7e1340da` | 1 | `entry_stub_7e1340da` | `call 0x7e13408a,[mask 0xa0],12; ret` — second entry into the body at `0x7e13408a`. | pattern scan |
+| `0x7e134148` | 1 | `entry_stub_7e134148` | `call 0x7e1340f8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1340f8`. | pattern scan |
+| `0x7e1341b6` | 1 | `entry_stub_7e1341b6` | `call 0x7e134166,[mask 0xa0],12; ret` — second entry into the body at `0x7e134166`. | pattern scan |
+| `0x7e134224` | 1 | `entry_stub_7e134224` | `call 0x7e1341d4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1341d4`. | pattern scan |
+| `0x7e134292` | 1 | `entry_stub_7e134292` | `call 0x7e134242,[mask 0xa0],12; ret` — second entry into the body at `0x7e134242`. | pattern scan |
+| `0x7e134300` | 1 | `entry_stub_7e134300` | `call 0x7e1342b0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1342b0`. | pattern scan |
+| `0x7e13436e` | 1 | `entry_stub_7e13436e` | `call 0x7e13431e,[mask 0xa0],12; ret` — second entry into the body at `0x7e13431e`. | pattern scan |
+| `0x7e134426` | 1 | `entry_stub_7e134426` | `call 0x7e1343d6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1343d6`. | pattern scan |
+| `0x7e134494` | 1 | `entry_stub_7e134494` | `call 0x7e134444,[mask 0xa0],12; ret` — second entry into the body at `0x7e134444`. | pattern scan |
+| `0x7e134502` | 1 | `entry_stub_7e134502` | `call 0x7e1344b2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1344b2`. | pattern scan |
+| `0x7e1346b0` | 1 | `entry_stub_7e1346b0` | `call 0x7e134660,[mask 0xa0],12; ret` — second entry into the body at `0x7e134660`. | pattern scan |
+| `0x7e13471e` | 1 | `entry_stub_7e13471e` | `call 0x7e1346ce,[mask 0xa0],12; ret` — second entry into the body at `0x7e1346ce`. | pattern scan |
+| `0x7e13479a` | 1 | `entry_stub_7e13479a` | `call 0x7e13474a,[mask 0xa0],12; ret` — second entry into the body at `0x7e13474a`. | pattern scan |
+| `0x7e134808` | 1 | `entry_stub_7e134808` | `call 0x7e1347b8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1347b8`. | pattern scan |
+| `0x7e134876` | 1 | `entry_stub_7e134876` | `call 0x7e134826,[mask 0xa0],12; ret` — second entry into the body at `0x7e134826`. | pattern scan |
+| `0x7e141184` | 1 | `entry_stub_7e141184` | `call 0x7e14112c,[mask 0xa0],12; ret` — second entry into the body at `0x7e14112c`. | pattern scan |
+| `0x7e1414a7` | 1 | `entry_stub_7e1414a7` | `call 0x7e141260,[mask 0xa0],12; ret` — second entry into the body at `0x7e141260`. | pattern scan |
+| `0x7e141da6` | 1 | `entry_stub_7e141da6` | `call 0x7e141df8,[mask 0x00],4; ret` — second entry into the body at `0x7e141df8`. | pattern scan |
+| `0x7e142379` | 1 | `entry_stub_7e142379` | `call 0x7e148370,[mask 0x00],4; ret` — second entry into the body at `0x7e148370`. | pattern scan |
+| `0x7e142d12` | 1 | `entry_stub_7e142d12` | `call 0x7e142765,[mask 0xa0],12; ret` — second entry into the body at `0x7e142765`. | pattern scan |
+| `0x7e142f40` | 1 | `entry_stub_7e142f40` | `call 0x7e142d30,[mask 0xa0],12; ret` — second entry into the body at `0x7e142d30`. | pattern scan |
+| `0x7e1430fd` | 1 | `entry_stub_7e1430fd` | `call 0x7e142f5e,[mask 0xa0],12; ret` — second entry into the body at `0x7e142f5e`. | pattern scan |
+| `0x7e143256` | 1 | `entry_stub_7e143256` | `call 0x7e143206,[mask 0xa0],12; ret` — second entry into the body at `0x7e143206`. | pattern scan |
+| `0x7e143883` | 1 | `entry_stub_7e143883` | `call 0x7e14341d,[mask 0xa0],12; ret` — second entry into the body at `0x7e14341d`. | pattern scan |
+| `0x7e143abb` | 1 | `entry_stub_7e143abb` | `call 0x7e1438a1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1438a1`. | pattern scan |
+| `0x7e143b29` | 1 | `entry_stub_7e143b29` | `call 0x7e143ad9,[mask 0xa0],12; ret` — second entry into the body at `0x7e143ad9`. | pattern scan |
+| `0x7e143f17` | 1 | `entry_stub_7e143f17` | `call 0x7e143b47,[mask 0xa0],12; ret` — second entry into the body at `0x7e143b47`. | pattern scan |
+| `0x7e1443c5` | 1 | `entry_stub_7e1443c5` | `call 0x7e144251,[mask 0xa0],12; ret` — second entry into the body at `0x7e144251`. | pattern scan |
+| `0x7e145099` | 1 | `entry_stub_7e145099` | `call 0x7e144e54,[mask 0xa0],12; ret` — second entry into the body at `0x7e144e54`. | pattern scan |
+| `0x7e145107` | 1 | `entry_stub_7e145107` | `call 0x7e1450b7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1450b7`. | pattern scan |
+| `0x7e145175` | 1 | `entry_stub_7e145175` | `call 0x7e145125,[mask 0xa0],12; ret` — second entry into the body at `0x7e145125`. | pattern scan |
+| `0x7e1451e3` | 1 | `entry_stub_7e1451e3` | `call 0x7e145193,[mask 0xa0],12; ret` — second entry into the body at `0x7e145193`. | pattern scan |
+| `0x7e1452ed` | 1 | `entry_stub_7e1452ed` | `call 0x7e145201,[mask 0xa0],12; ret` — second entry into the body at `0x7e145201`. | pattern scan |
+| `0x7e145954` | 1 | `entry_stub_7e145954` | `call 0x7e14530b,[mask 0xa0],12; ret` — second entry into the body at `0x7e14530b`. | pattern scan |
+| `0x7e1459c2` | 1 | `entry_stub_7e1459c2` | `call 0x7e145972,[mask 0xa0],12; ret` — second entry into the body at `0x7e145972`. | pattern scan |
+| `0x7e145a30` | 1 | `entry_stub_7e145a30` | `call 0x7e1459e0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1459e0`. | pattern scan |
+| `0x7e145a9e` | 1 | `entry_stub_7e145a9e` | `call 0x7e145a4e,[mask 0xa0],12; ret` — second entry into the body at `0x7e145a4e`. | pattern scan |
+| `0x7e145b0c` | 1 | `entry_stub_7e145b0c` | `call 0x7e145abc,[mask 0xa0],12; ret` — second entry into the body at `0x7e145abc`. | pattern scan |
+| `0x7e145b7a` | 1 | `entry_stub_7e145b7a` | `call 0x7e145b2a,[mask 0xa0],12; ret` — second entry into the body at `0x7e145b2a`. | pattern scan |
+| `0x7e145be8` | 1 | `entry_stub_7e145be8` | `call 0x7e145b98,[mask 0xa0],12; ret` — second entry into the body at `0x7e145b98`. | pattern scan |
+| `0x7e145c56` | 1 | `entry_stub_7e145c56` | `call 0x7e145c06,[mask 0xa0],12; ret` — second entry into the body at `0x7e145c06`. | pattern scan |
+| `0x7e1463ee` | 1 | `entry_stub_7e1463ee` | `call 0x7e145c74,[mask 0xa0],12; ret` — second entry into the body at `0x7e145c74`. | pattern scan |
+| `0x7e146739` | 1 | `entry_stub_7e146739` | `call 0x7e14640c,[mask 0xa0],12; ret` — second entry into the body at `0x7e14640c`. | pattern scan |
+| `0x7e146d1c` | 1 | `entry_stub_7e146d1c` | `call 0x7e146757,[mask 0xa0],12; ret` — second entry into the body at `0x7e146757`. | pattern scan |
+| `0x7e1477c9` | 1 | `entry_stub_7e1477c9` | `call 0x7e147664,[mask 0xa0],12; ret` — second entry into the body at `0x7e147664`. | pattern scan |
+| `0x7e147944` | 1 | `entry_stub_7e147944` | `call 0x7e1478f4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1478f4`. | pattern scan |
+| `0x7e147af9` | 1 | `entry_stub_7e147af9` | `call 0x7e1479f6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1479f6`. | pattern scan |
+| `0x7e147b67` | 1 | `entry_stub_7e147b67` | `call 0x7e147b17,[mask 0xa0],12; ret` — second entry into the body at `0x7e147b17`. | pattern scan |
+| `0x7e147be3` | 1 | `entry_stub_7e147be3` | `call 0x7e147b93,[mask 0xa0],12; ret` — second entry into the body at `0x7e147b93`. | pattern scan |
+| `0x7e147c51` | 1 | `entry_stub_7e147c51` | `call 0x7e147c01,[mask 0xa0],12; ret` — second entry into the body at `0x7e147c01`. | pattern scan |
+| `0x7e147de3` | 1 | `entry_stub_7e147de3` | `call 0x7e147c6f,[mask 0xa0],12; ret` — second entry into the body at `0x7e147c6f`. | pattern scan |
+| `0x7e147e51` | 1 | `entry_stub_7e147e51` | `call 0x7e147e01,[mask 0xa0],12; ret` — second entry into the body at `0x7e147e01`. | pattern scan |
+| `0x7e147fcd` | 1 | `entry_stub_7e147fcd` | `call 0x7e147e6f,[mask 0xa0],12; ret` — second entry into the body at `0x7e147e6f`. | pattern scan |
+| `0x7e148195` | 1 | `entry_stub_7e148195` | `call 0x7e147feb,[mask 0xa0],12; ret` — second entry into the body at `0x7e147feb`. | pattern scan |
+| `0x7e14830e` | 1 | `entry_stub_7e14830e` | `call 0x7e1481b3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1481b3`. | pattern scan |
+| `0x7e149283` | 1 | `entry_stub_7e149283` | `call 0x7e14922b,[mask 0xa0],12; ret` — second entry into the body at `0x7e14922b`. | pattern scan |
+| `0x7e1495a6` | 1 | `entry_stub_7e1495a6` | `call 0x7e14935f,[mask 0xa0],12; ret` — second entry into the body at `0x7e14935f`. | pattern scan |
+| `0x7e149e6a` | 1 | `entry_stub_7e149e6a` | `call 0x7e149e0f,[mask 0xa0],12; ret` — second entry into the body at `0x7e149e0f`. | pattern scan |
+| `0x7e14a10a` | 1 | `entry_stub_7e14a10a` | `call 0x7e14a0af,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a0af`. | pattern scan |
+| `0x7e14a183` | 1 | `entry_stub_7e14a183` | `call 0x7e14a128,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a128`. | pattern scan |
+| `0x7e14a1fc` | 1 | `entry_stub_7e14a1fc` | `call 0x7e14a1a1,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a1a1`. | pattern scan |
+| `0x7e14a275` | 1 | `entry_stub_7e14a275` | `call 0x7e14a21a,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a21a`. | pattern scan |
+| `0x7e14a2ee` | 1 | `entry_stub_7e14a2ee` | `call 0x7e14a293,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a293`. | pattern scan |
+| `0x7e14a367` | 1 | `entry_stub_7e14a367` | `call 0x7e14a30c,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a30c`. | pattern scan |
+| `0x7e14a3e0` | 1 | `entry_stub_7e14a3e0` | `call 0x7e14a385,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a385`. | pattern scan |
+| `0x7e14a459` | 1 | `entry_stub_7e14a459` | `call 0x7e14a3fe,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a3fe`. | pattern scan |
+| `0x7e14a4d2` | 1 | `entry_stub_7e14a4d2` | `call 0x7e14a477,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a477`. | pattern scan |
+| `0x7e14a54b` | 1 | `entry_stub_7e14a54b` | `call 0x7e14a4f0,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a4f0`. | pattern scan |
+| `0x7e14a70f` | 1 | `entry_stub_7e14a70f` | `call 0x7e14a6b4,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a6b4`. | pattern scan |
+| `0x7e14a788` | 1 | `entry_stub_7e14a788` | `call 0x7e14a72d,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a72d`. | pattern scan |
+| `0x7e14a80f` | 1 | `entry_stub_7e14a80f` | `call 0x7e14a7b4,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a7b4`. | pattern scan |
+| `0x7e14a888` | 1 | `entry_stub_7e14a888` | `call 0x7e14a82d,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a82d`. | pattern scan |
+| `0x7e14a901` | 1 | `entry_stub_7e14a901` | `call 0x7e14a8a6,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a8a6`. | pattern scan |
+| `0x7e14aac9` | 1 | `entry_stub_7e14aac9` | `call 0x7e14a984,[mask 0xa0],12; ret` — second entry into the body at `0x7e14a984`. | pattern scan |
+| `0x7e14b088` | 1 | `entry_stub_7e14b088` | `call 0x7e14ae27,[mask 0xa0],12; ret` — second entry into the body at `0x7e14ae27`. | pattern scan |
+| `0x7e14c463` | 1 | `entry_stub_7e14c463` | `call 0x7e14c40b,[mask 0xa0],12; ret` — second entry into the body at `0x7e14c40b`. | pattern scan |
+| `0x7e14c786` | 1 | `entry_stub_7e14c786` | `call 0x7e14c53f,[mask 0xa0],12; ret` — second entry into the body at `0x7e14c53f`. | pattern scan |
+| `0x7e14d0a0` | 1 | `entry_stub_7e14d0a0` | `call 0x7e14cfdf,[mask 0xa0],12; ret` — second entry into the body at `0x7e14cfdf`. | pattern scan |
+| `0x7e14d5db` | 1 | `entry_stub_7e14d5db` | `call 0x7e14d580,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d580`. | pattern scan |
+| `0x7e14d84f` | 1 | `entry_stub_7e14d84f` | `call 0x7e14d7f4,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d7f4`. | pattern scan |
+| `0x7e14d8c8` | 1 | `entry_stub_7e14d8c8` | `call 0x7e14d86d,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d86d`. | pattern scan |
+| `0x7e14d941` | 1 | `entry_stub_7e14d941` | `call 0x7e14d8e6,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d8e6`. | pattern scan |
+| `0x7e14d9ba` | 1 | `entry_stub_7e14d9ba` | `call 0x7e14d95f,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d95f`. | pattern scan |
+| `0x7e14da33` | 1 | `entry_stub_7e14da33` | `call 0x7e14d9d8,[mask 0xa0],12; ret` — second entry into the body at `0x7e14d9d8`. | pattern scan |
+| `0x7e14daac` | 1 | `entry_stub_7e14daac` | `call 0x7e14da51,[mask 0xa0],12; ret` — second entry into the body at `0x7e14da51`. | pattern scan |
+| `0x7e14db25` | 1 | `entry_stub_7e14db25` | `call 0x7e14daca,[mask 0xa0],12; ret` — second entry into the body at `0x7e14daca`. | pattern scan |
+| `0x7e14db9e` | 1 | `entry_stub_7e14db9e` | `call 0x7e14db43,[mask 0xa0],12; ret` — second entry into the body at `0x7e14db43`. | pattern scan |
+| `0x7e14dc17` | 1 | `entry_stub_7e14dc17` | `call 0x7e14dbbc,[mask 0xa0],12; ret` — second entry into the body at `0x7e14dbbc`. | pattern scan |
+| `0x7e14dc90` | 1 | `entry_stub_7e14dc90` | `call 0x7e14dc35,[mask 0xa0],12; ret` — second entry into the body at `0x7e14dc35`. | pattern scan |
+| `0x7e14de54` | 1 | `entry_stub_7e14de54` | `call 0x7e14ddf9,[mask 0xa0],12; ret` — second entry into the body at `0x7e14ddf9`. | pattern scan |
+| `0x7e14decd` | 1 | `entry_stub_7e14decd` | `call 0x7e14de72,[mask 0xa0],12; ret` — second entry into the body at `0x7e14de72`. | pattern scan |
+| `0x7e14df54` | 1 | `entry_stub_7e14df54` | `call 0x7e14def9,[mask 0xa0],12; ret` — second entry into the body at `0x7e14def9`. | pattern scan |
+| `0x7e14dfcd` | 1 | `entry_stub_7e14dfcd` | `call 0x7e14df72,[mask 0xa0],12; ret` — second entry into the body at `0x7e14df72`. | pattern scan |
+| `0x7e14e046` | 1 | `entry_stub_7e14e046` | `call 0x7e14dfeb,[mask 0xa0],12; ret` — second entry into the body at `0x7e14dfeb`. | pattern scan |
+| `0x7e14eb26` | 1 | `entry_stub_7e14eb26` | `call 0x7e14eace,[mask 0xa0],12; ret` — second entry into the body at `0x7e14eace`. | pattern scan |
+| `0x7e14ee49` | 1 | `entry_stub_7e14ee49` | `call 0x7e14ec02,[mask 0xa0],12; ret` — second entry into the body at `0x7e14ec02`. | pattern scan |
+| `0x7e14f7de` | 1 | `entry_stub_7e14f7de` | `call 0x7e14f6d9,[mask 0xa0],12; ret` — second entry into the body at `0x7e14f6d9`. | pattern scan |
+| `0x7e14f857` | 1 | `entry_stub_7e14f857` | `call 0x7e14f7fc,[mask 0xa0],12; ret` — second entry into the body at `0x7e14f7fc`. | pattern scan |
+| `0x7e15000f` | 1 | `entry_stub_7e15000f` | `call 0x7e14fe04,[mask 0xa0],12; ret` — second entry into the body at `0x7e14fe04`. | pattern scan |
+| `0x7e150088` | 1 | `entry_stub_7e150088` | `call 0x7e15002d,[mask 0xa0],12; ret` — second entry into the body at `0x7e15002d`. | pattern scan |
+| `0x7e150101` | 1 | `entry_stub_7e150101` | `call 0x7e1500a6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1500a6`. | pattern scan |
+| `0x7e15017a` | 1 | `entry_stub_7e15017a` | `call 0x7e15011f,[mask 0xa0],12; ret` — second entry into the body at `0x7e15011f`. | pattern scan |
+| `0x7e1501f3` | 1 | `entry_stub_7e1501f3` | `call 0x7e150198,[mask 0xa0],12; ret` — second entry into the body at `0x7e150198`. | pattern scan |
+| `0x7e15026c` | 1 | `entry_stub_7e15026c` | `call 0x7e150211,[mask 0xa0],12; ret` — second entry into the body at `0x7e150211`. | pattern scan |
+| `0x7e1502e5` | 1 | `entry_stub_7e1502e5` | `call 0x7e15028a,[mask 0xa0],12; ret` — second entry into the body at `0x7e15028a`. | pattern scan |
+| `0x7e15035e` | 1 | `entry_stub_7e15035e` | `call 0x7e150303,[mask 0xa0],12; ret` — second entry into the body at `0x7e150303`. | pattern scan |
+| `0x7e1503d7` | 1 | `entry_stub_7e1503d7` | `call 0x7e15037c,[mask 0xa0],12; ret` — second entry into the body at `0x7e15037c`. | pattern scan |
+| `0x7e150450` | 1 | `entry_stub_7e150450` | `call 0x7e1503f5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1503f5`. | pattern scan |
+| `0x7e1504c9` | 1 | `entry_stub_7e1504c9` | `call 0x7e15046e,[mask 0xa0],12; ret` — second entry into the body at `0x7e15046e`. | pattern scan |
+| `0x7e1508bb` | 1 | `entry_stub_7e1508bb` | `call 0x7e1504e7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1504e7`. | pattern scan |
+| `0x7e150a7f` | 1 | `entry_stub_7e150a7f` | `call 0x7e150a24,[mask 0xa0],12; ret` — second entry into the body at `0x7e150a24`. | pattern scan |
+| `0x7e150bba` | 1 | `entry_stub_7e150bba` | `call 0x7e150a9d,[mask 0xa0],12; ret` — second entry into the body at `0x7e150a9d`. | pattern scan |
+| `0x7e150c33` | 1 | `entry_stub_7e150c33` | `call 0x7e150bd8,[mask 0xa0],12; ret` — second entry into the body at `0x7e150bd8`. | pattern scan |
+| `0x7e150cba` | 1 | `entry_stub_7e150cba` | `call 0x7e150c5f,[mask 0xa0],12; ret` — second entry into the body at `0x7e150c5f`. | pattern scan |
+| `0x7e150e2f` | 1 | `entry_stub_7e150e2f` | `call 0x7e150cd8,[mask 0xa0],12; ret` — second entry into the body at `0x7e150cd8`. | pattern scan |
+| `0x7e150ea8` | 1 | `entry_stub_7e150ea8` | `call 0x7e150e4d,[mask 0xa0],12; ret` — second entry into the body at `0x7e150e4d`. | pattern scan |
+| `0x7e150f21` | 1 | `entry_stub_7e150f21` | `call 0x7e150ec6,[mask 0xa0],12; ret` — second entry into the body at `0x7e150ec6`. | pattern scan |
+| `0x7e1511db` | 1 | `entry_stub_7e1511db` | `call 0x7e150f3f,[mask 0xa0],12; ret` — second entry into the body at `0x7e150f3f`. | pattern scan |
+| `0x7e1514b0` | 1 | `entry_stub_7e1514b0` | `call 0x7e15125e,[mask 0xa0],12; ret` — second entry into the body at `0x7e15125e`. | pattern scan |
+| `0x7e152644` | 1 | `entry_stub_7e152644` | `call 0x7e1525ec,[mask 0xa0],12; ret` — second entry into the body at `0x7e1525ec`. | pattern scan |
+| `0x7e152967` | 1 | `entry_stub_7e152967` | `call 0x7e152720,[mask 0xa0],12; ret` — second entry into the body at `0x7e152720`. | pattern scan |
+| `0x7e153352` | 1 | `entry_stub_7e153352` | `call 0x7e153258,[mask 0xa0],12; ret` — second entry into the body at `0x7e153258`. | pattern scan |
+| `0x7e15374a` | 1 | `entry_stub_7e15374a` | `call 0x7e15363e,[mask 0xa0],12; ret` — second entry into the body at `0x7e15363e`. | pattern scan |
+| `0x7e153a5a` | 1 | `entry_stub_7e153a5a` | `call 0x7e153975,[mask 0xa0],12; ret` — second entry into the body at `0x7e153975`. | pattern scan |
+| `0x7e153ad3` | 1 | `entry_stub_7e153ad3` | `call 0x7e153a78,[mask 0xa0],12; ret` — second entry into the body at `0x7e153a78`. | pattern scan |
+| `0x7e153cac` | 1 | `entry_stub_7e153cac` | `call 0x7e153af1,[mask 0xa0],12; ret` — second entry into the body at `0x7e153af1`. | pattern scan |
+| `0x7e1541da` | 1 | `entry_stub_7e1541da` | `call 0x7e153f87,[mask 0xa0],12; ret` — second entry into the body at `0x7e153f87`. | pattern scan |
+| `0x7e1546a8` | 1 | `entry_stub_7e1546a8` | `call 0x7e154595,[mask 0xa0],12; ret` — second entry into the body at `0x7e154595`. | pattern scan |
+| `0x7e1548a2` | 1 | `entry_stub_7e1548a2` | `call 0x7e1546c6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1546c6`. | pattern scan |
+| `0x7e15491b` | 1 | `entry_stub_7e15491b` | `call 0x7e1548c0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1548c0`. | pattern scan |
+| `0x7e154994` | 1 | `entry_stub_7e154994` | `call 0x7e154939,[mask 0xa0],12; ret` — second entry into the body at `0x7e154939`. | pattern scan |
+| `0x7e154a0d` | 1 | `entry_stub_7e154a0d` | `call 0x7e1549b2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1549b2`. | pattern scan |
+| `0x7e154b12` | 1 | `entry_stub_7e154b12` | `call 0x7e154a2b,[mask 0xa0],12; ret` — second entry into the body at `0x7e154a2b`. | pattern scan |
+| `0x7e154b8b` | 1 | `entry_stub_7e154b8b` | `call 0x7e154b30,[mask 0xa0],12; ret` — second entry into the body at `0x7e154b30`. | pattern scan |
+| `0x7e154c04` | 1 | `entry_stub_7e154c04` | `call 0x7e154ba9,[mask 0xa0],12; ret` — second entry into the body at `0x7e154ba9`. | pattern scan |
+| `0x7e154d1a` | 1 | `entry_stub_7e154d1a` | `call 0x7e154c22,[mask 0xa0],12; ret` — second entry into the body at `0x7e154c22`. | pattern scan |
+| `0x7e154d93` | 1 | `entry_stub_7e154d93` | `call 0x7e154d38,[mask 0xa0],12; ret` — second entry into the body at `0x7e154d38`. | pattern scan |
+| `0x7e154e0c` | 1 | `entry_stub_7e154e0c` | `call 0x7e154db1,[mask 0xa0],12; ret` — second entry into the body at `0x7e154db1`. | pattern scan |
+| `0x7e154e85` | 1 | `entry_stub_7e154e85` | `call 0x7e154e2a,[mask 0xa0],12; ret` — second entry into the body at `0x7e154e2a`. | pattern scan |
+| `0x7e154efe` | 1 | `entry_stub_7e154efe` | `call 0x7e154ea3,[mask 0xa0],12; ret` — second entry into the body at `0x7e154ea3`. | pattern scan |
+| `0x7e154f77` | 1 | `entry_stub_7e154f77` | `call 0x7e154f1c,[mask 0xa0],12; ret` — second entry into the body at `0x7e154f1c`. | pattern scan |
+| `0x7e15516f` | 1 | `entry_stub_7e15516f` | `call 0x7e154f95,[mask 0xa0],12; ret` — second entry into the body at `0x7e154f95`. | pattern scan |
+| `0x7e155285` | 1 | `entry_stub_7e155285` | `call 0x7e15518d,[mask 0xa0],12; ret` — second entry into the body at `0x7e15518d`. | pattern scan |
+| `0x7e155661` | 1 | `entry_stub_7e155661` | `call 0x7e155606,[mask 0xa0],12; ret` — second entry into the body at `0x7e155606`. | pattern scan |
+| `0x7e155773` | 1 | `entry_stub_7e155773` | `call 0x7e15567f,[mask 0xa0],12; ret` — second entry into the body at `0x7e15567f`. | pattern scan |
+| `0x7e1557ec` | 1 | `entry_stub_7e1557ec` | `call 0x7e155791,[mask 0xa0],12; ret` — second entry into the body at `0x7e155791`. | pattern scan |
+| `0x7e155873` | 1 | `entry_stub_7e155873` | `call 0x7e155818,[mask 0xa0],12; ret` — second entry into the body at `0x7e155818`. | pattern scan |
+| `0x7e1558ec` | 1 | `entry_stub_7e1558ec` | `call 0x7e155891,[mask 0xa0],12; ret` — second entry into the body at `0x7e155891`. | pattern scan |
+| `0x7e155965` | 1 | `entry_stub_7e155965` | `call 0x7e15590a,[mask 0xa0],12; ret` — second entry into the body at `0x7e15590a`. | pattern scan |
+| `0x7e155a8c` | 1 | `entry_stub_7e155a8c` | `call 0x7e155983,[mask 0xa0],12; ret` — second entry into the body at `0x7e155983`. | pattern scan |
+| `0x7e155d9c` | 1 | `entry_stub_7e155d9c` | `call 0x7e155aaa,[mask 0xa0],12; ret` — second entry into the body at `0x7e155aaa`. | pattern scan |
+| `0x7e155f75` | 1 | `entry_stub_7e155f75` | `call 0x7e155e1f,[mask 0xa0],12; ret` — second entry into the body at `0x7e155e1f`. | pattern scan |
+| `0x7e156195` | 1 | `entry_stub_7e156195` | `call 0x7e155f93,[mask 0xa0],12; ret` — second entry into the body at `0x7e155f93`. | pattern scan |
+| `0x7e156e2f` | 1 | `entry_stub_7e156e2f` | `call 0x7e156dd7,[mask 0xa0],12; ret` — second entry into the body at `0x7e156dd7`. | pattern scan |
+| `0x7e157152` | 1 | `entry_stub_7e157152` | `call 0x7e156f0b,[mask 0xa0],12; ret` — second entry into the body at `0x7e156f0b`. | pattern scan |
+| `0x7e157b39` | 1 | `entry_stub_7e157b39` | `call 0x7e157a0b,[mask 0xa0],12; ret` — second entry into the body at `0x7e157a0b`. | pattern scan |
+| `0x7e157c90` | 1 | `entry_stub_7e157c90` | `call 0x7e157b57,[mask 0xa0],12; ret` — second entry into the body at `0x7e157b57`. | pattern scan |
+| `0x7e157dc3` | 1 | `entry_stub_7e157dc3` | `call 0x7e157cae,[mask 0xa0],12; ret` — second entry into the body at `0x7e157cae`. | pattern scan |
+| `0x7e157e3c` | 1 | `entry_stub_7e157e3c` | `call 0x7e157de1,[mask 0xa0],12; ret` — second entry into the body at `0x7e157de1`. | pattern scan |
+| `0x7e15860b` | 1 | `entry_stub_7e15860b` | `call 0x7e1584a9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1584a9`. | pattern scan |
+| `0x7e158bb5` | 1 | `entry_stub_7e158bb5` | `call 0x7e158629,[mask 0xa0],12; ret` — second entry into the body at `0x7e158629`. | pattern scan |
+| `0x7e158f4a` | 1 | `entry_stub_7e158f4a` | `call 0x7e158bd3,[mask 0xa0],12; ret` — second entry into the body at `0x7e158bd3`. | pattern scan |
+| `0x7e158fc3` | 1 | `entry_stub_7e158fc3` | `call 0x7e158f68,[mask 0xa0],12; ret` — second entry into the body at `0x7e158f68`. | pattern scan |
+| `0x7e15903c` | 1 | `entry_stub_7e15903c` | `call 0x7e158fe1,[mask 0xa0],12; ret` — second entry into the body at `0x7e158fe1`. | pattern scan |
+| `0x7e1590b5` | 1 | `entry_stub_7e1590b5` | `call 0x7e15905a,[mask 0xa0],12; ret` — second entry into the body at `0x7e15905a`. | pattern scan |
+| `0x7e1591f3` | 1 | `entry_stub_7e1591f3` | `call 0x7e1590d3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1590d3`. | pattern scan |
+| `0x7e15926c` | 1 | `entry_stub_7e15926c` | `call 0x7e159211,[mask 0xa0],12; ret` — second entry into the body at `0x7e159211`. | pattern scan |
+| `0x7e1592e5` | 1 | `entry_stub_7e1592e5` | `call 0x7e15928a,[mask 0xa0],12; ret` — second entry into the body at `0x7e15928a`. | pattern scan |
+| `0x7e15942f` | 1 | `entry_stub_7e15942f` | `call 0x7e159303,[mask 0xa0],12; ret` — second entry into the body at `0x7e159303`. | pattern scan |
+| `0x7e1594a8` | 1 | `entry_stub_7e1594a8` | `call 0x7e15944d,[mask 0xa0],12; ret` — second entry into the body at `0x7e15944d`. | pattern scan |
+| `0x7e159521` | 1 | `entry_stub_7e159521` | `call 0x7e1594c6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1594c6`. | pattern scan |
+| `0x7e15959a` | 1 | `entry_stub_7e15959a` | `call 0x7e15953f,[mask 0xa0],12; ret` — second entry into the body at `0x7e15953f`. | pattern scan |
+| `0x7e159613` | 1 | `entry_stub_7e159613` | `call 0x7e1595b8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1595b8`. | pattern scan |
+| `0x7e15968c` | 1 | `entry_stub_7e15968c` | `call 0x7e159631,[mask 0xa0],12; ret` — second entry into the body at `0x7e159631`. | pattern scan |
+| `0x7e1597d6` | 1 | `entry_stub_7e1597d6` | `call 0x7e1596aa,[mask 0xa0],12; ret` — second entry into the body at `0x7e1596aa`. | pattern scan |
+| `0x7e1599a1` | 1 | `entry_stub_7e1599a1` | `call 0x7e15993f,[mask 0xa0],12; ret` — second entry into the body at `0x7e15993f`. | pattern scan |
+| `0x7e159bf3` | 1 | `entry_stub_7e159bf3` | `call 0x7e1599bf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1599bf`. | pattern scan |
+| `0x7e159c6c` | 1 | `entry_stub_7e159c6c` | `call 0x7e159c11,[mask 0xa0],12; ret` — second entry into the body at `0x7e159c11`. | pattern scan |
+| `0x7e159cf3` | 1 | `entry_stub_7e159cf3` | `call 0x7e159c98,[mask 0xa0],12; ret` — second entry into the body at `0x7e159c98`. | pattern scan |
+| `0x7e159f45` | 1 | `entry_stub_7e159f45` | `call 0x7e159d11,[mask 0xa0],12; ret` — second entry into the body at `0x7e159d11`. | pattern scan |
+| `0x7e159fbe` | 1 | `entry_stub_7e159fbe` | `call 0x7e159f63,[mask 0xa0],12; ret` — second entry into the body at `0x7e159f63`. | pattern scan |
+| `0x7e15a037` | 1 | `entry_stub_7e15a037` | `call 0x7e159fdc,[mask 0xa0],12; ret` — second entry into the body at `0x7e159fdc`. | pattern scan |
+| `0x7e15a292` | 1 | `entry_stub_7e15a292` | `call 0x7e15a055,[mask 0xa0],12; ret` — second entry into the body at `0x7e15a055`. | pattern scan |
+| `0x7e15b70d` | 1 | `entry_stub_7e15b70d` | `call 0x7e15b6b5,[mask 0xa0],12; ret` — second entry into the body at `0x7e15b6b5`. | pattern scan |
+| `0x7e15ba30` | 1 | `entry_stub_7e15ba30` | `call 0x7e15b7e9,[mask 0xa0],12; ret` — second entry into the body at `0x7e15b7e9`. | pattern scan |
+| `0x7e15c3f7` | 1 | `entry_stub_7e15c3f7` | `call 0x7e15c2f0,[mask 0xa0],12; ret` — second entry into the body at `0x7e15c2f0`. | pattern scan |
+| `0x7e15c676` | 1 | `entry_stub_7e15c676` | `call 0x7e15c415,[mask 0xa0],12; ret` — second entry into the body at `0x7e15c415`. | pattern scan |
+| `0x7e15c6ef` | 1 | `entry_stub_7e15c6ef` | `call 0x7e15c694,[mask 0xa0],12; ret` — second entry into the body at `0x7e15c694`. | pattern scan |
+| `0x7e15ce24` | 1 | `entry_stub_7e15ce24` | `call 0x7e15ccd6,[mask 0xa0],12; ret` — second entry into the body at `0x7e15ccd6`. | pattern scan |
+| `0x7e15cfdb` | 1 | `entry_stub_7e15cfdb` | `call 0x7e15ce42,[mask 0xa0],12; ret` — second entry into the body at `0x7e15ce42`. | pattern scan |
+| `0x7e15d16f` | 1 | `entry_stub_7e15d16f` | `call 0x7e15cff9,[mask 0xa0],12; ret` — second entry into the body at `0x7e15cff9`. | pattern scan |
+| `0x7e15d9e5` | 1 | `entry_stub_7e15d9e5` | `call 0x7e15d19e,[mask 0xa0],12; ret` — second entry into the body at `0x7e15d19e`. | pattern scan |
+| `0x7e15dc8f` | 1 | `entry_stub_7e15dc8f` | `call 0x7e15dc34,[mask 0xa0],12; ret` — second entry into the body at `0x7e15dc34`. | pattern scan |
+| `0x7e15dd08` | 1 | `entry_stub_7e15dd08` | `call 0x7e15dcad,[mask 0xa0],12; ret` — second entry into the body at `0x7e15dcad`. | pattern scan |
+| `0x7e15dd81` | 1 | `entry_stub_7e15dd81` | `call 0x7e15dd26,[mask 0xa0],12; ret` — second entry into the body at `0x7e15dd26`. | pattern scan |
+| `0x7e15e045` | 1 | `entry_stub_7e15e045` | `call 0x7e15dd9f,[mask 0xa0],12; ret` — second entry into the body at `0x7e15dd9f`. | pattern scan |
+| `0x7e15e0be` | 1 | `entry_stub_7e15e0be` | `call 0x7e15e063,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e063`. | pattern scan |
+| `0x7e15e137` | 1 | `entry_stub_7e15e137` | `call 0x7e15e0dc,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e0dc`. | pattern scan |
+| `0x7e15e24e` | 1 | `entry_stub_7e15e24e` | `call 0x7e15e155,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e155`. | pattern scan |
+| `0x7e15e2c7` | 1 | `entry_stub_7e15e2c7` | `call 0x7e15e26c,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e26c`. | pattern scan |
+| `0x7e15e340` | 1 | `entry_stub_7e15e340` | `call 0x7e15e2e5,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e2e5`. | pattern scan |
+| `0x7e15e455` | 1 | `entry_stub_7e15e455` | `call 0x7e15e35e,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e35e`. | pattern scan |
+| `0x7e15e4ce` | 1 | `entry_stub_7e15e4ce` | `call 0x7e15e473,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e473`. | pattern scan |
+| `0x7e15e547` | 1 | `entry_stub_7e15e547` | `call 0x7e15e4ec,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e4ec`. | pattern scan |
+| `0x7e15e5c0` | 1 | `entry_stub_7e15e5c0` | `call 0x7e15e565,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e565`. | pattern scan |
+| `0x7e15e6d7` | 1 | `entry_stub_7e15e6d7` | `call 0x7e15e5de,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e5de`. | pattern scan |
+| `0x7e15e89b` | 1 | `entry_stub_7e15e89b` | `call 0x7e15e840,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e840`. | pattern scan |
+| `0x7e15e914` | 1 | `entry_stub_7e15e914` | `call 0x7e15e8b9,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e8b9`. | pattern scan |
+| `0x7e15e99b` | 1 | `entry_stub_7e15e99b` | `call 0x7e15e940,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e940`. | pattern scan |
+| `0x7e15ea14` | 1 | `entry_stub_7e15ea14` | `call 0x7e15e9b9,[mask 0xa0],12; ret` — second entry into the body at `0x7e15e9b9`. | pattern scan |
+| `0x7e15ea8d` | 1 | `entry_stub_7e15ea8d` | `call 0x7e15ea32,[mask 0xa0],12; ret` — second entry into the body at `0x7e15ea32`. | pattern scan |
+| `0x7e15ec36` | 1 | `entry_stub_7e15ec36` | `call 0x7e15eaab,[mask 0xa0],12; ret` — second entry into the body at `0x7e15eaab`. | pattern scan |
+| `0x7e15ed31` | 1 | `entry_stub_7e15ed31` | `call 0x7e15ec54,[mask 0xa0],12; ret` — second entry into the body at `0x7e15ec54`. | pattern scan |
+| `0x7e15fecb` | 1 | `entry_stub_7e15fecb` | `call 0x7e15fe73,[mask 0xa0],12; ret` — second entry into the body at `0x7e15fe73`. | pattern scan |
+| `0x7e1601ee` | 1 | `entry_stub_7e1601ee` | `call 0x7e15ffa7,[mask 0xa0],12; ret` — second entry into the body at `0x7e15ffa7`. | pattern scan |
+| `0x7e160b2b` | 1 | `entry_stub_7e160b2b` | `call 0x7e160a4d,[mask 0xa0],12; ret` — second entry into the body at `0x7e160a4d`. | pattern scan |
+| `0x7e160ba4` | 1 | `entry_stub_7e160ba4` | `call 0x7e160b49,[mask 0xa0],12; ret` — second entry into the body at `0x7e160b49`. | pattern scan |
+| `0x7e160eba` | 1 | `entry_stub_7e160eba` | `call 0x7e160dd3,[mask 0xa0],12; ret` — second entry into the body at `0x7e160dd3`. | pattern scan |
+| `0x7e160f33` | 1 | `entry_stub_7e160f33` | `call 0x7e160ed8,[mask 0xa0],12; ret` — second entry into the body at `0x7e160ed8`. | pattern scan |
+| `0x7e160fac` | 1 | `entry_stub_7e160fac` | `call 0x7e160f51,[mask 0xa0],12; ret` — second entry into the body at `0x7e160f51`. | pattern scan |
+| `0x7e161025` | 1 | `entry_stub_7e161025` | `call 0x7e160fca,[mask 0xa0],12; ret` — second entry into the body at `0x7e160fca`. | pattern scan |
+| `0x7e16109e` | 1 | `entry_stub_7e16109e` | `call 0x7e161043,[mask 0xa0],12; ret` — second entry into the body at `0x7e161043`. | pattern scan |
+| `0x7e161117` | 1 | `entry_stub_7e161117` | `call 0x7e1610bc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1610bc`. | pattern scan |
+| `0x7e161190` | 1 | `entry_stub_7e161190` | `call 0x7e161135,[mask 0xa0],12; ret` — second entry into the body at `0x7e161135`. | pattern scan |
+| `0x7e161209` | 1 | `entry_stub_7e161209` | `call 0x7e1611ae,[mask 0xa0],12; ret` — second entry into the body at `0x7e1611ae`. | pattern scan |
+| `0x7e161282` | 1 | `entry_stub_7e161282` | `call 0x7e161227,[mask 0xa0],12; ret` — second entry into the body at `0x7e161227`. | pattern scan |
+| `0x7e1612fb` | 1 | `entry_stub_7e1612fb` | `call 0x7e1612a0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1612a0`. | pattern scan |
+| `0x7e161374` | 1 | `entry_stub_7e161374` | `call 0x7e161319,[mask 0xa0],12; ret` — second entry into the body at `0x7e161319`. | pattern scan |
+| `0x7e161538` | 1 | `entry_stub_7e161538` | `call 0x7e1614dd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1614dd`. | pattern scan |
+| `0x7e1615b1` | 1 | `entry_stub_7e1615b1` | `call 0x7e161556,[mask 0xa0],12; ret` — second entry into the body at `0x7e161556`. | pattern scan |
+| `0x7e161638` | 1 | `entry_stub_7e161638` | `call 0x7e1615dd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1615dd`. | pattern scan |
+| `0x7e1616b1` | 1 | `entry_stub_7e1616b1` | `call 0x7e161656,[mask 0xa0],12; ret` — second entry into the body at `0x7e161656`. | pattern scan |
+| `0x7e16172a` | 1 | `entry_stub_7e16172a` | `call 0x7e1616cf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1616cf`. | pattern scan |
+| `0x7e163780` | 1 | `entry_stub_7e163780` | `call 0x7e163728,[mask 0xa0],12; ret` — second entry into the body at `0x7e163728`. | pattern scan |
+| `0x7e163aa3` | 1 | `entry_stub_7e163aa3` | `call 0x7e16385c,[mask 0xa0],12; ret` — second entry into the body at `0x7e16385c`. | pattern scan |
+| `0x7e164483` | 1 | `entry_stub_7e164483` | `call 0x7e164333,[mask 0xa0],12; ret` — second entry into the body at `0x7e164333`. | pattern scan |
+| `0x7e1645e6` | 1 | `entry_stub_7e1645e6` | `call 0x7e16458b,[mask 0xa0],12; ret` — second entry into the body at `0x7e16458b`. | pattern scan |
+| `0x7e165997` | 1 | `entry_stub_7e165997` | `call 0x7e16593c,[mask 0xa0],12; ret` — second entry into the body at `0x7e16593c`. | pattern scan |
+| `0x7e165a10` | 1 | `entry_stub_7e165a10` | `call 0x7e1659b5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1659b5`. | pattern scan |
+| `0x7e165a89` | 1 | `entry_stub_7e165a89` | `call 0x7e165a2e,[mask 0xa0],12; ret` — second entry into the body at `0x7e165a2e`. | pattern scan |
+| `0x7e165b02` | 1 | `entry_stub_7e165b02` | `call 0x7e165aa7,[mask 0xa0],12; ret` — second entry into the body at `0x7e165aa7`. | pattern scan |
+| `0x7e165b7b` | 1 | `entry_stub_7e165b7b` | `call 0x7e165b20,[mask 0xa0],12; ret` — second entry into the body at `0x7e165b20`. | pattern scan |
+| `0x7e165bf4` | 1 | `entry_stub_7e165bf4` | `call 0x7e165b99,[mask 0xa0],12; ret` — second entry into the body at `0x7e165b99`. | pattern scan |
+| `0x7e165c6d` | 1 | `entry_stub_7e165c6d` | `call 0x7e165c12,[mask 0xa0],12; ret` — second entry into the body at `0x7e165c12`. | pattern scan |
+| `0x7e165ce6` | 1 | `entry_stub_7e165ce6` | `call 0x7e165c8b,[mask 0xa0],12; ret` — second entry into the body at `0x7e165c8b`. | pattern scan |
+| `0x7e165d5f` | 1 | `entry_stub_7e165d5f` | `call 0x7e165d04,[mask 0xa0],12; ret` — second entry into the body at `0x7e165d04`. | pattern scan |
+| `0x7e165dd8` | 1 | `entry_stub_7e165dd8` | `call 0x7e165d7d,[mask 0xa0],12; ret` — second entry into the body at `0x7e165d7d`. | pattern scan |
+| `0x7e165f9c` | 1 | `entry_stub_7e165f9c` | `call 0x7e165f41,[mask 0xa0],12; ret` — second entry into the body at `0x7e165f41`. | pattern scan |
+| `0x7e166174` | 1 | `entry_stub_7e166174` | `call 0x7e166119,[mask 0xa0],12; ret` — second entry into the body at `0x7e166119`. | pattern scan |
+| `0x7e1661fb` | 1 | `entry_stub_7e1661fb` | `call 0x7e1661a0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1661a0`. | pattern scan |
+| `0x7e166274` | 1 | `entry_stub_7e166274` | `call 0x7e166219,[mask 0xa0],12; ret` — second entry into the body at `0x7e166219`. | pattern scan |
+| `0x7e166447` | 1 | `entry_stub_7e166447` | `call 0x7e166292,[mask 0xa0],12; ret` — second entry into the body at `0x7e166292`. | pattern scan |
+| `0x7e1664c0` | 1 | `entry_stub_7e1664c0` | `call 0x7e166465,[mask 0xa0],12; ret` — second entry into the body at `0x7e166465`. | pattern scan |
+| `0x7e16738d` | 1 | `entry_stub_7e16738d` | `call 0x7e167335,[mask 0xa0],12; ret` — second entry into the body at `0x7e167335`. | pattern scan |
+| `0x7e1676b0` | 1 | `entry_stub_7e1676b0` | `call 0x7e167469,[mask 0xa0],12; ret` — second entry into the body at `0x7e167469`. | pattern scan |
+| `0x7e16810b` | 1 | `entry_stub_7e16810b` | `call 0x7e16801f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16801f`. | pattern scan |
+| `0x7e16822d` | 1 | `entry_stub_7e16822d` | `call 0x7e168129,[mask 0xa0],12; ret` — second entry into the body at `0x7e168129`. | pattern scan |
+| `0x7e16832b` | 1 | `entry_stub_7e16832b` | `call 0x7e16824b,[mask 0xa0],12; ret` — second entry into the body at `0x7e16824b`. | pattern scan |
+| `0x7e1683a4` | 1 | `entry_stub_7e1683a4` | `call 0x7e168349,[mask 0xa0],12; ret` — second entry into the body at `0x7e168349`. | pattern scan |
+| `0x7e168ae4` | 1 | `entry_stub_7e168ae4` | `call 0x7e16895f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16895f`. | pattern scan |
+| `0x7e168c1b` | 1 | `entry_stub_7e168c1b` | `call 0x7e168b02,[mask 0xa0],12; ret` — second entry into the body at `0x7e168b02`. | pattern scan |
+| `0x7e16927f` | 1 | `entry_stub_7e16927f` | `call 0x7e168c39,[mask 0xa0],12; ret` — second entry into the body at `0x7e168c39`. | pattern scan |
+| `0x7e1692f8` | 1 | `entry_stub_7e1692f8` | `call 0x7e16929d,[mask 0xa0],12; ret` — second entry into the body at `0x7e16929d`. | pattern scan |
+| `0x7e169371` | 1 | `entry_stub_7e169371` | `call 0x7e169316,[mask 0xa0],12; ret` — second entry into the body at `0x7e169316`. | pattern scan |
+| `0x7e1693ea` | 1 | `entry_stub_7e1693ea` | `call 0x7e16938f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16938f`. | pattern scan |
+| `0x7e1694f5` | 1 | `entry_stub_7e1694f5` | `call 0x7e169408,[mask 0xa0],12; ret` — second entry into the body at `0x7e169408`. | pattern scan |
+| `0x7e16956e` | 1 | `entry_stub_7e16956e` | `call 0x7e169513,[mask 0xa0],12; ret` — second entry into the body at `0x7e169513`. | pattern scan |
+| `0x7e1695e7` | 1 | `entry_stub_7e1695e7` | `call 0x7e16958c,[mask 0xa0],12; ret` — second entry into the body at `0x7e16958c`. | pattern scan |
+| `0x7e169708` | 1 | `entry_stub_7e169708` | `call 0x7e169605,[mask 0xa0],12; ret` — second entry into the body at `0x7e169605`. | pattern scan |
+| `0x7e169781` | 1 | `entry_stub_7e169781` | `call 0x7e169726,[mask 0xa0],12; ret` — second entry into the body at `0x7e169726`. | pattern scan |
+| `0x7e1697fa` | 1 | `entry_stub_7e1697fa` | `call 0x7e16979f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16979f`. | pattern scan |
+| `0x7e169873` | 1 | `entry_stub_7e169873` | `call 0x7e169818,[mask 0xa0],12; ret` — second entry into the body at `0x7e169818`. | pattern scan |
+| `0x7e1698ec` | 1 | `entry_stub_7e1698ec` | `call 0x7e169891,[mask 0xa0],12; ret` — second entry into the body at `0x7e169891`. | pattern scan |
+| `0x7e169965` | 1 | `entry_stub_7e169965` | `call 0x7e16990a,[mask 0xa0],12; ret` — second entry into the body at `0x7e16990a`. | pattern scan |
+| `0x7e169a81` | 1 | `entry_stub_7e169a81` | `call 0x7e169983,[mask 0xa0],12; ret` — second entry into the body at `0x7e169983`. | pattern scan |
+| `0x7e169c4c` | 1 | `entry_stub_7e169c4c` | `call 0x7e169bea,[mask 0xa0],12; ret` — second entry into the body at `0x7e169bea`. | pattern scan |
+| `0x7e169cc5` | 1 | `entry_stub_7e169cc5` | `call 0x7e169c6a,[mask 0xa0],12; ret` — second entry into the body at `0x7e169c6a`. | pattern scan |
+| `0x7e169d4c` | 1 | `entry_stub_7e169d4c` | `call 0x7e169cf1,[mask 0xa0],12; ret` — second entry into the body at `0x7e169cf1`. | pattern scan |
+| `0x7e169dc5` | 1 | `entry_stub_7e169dc5` | `call 0x7e169d6a,[mask 0xa0],12; ret` — second entry into the body at `0x7e169d6a`. | pattern scan |
+| `0x7e169e3e` | 1 | `entry_stub_7e169e3e` | `call 0x7e169de3,[mask 0xa0],12; ret` — second entry into the body at `0x7e169de3`. | pattern scan |
+| `0x7e169f7e` | 1 | `entry_stub_7e169f7e` | `call 0x7e169e76,[mask 0xa0],12; ret` — second entry into the body at `0x7e169e76`. | pattern scan |
+| `0x7e16a1a2` | 1 | `entry_stub_7e16a1a2` | `call 0x7e169f9c,[mask 0xa0],12; ret` — second entry into the body at `0x7e169f9c`. | pattern scan |
+| `0x7e16ad09` | 1 | `entry_stub_7e16ad09` | `call 0x7e16acb1,[mask 0xa0],12; ret` — second entry into the body at `0x7e16acb1`. | pattern scan |
+| `0x7e16b02c` | 1 | `entry_stub_7e16b02c` | `call 0x7e16ade5,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ade5`. | pattern scan |
+| `0x7e16ba2e` | 1 | `entry_stub_7e16ba2e` | `call 0x7e16b8ad,[mask 0xa0],12; ret` — second entry into the body at `0x7e16b8ad`. | pattern scan |
+| `0x7e16baa7` | 1 | `entry_stub_7e16baa7` | `call 0x7e16ba4c,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ba4c`. | pattern scan |
+| `0x7e16c1f7` | 1 | `entry_stub_7e16c1f7` | `call 0x7e16c03a,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c03a`. | pattern scan |
+| `0x7e16c2f8` | 1 | `entry_stub_7e16c2f8` | `call 0x7e16c215,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c215`. | pattern scan |
+| `0x7e16c4cc` | 1 | `entry_stub_7e16c4cc` | `call 0x7e16c316,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c316`. | pattern scan |
+| `0x7e16c545` | 1 | `entry_stub_7e16c545` | `call 0x7e16c4ea,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c4ea`. | pattern scan |
+| `0x7e16c5be` | 1 | `entry_stub_7e16c5be` | `call 0x7e16c563,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c563`. | pattern scan |
+| `0x7e16c637` | 1 | `entry_stub_7e16c637` | `call 0x7e16c5dc,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c5dc`. | pattern scan |
+| `0x7e16c6b0` | 1 | `entry_stub_7e16c6b0` | `call 0x7e16c655,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c655`. | pattern scan |
+| `0x7e16c729` | 1 | `entry_stub_7e16c729` | `call 0x7e16c6ce,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c6ce`. | pattern scan |
+| `0x7e16ca23` | 1 | `entry_stub_7e16ca23` | `call 0x7e16c747,[mask 0xa0],12; ret` — second entry into the body at `0x7e16c747`. | pattern scan |
+| `0x7e16ca9c` | 1 | `entry_stub_7e16ca9c` | `call 0x7e16ca41,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ca41`. | pattern scan |
+| `0x7e16cb15` | 1 | `entry_stub_7e16cb15` | `call 0x7e16caba,[mask 0xa0],12; ret` — second entry into the body at `0x7e16caba`. | pattern scan |
+| `0x7e16cb8e` | 1 | `entry_stub_7e16cb8e` | `call 0x7e16cb33,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cb33`. | pattern scan |
+| `0x7e16cc07` | 1 | `entry_stub_7e16cc07` | `call 0x7e16cbac,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cbac`. | pattern scan |
+| `0x7e16cc80` | 1 | `entry_stub_7e16cc80` | `call 0x7e16cc25,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cc25`. | pattern scan |
+| `0x7e16ce44` | 1 | `entry_stub_7e16ce44` | `call 0x7e16cde9,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cde9`. | pattern scan |
+| `0x7e16cebd` | 1 | `entry_stub_7e16cebd` | `call 0x7e16ce62,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ce62`. | pattern scan |
+| `0x7e16cf44` | 1 | `entry_stub_7e16cf44` | `call 0x7e16cee9,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cee9`. | pattern scan |
+| `0x7e16cfbd` | 1 | `entry_stub_7e16cfbd` | `call 0x7e16cf62,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cf62`. | pattern scan |
+| `0x7e16d036` | 1 | `entry_stub_7e16d036` | `call 0x7e16cfdb,[mask 0xa0],12; ret` — second entry into the body at `0x7e16cfdb`. | pattern scan |
+| `0x7e16e24e` | 1 | `entry_stub_7e16e24e` | `call 0x7e16e1f6,[mask 0xa0],12; ret` — second entry into the body at `0x7e16e1f6`. | pattern scan |
+| `0x7e16e571` | 1 | `entry_stub_7e16e571` | `call 0x7e16e32a,[mask 0xa0],12; ret` — second entry into the body at `0x7e16e32a`. | pattern scan |
+| `0x7e16eeba` | 1 | `entry_stub_7e16eeba` | `call 0x7e16ede0,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ede0`. | pattern scan |
+| `0x7e16ef33` | 1 | `entry_stub_7e16ef33` | `call 0x7e16eed8,[mask 0xa0],12; ret` — second entry into the body at `0x7e16eed8`. | pattern scan |
+| `0x7e16efee` | 1 | `entry_stub_7e16efee` | `call 0x7e16ef51,[mask 0xa0],12; ret` — second entry into the body at `0x7e16ef51`. | pattern scan |
+| `0x7e16f32c` | 1 | `entry_stub_7e16f32c` | `call 0x7e16f249,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f249`. | pattern scan |
+| `0x7e16f3a5` | 1 | `entry_stub_7e16f3a5` | `call 0x7e16f34a,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f34a`. | pattern scan |
+| `0x7e16f41e` | 1 | `entry_stub_7e16f41e` | `call 0x7e16f3c3,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f3c3`. | pattern scan |
+| `0x7e16f497` | 1 | `entry_stub_7e16f497` | `call 0x7e16f43c,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f43c`. | pattern scan |
+| `0x7e16f510` | 1 | `entry_stub_7e16f510` | `call 0x7e16f4b5,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f4b5`. | pattern scan |
+| `0x7e16f589` | 1 | `entry_stub_7e16f589` | `call 0x7e16f52e,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f52e`. | pattern scan |
+| `0x7e16f602` | 1 | `entry_stub_7e16f602` | `call 0x7e16f5a7,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f5a7`. | pattern scan |
+| `0x7e16f67b` | 1 | `entry_stub_7e16f67b` | `call 0x7e16f620,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f620`. | pattern scan |
+| `0x7e16f6f4` | 1 | `entry_stub_7e16f6f4` | `call 0x7e16f699,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f699`. | pattern scan |
+| `0x7e16f76d` | 1 | `entry_stub_7e16f76d` | `call 0x7e16f712,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f712`. | pattern scan |
+| `0x7e16f7e6` | 1 | `entry_stub_7e16f7e6` | `call 0x7e16f78b,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f78b`. | pattern scan |
+| `0x7e16f9aa` | 1 | `entry_stub_7e16f9aa` | `call 0x7e16f94f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f94f`. | pattern scan |
+| `0x7e16fa23` | 1 | `entry_stub_7e16fa23` | `call 0x7e16f9c8,[mask 0xa0],12; ret` — second entry into the body at `0x7e16f9c8`. | pattern scan |
+| `0x7e16faaa` | 1 | `entry_stub_7e16faaa` | `call 0x7e16fa4f,[mask 0xa0],12; ret` — second entry into the body at `0x7e16fa4f`. | pattern scan |
+| `0x7e16fb23` | 1 | `entry_stub_7e16fb23` | `call 0x7e16fac8,[mask 0xa0],12; ret` — second entry into the body at `0x7e16fac8`. | pattern scan |
+| `0x7e16fcba` | 1 | `entry_stub_7e16fcba` | `call 0x7e16fb41,[mask 0xa0],12; ret` — second entry into the body at `0x7e16fb41`. | pattern scan |
+| `0x7e16fd33` | 1 | `entry_stub_7e16fd33` | `call 0x7e16fcd8,[mask 0xa0],12; ret` — second entry into the body at `0x7e16fcd8`. | pattern scan |
+| `0x7e170b4b` | 1 | `entry_stub_7e170b4b` | `call 0x7e170af3,[mask 0xa0],12; ret` — second entry into the body at `0x7e170af3`. | pattern scan |
+| `0x7e170e6e` | 1 | `entry_stub_7e170e6e` | `call 0x7e170c27,[mask 0xa0],12; ret` — second entry into the body at `0x7e170c27`. | pattern scan |
+| `0x7e1718c4` | 1 | `entry_stub_7e1718c4` | `call 0x7e1717dd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1717dd`. | pattern scan |
+| `0x7e1719a1` | 1 | `entry_stub_7e1719a1` | `call 0x7e1718e2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1718e2`. | pattern scan |
+| `0x7e171a99` | 1 | `entry_stub_7e171a99` | `call 0x7e1719bf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1719bf`. | pattern scan |
+| `0x7e171b12` | 1 | `entry_stub_7e171b12` | `call 0x7e171ab7,[mask 0xa0],12; ret` — second entry into the body at `0x7e171ab7`. | pattern scan |
+| `0x7e172243` | 1 | `entry_stub_7e172243` | `call 0x7e1720be,[mask 0xa0],12; ret` — second entry into the body at `0x7e1720be`. | pattern scan |
+| `0x7e172374` | 1 | `entry_stub_7e172374` | `call 0x7e172261,[mask 0xa0],12; ret` — second entry into the body at `0x7e172261`. | pattern scan |
+| `0x7e17293f` | 1 | `entry_stub_7e17293f` | `call 0x7e172392,[mask 0xa0],12; ret` — second entry into the body at `0x7e172392`. | pattern scan |
+| `0x7e1729b8` | 1 | `entry_stub_7e1729b8` | `call 0x7e17295d,[mask 0xa0],12; ret` — second entry into the body at `0x7e17295d`. | pattern scan |
+| `0x7e172a31` | 1 | `entry_stub_7e172a31` | `call 0x7e1729d6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1729d6`. | pattern scan |
+| `0x7e172aaa` | 1 | `entry_stub_7e172aaa` | `call 0x7e172a4f,[mask 0xa0],12; ret` — second entry into the body at `0x7e172a4f`. | pattern scan |
+| `0x7e172baf` | 1 | `entry_stub_7e172baf` | `call 0x7e172ac8,[mask 0xa0],12; ret` — second entry into the body at `0x7e172ac8`. | pattern scan |
+| `0x7e172c28` | 1 | `entry_stub_7e172c28` | `call 0x7e172bcd,[mask 0xa0],12; ret` — second entry into the body at `0x7e172bcd`. | pattern scan |
+| `0x7e172ca1` | 1 | `entry_stub_7e172ca1` | `call 0x7e172c46,[mask 0xa0],12; ret` — second entry into the body at `0x7e172c46`. | pattern scan |
+| `0x7e172db8` | 1 | `entry_stub_7e172db8` | `call 0x7e172cbf,[mask 0xa0],12; ret` — second entry into the body at `0x7e172cbf`. | pattern scan |
+| `0x7e172e31` | 1 | `entry_stub_7e172e31` | `call 0x7e172dd6,[mask 0xa0],12; ret` — second entry into the body at `0x7e172dd6`. | pattern scan |
+| `0x7e172eaa` | 1 | `entry_stub_7e172eaa` | `call 0x7e172e4f,[mask 0xa0],12; ret` — second entry into the body at `0x7e172e4f`. | pattern scan |
+| `0x7e172f23` | 1 | `entry_stub_7e172f23` | `call 0x7e172ec8,[mask 0xa0],12; ret` — second entry into the body at `0x7e172ec8`. | pattern scan |
+| `0x7e172f9c` | 1 | `entry_stub_7e172f9c` | `call 0x7e172f41,[mask 0xa0],12; ret` — second entry into the body at `0x7e172f41`. | pattern scan |
+| `0x7e173015` | 1 | `entry_stub_7e173015` | `call 0x7e172fba,[mask 0xa0],12; ret` — second entry into the body at `0x7e172fba`. | pattern scan |
+| `0x7e17312c` | 1 | `entry_stub_7e17312c` | `call 0x7e173033,[mask 0xa0],12; ret` — second entry into the body at `0x7e173033`. | pattern scan |
+| `0x7e1732f7` | 1 | `entry_stub_7e1732f7` | `call 0x7e173295,[mask 0xa0],12; ret` — second entry into the body at `0x7e173295`. | pattern scan |
+| `0x7e173370` | 1 | `entry_stub_7e173370` | `call 0x7e173315,[mask 0xa0],12; ret` — second entry into the body at `0x7e173315`. | pattern scan |
+| `0x7e1733f7` | 1 | `entry_stub_7e1733f7` | `call 0x7e17339c,[mask 0xa0],12; ret` — second entry into the body at `0x7e17339c`. | pattern scan |
+| `0x7e173470` | 1 | `entry_stub_7e173470` | `call 0x7e173415,[mask 0xa0],12; ret` — second entry into the body at `0x7e173415`. | pattern scan |
+| `0x7e1734e9` | 1 | `entry_stub_7e1734e9` | `call 0x7e17348e,[mask 0xa0],12; ret` — second entry into the body at `0x7e17348e`. | pattern scan |
+| `0x7e173610` | 1 | `entry_stub_7e173610` | `call 0x7e173507,[mask 0xa0],12; ret` — second entry into the body at `0x7e173507`. | pattern scan |
+| `0x7e17386c` | 1 | `entry_stub_7e17386c` | `call 0x7e17362e,[mask 0xa0],12; ret` — second entry into the body at `0x7e17362e`. | pattern scan |
+| `0x7e17592f` | 1 | `entry_stub_7e17592f` | `call 0x7e1758d7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1758d7`. | pattern scan |
+| `0x7e175c52` | 1 | `entry_stub_7e175c52` | `call 0x7e175a0b,[mask 0xa0],12; ret` — second entry into the body at `0x7e175a0b`. | pattern scan |
+| `0x7e17667f` | 1 | `entry_stub_7e17667f` | `call 0x7e17646f,[mask 0xa0],12; ret` — second entry into the body at `0x7e17646f`. | pattern scan |
+| `0x7e176836` | 1 | `entry_stub_7e176836` | `call 0x7e176749,[mask 0xa0],12; ret` — second entry into the body at `0x7e176749`. | pattern scan |
+| `0x7e17694e` | 1 | `entry_stub_7e17694e` | `call 0x7e176854,[mask 0xa0],12; ret` — second entry into the body at `0x7e176854`. | pattern scan |
+| `0x7e176a46` | 1 | `entry_stub_7e176a46` | `call 0x7e17696c,[mask 0xa0],12; ret` — second entry into the body at `0x7e17696c`. | pattern scan |
+| `0x7e176abf` | 1 | `entry_stub_7e176abf` | `call 0x7e176a64,[mask 0xa0],12; ret` — second entry into the body at `0x7e176a64`. | pattern scan |
+| `0x7e17725b` | 1 | `entry_stub_7e17725b` | `call 0x7e1770d6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1770d6`. | pattern scan |
+| `0x7e17738c` | 1 | `entry_stub_7e17738c` | `call 0x7e177279,[mask 0xa0],12; ret` — second entry into the body at `0x7e177279`. | pattern scan |
+| `0x7e1775cb` | 1 | `entry_stub_7e1775cb` | `call 0x7e1773aa,[mask 0xa0],12; ret` — second entry into the body at `0x7e1773aa`. | pattern scan |
+| `0x7e177644` | 1 | `entry_stub_7e177644` | `call 0x7e1775e9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1775e9`. | pattern scan |
+| `0x7e1776bd` | 1 | `entry_stub_7e1776bd` | `call 0x7e177662,[mask 0xa0],12; ret` — second entry into the body at `0x7e177662`. | pattern scan |
+| `0x7e177736` | 1 | `entry_stub_7e177736` | `call 0x7e1776db,[mask 0xa0],12; ret` — second entry into the body at `0x7e1776db`. | pattern scan |
+| `0x7e17783b` | 1 | `entry_stub_7e17783b` | `call 0x7e177754,[mask 0xa0],12; ret` — second entry into the body at `0x7e177754`. | pattern scan |
+| `0x7e177d11` | 1 | `entry_stub_7e177d11` | `call 0x7e177859,[mask 0xa0],12; ret` — second entry into the body at `0x7e177859`. | pattern scan |
+| `0x7e177d8a` | 1 | `entry_stub_7e177d8a` | `call 0x7e177d2f,[mask 0xa0],12; ret` — second entry into the body at `0x7e177d2f`. | pattern scan |
+| `0x7e177e03` | 1 | `entry_stub_7e177e03` | `call 0x7e177da8,[mask 0xa0],12; ret` — second entry into the body at `0x7e177da8`. | pattern scan |
+| `0x7e177f1a` | 1 | `entry_stub_7e177f1a` | `call 0x7e177e21,[mask 0xa0],12; ret` — second entry into the body at `0x7e177e21`. | pattern scan |
+| `0x7e177f93` | 1 | `entry_stub_7e177f93` | `call 0x7e177f38,[mask 0xa0],12; ret` — second entry into the body at `0x7e177f38`. | pattern scan |
+| `0x7e17800c` | 1 | `entry_stub_7e17800c` | `call 0x7e177fb1,[mask 0xa0],12; ret` — second entry into the body at `0x7e177fb1`. | pattern scan |
+| `0x7e178085` | 1 | `entry_stub_7e178085` | `call 0x7e17802a,[mask 0xa0],12; ret` — second entry into the body at `0x7e17802a`. | pattern scan |
+| `0x7e1780fe` | 1 | `entry_stub_7e1780fe` | `call 0x7e1780a3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1780a3`. | pattern scan |
+| `0x7e178177` | 1 | `entry_stub_7e178177` | `call 0x7e17811c,[mask 0xa0],12; ret` — second entry into the body at `0x7e17811c`. | pattern scan |
+| `0x7e17828e` | 1 | `entry_stub_7e17828e` | `call 0x7e178195,[mask 0xa0],12; ret` — second entry into the body at `0x7e178195`. | pattern scan |
+| `0x7e178459` | 1 | `entry_stub_7e178459` | `call 0x7e1783f7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1783f7`. | pattern scan |
+| `0x7e1785d3` | 1 | `entry_stub_7e1785d3` | `call 0x7e178477,[mask 0xa0],12; ret` — second entry into the body at `0x7e178477`. | pattern scan |
+| `0x7e17864c` | 1 | `entry_stub_7e17864c` | `call 0x7e1785f1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1785f1`. | pattern scan |
+| `0x7e1786d3` | 1 | `entry_stub_7e1786d3` | `call 0x7e178678,[mask 0xa0],12; ret` — second entry into the body at `0x7e178678`. | pattern scan |
+| `0x7e178836` | 1 | `entry_stub_7e178836` | `call 0x7e1786f1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1786f1`. | pattern scan |
+| `0x7e1788af` | 1 | `entry_stub_7e1788af` | `call 0x7e178854,[mask 0xa0],12; ret` — second entry into the body at `0x7e178854`. | pattern scan |
+| `0x7e178ca9` | 1 | `entry_stub_7e178ca9` | `call 0x7e1788cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1788cd`. | pattern scan |
+| `0x7e178d22` | 1 | `entry_stub_7e178d22` | `call 0x7e178cc7,[mask 0xa0],12; ret` — second entry into the body at `0x7e178cc7`. | pattern scan |
+| `0x7e17971d` | 1 | `entry_stub_7e17971d` | `call 0x7e1796c5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1796c5`. | pattern scan |
+| `0x7e179a34` | 1 | `entry_stub_7e179a34` | `call 0x7e1797e0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1797e0`. | pattern scan |
+| `0x7e17af89` | 1 | `entry_stub_7e17af89` | `call 0x7e17af83,[mask 0x00],0; ret` — second entry into the body at `0x7e17af83`. | pattern scan |
+| `0x7e17b388` | 1 | `entry_stub_7e17b388` | `call 0x7e17b382,[mask 0x00],0; ret` — second entry into the body at `0x7e17b382`. | pattern scan |
+| `0x7e17b396` | 1 | `entry_stub_7e17b396` | `call 0x7e17b390,[mask 0x00],0; ret` — second entry into the body at `0x7e17b390`. | pattern scan |
+| `0x7e17c912` | 1 | `entry_stub_7e17c912` | `call 0x7e17c8ba,[mask 0xa0],12; ret` — second entry into the body at `0x7e17c8ba`. | pattern scan |
+| `0x7e17cc35` | 1 | `entry_stub_7e17cc35` | `call 0x7e17c9ee,[mask 0xa0],12; ret` — second entry into the body at `0x7e17c9ee`. | pattern scan |
+| `0x7e17d692` | 1 | `entry_stub_7e17d692` | `call 0x7e17d848,[mask 0x00],4; ret` — second entry into the body at `0x7e17d848`. | pattern scan |
+| `0x7e17d8bc` | 1 | `entry_stub_7e17d8bc` | `call 0x7e17dbdb,[mask 0x00],4; ret` — second entry into the body at `0x7e17dbdb`. | pattern scan |
+| `0x7e17ddda` | 1 | `entry_stub_7e17ddda` | `call 0x7e1834ba,[mask 0x00],4; ret` — second entry into the body at `0x7e1834ba`. | pattern scan |
+| `0x7e17e824` | 1 | `entry_stub_7e17e824` | `call 0x7e17e775,[mask 0xa0],12; ret` — second entry into the body at `0x7e17e775`. | pattern scan |
+| `0x7e17ef93` | 1 | `entry_stub_7e17ef93` | `call 0x7e17ef3d,[mask 0xa0],12; ret` — second entry into the body at `0x7e17ef3d`. | pattern scan |
+| `0x7e17fd46` | 1 | `entry_stub_7e17fd46` | `call 0x7e17fb7c,[mask 0xa0],12; ret` — second entry into the body at `0x7e17fb7c`. | pattern scan |
+| `0x7e17fd9d` | 1 | `entry_stub_7e17fd9d` | `call 0x7e17fb7c,[mask 0xa0],12; ret` — second entry into the body at `0x7e17fb7c`. | pattern scan |
+| `0x7e18002b` | 1 | `entry_stub_7e18002b` | `call 0x7e17ef3d,[mask 0xa0],12; ret` — second entry into the body at `0x7e17ef3d`. | pattern scan |
+| `0x7e18070b` | 1 | `entry_stub_7e18070b` | `call 0x7e17ef3d,[mask 0xa0],12; ret` — second entry into the body at `0x7e17ef3d`. | pattern scan |
+| `0x7e180c8b` | 1 | `entry_stub_7e180c8b` | `call 0x7e1809e9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1809e9`. | pattern scan |
+| `0x7e1812bb` | 1 | `entry_stub_7e1812bb` | `call 0x7e1811e4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1811e4`. | pattern scan |
+| `0x7e181683` | 1 | `entry_stub_7e181683` | `call 0x7e1815a3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1815a3`. | pattern scan |
+| `0x7e181a0c` | 1 | `entry_stub_7e181a0c` | `call 0x7e1818bc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1818bc`. | pattern scan |
+| `0x7e181ad5` | 1 | `entry_stub_7e181ad5` | `call 0x7e1818bc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1818bc`. | pattern scan |
+| `0x7e1827ec` | 1 | `entry_stub_7e1827ec` | `call 0x7e181b7b,[mask 0xa0],12; ret` — second entry into the body at `0x7e181b7b`. | pattern scan |
+| `0x7e182edb` | 1 | `entry_stub_7e182edb` | `call 0x7e181b7b,[mask 0xa0],12; ret` — second entry into the body at `0x7e181b7b`. | pattern scan |
+| `0x7e183b26` | 1 | `entry_stub_7e183b26` | `call 0x7e1834d9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1834d9`. | pattern scan |
+| `0x7e184633` | 1 | `entry_stub_7e184633` | `call 0x7e184479,[mask 0xa0],12; ret` — second entry into the body at `0x7e184479`. | pattern scan |
+| `0x7e185099` | 1 | `entry_stub_7e185099` | `call 0x7e184e51,[mask 0xa0],12; ret` — second entry into the body at `0x7e184e51`. | pattern scan |
+| `0x7e1851d6` | 1 | `entry_stub_7e1851d6` | `call 0x7e1851a9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1851a9`. | pattern scan |
+| `0x7e186408` | 1 | `entry_stub_7e186408` | `call 0x7e185e56,[mask 0xa0],12; ret` — second entry into the body at `0x7e185e56`. | pattern scan |
+| `0x7e1864f2` | 1 | `entry_stub_7e1864f2` | `call 0x7e185e56,[mask 0xa0],12; ret` — second entry into the body at `0x7e185e56`. | pattern scan |
+| `0x7e186865` | 1 | `entry_stub_7e186865` | `call 0x7e1865cb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1865cb`. | pattern scan |
+| `0x7e1869ac` | 1 | `entry_stub_7e1869ac` | `call 0x7e1851a9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1851a9`. | pattern scan |
+| `0x7e186e23` | 1 | `entry_stub_7e186e23` | `call 0x7e1851a9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1851a9`. | pattern scan |
+| `0x7e189894` | 1 | `entry_stub_7e189894` | `call 0x7e189795,[mask 0xa0],12; ret` — second entry into the body at `0x7e189795`. | pattern scan |
+| `0x7e18aaa3` | 1 | `entry_stub_7e18aaa3` | `call 0x7e18a738,[mask 0xa0],12; ret` — second entry into the body at `0x7e18a738`. | pattern scan |
+| `0x7e18aeb0` | 1 | `entry_stub_7e18aeb0` | `call 0x7e18aac1,[mask 0xa0],12; ret` — second entry into the body at `0x7e18aac1`. | pattern scan |
+| `0x7e18bff3` | 1 | `entry_stub_7e18bff3` | `call 0x7e18ba63,[mask 0xa0],12; ret` — second entry into the body at `0x7e18ba63`. | pattern scan |
+| `0x7e18c078` | 1 | `entry_stub_7e18c078` | `call 0x7e18ba63,[mask 0xa0],12; ret` — second entry into the body at `0x7e18ba63`. | pattern scan |
+| `0x7e18d6b7` | 1 | `entry_stub_7e18d6b7` | `call 0x7e18d65f,[mask 0xa0],12; ret` — second entry into the body at `0x7e18d65f`. | pattern scan |
+| `0x7e18d9da` | 1 | `entry_stub_7e18d9da` | `call 0x7e18d793,[mask 0xa0],12; ret` — second entry into the body at `0x7e18d793`. | pattern scan |
+| `0x7e18e2c3` | 1 | `entry_stub_7e18e2c3` | `call 0x7e18e268,[mask 0xa0],12; ret` — second entry into the body at `0x7e18e268`. | pattern scan |
+| `0x7e18e7a7` | 1 | `entry_stub_7e18e7a7` | `call 0x7e18e58c,[mask 0xa0],12; ret` — second entry into the body at `0x7e18e58c`. | pattern scan |
+| `0x7e18ea5c` | 1 | `entry_stub_7e18ea5c` | `call 0x7e18e7c5,[mask 0xa0],12; ret` — second entry into the body at `0x7e18e7c5`. | pattern scan |
+| `0x7e18ecfe` | 1 | `entry_stub_7e18ecfe` | `call 0x7e18ea7a,[mask 0xa0],12; ret` — second entry into the body at `0x7e18ea7a`. | pattern scan |
+| `0x7e18ef54` | 1 | `entry_stub_7e18ef54` | `call 0x7e18ed1c,[mask 0xa0],12; ret` — second entry into the body at `0x7e18ed1c`. | pattern scan |
+| `0x7e18f080` | 1 | `entry_stub_7e18f080` | `call 0x7e18ef72,[mask 0xa0],12; ret` — second entry into the body at `0x7e18ef72`. | pattern scan |
+| `0x7e18f1ee` | 1 | `entry_stub_7e18f1ee` | `call 0x7e18f09e,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f09e`. | pattern scan |
+| `0x7e18f30e` | 1 | `entry_stub_7e18f30e` | `call 0x7e18f20c,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f20c`. | pattern scan |
+| `0x7e18f491` | 1 | `entry_stub_7e18f491` | `call 0x7e18f37f,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f37f`. | pattern scan |
+| `0x7e18f50a` | 1 | `entry_stub_7e18f50a` | `call 0x7e18f4af,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f4af`. | pattern scan |
+| `0x7e18f583` | 1 | `entry_stub_7e18f583` | `call 0x7e18f528,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f528`. | pattern scan |
+| `0x7e18f5fc` | 1 | `entry_stub_7e18f5fc` | `call 0x7e18f5a1,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f5a1`. | pattern scan |
+| `0x7e18f675` | 1 | `entry_stub_7e18f675` | `call 0x7e18f61a,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f61a`. | pattern scan |
+| `0x7e18f6ee` | 1 | `entry_stub_7e18f6ee` | `call 0x7e18f693,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f693`. | pattern scan |
+| `0x7e18f767` | 1 | `entry_stub_7e18f767` | `call 0x7e18f70c,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f70c`. | pattern scan |
+| `0x7e18f7e0` | 1 | `entry_stub_7e18f7e0` | `call 0x7e18f785,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f785`. | pattern scan |
+| `0x7e18f859` | 1 | `entry_stub_7e18f859` | `call 0x7e18f7fe,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f7fe`. | pattern scan |
+| `0x7e18f8d2` | 1 | `entry_stub_7e18f8d2` | `call 0x7e18f877,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f877`. | pattern scan |
+| `0x7e18f94b` | 1 | `entry_stub_7e18f94b` | `call 0x7e18f8f0,[mask 0xa0],12; ret` — second entry into the body at `0x7e18f8f0`. | pattern scan |
+| `0x7e18fb0b` | 1 | `entry_stub_7e18fb0b` | `call 0x7e18fab0,[mask 0xa0],12; ret` — second entry into the body at `0x7e18fab0`. | pattern scan |
+| `0x7e18fb84` | 1 | `entry_stub_7e18fb84` | `call 0x7e18fb29,[mask 0xa0],12; ret` — second entry into the body at `0x7e18fb29`. | pattern scan |
+| `0x7e18fc0b` | 1 | `entry_stub_7e18fc0b` | `call 0x7e18fbb0,[mask 0xa0],12; ret` — second entry into the body at `0x7e18fbb0`. | pattern scan |
+| `0x7e18fc84` | 1 | `entry_stub_7e18fc84` | `call 0x7e18fc29,[mask 0xa0],12; ret` — second entry into the body at `0x7e18fc29`. | pattern scan |
+| `0x7e18fcfd` | 1 | `entry_stub_7e18fcfd` | `call 0x7e18fca2,[mask 0xa0],12; ret` — second entry into the body at `0x7e18fca2`. | pattern scan |
+| `0x7e19e833` | 1 | `entry_stub_7e19e833` | `call 0x7e19e7da,[mask 0xa0],12; ret` — second entry into the body at `0x7e19e7da`. | pattern scan |
+| `0x7e19eb61` | 1 | `entry_stub_7e19eb61` | `call 0x7e19e913,[mask 0xa0],12; ret` — second entry into the body at `0x7e19e913`. | pattern scan |
+| `0x7e19f3f5` | 1 | `entry_stub_7e19f3f5` | `call 0x7e19f39c,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f39c`. | pattern scan |
+| `0x7e19f651` | 1 | `entry_stub_7e19f651` | `call 0x7e19f5f8,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f5f8`. | pattern scan |
+| `0x7e19f6c8` | 1 | `entry_stub_7e19f6c8` | `call 0x7e19f66f,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f66f`. | pattern scan |
+| `0x7e19f73f` | 1 | `entry_stub_7e19f73f` | `call 0x7e19f6e6,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f6e6`. | pattern scan |
+| `0x7e19f7b9` | 1 | `entry_stub_7e19f7b9` | `call 0x7e19f75d,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f75d`. | pattern scan |
+| `0x7e19f830` | 1 | `entry_stub_7e19f830` | `call 0x7e19f7d7,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f7d7`. | pattern scan |
+| `0x7e19f8aa` | 1 | `entry_stub_7e19f8aa` | `call 0x7e19f84e,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f84e`. | pattern scan |
+| `0x7e19f924` | 1 | `entry_stub_7e19f924` | `call 0x7e19f8c8,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f8c8`. | pattern scan |
+| `0x7e19f99e` | 1 | `entry_stub_7e19f99e` | `call 0x7e19f942,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f942`. | pattern scan |
+| `0x7e19fa15` | 1 | `entry_stub_7e19fa15` | `call 0x7e19f9bc,[mask 0xa0],12; ret` — second entry into the body at `0x7e19f9bc`. | pattern scan |
+| `0x7e19fa8c` | 1 | `entry_stub_7e19fa8c` | `call 0x7e19fa33,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fa33`. | pattern scan |
+| `0x7e19fc4d` | 1 | `entry_stub_7e19fc4d` | `call 0x7e19fbf1,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fbf1`. | pattern scan |
+| `0x7e19fcc4` | 1 | `entry_stub_7e19fcc4` | `call 0x7e19fc6b,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fc6b`. | pattern scan |
+| `0x7e19fd4d` | 1 | `entry_stub_7e19fd4d` | `call 0x7e19fcf1,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fcf1`. | pattern scan |
+| `0x7e19fdc4` | 1 | `entry_stub_7e19fdc4` | `call 0x7e19fd6b,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fd6b`. | pattern scan |
+| `0x7e19fe3b` | 1 | `entry_stub_7e19fe3b` | `call 0x7e19fde2,[mask 0xa0],12; ret` — second entry into the body at `0x7e19fde2`. | pattern scan |
+| `0x7e1a0705` | 1 | `entry_stub_7e1a0705` | `call 0x7e19e5ac,[mask 0x00],4; ret` — second entry into the body at `0x7e19e5ac`. | pattern scan |
+| `0x7e1a0944` | 1 | `entry_stub_7e1a0944` | `call 0x7e1a08ec,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a08ec`. | pattern scan |
+| `0x7e1a0c67` | 1 | `entry_stub_7e1a0c67` | `call 0x7e1a0a20,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a0a20`. | pattern scan |
+| `0x7e1a1533` | 1 | `entry_stub_7e1a1533` | `call 0x7e1a14da,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a14da`. | pattern scan |
+| `0x7e1a1813` | 1 | `entry_stub_7e1a1813` | `call 0x7e1a17ba,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a17ba`. | pattern scan |
+| `0x7e1a188a` | 1 | `entry_stub_7e1a188a` | `call 0x7e1a1831,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1831`. | pattern scan |
+| `0x7e1a1901` | 1 | `entry_stub_7e1a1901` | `call 0x7e1a18a8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a18a8`. | pattern scan |
+| `0x7e1a197a` | 1 | `entry_stub_7e1a197a` | `call 0x7e1a191f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a191f`. | pattern scan |
+| `0x7e1a19f1` | 1 | `entry_stub_7e1a19f1` | `call 0x7e1a1998,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1998`. | pattern scan |
+| `0x7e1a1a6a` | 1 | `entry_stub_7e1a1a6a` | `call 0x7e1a1a0f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1a0f`. | pattern scan |
+| `0x7e1a1ae3` | 1 | `entry_stub_7e1a1ae3` | `call 0x7e1a1a88,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1a88`. | pattern scan |
+| `0x7e1a1b5c` | 1 | `entry_stub_7e1a1b5c` | `call 0x7e1a1b01,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1b01`. | pattern scan |
+| `0x7e1a1bd3` | 1 | `entry_stub_7e1a1bd3` | `call 0x7e1a1b7a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1b7a`. | pattern scan |
+| `0x7e1a1c4c` | 1 | `entry_stub_7e1a1c4c` | `call 0x7e1a1bf1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1bf1`. | pattern scan |
+| `0x7e1a1e0e` | 1 | `entry_stub_7e1a1e0e` | `call 0x7e1a1db5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1db5`. | pattern scan |
+| `0x7e1a2043` | 1 | `entry_stub_7e1a2043` | `call 0x7e1a1e2c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a1e2c`. | pattern scan |
+| `0x7e1a213b` | 1 | `entry_stub_7e1a213b` | `call 0x7e1a2061,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a2061`. | pattern scan |
+| `0x7e1a22ee` | 1 | `entry_stub_7e1a22ee` | `call 0x7e1a2159,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a2159`. | pattern scan |
+| `0x7e1a23e6` | 1 | `entry_stub_7e1a23e6` | `call 0x7e1a230c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a230c`. | pattern scan |
+| `0x7e1a25d2` | 1 | `entry_stub_7e1a25d2` | `call 0x7e1a2404,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a2404`. | pattern scan |
+| `0x7e1a2836` | 1 | `entry_stub_7e1a2836` | `call 0x7e1a25f0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a25f0`. | pattern scan |
+| `0x7e1a28af` | 1 | `entry_stub_7e1a28af` | `call 0x7e1a2854,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a2854`. | pattern scan |
+| `0x7e1a2936` | 1 | `entry_stub_7e1a2936` | `call 0x7e1a28db,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a28db`. | pattern scan |
+| `0x7e1a29af` | 1 | `entry_stub_7e1a29af` | `call 0x7e1a2954,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a2954`. | pattern scan |
+| `0x7e1a2a28` | 1 | `entry_stub_7e1a2a28` | `call 0x7e1a29cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a29cd`. | pattern scan |
+| `0x7e1a2fb9` | 14 | `entry_stub_7e1a2fb9` | `call 0x7e1a5881,[mask 0x00],4; ret` — second entry into the body at `0x7e1a5881`. | pattern scan |
+| `0x7e1a31b5` | 1 | `entry_stub_7e1a31b5` | `call 0x7e1a315c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a315c`. | pattern scan |
+| `0x7e1a34e3` | 1 | `entry_stub_7e1a34e3` | `call 0x7e1a3295,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a3295`. | pattern scan |
+| `0x7e1a3d8b` | 1 | `entry_stub_7e1a3d8b` | `call 0x7e1a3d32,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a3d32`. | pattern scan |
+| `0x7e1a3fe9` | 1 | `entry_stub_7e1a3fe9` | `call 0x7e1a3f8e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a3f8e`. | pattern scan |
+| `0x7e1a4062` | 1 | `entry_stub_7e1a4062` | `call 0x7e1a4007,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4007`. | pattern scan |
+| `0x7e1a40db` | 1 | `entry_stub_7e1a40db` | `call 0x7e1a4080,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4080`. | pattern scan |
+| `0x7e1a4155` | 1 | `entry_stub_7e1a4155` | `call 0x7e1a40f9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a40f9`. | pattern scan |
+| `0x7e1a41ce` | 1 | `entry_stub_7e1a41ce` | `call 0x7e1a4173,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4173`. | pattern scan |
+| `0x7e1a4248` | 1 | `entry_stub_7e1a4248` | `call 0x7e1a41ec,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a41ec`. | pattern scan |
+| `0x7e1a42c2` | 1 | `entry_stub_7e1a42c2` | `call 0x7e1a4266,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4266`. | pattern scan |
+| `0x7e1a433c` | 1 | `entry_stub_7e1a433c` | `call 0x7e1a42e0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a42e0`. | pattern scan |
+| `0x7e1a43b5` | 1 | `entry_stub_7e1a43b5` | `call 0x7e1a435a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a435a`. | pattern scan |
+| `0x7e1a442e` | 1 | `entry_stub_7e1a442e` | `call 0x7e1a43d3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a43d3`. | pattern scan |
+| `0x7e1a45f3` | 1 | `entry_stub_7e1a45f3` | `call 0x7e1a4597,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4597`. | pattern scan |
+| `0x7e1a466c` | 1 | `entry_stub_7e1a466c` | `call 0x7e1a4611,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4611`. | pattern scan |
+| `0x7e1a46f5` | 1 | `entry_stub_7e1a46f5` | `call 0x7e1a4699,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4699`. | pattern scan |
+| `0x7e1a476e` | 1 | `entry_stub_7e1a476e` | `call 0x7e1a4713,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a4713`. | pattern scan |
+| `0x7e1a47e7` | 1 | `entry_stub_7e1a47e7` | `call 0x7e1a478c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a478c`. | pattern scan |
+| `0x7e1a5a7f` | 1 | `entry_stub_7e1a5a7f` | `call 0x7e1a5a26,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a5a26`. | pattern scan |
+| `0x7e1a5dad` | 1 | `entry_stub_7e1a5dad` | `call 0x7e1a5b5f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a5b5f`. | pattern scan |
+| `0x7e1a665d` | 1 | `entry_stub_7e1a665d` | `call 0x7e1a6602,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6602`. | pattern scan |
+| `0x7e1a68bb` | 1 | `entry_stub_7e1a68bb` | `call 0x7e1a6860,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6860`. | pattern scan |
+| `0x7e1a6934` | 1 | `entry_stub_7e1a6934` | `call 0x7e1a68d9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a68d9`. | pattern scan |
+| `0x7e1a69ad` | 1 | `entry_stub_7e1a69ad` | `call 0x7e1a6952,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6952`. | pattern scan |
+| `0x7e1a6a27` | 1 | `entry_stub_7e1a6a27` | `call 0x7e1a69cb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a69cb`. | pattern scan |
+| `0x7e1a6aa0` | 1 | `entry_stub_7e1a6aa0` | `call 0x7e1a6a45,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6a45`. | pattern scan |
+| `0x7e1a6b1a` | 1 | `entry_stub_7e1a6b1a` | `call 0x7e1a6abe,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6abe`. | pattern scan |
+| `0x7e1a6b94` | 1 | `entry_stub_7e1a6b94` | `call 0x7e1a6b38,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6b38`. | pattern scan |
+| `0x7e1a6c0e` | 1 | `entry_stub_7e1a6c0e` | `call 0x7e1a6bb2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6bb2`. | pattern scan |
+| `0x7e1a6c87` | 1 | `entry_stub_7e1a6c87` | `call 0x7e1a6c2c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6c2c`. | pattern scan |
+| `0x7e1a6d00` | 1 | `entry_stub_7e1a6d00` | `call 0x7e1a6ca5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6ca5`. | pattern scan |
+| `0x7e1a6ec5` | 1 | `entry_stub_7e1a6ec5` | `call 0x7e1a6e69,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6e69`. | pattern scan |
+| `0x7e1a6f3e` | 1 | `entry_stub_7e1a6f3e` | `call 0x7e1a6ee3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6ee3`. | pattern scan |
+| `0x7e1a6fc7` | 1 | `entry_stub_7e1a6fc7` | `call 0x7e1a6f6b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6f6b`. | pattern scan |
+| `0x7e1a7040` | 1 | `entry_stub_7e1a7040` | `call 0x7e1a6fe5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a6fe5`. | pattern scan |
+| `0x7e1a70b9` | 1 | `entry_stub_7e1a70b9` | `call 0x7e1a705e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a705e`. | pattern scan |
+| `0x7e1a86d4` | 1 | `entry_stub_7e1a86d4` | `call 0x7e1a867c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a867c`. | pattern scan |
+| `0x7e1a89f7` | 1 | `entry_stub_7e1a89f7` | `call 0x7e1a87b0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a87b0`. | pattern scan |
+| `0x7e1a934f` | 1 | `entry_stub_7e1a934f` | `call 0x7e1a92f4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a92f4`. | pattern scan |
+| `0x7e1a99f1` | 1 | `entry_stub_7e1a99f1` | `call 0x7e1a96c8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a96c8`. | pattern scan |
+| `0x7e1a9af5` | 1 | `entry_stub_7e1a9af5` | `call 0x7e1a9a0f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a9a0f`. | pattern scan |
+| `0x7e1a9bf7` | 1 | `entry_stub_7e1a9bf7` | `call 0x7e1a9b13,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a9b13`. | pattern scan |
+| `0x7e1a9ed4` | 1 | `entry_stub_7e1a9ed4` | `call 0x7e1a9c15,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a9c15`. | pattern scan |
+| `0x7e1aa1b1` | 1 | `entry_stub_7e1aa1b1` | `call 0x7e1a9ef2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1a9ef2`. | pattern scan |
+| `0x7e1aa310` | 1 | `entry_stub_7e1aa310` | `call 0x7e1aa1cf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aa1cf`. | pattern scan |
+| `0x7e1aa404` | 1 | `entry_stub_7e1aa404` | `call 0x7e1aa32e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aa32e`. | pattern scan |
+| `0x7e1aa75f` | 1 | `entry_stub_7e1aa75f` | `call 0x7e1aa422,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aa422`. | pattern scan |
+| `0x7e1aa8a6` | 1 | `entry_stub_7e1aa8a6` | `call 0x7e1aa77d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aa77d`. | pattern scan |
+| `0x7e1aaa0d` | 1 | `entry_stub_7e1aaa0d` | `call 0x7e1aa8c4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aa8c4`. | pattern scan |
+| `0x7e1aab5c` | 1 | `entry_stub_7e1aab5c` | `call 0x7e1aaa2b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aaa2b`. | pattern scan |
+| `0x7e1aaefb` | 1 | `entry_stub_7e1aaefb` | `call 0x7e1aab7a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aab7a`. | pattern scan |
+| `0x7e1ab7f5` | 1 | `entry_stub_7e1ab7f5` | `call 0x7e1ab5f3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ab5f3`. | pattern scan |
+| `0x7e1ab8f2` | 1 | `entry_stub_7e1ab8f2` | `call 0x7e1ab813,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ab813`. | pattern scan |
+| `0x7e1ab96b` | 1 | `entry_stub_7e1ab96b` | `call 0x7e1ab910,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ab910`. | pattern scan |
+| `0x7e1ab9e4` | 1 | `entry_stub_7e1ab9e4` | `call 0x7e1ab989,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ab989`. | pattern scan |
+| `0x7e1aba5d` | 1 | `entry_stub_7e1aba5d` | `call 0x7e1aba02,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aba02`. | pattern scan |
+| `0x7e1abad6` | 1 | `entry_stub_7e1abad6` | `call 0x7e1aba7b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aba7b`. | pattern scan |
+| `0x7e1abb4f` | 1 | `entry_stub_7e1abb4f` | `call 0x7e1abaf4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abaf4`. | pattern scan |
+| `0x7e1abbc8` | 1 | `entry_stub_7e1abbc8` | `call 0x7e1abb6d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abb6d`. | pattern scan |
+| `0x7e1abc41` | 1 | `entry_stub_7e1abc41` | `call 0x7e1abbe6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abbe6`. | pattern scan |
+| `0x7e1abcba` | 1 | `entry_stub_7e1abcba` | `call 0x7e1abc5f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abc5f`. | pattern scan |
+| `0x7e1abd33` | 1 | `entry_stub_7e1abd33` | `call 0x7e1abcd8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abcd8`. | pattern scan |
+| `0x7e1abdac` | 1 | `entry_stub_7e1abdac` | `call 0x7e1abd51,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abd51`. | pattern scan |
+| `0x7e1abf70` | 1 | `entry_stub_7e1abf70` | `call 0x7e1abf15,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abf15`. | pattern scan |
+| `0x7e1abfe9` | 1 | `entry_stub_7e1abfe9` | `call 0x7e1abf8e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1abf8e`. | pattern scan |
+| `0x7e1ac070` | 1 | `entry_stub_7e1ac070` | `call 0x7e1ac015,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ac015`. | pattern scan |
+| `0x7e1ac0e9` | 1 | `entry_stub_7e1ac0e9` | `call 0x7e1ac08e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ac08e`. | pattern scan |
+| `0x7e1ac162` | 1 | `entry_stub_7e1ac162` | `call 0x7e1ac107,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ac107`. | pattern scan |
+| `0x7e1ad47b` | 1 | `entry_stub_7e1ad47b` | `call 0x7e1ad423,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ad423`. | pattern scan |
+| `0x7e1ad79e` | 1 | `entry_stub_7e1ad79e` | `call 0x7e1ad557,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ad557`. | pattern scan |
+| `0x7e1ae1ae` | 1 | `entry_stub_7e1ae1ae` | `call 0x7e1ae153,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ae153`. | pattern scan |
+| `0x7e1ae5b6` | 1 | `entry_stub_7e1ae5b6` | `call 0x7e1ae4b7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ae4b7`. | pattern scan |
+| `0x7e1ae719` | 1 | `entry_stub_7e1ae719` | `call 0x7e1ae5d4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ae5d4`. | pattern scan |
+| `0x7e1ae885` | 1 | `entry_stub_7e1ae885` | `call 0x7e1ae737,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ae737`. | pattern scan |
+| `0x7e1aea22` | 1 | `entry_stub_7e1aea22` | `call 0x7e1ae8a3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ae8a3`. | pattern scan |
+| `0x7e1aeba1` | 1 | `entry_stub_7e1aeba1` | `call 0x7e1aea40,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aea40`. | pattern scan |
+| `0x7e1aecfa` | 1 | `entry_stub_7e1aecfa` | `call 0x7e1aebbf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aebbf`. | pattern scan |
+| `0x7e1aee66` | 1 | `entry_stub_7e1aee66` | `call 0x7e1aed18,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aed18`. | pattern scan |
+| `0x7e1aef9e` | 1 | `entry_stub_7e1aef9e` | `call 0x7e1aee84,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aee84`. | pattern scan |
+| `0x7e1af0fa` | 1 | `entry_stub_7e1af0fa` | `call 0x7e1aefbc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1aefbc`. | pattern scan |
+| `0x7e1af256` | 1 | `entry_stub_7e1af256` | `call 0x7e1af118,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af118`. | pattern scan |
+| `0x7e1af3af` | 1 | `entry_stub_7e1af3af` | `call 0x7e1af274,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af274`. | pattern scan |
+| `0x7e1af513` | 1 | `entry_stub_7e1af513` | `call 0x7e1af3cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af3cd`. | pattern scan |
+| `0x7e1af697` | 1 | `entry_stub_7e1af697` | `call 0x7e1af531,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af531`. | pattern scan |
+| `0x7e1af710` | 1 | `entry_stub_7e1af710` | `call 0x7e1af6b5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af6b5`. | pattern scan |
+| `0x7e1af789` | 1 | `entry_stub_7e1af789` | `call 0x7e1af72e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af72e`. | pattern scan |
+| `0x7e1af802` | 1 | `entry_stub_7e1af802` | `call 0x7e1af7a7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af7a7`. | pattern scan |
+| `0x7e1af87b` | 1 | `entry_stub_7e1af87b` | `call 0x7e1af820,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af820`. | pattern scan |
+| `0x7e1af8f4` | 1 | `entry_stub_7e1af8f4` | `call 0x7e1af899,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af899`. | pattern scan |
+| `0x7e1af96d` | 1 | `entry_stub_7e1af96d` | `call 0x7e1af912,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af912`. | pattern scan |
+| `0x7e1af9e6` | 1 | `entry_stub_7e1af9e6` | `call 0x7e1af98b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1af98b`. | pattern scan |
+| `0x7e1afa5f` | 1 | `entry_stub_7e1afa5f` | `call 0x7e1afa04,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afa04`. | pattern scan |
+| `0x7e1afad8` | 1 | `entry_stub_7e1afad8` | `call 0x7e1afa7d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afa7d`. | pattern scan |
+| `0x7e1afb51` | 1 | `entry_stub_7e1afb51` | `call 0x7e1afaf6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afaf6`. | pattern scan |
+| `0x7e1afd15` | 1 | `entry_stub_7e1afd15` | `call 0x7e1afcba,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afcba`. | pattern scan |
+| `0x7e1afd8e` | 1 | `entry_stub_7e1afd8e` | `call 0x7e1afd33,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afd33`. | pattern scan |
+| `0x7e1afe15` | 1 | `entry_stub_7e1afe15` | `call 0x7e1afdba,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afdba`. | pattern scan |
+| `0x7e1afe8e` | 1 | `entry_stub_7e1afe8e` | `call 0x7e1afe33,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afe33`. | pattern scan |
+| `0x7e1aff07` | 1 | `entry_stub_7e1aff07` | `call 0x7e1afeac,[mask 0xa0],12; ret` — second entry into the body at `0x7e1afeac`. | pattern scan |
+| `0x7e1b1500` | 1 | `entry_stub_7e1b1500` | `call 0x7e1b14a8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b14a8`. | pattern scan |
+| `0x7e1b1823` | 1 | `entry_stub_7e1b1823` | `call 0x7e1b15dc,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b15dc`. | pattern scan |
+| `0x7e1b2107` | 1 | `entry_stub_7e1b2107` | `call 0x7e1b20ac,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b20ac`. | pattern scan |
+| `0x7e1b24aa` | 1 | `entry_stub_7e1b24aa` | `call 0x7e1b239c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b239c`. | pattern scan |
+| `0x7e1b25ac` | 1 | `entry_stub_7e1b25ac` | `call 0x7e1b24c8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b24c8`. | pattern scan |
+| `0x7e1b26d0` | 1 | `entry_stub_7e1b26d0` | `call 0x7e1b25ca,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b25ca`. | pattern scan |
+| `0x7e1b2797` | 1 | `entry_stub_7e1b2797` | `call 0x7e1b2a56,[mask 0x00],4; ret` — second entry into the body at `0x7e1b2a56`. | pattern scan |
+| `0x7e1b2b30` | 1 | `entry_stub_7e1b2b30` | `call 0x7e1b2bef,[mask 0x00],4; ret` — second entry into the body at `0x7e1b2bef`. | pattern scan |
+| `0x7e1b2ebc` | 1 | `entry_stub_7e1b2ebc` | `call 0x7e1b2ddb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b2ddb`. | pattern scan |
+| `0x7e1b2fd3` | 1 | `entry_stub_7e1b2fd3` | `call 0x7e1b2eda,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b2eda`. | pattern scan |
+| `0x7e1b3175` | 1 | `entry_stub_7e1b3175` | `call 0x7e1b2ff1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b2ff1`. | pattern scan |
+| `0x7e1b31ee` | 1 | `entry_stub_7e1b31ee` | `call 0x7e1b3193,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3193`. | pattern scan |
+| `0x7e1b3267` | 1 | `entry_stub_7e1b3267` | `call 0x7e1b320c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b320c`. | pattern scan |
+| `0x7e1b32e0` | 1 | `entry_stub_7e1b32e0` | `call 0x7e1b3285,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3285`. | pattern scan |
+| `0x7e1b3359` | 1 | `entry_stub_7e1b3359` | `call 0x7e1b32fe,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b32fe`. | pattern scan |
+| `0x7e1b33d2` | 1 | `entry_stub_7e1b33d2` | `call 0x7e1b3377,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3377`. | pattern scan |
+| `0x7e1b344b` | 1 | `entry_stub_7e1b344b` | `call 0x7e1b33f0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b33f0`. | pattern scan |
+| `0x7e1b34c4` | 1 | `entry_stub_7e1b34c4` | `call 0x7e1b3469,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3469`. | pattern scan |
+| `0x7e1b353d` | 1 | `entry_stub_7e1b353d` | `call 0x7e1b34e2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b34e2`. | pattern scan |
+| `0x7e1b35b6` | 1 | `entry_stub_7e1b35b6` | `call 0x7e1b355b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b355b`. | pattern scan |
+| `0x7e1b362f` | 1 | `entry_stub_7e1b362f` | `call 0x7e1b35d4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b35d4`. | pattern scan |
+| `0x7e1b37f3` | 1 | `entry_stub_7e1b37f3` | `call 0x7e1b3798,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3798`. | pattern scan |
+| `0x7e1b386c` | 1 | `entry_stub_7e1b386c` | `call 0x7e1b3811,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3811`. | pattern scan |
+| `0x7e1b38f3` | 1 | `entry_stub_7e1b38f3` | `call 0x7e1b3898,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3898`. | pattern scan |
+| `0x7e1b396c` | 1 | `entry_stub_7e1b396c` | `call 0x7e1b3911,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b3911`. | pattern scan |
+| `0x7e1b39e5` | 1 | `entry_stub_7e1b39e5` | `call 0x7e1b398a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b398a`. | pattern scan |
+| `0x7e1b5933` | 1 | `entry_stub_7e1b5933` | `call 0x7e1b58db,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b58db`. | pattern scan |
+| `0x7e1b5c56` | 1 | `entry_stub_7e1b5c56` | `call 0x7e1b5a0f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b5a0f`. | pattern scan |
+| `0x7e1b6591` | 1 | `entry_stub_7e1b6591` | `call 0x7e1b6491,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b6491`. | pattern scan |
+| `0x7e1b676a` | 1 | `entry_stub_7e1b676a` | `call 0x7e1b665b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b665b`. | pattern scan |
+| `0x7e1b67e3` | 1 | `entry_stub_7e1b67e3` | `call 0x7e1b6788,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b6788`. | pattern scan |
+| `0x7e1b689c` | 1 | `entry_stub_7e1b689c` | `call 0x7e1b6801,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b6801`. | pattern scan |
+| `0x7e1b6d5a` | 1 | `entry_stub_7e1b6d5a` | `call 0x7e1b6bbd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b6bbd`. | pattern scan |
+| `0x7e1b7223` | 1 | `entry_stub_7e1b7223` | `call 0x7e1b71c8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b71c8`. | pattern scan |
+| `0x7e1b729c` | 1 | `entry_stub_7e1b729c` | `call 0x7e1b7241,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7241`. | pattern scan |
+| `0x7e1b7315` | 1 | `entry_stub_7e1b7315` | `call 0x7e1b72ba,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b72ba`. | pattern scan |
+| `0x7e1b7426` | 1 | `entry_stub_7e1b7426` | `call 0x7e1b7333,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7333`. | pattern scan |
+| `0x7e1b749f` | 1 | `entry_stub_7e1b749f` | `call 0x7e1b7444,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7444`. | pattern scan |
+| `0x7e1b7518` | 1 | `entry_stub_7e1b7518` | `call 0x7e1b74bd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b74bd`. | pattern scan |
+| `0x7e1b762e` | 1 | `entry_stub_7e1b762e` | `call 0x7e1b7536,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7536`. | pattern scan |
+| `0x7e1b76a7` | 1 | `entry_stub_7e1b76a7` | `call 0x7e1b764c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b764c`. | pattern scan |
+| `0x7e1b7720` | 1 | `entry_stub_7e1b7720` | `call 0x7e1b76c5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b76c5`. | pattern scan |
+| `0x7e1b7837` | 1 | `entry_stub_7e1b7837` | `call 0x7e1b773e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b773e`. | pattern scan |
+| `0x7e1b78b0` | 1 | `entry_stub_7e1b78b0` | `call 0x7e1b7855,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7855`. | pattern scan |
+| `0x7e1b7929` | 1 | `entry_stub_7e1b7929` | `call 0x7e1b78ce,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b78ce`. | pattern scan |
+| `0x7e1b79a2` | 1 | `entry_stub_7e1b79a2` | `call 0x7e1b7947,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7947`. | pattern scan |
+| `0x7e1b7ab6` | 1 | `entry_stub_7e1b7ab6` | `call 0x7e1b79c0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b79c0`. | pattern scan |
+| `0x7e1b7b6b` | 1 | `entry_stub_7e1b7b6b` | `call 0x7e1b7ad4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7ad4`. | pattern scan |
+| `0x7e1b7d2f` | 1 | `entry_stub_7e1b7d2f` | `call 0x7e1b7cd4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7cd4`. | pattern scan |
+| `0x7e1b7e9a` | 1 | `entry_stub_7e1b7e9a` | `call 0x7e1b7d4d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7d4d`. | pattern scan |
+| `0x7e1b7f13` | 1 | `entry_stub_7e1b7f13` | `call 0x7e1b7eb8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7eb8`. | pattern scan |
+| `0x7e1b7f9a` | 1 | `entry_stub_7e1b7f9a` | `call 0x7e1b7f3f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7f3f`. | pattern scan |
+| `0x7e1b8013` | 1 | `entry_stub_7e1b8013` | `call 0x7e1b7fb8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b7fb8`. | pattern scan |
+| `0x7e1b81cd` | 1 | `entry_stub_7e1b81cd` | `call 0x7e1b804b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b804b`. | pattern scan |
+| `0x7e1b8246` | 1 | `entry_stub_7e1b8246` | `call 0x7e1b81eb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b81eb`. | pattern scan |
+| `0x7e1b83c4` | 1 | `entry_stub_7e1b83c4` | `call 0x7e1b8264,[mask 0xa0],12; ret` — second entry into the body at `0x7e1b8264`. | pattern scan |
+| `0x7e1baa7b` | 1 | `entry_stub_7e1baa7b` | `call 0x7e1baa22,[mask 0xa0],12; ret` — second entry into the body at `0x7e1baa22`. | pattern scan |
+| `0x7e1bada9` | 1 | `entry_stub_7e1bada9` | `call 0x7e1bab5b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bab5b`. | pattern scan |
+| `0x7e1bb659` | 1 | `entry_stub_7e1bb659` | `call 0x7e1bb5fe,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bb5fe`. | pattern scan |
+| `0x7e1bb8b7` | 1 | `entry_stub_7e1bb8b7` | `call 0x7e1bb85c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bb85c`. | pattern scan |
+| `0x7e1bb930` | 1 | `entry_stub_7e1bb930` | `call 0x7e1bb8d5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bb8d5`. | pattern scan |
+| `0x7e1bb9a9` | 1 | `entry_stub_7e1bb9a9` | `call 0x7e1bb94e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bb94e`. | pattern scan |
+| `0x7e1bba23` | 1 | `entry_stub_7e1bba23` | `call 0x7e1bb9c7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bb9c7`. | pattern scan |
+| `0x7e1bba9c` | 1 | `entry_stub_7e1bba9c` | `call 0x7e1bba41,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bba41`. | pattern scan |
+| `0x7e1bbb16` | 1 | `entry_stub_7e1bbb16` | `call 0x7e1bbaba,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbaba`. | pattern scan |
+| `0x7e1bbb90` | 1 | `entry_stub_7e1bbb90` | `call 0x7e1bbb34,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbb34`. | pattern scan |
+| `0x7e1bbc0a` | 1 | `entry_stub_7e1bbc0a` | `call 0x7e1bbbae,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbbae`. | pattern scan |
+| `0x7e1bbc83` | 1 | `entry_stub_7e1bbc83` | `call 0x7e1bbc28,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbc28`. | pattern scan |
+| `0x7e1bbcfc` | 1 | `entry_stub_7e1bbcfc` | `call 0x7e1bbca1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbca1`. | pattern scan |
+| `0x7e1bbec1` | 1 | `entry_stub_7e1bbec1` | `call 0x7e1bbe65,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbe65`. | pattern scan |
+| `0x7e1bbf3a` | 1 | `entry_stub_7e1bbf3a` | `call 0x7e1bbedf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbedf`. | pattern scan |
+| `0x7e1bbfc3` | 1 | `entry_stub_7e1bbfc3` | `call 0x7e1bbf67,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbf67`. | pattern scan |
+| `0x7e1bc03c` | 1 | `entry_stub_7e1bc03c` | `call 0x7e1bbfe1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bbfe1`. | pattern scan |
+| `0x7e1bc0b5` | 1 | `entry_stub_7e1bc0b5` | `call 0x7e1bc05a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bc05a`. | pattern scan |
+| `0x7e1be220` | 1 | `entry_stub_7e1be220` | `call 0x7e1ba86f,[mask 0x00],4; ret` — second entry into the body at `0x7e1ba86f`. | pattern scan |
+| `0x7e1be56d` | 1 | `entry_stub_7e1be56d` | `call 0x7e1be515,[mask 0xa0],12; ret` — second entry into the body at `0x7e1be515`. | pattern scan |
+| `0x7e1be890` | 1 | `entry_stub_7e1be890` | `call 0x7e1be649,[mask 0xa0],12; ret` — second entry into the body at `0x7e1be649`. | pattern scan |
+| `0x7e1bf663` | 1 | `entry_stub_7e1bf663` | `call 0x7e1bf3e2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bf3e2`. | pattern scan |
+| `0x7e1bfa1e` | 1 | `entry_stub_7e1bfa1e` | `call 0x7e1bf681,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bf681`. | pattern scan |
+| `0x7e1bfb36` | 1 | `entry_stub_7e1bfb36` | `call 0x7e1bfa3c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bfa3c`. | pattern scan |
+| `0x7e1bfc53` | 1 | `entry_stub_7e1bfc53` | `call 0x7e1bfb54,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bfb54`. | pattern scan |
+| `0x7e1bfd96` | 1 | `entry_stub_7e1bfd96` | `call 0x7e1bfc71,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bfc71`. | pattern scan |
+| `0x7e1bfee0` | 1 | `entry_stub_7e1bfee0` | `call 0x7e1bfdb4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bfdb4`. | pattern scan |
+| `0x7e1c00ed` | 1 | `entry_stub_7e1c00ed` | `call 0x7e1bfefe,[mask 0xa0],12; ret` — second entry into the body at `0x7e1bfefe`. | pattern scan |
+| `0x7e1c038a` | 1 | `entry_stub_7e1c038a` | `call 0x7e1c010b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c010b`. | pattern scan |
+| `0x7e1c0484` | 1 | `entry_stub_7e1c0484` | `call 0x7e1c03a8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c03a8`. | pattern scan |
+| `0x7e1c05d0` | 1 | `entry_stub_7e1c05d0` | `call 0x7e1c04a2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c04a2`. | pattern scan |
+| `0x7e1c0713` | 1 | `entry_stub_7e1c0713` | `call 0x7e1c05ee,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c05ee`. | pattern scan |
+| `0x7e1c083a` | 1 | `entry_stub_7e1c083a` | `call 0x7e1c0731,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c0731`. | pattern scan |
+| `0x7e1c0999` | 1 | `entry_stub_7e1c0999` | `call 0x7e1c0858,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c0858`. | pattern scan |
+| `0x7e1c0acb` | 1 | `entry_stub_7e1c0acb` | `call 0x7e1c09b7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c09b7`. | pattern scan |
+| `0x7e1c0c61` | 1 | `entry_stub_7e1c0c61` | `call 0x7e1c0ae9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c0ae9`. | pattern scan |
+| `0x7e1c0d98` | 1 | `entry_stub_7e1c0d98` | `call 0x7e1c0c7f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c0c7f`. | pattern scan |
+| `0x7e1c1070` | 1 | `entry_stub_7e1c1070` | `call 0x7e1c0db6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c0db6`. | pattern scan |
+| `0x7e1c10e9` | 1 | `entry_stub_7e1c10e9` | `call 0x7e1c108e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c108e`. | pattern scan |
+| `0x7e1c14bd` | 1 | `entry_stub_7e1c14bd` | `call 0x7e1c1462,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1462`. | pattern scan |
+| `0x7e1c1536` | 1 | `entry_stub_7e1c1536` | `call 0x7e1c14db,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c14db`. | pattern scan |
+| `0x7e1c15af` | 1 | `entry_stub_7e1c15af` | `call 0x7e1c1554,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1554`. | pattern scan |
+| `0x7e1c1628` | 1 | `entry_stub_7e1c1628` | `call 0x7e1c15cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c15cd`. | pattern scan |
+| `0x7e1c16a1` | 1 | `entry_stub_7e1c16a1` | `call 0x7e1c1646,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1646`. | pattern scan |
+| `0x7e1c171a` | 1 | `entry_stub_7e1c171a` | `call 0x7e1c16bf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c16bf`. | pattern scan |
+| `0x7e1c1793` | 1 | `entry_stub_7e1c1793` | `call 0x7e1c1738,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1738`. | pattern scan |
+| `0x7e1c180c` | 1 | `entry_stub_7e1c180c` | `call 0x7e1c17b1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c17b1`. | pattern scan |
+| `0x7e1c1885` | 1 | `entry_stub_7e1c1885` | `call 0x7e1c182a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c182a`. | pattern scan |
+| `0x7e1c18fe` | 1 | `entry_stub_7e1c18fe` | `call 0x7e1c18a3,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c18a3`. | pattern scan |
+| `0x7e1c1ac2` | 1 | `entry_stub_7e1c1ac2` | `call 0x7e1c1a67,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1a67`. | pattern scan |
+| `0x7e1c1b3b` | 1 | `entry_stub_7e1c1b3b` | `call 0x7e1c1ae0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1ae0`. | pattern scan |
+| `0x7e1c1bc2` | 1 | `entry_stub_7e1c1bc2` | `call 0x7e1c1b67,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1b67`. | pattern scan |
+| `0x7e1c1c3b` | 1 | `entry_stub_7e1c1c3b` | `call 0x7e1c1be0,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1be0`. | pattern scan |
+| `0x7e1c1cb4` | 1 | `entry_stub_7e1c1cb4` | `call 0x7e1c1c59,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c1c59`. | pattern scan |
+| `0x7e1c274e` | 1 | `entry_stub_7e1c274e` | `call 0x7e1c26f6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c26f6`. | pattern scan |
+| `0x7e1c2a71` | 1 | `entry_stub_7e1c2a71` | `call 0x7e1c282a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c282a`. | pattern scan |
+| `0x7e1c331d` | 1 | `entry_stub_7e1c331d` | `call 0x7e1c32c2,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c32c2`. | pattern scan |
+| `0x7e1c357b` | 1 | `entry_stub_7e1c357b` | `call 0x7e1c3520,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3520`. | pattern scan |
+| `0x7e1c35f4` | 1 | `entry_stub_7e1c35f4` | `call 0x7e1c3599,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3599`. | pattern scan |
+| `0x7e1c366d` | 1 | `entry_stub_7e1c366d` | `call 0x7e1c3612,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3612`. | pattern scan |
+| `0x7e1c36e6` | 1 | `entry_stub_7e1c36e6` | `call 0x7e1c368b,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c368b`. | pattern scan |
+| `0x7e1c375f` | 1 | `entry_stub_7e1c375f` | `call 0x7e1c3704,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3704`. | pattern scan |
+| `0x7e1c37d8` | 1 | `entry_stub_7e1c37d8` | `call 0x7e1c377d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c377d`. | pattern scan |
+| `0x7e1c3851` | 1 | `entry_stub_7e1c3851` | `call 0x7e1c37f6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c37f6`. | pattern scan |
+| `0x7e1c38ca` | 1 | `entry_stub_7e1c38ca` | `call 0x7e1c386f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c386f`. | pattern scan |
+| `0x7e1c3943` | 1 | `entry_stub_7e1c3943` | `call 0x7e1c38e8,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c38e8`. | pattern scan |
+| `0x7e1c39bc` | 1 | `entry_stub_7e1c39bc` | `call 0x7e1c3961,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3961`. | pattern scan |
+| `0x7e1c3b80` | 1 | `entry_stub_7e1c3b80` | `call 0x7e1c3b25,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3b25`. | pattern scan |
+| `0x7e1c3bf9` | 1 | `entry_stub_7e1c3bf9` | `call 0x7e1c3b9e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3b9e`. | pattern scan |
+| `0x7e1c3c80` | 1 | `entry_stub_7e1c3c80` | `call 0x7e1c3c25,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3c25`. | pattern scan |
+| `0x7e1c3cf9` | 1 | `entry_stub_7e1c3cf9` | `call 0x7e1c3c9e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3c9e`. | pattern scan |
+| `0x7e1c3d72` | 1 | `entry_stub_7e1c3d72` | `call 0x7e1c3d17,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c3d17`. | pattern scan |
+| `0x7e1c44e5` | 1 | `entry_stub_7e1c44e5` | `call 0x7e1c448c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c448c`. | pattern scan |
+| `0x7e1c4813` | 1 | `entry_stub_7e1c4813` | `call 0x7e1c45c5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c45c5`. | pattern scan |
+| `0x7e1c5305` | 1 | `entry_stub_7e1c5305` | `call 0x7e1c4f0d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c4f0d`. | pattern scan |
+| `0x7e1c5a52` | 1 | `entry_stub_7e1c5a52` | `call 0x7e1c59fa,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c59fa`. | pattern scan |
+| `0x7e1c5d75` | 1 | `entry_stub_7e1c5d75` | `call 0x7e1c5b2e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c5b2e`. | pattern scan |
+| `0x7e1c6697` | 1 | `entry_stub_7e1c6697` | `call 0x7e1c6590,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c6590`. | pattern scan |
+| `0x7e1c6876` | 1 | `entry_stub_7e1c6876` | `call 0x7e1c6761,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c6761`. | pattern scan |
+| `0x7e1c6983` | 1 | `entry_stub_7e1c6983` | `call 0x7e1c6894,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c6894`. | pattern scan |
+| `0x7e1c69fc` | 1 | `entry_stub_7e1c69fc` | `call 0x7e1c69a1,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c69a1`. | pattern scan |
+| `0x7e1c73db` | 1 | `entry_stub_7e1c73db` | `call 0x7e1c7380,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7380`. | pattern scan |
+| `0x7e1c7454` | 1 | `entry_stub_7e1c7454` | `call 0x7e1c73f9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c73f9`. | pattern scan |
+| `0x7e1c74cd` | 1 | `entry_stub_7e1c74cd` | `call 0x7e1c7472,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7472`. | pattern scan |
+| `0x7e1c75e9` | 1 | `entry_stub_7e1c75e9` | `call 0x7e1c74eb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c74eb`. | pattern scan |
+| `0x7e1c7969` | 1 | `entry_stub_7e1c7969` | `call 0x7e1c790e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c790e`. | pattern scan |
+| `0x7e1c79e2` | 1 | `entry_stub_7e1c79e2` | `call 0x7e1c7987,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7987`. | pattern scan |
+| `0x7e1c7b32` | 1 | `entry_stub_7e1c7b32` | `call 0x7e1c7a00,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7a00`. | pattern scan |
+| `0x7e1c7bab` | 1 | `entry_stub_7e1c7bab` | `call 0x7e1c7b50,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7b50`. | pattern scan |
+| `0x7e1c7c24` | 1 | `entry_stub_7e1c7c24` | `call 0x7e1c7bc9,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7bc9`. | pattern scan |
+| `0x7e1c7c9d` | 1 | `entry_stub_7e1c7c9d` | `call 0x7e1c7c42,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7c42`. | pattern scan |
+| `0x7e1c7d16` | 1 | `entry_stub_7e1c7d16` | `call 0x7e1c7cbb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7cbb`. | pattern scan |
+| `0x7e1c7d8f` | 1 | `entry_stub_7e1c7d8f` | `call 0x7e1c7d34,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c7d34`. | pattern scan |
+| `0x7e1c81eb` | 1 | `entry_stub_7e1c81eb` | `call 0x7e1c810e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c810e`. | pattern scan |
+| `0x7e1c8264` | 1 | `entry_stub_7e1c8264` | `call 0x7e1c8209,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8209`. | pattern scan |
+| `0x7e1c82dd` | 1 | `entry_stub_7e1c82dd` | `call 0x7e1c8282,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8282`. | pattern scan |
+| `0x7e1c8364` | 1 | `entry_stub_7e1c8364` | `call 0x7e1c8309,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8309`. | pattern scan |
+| `0x7e1c85c8` | 1 | `entry_stub_7e1c85c8` | `call 0x7e1c8382,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8382`. | pattern scan |
+| `0x7e1c86e8` | 1 | `entry_stub_7e1c86e8` | `call 0x7e1c85e6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c85e6`. | pattern scan |
+| `0x7e1c8761` | 1 | `entry_stub_7e1c8761` | `call 0x7e1c8706,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8706`. | pattern scan |
+| `0x7e1c888f` | 1 | `entry_stub_7e1c888f` | `call 0x7e1c877f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c877f`. | pattern scan |
+| `0x7e1c8908` | 1 | `entry_stub_7e1c8908` | `call 0x7e1c88ad,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c88ad`. | pattern scan |
+| `0x7e1c8a5a` | 1 | `entry_stub_7e1c8a5a` | `call 0x7e1c8926,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8926`. | pattern scan |
+| `0x7e1c8bb5` | 1 | `entry_stub_7e1c8bb5` | `call 0x7e1c8a78,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c8a78`. | pattern scan |
+| `0x7e1c99bd` | 1 | `entry_stub_7e1c99bd` | `call 0x7e1c9965,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c9965`. | pattern scan |
+| `0x7e1c9ce0` | 1 | `entry_stub_7e1c9ce0` | `call 0x7e1c9a99,[mask 0xa0],12; ret` — second entry into the body at `0x7e1c9a99`. | pattern scan |
+| `0x7e1ca64a` | 1 | `entry_stub_7e1ca64a` | `call 0x7e1ca56e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ca56e`. | pattern scan |
+| `0x7e1ca8f2` | 1 | `entry_stub_7e1ca8f2` | `call 0x7e1ca668,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ca668`. | pattern scan |
+| `0x7e1ca96b` | 1 | `entry_stub_7e1ca96b` | `call 0x7e1ca910,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ca910`. | pattern scan |
+| `0x7e1cadb7` | 1 | `entry_stub_7e1cadb7` | `call 0x7e1cac1e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cac1e`. | pattern scan |
+| `0x7e1cae30` | 1 | `entry_stub_7e1cae30` | `call 0x7e1cadd5,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cadd5`. | pattern scan |
+| `0x7e1caea9` | 1 | `entry_stub_7e1caea9` | `call 0x7e1cae4e,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cae4e`. | pattern scan |
+| `0x7e1caf22` | 1 | `entry_stub_7e1caf22` | `call 0x7e1caec7,[mask 0xa0],12; ret` — second entry into the body at `0x7e1caec7`. | pattern scan |
+| `0x7e1cb19d` | 1 | `entry_stub_7e1cb19d` | `call 0x7e1caf40,[mask 0xa0],12; ret` — second entry into the body at `0x7e1caf40`. | pattern scan |
+| `0x7e1cb216` | 1 | `entry_stub_7e1cb216` | `call 0x7e1cb1bb,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb1bb`. | pattern scan |
+| `0x7e1cb28f` | 1 | `entry_stub_7e1cb28f` | `call 0x7e1cb234,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb234`. | pattern scan |
+| `0x7e1cb3a6` | 1 | `entry_stub_7e1cb3a6` | `call 0x7e1cb2ad,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb2ad`. | pattern scan |
+| `0x7e1cb41f` | 1 | `entry_stub_7e1cb41f` | `call 0x7e1cb3c4,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb3c4`. | pattern scan |
+| `0x7e1cb498` | 1 | `entry_stub_7e1cb498` | `call 0x7e1cb43d,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb43d`. | pattern scan |
+| `0x7e1cb5af` | 1 | `entry_stub_7e1cb5af` | `call 0x7e1cb4b6,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb4b6`. | pattern scan |
+| `0x7e1cb628` | 1 | `entry_stub_7e1cb628` | `call 0x7e1cb5cd,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb5cd`. | pattern scan |
+| `0x7e1cb6a1` | 1 | `entry_stub_7e1cb6a1` | `call 0x7e1cb646,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb646`. | pattern scan |
+| `0x7e1cb71a` | 1 | `entry_stub_7e1cb71a` | `call 0x7e1cb6bf,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb6bf`. | pattern scan |
+| `0x7e1cb831` | 1 | `entry_stub_7e1cb831` | `call 0x7e1cb738,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb738`. | pattern scan |
+| `0x7e1cb9f5` | 1 | `entry_stub_7e1cb9f5` | `call 0x7e1cb99a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cb99a`. | pattern scan |
+| `0x7e1cba6e` | 1 | `entry_stub_7e1cba6e` | `call 0x7e1cba13,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cba13`. | pattern scan |
+| `0x7e1cbaf5` | 1 | `entry_stub_7e1cbaf5` | `call 0x7e1cba9a,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cba9a`. | pattern scan |
+| `0x7e1cbb6e` | 1 | `entry_stub_7e1cbb6e` | `call 0x7e1cbb13,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cbb13`. | pattern scan |
+| `0x7e1cbbe7` | 1 | `entry_stub_7e1cbbe7` | `call 0x7e1cbb8c,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cbb8c`. | pattern scan |
+| `0x7e1cbce2` | 1 | `entry_stub_7e1cbce2` | `call 0x7e1cbc05,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cbc05`. | pattern scan |
+| `0x7e1ccf52` | 1 | `entry_stub_7e1ccf52` | `call 0x7e1cc99f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cc99f`. | pattern scan |
+| `0x7e1cefee` | 1 | `entry_stub_7e1cefee` | `call 0x7e1cef96,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cef96`. | pattern scan |
+| `0x7e1cf1b7` | 1 | `entry_stub_7e1cf1b7` | `call 0x7e1cf113,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cf113`. | pattern scan |
+| `0x7e1cf85b` | 1 | `entry_stub_7e1cf85b` | `call 0x7e1cf340,[mask 0xa0],12; ret` — second entry into the body at `0x7e1cf340`. | pattern scan |
+| `0x7e1d1220` | 5 | `entry_stub_7e1d1220` | `call 0x7e1cfa1a,[mask 0xf0],56; ret` — second entry into the body at `0x7e1cfa1a`. | pattern scan |
+| `0x7e1d158b` | 1 | `entry_stub_7e1d158b` | `call 0x7e1d1220,[mask 0x00],4; ret` — second entry into the body at `0x7e1d1220`. | pattern scan |
+| `0x7e1d3f1c` | 1 | `entry_stub_7e1d3f1c` | `call 0x7e1d3e0a,[mask 0xf0],36; ret` — second entry into the body at `0x7e1d3e0a`. | pattern scan |
+| `0x7e1d418f` | 1 | `entry_stub_7e1d418f` | `call 0x7e1d3fc8,[mask 0xf0],36; ret` — second entry into the body at `0x7e1d3fc8`. | pattern scan |
+| `0x7e1d6ce6` | 1 | `entry_stub_7e1d6ce6` | `call 0x7e1d973d,[mask 0x00],4; ret` — second entry into the body at `0x7e1d973d`. | pattern scan |
+| `0x7e1e1b9e` | 1 | `entry_stub_7e1e1b9e` | `call 0x7e1e1477,[mask 0xb0],16; ret` — second entry into the body at `0x7e1e1477`. | pattern scan |
+| `0x7e1e1cef` | 2 | `entry_stub_7e1e1cef` | `call 0x7e1e1db3,[mask 0x00],4; ret` — second entry into the body at `0x7e1e1db3`. | pattern scan |
+| `0x7e1e64a9` | 16 | `entry_stub_7e1e64a9` | `call 0x7e1e6305,[mask 0xb0],68; ret` — second entry into the body at `0x7e1e6305`. | pattern scan |
+| `0x7e1e64de` | 17 | `entry_stub_7e1e64de` | `call 0x7e1e82d9,[mask 0x20],8; ret` — second entry into the body at `0x7e1e82d9`. | pattern scan |
+| `0x7e1e8a96` | 2 | `entry_stub_7e1e8a96` | `call 0x7e1ea188,[mask 0x00],4; ret` — second entry into the body at `0x7e1ea188`. | pattern scan |
+| `0x7e1e8e6d` | 13 | `entry_stub_7e1e8e6d` | `call 0x7e1ea188,[mask 0x00],4; ret` — second entry into the body at `0x7e1ea188`. | pattern scan |
+| `0x7e1e92c4` | 2 | `entry_stub_7e1e92c4` | `call 0x7e1e9743,[mask 0x00],4; ret` — second entry into the body at `0x7e1e9743`. | pattern scan |
+| `0x7e1e9743` | 2 | `entry_stub_7e1e9743` | `call 0x7e1e9c22,[mask 0x00],4; ret` — second entry into the body at `0x7e1e9c22`. | pattern scan |
+| `0x7e1e9c22` | 2 | `entry_stub_7e1e9c22` | `call 0x7e1e8a96,[mask 0x00],4; ret` — second entry into the body at `0x7e1e8a96`. | pattern scan |
+| `0x7e1eaf51` | 1 | `entry_stub_7e1eaf51` | `call 0x7e1e8a96,[mask 0x00],4; ret` — second entry into the body at `0x7e1e8a96`. | pattern scan |
+| `0x7e1eb2e0` | 1 | `entry_stub_7e1eb2e0` | `call 0x7e1eb139,[mask 0xa0],16; ret` — second entry into the body at `0x7e1eb139`. | pattern scan |
+| `0x7e1eb65f` | 1 | `entry_stub_7e1eb65f` | `call 0x7e1eb513,[mask 0xa0],12; ret` — second entry into the body at `0x7e1eb513`. | pattern scan |
+| `0x7e1eba8c` | 1 | `entry_stub_7e1eba8c` | `call 0x7e1eb969,[mask 0xb0],20; ret` — second entry into the body at `0x7e1eb969`. | pattern scan |
+| `0x7e1ebd61` | 1 | `entry_stub_7e1ebd61` | `call 0x7e1ebc3e,[mask 0xb0],20; ret` — second entry into the body at `0x7e1ebc3e`. | pattern scan |
+| `0x7e1ec031` | 1 | `entry_stub_7e1ec031` | `call 0x7e1ebf0f,[mask 0xb0],20; ret` — second entry into the body at `0x7e1ebf0f`. | pattern scan |
+| `0x7e1ef1d6` | 2 | `entry_stub_7e1ef1d6` | `call 0x7e1e881b,[mask 0x00],0; ret` — second entry into the body at `0x7e1e881b`. | pattern scan |
+| `0x7e1f4e5c` | 1 | `entry_stub_7e1f4e5c` | `call 0x7e1f5ce5,[mask 0x00],4; ret` — second entry into the body at `0x7e1f5ce5`. | pattern scan |
+| `0x7e1f502f` | 1 | `entry_stub_7e1f502f` | `call 0x7e1f4f82,[mask 0xa0],12; ret` — second entry into the body at `0x7e1f4f82`. | pattern scan |
+| `0x7e1f535e` | 1 | `entry_stub_7e1f535e` | `call 0x7e1f5196,[mask 0xa0],16; ret` — second entry into the body at `0x7e1f5196`. | pattern scan |
+| `0x7e1f5ee5` | 1 | `entry_stub_7e1f5ee5` | `call 0x7e1f5e38,[mask 0xa0],12; ret` — second entry into the body at `0x7e1f5e38`. | pattern scan |
+| `0x7e1f6211` | 1 | `entry_stub_7e1f6211` | `call 0x7e1f6037,[mask 0xa0],16; ret` — second entry into the body at `0x7e1f6037`. | pattern scan |
+| `0x7e1f66b8` | 1 | `entry_stub_7e1f66b8` | `call 0x7e1f73ec,[mask 0x00],4; ret` — second entry into the body at `0x7e1f73ec`. | pattern scan |
+| `0x7e1f6b5d` | 1 | `entry_stub_7e1f6b5d` | `call 0x7e1f6992,[mask 0xa0],16; ret` — second entry into the body at `0x7e1f6992`. | pattern scan |
+| `0x7e1f78b5` | 1 | `entry_stub_7e1f78b5` | `call 0x7e1f76d6,[mask 0xa0],16; ret` — second entry into the body at `0x7e1f76d6`. | pattern scan |
+| `0x7e1f85e8` | 1 | `entry_stub_7e1f85e8` | `call 0x7e1f5ce5,[mask 0x00],4; ret` — second entry into the body at `0x7e1f5ce5`. | pattern scan |
+| `0x7e1f892c` | 1 | `entry_stub_7e1f892c` | `call 0x7e1f887f,[mask 0xa0],12; ret` — second entry into the body at `0x7e1f887f`. | pattern scan |
+| `0x7e1f8c61` | 1 | `entry_stub_7e1f8c61` | `call 0x7e1f8a97,[mask 0xa0],16; ret` — second entry into the body at `0x7e1f8a97`. | pattern scan |
+| `0x7e1fd801` | 1 | `entry_stub_7e1fd801` | `call 0x7e1f73ec,[mask 0x00],4; ret` — second entry into the body at `0x7e1f73ec`. | pattern scan |
+| `0x7e1fdc8e` | 1 | `entry_stub_7e1fdc8e` | `call 0x7e1fdacb,[mask 0xa0],16; ret` — second entry into the body at `0x7e1fdacb`. | pattern scan |
+| `0x7e1fe554` | 1 | `entry_stub_7e1fe554` | `call 0x7e1f73ec,[mask 0x00],4; ret` — second entry into the body at `0x7e1f73ec`. | pattern scan |
+| `0x7e1fe891` | 1 | `entry_stub_7e1fe891` | `call 0x7e1fe709,[mask 0xa0],12; ret` — second entry into the body at `0x7e1fe709`. | pattern scan |
+| `0x7e1fe97b` | 1 | `entry_stub_7e1fe97b` | `call 0x7e1fe709,[mask 0xa0],12; ret` — second entry into the body at `0x7e1fe709`. | pattern scan |
+| `0x7e1feb88` | 1 | `entry_stub_7e1feb88` | `call 0x7e1fe9c9,[mask 0xa0],16; ret` — second entry into the body at `0x7e1fe9c9`. | pattern scan |
+| `0x7e1ff46b` | 1 | `entry_stub_7e1ff46b` | `call 0x7e200b97,[mask 0x00],4; ret` — second entry into the body at `0x7e200b97`. | pattern scan |
+| `0x7e1ff631` | 1 | `entry_stub_7e1ff631` | `call 0x7e1ff582,[mask 0xa0],12; ret` — second entry into the body at `0x7e1ff582`. | pattern scan |
+| `0x7e1ff950` | 1 | `entry_stub_7e1ff950` | `call 0x7e1ff792,[mask 0xa0],16; ret` — second entry into the body at `0x7e1ff792`. | pattern scan |
+| `0x7e200da9` | 1 | `entry_stub_7e200da9` | `call 0x7e200cfa,[mask 0xa0],12; ret` — second entry into the body at `0x7e200cfa`. | pattern scan |
+| `0x7e2010c9` | 1 | `entry_stub_7e2010c9` | `call 0x7e200f0b,[mask 0xa0],16; ret` — second entry into the body at `0x7e200f0b`. | pattern scan |
+| `0x7e205859` | 7 | `entry_stub_7e205859` | `call 0x7e205b6a,[mask 0x00],4; ret` — second entry into the body at `0x7e205b6a`. | pattern scan |
+| `0x7e206a17` | 242 | `entry_stub_7e206a17` | `call 0x7e208040,[mask 0x00],4; ret` — second entry into the body at `0x7e208040`. | pattern scan |
+| `0x7e207abd` | 1 | `entry_stub_7e207abd` | `call 0x7e207c79,[mask 0xb0],16; ret` — second entry into the body at `0x7e207c79`. | pattern scan |
+| `0x7e20f68c` | 7 | `entry_stub_7e20f68c` | `call 0x7e20fb27,[mask 0x80],8; ret` — second entry into the body at `0x7e20fb27`. | pattern scan |
+| `0x7e20f9c8` | 1 | `entry_stub_7e20f9c8` | `call 0x7e20f8fa,[mask 0x00],0; ret` — second entry into the body at `0x7e20f8fa`. | pattern scan |
+| `0x7e21bd86` | 1 | `entry_stub_7e21bd86` | `call 0x7e215adb,[mask 0x00],0; ret` — second entry into the body at `0x7e215adb`. | pattern scan |
+| `0x7e223dc7` | 1 | `entry_stub_7e223dc7` | `call 0x7e223e39,[mask 0x20],12; ret` — second entry into the body at `0x7e223e39`. | pattern scan |
+| `0x7e223dd2` | 6 | `entry_stub_7e223dd2` | `call 0x7e223e60,[mask 0x30],16; ret` — second entry into the body at `0x7e223e60`. | pattern scan |
+| `0x7e22c98c` | 1 | `entry_stub_7e22c98c` | `call 0x7e22ccee,[mask 0x00],0; ret` — second entry into the body at `0x7e22ccee`. | pattern scan |
+| `0x7e22c994` | 1 | `entry_stub_7e22c994` | `call 0x7e22ccfa,[mask 0x30],12; ret` — second entry into the body at `0x7e22ccfa`. | pattern scan |
+| `0x7e22c9ae` | 3 | `entry_stub_7e22c9ae` | `call 0x7e22ceb4,[mask 0x00],0; ret` — second entry into the body at `0x7e22ceb4`. | pattern scan |
+| `0x7e22c9b6` | 6 | `entry_stub_7e22c9b6` | `call 0x7e22ced2,[mask 0x20],4; ret` — second entry into the body at `0x7e22ced2`. | pattern scan |
+| `0x7e22fe96` | 1 | `entry_stub_7e22fe96` | `call 0x7e22ccee,[mask 0x00],0; ret` — second entry into the body at `0x7e22ccee`. | pattern scan |
+| `0x7e22fe9e` | 1 | `entry_stub_7e22fe9e` | `call 0x7e22ccfa,[mask 0x30],12; ret` — second entry into the body at `0x7e22ccfa`. | pattern scan |
+| `0x7e22fedc` | 1 | `entry_stub_7e22fedc` | `call 0x7e22ce72,[mask 0x00],0; ret` — second entry into the body at `0x7e22ce72`. | pattern scan |
+| `0x7e22fee4` | 1 | `entry_stub_7e22fee4` | `call 0x7e22ce7a,[mask 0x00],0; ret` — second entry into the body at `0x7e22ce7a`. | pattern scan |
+| `0x7e22fef5` | 1 | `entry_stub_7e22fef5` | `call 0x7e22ceb4,[mask 0x00],0; ret` — second entry into the body at `0x7e22ceb4`. | pattern scan |
+| `0x7e22fefd` | 1 | `entry_stub_7e22fefd` | `call 0x7e22ceb9,[mask 0x00],0; ret` — second entry into the body at `0x7e22ceb9`. | pattern scan |
+| `0x7e22ff05` | 1 | `entry_stub_7e22ff05` | `call 0x7e22cebf,[mask 0x20],4; ret` — second entry into the body at `0x7e22cebf`. | pattern scan |
+| `0x7e22ff0d` | 1 | `entry_stub_7e22ff0d` | `call 0x7e22ced2,[mask 0x20],4; ret` — second entry into the body at `0x7e22ced2`. | pattern scan |
+| `0x7e232183` | 12 | `entry_stub_7e232183` | `call 0x7e22bf3d,[mask 0x00],0; ret` — second entry into the body at `0x7e22bf3d`. | pattern scan |
+| `0x7e291069` | 1 | `entry_stub_7e291069` | `call 0x7e290e2c,[mask 0xf0],72; ret` — second entry into the body at `0x7e290e2c`. | pattern scan |
+| `0x7e2cb7f6` | 5 | `entry_stub_7e2cb7f6` | `call 0x7e2cd0af,[mask 0x00],0; ret` — second entry into the body at `0x7e2cd0af`. | pattern scan |
+| `0x7e31ecec` | 2 | `entry_stub_7e31ecec` | `call 0x7e320020,[mask 0x00],8; ret` — second entry into the body at `0x7e320020`. | pattern scan |
+| `0x7e31ecf4` | 1 | `entry_stub_7e31ecf4` | `call 0x7e32004f,[mask 0x80],12; ret` — second entry into the body at `0x7e32004f`. | pattern scan |
+| `0x7e31ecfc` | 2 | `entry_stub_7e31ecfc` | `call 0x7e31edb5,[mask 0x80],12; ret` — second entry into the body at `0x7e31edb5`. | pattern scan |
+| `0x7e31ed04` | 2 | `entry_stub_7e31ed04` | `call 0x7e320b37,[mask 0x80],12; ret` — second entry into the body at `0x7e320b37`. | pattern scan |
+| `0x7e31ed0c` | 1 | `entry_stub_7e31ed0c` | `call 0x7e320626,[mask 0x00],8; ret` — second entry into the body at `0x7e320626`. | pattern scan |
+| `0x7e31ed14` | 3 | `entry_stub_7e31ed14` | `call 0x7e31f8ef,[mask 0x80],12; ret` — second entry into the body at `0x7e31f8ef`. | pattern scan |
+| `0x7e31ed1c` | 1 | `entry_stub_7e31ed1c` | `call 0x7e31f48a,[mask 0x00],8; ret` — second entry into the body at `0x7e31f48a`. | pattern scan |
+| `0x7e31ed85` | 5 | `entry_stub_7e31ed85` | `call 0x7e31ff01,[mask 0x00],4; ret` — second entry into the body at `0x7e31ff01`. | pattern scan |
+| `0x7e31ed8d` | 3 | `entry_stub_7e31ed8d` | `call 0x7e320a14,[mask 0x00],4; ret` — second entry into the body at `0x7e320a14`. | pattern scan |
+| `0x7e31ed95` | 1 | `entry_stub_7e31ed95` | `call 0x7e3208f5,[mask 0x00],4; ret` — second entry into the body at `0x7e3208f5`. | pattern scan |
+| `0x7e31ed9d` | 1 | `entry_stub_7e31ed9d` | `call 0x7e31f7cc,[mask 0x00],4; ret` — second entry into the body at `0x7e31f7cc`. | pattern scan |
+| `0x7e31eda5` | 1 | `entry_stub_7e31eda5` | `call 0x7e31f36b,[mask 0x00],4; ret` — second entry into the body at `0x7e31f36b`. | pattern scan |
+| `0x7e335851` | 1 | `entry_stub_7e335851` | `call 0x7e33581d,[mask 0xe0],16; ret` — second entry into the body at `0x7e33581d`. | pattern scan |
+| `0x7e34dddf` | 2 | `entry_stub_7e34dddf` | `call 0x7e34dd64,[mask 0x20],8; ret` — second entry into the body at `0x7e34dd64`. | pattern scan |
+| `0x7e34f2a4` | 1 | `entry_stub_7e34f2a4` | `call 0x7e34f25f,[mask 0x20],8; ret` — second entry into the body at `0x7e34f25f`. | pattern scan |
+| `0x7e6b0bab` | 1 | `entry_stub_7e6b0bab` | `call 0x7e6b0444,[mask 0x00],36; ret` — second entry into the body at `0x7e6b0444`. | pattern scan |
+| `0x7e6b5864` | 1 | `entry_stub_7e6b5864` | `call 0x7e6b5355,[mask 0xc0],216; ret` — second entry into the body at `0x7e6b5355`. | pattern scan |
+| `0x7e6c6297` | 2 | `entry_stub_7e6c6297` | `call 0x7e6c620d,[mask 0x80],84; ret` — second entry into the body at `0x7e6c620d`. | pattern scan |
+| `0x7e6c6329` | 1 | `entry_stub_7e6c6329` | `call 0x7e6c629f,[mask 0x80],84; ret` — second entry into the body at `0x7e6c629f`. | pattern scan |
+| `0x7e6e22c9` | 7 | `entry_stub_7e6e22c9` | `call 0x7e6e2080,[mask 0x00],0; ret` — second entry into the body at `0x7e6e2080`. | pattern scan |
+| `0x7e6f3a6d` | 1 | `entry_stub_7e6f3a6d` | `call 0x7e6f3ac9,[mask 0x00],4; ret` — second entry into the body at `0x7e6f3ac9`. | pattern scan |
+| `0x7e6f3e12` | 1 | `entry_stub_7e6f3e12` | `call 0x7e6f3ee2,[mask 0x00],4; ret` — second entry into the body at `0x7e6f3ee2`. | pattern scan |
+| `0x7e70782c` | 2 | `entry_stub_7e70782c` | `call 0x7e70933f,[mask 0xf0],84; ret` — second entry into the body at `0x7e70933f`. | pattern scan |
+| `0x7e707834` | 2 | `entry_stub_7e707834` | `call 0x7e7097b6,[mask 0x00],0; ret` — second entry into the body at `0x7e7097b6`. | pattern scan |
+| `0x7e707853` | 2 | `entry_stub_7e707853` | `call 0x7e70943f,[mask 0x20],8; ret` — second entry into the body at `0x7e70943f`. | pattern scan |
+| `0x7e70785b` | 1 | `entry_stub_7e70785b` | `call 0x7e70947f,[mask 0xf0],80; ret` — second entry into the body at `0x7e70947f`. | pattern scan |
+| `0x7e7078d1` | 6 | `entry_stub_7e7078d1` | `call 0x7e70977b,[mask 0x00],0; ret` — second entry into the body at `0x7e70977b`. | pattern scan |
+| `0x7e7078d9` | 1 | `entry_stub_7e7078d9` | `call 0x7e709784,[mask 0x00],16; ret` — second entry into the body at `0x7e709784`. | pattern scan |
+| `0x7e70a081` | 1 | `entry_stub_7e70a081` | `call 0x7e70ab14,[mask 0x00],4; ret` — second entry into the body at `0x7e70ab14`. | pattern scan |
+| `0x7e7c98db` | 1 | `entry_stub_7e7c98db` | `call 0x7e7c947d,[mask 0x30],56; ret` — second entry into the body at `0x7e7c947d`. | pattern scan |
+| `0x7e7ca8f5` | 2 | `entry_stub_7e7ca8f5` | `call 0x7e7d0b53,[mask 0xb0],16; ret` — second entry into the body at `0x7e7d0b53`. | pattern scan |
+| `0x7e7ca8fd` | 1 | `entry_stub_7e7ca8fd` | `call 0x7e7cc514,[mask 0x00],32; ret` — second entry into the body at `0x7e7cc514`. | pattern scan |
+| `0x7e7ca905` | 1 | `entry_stub_7e7ca905` | `call 0x7e7cc54f,[mask 0xe0],44; ret` — second entry into the body at `0x7e7cc54f`. | pattern scan |
+| `0x7e7deaf0` | 1 | `entry_stub_7e7deaf0` | `call 0x7e7dd9fe,[mask 0x00],4; ret` — second entry into the body at `0x7e7dd9fe`. | pattern scan |
+| `0x7e7e098f` | 1 | `entry_stub_7e7e098f` | `call 0x7e7e09a7,[mask 0x00],4; ret` — second entry into the body at `0x7e7e09a7`. | pattern scan |
+| `0x7e7e0997` | 1 | `entry_stub_7e7e0997` | `call 0x7e7e0a0f,[mask 0x00],4; ret` — second entry into the body at `0x7e7e0a0f`. | pattern scan |
+| `0x7e7e099f` | 1 | `entry_stub_7e7e099f` | `call 0x7e7e0a75,[mask 0x00],4; ret` — second entry into the body at `0x7e7e0a75`. | pattern scan |
+| `0x7e7e0aa1` | 1 | `entry_stub_7e7e0aa1` | `call 0x7e7e098f,[mask 0x00],4; ret` — second entry into the body at `0x7e7e098f`. | pattern scan |
+| `0x7e7e0aa9` | 1 | `entry_stub_7e7e0aa9` | `call 0x7e7e0997,[mask 0x00],4; ret` — second entry into the body at `0x7e7e0997`. | pattern scan |
+| `0x7e7e0ab1` | 1 | `entry_stub_7e7e0ab1` | `call 0x7e7e099f,[mask 0x00],4; ret` — second entry into the body at `0x7e7e099f`. | pattern scan |
+| `0x7e7e0fc9` | 1 | `entry_stub_7e7e0fc9` | `call 0x7e7e0ab9,[mask 0x00],4; ret` — second entry into the body at `0x7e7e0ab9`. | pattern scan |
+| `0x7e7f1209` | 1 | `entry_stub_7e7f1209` | `call 0x7e7f0e88,[mask 0x20],8; ret` — second entry into the body at `0x7e7f0e88`. | pattern scan |
+| `0x7e7f1211` | 1 | `entry_stub_7e7f1211` | `call 0x7e7f0ef7,[mask 0xa0],16; ret` — second entry into the body at `0x7e7f0ef7`. | pattern scan |
+| `0x7e7f1219` | 1 | `entry_stub_7e7f1219` | `call 0x7e7f1101,[mask 0xa0],16; ret` — second entry into the body at `0x7e7f1101`. | pattern scan |
+| `0x7e7f631b` | 24 | `entry_stub_7e7f631b` | `call 0x7e7f1841,[mask 0xa0],16; ret` — second entry into the body at `0x7e7f1841`. | pattern scan |
+| `0x7e8100c6` | 6 | `entry_stub_7e8100c6` | `call 0x7e810798,[mask 0xf0],24; ret` — second entry into the body at `0x7e810798`. | pattern scan |
+| `0x7e8100ce` | 1 | `entry_stub_7e8100ce` | `call 0x7e811293,[mask 0xa0],8; ret` — second entry into the body at `0x7e811293`. | pattern scan |
+| `0x7e83e2db` | 1 | `entry_stub_7e83e2db` | `call 0x7e83e780,[mask 0x00],4; ret` — second entry into the body at `0x7e83e780`. | pattern scan |
+| `0x7e843058` | 2 | `entry_stub_7e843058` | `call 0x7e843078,[mask 0xb0],20; ret` — second entry into the body at `0x7e843078`. | pattern scan |
+| `0x7e854dbc` | 1 | `entry_stub_7e854dbc` | `call 0x7e854e8d,[mask 0x00],4; ret` — second entry into the body at `0x7e854e8d`. | pattern scan |
+| `0x7e854dc4` | 2 | `entry_stub_7e854dc4` | `call 0x7e854eaf,[mask 0x00],4; ret` — second entry into the body at `0x7e854eaf`. | pattern scan |
+| `0x7e858073` | 1 | `entry_stub_7e858073` | `call 0x7e858080,[mask 0xa0],12; ret` — second entry into the body at `0x7e858080`. | pattern scan |
+| `0x7e867e09` | 3 | `entry_stub_7e867e09` | `call 0x7e867c6e,[mask 0xf0],136; ret` — second entry into the body at `0x7e867c6e`. | pattern scan |
+| `0x7e87ab0e` | 3 | `entry_stub_7e87ab0e` | `call 0x7e875603,[mask 0xb0],48; ret` — second entry into the body at `0x7e875603`. | pattern scan |
+| `0x7e87e49d` | 2 | `entry_stub_7e87e49d` | `call 0x7e87da55,[mask 0xb0],16; ret` — second entry into the body at `0x7e87da55`. | pattern scan |
+| `0x7e87e71d` | 1 | `entry_stub_7e87e71d` | `call 0x7e87e548,[mask 0xf0],108; ret` — second entry into the body at `0x7e87e548`. | pattern scan |
+| `0x7e881fce` | 2 | `entry_stub_7e881fce` | `call 0x7e881824,[mask 0xf0],24; ret` — second entry into the body at `0x7e881824`. | pattern scan |
+| `0x7e881fd6` | 2 | `entry_stub_7e881fd6` | `call 0x7e88187c,[mask 0xb0],16; ret` — second entry into the body at `0x7e88187c`. | pattern scan |
+| `0x7e881fde` | 2 | `entry_stub_7e881fde` | `call 0x7e8818ef,[mask 0x30],12; ret` — second entry into the body at `0x7e8818ef`. | pattern scan |
+| `0x7e882b77` | 4 | `entry_stub_7e882b77` | `call 0x7e881f1c,[mask 0x00],4; ret` — second entry into the body at `0x7e881f1c`. | pattern scan |
+| `0x7e882b7f` | 4 | `entry_stub_7e882b7f` | `call 0x7e88200d,[mask 0x00],4; ret` — second entry into the body at `0x7e88200d`. | pattern scan |
+| `0x7e88380d` | 2 | `entry_stub_7e88380d` | `call 0x7e882555,[mask 0x00],4; ret` — second entry into the body at `0x7e882555`. | pattern scan |
+| `0x7e883815` | 3 | `entry_stub_7e883815` | `call 0x7e88251f,[mask 0x00],4; ret` — second entry into the body at `0x7e88251f`. | pattern scan |
+| `0x7e9dafdb` | 2 | `entry_stub_7e9dafdb` | `call 0x7e9dae68,[mask 0x00],0; ret` — second entry into the body at `0x7e9dae68`. | pattern scan |
+
+## Constant-return stubs (pattern family)
+Functions whose whole body is `return <constant>` (`clr d0; retf`, `mov imm8,d0; retf` or
+`mov imm32,d0; retf`). Mostly virtual-method defaults copied into each class. 439 listed, named
+`ret_<value>_<address>`. Most common values: 0 ×231, 1 ×55, 0xf0000028 ×21, 2 ×15, 3 ×8, 0xf0000049 ×7, m1 ×6, 0xc0000000 ×5. Values such as `0xf0000028` and `0xf0000049` look like
+status codes; their meaning is not established.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d996744` | 1 | `ret_0_7d996744` | `return 0` and nothing else. | pattern scan |
+| `0x7d9c1598` | 31 | `ret_0_7d9c1598` | `return 0` and nothing else. | pattern scan |
+| `0x7d9d52ef` | 2 | `ret_0_7d9d52ef` | `return 0` and nothing else. | pattern scan |
+| `0x7d9e1f3d` | 2 | `ret_0_7d9e1f3d` | `return 0` and nothing else. | pattern scan |
+| `0x7d9e3d21` | 12 | `ret_0xffff_7d9e3d21` | `return 0xffff` and nothing else. | pattern scan |
+| `0x7d9e3d2a` | 5 | `ret_0_7d9e3d2a` | `return 0` and nothing else. | pattern scan |
+| `0x7d9e55e7` | 1 | `ret_67_7d9e55e7` | `return 67` and nothing else. | pattern scan |
+| `0x7d9ec312` | 1 | `ret_0x101d00_7d9ec312` | `return 0x101d00` and nothing else. | pattern scan |
+| `0x7d9ecee8` | 1 | `ret_0_7d9ecee8` | `return 0` and nothing else. | pattern scan |
+| `0x7d9ed274` | 1 | `ret_0x3fffffff_7d9ed274` | `return 0x3fffffff` and nothing else. | pattern scan |
+| `0x7d9ed27d` | 2 | `ret_0_7d9ed27d` | `return 0` and nothing else. | pattern scan |
+| `0x7da8a77f` | 1 | `ret_0xffff_7da8a77f` | `return 0xffff` and nothing else. | pattern scan |
+| `0x7da8fd7f` | 4 | `ret_0_7da8fd7f` | `return 0` and nothing else. | pattern scan |
+| `0x7da9b489` | 1 | `ret_0_7da9b489` | `return 0` and nothing else. | pattern scan |
+| `0x7daa38aa` | 2 | `ret_0_7daa38aa` | `return 0` and nothing else. | pattern scan |
+| `0x7daa3b62` | 1 | `ret_0_7daa3b62` | `return 0` and nothing else. | pattern scan |
+| `0x7daa3faa` | 1 | `ret_0_7daa3faa` | `return 0` and nothing else. | pattern scan |
+| `0x7daa530f` | 1 | `ret_0_7daa530f` | `return 0` and nothing else. | pattern scan |
+| `0x7daa5462` | 1 | `ret_0_7daa5462` | `return 0` and nothing else. | pattern scan |
+| `0x7daaab19` | 1 | `ret_1_7daaab19` | `return 1` and nothing else. | pattern scan |
+| `0x7daab7ba` | 1 | `ret_0_7daab7ba` | `return 0` and nothing else. | pattern scan |
+| `0x7daab7be` | 1 | `ret_0_7daab7be` | `return 0` and nothing else. | pattern scan |
+| `0x7daab7c2` | 1 | `ret_0_7daab7c2` | `return 0` and nothing else. | pattern scan |
+| `0x7daab7c6` | 1 | `ret_0_7daab7c6` | `return 0` and nothing else. | pattern scan |
+| `0x7daab7ca` | 1 | `ret_0_7daab7ca` | `return 0` and nothing else. | pattern scan |
+| `0x7daabc9a` | 1 | `ret_0_7daabc9a` | `return 0` and nothing else. | pattern scan |
+| `0x7daabc9e` | 1 | `ret_0_7daabc9e` | `return 0` and nothing else. | pattern scan |
+| `0x7daac681` | 1 | `ret_0_7daac681` | `return 0` and nothing else. | pattern scan |
+| `0x7daac685` | 1 | `ret_0_7daac685` | `return 0` and nothing else. | pattern scan |
+| `0x7dabe4b9` | 1 | `ret_0_7dabe4b9` | `return 0` and nothing else. | pattern scan |
+| `0x7dabe65d` | 1 | `ret_0_7dabe65d` | `return 0` and nothing else. | pattern scan |
+| `0x7dac0fb3` | 1 | `ret_0_7dac0fb3` | `return 0` and nothing else. | pattern scan |
+| `0x7dacc3c8` | 4 | `ret_0_7dacc3c8` | `return 0` and nothing else. | pattern scan |
+| `0x7dacc3f1` | 1 | `ret_0_7dacc3f1` | `return 0` and nothing else. | pattern scan |
+| `0x7dacd66e` | 1 | `ret_0_7dacd66e` | `return 0` and nothing else. | pattern scan |
+| `0x7dad2a79` | 1 | `ret_0_7dad2a79` | `return 0` and nothing else. | pattern scan |
+| `0x7dad3a49` | 1 | `ret_0_7dad3a49` | `return 0` and nothing else. | pattern scan |
+| `0x7dad4055` | 1 | `ret_0x8214_7dad4055` | `return 0x8214` and nothing else. | pattern scan |
+| `0x7dad4105` | 1 | `ret_0_7dad4105` | `return 0` and nothing else. | pattern scan |
+| `0x7dadd270` | 1 | `ret_0_7dadd270` | `return 0` and nothing else. | pattern scan |
+| `0x7dadd274` | 2 | `ret_0_7dadd274` | `return 0` and nothing else. | pattern scan |
+| `0x7dadd278` | 4 | `ret_0_7dadd278` | `return 0` and nothing else. | pattern scan |
+| `0x7dadd27c` | 2 | `ret_0_7dadd27c` | `return 0` and nothing else. | pattern scan |
+| `0x7daf9348` | 2 | `ret_0_7daf9348` | `return 0` and nothing else. | pattern scan |
+| `0x7daf934c` | 2 | `ret_0_7daf934c` | `return 0` and nothing else. | pattern scan |
+| `0x7db13847` | 1 | `ret_0_7db13847` | `return 0` and nothing else. | pattern scan |
+| `0x7db1384b` | 1 | `ret_0_7db1384b` | `return 0` and nothing else. | pattern scan |
+| `0x7db1836b` | 1 | `ret_0xc0000000_7db1836b` | `return 0xc0000000` and nothing else. | pattern scan |
+| `0x7db18374` | 1 | `ret_0xc0000000_7db18374` | `return 0xc0000000` and nothing else. | pattern scan |
+| `0x7db194f7` | 1 | `ret_0_7db194f7` | `return 0` and nothing else. | pattern scan |
+| `0x7db1a3ca` | 1 | `ret_0_7db1a3ca` | `return 0` and nothing else. | pattern scan |
+| `0x7db1a43c` | 1 | `ret_0_7db1a43c` | `return 0` and nothing else. | pattern scan |
+| `0x7db21197` | 3 | `ret_0_7db21197` | `return 0` and nothing else. | pattern scan |
+| `0x7db2119b` | 1 | `ret_0_7db2119b` | `return 0` and nothing else. | pattern scan |
+| `0x7db22ae5` | 1 | `ret_0_7db22ae5` | `return 0` and nothing else. | pattern scan |
+| `0x7db22b1a` | 1 | `ret_0_7db22b1a` | `return 0` and nothing else. | pattern scan |
+| `0x7db22b1e` | 1 | `ret_0_7db22b1e` | `return 0` and nothing else. | pattern scan |
+| `0x7db22b22` | 1 | `ret_0_7db22b22` | `return 0` and nothing else. | pattern scan |
+| `0x7db22b26` | 1 | `ret_0_7db22b26` | `return 0` and nothing else. | pattern scan |
+| `0x7db2d2a8` | 8 | `ret_0_7db2d2a8` | `return 0` and nothing else. | pattern scan |
+| `0x7db2d2ac` | 4 | `ret_0_7db2d2ac` | `return 0` and nothing else. | pattern scan |
+| `0x7db31a14` | 1 | `ret_0_7db31a14` | `return 0` and nothing else. | pattern scan |
+| `0x7db31a18` | 1 | `ret_0_7db31a18` | `return 0` and nothing else. | pattern scan |
+| `0x7db31afc` | 1 | `ret_0_7db31afc` | `return 0` and nothing else. | pattern scan |
+| `0x7db31b00` | 2 | `ret_0_7db31b00` | `return 0` and nothing else. | pattern scan |
+| `0x7db31b04` | 3 | `ret_0_7db31b04` | `return 0` and nothing else. | pattern scan |
+| `0x7db31b18` | 1 | `ret_0_7db31b18` | `return 0` and nothing else. | pattern scan |
+| `0x7db31b2c` | 1 | `ret_0_7db31b2c` | `return 0` and nothing else. | pattern scan |
+| `0x7db335b9` | 3 | `ret_0_7db335b9` | `return 0` and nothing else. | pattern scan |
+| `0x7db335bd` | 6 | `ret_0_7db335bd` | `return 0` and nothing else. | pattern scan |
+| `0x7db3701f` | 1 | `ret_0_7db3701f` | `return 0` and nothing else. | pattern scan |
+| `0x7db37023` | 1 | `ret_0_7db37023` | `return 0` and nothing else. | pattern scan |
+| `0x7db3718d` | 1 | `ret_0_7db3718d` | `return 0` and nothing else. | pattern scan |
+| `0x7db372bd` | 1 | `ret_0_7db372bd` | `return 0` and nothing else. | pattern scan |
+| `0x7db377aa` | 1 | `ret_0_7db377aa` | `return 0` and nothing else. | pattern scan |
+| `0x7db37fc2` | 1 | `ret_0_7db37fc2` | `return 0` and nothing else. | pattern scan |
+| `0x7db384da` | 1 | `ret_0_7db384da` | `return 0` and nothing else. | pattern scan |
+| `0x7db38841` | 1 | `ret_0_7db38841` | `return 0` and nothing else. | pattern scan |
+| `0x7db38993` | 1 | `ret_0_7db38993` | `return 0` and nothing else. | pattern scan |
+| `0x7db43c8f` | 1 | `ret_0_7db43c8f` | `return 0` and nothing else. | pattern scan |
+| `0x7db43c93` | 1 | `ret_0_7db43c93` | `return 0` and nothing else. | pattern scan |
+| `0x7db4542e` | 1 | `ret_0xc0000000_7db4542e` | `return 0xc0000000` and nothing else. | pattern scan |
+| `0x7db46c9a` | 1 | `ret_0xc0000000_7db46c9a` | `return 0xc0000000` and nothing else. | pattern scan |
+| `0x7db46ca3` | 1 | `ret_0xc0000000_7db46ca3` | `return 0xc0000000` and nothing else. | pattern scan |
+| `0x7db6ca23` | 2 | `ret_113_7db6ca23` | `return 113` and nothing else. | pattern scan |
+| `0x7db701a7` | 2 | `ret_0_7db701a7` | `return 0` and nothing else. | pattern scan |
+| `0x7db7463c` | 1 | `ret_0_7db7463c` | `return 0` and nothing else. | pattern scan |
+| `0x7db83c8f` | 1 | `ret_0_7db83c8f` | `return 0` and nothing else. | pattern scan |
+| `0x7db8566e` | 1 | `ret_0_7db8566e` | `return 0` and nothing else. | pattern scan |
+| `0x7db93b26` | 1 | `ret_0_7db93b26` | `return 0` and nothing else. | pattern scan |
+| `0x7db95439` | 3 | `ret_1_7db95439` | `return 1` and nothing else. | pattern scan |
+| `0x7db9543e` | 1 | `ret_1_7db9543e` | `return 1` and nothing else. | pattern scan |
+| `0x7db95443` | 1 | `ret_0_7db95443` | `return 0` and nothing else. | pattern scan |
+| `0x7db95447` | 1 | `ret_1_7db95447` | `return 1` and nothing else. | pattern scan |
+| `0x7db9544c` | 1 | `ret_0_7db9544c` | `return 0` and nothing else. | pattern scan |
+| `0x7db95450` | 2 | `ret_0_7db95450` | `return 0` and nothing else. | pattern scan |
+| `0x7db95454` | 2 | `ret_0_7db95454` | `return 0` and nothing else. | pattern scan |
+| `0x7db95458` | 1 | `ret_0_7db95458` | `return 0` and nothing else. | pattern scan |
+| `0x7db9545c` | 2 | `ret_0_7db9545c` | `return 0` and nothing else. | pattern scan |
+| `0x7db95460` | 1 | `ret_0_7db95460` | `return 0` and nothing else. | pattern scan |
+| `0x7db95464` | 1 | `ret_0_7db95464` | `return 0` and nothing else. | pattern scan |
+| `0x7db95468` | 3 | `ret_0_7db95468` | `return 0` and nothing else. | pattern scan |
+| `0x7db9546c` | 9 | `ret_0_7db9546c` | `return 0` and nothing else. | pattern scan |
+| `0x7dba35b1` | 1 | `ret_0_7dba35b1` | `return 0` and nothing else. | pattern scan |
+| `0x7dba35b5` | 1 | `ret_0_7dba35b5` | `return 0` and nothing else. | pattern scan |
+| `0x7dba3e15` | 2 | `ret_100_7dba3e15` | `return 100` and nothing else. | pattern scan |
+| `0x7dba41af` | 1 | `ret_0_7dba41af` | `return 0` and nothing else. | pattern scan |
+| `0x7dba41b6` | 1 | `ret_0_7dba41b6` | `return 0` and nothing else. | pattern scan |
+| `0x7dbaa634` | 1 | `ret_0_7dbaa634` | `return 0` and nothing else. | pattern scan |
+| `0x7dbaa638` | 1 | `ret_0_7dbaa638` | `return 0` and nothing else. | pattern scan |
+| `0x7dbae3c8` | 1 | `ret_15_7dbae3c8` | `return 15` and nothing else. | pattern scan |
+| `0x7dbae3f1` | 5 | `ret_1_7dbae3f1` | `return 1` and nothing else. | pattern scan |
+| `0x7dbae409` | 2 | `ret_0_7dbae409` | `return 0` and nothing else. | pattern scan |
+| `0x7dbae40d` | 1 | `ret_2_7dbae40d` | `return 2` and nothing else. | pattern scan |
+| `0x7dbae412` | 1 | `ret_0_7dbae412` | `return 0` and nothing else. | pattern scan |
+| `0x7dbae429` | 2 | `ret_30_7dbae429` | `return 30` and nothing else. | pattern scan |
+| `0x7dbae478` | 1 | `ret_0_7dbae478` | `return 0` and nothing else. | pattern scan |
+| `0x7dbae50f` | 1 | `ret_1_7dbae50f` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb106a` | 1 | `ret_15_7dbb106a` | `return 15` and nothing else. | pattern scan |
+| `0x7dbb1093` | 6 | `ret_1_7dbb1093` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb109e` | 1 | `ret_0_7dbb109e` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb10a2` | 1 | `ret_2_7dbb10a2` | `return 2` and nothing else. | pattern scan |
+| `0x7dbb10a7` | 1 | `ret_0_7dbb10a7` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb10b1` | 1 | `ret_30_7dbb10b1` | `return 30` and nothing else. | pattern scan |
+| `0x7dbb10fa` | 1 | `ret_0_7dbb10fa` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb1114` | 2 | `ret_2_7dbb1114` | `return 2` and nothing else. | pattern scan |
+| `0x7dbb11c1` | 1 | `ret_35_7dbb11c1` | `return 35` and nothing else. | pattern scan |
+| `0x7dbb11e5` | 5 | `ret_1_7dbb11e5` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb11f0` | 1 | `ret_0_7dbb11f0` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb11f4` | 1 | `ret_10_7dbb11f4` | `return 10` and nothing else. | pattern scan |
+| `0x7dbb11f9` | 1 | `ret_0_7dbb11f9` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb1203` | 1 | `ret_44_7dbb1203` | `return 44` and nothing else. | pattern scan |
+| `0x7dbb124c` | 1 | `ret_0_7dbb124c` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb1517` | 1 | `ret_6_7dbb1517` | `return 6` and nothing else. | pattern scan |
+| `0x7dbb1540` | 5 | `ret_1_7dbb1540` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb154b` | 1 | `ret_0_7dbb154b` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb154f` | 1 | `ret_2_7dbb154f` | `return 2` and nothing else. | pattern scan |
+| `0x7dbb1554` | 1 | `ret_0_7dbb1554` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb155e` | 1 | `ret_20_7dbb155e` | `return 20` and nothing else. | pattern scan |
+| `0x7dbb15a7` | 1 | `ret_0_7dbb15a7` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb5222` | 1 | `ret_32_7dbb5222` | `return 32` and nothing else. | pattern scan |
+| `0x7dbb5249` | 6 | `ret_0_7dbb5249` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb5259` | 1 | `ret_21_7dbb5259` | `return 21` and nothing else. | pattern scan |
+| `0x7dbb5270` | 1 | `ret_21_7dbb5270` | `return 21` and nothing else. | pattern scan |
+| `0x7dbb52af` | 1 | `ret_0_7dbb52af` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb52c4` | 1 | `ret_38_7dbb52c4` | `return 38` and nothing else. | pattern scan |
+| `0x7dbb531f` | 1 | `ret_0_7dbb531f` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb5828` | 1 | `ret_8_7dbb5828` | `return 8` and nothing else. | pattern scan |
+| `0x7dbb584b` | 6 | `ret_1_7dbb584b` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb5856` | 1 | `ret_0_7dbb5856` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb585a` | 1 | `ret_2_7dbb585a` | `return 2` and nothing else. | pattern scan |
+| `0x7dbb585f` | 1 | `ret_0_7dbb585f` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb5869` | 1 | `ret_2_7dbb5869` | `return 2` and nothing else. | pattern scan |
+| `0x7dbb58b3` | 1 | `ret_1_7dbb58b3` | `return 1` and nothing else. | pattern scan |
+| `0x7dbb58f9` | 1 | `ret_0_7dbb58f9` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb58fd` | 4 | `ret_0_7dbb58fd` | `return 0` and nothing else. | pattern scan |
+| `0x7dbb598f` | 1 | `ret_1_7dbb598f` | `return 1` and nothing else. | pattern scan |
+| `0x7dbba8fa` | 12 | `ret_0_7dbba8fa` | `return 0` and nothing else. | pattern scan |
+| `0x7dbba8fe` | 9 | `ret_0_7dbba8fe` | `return 0` and nothing else. | pattern scan |
+| `0x7dbbae54` | 8 | `ret_0_7dbbae54` | `return 0` and nothing else. | pattern scan |
+| `0x7dbbb58b` | 1 | `ret_m1_7dbbb58b` | `return -1` and nothing else. | pattern scan |
+| `0x7dbbb596` | 1 | `ret_m1_7dbbb596` | `return -1` and nothing else. | pattern scan |
+| `0x7dbbb59e` | 1 | `ret_m1_7dbbb59e` | `return -1` and nothing else. | pattern scan |
+| `0x7dbbb5a3` | 1 | `ret_m1_7dbbb5a3` | `return -1` and nothing else. | pattern scan |
+| `0x7dbbdb1c` | 1 | `ret_0_7dbbdb1c` | `return 0` and nothing else. | pattern scan |
+| `0x7dbbdb29` | 5 | `ret_0_7dbbdb29` | `return 0` and nothing else. | pattern scan |
+| `0x7dd6b331` | 2 | `ret_0_7dd6b331` | `return 0` and nothing else. | pattern scan |
+| `0x7dd6f8e0` | 1 | `ret_1_7dd6f8e0` | `return 1` and nothing else. | pattern scan |
+| `0x7dd7abf9` | 1 | `ret_60_7dd7abf9` | `return 60` and nothing else. | pattern scan |
+| `0x7dd7b0f6` | 7 | `ret_0_7dd7b0f6` | `return 0` and nothing else. | pattern scan |
+| `0x7dd89467` | 1 | `ret_0x111a84_7dd89467` | `return 0x111a84` and nothing else. | pattern scan |
+| `0x7ddab1b1` | 1 | `ret_0_7ddab1b1` | `return 0` and nothing else. | pattern scan |
+| `0x7ddbf68f` | 1 | `ret_0_7ddbf68f` | `return 0` and nothing else. | pattern scan |
+| `0x7ddc8f0d` | 6 | `ret_0_7ddc8f0d` | `return 0` and nothing else. | pattern scan |
+| `0x7ddca044` | 2 | `ret_0x32000_7ddca044` | `return 0x32000` and nothing else. | pattern scan |
+| `0x7dde74ed` | 1 | `ret_2_7dde74ed` | `return 2` and nothing else. | pattern scan |
+| `0x7dde74f2` | 1 | `ret_2_7dde74f2` | `return 2` and nothing else. | pattern scan |
+| `0x7de0258b` | 8 | `ret_0x149c0_7de0258b` | `return 0x149c0` and nothing else. | pattern scan |
+| `0x7de3716f` | 1 | `ret_0_7de3716f` | `return 0` and nothing else. | pattern scan |
+| `0x7de47856` | 2 | `ret_11_7de47856` | `return 11` and nothing else. | pattern scan |
+| `0x7de4ef00` | 1 | `ret_0_7de4ef00` | `return 0` and nothing else. | pattern scan |
+| `0x7de57763` | 2 | `ret_0_7de57763` | `return 0` and nothing else. | pattern scan |
+| `0x7de6a5e4` | 2 | `ret_0_7de6a5e4` | `return 0` and nothing else. | pattern scan |
+| `0x7de6a5e8` | 3 | `ret_0_7de6a5e8` | `return 0` and nothing else. | pattern scan |
+| `0x7de74e7b` | 1 | `ret_0_7de74e7b` | `return 0` and nothing else. | pattern scan |
+| `0x7de74e7f` | 1 | `ret_0_7de74e7f` | `return 0` and nothing else. | pattern scan |
+| `0x7de74e83` | 1 | `ret_0_7de74e83` | `return 0` and nothing else. | pattern scan |
+| `0x7de82e12` | 1 | `ret_0_7de82e12` | `return 0` and nothing else. | pattern scan |
+| `0x7de82e16` | 1 | `ret_0_7de82e16` | `return 0` and nothing else. | pattern scan |
+| `0x7de895a3` | 6 | `ret_0_7de895a3` | `return 0` and nothing else. | pattern scan |
+| `0x7de8af89` | 3 | `ret_0_7de8af89` | `return 0` and nothing else. | pattern scan |
+| `0x7de928f4` | 2 | `ret_0_7de928f4` | `return 0` and nothing else. | pattern scan |
+| `0x7de96429` | 1 | `ret_1_7de96429` | `return 1` and nothing else. | pattern scan |
+| `0x7de96442` | 1 | `ret_1_7de96442` | `return 1` and nothing else. | pattern scan |
+| `0x7de98fab` | 1 | `ret_0_7de98fab` | `return 0` and nothing else. | pattern scan |
+| `0x7de9ce03` | 1 | `ret_0_7de9ce03` | `return 0` and nothing else. | pattern scan |
+| `0x7dea0e1e` | 1 | `ret_0_7dea0e1e` | `return 0` and nothing else. | pattern scan |
+| `0x7dea10d3` | 9 | `ret_0xb658_7dea10d3` | `return 0xb658` and nothing else. | pattern scan |
+| `0x7deab0ee` | 1 | `ret_0_7deab0ee` | `return 0` and nothing else. | pattern scan |
+| `0x7deab1eb` | 1 | `ret_0_7deab1eb` | `return 0` and nothing else. | pattern scan |
+| `0x7deab874` | 1 | `ret_0_7deab874` | `return 0` and nothing else. | pattern scan |
+| `0x7deab878` | 1 | `ret_0_7deab878` | `return 0` and nothing else. | pattern scan |
+| `0x7deaca16` | 2 | `ret_1_7deaca16` | `return 1` and nothing else. | pattern scan |
+| `0x7deae510` | 1 | `ret_0_7deae510` | `return 0` and nothing else. | pattern scan |
+| `0x7deaef88` | 6 | `ret_0_7deaef88` | `return 0` and nothing else. | pattern scan |
+| `0x7deaef8c` | 1 | `ret_0_7deaef8c` | `return 0` and nothing else. | pattern scan |
+| `0x7deceb68` | 2 | `ret_0_7deceb68` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc642c` | 2 | `ret_0_7dfc642c` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc6452` | 2 | `ret_0_7dfc6452` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc6456` | 1 | `ret_0_7dfc6456` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc645a` | 1 | `ret_0_7dfc645a` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc645e` | 1 | `ret_0_7dfc645e` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc6462` | 1 | `ret_0_7dfc6462` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc6494` | 1 | `ret_0_7dfc6494` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc64b7` | 1 | `ret_0_7dfc64b7` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc64bb` | 1 | `ret_0_7dfc64bb` | `return 0` and nothing else. | pattern scan |
+| `0x7dfc6ac1` | 1 | `ret_0_7dfc6ac1` | `return 0` and nothing else. | pattern scan |
+| `0x7dfcc810` | 1 | `ret_100_7dfcc810` | `return 100` and nothing else. | pattern scan |
+| `0x7dfd6f73` | 2 | `ret_0x20109_7dfd6f73` | `return 0x20109` and nothing else. | pattern scan |
+| `0x7dfd7e16` | 1 | `ret_0xf0000001_7dfd7e16` | `return 0xf0000001` and nothing else. | pattern scan |
+| `0x7dfd8534` | 1 | `ret_0xf0000001_7dfd8534` | `return 0xf0000001` and nothing else. | pattern scan |
+| `0x7dfdc9cc` | 1 | `ret_0_7dfdc9cc` | `return 0` and nothing else. | pattern scan |
+| `0x7dfde795` | 1 | `ret_0_7dfde795` | `return 0` and nothing else. | pattern scan |
+| `0x7dfded7e` | 1 | `ret_0xf0000001_7dfded7e` | `return 0xf0000001` and nothing else. | pattern scan |
+| `0x7dfe1323` | 2 | `ret_0x20103_7dfe1323` | `return 0x20103` and nothing else. | pattern scan |
+| `0x7dfe580c` | 2 | `ret_0x2010c_7dfe580c` | `return 0x2010c` and nothing else. | pattern scan |
+| `0x7dfe9ee2` | 2 | `ret_0x2010c_7dfe9ee2` | `return 0x2010c` and nothing else. | pattern scan |
+| `0x7dfeee2a` | 1 | `ret_0xf0000028_7dfeee2a` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee72` | 1 | `ret_0xf0000028_7dfeee72` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee7b` | 1 | `ret_0xf0000028_7dfeee7b` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee84` | 1 | `ret_0xf0000028_7dfeee84` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee8d` | 1 | `ret_0xf0000028_7dfeee8d` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee96` | 1 | `ret_0xf0000028_7dfeee96` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeee9f` | 1 | `ret_0_7dfeee9f` | `return 0` and nothing else. | pattern scan |
+| `0x7dfeeea3` | 1 | `ret_0xf0000028_7dfeeea3` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeeeac` | 1 | `ret_0xf0000028_7dfeeeac` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeeeb5` | 1 | `ret_0xf0000028_7dfeeeb5` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeeebe` | 1 | `ret_0xf0000028_7dfeeebe` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeeecb` | 1 | `ret_0xf0000028_7dfeeecb` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfeeffd` | 1 | `ret_0xf0000028_7dfeeffd` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef006` | 1 | `ret_0_7dfef006` | `return 0` and nothing else. | pattern scan |
+| `0x7dfef00a` | 1 | `ret_0xf0000028_7dfef00a` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef013` | 1 | `ret_0xf0000028_7dfef013` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef01c` | 1 | `ret_0xf0000028_7dfef01c` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef025` | 1 | `ret_0xf0000028_7dfef025` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef02e` | 1 | `ret_0xf0000028_7dfef02e` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef037` | 1 | `ret_0xf0000028_7dfef037` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef040` | 1 | `ret_0xf0000028_7dfef040` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef049` | 1 | `ret_0xf0000028_7dfef049` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dfef052` | 1 | `ret_0xf0000028_7dfef052` | `return 0xf0000028` and nothing else. | pattern scan |
+| `0x7dff03f1` | 4 | `ret_0_7dff03f1` | `return 0` and nothing else. | pattern scan |
+| `0x7e0345c0` | 1 | `ret_0xf0000049_7e0345c0` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345c9` | 17 | `ret_0xf0000049_7e0345c9` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345d2` | 1 | `ret_0xf0000049_7e0345d2` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345db` | 1 | `ret_0xf0000049_7e0345db` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345e4` | 1 | `ret_0xf0000049_7e0345e4` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345ed` | 1 | `ret_0xf0000049_7e0345ed` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e0345f6` | 1 | `ret_0xf0000049_7e0345f6` | `return 0xf0000049` and nothing else. | pattern scan |
+| `0x7e034930` | 1 | `ret_0_7e034930` | `return 0` and nothing else. | pattern scan |
+| `0x7e034934` | 1 | `ret_0_7e034934` | `return 0` and nothing else. | pattern scan |
+| `0x7e034c0b` | 1 | `ret_0xf0000001_7e034c0b` | `return 0xf0000001` and nothing else. | pattern scan |
+| `0x7e034ce7` | 1 | `ret_0_7e034ce7` | `return 0` and nothing else. | pattern scan |
+| `0x7e037e72` | 3 | `ret_0x2011e_7e037e72` | `return 0x2011e` and nothing else. | pattern scan |
+| `0x7e038510` | 3 | `ret_0x20116_7e038510` | `return 0x20116` and nothing else. | pattern scan |
+| `0x7e038a04` | 3 | `ret_0x20112_7e038a04` | `return 0x20112` and nothing else. | pattern scan |
+| `0x7e0390ca` | 3 | `ret_0x20122_7e0390ca` | `return 0x20122` and nothing else. | pattern scan |
+| `0x7e039abc` | 5 | `ret_0x2011f_7e039abc` | `return 0x2011f` and nothing else. | pattern scan |
+| `0x7e03a7e6` | 3 | `ret_0x20114_7e03a7e6` | `return 0x20114` and nothing else. | pattern scan |
+| `0x7e03ac3f` | 2 | `ret_0x2010f_7e03ac3f` | `return 0x2010f` and nothing else. | pattern scan |
+| `0x7e03b059` | 3 | `ret_0x20110_7e03b059` | `return 0x20110` and nothing else. | pattern scan |
+| `0x7e03b7c0` | 3 | `ret_0x20111_7e03b7c0` | `return 0x20111` and nothing else. | pattern scan |
+| `0x7e03e889` | 1 | `ret_0_7e03e889` | `return 0` and nothing else. | pattern scan |
+| `0x7e03eb54` | 1 | `ret_0_7e03eb54` | `return 0` and nothing else. | pattern scan |
+| `0x7e03ef97` | 2 | `ret_0x60101_7e03ef97` | `return 0x60101` and nothing else. | pattern scan |
+| `0x7e04452c` | 5 | `ret_0x20128_7e04452c` | `return 0x20128` and nothing else. | pattern scan |
+| `0x7e044e14` | 2 | `ret_0x20123_7e044e14` | `return 0x20123` and nothing else. | pattern scan |
+| `0x7e045788` | 6 | `ret_0x20108_7e045788` | `return 0x20108` and nothing else. | pattern scan |
+| `0x7e045f00` | 3 | `ret_0x20104_7e045f00` | `return 0x20104` and nothing else. | pattern scan |
+| `0x7e046df3` | 2 | `ret_0x20121_7e046df3` | `return 0x20121` and nothing else. | pattern scan |
+| `0x7e04789e` | 2 | `ret_0x2010b_7e04789e` | `return 0x2010b` and nothing else. | pattern scan |
+| `0x7e047e5a` | 3 | `ret_0x20105_7e047e5a` | `return 0x20105` and nothing else. | pattern scan |
+| `0x7e0480fd` | 2 | `ret_0x2011d_7e0480fd` | `return 0x2011d` and nothing else. | pattern scan |
+| `0x7e0496e1` | 2 | `ret_0x20102_7e0496e1` | `return 0x20102` and nothing else. | pattern scan |
+| `0x7e04ad5c` | 4 | `ret_0x2010a_7e04ad5c` | `return 0x2010a` and nothing else. | pattern scan |
+| `0x7e04b2e0` | 1 | `ret_1_7e04b2e0` | `return 1` and nothing else. | pattern scan |
+| `0x7e04bd2c` | 3 | `ret_0x20117_7e04bd2c` | `return 0x20117` and nothing else. | pattern scan |
+| `0x7e04c225` | 3 | `ret_0x20126_7e04c225` | `return 0x20126` and nothing else. | pattern scan |
+| `0x7e04cb11` | 4 | `ret_0x20125_7e04cb11` | `return 0x20125` and nothing else. | pattern scan |
+| `0x7e04ce17` | 2 | `ret_0x20124_7e04ce17` | `return 0x20124` and nothing else. | pattern scan |
+| `0x7e04d90e` | 4 | `ret_0x60101_7e04d90e` | `return 0x60101` and nothing else. | pattern scan |
+| `0x7e04e0e7` | 1 | `ret_0_7e04e0e7` | `return 0` and nothing else. | pattern scan |
+| `0x7e052e33` | 1 | `ret_1_7e052e33` | `return 1` and nothing else. | pattern scan |
+| `0x7e0565e3` | 1 | `ret_0_7e0565e3` | `return 0` and nothing else. | pattern scan |
+| `0x7e0565f9` | 1 | `ret_0_7e0565f9` | `return 0` and nothing else. | pattern scan |
+| `0x7e056663` | 4 | `ret_0_7e056663` | `return 0` and nothing else. | pattern scan |
+| `0x7e059ce8` | 1 | `ret_100_7e059ce8` | `return 100` and nothing else. | pattern scan |
+| `0x7e07de9d` | 1 | `ret_0_7e07de9d` | `return 0` and nothing else. | pattern scan |
+| `0x7e0992dd` | 2 | `ret_0_7e0992dd` | `return 0` and nothing else. | pattern scan |
+| `0x7e0992e1` | 2 | `ret_0_7e0992e1` | `return 0` and nothing else. | pattern scan |
+| `0x7e0a009e` | 2 | `ret_0_7e0a009e` | `return 0` and nothing else. | pattern scan |
+| `0x7e0a00a2` | 2 | `ret_1_7e0a00a2` | `return 1` and nothing else. | pattern scan |
+| `0x7e0a00b2` | 1 | `ret_3_7e0a00b2` | `return 3` and nothing else. | pattern scan |
+| `0x7e0a014f` | 1 | `ret_0_7e0a014f` | `return 0` and nothing else. | pattern scan |
+| `0x7e0a01a9` | 1 | `ret_1_7e0a01a9` | `return 1` and nothing else. | pattern scan |
+| `0x7e0a0246` | 1 | `ret_0_7e0a0246` | `return 0` and nothing else. | pattern scan |
+| `0x7e0a5b4f` | 1 | `ret_1_7e0a5b4f` | `return 1` and nothing else. | pattern scan |
+| `0x7e0a64d7` | 1 | `ret_0_7e0a64d7` | `return 0` and nothing else. | pattern scan |
+| `0x7e0b3eb9` | 1 | `ret_0_7e0b3eb9` | `return 0` and nothing else. | pattern scan |
+| `0x7e0c284f` | 1 | `ret_1_7e0c284f` | `return 1` and nothing else. | pattern scan |
+| `0x7e0c29cc` | 1 | `ret_1_7e0c29cc` | `return 1` and nothing else. | pattern scan |
+| `0x7e0c2a47` | 2 | `ret_3_7e0c2a47` | `return 3` and nothing else. | pattern scan |
+| `0x7e0c2a4c` | 2 | `ret_4_7e0c2a4c` | `return 4` and nothing else. | pattern scan |
+| `0x7e0c2aed` | 2 | `ret_3_7e0c2aed` | `return 3` and nothing else. | pattern scan |
+| `0x7e0c2b08` | 10 | `ret_66_7e0c2b08` | `return 66` and nothing else. | pattern scan |
+| `0x7e0c2bb7` | 3 | `ret_2_7e0c2bb7` | `return 2` and nothing else. | pattern scan |
+| `0x7e0c2bd7` | 3 | `ret_2_7e0c2bd7` | `return 2` and nothing else. | pattern scan |
+| `0x7e0c2bf2` | 3 | `ret_2_7e0c2bf2` | `return 2` and nothing else. | pattern scan |
+| `0x7e0cc8d3` | 1 | `ret_0_7e0cc8d3` | `return 0` and nothing else. | pattern scan |
+| `0x7e0d85da` | 1 | `ret_0_7e0d85da` | `return 0` and nothing else. | pattern scan |
+| `0x7e0d85de` | 1 | `ret_1_7e0d85de` | `return 1` and nothing else. | pattern scan |
+| `0x7e0f2ad1` | 7 | `ret_0_7e0f2ad1` | `return 0` and nothing else. | pattern scan |
+| `0x7e124a69` | 3 | `ret_0_7e124a69` | `return 0` and nothing else. | pattern scan |
+| `0x7e19789d` | 1 | `ret_0_7e19789d` | `return 0` and nothing else. | pattern scan |
+| `0x7e1d1ca1` | 2 | `ret_0_7e1d1ca1` | `return 0` and nothing else. | pattern scan |
+| `0x7e1d1ca5` | 2 | `ret_0_7e1d1ca5` | `return 0` and nothing else. | pattern scan |
+| `0x7e1d1ca9` | 2 | `ret_0_7e1d1ca9` | `return 0` and nothing else. | pattern scan |
+| `0x7e1d1d3d` | 3 | `ret_0_7e1d1d3d` | `return 0` and nothing else. | pattern scan |
+| `0x7e2007ee` | 9 | `ret_1_7e2007ee` | `return 1` and nothing else. | pattern scan |
+| `0x7e20803b` | 1 | `ret_1_7e20803b` | `return 1` and nothing else. | pattern scan |
+| `0x7e243c2b` | 8 | `ret_0_7e243c2b` | `return 0` and nothing else. | pattern scan |
+| `0x7e258e0d` | 19 | `ret_m1_7e258e0d` | `return -1` and nothing else. | pattern scan |
+| `0x7e2613ec` | 1 | `ret_0_7e2613ec` | `return 0` and nothing else. | pattern scan |
+| `0x7e261c48` | 2 | `ret_1_7e261c48` | `return 1` and nothing else. | pattern scan |
+| `0x7e266ff9` | 2 | `ret_0_7e266ff9` | `return 0` and nothing else. | pattern scan |
+| `0x7e267c7b` | 2 | `ret_0_7e267c7b` | `return 0` and nothing else. | pattern scan |
+| `0x7e2cd6c2` | 5 | `ret_0_7e2cd6c2` | `return 0` and nothing else. | pattern scan |
+| `0x7e2d0dd5` | 4 | `ret_3_7e2d0dd5` | `return 3` and nothing else. | pattern scan |
+| `0x7e2d0dda` | 2 | `ret_0_7e2d0dda` | `return 0` and nothing else. | pattern scan |
+| `0x7e2d468e` | 2 | `ret_3_7e2d468e` | `return 3` and nothing else. | pattern scan |
+| `0x7e30191d` | 2 | `ret_0_7e30191d` | `return 0` and nothing else. | pattern scan |
+| `0x7e301eb8` | 1 | `ret_0_7e301eb8` | `return 0` and nothing else. | pattern scan |
+| `0x7e302244` | 1 | `ret_3_7e302244` | `return 3` and nothing else. | pattern scan |
+| `0x7e303ff2` | 4 | `ret_2_7e303ff2` | `return 2` and nothing else. | pattern scan |
+| `0x7e304009` | 1 | `ret_9_7e304009` | `return 9` and nothing else. | pattern scan |
+| `0x7e30400e` | 6 | `ret_3_7e30400e` | `return 3` and nothing else. | pattern scan |
+| `0x7e304013` | 1 | `ret_12_7e304013` | `return 12` and nothing else. | pattern scan |
+| `0x7e304018` | 1 | `ret_13_7e304018` | `return 13` and nothing else. | pattern scan |
+| `0x7e30401d` | 1 | `ret_17_7e30401d` | `return 17` and nothing else. | pattern scan |
+| `0x7e304022` | 1 | `ret_19_7e304022` | `return 19` and nothing else. | pattern scan |
+| `0x7e304027` | 1 | `ret_20_7e304027` | `return 20` and nothing else. | pattern scan |
+| `0x7e304113` | 2 | `ret_10_7e304113` | `return 10` and nothing else. | pattern scan |
+| `0x7e304253` | 2 | `ret_4_7e304253` | `return 4` and nothing else. | pattern scan |
+| `0x7e304258` | 2 | `ret_11_7e304258` | `return 11` and nothing else. | pattern scan |
+| `0x7e30425d` | 2 | `ret_14_7e30425d` | `return 14` and nothing else. | pattern scan |
+| `0x7e304262` | 2 | `ret_15_7e304262` | `return 15` and nothing else. | pattern scan |
+| `0x7e3046a0` | 21 | `ret_21_7e3046a0` | `return 21` and nothing else. | pattern scan |
+| `0x7e30475b` | 1 | `ret_1_7e30475b` | `return 1` and nothing else. | pattern scan |
+| `0x7e30489e` | 1 | `ret_22_7e30489e` | `return 22` and nothing else. | pattern scan |
+| `0x7e304901` | 2 | `ret_24_7e304901` | `return 24` and nothing else. | pattern scan |
+| `0x7e32c227` | 3 | `ret_1_7e32c227` | `return 1` and nothing else. | pattern scan |
+| `0x7e33cc94` | 1 | `ret_2_7e33cc94` | `return 2` and nothing else. | pattern scan |
+| `0x7e33cc9c` | 1 | `ret_2_7e33cc9c` | `return 2` and nothing else. | pattern scan |
+| `0x7e34cbc3` | 1 | `ret_1_7e34cbc3` | `return 1` and nothing else. | pattern scan |
+| `0x7e34cbc8` | 1 | `ret_0_7e34cbc8` | `return 0` and nothing else. | pattern scan |
+| `0x7e34fa0d` | 14 | `ret_1_7e34fa0d` | `return 1` and nothing else. | pattern scan |
+| `0x7e6a1e1e` | 1 | `ret_0_7e6a1e1e` | `return 0` and nothing else. | pattern scan |
+| `0x7e6a20ec` | 1 | `ret_0_7e6a20ec` | `return 0` and nothing else. | pattern scan |
+| `0x7e6a23d7` | 2 | `ret_0_7e6a23d7` | `return 0` and nothing else. | pattern scan |
+| `0x7e6a6671` | 2 | `ret_0_7e6a6671` | `return 0` and nothing else. | pattern scan |
+| `0x7e6a77d4` | 16 | `ret_3_7e6a77d4` | `return 3` and nothing else. | pattern scan |
+| `0x7e6a7b9e` | 1 | `ret_0_7e6a7b9e` | `return 0` and nothing else. | pattern scan |
+| `0x7e6abbc8` | 1 | `ret_1_7e6abbc8` | `return 1` and nothing else. | pattern scan |
+| `0x7e6ae64b` | 1 | `ret_0_7e6ae64b` | `return 0` and nothing else. | pattern scan |
+| `0x7e6ae64f` | 1 | `ret_0_7e6ae64f` | `return 0` and nothing else. | pattern scan |
+| `0x7e6d89c1` | 1 | `ret_1_7e6d89c1` | `return 1` and nothing else. | pattern scan |
+| `0x7e6e0e78` | 7 | `ret_4_7e6e0e78` | `return 4` and nothing else. | pattern scan |
+| `0x7e6e2078` | 1 | `ret_1_7e6e2078` | `return 1` and nothing else. | pattern scan |
+| `0x7e6f09b4` | 1 | `ret_0_7e6f09b4` | `return 0` and nothing else. | pattern scan |
+| `0x7e6f3fd3` | 1 | `ret_0_7e6f3fd3` | `return 0` and nothing else. | pattern scan |
+| `0x7e6f4fcc` | 2 | `ret_0_7e6f4fcc` | `return 0` and nothing else. | pattern scan |
+| `0x7e7025ad` | 1 | `ret_0_7e7025ad` | `return 0` and nothing else. | pattern scan |
+| `0x7e70bb47` | 1 | `ret_4_7e70bb47` | `return 4` and nothing else. | pattern scan |
+| `0x7e725dbd` | 5 | `ret_1_7e725dbd` | `return 1` and nothing else. | pattern scan |
+| `0x7e755cc0` | 2 | `ret_m1_7e755cc0` | `return -1` and nothing else. | pattern scan |
+| `0x7e7c9471` | 1 | `ret_0_7e7c9471` | `return 0` and nothing else. | pattern scan |
+| `0x7e7c9475` | 1 | `ret_0_7e7c9475` | `return 0` and nothing else. | pattern scan |
+| `0x7e7c9479` | 1 | `ret_0_7e7c9479` | `return 0` and nothing else. | pattern scan |
+| `0x7e7c977b` | 1 | `ret_0_7e7c977b` | `return 0` and nothing else. | pattern scan |
+| `0x7e7cf109` | 1 | `ret_0_7e7cf109` | `return 0` and nothing else. | pattern scan |
+| `0x7e7cf3fd` | 1 | `ret_0_7e7cf3fd` | `return 0` and nothing else. | pattern scan |
+| `0x7e7d7233` | 1 | `ret_0_7e7d7233` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1ad4` | 1 | `ret_1_7e7e1ad4` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1ad9` | 1 | `ret_1_7e7e1ad9` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1ade` | 1 | `ret_1_7e7e1ade` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1ae3` | 1 | `ret_1_7e7e1ae3` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1ae8` | 2 | `ret_1_7e7e1ae8` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1aed` | 1 | `ret_0_7e7e1aed` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1af1` | 1 | `ret_0_7e7e1af1` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1af5` | 1 | `ret_0_7e7e1af5` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1af9` | 1 | `ret_0_7e7e1af9` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1afd` | 1 | `ret_0_7e7e1afd` | `return 0` and nothing else. | pattern scan |
+| `0x7e7e1b01` | 1 | `ret_1_7e7e1b01` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1b06` | 1 | `ret_1_7e7e1b06` | `return 1` and nothing else. | pattern scan |
+| `0x7e7e1b0b` | 1 | `ret_1_7e7e1b0b` | `return 1` and nothing else. | pattern scan |
+| `0x7e7f17d5` | 1 | `ret_0_7e7f17d5` | `return 0` and nothing else. | pattern scan |
+| `0x7e7fae05` | 1 | `ret_0_7e7fae05` | `return 0` and nothing else. | pattern scan |
+| `0x7e7fdc0b` | 2 | `ret_0x100000b_7e7fdc0b` | `return 0x100000b` and nothing else. | pattern scan |
+| `0x7e7fde23` | 2 | `ret_0x100000c_7e7fde23` | `return 0x100000c` and nothing else. | pattern scan |
+| `0x7e80267b` | 7 | `ret_0x1010003_7e80267b` | `return 0x1010003` and nothing else. | pattern scan |
+| `0x7e8036dd` | 2 | `ret_1_7e8036dd` | `return 1` and nothing else. | pattern scan |
+| `0x7e803760` | 3 | `ret_0x1020001_7e803760` | `return 0x1020001` and nothing else. | pattern scan |
+| `0x7e806d97` | 4 | `ret_2_7e806d97` | `return 2` and nothing else. | pattern scan |
+| `0x7e807d4b` | 2 | `ret_1_7e807d4b` | `return 1` and nothing else. | pattern scan |
+| `0x7e80b40b` | 7 | `ret_1_7e80b40b` | `return 1` and nothing else. | pattern scan |
+| `0x7e80ee74` | 3 | `ret_0x1030001_7e80ee74` | `return 0x1030001` and nothing else. | pattern scan |
+| `0x7e819da8` | 7 | `ret_0x1010002_7e819da8` | `return 0x1010002` and nothing else. | pattern scan |
+| `0x7e82be40` | 2 | `ret_1_7e82be40` | `return 1` and nothing else. | pattern scan |
+| `0x7e8319fa` | 3 | `ret_0x1030003_7e8319fa` | `return 0x1030003` and nothing else. | pattern scan |
+| `0x7e836345` | 2 | `ret_1_7e836345` | `return 1` and nothing else. | pattern scan |
+| `0x7e83e89d` | 1 | `ret_0x80000009_7e83e89d` | `return 0x80000009` and nothing else. | pattern scan |
+| `0x7e83e8b7` | 1 | `ret_0x80000009_7e83e8b7` | `return 0x80000009` and nothing else. | pattern scan |
+| `0x7e83e9d7` | 1 | `ret_0x80000009_7e83e9d7` | `return 0x80000009` and nothing else. | pattern scan |
+| `0x7e850e4e` | 3 | `ret_0_7e850e4e` | `return 0` and nothing else. | pattern scan |
+| `0x7e851812` | 3 | `ret_1_7e851812` | `return 1` and nothing else. | pattern scan |
+| `0x7e854db7` | 2 | `ret_1_7e854db7` | `return 1` and nothing else. | pattern scan |
+| `0x7e8554ef` | 1 | `ret_1_7e8554ef` | `return 1` and nothing else. | pattern scan |
+| `0x7e85eda6` | 1 | `ret_0_7e85eda6` | `return 0` and nothing else. | pattern scan |
+| `0x7e867a8d` | 24 | `ret_0_7e867a8d` | `return 0` and nothing else. | pattern scan |
+| `0x7e867a91` | 1 | `ret_1_7e867a91` | `return 1` and nothing else. | pattern scan |
+| `0x7e867efb` | 8 | `ret_0_7e867efb` | `return 0` and nothing else. | pattern scan |
+| `0x7e870017` | 1 | `ret_1_7e870017` | `return 1` and nothing else. | pattern scan |
+| `0x7e87a987` | 1 | `ret_1_7e87a987` | `return 1` and nothing else. | pattern scan |
+| `0x7e87cc37` | 1 | `ret_1_7e87cc37` | `return 1` and nothing else. | pattern scan |
+| `0x7e87e055` | 2 | `ret_0_7e87e055` | `return 0` and nothing else. | pattern scan |
+| `0x7e880a47` | 2 | `ret_0_7e880a47` | `return 0` and nothing else. | pattern scan |
+| `0x7e8816e4` | 2 | `ret_0_7e8816e4` | `return 0` and nothing else. | pattern scan |
+| `0x7e8816f4` | 1 | `ret_0_7e8816f4` | `return 0` and nothing else. | pattern scan |
+| `0x7e8824c2` | 1 | `ret_0_7e8824c2` | `return 0` and nothing else. | pattern scan |
+| `0x7e88251b` | 1 | `ret_0_7e88251b` | `return 0` and nothing else. | pattern scan |
