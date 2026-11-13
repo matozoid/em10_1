@@ -15363,6 +15363,11 @@ Unlabelled functions of at most 16 bytes whose body is one or two calls plus at 
 instructions, classified from their disassembly on 2026-11-13 by `tools/func_patterns.py small 16`
 (a leading stack-frame adjustment is ignored). 3407 listed. The name records the shape and the call target;
 what the target does is described at the target, if it is labelled.
+Where the call target already has a name in these documents, the row ends with `Target: <name>`.
+The `call_<target>_ret_null` shape is this firmware's destructor convention: the labelled targets are
+base-class destructors or teardown routines (`base_reset_vtbl_7e42c02c` ×608, `evtsrc_dtor` ×173,
+`gui_view_dtor` ×54), and the wrapper is the derived class's destructor that has nothing of its own to
+free, returning null like every destructor here.
 - `call_<target>_ret_null_<addr>`: call `target`, return a null pointer (1037; most common targets `0x7e205040` ×608, `0x7e1e67f6` ×173, `0x7e2daa34` ×54, `0x7e33c67e` ×40, `0x7dfd5731` ×25, `0x7e34f411` ×24).
 - `call_<target>_ret_ptr_<value>` / `call_<target>_ret_<value>`: call `target`, return a fixed address or number.
 - `call_<target>_arg_<value>`: call `target` with `d0` set to a constant. `call_<target>_on_<address>`:
@@ -15378,20 +15383,20 @@ what the target does is described at the target, if it is labelled.
 
 | address | xrefs | symbol | role | source |
 |---|---|---|---|---|
-| `0x7d9976b1` | 3 | `call_7d996ee2_on_7d998c98_7d9976b1` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d9976bf` | 1 | `call_7d996ee2_on_7d998c98_7d9976bf` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d9976cd` | 1 | `call_7d996ee2_on_7d998c98_7d9976cd` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d9976db` | 1 | `call_7d996ee2_on_7d998c98_7d9976db` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d9976e9` | 1 | `call_7d996ee2_on_7d998c98_7d9976e9` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d9976f7` | 1 | `call_7d996ee2_on_7d998c98_7d9976f7` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
-| `0x7d997705` | 1 | `call_7d996ee2_on_7d998c98_7d997705` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976b1` | 3 | `call_7d996ee2_on_7d998c98_7d9976b1` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d9976bf` | 1 | `call_7d996ee2_on_7d998c98_7d9976bf` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d9976cd` | 1 | `call_7d996ee2_on_7d998c98_7d9976cd` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d9976db` | 1 | `call_7d996ee2_on_7d998c98_7d9976db` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d9976e9` | 1 | `call_7d996ee2_on_7d998c98_7d9976e9` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d9976f7` | 1 | `call_7d996ee2_on_7d998c98_7d9976f7` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7d997705` | 1 | `call_7d996ee2_on_7d998c98_7d997705` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). Target: `emit`. | pattern scan |
 | `0x7d9b1499` | 1 | `call_7d9b14ad_arg_2_7d9b1499` | Calls `0x7d9b14ad` with `d0 = 2`. | pattern scan |
 | `0x7d9b14a3` | 1 | `call_7d9b1578_arg_2_7d9b14a3` | Calls `0x7d9b1578` with `d0 = 2`. | pattern scan |
-| `0x7d9c6e4c` | 3 | `call_7d996ee2_on_7d9f6e2f_7d9c6e4c` | Calls `0x7d996ee2` with `a0 = 0x7d9f6e2f` (a fixed address). | pattern scan |
+| `0x7d9c6e4c` | 3 | `call_7d996ee2_on_7d9f6e2f_7d9c6e4c` | Calls `0x7d996ee2` with `a0 = 0x7d9f6e2f` (a fixed address). Target: `emit`. | pattern scan |
 | `0x7d9d5abd` | 1 | `call_7d9e1084_arg_158_7d9d5abd` | Calls `0x7d9e1084` with `d0 = 158`. | pattern scan |
-| `0x7d9d796b` | 6 | `call_7d9e9319_arg_7_7d9d796b` | Calls `0x7d9e9319` with `d0 = 7`. | pattern scan |
-| `0x7d9e43a0` | 1 | `call_7d9e43ba_arg_1_7d9e43a0` | Calls `0x7d9e43ba` with `d0 = 1`. | pattern scan |
-| `0x7d9e43ad` | 1 | `call_7d9e43ba_arg_2_7d9e43ad` | Calls `0x7d9e43ba` with `d0 = 2`. | pattern scan |
+| `0x7d9d796b` | 6 | `call_7d9e9319_arg_7_7d9d796b` | Calls `0x7d9e9319` with `d0 = 7`. Target: `per_sio_sem_close_7d9e`. | pattern scan |
+| `0x7d9e43a0` | 1 | `call_7d9e43ba_arg_1_7d9e43a0` | Calls `0x7d9e43ba` with `d0 = 1`. Target: `mintimer1_dump`. | pattern scan |
+| `0x7d9e43ad` | 1 | `call_7d9e43ba_arg_2_7d9e43ad` | Calls `0x7d9e43ba` with `d0 = 2`. Target: `mintimer1_dump`. | pattern scan |
 | `0x7d9e83b6` | 0 | `call_7d9e84c2_arg_1_7d9e83b6` | Calls `0x7d9e84c2` with `d0 = 1`. | pattern scan |
 | `0x7d9e83c3` | 0 | `call_7d9e84c2_arg_2_7d9e83c3` | Calls `0x7d9e84c2` with `d0 = 2`. | pattern scan |
 | `0x7d9e83d0` | 0 | `call_7d9e84c2_arg_3_7d9e83d0` | Calls `0x7d9e84c2` with `d0 = 3`. | pattern scan |
@@ -15415,22 +15420,22 @@ what the target does is described at the target, if it is labelled.
 | `0x7d9ed25a` | 1 | `call_7d9ed10a_arg_7_7d9ed25a` | Calls `0x7d9ed10a` with `d0 = 7`. | pattern scan |
 | `0x7d9ed267` | 1 | `call_7d9ed10a_arg_8_7d9ed267` | Calls `0x7d9ed10a` with `d0 = 8`. | pattern scan |
 | `0x7da675e0` | 20 | `global_u16_6000112c_set_7da675e0` | `*(u16*)0x6000112c = d0`. | pattern scan |
-| `0x7da84ef1` | 1 | `call_7d996e85_on_7dbbf2a4_7da84ef1` | Calls `0x7d996e85` with `a0 = 0x7dbbf2a4` (a fixed address). | pattern scan |
+| `0x7da84ef1` | 1 | `call_7d996e85_on_7dbbf2a4_7da84ef1` | Calls `0x7d996e85` with `a0 = 0x7dbbf2a4` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7da8ff8b` | 1 | `call_7da8ffaa_arg_82837528_7da8ff8b` | Calls `0x7da8ffaa` with `d0 = 82837528`. | pattern scan |
 | `0x7da8ff9c` | 1 | `call_7da8ffaa_arg_82837529_7da8ff9c` | Calls `0x7da8ffaa` with `d0 = 82837529`. | pattern scan |
-| `0x7da95332` | 2 | `call_7d996e85_on_7dbc39dc_7da95332` | Calls `0x7d996e85` with `a0 = 0x7dbc39dc` (a fixed address). | pattern scan |
+| `0x7da95332` | 2 | `call_7d996e85_on_7dbc39dc_7da95332` | Calls `0x7d996e85` with `a0 = 0x7dbc39dc` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7da987f5` | 1 | `call_7da90c9a_on_0_7da987f5` | Calls `0x7da90c9a` with `a0 = 0x0` (a fixed address). | pattern scan |
-| `0x7dab45c5` | 6 | `call_7d996ee2_on_7dbd1540_7dab45c5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). | pattern scan |
-| `0x7dab45d5` | 1 | `call_7d996ee2_on_7dbd1540_7dab45d5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). | pattern scan |
-| `0x7dac5427` | 1 | `call_7dac29b7_arg_128_7dac5427` | Calls `0x7dac29b7` with `d0 = 128`. | pattern scan |
+| `0x7dab45c5` | 6 | `call_7d996ee2_on_7dbd1540_7dab45c5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7dab45d5` | 1 | `call_7d996ee2_on_7dbd1540_7dab45d5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7dac5427` | 1 | `call_7dac29b7_arg_128_7dac5427` | Calls `0x7dac29b7` with `d0 = 128`. Target: `lens_mem_alloc`. | pattern scan |
 | `0x7dac9751` | 8 | `call_7dac5245_on_7dbd5b6c_7dac9751` | Calls `0x7dac5245` with `a0 = 0x7dbd5b6c` (a fixed address). | pattern scan |
 | `0x7dacc94b` | 1 | `call_7d9d3a9a_arg_32882_7dacc94b` | Calls `0x7d9d3a9a` with `d0 = 32882`. | pattern scan |
-| `0x7dacf442` | 1 | `call_7d996e85_on_7dbd7da0_7dacf442` | Calls `0x7d996e85` with `a0 = 0x7dbd7da0` (a fixed address). | pattern scan |
-| `0x7dad0aec` | 1 | `call_7d996e85_on_7dbd8170_7dad0aec` | Calls `0x7d996e85` with `a0 = 0x7dbd8170` (a fixed address). | pattern scan |
-| `0x7dad168f` | 2 | `call_7d9e9319_arg_1_7dad168f` | Calls `0x7d9e9319` with `d0 = 1`. | pattern scan |
+| `0x7dacf442` | 1 | `call_7d996e85_on_7dbd7da0_7dacf442` | Calls `0x7d996e85` with `a0 = 0x7dbd7da0` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7dad0aec` | 1 | `call_7d996e85_on_7dbd8170_7dad0aec` | Calls `0x7d996e85` with `a0 = 0x7dbd8170` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7dad168f` | 2 | `call_7d9e9319_arg_1_7dad168f` | Calls `0x7d9e9319` with `d0 = 1`. Target: `per_sio_sem_close_7d9e`. | pattern scan |
 | `0x7dad1af3` | 1 | `call_7d9e1084_arg_163_7dad1af3` | Calls `0x7d9e1084` with `d0 = 163`. | pattern scan |
 | `0x7dad2640` | 2 | `call_7d9e109f_arg_157_7dad2640` | Calls `0x7d9e109f` with `d0 = 157`. | pattern scan |
-| `0x7dadcfeb` | 1 | `call_7d996e85_on_7dbdaaa5_7dadcfeb` | Calls `0x7d996e85` with `a0 = 0x7dbdaaa5` (a fixed address). | pattern scan |
+| `0x7dadcfeb` | 1 | `call_7d996e85_on_7dbdaaa5_7dadcfeb` | Calls `0x7d996e85` with `a0 = 0x7dbdaaa5` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7dae14f2` | 4 | `fwd_f4_to_7dae1500_7dae14f2` | Forwards to the object at `this+4`: `0x7dae1500(*(this+4))`. | pattern scan |
 | `0x7daf8c02` | 2 | `call_7de51f69_arg_1_7daf8c02` | Calls `0x7de51f69` with `d0 = 1`. | pattern scan |
 | `0x7daf9f9b` | 3 | `call_7daf8c0e_on_606c6574_7daf9f9b` | Calls `0x7daf8c0e` with `a0 = 0x606c6574` (a fixed address). | pattern scan |
@@ -15438,11 +15443,11 @@ what the target does is described at the target, if it is labelled.
 | `0x7db0b081` | 5 | `call_7db04132_on_606c941c_7db0b081` | Calls `0x7db04132` with `a0 = 0x606c941c` (a fixed address). | pattern scan |
 | `0x7db0b0ee` | 2 | `call_7db04132_on_606c941e_7db0b0ee` | Calls `0x7db04132` with `a0 = 0x606c941e` (a fixed address). | pattern scan |
 | `0x7db0b16e` | 2 | `call_7db04132_on_606c9428_7db0b16e` | Calls `0x7db04132` with `a0 = 0x606c9428` (a fixed address). | pattern scan |
-| `0x7db0bc5b` | 5 | `call_7d9d5163_arg_1_7db0bc5b` | Calls `0x7d9d5163` with `d0 = 1`. | pattern scan |
+| `0x7db0bc5b` | 5 | `call_7d9d5163_arg_1_7db0bc5b` | Calls `0x7d9d5163` with `d0 = 1`. Target: `global_u8_a0a5375d_set_7d9d5163`. | pattern scan |
 | `0x7db12984` | 1 | `call_7db04132_on_606c9a66_7db12984` | Calls `0x7db04132` with `a0 = 0x606c9a66` (a fixed address). | pattern scan |
-| `0x7db13425` | 2 | `call_7db4c2d9_on_g606c9a88_7db13425` | Calls `0x7db4c2d9` on the object whose pointer is stored at `0x606c9a88`. | pattern scan |
+| `0x7db13425` | 2 | `call_7db4c2d9_on_g606c9a88_7db13425` | Calls `0x7db4c2d9` on the object whose pointer is stored at `0x606c9a88`. Target: `drv_node_recycle`. | pattern scan |
 | `0x7db22adb` | 1 | `call_7db22246_arg_2_7db22adb` | Calls `0x7db22246` with `d0 = 2`. | pattern scan |
-| `0x7db334fb` | 1 | `call_7d996e85_on_7dbe8c7c_7db334fb` | Calls `0x7d996e85` with `a0 = 0x7dbe8c7c` (a fixed address). | pattern scan |
+| `0x7db334fb` | 1 | `call_7d996e85_on_7dbe8c7c_7db334fb` | Calls `0x7d996e85` with `a0 = 0x7dbe8c7c` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7db595e4` | 1 | `call2_7db59fff_7db59881_7db595e4` | Calls `0x7db59fff(this)` and then `0x7db59881(this)`. | pattern scan |
 | `0x7db5a011` | 4 | `call_7db22cd9_on_g606ef3ec_7db5a011` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3ec`. | pattern scan |
 | `0x7db5a021` | 3 | `call_7db22cd9_on_g606ef3f4_7db5a021` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3f4`. | pattern scan |
@@ -15492,11 +15497,11 @@ what the target does is described at the target, if it is labelled.
 | `0x7db5e4cc` | 1 | `call2_7db5e4ea_7db5e61d_7db5e4cc` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
 | `0x7db5e4db` | 1 | `call2_7db5e4ea_7db5e61d_7db5e4db` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
 | `0x7db61927` | 1 | `call_7db22cd9_on_g606ef590_7db61927` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef590`. | pattern scan |
-| `0x7db681a4` | 2 | `call_7db67e71_arg_2341_7db681a4` | Calls `0x7db67e71` with `d0 = 2341`. | pattern scan |
-| `0x7db6a1a2` | 0 | `call_7db93fb8_arg_64_7db6a1a2` | Calls `0x7db93fb8` with `d0 = 64`. | pattern scan |
-| `0x7db6a1b1` | 0 | `call_7db944dc_arg_64_7db6a1b1` | Calls `0x7db944dc` with `d0 = 64`. | pattern scan |
-| `0x7db6a1c0` | 0 | `call_7db93fb8_arg_141_7db6a1c0` | Calls `0x7db93fb8` with `d0 = 141`. | pattern scan |
-| `0x7db6a1d0` | 0 | `call_7db944dc_arg_141_7db6a1d0` | Calls `0x7db944dc` with `d0 = 141`. | pattern scan |
+| `0x7db681a4` | 2 | `call_7db67e71_arg_2341_7db681a4` | Calls `0x7db67e71` with `d0 = 2341`. Target: `get_camprop_by_code`. | pattern scan |
+| `0x7db6a1a2` | 0 | `call_7db93fb8_arg_64_7db6a1a2` | Calls `0x7db93fb8` with `d0 = 64`. Target: `code_lookup_6000`. | pattern scan |
+| `0x7db6a1b1` | 0 | `call_7db944dc_arg_64_7db6a1b1` | Calls `0x7db944dc` with `d0 = 64`. Target: `prm_get_value_by_id`. | pattern scan |
+| `0x7db6a1c0` | 0 | `call_7db93fb8_arg_141_7db6a1c0` | Calls `0x7db93fb8` with `d0 = 141`. Target: `code_lookup_6000`. | pattern scan |
+| `0x7db6a1d0` | 0 | `call_7db944dc_arg_141_7db6a1d0` | Calls `0x7db944dc` with `d0 = 141`. Target: `prm_get_value_by_id`. | pattern scan |
 | `0x7db6e910` | 1 | `call_7db6b24f_arg_10058_7db6e910` | Calls `0x7db6b24f` with `d0 = 10058`. | pattern scan |
 | `0x7db704e8` | 0 | `call_7db6be3a_arg_1_7db704e8` | Calls `0x7db6be3a` with `d0 = 1`. | pattern scan |
 | `0x7db704f5` | 0 | `call_7db6beee_arg_1_7db704f5` | Calls `0x7db6beee` with `d0 = 1`. | pattern scan |
@@ -15519,672 +15524,672 @@ what the target does is described at the target, if it is labelled.
 | `0x7db71d98` | 0 | `call_7db71d5b_arg_1_7db71d98` | Calls `0x7db71d5b` with `d0 = 1`. | pattern scan |
 | `0x7db73813` | 1 | `call_7db7387f_arg_1_7db73813` | Calls `0x7db7387f` with `d0 = 1`. | pattern scan |
 | `0x7db78da3` | 3 | `call_7db78c2c_ret_1_7db78da3` | Calls `0x7db78c2c`, then returns 1. | pattern scan |
-| `0x7db834ce` | 1 | `call_7db83e1d_on_7db83c93_7db834ce` | Calls `0x7db83e1d` with `a0 = 0x7db83c93` (a fixed address). | pattern scan |
-| `0x7db853da` | 1 | `call_7d996ee2_on_7dc4ff28_7db853da` | Calls `0x7d996ee2` with `a0 = 0x7dc4ff28` (a fixed address). | pattern scan |
+| `0x7db834ce` | 1 | `call_7db83e1d_on_7db83c93_7db834ce` | Calls `0x7db83e1d` with `a0 = 0x7db83c93` (a fixed address). Target: `STB_AD_7db83e1d`. | pattern scan |
+| `0x7db853da` | 1 | `call_7d996ee2_on_7dc4ff28_7db853da` | Calls `0x7d996ee2` with `a0 = 0x7dc4ff28` (a fixed address). Target: `emit`. | pattern scan |
 | `0x7dba3d95` | 1 | `call_7da89732_arg_1_7dba3d95` | Calls `0x7da89732` with `d0 = 1`. | pattern scan |
 | `0x7dbae165` | 1 | `call2_7dbae27f_7dbae174_7dbae165` | Calls `0x7dbae27f(this)` and then `0x7dbae174(this)`. | pattern scan |
 | `0x7dbb47f9` | 3 | `call_7d9e1084_arg_112_7dbb47f9` | Calls `0x7d9e1084` with `d0 = 112`. | pattern scan |
 | `0x7dbb4805` | 1 | `call_7d9e109f_arg_112_7dbb4805` | Calls `0x7d9e109f` with `d0 = 112`. | pattern scan |
-| `0x7dbb5af9` | 1 | `call_7d9e9319_arg_2_7dbb5af9` | Calls `0x7d9e9319` with `d0 = 2`. | pattern scan |
+| `0x7dbb5af9` | 1 | `call_7d9e9319_arg_2_7dbb5af9` | Calls `0x7d9e9319` with `d0 = 2`. Target: `per_sio_sem_close_7d9e`. | pattern scan |
 | `0x7dc9d17f` | 1 | `call_7d9db57e_ret_1_7dc9d17f` | Calls `0x7d9db57e`, then returns 1. | pattern scan |
 | `0x7dd43689` | 1 | `call_7dd4389e_on_7deddba2_7dd43689` | Calls `0x7dd4389e` with `a0 = 0x7deddba2` (a fixed address). | pattern scan |
 | `0x7dd4fdf6` | 1 | `call_7dd4fe04_arg_65535_7dd4fdf6` | Calls `0x7dd4fe04` with `d0 = 65535`. | pattern scan |
-| `0x7dd6e9f5` | 1 | `call_7d996e85_on_7def3714_7dd6e9f5` | Calls `0x7d996e85` with `a0 = 0x7def3714` (a fixed address). | pattern scan |
-| `0x7dd6ef4f` | 1 | `call_7d996e85_on_7def3eec_7dd6ef4f` | Calls `0x7d996e85` with `a0 = 0x7def3eec` (a fixed address). | pattern scan |
-| `0x7dd7225e` | 1 | `call_7dd71ed9_ret_14086_7dd7225e` | Calls `0x7dd71ed9`, then returns 14086. | pattern scan |
-| `0x7dd7226c` | 0 | `call_7dd71ed9_ret_14086_7dd7226c` | Calls `0x7dd71ed9`, then returns 14086. | pattern scan |
-| `0x7dd7c5f7` | 1 | `adj_thunk_2764_to_7db130d2_7dd7c5f7` | Adds 2764 to `this`, then calls `0x7db130d2`: entry for a base or member sub-object. | pattern scan |
-| `0x7ddda80a` | 12 | `call_7de17c1b_arg_776_7ddda80a` | Calls `0x7de17c1b` with `d0 = 776`. | pattern scan |
+| `0x7dd6e9f5` | 1 | `call_7d996e85_on_7def3714_7dd6e9f5` | Calls `0x7d996e85` with `a0 = 0x7def3714` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7dd6ef4f` | 1 | `call_7d996e85_on_7def3eec_7dd6ef4f` | Calls `0x7d996e85` with `a0 = 0x7def3eec` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7dd7225e` | 1 | `call_7dd71ed9_ret_14086_7dd7225e` | Calls `0x7dd71ed9`, then returns 14086. Target: `ev_result_7dd71ed9`. | pattern scan |
+| `0x7dd7226c` | 0 | `call_7dd71ed9_ret_14086_7dd7226c` | Calls `0x7dd71ed9`, then returns 14086. Target: `ev_result_7dd71ed9`. | pattern scan |
+| `0x7dd7c5f7` | 1 | `adj_thunk_2764_to_7db130d2_7dd7c5f7` | Adds 2764 to `this`, then calls `0x7db130d2`: entry for a base or member sub-object. Target: `ret0_stub`. | pattern scan |
+| `0x7ddda80a` | 12 | `call_7de17c1b_arg_776_7ddda80a` | Calls `0x7de17c1b` with `d0 = 776`. Target: `evflag_clear_locked`. | pattern scan |
 | `0x7dddbeb3` | 6 | `call2_7dddc079_7dddc2b3_7dddbeb3` | Calls `0x7dddc079(this)` and then `0x7dddc2b3(this)`. | pattern scan |
 | `0x7dde42d5` | 2 | `fwd_f8_to_7de16d46_7dde42d5` | Forwards to the object at `this+8`: `0x7de16d46(*(this+8))`. | pattern scan |
 | `0x7dde42e2` | 2 | `fwd_f8_to_7de16d98_7dde42e2` | Forwards to the object at `this+8`: `0x7de16d98(*(this+8))`. | pattern scan |
 | `0x7dde42ef` | 2 | `fwd_f8_to_7de16dea_7dde42ef` | Forwards to the object at `this+8`: `0x7de16dea(*(this+8))`. | pattern scan |
 | `0x7dde42fc` | 2 | `fwd_f8_to_7de16e3c_7dde42fc` | Forwards to the object at `this+8`: `0x7de16e3c(*(this+8))`. | pattern scan |
-| `0x7de00b4a` | 16 | `call_7de17c1b_arg_769_7de00b4a` | Calls `0x7de17c1b` with `d0 = 769`. | pattern scan |
+| `0x7de00b4a` | 16 | `call_7de17c1b_arg_769_7de00b4a` | Calls `0x7de17c1b` with `d0 = 769`. Target: `evflag_clear_locked`. | pattern scan |
 | `0x7de2da82` | 5 | `call_7de2d394_on_7df37964_7de2da82` | Calls `0x7de2d394` with `a0 = 0x7df37964` (a fixed address). | pattern scan |
 | `0x7de2db30` | 1 | `call_7de2d394_on_7df37bbf_7de2db30` | Calls `0x7de2d394` with `a0 = 0x7df37bbf` (a fixed address). | pattern scan |
 | `0x7de2dc94` | 1 | `call_7de2d394_on_7df37f2a_7de2dc94` | Calls `0x7de2d394` with `a0 = 0x7df37f2a` (a fixed address). | pattern scan |
-| `0x7de3e858` | 1 | `call_7d996e85_on_7df41614_7de3e858` | Calls `0x7d996e85` with `a0 = 0x7df41614` (a fixed address). | pattern scan |
+| `0x7de3e858` | 1 | `call_7d996e85_on_7df41614_7de3e858` | Calls `0x7d996e85` with `a0 = 0x7df41614` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7de55542` | 1 | `call_7de56c1c_on_a0a73850_7de55542` | Calls `0x7de56c1c` with `a0 = 0xa0a73850` (a fixed address). | pattern scan |
-| `0x7de5df7f` | 1 | `call_7d996ee2_on_7df4b8bd_7de5df7f` | Calls `0x7d996ee2` with `a0 = 0x7df4b8bd` (a fixed address). | pattern scan |
-| `0x7de5f4c8` | 1 | `call_7d996ee2_on_7df4be7a_7de5f4c8` | Calls `0x7d996ee2` with `a0 = 0x7df4be7a` (a fixed address). | pattern scan |
-| `0x7de5f7f9` | 2 | `call_7d996e85_on_7df4c29e_7de5f7f9` | Calls `0x7d996e85` with `a0 = 0x7df4c29e` (a fixed address). | pattern scan |
-| `0x7de5f8f1` | 1 | `call_7d996e85_on_7df4c781_7de5f8f1` | Calls `0x7d996e85` with `a0 = 0x7df4c781` (a fixed address). | pattern scan |
-| `0x7de5f96a` | 1 | `call_7d996e85_on_7df4c89c_7de5f96a` | Calls `0x7d996e85` with `a0 = 0x7df4c89c` (a fixed address). | pattern scan |
-| `0x7de5fa1a` | 1 | `call_7d996e85_on_7df4ca58_7de5fa1a` | Calls `0x7d996e85` with `a0 = 0x7df4ca58` (a fixed address). | pattern scan |
-| `0x7de5fa2a` | 1 | `call_7d996e85_on_7df4cb40_7de5fa2a` | Calls `0x7d996e85` with `a0 = 0x7df4cb40` (a fixed address). | pattern scan |
-| `0x7de9ae03` | 1 | `call_7d996e85_on_7df55f37_7de9ae03` | Calls `0x7d996e85` with `a0 = 0x7df55f37` (a fixed address). | pattern scan |
-| `0x7deab1d7` | 2 | `call_7deaafca_arg_1_7deab1d7` | Calls `0x7deaafca` with `d0 = 1`. | pattern scan |
+| `0x7de5df7f` | 1 | `call_7d996ee2_on_7df4b8bd_7de5df7f` | Calls `0x7d996ee2` with `a0 = 0x7df4b8bd` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7de5f4c8` | 1 | `call_7d996ee2_on_7df4be7a_7de5f4c8` | Calls `0x7d996ee2` with `a0 = 0x7df4be7a` (a fixed address). Target: `emit`. | pattern scan |
+| `0x7de5f7f9` | 2 | `call_7d996e85_on_7df4c29e_7de5f7f9` | Calls `0x7d996e85` with `a0 = 0x7df4c29e` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7de5f8f1` | 1 | `call_7d996e85_on_7df4c781_7de5f8f1` | Calls `0x7d996e85` with `a0 = 0x7df4c781` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7de5f96a` | 1 | `call_7d996e85_on_7df4c89c_7de5f96a` | Calls `0x7d996e85` with `a0 = 0x7df4c89c` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7de5fa1a` | 1 | `call_7d996e85_on_7df4ca58_7de5fa1a` | Calls `0x7d996e85` with `a0 = 0x7df4ca58` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7de5fa2a` | 1 | `call_7d996e85_on_7df4cb40_7de5fa2a` | Calls `0x7d996e85` with `a0 = 0x7df4cb40` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7de9ae03` | 1 | `call_7d996e85_on_7df55f37_7de9ae03` | Calls `0x7d996e85` with `a0 = 0x7df55f37` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7deab1d7` | 2 | `call_7deaafca_arg_1_7deab1d7` | Calls `0x7deaafca` with `d0 = 1`. Target: `filewrap_7deaafca`. | pattern scan |
 | `0x7dfc0795` | 10 | `fwd_f8_vslot16_7dfc0795` | Forwards to the object at `this+8`: calls its vtable slot `+16`. | pattern scan |
-| `0x7dfc1a9e` | 18 | `call_7dfc056a_on_6075abb0_7dfc1a9e` | Calls `0x7dfc056a` with `a0 = 0x6075abb0` (a fixed address). | pattern scan |
-| `0x7dfc38b5` | 1 | `call_7e205040_ret_null_7dfc38b5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc38c7` | 1 | `call_7e205040_ret_null_7dfc38c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc38d6` | 1 | `call_7e205040_ret_null_7dfc38d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc38e2` | 1 | `call_7e205040_ret_null_7dfc38e2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc38f4` | 2 | `call_7e205040_ret_null_7dfc38f4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3900` | 1 | `call_7e205040_ret_null_7dfc3900` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc390f` | 1 | `call_7e205040_ret_null_7dfc390f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc391e` | 1 | `call_7e205040_ret_null_7dfc391e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc392d` | 1 | `call_7e205040_ret_null_7dfc392d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc393c` | 1 | `call_7e205040_ret_null_7dfc393c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc394b` | 1 | `call_7e205040_ret_null_7dfc394b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc395a` | 1 | `call_7e205040_ret_null_7dfc395a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3969` | 1 | `call_7e205040_ret_null_7dfc3969` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3978` | 1 | `call_7e205040_ret_null_7dfc3978` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3987` | 1 | `call_7e205040_ret_null_7dfc3987` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3996` | 1 | `call_7e205040_ret_null_7dfc3996` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39a8` | 1 | `call_7e205040_ret_null_7dfc39a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39b7` | 1 | `call_7e205040_ret_null_7dfc39b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39c3` | 1 | `call_7e205040_ret_null_7dfc39c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39d2` | 1 | `call_7e205040_ret_null_7dfc39d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39e1` | 1 | `call_7e205040_ret_null_7dfc39e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc39f0` | 1 | `call_7e205040_ret_null_7dfc39f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a02` | 1 | `call_7e205040_ret_null_7dfc3a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a11` | 1 | `call_7e205040_ret_null_7dfc3a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a1d` | 1 | `call_7e205040_ret_null_7dfc3a1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a2c` | 1 | `call_7e205040_ret_null_7dfc3a2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a3b` | 1 | `call_7e205040_ret_null_7dfc3a3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a4a` | 1 | `call_7e205040_ret_null_7dfc3a4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a5c` | 1 | `call_7e205040_ret_null_7dfc3a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a6b` | 1 | `call_7e205040_ret_null_7dfc3a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a7a` | 1 | `call_7e205040_ret_null_7dfc3a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a89` | 1 | `call_7e205040_ret_null_7dfc3a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3a98` | 1 | `call_7e205040_ret_null_7dfc3a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3aa7` | 1 | `call_7e205040_ret_null_7dfc3aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ab6` | 1 | `call_7e205040_ret_null_7dfc3ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ac5` | 1 | `call_7e205040_ret_null_7dfc3ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ad4` | 1 | `call_7e205040_ret_null_7dfc3ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ae3` | 1 | `call_7e205040_ret_null_7dfc3ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3af2` | 1 | `call_7e205040_ret_null_7dfc3af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b01` | 1 | `call_7e205040_ret_null_7dfc3b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b10` | 1 | `call_7e205040_ret_null_7dfc3b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b1f` | 1 | `call_7e205040_ret_null_7dfc3b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b2e` | 1 | `call_7e205040_ret_null_7dfc3b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b3d` | 1 | `call_7e205040_ret_null_7dfc3b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b4c` | 1 | `call_7e205040_ret_null_7dfc3b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b5b` | 1 | `call_7e205040_ret_null_7dfc3b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b67` | 1 | `call_7e205040_ret_null_7dfc3b67` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b79` | 1 | `call_7e205040_ret_null_7dfc3b79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b88` | 1 | `call_7e205040_ret_null_7dfc3b88` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3b97` | 1 | `call_7e205040_ret_null_7dfc3b97` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ba6` | 1 | `call_7e205040_ret_null_7dfc3ba6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3bb5` | 1 | `call_7e205040_ret_null_7dfc3bb5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3bc4` | 1 | `call_7e205040_ret_null_7dfc3bc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3bd3` | 1 | `call_7e205040_ret_null_7dfc3bd3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3be2` | 1 | `call_7e205040_ret_null_7dfc3be2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3bf1` | 1 | `call_7e205040_ret_null_7dfc3bf1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3bfd` | 1 | `call_7e205040_ret_null_7dfc3bfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c0f` | 2 | `call_7e205040_ret_null_7dfc3c0f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c1e` | 1 | `call_7e205040_ret_null_7dfc3c1e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c2d` | 1 | `call_7e205040_ret_null_7dfc3c2d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c3c` | 1 | `call_7e205040_ret_null_7dfc3c3c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c4b` | 1 | `call_7e205040_ret_null_7dfc3c4b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c57` | 1 | `call_7e205040_ret_null_7dfc3c57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c66` | 1 | `call_7e205040_ret_null_7dfc3c66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c75` | 1 | `call_7e205040_ret_null_7dfc3c75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c84` | 1 | `call_7e205040_ret_null_7dfc3c84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3c93` | 1 | `call_7e205040_ret_null_7dfc3c93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ca2` | 1 | `call_7e205040_ret_null_7dfc3ca2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3cb1` | 1 | `call_7e205040_ret_null_7dfc3cb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3cc0` | 1 | `call_7e205040_ret_null_7dfc3cc0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3cd2` | 1 | `call_7e205040_ret_null_7dfc3cd2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3ce1` | 1 | `call_7e205040_ret_null_7dfc3ce1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3cf0` | 1 | `call_7e205040_ret_null_7dfc3cf0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3cfc` | 1 | `call_7e205040_ret_null_7dfc3cfc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3d0b` | 1 | `call_7e205040_ret_null_7dfc3d0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3d1a` | 1 | `call_7e205040_ret_null_7dfc3d1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3d29` | 1 | `call_7e205040_ret_null_7dfc3d29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3d38` | 1 | `call_7e205040_ret_null_7dfc3d38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc3d47` | 1 | `call_7e205040_ret_null_7dfc3d47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc1a9e` | 18 | `call_7dfc056a_on_6075abb0_7dfc1a9e` | Calls `0x7dfc056a` with `a0 = 0x6075abb0` (a fixed address). Target: `mutex_lock`. | pattern scan |
+| `0x7dfc38b5` | 1 | `call_7e205040_ret_null_7dfc38b5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc38c7` | 1 | `call_7e205040_ret_null_7dfc38c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc38d6` | 1 | `call_7e205040_ret_null_7dfc38d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc38e2` | 1 | `call_7e205040_ret_null_7dfc38e2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc38f4` | 2 | `call_7e205040_ret_null_7dfc38f4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3900` | 1 | `call_7e205040_ret_null_7dfc3900` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc390f` | 1 | `call_7e205040_ret_null_7dfc390f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc391e` | 1 | `call_7e205040_ret_null_7dfc391e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc392d` | 1 | `call_7e205040_ret_null_7dfc392d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc393c` | 1 | `call_7e205040_ret_null_7dfc393c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc394b` | 1 | `call_7e205040_ret_null_7dfc394b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc395a` | 1 | `call_7e205040_ret_null_7dfc395a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3969` | 1 | `call_7e205040_ret_null_7dfc3969` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3978` | 1 | `call_7e205040_ret_null_7dfc3978` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3987` | 1 | `call_7e205040_ret_null_7dfc3987` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3996` | 1 | `call_7e205040_ret_null_7dfc3996` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39a8` | 1 | `call_7e205040_ret_null_7dfc39a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39b7` | 1 | `call_7e205040_ret_null_7dfc39b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39c3` | 1 | `call_7e205040_ret_null_7dfc39c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39d2` | 1 | `call_7e205040_ret_null_7dfc39d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39e1` | 1 | `call_7e205040_ret_null_7dfc39e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc39f0` | 1 | `call_7e205040_ret_null_7dfc39f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a02` | 1 | `call_7e205040_ret_null_7dfc3a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a11` | 1 | `call_7e205040_ret_null_7dfc3a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a1d` | 1 | `call_7e205040_ret_null_7dfc3a1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a2c` | 1 | `call_7e205040_ret_null_7dfc3a2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a3b` | 1 | `call_7e205040_ret_null_7dfc3a3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a4a` | 1 | `call_7e205040_ret_null_7dfc3a4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a5c` | 1 | `call_7e205040_ret_null_7dfc3a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a6b` | 1 | `call_7e205040_ret_null_7dfc3a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a7a` | 1 | `call_7e205040_ret_null_7dfc3a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a89` | 1 | `call_7e205040_ret_null_7dfc3a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3a98` | 1 | `call_7e205040_ret_null_7dfc3a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3aa7` | 1 | `call_7e205040_ret_null_7dfc3aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ab6` | 1 | `call_7e205040_ret_null_7dfc3ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ac5` | 1 | `call_7e205040_ret_null_7dfc3ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ad4` | 1 | `call_7e205040_ret_null_7dfc3ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ae3` | 1 | `call_7e205040_ret_null_7dfc3ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3af2` | 1 | `call_7e205040_ret_null_7dfc3af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b01` | 1 | `call_7e205040_ret_null_7dfc3b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b10` | 1 | `call_7e205040_ret_null_7dfc3b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b1f` | 1 | `call_7e205040_ret_null_7dfc3b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b2e` | 1 | `call_7e205040_ret_null_7dfc3b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b3d` | 1 | `call_7e205040_ret_null_7dfc3b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b4c` | 1 | `call_7e205040_ret_null_7dfc3b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b5b` | 1 | `call_7e205040_ret_null_7dfc3b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b67` | 1 | `call_7e205040_ret_null_7dfc3b67` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b79` | 1 | `call_7e205040_ret_null_7dfc3b79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b88` | 1 | `call_7e205040_ret_null_7dfc3b88` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3b97` | 1 | `call_7e205040_ret_null_7dfc3b97` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ba6` | 1 | `call_7e205040_ret_null_7dfc3ba6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3bb5` | 1 | `call_7e205040_ret_null_7dfc3bb5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3bc4` | 1 | `call_7e205040_ret_null_7dfc3bc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3bd3` | 1 | `call_7e205040_ret_null_7dfc3bd3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3be2` | 1 | `call_7e205040_ret_null_7dfc3be2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3bf1` | 1 | `call_7e205040_ret_null_7dfc3bf1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3bfd` | 1 | `call_7e205040_ret_null_7dfc3bfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c0f` | 2 | `call_7e205040_ret_null_7dfc3c0f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c1e` | 1 | `call_7e205040_ret_null_7dfc3c1e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c2d` | 1 | `call_7e205040_ret_null_7dfc3c2d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c3c` | 1 | `call_7e205040_ret_null_7dfc3c3c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c4b` | 1 | `call_7e205040_ret_null_7dfc3c4b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c57` | 1 | `call_7e205040_ret_null_7dfc3c57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c66` | 1 | `call_7e205040_ret_null_7dfc3c66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c75` | 1 | `call_7e205040_ret_null_7dfc3c75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c84` | 1 | `call_7e205040_ret_null_7dfc3c84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3c93` | 1 | `call_7e205040_ret_null_7dfc3c93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ca2` | 1 | `call_7e205040_ret_null_7dfc3ca2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3cb1` | 1 | `call_7e205040_ret_null_7dfc3cb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3cc0` | 1 | `call_7e205040_ret_null_7dfc3cc0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3cd2` | 1 | `call_7e205040_ret_null_7dfc3cd2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3ce1` | 1 | `call_7e205040_ret_null_7dfc3ce1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3cf0` | 1 | `call_7e205040_ret_null_7dfc3cf0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3cfc` | 1 | `call_7e205040_ret_null_7dfc3cfc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3d0b` | 1 | `call_7e205040_ret_null_7dfc3d0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3d1a` | 1 | `call_7e205040_ret_null_7dfc3d1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3d29` | 1 | `call_7e205040_ret_null_7dfc3d29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3d38` | 1 | `call_7e205040_ret_null_7dfc3d38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc3d47` | 1 | `call_7e205040_ret_null_7dfc3d47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfc705f` | 1 | `call_7dfc7173_ret_null_7dfc705f` | Calls `0x7dfc7173`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfc7530` | 4 | `call_7e205100_arg_1_7dfc7530` | Calls `0x7e205100` with `d0 = 1`. | pattern scan |
-| `0x7dfc8a83` | 1 | `call_7e205040_ret_null_7dfc8a83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8a92` | 1 | `call_7e205040_ret_null_7dfc8a92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8aa4` | 3 | `call_7e205040_ret_null_7dfc8aa4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8ab3` | 1 | `call_7e205040_ret_null_7dfc8ab3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8ac2` | 1 | `call_7e205040_ret_null_7dfc8ac2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8ad1` | 1 | `call_7e205040_ret_null_7dfc8ad1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8ae0` | 1 | `call_7e205040_ret_null_7dfc8ae0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8aec` | 1 | `call_7e205040_ret_null_7dfc8aec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8afb` | 1 | `call_7e205040_ret_null_7dfc8afb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b0a` | 1 | `call_7e205040_ret_null_7dfc8b0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b19` | 1 | `call_7e205040_ret_null_7dfc8b19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b28` | 1 | `call_7e205040_ret_null_7dfc8b28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b37` | 1 | `call_7e205040_ret_null_7dfc8b37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b46` | 1 | `call_7e205040_ret_null_7dfc8b46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b55` | 1 | `call_7e205040_ret_null_7dfc8b55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b64` | 1 | `call_7e205040_ret_null_7dfc8b64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b73` | 1 | `call_7e205040_ret_null_7dfc8b73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b82` | 1 | `call_7e205040_ret_null_7dfc8b82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8b91` | 1 | `call_7e205040_ret_null_7dfc8b91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8ba0` | 1 | `call_7e205040_ret_null_7dfc8ba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8baf` | 1 | `call_7e205040_ret_null_7dfc8baf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8bbe` | 1 | `call_7e205040_ret_null_7dfc8bbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8bcd` | 1 | `call_7e205040_ret_null_7dfc8bcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8bdc` | 1 | `call_7e205040_ret_null_7dfc8bdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8beb` | 1 | `call_7e205040_ret_null_7dfc8beb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc8bfa` | 1 | `call_7e205040_ret_null_7dfc8bfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc95bb` | 1 | `call_7e205040_ret_null_7dfc95bb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc95ca` | 1 | `call_7e205040_ret_null_7dfc95ca` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc95d9` | 1 | `call_7e205040_ret_null_7dfc95d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc95e8` | 1 | `call_7e205040_ret_null_7dfc95e8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc95f7` | 1 | `call_7e205040_ret_null_7dfc95f7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9606` | 1 | `call_7e205040_ret_null_7dfc9606` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9615` | 1 | `call_7e205040_ret_null_7dfc9615` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9624` | 1 | `call_7e205040_ret_null_7dfc9624` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9636` | 1 | `call_7e205040_ret_null_7dfc9636` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9645` | 1 | `call_7e205040_ret_null_7dfc9645` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9654` | 1 | `call_7e205040_ret_null_7dfc9654` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9663` | 1 | `call_7e205040_ret_null_7dfc9663` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9672` | 1 | `call_7e205040_ret_null_7dfc9672` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9681` | 1 | `call_7e205040_ret_null_7dfc9681` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9690` | 1 | `call_7e205040_ret_null_7dfc9690` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc969f` | 2 | `call_7e205040_ret_null_7dfc969f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96ae` | 2 | `call_7e205040_ret_null_7dfc96ae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96bd` | 1 | `call_7e205040_ret_null_7dfc96bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96c9` | 1 | `call_7e205040_ret_null_7dfc96c9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96d8` | 1 | `call_7e205040_ret_null_7dfc96d8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96e7` | 1 | `call_7e205040_ret_null_7dfc96e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc96f9` | 2 | `call_7e205040_ret_null_7dfc96f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9708` | 1 | `call_7e205040_ret_null_7dfc9708` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9717` | 1 | `call_7e205040_ret_null_7dfc9717` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9723` | 1 | `call_7e205040_ret_null_7dfc9723` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9735` | 4 | `call_7e205040_ret_null_7dfc9735` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9741` | 1 | `call_7e205040_ret_null_7dfc9741` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9750` | 1 | `call_7e205040_ret_null_7dfc9750` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9762` | 1 | `call_7e205040_ret_null_7dfc9762` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9771` | 1 | `call_7e205040_ret_null_7dfc9771` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9780` | 1 | `call_7e205040_ret_null_7dfc9780` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc978c` | 1 | `call_7e205040_ret_null_7dfc978c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc979e` | 4 | `call_7e205040_ret_null_7dfc979e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97aa` | 1 | `call_7e205040_ret_null_7dfc97aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97b9` | 1 | `call_7e205040_ret_null_7dfc97b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97c8` | 1 | `call_7e205040_ret_null_7dfc97c8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97da` | 1 | `call_7e205040_ret_null_7dfc97da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97e9` | 1 | `call_7e205040_ret_null_7dfc97e9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc97f5` | 1 | `call_7e205040_ret_null_7dfc97f5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9807` | 2 | `call_7e205040_ret_null_7dfc9807` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9813` | 1 | `call_7e205040_ret_null_7dfc9813` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9822` | 1 | `call_7e205040_ret_null_7dfc9822` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9831` | 1 | `call_7e205040_ret_null_7dfc9831` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9840` | 1 | `call_7e205040_ret_null_7dfc9840` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc984f` | 1 | `call_7e205040_ret_null_7dfc984f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9861` | 1 | `call_7e205040_ret_null_7dfc9861` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc9870` | 1 | `call_7e205040_ret_null_7dfc9870` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc987c` | 1 | `call_7e205040_ret_null_7dfc987c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc988b` | 1 | `call_7e205040_ret_null_7dfc988b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc989d` | 1 | `call_7e205040_ret_null_7dfc989d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc98ac` | 1 | `call_7e205040_ret_null_7dfc98ac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc98b8` | 1 | `call_7e205040_ret_null_7dfc98b8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc98c7` | 1 | `call_7e205040_ret_null_7dfc98c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfc98d6` | 1 | `call_7e205040_ret_null_7dfc98d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcad69` | 1 | `call_7e205040_ret_null_7dfcad69` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcad78` | 1 | `call_7e205040_ret_null_7dfcad78` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcad87` | 1 | `call_7e205040_ret_null_7dfcad87` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcad96` | 1 | `call_7e205040_ret_null_7dfcad96` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcada5` | 1 | `call_7e205040_ret_null_7dfcada5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcadb4` | 1 | `call_7e205040_ret_null_7dfcadb4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcadc3` | 1 | `call_7e205040_ret_null_7dfcadc3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcadd5` | 2 | `call_7e205040_ret_null_7dfcadd5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcade4` | 2 | `call_7e205040_ret_null_7dfcade4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcadf3` | 1 | `call_7e205040_ret_null_7dfcadf3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcadff` | 1 | `call_7e205040_ret_null_7dfcadff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae11` | 2 | `call_7e205040_ret_null_7dfcae11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae20` | 1 | `call_7e205040_ret_null_7dfcae20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae2c` | 1 | `call_7e205040_ret_null_7dfcae2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae3b` | 1 | `call_7e205040_ret_null_7dfcae3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae4a` | 1 | `call_7e205040_ret_null_7dfcae4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae59` | 1 | `call_7e205040_ret_null_7dfcae59` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae68` | 1 | `call_7e205040_ret_null_7dfcae68` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae7a` | 2 | `call_7e205040_ret_null_7dfcae7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae89` | 1 | `call_7e205040_ret_null_7dfcae89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcae98` | 4 | `call_7e205040_ret_null_7dfcae98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaea7` | 7 | `call_7e205040_ret_null_7dfcaea7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaeb3` | 1 | `call_7e205040_ret_null_7dfcaeb3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaec5` | 11 | `call_7e205040_ret_null_7dfcaec5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaed4` | 8 | `call_7e205040_ret_null_7dfcaed4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaee0` | 1 | `call_7e205040_ret_null_7dfcaee0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaeef` | 1 | `call_7e205040_ret_null_7dfcaeef` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf01` | 1 | `call_7e205040_ret_null_7dfcaf01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf0d` | 1 | `call_7e205040_ret_null_7dfcaf0d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf1c` | 1 | `call_7e205040_ret_null_7dfcaf1c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf2b` | 1 | `call_7e205040_ret_null_7dfcaf2b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf3d` | 3 | `call_7e205040_ret_null_7dfcaf3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf4c` | 7 | `call_7e205040_ret_null_7dfcaf4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf5b` | 6 | `call_7e205040_ret_null_7dfcaf5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf6a` | 6 | `call_7e205040_ret_null_7dfcaf6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf79` | 4 | `call_7e205040_ret_null_7dfcaf79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf85` | 1 | `call_7e205040_ret_null_7dfcaf85` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaf94` | 1 | `call_7e205040_ret_null_7dfcaf94` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcafa3` | 1 | `call_7e205040_ret_null_7dfcafa3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcafb2` | 1 | `call_7e205040_ret_null_7dfcafb2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcafc4` | 2 | `call_7e205040_ret_null_7dfcafc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcafd0` | 1 | `call_7e205040_ret_null_7dfcafd0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcafe2` | 2 | `call_7e205040_ret_null_7dfcafe2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcaff1` | 2 | `call_7e205040_ret_null_7dfcaff1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb000` | 2 | `call_7e205040_ret_null_7dfcb000` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb00c` | 1 | `call_7e205040_ret_null_7dfcb00c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb01b` | 1 | `call_7e205040_ret_null_7dfcb01b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb02d` | 4 | `call_7e205040_ret_null_7dfcb02d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb039` | 1 | `call_7e205040_ret_null_7dfcb039` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb04b` | 2 | `call_7e205040_ret_null_7dfcb04b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb05a` | 1 | `call_7e205040_ret_null_7dfcb05a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb066` | 1 | `call_7e205040_ret_null_7dfcb066` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb075` | 1 | `call_7e205040_ret_null_7dfcb075` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb087` | 1 | `call_7e205040_ret_null_7dfcb087` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb096` | 2 | `call_7e205040_ret_null_7dfcb096` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0a5` | 2 | `call_7e205040_ret_null_7dfcb0a5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0b4` | 1 | `call_7e205040_ret_null_7dfcb0b4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0c3` | 1 | `call_7e205040_ret_null_7dfcb0c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0d2` | 6 | `call_7e205040_ret_null_7dfcb0d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0e1` | 1 | `call_7e205040_ret_null_7dfcb0e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0f0` | 1 | `call_7e205040_ret_null_7dfcb0f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb0ff` | 3 | `call_7e205040_ret_null_7dfcb0ff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb10b` | 1 | `call_7e205040_ret_null_7dfcb10b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb11a` | 1 | `call_7e205040_ret_null_7dfcb11a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb129` | 1 | `call_7e205040_ret_null_7dfcb129` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb13b` | 3 | `call_7e205040_ret_null_7dfcb13b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb147` | 1 | `call_7e205040_ret_null_7dfcb147` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb156` | 1 | `call_7e205040_ret_null_7dfcb156` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb165` | 1 | `call_7e205040_ret_null_7dfcb165` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb174` | 1 | `call_7e205040_ret_null_7dfcb174` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb183` | 1 | `call_7e205040_ret_null_7dfcb183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb192` | 1 | `call_7e205040_ret_null_7dfcb192` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1a1` | 1 | `call_7e205040_ret_null_7dfcb1a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1b0` | 1 | `call_7e205040_ret_null_7dfcb1b0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1c2` | 1 | `call_7e205040_ret_null_7dfcb1c2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1d1` | 1 | `call_7e205040_ret_null_7dfcb1d1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1e0` | 1 | `call_7e205040_ret_null_7dfcb1e0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1ec` | 1 | `call_7e205040_ret_null_7dfcb1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb1fb` | 1 | `call_7e205040_ret_null_7dfcb1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb20a` | 1 | `call_7e205040_ret_null_7dfcb20a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb21c` | 2 | `call_7e205040_ret_null_7dfcb21c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb22b` | 2 | `call_7e205040_ret_null_7dfcb22b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb23a` | 1 | `call_7e205040_ret_null_7dfcb23a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb246` | 1 | `call_7e205040_ret_null_7dfcb246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb255` | 1 | `call_7e205040_ret_null_7dfcb255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb264` | 1 | `call_7e205040_ret_null_7dfcb264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb273` | 1 | `call_7e205040_ret_null_7dfcb273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb282` | 1 | `call_7e205040_ret_null_7dfcb282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb291` | 1 | `call_7e205040_ret_null_7dfcb291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2a0` | 1 | `call_7e205040_ret_null_7dfcb2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2af` | 1 | `call_7e205040_ret_null_7dfcb2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2be` | 1 | `call_7e205040_ret_null_7dfcb2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2cd` | 1 | `call_7e205040_ret_null_7dfcb2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2df` | 1 | `call_7e205040_ret_null_7dfcb2df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2ee` | 1 | `call_7e205040_ret_null_7dfcb2ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb2fd` | 2 | `call_7e205040_ret_null_7dfcb2fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb30c` | 3 | `call_7e205040_ret_null_7dfcb30c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb31b` | 4 | `call_7e205040_ret_null_7dfcb31b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb32a` | 3 | `call_7e205040_ret_null_7dfcb32a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb339` | 1 | `call_7e205040_ret_null_7dfcb339` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb348` | 3 | `call_7e205040_ret_null_7dfcb348` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb357` | 3 | `call_7e205040_ret_null_7dfcb357` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb366` | 4 | `call_7e205040_ret_null_7dfcb366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb375` | 2 | `call_7e205040_ret_null_7dfcb375` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb384` | 2 | `call_7e205040_ret_null_7dfcb384` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb393` | 1 | `call_7e205040_ret_null_7dfcb393` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3a2` | 4 | `call_7e205040_ret_null_7dfcb3a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3b1` | 1 | `call_7e205040_ret_null_7dfcb3b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3c0` | 1 | `call_7e205040_ret_null_7dfcb3c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3cc` | 1 | `call_7e205040_ret_null_7dfcb3cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3db` | 1 | `call_7e205040_ret_null_7dfcb3db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3ea` | 1 | `call_7e205040_ret_null_7dfcb3ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb3f9` | 1 | `call_7e205040_ret_null_7dfcb3f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb408` | 1 | `call_7e205040_ret_null_7dfcb408` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb417` | 1 | `call_7e205040_ret_null_7dfcb417` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb426` | 1 | `call_7e205040_ret_null_7dfcb426` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb435` | 1 | `call_7e205040_ret_null_7dfcb435` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb444` | 1 | `call_7e205040_ret_null_7dfcb444` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb456` | 1 | `call_7e205040_ret_null_7dfcb456` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb462` | 1 | `call_7e205040_ret_null_7dfcb462` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb474` | 2 | `call_7e205040_ret_null_7dfcb474` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb483` | 2 | `call_7e205040_ret_null_7dfcb483` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb492` | 2 | `call_7e205040_ret_null_7dfcb492` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb4a1` | 6 | `call_7e205040_ret_null_7dfcb4a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb4ad` | 1 | `call_7e205040_ret_null_7dfcb4ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb4bc` | 1 | `call_7e205040_ret_null_7dfcb4bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcb4cb` | 1 | `call_7e205040_ret_null_7dfcb4cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8a83` | 1 | `call_7e205040_ret_null_7dfc8a83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8a92` | 1 | `call_7e205040_ret_null_7dfc8a92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8aa4` | 3 | `call_7e205040_ret_null_7dfc8aa4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8ab3` | 1 | `call_7e205040_ret_null_7dfc8ab3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8ac2` | 1 | `call_7e205040_ret_null_7dfc8ac2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8ad1` | 1 | `call_7e205040_ret_null_7dfc8ad1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8ae0` | 1 | `call_7e205040_ret_null_7dfc8ae0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8aec` | 1 | `call_7e205040_ret_null_7dfc8aec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8afb` | 1 | `call_7e205040_ret_null_7dfc8afb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b0a` | 1 | `call_7e205040_ret_null_7dfc8b0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b19` | 1 | `call_7e205040_ret_null_7dfc8b19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b28` | 1 | `call_7e205040_ret_null_7dfc8b28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b37` | 1 | `call_7e205040_ret_null_7dfc8b37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b46` | 1 | `call_7e205040_ret_null_7dfc8b46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b55` | 1 | `call_7e205040_ret_null_7dfc8b55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b64` | 1 | `call_7e205040_ret_null_7dfc8b64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b73` | 1 | `call_7e205040_ret_null_7dfc8b73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b82` | 1 | `call_7e205040_ret_null_7dfc8b82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8b91` | 1 | `call_7e205040_ret_null_7dfc8b91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8ba0` | 1 | `call_7e205040_ret_null_7dfc8ba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8baf` | 1 | `call_7e205040_ret_null_7dfc8baf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8bbe` | 1 | `call_7e205040_ret_null_7dfc8bbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8bcd` | 1 | `call_7e205040_ret_null_7dfc8bcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8bdc` | 1 | `call_7e205040_ret_null_7dfc8bdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8beb` | 1 | `call_7e205040_ret_null_7dfc8beb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc8bfa` | 1 | `call_7e205040_ret_null_7dfc8bfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc95bb` | 1 | `call_7e205040_ret_null_7dfc95bb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc95ca` | 1 | `call_7e205040_ret_null_7dfc95ca` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc95d9` | 1 | `call_7e205040_ret_null_7dfc95d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc95e8` | 1 | `call_7e205040_ret_null_7dfc95e8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc95f7` | 1 | `call_7e205040_ret_null_7dfc95f7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9606` | 1 | `call_7e205040_ret_null_7dfc9606` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9615` | 1 | `call_7e205040_ret_null_7dfc9615` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9624` | 1 | `call_7e205040_ret_null_7dfc9624` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9636` | 1 | `call_7e205040_ret_null_7dfc9636` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9645` | 1 | `call_7e205040_ret_null_7dfc9645` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9654` | 1 | `call_7e205040_ret_null_7dfc9654` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9663` | 1 | `call_7e205040_ret_null_7dfc9663` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9672` | 1 | `call_7e205040_ret_null_7dfc9672` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9681` | 1 | `call_7e205040_ret_null_7dfc9681` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9690` | 1 | `call_7e205040_ret_null_7dfc9690` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc969f` | 2 | `call_7e205040_ret_null_7dfc969f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96ae` | 2 | `call_7e205040_ret_null_7dfc96ae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96bd` | 1 | `call_7e205040_ret_null_7dfc96bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96c9` | 1 | `call_7e205040_ret_null_7dfc96c9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96d8` | 1 | `call_7e205040_ret_null_7dfc96d8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96e7` | 1 | `call_7e205040_ret_null_7dfc96e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc96f9` | 2 | `call_7e205040_ret_null_7dfc96f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9708` | 1 | `call_7e205040_ret_null_7dfc9708` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9717` | 1 | `call_7e205040_ret_null_7dfc9717` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9723` | 1 | `call_7e205040_ret_null_7dfc9723` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9735` | 4 | `call_7e205040_ret_null_7dfc9735` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9741` | 1 | `call_7e205040_ret_null_7dfc9741` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9750` | 1 | `call_7e205040_ret_null_7dfc9750` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9762` | 1 | `call_7e205040_ret_null_7dfc9762` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9771` | 1 | `call_7e205040_ret_null_7dfc9771` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9780` | 1 | `call_7e205040_ret_null_7dfc9780` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc978c` | 1 | `call_7e205040_ret_null_7dfc978c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc979e` | 4 | `call_7e205040_ret_null_7dfc979e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97aa` | 1 | `call_7e205040_ret_null_7dfc97aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97b9` | 1 | `call_7e205040_ret_null_7dfc97b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97c8` | 1 | `call_7e205040_ret_null_7dfc97c8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97da` | 1 | `call_7e205040_ret_null_7dfc97da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97e9` | 1 | `call_7e205040_ret_null_7dfc97e9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc97f5` | 1 | `call_7e205040_ret_null_7dfc97f5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9807` | 2 | `call_7e205040_ret_null_7dfc9807` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9813` | 1 | `call_7e205040_ret_null_7dfc9813` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9822` | 1 | `call_7e205040_ret_null_7dfc9822` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9831` | 1 | `call_7e205040_ret_null_7dfc9831` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9840` | 1 | `call_7e205040_ret_null_7dfc9840` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc984f` | 1 | `call_7e205040_ret_null_7dfc984f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9861` | 1 | `call_7e205040_ret_null_7dfc9861` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc9870` | 1 | `call_7e205040_ret_null_7dfc9870` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc987c` | 1 | `call_7e205040_ret_null_7dfc987c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc988b` | 1 | `call_7e205040_ret_null_7dfc988b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc989d` | 1 | `call_7e205040_ret_null_7dfc989d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc98ac` | 1 | `call_7e205040_ret_null_7dfc98ac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc98b8` | 1 | `call_7e205040_ret_null_7dfc98b8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc98c7` | 1 | `call_7e205040_ret_null_7dfc98c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfc98d6` | 1 | `call_7e205040_ret_null_7dfc98d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcad69` | 1 | `call_7e205040_ret_null_7dfcad69` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcad78` | 1 | `call_7e205040_ret_null_7dfcad78` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcad87` | 1 | `call_7e205040_ret_null_7dfcad87` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcad96` | 1 | `call_7e205040_ret_null_7dfcad96` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcada5` | 1 | `call_7e205040_ret_null_7dfcada5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcadb4` | 1 | `call_7e205040_ret_null_7dfcadb4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcadc3` | 1 | `call_7e205040_ret_null_7dfcadc3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcadd5` | 2 | `call_7e205040_ret_null_7dfcadd5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcade4` | 2 | `call_7e205040_ret_null_7dfcade4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcadf3` | 1 | `call_7e205040_ret_null_7dfcadf3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcadff` | 1 | `call_7e205040_ret_null_7dfcadff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae11` | 2 | `call_7e205040_ret_null_7dfcae11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae20` | 1 | `call_7e205040_ret_null_7dfcae20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae2c` | 1 | `call_7e205040_ret_null_7dfcae2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae3b` | 1 | `call_7e205040_ret_null_7dfcae3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae4a` | 1 | `call_7e205040_ret_null_7dfcae4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae59` | 1 | `call_7e205040_ret_null_7dfcae59` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae68` | 1 | `call_7e205040_ret_null_7dfcae68` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae7a` | 2 | `call_7e205040_ret_null_7dfcae7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae89` | 1 | `call_7e205040_ret_null_7dfcae89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcae98` | 4 | `call_7e205040_ret_null_7dfcae98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaea7` | 7 | `call_7e205040_ret_null_7dfcaea7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaeb3` | 1 | `call_7e205040_ret_null_7dfcaeb3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaec5` | 11 | `call_7e205040_ret_null_7dfcaec5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaed4` | 8 | `call_7e205040_ret_null_7dfcaed4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaee0` | 1 | `call_7e205040_ret_null_7dfcaee0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaeef` | 1 | `call_7e205040_ret_null_7dfcaeef` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf01` | 1 | `call_7e205040_ret_null_7dfcaf01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf0d` | 1 | `call_7e205040_ret_null_7dfcaf0d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf1c` | 1 | `call_7e205040_ret_null_7dfcaf1c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf2b` | 1 | `call_7e205040_ret_null_7dfcaf2b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf3d` | 3 | `call_7e205040_ret_null_7dfcaf3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf4c` | 7 | `call_7e205040_ret_null_7dfcaf4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf5b` | 6 | `call_7e205040_ret_null_7dfcaf5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf6a` | 6 | `call_7e205040_ret_null_7dfcaf6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf79` | 4 | `call_7e205040_ret_null_7dfcaf79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf85` | 1 | `call_7e205040_ret_null_7dfcaf85` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaf94` | 1 | `call_7e205040_ret_null_7dfcaf94` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcafa3` | 1 | `call_7e205040_ret_null_7dfcafa3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcafb2` | 1 | `call_7e205040_ret_null_7dfcafb2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcafc4` | 2 | `call_7e205040_ret_null_7dfcafc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcafd0` | 1 | `call_7e205040_ret_null_7dfcafd0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcafe2` | 2 | `call_7e205040_ret_null_7dfcafe2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcaff1` | 2 | `call_7e205040_ret_null_7dfcaff1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb000` | 2 | `call_7e205040_ret_null_7dfcb000` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb00c` | 1 | `call_7e205040_ret_null_7dfcb00c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb01b` | 1 | `call_7e205040_ret_null_7dfcb01b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb02d` | 4 | `call_7e205040_ret_null_7dfcb02d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb039` | 1 | `call_7e205040_ret_null_7dfcb039` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb04b` | 2 | `call_7e205040_ret_null_7dfcb04b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb05a` | 1 | `call_7e205040_ret_null_7dfcb05a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb066` | 1 | `call_7e205040_ret_null_7dfcb066` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb075` | 1 | `call_7e205040_ret_null_7dfcb075` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb087` | 1 | `call_7e205040_ret_null_7dfcb087` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb096` | 2 | `call_7e205040_ret_null_7dfcb096` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0a5` | 2 | `call_7e205040_ret_null_7dfcb0a5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0b4` | 1 | `call_7e205040_ret_null_7dfcb0b4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0c3` | 1 | `call_7e205040_ret_null_7dfcb0c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0d2` | 6 | `call_7e205040_ret_null_7dfcb0d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0e1` | 1 | `call_7e205040_ret_null_7dfcb0e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0f0` | 1 | `call_7e205040_ret_null_7dfcb0f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb0ff` | 3 | `call_7e205040_ret_null_7dfcb0ff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb10b` | 1 | `call_7e205040_ret_null_7dfcb10b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb11a` | 1 | `call_7e205040_ret_null_7dfcb11a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb129` | 1 | `call_7e205040_ret_null_7dfcb129` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb13b` | 3 | `call_7e205040_ret_null_7dfcb13b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb147` | 1 | `call_7e205040_ret_null_7dfcb147` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb156` | 1 | `call_7e205040_ret_null_7dfcb156` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb165` | 1 | `call_7e205040_ret_null_7dfcb165` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb174` | 1 | `call_7e205040_ret_null_7dfcb174` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb183` | 1 | `call_7e205040_ret_null_7dfcb183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb192` | 1 | `call_7e205040_ret_null_7dfcb192` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1a1` | 1 | `call_7e205040_ret_null_7dfcb1a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1b0` | 1 | `call_7e205040_ret_null_7dfcb1b0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1c2` | 1 | `call_7e205040_ret_null_7dfcb1c2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1d1` | 1 | `call_7e205040_ret_null_7dfcb1d1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1e0` | 1 | `call_7e205040_ret_null_7dfcb1e0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1ec` | 1 | `call_7e205040_ret_null_7dfcb1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb1fb` | 1 | `call_7e205040_ret_null_7dfcb1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb20a` | 1 | `call_7e205040_ret_null_7dfcb20a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb21c` | 2 | `call_7e205040_ret_null_7dfcb21c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb22b` | 2 | `call_7e205040_ret_null_7dfcb22b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb23a` | 1 | `call_7e205040_ret_null_7dfcb23a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb246` | 1 | `call_7e205040_ret_null_7dfcb246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb255` | 1 | `call_7e205040_ret_null_7dfcb255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb264` | 1 | `call_7e205040_ret_null_7dfcb264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb273` | 1 | `call_7e205040_ret_null_7dfcb273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb282` | 1 | `call_7e205040_ret_null_7dfcb282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb291` | 1 | `call_7e205040_ret_null_7dfcb291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2a0` | 1 | `call_7e205040_ret_null_7dfcb2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2af` | 1 | `call_7e205040_ret_null_7dfcb2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2be` | 1 | `call_7e205040_ret_null_7dfcb2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2cd` | 1 | `call_7e205040_ret_null_7dfcb2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2df` | 1 | `call_7e205040_ret_null_7dfcb2df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2ee` | 1 | `call_7e205040_ret_null_7dfcb2ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb2fd` | 2 | `call_7e205040_ret_null_7dfcb2fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb30c` | 3 | `call_7e205040_ret_null_7dfcb30c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb31b` | 4 | `call_7e205040_ret_null_7dfcb31b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb32a` | 3 | `call_7e205040_ret_null_7dfcb32a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb339` | 1 | `call_7e205040_ret_null_7dfcb339` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb348` | 3 | `call_7e205040_ret_null_7dfcb348` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb357` | 3 | `call_7e205040_ret_null_7dfcb357` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb366` | 4 | `call_7e205040_ret_null_7dfcb366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb375` | 2 | `call_7e205040_ret_null_7dfcb375` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb384` | 2 | `call_7e205040_ret_null_7dfcb384` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb393` | 1 | `call_7e205040_ret_null_7dfcb393` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3a2` | 4 | `call_7e205040_ret_null_7dfcb3a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3b1` | 1 | `call_7e205040_ret_null_7dfcb3b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3c0` | 1 | `call_7e205040_ret_null_7dfcb3c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3cc` | 1 | `call_7e205040_ret_null_7dfcb3cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3db` | 1 | `call_7e205040_ret_null_7dfcb3db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3ea` | 1 | `call_7e205040_ret_null_7dfcb3ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb3f9` | 1 | `call_7e205040_ret_null_7dfcb3f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb408` | 1 | `call_7e205040_ret_null_7dfcb408` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb417` | 1 | `call_7e205040_ret_null_7dfcb417` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb426` | 1 | `call_7e205040_ret_null_7dfcb426` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb435` | 1 | `call_7e205040_ret_null_7dfcb435` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb444` | 1 | `call_7e205040_ret_null_7dfcb444` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb456` | 1 | `call_7e205040_ret_null_7dfcb456` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb462` | 1 | `call_7e205040_ret_null_7dfcb462` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb474` | 2 | `call_7e205040_ret_null_7dfcb474` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb483` | 2 | `call_7e205040_ret_null_7dfcb483` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb492` | 2 | `call_7e205040_ret_null_7dfcb492` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb4a1` | 6 | `call_7e205040_ret_null_7dfcb4a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb4ad` | 1 | `call_7e205040_ret_null_7dfcb4ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb4bc` | 1 | `call_7e205040_ret_null_7dfcb4bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfcb4cb` | 1 | `call_7e205040_ret_null_7dfcb4cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfcbb2f` | 1 | `call_7dfc4546_ret_null_7dfcbb2f` | Calls `0x7dfc4546`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcc2e8` | 1 | `call_7db93fb8_arg_33_7dfcc2e8` | Calls `0x7db93fb8` with `d0 = 33`. | pattern scan |
-| `0x7dfccdb7` | 1 | `call_7dfcbb2f_ret_null_7dfccdb7` | Calls `0x7dfcbb2f`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcce48` | 1 | `call_7dfc6731_ret_null_7dfcce48` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcd069` | 4 | `call_7dff0eda_ret_null_7dfcd069` | Calls `0x7dff0eda`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce0bd` | 1 | `call_7e205040_ret_null_7dfce0bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce0cc` | 1 | `call_7e205040_ret_null_7dfce0cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce0db` | 1 | `call_7e205040_ret_null_7dfce0db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce0ea` | 1 | `call_7e205040_ret_null_7dfce0ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce0f9` | 1 | `call_7e205040_ret_null_7dfce0f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce108` | 1 | `call_7e205040_ret_null_7dfce108` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce117` | 1 | `call_7e205040_ret_null_7dfce117` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce126` | 1 | `call_7e205040_ret_null_7dfce126` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce135` | 1 | `call_7e205040_ret_null_7dfce135` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce144` | 1 | `call_7e205040_ret_null_7dfce144` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce153` | 1 | `call_7e205040_ret_null_7dfce153` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce162` | 1 | `call_7e205040_ret_null_7dfce162` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce171` | 1 | `call_7e205040_ret_null_7dfce171` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce183` | 4 | `call_7e205040_ret_null_7dfce183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce18f` | 1 | `call_7e205040_ret_null_7dfce18f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce19e` | 1 | `call_7e205040_ret_null_7dfce19e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1ad` | 1 | `call_7e205040_ret_null_7dfce1ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1bc` | 1 | `call_7e205040_ret_null_7dfce1bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1cb` | 1 | `call_7e205040_ret_null_7dfce1cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1da` | 1 | `call_7e205040_ret_null_7dfce1da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1ec` | 2 | `call_7e205040_ret_null_7dfce1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce1fb` | 2 | `call_7e205040_ret_null_7dfce1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce207` | 1 | `call_7e205040_ret_null_7dfce207` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce219` | 1 | `call_7e205040_ret_null_7dfce219` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce228` | 1 | `call_7e205040_ret_null_7dfce228` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce237` | 1 | `call_7e205040_ret_null_7dfce237` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce246` | 1 | `call_7e205040_ret_null_7dfce246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce255` | 1 | `call_7e205040_ret_null_7dfce255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce264` | 1 | `call_7e205040_ret_null_7dfce264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce273` | 1 | `call_7e205040_ret_null_7dfce273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce282` | 1 | `call_7e205040_ret_null_7dfce282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce291` | 1 | `call_7e205040_ret_null_7dfce291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2a0` | 1 | `call_7e205040_ret_null_7dfce2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2af` | 1 | `call_7e205040_ret_null_7dfce2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2be` | 1 | `call_7e205040_ret_null_7dfce2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2cd` | 1 | `call_7e205040_ret_null_7dfce2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2dc` | 1 | `call_7e205040_ret_null_7dfce2dc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2eb` | 1 | `call_7e205040_ret_null_7dfce2eb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce2fa` | 1 | `call_7e205040_ret_null_7dfce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcc2e8` | 1 | `call_7db93fb8_arg_33_7dfcc2e8` | Calls `0x7db93fb8` with `d0 = 33`. Target: `code_lookup_6000`. | pattern scan |
+| `0x7dfccdb7` | 1 | `call_7dfcbb2f_ret_null_7dfccdb7` | Calls `0x7dfcbb2f`, then returns a null pointer (`a0 = 0`). Target: `call_7dfc4546_ret_null_7dfcbb2f`. | pattern scan |
+| `0x7dfcce48` | 1 | `call_7dfc6731_ret_null_7dfcce48` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
+| `0x7dfcd069` | 4 | `call_7dff0eda_ret_null_7dfcd069` | Calls `0x7dff0eda`, then returns a null pointer (`a0 = 0`). Target: `tra_event_dtor`. | pattern scan |
+| `0x7dfce0bd` | 1 | `call_7e205040_ret_null_7dfce0bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce0cc` | 1 | `call_7e205040_ret_null_7dfce0cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce0db` | 1 | `call_7e205040_ret_null_7dfce0db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce0ea` | 1 | `call_7e205040_ret_null_7dfce0ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce0f9` | 1 | `call_7e205040_ret_null_7dfce0f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce108` | 1 | `call_7e205040_ret_null_7dfce108` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce117` | 1 | `call_7e205040_ret_null_7dfce117` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce126` | 1 | `call_7e205040_ret_null_7dfce126` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce135` | 1 | `call_7e205040_ret_null_7dfce135` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce144` | 1 | `call_7e205040_ret_null_7dfce144` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce153` | 1 | `call_7e205040_ret_null_7dfce153` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce162` | 1 | `call_7e205040_ret_null_7dfce162` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce171` | 1 | `call_7e205040_ret_null_7dfce171` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce183` | 4 | `call_7e205040_ret_null_7dfce183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce18f` | 1 | `call_7e205040_ret_null_7dfce18f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce19e` | 1 | `call_7e205040_ret_null_7dfce19e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1ad` | 1 | `call_7e205040_ret_null_7dfce1ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1bc` | 1 | `call_7e205040_ret_null_7dfce1bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1cb` | 1 | `call_7e205040_ret_null_7dfce1cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1da` | 1 | `call_7e205040_ret_null_7dfce1da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1ec` | 2 | `call_7e205040_ret_null_7dfce1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce1fb` | 2 | `call_7e205040_ret_null_7dfce1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce207` | 1 | `call_7e205040_ret_null_7dfce207` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce219` | 1 | `call_7e205040_ret_null_7dfce219` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce228` | 1 | `call_7e205040_ret_null_7dfce228` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce237` | 1 | `call_7e205040_ret_null_7dfce237` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce246` | 1 | `call_7e205040_ret_null_7dfce246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce255` | 1 | `call_7e205040_ret_null_7dfce255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce264` | 1 | `call_7e205040_ret_null_7dfce264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce273` | 1 | `call_7e205040_ret_null_7dfce273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce282` | 1 | `call_7e205040_ret_null_7dfce282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce291` | 1 | `call_7e205040_ret_null_7dfce291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2a0` | 1 | `call_7e205040_ret_null_7dfce2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2af` | 1 | `call_7e205040_ret_null_7dfce2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2be` | 1 | `call_7e205040_ret_null_7dfce2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2cd` | 1 | `call_7e205040_ret_null_7dfce2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2dc` | 1 | `call_7e205040_ret_null_7dfce2dc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2eb` | 1 | `call_7e205040_ret_null_7dfce2eb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce2fa` | 1 | `call_7e205040_ret_null_7dfce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfce42f` | 1 | `this_plus_112_7dfce42f` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7dfce434` | 1 | `this_plus_156_7dfce434` | Leaf `return this+156` (address of a member or base sub-object). | pattern scan |
-| `0x7dfce7b2` | 1 | `call_7e205040_ret_null_7dfce7b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce7c1` | 1 | `call_7e205040_ret_null_7dfce7c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce7d0` | 1 | `call_7e205040_ret_null_7dfce7d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce7df` | 1 | `call_7e205040_ret_null_7dfce7df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce7ee` | 1 | `call_7e205040_ret_null_7dfce7ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce7fd` | 1 | `call_7e205040_ret_null_7dfce7fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce80c` | 1 | `call_7e205040_ret_null_7dfce80c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce81b` | 1 | `call_7e205040_ret_null_7dfce81b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce82a` | 1 | `call_7e205040_ret_null_7dfce82a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce839` | 1 | `call_7e205040_ret_null_7dfce839` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce848` | 1 | `call_7e205040_ret_null_7dfce848` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce857` | 1 | `call_7e205040_ret_null_7dfce857` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce866` | 1 | `call_7e205040_ret_null_7dfce866` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce875` | 1 | `call_7e205040_ret_null_7dfce875` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce884` | 1 | `call_7e205040_ret_null_7dfce884` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce893` | 1 | `call_7e205040_ret_null_7dfce893` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfce8a2` | 1 | `call_7e205040_ret_null_7dfce8a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7b2` | 1 | `call_7e205040_ret_null_7dfce7b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce7c1` | 1 | `call_7e205040_ret_null_7dfce7c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce7d0` | 1 | `call_7e205040_ret_null_7dfce7d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce7df` | 1 | `call_7e205040_ret_null_7dfce7df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce7ee` | 1 | `call_7e205040_ret_null_7dfce7ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce7fd` | 1 | `call_7e205040_ret_null_7dfce7fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce80c` | 1 | `call_7e205040_ret_null_7dfce80c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce81b` | 1 | `call_7e205040_ret_null_7dfce81b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce82a` | 1 | `call_7e205040_ret_null_7dfce82a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce839` | 1 | `call_7e205040_ret_null_7dfce839` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce848` | 1 | `call_7e205040_ret_null_7dfce848` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce857` | 1 | `call_7e205040_ret_null_7dfce857` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce866` | 1 | `call_7e205040_ret_null_7dfce866` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce875` | 1 | `call_7e205040_ret_null_7dfce875` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce884` | 1 | `call_7e205040_ret_null_7dfce884` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce893` | 1 | `call_7e205040_ret_null_7dfce893` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfce8a2` | 1 | `call_7e205040_ret_null_7dfce8a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfcf291` | 2 | `this_plus_12_7dfcf291` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
 | `0x7dfcf73c` | 3 | `call_7dfcb664_ret_null_7dfcf73c` | Calls `0x7dfcb664`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfcfc7b` | 1 | `call_7dfd0387_ret_null_7dfcfc7b` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd0ce8` | 8 | `call_7dff143a_ret_null_7dfd0ce8` | Calls `0x7dff143a`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcfc7b` | 1 | `call_7dfd0387_ret_null_7dfcfc7b` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). Target: `cls_7e373744__ctordtor_7dfd0387`. | pattern scan |
+| `0x7dfd0ce8` | 8 | `call_7dff143a_ret_null_7dfd0ce8` | Calls `0x7dff143a`, then returns a null pointer (`a0 = 0`). Target: `cls_7e3838f4__ctordtor_7dff143a`. | pattern scan |
 | `0x7dfd4189` | 2 | `adj_thunk_12_to_7dfc66d8_7dfd4189` | Adds 12 to `this`, then calls `0x7dfc66d8`: entry for a base or member sub-object. | pattern scan |
-| `0x7dfd4685` | 1 | `call_7dfd4c7d_arg_1_7dfd4685` | Calls `0x7dfd4c7d` with `d0 = 1`. | pattern scan |
+| `0x7dfd4685` | 1 | `call_7dfd4c7d_arg_1_7dfd4685` | Calls `0x7dfd4c7d` with `d0 = 1`. Target: `Mount_USB_Strage_7dfd4c7d`. | pattern scan |
 | `0x7dfd5ee7` | 1 | `this_plus_112_7dfd5ee7` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7dfd6051` | 1 | `call_7e205040_ret_null_7dfd6051` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd6060` | 1 | `call_7e205040_ret_null_7dfd6060` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd606f` | 1 | `call_7e205040_ret_null_7dfd606f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd607e` | 1 | `call_7e205040_ret_null_7dfd607e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd608d` | 1 | `call_7e205040_ret_null_7dfd608d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd609c` | 1 | `call_7e205040_ret_null_7dfd609c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd60ab` | 1 | `call_7e205040_ret_null_7dfd60ab` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd60ba` | 1 | `call_7e205040_ret_null_7dfd60ba` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfd6c7b` | 1 | `call_7dfd5731_ret_null_7dfd6c7b` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd6051` | 1 | `call_7e205040_ret_null_7dfd6051` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd6060` | 1 | `call_7e205040_ret_null_7dfd6060` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd606f` | 1 | `call_7e205040_ret_null_7dfd606f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd607e` | 1 | `call_7e205040_ret_null_7dfd607e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd608d` | 1 | `call_7e205040_ret_null_7dfd608d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd609c` | 1 | `call_7e205040_ret_null_7dfd609c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd60ab` | 1 | `call_7e205040_ret_null_7dfd60ab` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd60ba` | 1 | `call_7e205040_ret_null_7dfd60ba` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfd6c7b` | 1 | `call_7dfd5731_ret_null_7dfd6c7b` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
 | `0x7dfda419` | 1 | `adj_thunk_72_to_7dfecfa8_7dfda419` | Adds 72 to `this`, then calls `0x7dfecfa8`: entry for a base or member sub-object. | pattern scan |
-| `0x7dfdffcc` | 1 | `call_7dfe0386_arg_3_7dfdffcc` | Calls `0x7dfe0386` with `d0 = 3`. | pattern scan |
-| `0x7dfe0277` | 1 | `call_7dfe0386_arg_2_7dfe0277` | Calls `0x7dfe0386` with `d0 = 2`. | pattern scan |
-| `0x7dfe0281` | 1 | `call_7dfe0386_arg_1_7dfe0281` | Calls `0x7dfe0386` with `d0 = 1`. | pattern scan |
+| `0x7dfdffcc` | 1 | `call_7dfe0386_arg_3_7dfdffcc` | Calls `0x7dfe0386` with `d0 = 3`. Target: `OlyHfwOpeShoot__ctrlZoom_7dfe0386`. | pattern scan |
+| `0x7dfe0277` | 1 | `call_7dfe0386_arg_2_7dfe0277` | Calls `0x7dfe0386` with `d0 = 2`. Target: `OlyHfwOpeShoot__ctrlZoom_7dfe0386`. | pattern scan |
+| `0x7dfe0281` | 1 | `call_7dfe0386_arg_1_7dfe0281` | Calls `0x7dfe0386` with `d0 = 1`. Target: `OlyHfwOpeShoot__ctrlZoom_7dfe0386`. | pattern scan |
 | `0x7dfe0824` | 1 | `call_7dfd2fec_ret_null_7dfe0824` | Calls `0x7dfd2fec`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7206` | 1 | `call_7e205040_ret_null_7dfe7206` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7215` | 2 | `call_7e205040_ret_null_7dfe7215` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7224` | 2 | `call_7e205040_ret_null_7dfe7224` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7233` | 3 | `call_7e205040_ret_null_7dfe7233` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7242` | 3 | `call_7e205040_ret_null_7dfe7242` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7251` | 1 | `call_7e205040_ret_null_7dfe7251` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7260` | 2 | `call_7e205040_ret_null_7dfe7260` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe726c` | 1 | `call_7e205040_ret_null_7dfe726c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe727e` | 4 | `call_7e205040_ret_null_7dfe727e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe728d` | 1 | `call_7e205040_ret_null_7dfe728d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe729c` | 1 | `call_7e205040_ret_null_7dfe729c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72a8` | 1 | `call_7e205040_ret_null_7dfe72a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72b7` | 1 | `call_7e205040_ret_null_7dfe72b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72c6` | 1 | `call_7e205040_ret_null_7dfe72c6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72d5` | 1 | `call_7e205040_ret_null_7dfe72d5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72e7` | 2 | `call_7e205040_ret_null_7dfe72e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe72f6` | 1 | `call_7e205040_ret_null_7dfe72f6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7305` | 1 | `call_7e205040_ret_null_7dfe7305` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7314` | 1 | `call_7e205040_ret_null_7dfe7314` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7320` | 1 | `call_7e205040_ret_null_7dfe7320` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7332` | 1 | `call_7e205040_ret_null_7dfe7332` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe733e` | 1 | `call_7e205040_ret_null_7dfe733e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe734d` | 1 | `call_7e205040_ret_null_7dfe734d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe735c` | 1 | `call_7e205040_ret_null_7dfe735c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe736b` | 1 | `call_7e205040_ret_null_7dfe736b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe737d` | 2 | `call_7e205040_ret_null_7dfe737d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7389` | 1 | `call_7e205040_ret_null_7dfe7389` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7398` | 1 | `call_7e205040_ret_null_7dfe7398` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73aa` | 2 | `call_7e205040_ret_null_7dfe73aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73b9` | 3 | `call_7e205040_ret_null_7dfe73b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73c5` | 1 | `call_7e205040_ret_null_7dfe73c5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73d4` | 1 | `call_7e205040_ret_null_7dfe73d4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73e3` | 1 | `call_7e205040_ret_null_7dfe73e3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe73f2` | 1 | `call_7e205040_ret_null_7dfe73f2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7404` | 3 | `call_7e205040_ret_null_7dfe7404` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe7410` | 1 | `call_7e205040_ret_null_7dfe7410` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe741f` | 1 | `call_7e205040_ret_null_7dfe741f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe742e` | 1 | `call_7e205040_ret_null_7dfe742e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe743d` | 1 | `call_7e205040_ret_null_7dfe743d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe744c` | 1 | `call_7e205040_ret_null_7dfe744c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe745e` | 1 | `call_7e205040_ret_null_7dfe745e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7206` | 1 | `call_7e205040_ret_null_7dfe7206` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7215` | 2 | `call_7e205040_ret_null_7dfe7215` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7224` | 2 | `call_7e205040_ret_null_7dfe7224` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7233` | 3 | `call_7e205040_ret_null_7dfe7233` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7242` | 3 | `call_7e205040_ret_null_7dfe7242` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7251` | 1 | `call_7e205040_ret_null_7dfe7251` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7260` | 2 | `call_7e205040_ret_null_7dfe7260` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe726c` | 1 | `call_7e205040_ret_null_7dfe726c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe727e` | 4 | `call_7e205040_ret_null_7dfe727e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe728d` | 1 | `call_7e205040_ret_null_7dfe728d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe729c` | 1 | `call_7e205040_ret_null_7dfe729c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72a8` | 1 | `call_7e205040_ret_null_7dfe72a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72b7` | 1 | `call_7e205040_ret_null_7dfe72b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72c6` | 1 | `call_7e205040_ret_null_7dfe72c6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72d5` | 1 | `call_7e205040_ret_null_7dfe72d5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72e7` | 2 | `call_7e205040_ret_null_7dfe72e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe72f6` | 1 | `call_7e205040_ret_null_7dfe72f6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7305` | 1 | `call_7e205040_ret_null_7dfe7305` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7314` | 1 | `call_7e205040_ret_null_7dfe7314` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7320` | 1 | `call_7e205040_ret_null_7dfe7320` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7332` | 1 | `call_7e205040_ret_null_7dfe7332` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe733e` | 1 | `call_7e205040_ret_null_7dfe733e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe734d` | 1 | `call_7e205040_ret_null_7dfe734d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe735c` | 1 | `call_7e205040_ret_null_7dfe735c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe736b` | 1 | `call_7e205040_ret_null_7dfe736b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe737d` | 2 | `call_7e205040_ret_null_7dfe737d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7389` | 1 | `call_7e205040_ret_null_7dfe7389` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7398` | 1 | `call_7e205040_ret_null_7dfe7398` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73aa` | 2 | `call_7e205040_ret_null_7dfe73aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73b9` | 3 | `call_7e205040_ret_null_7dfe73b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73c5` | 1 | `call_7e205040_ret_null_7dfe73c5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73d4` | 1 | `call_7e205040_ret_null_7dfe73d4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73e3` | 1 | `call_7e205040_ret_null_7dfe73e3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe73f2` | 1 | `call_7e205040_ret_null_7dfe73f2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7404` | 3 | `call_7e205040_ret_null_7dfe7404` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe7410` | 1 | `call_7e205040_ret_null_7dfe7410` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe741f` | 1 | `call_7e205040_ret_null_7dfe741f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe742e` | 1 | `call_7e205040_ret_null_7dfe742e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe743d` | 1 | `call_7e205040_ret_null_7dfe743d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe744c` | 1 | `call_7e205040_ret_null_7dfe744c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe745e` | 1 | `call_7e205040_ret_null_7dfe745e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfe84a4` | 1 | `this_plus_124_7dfe84a4` | Leaf `return this+124` (address of a member or base sub-object). | pattern scan |
 | `0x7dfe84a9` | 1 | `this_plus_260_7dfe84a9` | Leaf `return this+260` (address of a member or base sub-object). | pattern scan |
-| `0x7dfe8a02` | 1 | `call_7e205040_ret_null_7dfe8a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a11` | 1 | `call_7e205040_ret_null_7dfe8a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a20` | 1 | `call_7e205040_ret_null_7dfe8a20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a2f` | 1 | `call_7e205040_ret_null_7dfe8a2f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a3e` | 1 | `call_7e205040_ret_null_7dfe8a3e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a4d` | 1 | `call_7e205040_ret_null_7dfe8a4d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a5c` | 1 | `call_7e205040_ret_null_7dfe8a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a6b` | 1 | `call_7e205040_ret_null_7dfe8a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a7a` | 1 | `call_7e205040_ret_null_7dfe8a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a89` | 1 | `call_7e205040_ret_null_7dfe8a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8a98` | 1 | `call_7e205040_ret_null_7dfe8a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8aa7` | 1 | `call_7e205040_ret_null_7dfe8aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8ab6` | 1 | `call_7e205040_ret_null_7dfe8ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8ac5` | 1 | `call_7e205040_ret_null_7dfe8ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8ad4` | 1 | `call_7e205040_ret_null_7dfe8ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8ae3` | 1 | `call_7e205040_ret_null_7dfe8ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8af2` | 1 | `call_7e205040_ret_null_7dfe8af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b01` | 1 | `call_7e205040_ret_null_7dfe8b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b10` | 1 | `call_7e205040_ret_null_7dfe8b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b1f` | 1 | `call_7e205040_ret_null_7dfe8b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b2e` | 1 | `call_7e205040_ret_null_7dfe8b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b3d` | 1 | `call_7e205040_ret_null_7dfe8b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b4c` | 1 | `call_7e205040_ret_null_7dfe8b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b5b` | 1 | `call_7e205040_ret_null_7dfe8b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfe8b6a` | 1 | `call_7e205040_ret_null_7dfe8b6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a02` | 1 | `call_7e205040_ret_null_7dfe8a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a11` | 1 | `call_7e205040_ret_null_7dfe8a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a20` | 1 | `call_7e205040_ret_null_7dfe8a20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a2f` | 1 | `call_7e205040_ret_null_7dfe8a2f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a3e` | 1 | `call_7e205040_ret_null_7dfe8a3e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a4d` | 1 | `call_7e205040_ret_null_7dfe8a4d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a5c` | 1 | `call_7e205040_ret_null_7dfe8a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a6b` | 1 | `call_7e205040_ret_null_7dfe8a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a7a` | 1 | `call_7e205040_ret_null_7dfe8a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a89` | 1 | `call_7e205040_ret_null_7dfe8a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8a98` | 1 | `call_7e205040_ret_null_7dfe8a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8aa7` | 1 | `call_7e205040_ret_null_7dfe8aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8ab6` | 1 | `call_7e205040_ret_null_7dfe8ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8ac5` | 1 | `call_7e205040_ret_null_7dfe8ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8ad4` | 1 | `call_7e205040_ret_null_7dfe8ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8ae3` | 1 | `call_7e205040_ret_null_7dfe8ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8af2` | 1 | `call_7e205040_ret_null_7dfe8af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b01` | 1 | `call_7e205040_ret_null_7dfe8b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b10` | 1 | `call_7e205040_ret_null_7dfe8b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b1f` | 1 | `call_7e205040_ret_null_7dfe8b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b2e` | 1 | `call_7e205040_ret_null_7dfe8b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b3d` | 1 | `call_7e205040_ret_null_7dfe8b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b4c` | 1 | `call_7e205040_ret_null_7dfe8b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b5b` | 1 | `call_7e205040_ret_null_7dfe8b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfe8b6a` | 1 | `call_7e205040_ret_null_7dfe8b6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7dfe8c0e` | 10 | `this_plus_48_7dfe8c0e` | Leaf `return this+48` (address of a member or base sub-object). | pattern scan |
 | `0x7dfe8c13` | 9 | `this_plus_112_7dfe8c13` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7dfea42d` | 1 | `call_7dfcb664_ret_null_7dfea42d` | Calls `0x7dfcb664`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfeab28` | 1 | `this_plus_124_7dfeab28` | Leaf `return this+124` (address of a member or base sub-object). | pattern scan |
 | `0x7dfeab2d` | 1 | `this_plus_328_7dfeab2d` | Leaf `return this+328` (address of a member or base sub-object). | pattern scan |
-| `0x7dfeb13a` | 2 | `call_7dfc6731_ret_null_7dfeb13a` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeb13a` | 2 | `call_7dfc6731_ret_null_7dfeb13a` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
 | `0x7dfeb2ea` | 1 | `call_7e051330_ret_null_7dfeb2ea` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfeb5b2` | 1 | `this_plus_224_7dfeb5b2` | Leaf `return this+224` (address of a member or base sub-object). | pattern scan |
 | `0x7dfeb5b9` | 1 | `this_plus_904_7dfeb5b9` | Leaf `return this+904` (address of a member or base sub-object). | pattern scan |
-| `0x7dfec7fe` | 1 | `call_7e205040_ret_null_7dfec7fe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec80d` | 1 | `call_7e205040_ret_null_7dfec80d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec81c` | 1 | `call_7e205040_ret_null_7dfec81c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec82b` | 1 | `call_7e205040_ret_null_7dfec82b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec83a` | 1 | `call_7e205040_ret_null_7dfec83a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec849` | 1 | `call_7e205040_ret_null_7dfec849` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec858` | 1 | `call_7e205040_ret_null_7dfec858` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec867` | 1 | `call_7e205040_ret_null_7dfec867` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec876` | 1 | `call_7e205040_ret_null_7dfec876` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec885` | 1 | `call_7e205040_ret_null_7dfec885` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec894` | 1 | `call_7e205040_ret_null_7dfec894` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8a3` | 1 | `call_7e205040_ret_null_7dfec8a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8b2` | 1 | `call_7e205040_ret_null_7dfec8b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8c1` | 1 | `call_7e205040_ret_null_7dfec8c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8d0` | 1 | `call_7e205040_ret_null_7dfec8d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8df` | 1 | `call_7e205040_ret_null_7dfec8df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8ee` | 1 | `call_7e205040_ret_null_7dfec8ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec8fd` | 1 | `call_7e205040_ret_null_7dfec8fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec90c` | 1 | `call_7e205040_ret_null_7dfec90c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec91b` | 1 | `call_7e205040_ret_null_7dfec91b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec92a` | 1 | `call_7e205040_ret_null_7dfec92a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec939` | 1 | `call_7e205040_ret_null_7dfec939` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec948` | 1 | `call_7e205040_ret_null_7dfec948` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec957` | 1 | `call_7e205040_ret_null_7dfec957` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec966` | 1 | `call_7e205040_ret_null_7dfec966` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec975` | 1 | `call_7e205040_ret_null_7dfec975` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec984` | 1 | `call_7e205040_ret_null_7dfec984` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec993` | 1 | `call_7e205040_ret_null_7dfec993` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9a2` | 1 | `call_7e205040_ret_null_7dfec9a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9b1` | 1 | `call_7e205040_ret_null_7dfec9b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9c0` | 1 | `call_7e205040_ret_null_7dfec9c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9d2` | 1 | `call_7e205040_ret_null_7dfec9d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9de` | 1 | `call_7e205040_ret_null_7dfec9de` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9ed` | 1 | `call_7e205040_ret_null_7dfec9ed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfec9fc` | 1 | `call_7e205040_ret_null_7dfec9fc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca0b` | 1 | `call_7e205040_ret_null_7dfeca0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca1a` | 1 | `call_7e205040_ret_null_7dfeca1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca29` | 1 | `call_7e205040_ret_null_7dfeca29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca38` | 1 | `call_7e205040_ret_null_7dfeca38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca47` | 1 | `call_7e205040_ret_null_7dfeca47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca56` | 1 | `call_7e205040_ret_null_7dfeca56` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca65` | 1 | `call_7e205040_ret_null_7dfeca65` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca74` | 1 | `call_7e205040_ret_null_7dfeca74` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca83` | 1 | `call_7e205040_ret_null_7dfeca83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeca92` | 1 | `call_7e205040_ret_null_7dfeca92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecaa1` | 1 | `call_7e205040_ret_null_7dfecaa1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecab0` | 1 | `call_7e205040_ret_null_7dfecab0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecabf` | 1 | `call_7e205040_ret_null_7dfecabf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecace` | 1 | `call_7e205040_ret_null_7dfecace` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecadd` | 1 | `call_7e205040_ret_null_7dfecadd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecaec` | 1 | `call_7e205040_ret_null_7dfecaec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecafb` | 1 | `call_7e205040_ret_null_7dfecafb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb0a` | 1 | `call_7e205040_ret_null_7dfecb0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb19` | 1 | `call_7e205040_ret_null_7dfecb19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb28` | 1 | `call_7e205040_ret_null_7dfecb28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb37` | 1 | `call_7e205040_ret_null_7dfecb37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb46` | 1 | `call_7e205040_ret_null_7dfecb46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb55` | 1 | `call_7e205040_ret_null_7dfecb55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb64` | 1 | `call_7e205040_ret_null_7dfecb64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb73` | 1 | `call_7e205040_ret_null_7dfecb73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb82` | 1 | `call_7e205040_ret_null_7dfecb82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecb91` | 1 | `call_7e205040_ret_null_7dfecb91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecba0` | 1 | `call_7e205040_ret_null_7dfecba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbaf` | 1 | `call_7e205040_ret_null_7dfecbaf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbbe` | 1 | `call_7e205040_ret_null_7dfecbbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbcd` | 1 | `call_7e205040_ret_null_7dfecbcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbdc` | 1 | `call_7e205040_ret_null_7dfecbdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbeb` | 1 | `call_7e205040_ret_null_7dfecbeb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecbfa` | 1 | `call_7e205040_ret_null_7dfecbfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc09` | 1 | `call_7e205040_ret_null_7dfecc09` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc18` | 1 | `call_7e205040_ret_null_7dfecc18` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc27` | 1 | `call_7e205040_ret_null_7dfecc27` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc36` | 1 | `call_7e205040_ret_null_7dfecc36` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc45` | 1 | `call_7e205040_ret_null_7dfecc45` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc54` | 1 | `call_7e205040_ret_null_7dfecc54` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc63` | 1 | `call_7e205040_ret_null_7dfecc63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc72` | 1 | `call_7e205040_ret_null_7dfecc72` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc81` | 1 | `call_7e205040_ret_null_7dfecc81` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc90` | 1 | `call_7e205040_ret_null_7dfecc90` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecc9f` | 1 | `call_7e205040_ret_null_7dfecc9f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeccae` | 1 | `call_7e205040_ret_null_7dfeccae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeccbd` | 1 | `call_7e205040_ret_null_7dfeccbd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecccc` | 1 | `call_7e205040_ret_null_7dfecccc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeccdb` | 1 | `call_7e205040_ret_null_7dfeccdb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeccea` | 1 | `call_7e205040_ret_null_7dfeccea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeccf9` | 1 | `call_7e205040_ret_null_7dfeccf9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd08` | 1 | `call_7e205040_ret_null_7dfecd08` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd17` | 1 | `call_7e205040_ret_null_7dfecd17` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd26` | 1 | `call_7e205040_ret_null_7dfecd26` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd35` | 1 | `call_7e205040_ret_null_7dfecd35` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd44` | 1 | `call_7e205040_ret_null_7dfecd44` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd53` | 1 | `call_7e205040_ret_null_7dfecd53` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd62` | 1 | `call_7e205040_ret_null_7dfecd62` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd71` | 1 | `call_7e205040_ret_null_7dfecd71` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd80` | 1 | `call_7e205040_ret_null_7dfecd80` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd8f` | 1 | `call_7e205040_ret_null_7dfecd8f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecd9e` | 1 | `call_7e205040_ret_null_7dfecd9e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecdad` | 1 | `call_7e205040_ret_null_7dfecdad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecdbc` | 1 | `call_7e205040_ret_null_7dfecdbc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecdcb` | 1 | `call_7e205040_ret_null_7dfecdcb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecdda` | 1 | `call_7e205040_ret_null_7dfecdda` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecde9` | 1 | `call_7e205040_ret_null_7dfecde9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecdf8` | 1 | `call_7e205040_ret_null_7dfecdf8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece07` | 1 | `call_7e205040_ret_null_7dfece07` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece16` | 1 | `call_7e205040_ret_null_7dfece16` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece25` | 1 | `call_7e205040_ret_null_7dfece25` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece34` | 1 | `call_7e205040_ret_null_7dfece34` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece43` | 1 | `call_7e205040_ret_null_7dfece43` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece52` | 1 | `call_7e205040_ret_null_7dfece52` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece61` | 1 | `call_7e205040_ret_null_7dfece61` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece70` | 1 | `call_7e205040_ret_null_7dfece70` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece7f` | 1 | `call_7e205040_ret_null_7dfece7f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece8e` | 1 | `call_7e205040_ret_null_7dfece8e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfece9d` | 1 | `call_7e205040_ret_null_7dfece9d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeceac` | 1 | `call_7e205040_ret_null_7dfeceac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecebb` | 1 | `call_7e205040_ret_null_7dfecebb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfececa` | 1 | `call_7e205040_ret_null_7dfececa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfeced9` | 1 | `call_7e205040_ret_null_7dfeced9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecee8` | 1 | `call_7e205040_ret_null_7dfecee8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecef7` | 1 | `call_7e205040_ret_null_7dfecef7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf06` | 1 | `call_7e205040_ret_null_7dfecf06` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf15` | 1 | `call_7e205040_ret_null_7dfecf15` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf24` | 1 | `call_7e205040_ret_null_7dfecf24` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf33` | 1 | `call_7e205040_ret_null_7dfecf33` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf42` | 1 | `call_7e205040_ret_null_7dfecf42` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf51` | 1 | `call_7e205040_ret_null_7dfecf51` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf60` | 1 | `call_7e205040_ret_null_7dfecf60` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf6f` | 1 | `call_7e205040_ret_null_7dfecf6f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfecf9c` | 1 | `call_7dfc6731_ret_null_7dfecf9c` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec7fe` | 1 | `call_7e205040_ret_null_7dfec7fe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec80d` | 1 | `call_7e205040_ret_null_7dfec80d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec81c` | 1 | `call_7e205040_ret_null_7dfec81c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec82b` | 1 | `call_7e205040_ret_null_7dfec82b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec83a` | 1 | `call_7e205040_ret_null_7dfec83a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec849` | 1 | `call_7e205040_ret_null_7dfec849` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec858` | 1 | `call_7e205040_ret_null_7dfec858` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec867` | 1 | `call_7e205040_ret_null_7dfec867` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec876` | 1 | `call_7e205040_ret_null_7dfec876` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec885` | 1 | `call_7e205040_ret_null_7dfec885` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec894` | 1 | `call_7e205040_ret_null_7dfec894` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8a3` | 1 | `call_7e205040_ret_null_7dfec8a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8b2` | 1 | `call_7e205040_ret_null_7dfec8b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8c1` | 1 | `call_7e205040_ret_null_7dfec8c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8d0` | 1 | `call_7e205040_ret_null_7dfec8d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8df` | 1 | `call_7e205040_ret_null_7dfec8df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8ee` | 1 | `call_7e205040_ret_null_7dfec8ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec8fd` | 1 | `call_7e205040_ret_null_7dfec8fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec90c` | 1 | `call_7e205040_ret_null_7dfec90c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec91b` | 1 | `call_7e205040_ret_null_7dfec91b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec92a` | 1 | `call_7e205040_ret_null_7dfec92a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec939` | 1 | `call_7e205040_ret_null_7dfec939` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec948` | 1 | `call_7e205040_ret_null_7dfec948` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec957` | 1 | `call_7e205040_ret_null_7dfec957` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec966` | 1 | `call_7e205040_ret_null_7dfec966` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec975` | 1 | `call_7e205040_ret_null_7dfec975` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec984` | 1 | `call_7e205040_ret_null_7dfec984` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec993` | 1 | `call_7e205040_ret_null_7dfec993` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9a2` | 1 | `call_7e205040_ret_null_7dfec9a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9b1` | 1 | `call_7e205040_ret_null_7dfec9b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9c0` | 1 | `call_7e205040_ret_null_7dfec9c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9d2` | 1 | `call_7e205040_ret_null_7dfec9d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9de` | 1 | `call_7e205040_ret_null_7dfec9de` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9ed` | 1 | `call_7e205040_ret_null_7dfec9ed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfec9fc` | 1 | `call_7e205040_ret_null_7dfec9fc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca0b` | 1 | `call_7e205040_ret_null_7dfeca0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca1a` | 1 | `call_7e205040_ret_null_7dfeca1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca29` | 1 | `call_7e205040_ret_null_7dfeca29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca38` | 1 | `call_7e205040_ret_null_7dfeca38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca47` | 1 | `call_7e205040_ret_null_7dfeca47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca56` | 1 | `call_7e205040_ret_null_7dfeca56` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca65` | 1 | `call_7e205040_ret_null_7dfeca65` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca74` | 1 | `call_7e205040_ret_null_7dfeca74` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca83` | 1 | `call_7e205040_ret_null_7dfeca83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeca92` | 1 | `call_7e205040_ret_null_7dfeca92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecaa1` | 1 | `call_7e205040_ret_null_7dfecaa1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecab0` | 1 | `call_7e205040_ret_null_7dfecab0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecabf` | 1 | `call_7e205040_ret_null_7dfecabf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecace` | 1 | `call_7e205040_ret_null_7dfecace` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecadd` | 1 | `call_7e205040_ret_null_7dfecadd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecaec` | 1 | `call_7e205040_ret_null_7dfecaec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecafb` | 1 | `call_7e205040_ret_null_7dfecafb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb0a` | 1 | `call_7e205040_ret_null_7dfecb0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb19` | 1 | `call_7e205040_ret_null_7dfecb19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb28` | 1 | `call_7e205040_ret_null_7dfecb28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb37` | 1 | `call_7e205040_ret_null_7dfecb37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb46` | 1 | `call_7e205040_ret_null_7dfecb46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb55` | 1 | `call_7e205040_ret_null_7dfecb55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb64` | 1 | `call_7e205040_ret_null_7dfecb64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb73` | 1 | `call_7e205040_ret_null_7dfecb73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb82` | 1 | `call_7e205040_ret_null_7dfecb82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecb91` | 1 | `call_7e205040_ret_null_7dfecb91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecba0` | 1 | `call_7e205040_ret_null_7dfecba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbaf` | 1 | `call_7e205040_ret_null_7dfecbaf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbbe` | 1 | `call_7e205040_ret_null_7dfecbbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbcd` | 1 | `call_7e205040_ret_null_7dfecbcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbdc` | 1 | `call_7e205040_ret_null_7dfecbdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbeb` | 1 | `call_7e205040_ret_null_7dfecbeb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecbfa` | 1 | `call_7e205040_ret_null_7dfecbfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc09` | 1 | `call_7e205040_ret_null_7dfecc09` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc18` | 1 | `call_7e205040_ret_null_7dfecc18` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc27` | 1 | `call_7e205040_ret_null_7dfecc27` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc36` | 1 | `call_7e205040_ret_null_7dfecc36` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc45` | 1 | `call_7e205040_ret_null_7dfecc45` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc54` | 1 | `call_7e205040_ret_null_7dfecc54` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc63` | 1 | `call_7e205040_ret_null_7dfecc63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc72` | 1 | `call_7e205040_ret_null_7dfecc72` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc81` | 1 | `call_7e205040_ret_null_7dfecc81` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc90` | 1 | `call_7e205040_ret_null_7dfecc90` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecc9f` | 1 | `call_7e205040_ret_null_7dfecc9f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeccae` | 1 | `call_7e205040_ret_null_7dfeccae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeccbd` | 1 | `call_7e205040_ret_null_7dfeccbd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecccc` | 1 | `call_7e205040_ret_null_7dfecccc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeccdb` | 1 | `call_7e205040_ret_null_7dfeccdb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeccea` | 1 | `call_7e205040_ret_null_7dfeccea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeccf9` | 1 | `call_7e205040_ret_null_7dfeccf9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd08` | 1 | `call_7e205040_ret_null_7dfecd08` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd17` | 1 | `call_7e205040_ret_null_7dfecd17` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd26` | 1 | `call_7e205040_ret_null_7dfecd26` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd35` | 1 | `call_7e205040_ret_null_7dfecd35` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd44` | 1 | `call_7e205040_ret_null_7dfecd44` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd53` | 1 | `call_7e205040_ret_null_7dfecd53` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd62` | 1 | `call_7e205040_ret_null_7dfecd62` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd71` | 1 | `call_7e205040_ret_null_7dfecd71` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd80` | 1 | `call_7e205040_ret_null_7dfecd80` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd8f` | 1 | `call_7e205040_ret_null_7dfecd8f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecd9e` | 1 | `call_7e205040_ret_null_7dfecd9e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecdad` | 1 | `call_7e205040_ret_null_7dfecdad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecdbc` | 1 | `call_7e205040_ret_null_7dfecdbc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecdcb` | 1 | `call_7e205040_ret_null_7dfecdcb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecdda` | 1 | `call_7e205040_ret_null_7dfecdda` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecde9` | 1 | `call_7e205040_ret_null_7dfecde9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecdf8` | 1 | `call_7e205040_ret_null_7dfecdf8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece07` | 1 | `call_7e205040_ret_null_7dfece07` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece16` | 1 | `call_7e205040_ret_null_7dfece16` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece25` | 1 | `call_7e205040_ret_null_7dfece25` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece34` | 1 | `call_7e205040_ret_null_7dfece34` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece43` | 1 | `call_7e205040_ret_null_7dfece43` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece52` | 1 | `call_7e205040_ret_null_7dfece52` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece61` | 1 | `call_7e205040_ret_null_7dfece61` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece70` | 1 | `call_7e205040_ret_null_7dfece70` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece7f` | 1 | `call_7e205040_ret_null_7dfece7f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece8e` | 1 | `call_7e205040_ret_null_7dfece8e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfece9d` | 1 | `call_7e205040_ret_null_7dfece9d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeceac` | 1 | `call_7e205040_ret_null_7dfeceac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecebb` | 1 | `call_7e205040_ret_null_7dfecebb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfececa` | 1 | `call_7e205040_ret_null_7dfececa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfeced9` | 1 | `call_7e205040_ret_null_7dfeced9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecee8` | 1 | `call_7e205040_ret_null_7dfecee8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecef7` | 1 | `call_7e205040_ret_null_7dfecef7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf06` | 1 | `call_7e205040_ret_null_7dfecf06` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf15` | 1 | `call_7e205040_ret_null_7dfecf15` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf24` | 1 | `call_7e205040_ret_null_7dfecf24` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf33` | 1 | `call_7e205040_ret_null_7dfecf33` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf42` | 1 | `call_7e205040_ret_null_7dfecf42` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf51` | 1 | `call_7e205040_ret_null_7dfecf51` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf60` | 1 | `call_7e205040_ret_null_7dfecf60` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf6f` | 1 | `call_7e205040_ret_null_7dfecf6f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7dfecf9c` | 1 | `call_7dfc6731_ret_null_7dfecf9c` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
 | `0x7dfed0e1` | 1 | `call_7dfed0aa_ret_null_7dfed0e1` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfed100` | 1 | `call_7dfed0aa_ret_null_7dfed100` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfed11f` | 1 | `call_7dfed0aa_ret_null_7dfed11f` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfed1ef` | 1 | `call_7dfed22c_ret_null_7dfed1ef` | Calls `0x7dfed22c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed1ef` | 1 | `call_7dfed22c_ret_null_7dfed1ef` | Calls `0x7dfed22c`, then returns a null pointer (`a0 = 0`). Target: `call_7dfce8c2_ret_null_7dfed22c`. | pattern scan |
 | `0x7dfed22c` | 1 | `call_7dfce8c2_ret_null_7dfed22c` | Calls `0x7dfce8c2`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7dfed462` | 1 | `store_7_f192_f196_7dfed462` | `*(this+192) = *(this+196) = 7`. | pattern scan |
 | `0x7dfed4f3` | 1 | `store_9_f200_f204_7dfed4f3` | `*(this+200) = *(this+204) = 9`. | pattern scan |
 | `0x7dfed580` | 1 | `store_12_f208_f212_7dfed580` | `*(this+208) = *(this+212) = 12`. | pattern scan |
-| `0x7dfef42d` | 1 | `call_7dfc6731_ret_null_7dfef42d` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7dfefc41` | 1 | `call_7dff065e_arg_1_7dfefc41` | Calls `0x7dff065e` with `d0 = 1`. | pattern scan |
-| `0x7dff1309` | 3 | `adj_thunk_16_to_7dfc056a_7dff1309` | Adds 16 to `this`, then calls `0x7dfc056a`: entry for a base or member sub-object. | pattern scan |
-| `0x7dff1362` | 3 | `adj_thunk_16_to_7dfc057a_7dff1362` | Adds 16 to `this`, then calls `0x7dfc057a`: entry for a base or member sub-object. | pattern scan |
-| `0x7dff23ef` | 1 | `call_7dfd0387_ret_null_7dff23ef` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfef42d` | 1 | `call_7dfc6731_ret_null_7dfef42d` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
+| `0x7dfefc41` | 1 | `call_7dff065e_arg_1_7dfefc41` | Calls `0x7dff065e` with `d0 = 1`. Target: `sleep_wakeup_ctrl`. | pattern scan |
+| `0x7dff1309` | 3 | `adj_thunk_16_to_7dfc056a_7dff1309` | Adds 16 to `this`, then calls `0x7dfc056a`: entry for a base or member sub-object. Target: `mutex_lock`. | pattern scan |
+| `0x7dff1362` | 3 | `adj_thunk_16_to_7dfc057a_7dff1362` | Adds 16 to `this`, then calls `0x7dfc057a`: entry for a base or member sub-object. Target: `mutex_unlock`. | pattern scan |
+| `0x7dff23ef` | 1 | `call_7dfd0387_ret_null_7dff23ef` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). Target: `cls_7e373744__ctordtor_7dfd0387`. | pattern scan |
 | `0x7dff9a1c` | 1 | `this_plus_8_7dff9a1c` | Leaf `return this+8` (address of a member or base sub-object). | pattern scan |
 | `0x7dff9a21` | 1 | `this_plus_12_7dff9a21` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
 | `0x7dff9a26` | 1 | `this_plus_16_7dff9a26` | Leaf `return this+16` (address of a member or base sub-object). | pattern scan |
 | `0x7dff9a2b` | 1 | `this_plus_20_7dff9a2b` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
-| `0x7dffb918` | 1 | `call_7e205040_ret_null_7dffb918` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dffb918` | 1 | `call_7e205040_ret_null_7dffb918` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7e03671b` | 2 | `this_plus_12_7e03671b` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
 | `0x7e036831` | 1 | `this_plus_112_7e036831` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e036836` | 1 | `this_plus_160_7e036836` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
-| `0x7e036929` | 1 | `call_7dfcf73c_ret_null_7e036929` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0376b3` | 1 | `call_7dfcf73c_ret_null_7e0376b3` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e037a46` | 1 | `call_7dfd5731_ret_null_7e037a46` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03810d` | 1 | `call_7dfd5731_ret_null_7e03810d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0385f1` | 1 | `call_7dfd5731_ret_null_7e0385f1` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e038da6` | 1 | `call_7dfd5731_ret_null_7e038da6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0398de` | 1 | `call_7dfd5731_ret_null_7e0398de` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03a3aa` | 1 | `call_7dfd5731_ret_null_7e03a3aa` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03a8a2` | 1 | `call_7dfd5731_ret_null_7e03a8a2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03ad18` | 1 | `call_7dfd5731_ret_null_7e03ad18` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03b27c` | 1 | `call_7dfd5731_ret_null_7e03b27c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e036929` | 1 | `call_7dfcf73c_ret_null_7e036929` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). Target: `call_7dfcb664_ret_null_7dfcf73c`. | pattern scan |
+| `0x7e0376b3` | 1 | `call_7dfcf73c_ret_null_7e0376b3` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). Target: `call_7dfcb664_ret_null_7dfcf73c`. | pattern scan |
+| `0x7e037a46` | 1 | `call_7dfd5731_ret_null_7e037a46` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e03810d` | 1 | `call_7dfd5731_ret_null_7e03810d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e0385f1` | 1 | `call_7dfd5731_ret_null_7e0385f1` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e038da6` | 1 | `call_7dfd5731_ret_null_7e038da6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e0398de` | 1 | `call_7dfd5731_ret_null_7e0398de` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e03a3aa` | 1 | `call_7dfd5731_ret_null_7e03a3aa` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e03a8a2` | 1 | `call_7dfd5731_ret_null_7e03a8a2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e03ad18` | 1 | `call_7dfd5731_ret_null_7e03ad18` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e03b27c` | 1 | `call_7dfd5731_ret_null_7e03b27c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
 | `0x7e03c13e` | 2 | `this_plus_20_7e03c13e` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
 | `0x7e03c2ee` | 1 | `this_plus_112_7e03c2ee` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e03e833` | 1 | `call_7e051330_ret_null_7e03e833` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e03f015` | 1 | `call_7dfc6731_ret_null_7e03f015` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03f015` | 1 | `call_7dfc6731_ret_null_7e03f015` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
 | `0x7e0401b6` | 1 | `store_1_f248_f252_7e0401b6` | `*(this+248) = *(this+252) = 1`. | pattern scan |
-| `0x7e04020c` | 1 | `store_2_f248_call_7e04174e_7e04020c` | `*(this+248) = 2`, then calls `0x7e04174e`. | pattern scan |
+| `0x7e04020c` | 1 | `store_2_f248_call_7e04174e_7e04020c` | `*(this+248) = 2`, then calls `0x7e04174e`. Target: `entry_thunk_7e04174e`. | pattern scan |
 | `0x7e0403ce` | 1 | `call2_7e0403dd_7e04045c_7e0403ce` | Calls `0x7e0403dd(this)` and then `0x7e04045c(this)`. | pattern scan |
 | `0x7e04052b` | 1 | `call2_7e04053a_7e0405ba_7e04052b` | Calls `0x7e04053a(this)` and then `0x7e0405ba(this)`. | pattern scan |
 | `0x7e04089b` | 1 | `store_12_f272_f252_7e04089b` | `*(this+272) = *(this+252) = 12`. | pattern scan |
 | `0x7e0408f1` | 1 | `store_13_f272_call_7e04091b_7e0408f1` | `*(this+272) = 13`, then calls `0x7e04091b`. | pattern scan |
-| `0x7e040c1a` | 1 | `store_19_f256_call_7e040ef3_7e040c1a` | `*(this+256) = 19`, then calls `0x7e040ef3`. | pattern scan |
+| `0x7e040c1a` | 1 | `store_19_f256_call_7e040ef3_7e040c1a` | `*(this+256) = 19`, then calls `0x7e040ef3`. Target: `entry_thunk_7e040ef3`. | pattern scan |
 | `0x7e040ff5` | 1 | `store_24_f288_f252_7e040ff5` | `*(this+288) = *(this+252) = 24`. | pattern scan |
-| `0x7e0411b3` | 1 | `store_26_f256_call_7e0413e8_7e0411b3` | `*(this+256) = 26`, then calls `0x7e0413e8`. | pattern scan |
+| `0x7e0411b3` | 1 | `store_26_f256_call_7e0413e8_7e0411b3` | `*(this+256) = 26`, then calls `0x7e0413e8`. Target: `entry_thunk_7e0413e8`. | pattern scan |
 | `0x7e041591` | 1 | `store_31_f296_f252_7e041591` | `*(this+296) = *(this+252) = 31`. | pattern scan |
-| `0x7e0415f8` | 1 | `store_32_f256_call_7e041622_7e0415f8` | `*(this+256) = 32`, then calls `0x7e041622`. | pattern scan |
+| `0x7e0415f8` | 1 | `store_32_f256_call_7e041622_7e0415f8` | `*(this+256) = 32`, then calls `0x7e041622`. Target: `entry_thunk_7e041622`. | pattern scan |
 | `0x7e041b0f` | 1 | `call2_7e041b1e_7e041c31_7e041b0f` | Calls `0x7e041b1e(this)` and then `0x7e041c31(this)`. | pattern scan |
-| `0x7e041c31` | 1 | `store_39_f320_call_7e041d0b_7e041c31` | `*(this+320) = 39`, then calls `0x7e041d0b`. | pattern scan |
-| `0x7e041e07` | 1 | `store_42_f320_call_7e0425bd_7e041e07` | `*(this+320) = 42`, then calls `0x7e0425bd`. | pattern scan |
+| `0x7e041c31` | 1 | `store_39_f320_call_7e041d0b_7e041c31` | `*(this+320) = 39`, then calls `0x7e041d0b`. Target: `entry_thunk_7e041d0b`. | pattern scan |
+| `0x7e041e07` | 1 | `store_42_f320_call_7e0425bd_7e041e07` | `*(this+320) = 42`, then calls `0x7e0425bd`. Target: `entry_thunk_7e0425bd`. | pattern scan |
 | `0x7e041e7d` | 1 | `store_43_f332_f252_7e041e7d` | `*(this+332) = *(this+252) = 43`. | pattern scan |
 | `0x7e041ed9` | 1 | `store_44_f332_f252_7e041ed9` | `*(this+332) = *(this+252) = 44`. | pattern scan |
 | `0x7e0427c5` | 1 | `store_56_f332_f252_7e0427c5` | `*(this+332) = *(this+252) = 56`. | pattern scan |
@@ -16193,153 +16198,153 @@ what the target does is described at the target, if it is labelled.
 | `0x7e042dae` | 1 | `store_63_f348_f252_7e042dae` | `*(this+348) = *(this+252) = 63`. | pattern scan |
 | `0x7e042e5d` | 1 | `call2_7e042e6c_7e043130_7e042e5d` | Calls `0x7e042e6c(this)` and then `0x7e043130(this)`. | pattern scan |
 | `0x7e043232` | 1 | `store_69_f352_f252_7e043232` | `*(this+352) = *(this+252) = 69`. | pattern scan |
-| `0x7e043278` | 1 | `store_70_f256_call_7e0434ad_7e043278` | `*(this+256) = 70`, then calls `0x7e0434ad`. | pattern scan |
+| `0x7e043278` | 1 | `store_70_f256_call_7e0434ad_7e043278` | `*(this+256) = 70`, then calls `0x7e0434ad`. Target: `entry_thunk_7e0434ad`. | pattern scan |
 | `0x7e0435af` | 1 | `store_74_f360_f252_7e0435af` | `*(this+360) = *(this+252) = 74`. | pattern scan |
 | `0x7e0437dc` | 1 | `store_77_f368_f252_7e0437dc` | `*(this+368) = *(this+252) = 77`. | pattern scan |
-| `0x7e0439cf` | 1 | `store_79_f256_call_7e043d9e_7e0439cf` | `*(this+256) = 79`, then calls `0x7e043d9e`. | pattern scan |
+| `0x7e0439cf` | 1 | `store_79_f256_call_7e043d9e_7e0439cf` | `*(this+256) = 79`, then calls `0x7e043d9e`. Target: `entry_thunk_7e043d9e`. | pattern scan |
 | `0x7e043fcb` | 1 | `store_85_f380_f252_7e043fcb` | `*(this+380) = *(this+252) = 85`. | pattern scan |
 | `0x7e044165` | 1 | `call_7e051330_ret_null_7e044165` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e04433d` | 1 | `call_7dfce9cb_ret_null_7e04433d` | Calls `0x7dfce9cb`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e0443b6` | 1 | `call_7dfd2fec_ret_null_7e0443b6` | Calls `0x7dfd2fec`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e044aa3` | 1 | `call_7dfd5731_ret_null_7e044aa3` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e045494` | 1 | `call_7dfd5731_ret_null_7e045494` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0454c2` | 1 | `call_7dfd5731_ret_null_7e0454c2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e045afb` | 1 | `call_7dfd5731_ret_null_7e045afb` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e046a0e` | 1 | `call_7dfd5731_ret_null_7e046a0e` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e047640` | 1 | `call_7dfd5731_ret_null_7e047640` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e047d5d` | 1 | `call_7dfd5731_ret_null_7e047d5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0480e9` | 1 | `call_7dfd5731_ret_null_7e0480e9` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e048d0a` | 1 | `call_7dfd5731_ret_null_7e048d0a` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04a824` | 1 | `call_7dfd5731_ret_null_7e04a824` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04ab9c` | 1 | `call_7dfd5731_ret_null_7e04ab9c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e044aa3` | 1 | `call_7dfd5731_ret_null_7e044aa3` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e045494` | 1 | `call_7dfd5731_ret_null_7e045494` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e0454c2` | 1 | `call_7dfd5731_ret_null_7e0454c2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e045afb` | 1 | `call_7dfd5731_ret_null_7e045afb` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e046a0e` | 1 | `call_7dfd5731_ret_null_7e046a0e` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e047640` | 1 | `call_7dfd5731_ret_null_7e047640` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e047d5d` | 1 | `call_7dfd5731_ret_null_7e047d5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e0480e9` | 1 | `call_7dfd5731_ret_null_7e0480e9` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e048d0a` | 1 | `call_7dfd5731_ret_null_7e048d0a` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04a824` | 1 | `call_7dfd5731_ret_null_7e04a824` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04ab9c` | 1 | `call_7dfd5731_ret_null_7e04ab9c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
 | `0x7e04b2d3` | 1 | `call_7e051330_ret_null_7e04b2d3` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04b3d7` | 1 | `call_7dfd0387_ret_null_7e04b3d7` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04b3d7` | 1 | `call_7dfd0387_ret_null_7e04b3d7` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). Target: `cls_7e373744__ctordtor_7dfd0387`. | pattern scan |
 | `0x7e04b51a` | 1 | `call_7e051330_ret_null_7e04b51a` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04b5f6` | 1 | `call_7dfd5731_ret_null_7e04b5f6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04c084` | 1 | `call_7dfd5731_ret_null_7e04c084` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04c9be` | 1 | `call_7dfd5731_ret_null_7e04c9be` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04cc5d` | 1 | `call_7dfd5731_ret_null_7e04cc5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04e4d9` | 1 | `call_7dfc6731_ret_null_7e04e4d9` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04e65c` | 1 | `adj_thunk_16_to_7dfc3eda_7e04e65c` | Adds 16 to `this`, then calls `0x7dfc3eda`: entry for a base or member sub-object. | pattern scan |
+| `0x7e04b5f6` | 1 | `call_7dfd5731_ret_null_7e04b5f6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04c084` | 1 | `call_7dfd5731_ret_null_7e04c084` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04c9be` | 1 | `call_7dfd5731_ret_null_7e04c9be` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04cc5d` | 1 | `call_7dfd5731_ret_null_7e04cc5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). Target: `chls_dtor_nondeleting_7dfd`. | pattern scan |
+| `0x7e04e4d9` | 1 | `call_7dfc6731_ret_null_7e04e4d9` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
+| `0x7e04e65c` | 1 | `adj_thunk_16_to_7dfc3eda_7e04e65c` | Adds 16 to `this`, then calls `0x7dfc3eda`: entry for a base or member sub-object. Target: `list_count_7dfc`. | pattern scan |
 | `0x7e04e66e` | 1 | `adj_thunk_16_to_7dfc3eb8_7e04e66e` | Adds 16 to `this`, then calls `0x7dfc3eb8`: entry for a base or member sub-object. | pattern scan |
-| `0x7e04e7c6` | 2 | `call_7e04e746_ret_null_7e04e7c6` | Calls `0x7e04e746`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e04f6ca` | 2 | `adj_thunk_8_to_7dfc0ad2_7e04f6ca` | Adds 8 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
-| `0x7e04f6d6` | 2 | `adj_thunk_8_to_7dfc0b9f_7e04f6d6` | Adds 8 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
-| `0x7e04f7b1` | 4 | `call_7dfc6731_ret_null_7e04f7b1` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e050701` | 1 | `call_7dfc6731_ret_null_7e050701` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04e7c6` | 2 | `call_7e04e746_ret_null_7e04e7c6` | Calls `0x7e04e746`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e04e746`. | pattern scan |
+| `0x7e04f6ca` | 2 | `adj_thunk_8_to_7dfc0ad2_7e04f6ca` | Adds 8 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
+| `0x7e04f6d6` | 2 | `adj_thunk_8_to_7dfc0b9f_7e04f6d6` | Adds 8 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. Target: `vec_erase_value_swap`. | pattern scan |
+| `0x7e04f7b1` | 4 | `call_7dfc6731_ret_null_7e04f7b1` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
+| `0x7e050701` | 1 | `call_7dfc6731_ret_null_7e050701` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7dfc6731`. | pattern scan |
 | `0x7e051420` | 3 | `fwd_f4_to_7e051515_7e051420` | Forwards to the object at `this+4`: `0x7e051515(*(this+4))`. | pattern scan |
 | `0x7e05217e` | 1 | `store_5_f172_f176_7e05217e` | `*(this+172) = *(this+176) = 5`. | pattern scan |
 | `0x7e0539ff` | 3 | `call_7e054042_arg_2055_7e0539ff` | Calls `0x7e054042` with `d0 = 2055`. | pattern scan |
-| `0x7e056793` | 1 | `call_7e205040_ret_null_7e056793` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0567a2` | 1 | `call_7e205040_ret_null_7e0567a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0567b1` | 1 | `call_7e205040_ret_null_7e0567b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056994` | 1 | `call_7e205040_ret_null_7e056994` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569a3` | 1 | `call_7e205040_ret_null_7e0569a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569b2` | 1 | `call_7e205040_ret_null_7e0569b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569c1` | 1 | `call_7e205040_ret_null_7e0569c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569d0` | 1 | `call_7e205040_ret_null_7e0569d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569df` | 1 | `call_7e205040_ret_null_7e0569df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569ee` | 1 | `call_7e205040_ret_null_7e0569ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0569fd` | 1 | `call_7e205040_ret_null_7e0569fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056a0c` | 1 | `call_7e205040_ret_null_7e056a0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056a1b` | 1 | `call_7e205040_ret_null_7e056a1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056a2a` | 1 | `call_7e205040_ret_null_7e056a2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056a39` | 1 | `call_7e205040_ret_null_7e056a39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056a48` | 1 | `call_7e205040_ret_null_7e056a48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ddf` | 1 | `call_7e205040_ret_null_7e056ddf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056dee` | 1 | `call_7e205040_ret_null_7e056dee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056dfd` | 1 | `call_7e205040_ret_null_7e056dfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e0c` | 1 | `call_7e205040_ret_null_7e056e0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e1b` | 1 | `call_7e205040_ret_null_7e056e1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e2a` | 1 | `call_7e205040_ret_null_7e056e2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e39` | 1 | `call_7e205040_ret_null_7e056e39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e48` | 1 | `call_7e205040_ret_null_7e056e48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e57` | 1 | `call_7e205040_ret_null_7e056e57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e66` | 1 | `call_7e205040_ret_null_7e056e66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e75` | 1 | `call_7e205040_ret_null_7e056e75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e84` | 1 | `call_7e205040_ret_null_7e056e84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056e93` | 1 | `call_7e205040_ret_null_7e056e93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ea2` | 1 | `call_7e205040_ret_null_7e056ea2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056eb1` | 1 | `call_7e205040_ret_null_7e056eb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ec0` | 1 | `call_7e205040_ret_null_7e056ec0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ecf` | 1 | `call_7e205040_ret_null_7e056ecf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ede` | 1 | `call_7e205040_ret_null_7e056ede` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056eed` | 1 | `call_7e205040_ret_null_7e056eed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056efc` | 1 | `call_7e205040_ret_null_7e056efc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056f0b` | 1 | `call_7e205040_ret_null_7e056f0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e056ffe` | 1 | `call_7e205040_ret_null_7e056ffe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e05700d` | 1 | `call_7e205040_ret_null_7e05700d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e05701c` | 1 | `call_7e205040_ret_null_7e05701c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e05702b` | 1 | `call_7e205040_ret_null_7e05702b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e05703a` | 1 | `call_7e205040_ret_null_7e05703a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e057049` | 1 | `call_7e205040_ret_null_7e057049` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e057058` | 1 | `call_7e205040_ret_null_7e057058` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e057147` | 1 | `call_7e05476c_ret_null_7e057147` | Calls `0x7e05476c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056793` | 1 | `call_7e205040_ret_null_7e056793` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0567a2` | 1 | `call_7e205040_ret_null_7e0567a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0567b1` | 1 | `call_7e205040_ret_null_7e0567b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056994` | 1 | `call_7e205040_ret_null_7e056994` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569a3` | 1 | `call_7e205040_ret_null_7e0569a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569b2` | 1 | `call_7e205040_ret_null_7e0569b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569c1` | 1 | `call_7e205040_ret_null_7e0569c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569d0` | 1 | `call_7e205040_ret_null_7e0569d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569df` | 1 | `call_7e205040_ret_null_7e0569df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569ee` | 1 | `call_7e205040_ret_null_7e0569ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0569fd` | 1 | `call_7e205040_ret_null_7e0569fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056a0c` | 1 | `call_7e205040_ret_null_7e056a0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056a1b` | 1 | `call_7e205040_ret_null_7e056a1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056a2a` | 1 | `call_7e205040_ret_null_7e056a2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056a39` | 1 | `call_7e205040_ret_null_7e056a39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056a48` | 1 | `call_7e205040_ret_null_7e056a48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ddf` | 1 | `call_7e205040_ret_null_7e056ddf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056dee` | 1 | `call_7e205040_ret_null_7e056dee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056dfd` | 1 | `call_7e205040_ret_null_7e056dfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e0c` | 1 | `call_7e205040_ret_null_7e056e0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e1b` | 1 | `call_7e205040_ret_null_7e056e1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e2a` | 1 | `call_7e205040_ret_null_7e056e2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e39` | 1 | `call_7e205040_ret_null_7e056e39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e48` | 1 | `call_7e205040_ret_null_7e056e48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e57` | 1 | `call_7e205040_ret_null_7e056e57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e66` | 1 | `call_7e205040_ret_null_7e056e66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e75` | 1 | `call_7e205040_ret_null_7e056e75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e84` | 1 | `call_7e205040_ret_null_7e056e84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056e93` | 1 | `call_7e205040_ret_null_7e056e93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ea2` | 1 | `call_7e205040_ret_null_7e056ea2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056eb1` | 1 | `call_7e205040_ret_null_7e056eb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ec0` | 1 | `call_7e205040_ret_null_7e056ec0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ecf` | 1 | `call_7e205040_ret_null_7e056ecf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ede` | 1 | `call_7e205040_ret_null_7e056ede` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056eed` | 1 | `call_7e205040_ret_null_7e056eed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056efc` | 1 | `call_7e205040_ret_null_7e056efc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056f0b` | 1 | `call_7e205040_ret_null_7e056f0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e056ffe` | 1 | `call_7e205040_ret_null_7e056ffe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e05700d` | 1 | `call_7e205040_ret_null_7e05700d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e05701c` | 1 | `call_7e205040_ret_null_7e05701c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e05702b` | 1 | `call_7e205040_ret_null_7e05702b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e05703a` | 1 | `call_7e205040_ret_null_7e05703a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e057049` | 1 | `call_7e205040_ret_null_7e057049` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e057058` | 1 | `call_7e205040_ret_null_7e057058` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e057147` | 1 | `call_7e05476c_ret_null_7e057147` | Calls `0x7e05476c`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e05476c`. | pattern scan |
 | `0x7e0580a6` | 1 | `call_7e0583aa_arg_3_7e0580a6` | Calls `0x7e0583aa` with `d0 = 3`. | pattern scan |
 | `0x7e0580b0` | 1 | `call_7e0583aa_arg_2_7e0580b0` | Calls `0x7e0583aa` with `d0 = 2`. | pattern scan |
 | `0x7e0580c3` | 1 | `call_7e0583aa_arg_1_7e0580c3` | Calls `0x7e0583aa` with `d0 = 1`. | pattern scan |
-| `0x7e058812` | 1 | `call_7e1e67f6_ret_null_7e058812` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e058812` | 1 | `call_7e1e67f6_ret_null_7e058812` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e058917` | 7 | `call_7e058a5e_arg_1_7e058917` | Calls `0x7e058a5e` with `d0 = 1`. | pattern scan |
 | `0x7e058968` | 3 | `store_1_f284_call_7e058a5e_7e058968` | `*(this+284) = 1`, then calls `0x7e058a5e`. | pattern scan |
-| `0x7e058ee4` | 1 | `adj_thunk_736_to_7e1e7e39_7e058ee4` | Adds 736 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e058ee4` | 1 | `adj_thunk_736_to_7e1e7e39_7e058ee4` | Adds 736 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
 | `0x7e059828` | 1 | `this_plus_736_7e059828` | Leaf `return this+736` (address of a member or base sub-object). | pattern scan |
-| `0x7e059918` | 1 | `adj_thunk_716_to_7dfc0ad2_7e059918` | Adds 716 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
-| `0x7e059926` | 2 | `adj_thunk_716_to_7dfc0b9f_7e059926` | Adds 716 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e059918` | 1 | `adj_thunk_716_to_7dfc0ad2_7e059918` | Adds 716 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
+| `0x7e059926` | 2 | `adj_thunk_716_to_7dfc0b9f_7e059926` | Adds 716 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. Target: `vec_erase_value_swap`. | pattern scan |
 | `0x7e05bd7f` | 3 | `call_7e05c1fb_arg_65536_7e05bd7f` | Calls `0x7e05c1fb` with `d0 = 65536`. | pattern scan |
 | `0x7e05bd8d` | 1 | `call_7e05c211_arg_32_7e05bd8d` | Calls `0x7e05c211` with `d0 = 32`. | pattern scan |
 | `0x7e05bdc4` | 2 | `call_7e05c211_arg_16_7e05bdc4` | Calls `0x7e05c211` with `d0 = 16`. | pattern scan |
 | `0x7e05be49` | 1 | `call_7e05c23d_arg_512_7e05be49` | Calls `0x7e05c23d` with `d0 = 512`. | pattern scan |
 | `0x7e05be88` | 2 | `call_7e05c23d_arg_256_7e05be88` | Calls `0x7e05c23d` with `d0 = 256`. | pattern scan |
 | `0x7e05bf16` | 2 | `call_7e05c253_arg_4096_7e05bf16` | Calls `0x7e05c253` with `d0 = 4096`. | pattern scan |
-| `0x7e05c55e` | 1 | `adj_thunk_296_to_7e1e7e39_7e05c55e` | Adds 296 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05c55e` | 1 | `adj_thunk_296_to_7e1e7e39_7e05c55e` | Adds 296 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
 | `0x7e05c5f9` | 2 | `fwd_f372_vslot84_7e05c5f9` | Forwards to the object at `this+372`: calls its vtable slot `+84`. | pattern scan |
 | `0x7e05c6ca` | 2 | `fwd_f372_vslot128_7e05c6ca` | Forwards to the object at `this+372`: calls its vtable slot `+128`. | pattern scan |
-| `0x7e05c6d9` | 1 | `adj_thunk_296_to_7e1e802d_7e05c6d9` | Adds 296 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05c6d9` | 1 | `adj_thunk_296_to_7e1e802d_7e05c6d9` | Adds 296 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
 | `0x7e05c7c6` | 2 | `fwd_f372_vslot160_7e05c7c6` | Forwards to the object at `this+372`: calls its vtable slot `+160`. | pattern scan |
 | `0x7e05c7d5` | 1 | `fwd_f372_vslot164_7e05c7d5` | Forwards to the object at `this+372`: calls its vtable slot `+164`. | pattern scan |
 | `0x7e05c7f4` | 5 | `fwd_f372_vslot180_7e05c7f4` | Forwards to the object at `this+372`: calls its vtable slot `+180`. | pattern scan |
 | `0x7e05cab8` | 1 | `store_7_f400_f404_7e05cab8` | `*(this+400) = *(this+404) = 7`. | pattern scan |
-| `0x7e05cb4f` | 1 | `store_8_f400_call_7e05cb5d_7e05cb4f` | `*(this+400) = 8`, then calls `0x7e05cb5d`. | pattern scan |
+| `0x7e05cb4f` | 1 | `store_8_f400_call_7e05cb5d_7e05cb4f` | `*(this+400) = 8`, then calls `0x7e05cb5d`. Target: `entry_stub_7e05cb5d`. | pattern scan |
 | `0x7e05cd38` | 9 | `call2_7e05d13d_7e05d067_7e05cd38` | Calls `0x7e05d13d(this)` and then `0x7e05d067(this)`. | pattern scan |
 | `0x7e05cd47` | 1 | `store_11_f408_f404_7e05cd47` | `*(this+408) = *(this+404) = 11`. | pattern scan |
 | `0x7e05d095` | 1 | `store_13_f412_f416_7e05d095` | `*(this+412) = *(this+416) = 13`. | pattern scan |
 | `0x7e05d0e9` | 1 | `store_14_f412_f416_7e05d0e9` | `*(this+412) = *(this+416) = 14`. | pattern scan |
 | `0x7e05d16b` | 1 | `store_16_f420_f424_7e05d16b` | `*(this+420) = *(this+424) = 16`. | pattern scan |
 | `0x7e05d1d4` | 1 | `store_17_f420_f424_7e05d1d4` | `*(this+420) = *(this+424) = 17`. | pattern scan |
-| `0x7e05e30d` | 1 | `adj_thunk_5156_to_7e1e7e39_7e05e30d` | Adds 5156 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e05e31e` | 2 | `adj_thunk_5204_to_7e1e7e39_7e05e31e` | Adds 5204 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e05e32f` | 2 | `adj_thunk_5180_to_7e1e7e39_7e05e32f` | Adds 5180 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e05e340` | 2 | `adj_thunk_5228_to_7e1e7e39_7e05e340` | Adds 5228 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e066fd3` | 1 | `adj_thunk_5132_to_7e1e802d_7e066fd3` | Adds 5132 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e066fe1` | 1 | `adj_thunk_5156_to_7e1e802d_7e066fe1` | Adds 5156 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e066ff2` | 4 | `adj_thunk_5204_to_7e1e802d_7e066ff2` | Adds 5204 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e067000` | 4 | `adj_thunk_5180_to_7e1e802d_7e067000` | Adds 5180 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e067011` | 4 | `adj_thunk_5228_to_7e1e802d_7e067011` | Adds 5228 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07c609` | 1 | `adj_thunk_8036_to_7e1e7e39_7e07c609` | Adds 8036 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07c617` | 1 | `adj_thunk_8060_to_7e1e7e39_7e07c617` | Adds 8060 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07c625` | 1 | `adj_thunk_8012_to_7e1e7e39_7e07c625` | Adds 8012 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07d045` | 3 | `adj_thunk_8036_to_7e1e802d_7e07d045` | Adds 8036 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07d053` | 3 | `adj_thunk_8060_to_7e1e802d_7e07d053` | Adds 8060 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07d061` | 2 | `adj_thunk_8012_to_7e1e802d_7e07d061` | Adds 8012 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07d06f` | 1 | `adj_thunk_8084_to_7e1e802d_7e07d06f` | Adds 8084 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e07de7e` | 1 | `store_4_f252_call_7e1e86dd_7e07de7e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e05e30d` | 1 | `adj_thunk_5156_to_7e1e7e39_7e05e30d` | Adds 5156 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e05e31e` | 2 | `adj_thunk_5204_to_7e1e7e39_7e05e31e` | Adds 5204 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e05e32f` | 2 | `adj_thunk_5180_to_7e1e7e39_7e05e32f` | Adds 5180 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e05e340` | 2 | `adj_thunk_5228_to_7e1e7e39_7e05e340` | Adds 5228 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e066fd3` | 1 | `adj_thunk_5132_to_7e1e802d_7e066fd3` | Adds 5132 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e066fe1` | 1 | `adj_thunk_5156_to_7e1e802d_7e066fe1` | Adds 5156 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e066ff2` | 4 | `adj_thunk_5204_to_7e1e802d_7e066ff2` | Adds 5204 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e067000` | 4 | `adj_thunk_5180_to_7e1e802d_7e067000` | Adds 5180 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e067011` | 4 | `adj_thunk_5228_to_7e1e802d_7e067011` | Adds 5228 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e07c609` | 1 | `adj_thunk_8036_to_7e1e7e39_7e07c609` | Adds 8036 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e07c617` | 1 | `adj_thunk_8060_to_7e1e7e39_7e07c617` | Adds 8060 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e07c625` | 1 | `adj_thunk_8012_to_7e1e7e39_7e07c625` | Adds 8012 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e07d045` | 3 | `adj_thunk_8036_to_7e1e802d_7e07d045` | Adds 8036 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e07d053` | 3 | `adj_thunk_8060_to_7e1e802d_7e07d053` | Adds 8060 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e07d061` | 2 | `adj_thunk_8012_to_7e1e802d_7e07d061` | Adds 8012 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e07d06f` | 1 | `adj_thunk_8084_to_7e1e802d_7e07d06f` | Adds 8084 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e07de7e` | 1 | `store_4_f252_call_7e1e86dd_7e07de7e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e07de8e` | 1 | `call2_7e07de7e_7e07e007_7e07de8e` | Calls `0x7e07de7e(this)` and then `0x7e07e007(this)`. | pattern scan |
-| `0x7e07e78b` | 1 | `call_7e1e67f6_ret_null_7e07e78b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e07e7f4` | 1 | `call_7e1e67f6_ret_null_7e07e7f4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e07e8d9` | 1 | `call_7e205040_ret_null_7e07e8d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e07ec52` | 2 | `call_7e1e67f6_ret_null_7e07ec52` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07e78b` | 1 | `call_7e1e67f6_ret_null_7e07e78b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e07e7f4` | 1 | `call_7e1e67f6_ret_null_7e07e7f4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e07e8d9` | 1 | `call_7e205040_ret_null_7e07e8d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e07ec52` | 2 | `call_7e1e67f6_ret_null_7e07ec52` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e07ed55` | 1 | `this_plus_396_7e07ed55` | Leaf `return this+396` (address of a member or base sub-object). | pattern scan |
-| `0x7e07edeb` | 1 | `call_7e07e91d_ret_null_7e07edeb` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07edeb` | 1 | `call_7e07e91d_ret_null_7e07edeb` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). Target: `capimg_player_cleanup_7e07`. | pattern scan |
 | `0x7e07f4c0` | 1 | `fwd_f4_to_7e1ea0fc_7e07f4c0` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e07f4d3` | 1 | `fwd_f4_to_7e1ea11a_7e07f4d3` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
 | `0x7e07f7de` | 1 | `this_plus_632_7e07f7de` | Leaf `return this+632` (address of a member or base sub-object). | pattern scan |
-| `0x7e0800ba` | 1 | `store_1_f320_call_7e080108_7e0800ba` | `*(this+320) = 1`, then calls `0x7e080108`. | pattern scan |
+| `0x7e0800ba` | 1 | `store_1_f320_call_7e080108_7e0800ba` | `*(this+320) = 1`, then calls `0x7e080108`. Target: `entry_thunk_7e080108`. | pattern scan |
 | `0x7e080110` | 1 | `store_2_f328_f324_7e080110` | `*(this+328) = *(this+324) = 2`. | pattern scan |
 | `0x7e08128f` | 2 | `fwd_f488_vslot4_7e08128f` | Forwards to the object at `this+488`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e08129d` | 1 | `fwd_f492_vslot4_7e08129d` | Forwards to the object at `this+492`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e081480` | 1 | `this_plus_368_7e081480` | Leaf `return this+368` (address of a member or base sub-object). | pattern scan |
 | `0x7e081487` | 3 | `this_plus_392_7e081487` | Leaf `return this+392` (address of a member or base sub-object). | pattern scan |
-| `0x7e0814ce` | 3 | `adj_thunk_420_to_7dfc0ad2_7e0814ce` | Adds 420 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0814ce` | 3 | `adj_thunk_420_to_7dfc0ad2_7e0814ce` | Adds 420 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
 | `0x7e0818d1` | 1 | `call2_7e081bd2_7e0819f1_7e0818d1` | Calls `0x7e081bd2(this)` and then `0x7e0819f1(this)`. | pattern scan |
 | `0x7e081a1f` | 1 | `store_6_f500_f504_7e081a1f` | `*(this+500) = *(this+504) = 6`. | pattern scan |
 | `0x7e081abb` | 1 | `store_7_f500_f504_7e081abb` | `*(this+500) = *(this+504) = 7`. | pattern scan |
@@ -16383,42 +16388,42 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0823e0` | 1 | `fwd_f4_to_7e080c0c_7e0823e0` | Forwards to the object at `this+4`: `0x7e080c0c(*(this+4))`. | pattern scan |
 | `0x7e0823ee` | 1 | `fwd_f4_to_7e080c43_7e0823ee` | Forwards to the object at `this+4`: `0x7e080c43(*(this+4))`. | pattern scan |
 | `0x7e0823fc` | 1 | `fwd_f4_to_7e1e8308_7e0823fc` | Forwards to the object at `this+4`: `0x7e1e8308(*(this+4))`. | pattern scan |
-| `0x7e0825ec` | 1 | `call_7e205040_ret_null_7e0825ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e082724` | 1 | `call_7e205040_ret_null_7e082724` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0832f4` | 1 | `call_7e083bb2_arg_3_7e0832f4` | Calls `0x7e083bb2` with `d0 = 3`. | pattern scan |
-| `0x7e084058` | 1 | `call_7e0840ed_ret_null_7e084058` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0825ec` | 1 | `call_7e205040_ret_null_7e0825ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e082724` | 1 | `call_7e205040_ret_null_7e082724` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0832f4` | 1 | `call_7e083bb2_arg_3_7e0832f4` | Calls `0x7e083bb2` with `d0 = 3`. Target: `setFrameStateAll_7e083bb2`. | pattern scan |
+| `0x7e084058` | 1 | `call_7e0840ed_ret_null_7e084058` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). Target: `thunk_to_7e1e67f6_7e0840ed`. | pattern scan |
 | `0x7e086bce` | 2 | `global_u16_6044fd86_get_7e086bce` | Leaf `return (u16)*0x6044fd86`. | pattern scan |
-| `0x7e08ba2e` | 2 | `adj_thunk_2212_to_7e1e7e39_7e08ba2e` | Adds 2212 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08ba50` | 4 | `adj_thunk_2288_to_7e1e7e39_7e08ba50` | Adds 2288 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08ba72` | 1 | `adj_thunk_2412_to_7e1e7e39_7e08ba72` | Adds 2412 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08ba83` | 4 | `adj_thunk_2516_to_7e1e7e39_7e08ba83` | Adds 2516 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08ba94` | 4 | `adj_thunk_2464_to_7e1e7e39_7e08ba94` | Adds 2464 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08bac7` | 1 | `adj_thunk_2644_to_7e1e7e39_7e08bac7` | Adds 2644 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08bad8` | 1 | `adj_thunk_2668_to_7e1e7e39_7e08bad8` | Adds 2668 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08bae9` | 1 | `adj_thunk_2692_to_7e1e7e39_7e08bae9` | Adds 2692 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08bafa` | 1 | `adj_thunk_2716_to_7e1e7e39_7e08bafa` | Adds 2716 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08ba2e` | 2 | `adj_thunk_2212_to_7e1e7e39_7e08ba2e` | Adds 2212 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08ba50` | 4 | `adj_thunk_2288_to_7e1e7e39_7e08ba50` | Adds 2288 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08ba72` | 1 | `adj_thunk_2412_to_7e1e7e39_7e08ba72` | Adds 2412 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08ba83` | 4 | `adj_thunk_2516_to_7e1e7e39_7e08ba83` | Adds 2516 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08ba94` | 4 | `adj_thunk_2464_to_7e1e7e39_7e08ba94` | Adds 2464 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08bac7` | 1 | `adj_thunk_2644_to_7e1e7e39_7e08bac7` | Adds 2644 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08bad8` | 1 | `adj_thunk_2668_to_7e1e7e39_7e08bad8` | Adds 2668 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08bae9` | 1 | `adj_thunk_2692_to_7e1e7e39_7e08bae9` | Adds 2692 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e08bafa` | 1 | `adj_thunk_2716_to_7e1e7e39_7e08bafa` | Adds 2716 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
 | `0x7e08bfda` | 4 | `fwd_f2796_vslot44_7e08bfda` | Forwards to the object at `this+2796`: calls its vtable slot `+44`. | pattern scan |
 | `0x7e08bfeb` | 10 | `fwd_f2796_vslot48_7e08bfeb` | Forwards to the object at `this+2796`: calls its vtable slot `+48`. | pattern scan |
 | `0x7e08bffc` | 1 | `fwd_f2796_vslot52_7e08bffc` | Forwards to the object at `this+2796`: calls its vtable slot `+52`. | pattern scan |
-| `0x7e08c5da` | 5 | `adj_thunk_2212_to_7e1e802d_7e08c5da` | Adds 2212 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08c5fc` | 4 | `adj_thunk_2288_to_7e1e802d_7e08c5fc` | Adds 2288 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08c62f` | 4 | `adj_thunk_2516_to_7e1e802d_7e08c62f` | Adds 2516 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08c640` | 4 | `adj_thunk_2464_to_7e1e802d_7e08c640` | Adds 2464 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08cbca` | 1 | `adj_thunk_2616_to_7e1e682c_7e08cbca` | Adds 2616 to `this`, then calls `0x7e1e682c`: entry for a base or member sub-object. | pattern scan |
-| `0x7e08cec8` | 1 | `call_7db9d93d_arg_1_7e08cec8` | Calls `0x7db9d93d` with `d0 = 1`. | pattern scan |
-| `0x7e08ced4` | 1 | `call_7db9d93d_arg_2_7e08ced4` | Calls `0x7db9d93d` with `d0 = 2`. | pattern scan |
-| `0x7e08cee0` | 1 | `call_7db9d93d_arg_4_7e08cee0` | Calls `0x7db9d93d` with `d0 = 4`. | pattern scan |
-| `0x7e08ceec` | 1 | `call_7db9d93d_arg_3_7e08ceec` | Calls `0x7db9d93d` with `d0 = 3`. | pattern scan |
+| `0x7e08c5da` | 5 | `adj_thunk_2212_to_7e1e802d_7e08c5da` | Adds 2212 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e08c5fc` | 4 | `adj_thunk_2288_to_7e1e802d_7e08c5fc` | Adds 2288 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e08c62f` | 4 | `adj_thunk_2516_to_7e1e802d_7e08c62f` | Adds 2516 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e08c640` | 4 | `adj_thunk_2464_to_7e1e802d_7e08c640` | Adds 2464 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e08cbca` | 1 | `adj_thunk_2616_to_7e1e682c_7e08cbca` | Adds 2616 to `this`, then calls `0x7e1e682c`: entry for a base or member sub-object. Target: `evtsrc_set_target`. | pattern scan |
+| `0x7e08cec8` | 1 | `call_7db9d93d_arg_1_7e08cec8` | Calls `0x7db9d93d` with `d0 = 1`. Target: `api_rec_Stop_Take_Picture_7db9d93d`. | pattern scan |
+| `0x7e08ced4` | 1 | `call_7db9d93d_arg_2_7e08ced4` | Calls `0x7db9d93d` with `d0 = 2`. Target: `api_rec_Stop_Take_Picture_7db9d93d`. | pattern scan |
+| `0x7e08cee0` | 1 | `call_7db9d93d_arg_4_7e08cee0` | Calls `0x7db9d93d` with `d0 = 4`. Target: `api_rec_Stop_Take_Picture_7db9d93d`. | pattern scan |
+| `0x7e08ceec` | 1 | `call_7db9d93d_arg_3_7e08ceec` | Calls `0x7db9d93d` with `d0 = 3`. Target: `api_rec_Stop_Take_Picture_7db9d93d`. | pattern scan |
 | `0x7e08d7aa` | 2 | `fwd_f2820_to_7e093677_7e08d7aa` | Forwards to the object at `this+2820`: `0x7e093677(*(this+2820))`. | pattern scan |
 | `0x7e08e876` | 1 | `store_1_f252_f256_7e08e876` | `*(this+252) = *(this+256) = 1`. | pattern scan |
-| `0x7e08f4f6` | 1 | `call_7e1e67f6_ret_null_7e08f4f6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e08f55b` | 1 | `call_7e1e67f6_ret_null_7e08f55b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e08f5c0` | 1 | `call_7e1e67f6_ret_null_7e08f5c0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e08f62b` | 1 | `call_7e0840ed_ret_null_7e08f62b` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e092384` | 1 | `call_7e091e69_arg_1_7e092384` | Calls `0x7e091e69` with `d0 = 1`. | pattern scan |
+| `0x7e08f4f6` | 1 | `call_7e1e67f6_ret_null_7e08f4f6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e08f55b` | 1 | `call_7e1e67f6_ret_null_7e08f55b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e08f5c0` | 1 | `call_7e1e67f6_ret_null_7e08f5c0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e08f62b` | 1 | `call_7e0840ed_ret_null_7e08f62b` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). Target: `thunk_to_7e1e67f6_7e0840ed`. | pattern scan |
+| `0x7e092384` | 1 | `call_7e091e69_arg_1_7e092384` | Calls `0x7e091e69` with `d0 = 1`. Target: `CapThr_7e091e69`. | pattern scan |
 | `0x7e0977cf` | 6 | `call2_7e097872_7e0977de_7e0977cf` | Calls `0x7e097872(this)` and then `0x7e0977de(this)`. | pattern scan |
 | `0x7e097b21` | 1 | `store_4_f252_f256_7e097b21` | `*(this+252) = *(this+256) = 4`. | pattern scan |
-| `0x7e097c78` | 1 | `call_7e0840ed_ret_null_7e097c78` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e097c78` | 1 | `call_7e0840ed_ret_null_7e097c78` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). Target: `thunk_to_7e1e67f6_7e0840ed`. | pattern scan |
 | `0x7e0990b6` | 1 | `this_plus_10148_7e0990b6` | Leaf `return this+10148` (address of a member or base sub-object). | pattern scan |
 | `0x7e09b092` | 1 | `fwd_f4_to_7e09924c_7e09b092` | Forwards to the object at `this+4`: `0x7e09924c(*(this+4))`. | pattern scan |
 | `0x7e09b0a0` | 1 | `fwd_f4_to_7e099270_7e09b0a0` | Forwards to the object at `this+4`: `0x7e099270(*(this+4))`. | pattern scan |
@@ -16442,7 +16447,7 @@ what the target does is described at the target, if it is labelled.
 | `0x7e09fe66` | 1 | `fwd_f4_to_7e1ea0fc_7e09fe66` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e09fe79` | 1 | `fwd_f4_to_7e1ea11a_7e09fe79` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
 | `0x7e09ff5a` | 1 | `this_plus_396_7e09ff5a` | Leaf `return this+396` (address of a member or base sub-object). | pattern scan |
-| `0x7e09fff2` | 1 | `call_7e07e91d_ret_null_7e09fff2` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e09fff2` | 1 | `call_7e07e91d_ret_null_7e09fff2` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). Target: `capimg_player_cleanup_7e07`. | pattern scan |
 | `0x7e0a05ed` | 1 | `fwd_f4_to_7e0a0083_7e0a05ed` | Forwards to the object at `this+4`: `0x7e0a0083(*(this+4))`. | pattern scan |
 | `0x7e0a063b` | 1 | `fwd_f4_to_7e0a00b2_7e0a063b` | Forwards to the object at `this+4`: `0x7e0a00b2(*(this+4))`. | pattern scan |
 | `0x7e0a0649` | 1 | `fwd_f4_to_7e0a00b7_7e0a0649` | Forwards to the object at `this+4`: `0x7e0a00b7(*(this+4))`. | pattern scan |
@@ -16462,11 +16467,11 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0a2c68` | 1 | `fwd_f4_to_7e1ea11a_7e0a2c68` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
 | `0x7e0a2cc3` | 1 | `fwd_f4_to_7e1ea0fc_7e0a2cc3` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e0a3bff` | 2 | `fwd_f312_to_7e059284_7e0a3bff` | Forwards to the object at `this+312`: `0x7e059284(*(this+312))`. | pattern scan |
-| `0x7e0a4794` | 1 | `adj_thunk_284_to_7e1e7e39_7e0a4794` | Adds 284 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0a47a2` | 1 | `adj_thunk_308_to_7e1e7e39_7e0a47a2` | Adds 308 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0a47ea` | 1 | `adj_thunk_284_to_7e1e802d_7e0a47ea` | Adds 284 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0a47f8` | 1 | `adj_thunk_308_to_7e1e802d_7e0a47f8` | Adds 308 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0a4c13` | 1 | `call_7e0840ed_ret_null_7e0a4c13` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a4794` | 1 | `adj_thunk_284_to_7e1e7e39_7e0a4794` | Adds 284 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e0a47a2` | 1 | `adj_thunk_308_to_7e1e7e39_7e0a47a2` | Adds 308 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e0a47ea` | 1 | `adj_thunk_284_to_7e1e802d_7e0a47ea` | Adds 284 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e0a47f8` | 1 | `adj_thunk_308_to_7e1e802d_7e0a47f8` | Adds 308 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. Target: `event_subject_remove_observer`. | pattern scan |
+| `0x7e0a4c13` | 1 | `call_7e0840ed_ret_null_7e0a4c13` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). Target: `thunk_to_7e1e67f6_7e0840ed`. | pattern scan |
 | `0x7e0a4e64` | 1 | `this_plus_1108_7e0a4e64` | Leaf `return this+1108` (address of a member or base sub-object). | pattern scan |
 | `0x7e0a662c` | 1 | `store_6_f948_f952_7e0a662c` | `*(this+948) = *(this+952) = 6`. | pattern scan |
 | `0x7e0a6639` | 1 | `call2_7e0a6648_7e0a6702_7e0a6639` | Calls `0x7e0a6648(this)` and then `0x7e0a6702(this)`. | pattern scan |
@@ -16479,9 +16484,9 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0a6d06` | 1 | `store_19_f980_f984_7e0a6d06` | `*(this+980) = *(this+984) = 19`. | pattern scan |
 | `0x7e0a6fd9` | 1 | `store_23_f988_f992_7e0a6fd9` | `*(this+988) = *(this+992) = 23`. | pattern scan |
 | `0x7e0a71ec` | 1 | `fwd_f4_to_7e1ea0fc_7e0a71ec` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
-| `0x7e0a7312` | 1 | `call_7e1e67f6_ret_null_7e0a7312` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0a7375` | 1 | `call_7e1e67f6_ret_null_7e0a7375` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0a73d8` | 1 | `call_7e1e67f6_ret_null_7e0a73d8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a7312` | 1 | `call_7e1e67f6_ret_null_7e0a7312` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0a7375` | 1 | `call_7e1e67f6_ret_null_7e0a7375` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0a73d8` | 1 | `call_7e1e67f6_ret_null_7e0a73d8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0a7585` | 1 | `this_plus_508_7e0a7585` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
 | `0x7e0a79bb` | 1 | `call2_7e0a7ac0_7e0a7c01_7e0a79bb` | Calls `0x7e0a7ac0(this)` and then `0x7e0a7c01(this)`. | pattern scan |
 | `0x7e0a7af9` | 1 | `store_6_f280_f284_7e0a7af9` | `*(this+280) = *(this+284) = 6`. | pattern scan |
@@ -16491,34 +16496,34 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0a7eeb` | 1 | `this_plus_412_7e0a7eeb` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
 | `0x7e0a7fbd` | 1 | `fwd_f296_vslot4_7e0a7fbd` | Forwards to the object at `this+296`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e0a847d` | 1 | `this_plus_452_7e0a847d` | Leaf `return this+452` (address of a member or base sub-object). | pattern scan |
-| `0x7e0a87ce` | 1 | `store_1_f252_call_7e0a8820_7e0a87ce` | `*(this+252) = 1`, then calls `0x7e0a8820`. | pattern scan |
+| `0x7e0a87ce` | 1 | `store_1_f252_call_7e0a8820_7e0a87ce` | `*(this+252) = 1`, then calls `0x7e0a8820`. Target: `entry_thunk_7e0a8820`. | pattern scan |
 | `0x7e0a8b6a` | 1 | `call2_7e0a8b79_7e0a8cdb_7e0a8b6a` | Calls `0x7e0a8b79(this)` and then `0x7e0a8cdb(this)`. | pattern scan |
 | `0x7e0a8df1` | 1 | `fwd_f4_to_7e1ea0fc_7e0a8df1` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e0a8e24` | 1 | `fwd_f4_to_7e1ea11a_7e0a8e24` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
 | `0x7e0a9075` | 1 | `this_plus_568_7e0a9075` | Leaf `return this+568` (address of a member or base sub-object). | pattern scan |
 | `0x7e0aa46e` | 1 | `fwd_f4_to_7e1ea0fc_7e0aa46e` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
-| `0x7e0aa5e5` | 1 | `call_7e1e67f6_ret_null_7e0aa5e5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa64e` | 1 | `call_7e1e67f6_ret_null_7e0aa64e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa6b1` | 1 | `call_7e1e67f6_ret_null_7e0aa6b1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa71a` | 1 | `call_7e1e67f6_ret_null_7e0aa71a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa783` | 1 | `call_7e1e67f6_ret_null_7e0aa783` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa7ec` | 1 | `call_7e1e67f6_ret_null_7e0aa7ec` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa84f` | 1 | `call_7e1e67f6_ret_null_7e0aa84f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aa8b8` | 1 | `call_7e1e67f6_ret_null_7e0aa8b8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa5e5` | 1 | `call_7e1e67f6_ret_null_7e0aa5e5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa64e` | 1 | `call_7e1e67f6_ret_null_7e0aa64e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa6b1` | 1 | `call_7e1e67f6_ret_null_7e0aa6b1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa71a` | 1 | `call_7e1e67f6_ret_null_7e0aa71a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa783` | 1 | `call_7e1e67f6_ret_null_7e0aa783` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa7ec` | 1 | `call_7e1e67f6_ret_null_7e0aa7ec` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa84f` | 1 | `call_7e1e67f6_ret_null_7e0aa84f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aa8b8` | 1 | `call_7e1e67f6_ret_null_7e0aa8b8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0aaa45` | 1 | `this_plus_404_7e0aaa45` | Leaf `return this+404` (address of a member or base sub-object). | pattern scan |
 | `0x7e0abb33` | 1 | `fwd_f8_to_7e1ea0fc_7e0abb33` | Forwards to the object at `this+8`: `0x7e1ea0fc(*(this+8))`. | pattern scan |
 | `0x7e0abb46` | 1 | `fwd_f8_to_7e1ea11a_7e0abb46` | Forwards to the object at `this+8`: `0x7e1ea11a(*(this+8))`. | pattern scan |
 | `0x7e0abe01` | 1 | `this_plus_504_7e0abe01` | Leaf `return this+504` (address of a member or base sub-object). | pattern scan |
-| `0x7e0acb1d` | 1 | `store_4_f252_call_7e1e86dd_7e0acb1d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0acb1d` | 1 | `store_4_f252_call_7e1e86dd_7e0acb1d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0accbc` | 1 | `store_6_f336_f256_7e0accbc` | `*(this+336) = *(this+256) = 6`. | pattern scan |
 | `0x7e0ace08` | 1 | `store_7_f336_f256_7e0ace08` | `*(this+336) = *(this+256) = 7`. | pattern scan |
 | `0x7e0acf85` | 1 | `fwd_f4_to_7e1ea0fc_7e0acf85` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e0ad0c2` | 1 | `this_plus_412_7e0ad0c2` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
 | `0x7e0ad259` | 1 | `fwd_f284_vslot76_7e0ad259` | Forwards to the object at `this+284`: calls its vtable slot `+76`. | pattern scan |
 | `0x7e0ad267` | 1 | `fwd_f284_vslot80_7e0ad267` | Forwards to the object at `this+284`: calls its vtable slot `+80`. | pattern scan |
-| `0x7e0ad3ac` | 1 | `store_1_f252_call_7e0ad3fe_7e0ad3ac` | `*(this+252) = 1`, then calls `0x7e0ad3fe`. | pattern scan |
-| `0x7e0ad469` | 1 | `store_2_f252_call_7e0ad511_7e0ad469` | `*(this+252) = 2`, then calls `0x7e0ad511`. | pattern scan |
-| `0x7e0ad64a` | 1 | `store_4_f252_call_7e1e86dd_7e0ad64a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0ad3ac` | 1 | `store_1_f252_call_7e0ad3fe_7e0ad3ac` | `*(this+252) = 1`, then calls `0x7e0ad3fe`. Target: `entry_thunk_7e0ad3fe`. | pattern scan |
+| `0x7e0ad469` | 1 | `store_2_f252_call_7e0ad511_7e0ad469` | `*(this+252) = 2`, then calls `0x7e0ad511`. Target: `entry_thunk_7e0ad511`. | pattern scan |
+| `0x7e0ad64a` | 1 | `store_4_f252_call_7e1e86dd_7e0ad64a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0ad662` | 1 | `call2_7e0ad64a_7e0ad754_7e0ad662` | Calls `0x7e0ad64a(this)` and then `0x7e0ad754(this)`. | pattern scan |
 | `0x7e0ad70e` | 1 | `store_7_f296_f256_7e0ad70e` | `*(this+296) = *(this+256) = 7`. | pattern scan |
 | `0x7e0ad818` | 1 | `fwd_f4_to_7e0ad186_7e0ad818` | Forwards to the object at `this+4`: `0x7e0ad186(*(this+4))`. | pattern scan |
@@ -16527,10 +16532,10 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0ad8a6` | 1 | `fwd_f4_to_7e0ad267_7e0ad8a6` | Forwards to the object at `this+4`: `0x7e0ad267(*(this+4))`. | pattern scan |
 | `0x7e0ada51` | 1 | `this_plus_680_7e0ada51` | Leaf `return this+680` (address of a member or base sub-object). | pattern scan |
 | `0x7e0ae3fe` | 1 | `call2_7e0ae3d1_7e0ae451_7e0ae3fe` | Calls `0x7e0ae3d1(this)` and then `0x7e0ae451(this)`. | pattern scan |
-| `0x7e0ae750` | 1 | `store_4_f252_call_7e1e86dd_7e0ae750` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0ae750` | 1 | `store_4_f252_call_7e1e86dd_7e0ae750` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0ae768` | 1 | `call2_7e0ae750_7e0aea05_7e0ae768` | Calls `0x7e0ae750(this)` and then `0x7e0aea05(this)`. | pattern scan |
-| `0x7e0aea7c` | 1 | `call_7e1e67f6_ret_null_7e0aea7c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0aeca5` | 1 | `call_7e1e67f6_ret_null_7e0aeca5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aea7c` | 1 | `call_7e1e67f6_ret_null_7e0aea7c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0aeca5` | 1 | `call_7e1e67f6_ret_null_7e0aeca5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0aed16` | 1 | `fwd_f4_to_7e0ae06c_7e0aed16` | Forwards to the object at `this+4`: `0x7e0ae06c(*(this+4))`. | pattern scan |
 | `0x7e0aed42` | 1 | `fwd_f4_to_7e1ea0b0_7e0aed42` | Forwards to the object at `this+4`: `0x7e1ea0b0(*(this+4))`. | pattern scan |
 | `0x7e0aee59` | 1 | `fwd_f4_to_7e0ae0fe_7e0aee59` | Forwards to the object at `this+4`: `0x7e0ae0fe(*(this+4))`. | pattern scan |
@@ -16554,10 +16559,10 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0b1f51` | 1 | `store_4_f252_f256_7e0b1f51` | `*(this+252) = *(this+256) = 4`. | pattern scan |
 | `0x7e0b26f1` | 1 | `this_plus_708_7e0b26f1` | Leaf `return this+708` (address of a member or base sub-object). | pattern scan |
 | `0x7e0b3e9a` | 1 | `call2_7e0b3ea9_7e0b3fb8_7e0b3e9a` | Calls `0x7e0b3ea9(this)` and then `0x7e0b3fb8(this)`. | pattern scan |
-| `0x7e0b3ea9` | 1 | `store_5_f420_call_7e1e86dd_7e0b3ea9` | `*(this+420) = 5`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e0b40b1` | 1 | `store_7_f428_call_7e0b41ae_7e0b40b1` | `*(this+428) = 7`, then calls `0x7e0b41ae`. | pattern scan |
-| `0x7e0b4452` | 1 | `store_13_f428_call_7e0b468a_7e0b4452` | `*(this+428) = 13`, then calls `0x7e0b468a`. | pattern scan |
-| `0x7e0b4a8c` | 1 | `store_21_f428_call_7e0b4aef_7e0b4a8c` | `*(this+428) = 21`, then calls `0x7e0b4aef`. | pattern scan |
+| `0x7e0b3ea9` | 1 | `store_5_f420_call_7e1e86dd_7e0b3ea9` | `*(this+420) = 5`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e0b40b1` | 1 | `store_7_f428_call_7e0b41ae_7e0b40b1` | `*(this+428) = 7`, then calls `0x7e0b41ae`. Target: `entry_thunk_7e0b41ae`. | pattern scan |
+| `0x7e0b4452` | 1 | `store_13_f428_call_7e0b468a_7e0b4452` | `*(this+428) = 13`, then calls `0x7e0b468a`. Target: `entry_thunk_7e0b468a`. | pattern scan |
+| `0x7e0b4a8c` | 1 | `store_21_f428_call_7e0b4aef_7e0b4a8c` | `*(this+428) = 21`, then calls `0x7e0b4aef`. Target: `entry_thunk_7e0b4aef`. | pattern scan |
 | `0x7e0b504c` | 1 | `fwd_f4_to_7e1e7e39_7e0b504c` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
 | `0x7e0b505c` | 1 | `fwd_f8_to_7e1e7e39_7e0b505c` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
 | `0x7e0b506c` | 1 | `fwd_f12_to_7e1e7e39_7e0b506c` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
@@ -16597,29 +16602,29 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0b5285` | 1 | `fwd_f24_to_7e1e802d_7e0b5285` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
 | `0x7e0b5295` | 1 | `fwd_f28_to_7e1e802d_7e0b5295` | Forwards to the object at `this+28`: `0x7e1e802d(*(this+28))`. | pattern scan |
 | `0x7e0b53f0` | 1 | `this_plus_432_7e0b53f0` | Leaf `return this+432` (address of a member or base sub-object). | pattern scan |
-| `0x7e0b569f` | 1 | `call_7e07e91d_ret_null_7e0b569f` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0b569f` | 1 | `call_7e07e91d_ret_null_7e0b569f` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). Target: `capimg_player_cleanup_7e07`. | pattern scan |
 | `0x7e0b6303` | 1 | `this_plus_412_7e0b6303` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
 | `0x7e0b63dd` | 1 | `fwd_f268_vslot4_7e0b63dd` | Forwards to the object at `this+268`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e0b63f0` | 1 | `fwd_f268_vslot8_7e0b63f0` | Forwards to the object at `this+268`: calls its vtable slot `+8`. | pattern scan |
-| `0x7e0b6738` | 1 | `store_4_f252_call_7e1e86dd_7e0b6738` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b6738` | 1 | `store_4_f252_call_7e1e86dd_7e0b6738` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0b675e` | 1 | `call2_7e0b6738_7e0b686f_7e0b675e` | Calls `0x7e0b6738(this)` and then `0x7e0b686f(this)`. | pattern scan |
 | `0x7e0b6877` | 1 | `store_6_f272_f256_7e0b6877` | `*(this+272) = *(this+256) = 6`. | pattern scan |
 | `0x7e0b696f` | 1 | `fwd_f8_to_7e1ea0fc_7e0b696f` | Forwards to the object at `this+8`: `0x7e1ea0fc(*(this+8))`. | pattern scan |
 | `0x7e0b6982` | 1 | `fwd_f8_to_7e1ea11a_7e0b6982` | Forwards to the object at `this+8`: `0x7e1ea11a(*(this+8))`. | pattern scan |
 | `0x7e0b6b93` | 1 | `this_plus_660_7e0b6b93` | Leaf `return this+660` (address of a member or base sub-object). | pattern scan |
-| `0x7e0b740a` | 1 | `store_4_f252_call_7e1e86dd_7e0b740a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b740a` | 1 | `store_4_f252_call_7e1e86dd_7e0b740a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0b7422` | 1 | `call2_7e0b740a_7e0b74f9_7e0b7422` | Calls `0x7e0b740a(this)` and then `0x7e0b74f9(this)`. | pattern scan |
 | `0x7e0b7501` | 1 | `store_6_f340_f256_7e0b7501` | `*(this+340) = *(this+256) = 6`. | pattern scan |
 | `0x7e0b774c` | 1 | `fwd_f12_to_7e1e802d_7e0b774c` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
-| `0x7e0b795f` | 1 | `call_7e205040_ret_null_7e0b795f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0b795f` | 1 | `call_7e205040_ret_null_7e0b795f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7e0b7cfc` | 1 | `this_plus_980_7e0b7cfc` | Leaf `return this+980` (address of a member or base sub-object). | pattern scan |
 | `0x7e0b88f1` | 2 | `fwd_f824_vslot4_7e0b88f1` | Forwards to the object at `this+824`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e0b8ecc` | 2 | `call2_7e0b90ad_7e0b9017_7e0b8ecc` | Calls `0x7e0b90ad(this)` and then `0x7e0b9017(this)`. | pattern scan |
 | `0x7e0b9038` | 1 | `store_6_f840_f844_7e0b9038` | `*(this+840) = *(this+844) = 6`. | pattern scan |
-| `0x7e0b91ec` | 1 | `store_8_f848_call_7e1e86dd_7e0b91ec` | `*(this+848) = 8`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e0b9894` | 1 | `store_13_f848_call_7e1e86dd_7e0b9894` | `*(this+848) = 13`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b91ec` | 1 | `store_8_f848_call_7e1e86dd_7e0b91ec` | `*(this+848) = 8`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e0b9894` | 1 | `store_13_f848_call_7e1e86dd_7e0b9894` | `*(this+848) = 13`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0b9c9e` | 1 | `call2_7e0b9cad_7e0b9da0_7e0b9c9e` | Calls `0x7e0b9cad(this)` and then `0x7e0b9da0(this)`. | pattern scan |
-| `0x7e0b9cad` | 1 | `store_18_f848_call_7e1e86dd_7e0b9cad` | `*(this+848) = 18`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b9cad` | 1 | `store_18_f848_call_7e1e86dd_7e0b9cad` | `*(this+848) = 18`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0ba0b9` | 1 | `fwd_f24_to_7e1e7e39_7e0ba0b9` | Forwards to the object at `this+24`: `0x7e1e7e39(*(this+24))`. | pattern scan |
 | `0x7e0ba0c9` | 1 | `fwd_f8_to_7e1e7e39_7e0ba0c9` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
 | `0x7e0ba0d9` | 1 | `fwd_f12_to_7e1e7e39_7e0ba0d9` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
@@ -16637,9 +16642,9 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0ba39a` | 1 | `fwd_f32_to_7e1e802d_7e0ba39a` | Forwards to the object at `this+32`: `0x7e1e802d(*(this+32))`. | pattern scan |
 | `0x7e0ba3aa` | 1 | `fwd_f36_to_7e1e802d_7e0ba3aa` | Forwards to the object at `this+36`: `0x7e1e802d(*(this+36))`. | pattern scan |
 | `0x7e0ba803` | 1 | `this_plus_724_7e0ba803` | Leaf `return this+724` (address of a member or base sub-object). | pattern scan |
-| `0x7e0bb314` | 1 | `store_4_f252_call_7e1e86dd_7e0bb314` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0bb314` | 1 | `store_4_f252_call_7e1e86dd_7e0bb314` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0bb6cd` | 1 | `call2_7e0bb6dc_7e0bbdbf_7e0bb6cd` | Calls `0x7e0bb6dc(this)` and then `0x7e0bbdbf(this)`. | pattern scan |
-| `0x7e0bbf9e` | 1 | `store_11_f600_call_7e0bc02b_7e0bbf9e` | `*(this+600) = 11`, then calls `0x7e0bc02b`. | pattern scan |
+| `0x7e0bbf9e` | 1 | `store_11_f600_call_7e0bc02b_7e0bbf9e` | `*(this+600) = 11`, then calls `0x7e0bc02b`. Target: `entry_thunk_7e0bc02b`. | pattern scan |
 | `0x7e0bca12` | 1 | `fwd_f8_to_7e1e7e39_7e0bca12` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
 | `0x7e0bca25` | 1 | `fwd_f12_to_7e1e7e39_7e0bca25` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
 | `0x7e0bca35` | 1 | `fwd_f16_to_7e1e7e39_7e0bca35` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
@@ -16654,13 +16659,13 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0bcb4e` | 1 | `fwd_f4_to_7e0bab90_7e0bcb4e` | Forwards to the object at `this+4`: `0x7e0bab90(*(this+4))`. | pattern scan |
 | `0x7e0bcb5c` | 1 | `fwd_f4_to_7e1ea0fc_7e0bcb5c` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
 | `0x7e0bcb72` | 1 | `fwd_f4_to_7e1ea11a_7e0bcb72` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
-| `0x7e0bcc88` | 1 | `call_7e1e67f6_ret_null_7e0bcc88` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0bcceb` | 2 | `call_7e1e67f6_ret_null_7e0bcceb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0bcd54` | 1 | `call_7e1e67f6_ret_null_7e0bcd54` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0bcdbd` | 1 | `call_7e1e67f6_ret_null_7e0bcdbd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0bce20` | 1 | `call_7e1e67f6_ret_null_7e0bce20` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bcc88` | 1 | `call_7e1e67f6_ret_null_7e0bcc88` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0bcceb` | 2 | `call_7e1e67f6_ret_null_7e0bcceb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0bcd54` | 1 | `call_7e1e67f6_ret_null_7e0bcd54` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0bcdbd` | 1 | `call_7e1e67f6_ret_null_7e0bcdbd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0bce20` | 1 | `call_7e1e67f6_ret_null_7e0bce20` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0bcf97` | 1 | `this_plus_1424_7e0bcf97` | Leaf `return this+1424` (address of a member or base sub-object). | pattern scan |
-| `0x7e0be25f` | 1 | `store_4_f252_call_7e1e86dd_7e0be25f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0be25f` | 1 | `store_4_f252_call_7e1e86dd_7e0be25f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0be313` | 1 | `call2_7e0be25f_7e0be8ca_7e0be313` | Calls `0x7e0be25f(this)` and then `0x7e0be8ca(this)`. | pattern scan |
 | `0x7e0be43d` | 2 | `call2_7e0be44c_7e0be776_7e0be43d` | Calls `0x7e0be44c(this)` and then `0x7e0be776(this)`. | pattern scan |
 | `0x7e0beae8` | 1 | `fwd_f8_to_7e1e7e39_7e0beae8` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
@@ -16678,13 +16683,13 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0bfdb9` | 1 | `fwd_f8_to_7e1e802d_7e0bfdb9` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
 | `0x7e0bfdc9` | 1 | `fwd_f4_to_7e1ea11a_7e0bfdc9` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
 | `0x7e0c0630` | 1 | `call2_7e0c063f_7e0c0797_7e0c0630` | Calls `0x7e0c063f(this)` and then `0x7e0c0797(this)`. | pattern scan |
-| `0x7e0c063f` | 1 | `store_8_f396_call_7e1e86dd_7e0c063f` | `*(this+396) = 8`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e0c0d1d` | 1 | `call_7e205040_ret_null_7e0c0d1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c063f` | 1 | `store_8_f396_call_7e1e86dd_7e0c063f` | `*(this+396) = 8`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e0c0d1d` | 1 | `call_7e205040_ret_null_7e0c0d1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7e0c14ea` | 1 | `this_plus_4816_7e0c14ea` | Leaf `return this+4816` (address of a member or base sub-object). | pattern scan |
 | `0x7e0c2d48` | 2 | `call2_7e0c2c16_7e0c2d2f_7e0c2d48` | Calls `0x7e0c2c16(this)` and then `0x7e0c2d2f(this)`. | pattern scan |
 | `0x7e0c3856` | 2 | `fwd_f4148_vslot56_7e0c3856` | Forwards to the object at `this+4148`: calls its vtable slot `+56`. | pattern scan |
 | `0x7e0c3864` | 2 | `fwd_f4148_vslot52_7e0c3864` | Forwards to the object at `this+4148`: calls its vtable slot `+52`. | pattern scan |
-| `0x7e0c38aa` | 7 | `call_7db93fb8_arg_23_7e0c38aa` | Calls `0x7db93fb8` with `d0 = 23`. | pattern scan |
+| `0x7e0c38aa` | 7 | `call_7db93fb8_arg_23_7e0c38aa` | Calls `0x7db93fb8` with `d0 = 23`. Target: `code_lookup_6000`. | pattern scan |
 | `0x7e0c3c36` | 2 | `fwd_f4152_vslot84_7e0c3c36` | Forwards to the object at `this+4152`: calls its vtable slot `+84`. | pattern scan |
 | `0x7e0c3c7a` | 1 | `fwd_f4148_vslot96_7e0c3c7a` | Forwards to the object at `this+4148`: calls its vtable slot `+96`. | pattern scan |
 | `0x7e0c3c88` | 6 | `fwd_f4148_vslot24_7e0c3c88` | Forwards to the object at `this+4148`: calls its vtable slot `+24`. | pattern scan |
@@ -16708,23 +16713,23 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0c4bf1` | 2 | `call2_7e0c4c00_7e0c4c8f_7e0c4bf1` | Calls `0x7e0c4c00(this)` and then `0x7e0c4c8f(this)`. | pattern scan |
 | `0x7e0c4c97` | 1 | `store_17_f4260_f4256_7e0c4c97` | `*(this+4260) = *(this+4256) = 17`. | pattern scan |
 | `0x7e0c4e2b` | 2 | `store_19_f4252_f4256_7e0c4e2b` | `*(this+4252) = *(this+4256) = 19`. | pattern scan |
-| `0x7e0c533f` | 1 | `store_27_f4280_call_7e0c5394_7e0c533f` | `*(this+4280) = 27`, then calls `0x7e0c5394`. | pattern scan |
+| `0x7e0c533f` | 1 | `store_27_f4280_call_7e0c5394_7e0c533f` | `*(this+4280) = 27`, then calls `0x7e0c5394`. Target: `entry_thunk_7e0c5394`. | pattern scan |
 | `0x7e0c55ce` | 1 | `store_30_f4280_f4284_7e0c55ce` | `*(this+4280) = *(this+4284) = 30`. | pattern scan |
-| `0x7e0c57cd` | 1 | `store_33_f4292_call_7e0c6d1a_7e0c57cd` | `*(this+4292) = 33`, then calls `0x7e0c6d1a`. | pattern scan |
+| `0x7e0c57cd` | 1 | `store_33_f4292_call_7e0c6d1a_7e0c57cd` | `*(this+4292) = 33`, then calls `0x7e0c6d1a`. Target: `entry_thunk_7e0c6d1a`. | pattern scan |
 | `0x7e0c61c3` | 3 | `call2_7e0c61d2_7e0c6937_7e0c61c3` | Calls `0x7e0c61d2(this)` and then `0x7e0c6937(this)`. | pattern scan |
-| `0x7e0c682a` | 1 | `store_48_f4308_call_7e0c68d9_7e0c682a` | `*(this+4308) = 48`, then calls `0x7e0c68d9`. | pattern scan |
+| `0x7e0c682a` | 1 | `store_48_f4308_call_7e0c68d9_7e0c682a` | `*(this+4308) = 48`, then calls `0x7e0c68d9`. Target: `entry_thunk_7e0c68d9`. | pattern scan |
 | `0x7e0c718f` | 1 | `store_57_f4292_f4296_7e0c718f` | `*(this+4292) = *(this+4296) = 57`. | pattern scan |
 | `0x7e0c71d2` | 1 | `store_58_f4292_f4296_7e0c71d2` | `*(this+4292) = *(this+4296) = 58`. | pattern scan |
-| `0x7e0c7747` | 2 | `store_63_f4292_call_7e0c7791_7e0c7747` | `*(this+4292) = 63`, then calls `0x7e0c7791`. | pattern scan |
-| `0x7e0c7b37` | 1 | `call_7e1e67f6_ret_null_7e0c7b37` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c7ba0` | 1 | `call_7e1e67f6_ret_null_7e0c7ba0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c7c9b` | 1 | `call_7e1e67f6_ret_null_7e0c7c9b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c7d04` | 1 | `call_7e1e67f6_ret_null_7e0c7d04` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c7d6d` | 1 | `call_7e1e67f6_ret_null_7e0c7d6d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c80cc` | 1 | `call_7e1e67f6_ret_null_7e0c80cc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c8135` | 1 | `call_7e1e67f6_ret_null_7e0c8135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c81e1` | 1 | `call_7e1e67f6_ret_null_7e0c81e1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0c824a` | 1 | `call_7e1e67f6_ret_null_7e0c824a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c7747` | 2 | `store_63_f4292_call_7e0c7791_7e0c7747` | `*(this+4292) = 63`, then calls `0x7e0c7791`. Target: `entry_thunk_7e0c7791`. | pattern scan |
+| `0x7e0c7b37` | 1 | `call_7e1e67f6_ret_null_7e0c7b37` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c7ba0` | 1 | `call_7e1e67f6_ret_null_7e0c7ba0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c7c9b` | 1 | `call_7e1e67f6_ret_null_7e0c7c9b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c7d04` | 1 | `call_7e1e67f6_ret_null_7e0c7d04` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c7d6d` | 1 | `call_7e1e67f6_ret_null_7e0c7d6d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c80cc` | 1 | `call_7e1e67f6_ret_null_7e0c80cc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c8135` | 1 | `call_7e1e67f6_ret_null_7e0c8135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c81e1` | 1 | `call_7e1e67f6_ret_null_7e0c81e1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0c824a` | 1 | `call_7e1e67f6_ret_null_7e0c824a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0c8591` | 1 | `fwd_f76_to_7e1ea0fc_7e0c8591` | Forwards to the object at `this+76`: `0x7e1ea0fc(*(this+76))`. | pattern scan |
 | `0x7e0c85a1` | 1 | `fwd_f76_to_7e1ea10b_7e0c85a1` | Forwards to the object at `this+76`: `0x7e1ea10b(*(this+76))`. | pattern scan |
 | `0x7e0c85b1` | 1 | `fwd_f76_to_7e1ea11a_7e0c85b1` | Forwards to the object at `this+76`: `0x7e1ea11a(*(this+76))`. | pattern scan |
@@ -16735,7 +16740,7 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0c932c` | 1 | `fwd_f16_to_7e1ea0fc_7e0c932c` | Forwards to the object at `this+16`: `0x7e1ea0fc(*(this+16))`. | pattern scan |
 | `0x7e0c933f` | 1 | `fwd_f16_to_7e1ea11a_7e0c933f` | Forwards to the object at `this+16`: `0x7e1ea11a(*(this+16))`. | pattern scan |
 | `0x7e0c94a4` | 1 | `this_plus_512_7e0c94a4` | Leaf `return this+512` (address of a member or base sub-object). | pattern scan |
-| `0x7e0c9ad7` | 1 | `store_4_f252_call_7e1e86dd_7e0c9ad7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0c9ad7` | 1 | `store_4_f252_call_7e1e86dd_7e0c9ad7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0c9aef` | 1 | `call2_7e0c9ad7_7e0c9c12_7e0c9aef` | Calls `0x7e0c9ad7(this)` and then `0x7e0c9c12(this)`. | pattern scan |
 | `0x7e0c9c1a` | 1 | `store_6_f324_f256_7e0c9c1a` | `*(this+324) = *(this+256) = 6`. | pattern scan |
 | `0x7e0c9da4` | 1 | `fwd_f8_to_7e1e7e39_7e0c9da4` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
@@ -16745,9 +16750,9 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0c9e2b` | 1 | `fwd_f12_to_7e1ea0fc_7e0c9e2b` | Forwards to the object at `this+12`: `0x7e1ea0fc(*(this+12))`. | pattern scan |
 | `0x7e0c9e4e` | 1 | `fwd_f12_to_7e1ea11a_7e0c9e4e` | Forwards to the object at `this+12`: `0x7e1ea11a(*(this+12))`. | pattern scan |
 | `0x7e0c9feb` | 1 | `this_plus_636_7e0c9feb` | Leaf `return this+636` (address of a member or base sub-object). | pattern scan |
-| `0x7e0cb2c3` | 1 | `call_7e1e67f6_ret_null_7e0cb2c3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0cb32c` | 1 | `call_7e1e67f6_ret_null_7e0cb32c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0cb395` | 1 | `call_7e1e67f6_ret_null_7e0cb395` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0cb2c3` | 1 | `call_7e1e67f6_ret_null_7e0cb2c3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0cb32c` | 1 | `call_7e1e67f6_ret_null_7e0cb32c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0cb395` | 1 | `call_7e1e67f6_ret_null_7e0cb395` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0cb43c` | 1 | `fwd_f24_to_7e1ea0b0_7e0cb43c` | Forwards to the object at `this+24`: `0x7e1ea0b0(*(this+24))`. | pattern scan |
 | `0x7e0cb44c` | 1 | `fwd_f4_to_7e1e7e39_7e0cb44c` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
 | `0x7e0cb45c` | 1 | `fwd_f8_to_7e1e7e39_7e0cb45c` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
@@ -17407,7 +17412,7 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0d339d` | 1 | `fwd_f2828_vslot2816_7e0d339d` | Forwards to the object at `this+2828`: calls its vtable slot `+2816`. | pattern scan |
 | `0x7e0d3489` | 1 | `fwd_f2828_vslot3400_7e0d3489` | Forwards to the object at `this+2828`: calls its vtable slot `+3400`. | pattern scan |
 | `0x7e0d3f5e` | 7 | `fwd_f188_to_7e0ec703_7e0d3f5e` | Forwards to the object at `this+188`: `0x7e0ec703(*(this+188))`. | pattern scan |
-| `0x7e0d4a4d` | 2 | `call_7e1e67f6_ret_null_7e0d4a4d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d4a4d` | 2 | `call_7e1e67f6_ret_null_7e0d4a4d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0d54c3` | 3 | `fwd_f184_to_7e0ed138_7e0d54c3` | Forwards to the object at `this+184`: `0x7e0ed138(*(this+184))`. | pattern scan |
 | `0x7e0d54d1` | 2 | `fwd_f184_to_7e0ed15e_7e0d54d1` | Forwards to the object at `this+184`: `0x7e0ed15e(*(this+184))`. | pattern scan |
 | `0x7e0d54df` | 1 | `fwd_f184_to_7e0edf6c_7e0d54df` | Forwards to the object at `this+184`: `0x7e0edf6c(*(this+184))`. | pattern scan |
@@ -17438,14 +17443,14 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0d5958` | 1 | `fwd_f184_to_7e0ed1e3_7e0d5958` | Forwards to the object at `this+184`: `0x7e0ed1e3(*(this+184))`. | pattern scan |
 | `0x7e0d5969` | 1 | `fwd_f184_to_7e0edf5e_7e0d5969` | Forwards to the object at `this+184`: `0x7e0edf5e(*(this+184))`. | pattern scan |
 | `0x7e0d597a` | 2 | `fwd_f184_to_7e0ede77_7e0d597a` | Forwards to the object at `this+184`: `0x7e0ede77(*(this+184))`. | pattern scan |
-| `0x7e0d601f` | 3 | `call_7e0d593c_arg_1_7e0d601f` | Calls `0x7e0d593c` with `d0 = 1`. | pattern scan |
-| `0x7e0d6584` | 2 | `call_7e1e67f6_ret_null_7e0d6584` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d65ef` | 2 | `call_7e1e67f6_ret_null_7e0d65ef` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d665a` | 1 | `call_7e1e67f6_ret_null_7e0d665a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d66bf` | 1 | `call_7e1e67f6_ret_null_7e0d66bf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d697c` | 2 | `call_7e1e67f6_ret_null_7e0d697c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d69fb` | 1 | `call_7e1e6239_ret_null_7e0d69fb` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0d7523` | 1 | `store_4_f176_call_7e1e86dd_7e0d7523` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0d601f` | 3 | `call_7e0d593c_arg_1_7e0d601f` | Calls `0x7e0d593c` with `d0 = 1`. Target: `fwd_f184_to_7e0edd33_7e0d593c`. | pattern scan |
+| `0x7e0d6584` | 2 | `call_7e1e67f6_ret_null_7e0d6584` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0d65ef` | 2 | `call_7e1e67f6_ret_null_7e0d65ef` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0d665a` | 1 | `call_7e1e67f6_ret_null_7e0d665a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0d66bf` | 1 | `call_7e1e67f6_ret_null_7e0d66bf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0d697c` | 2 | `call_7e1e67f6_ret_null_7e0d697c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0d69fb` | 1 | `call_7e1e6239_ret_null_7e0d69fb` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e6239`. | pattern scan |
+| `0x7e0d7523` | 1 | `store_4_f176_call_7e1e86dd_7e0d7523` | `*(this+176) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0d7547` | 1 | `call2_7e0d7523_7e0d759a_7e0d7547` | Calls `0x7e0d7523(this)` and then `0x7e0d759a(this)`. | pattern scan |
 | `0x7e0d8d7a` | 1 | `fwd_f440_to_7e0ceb85_7e0d8d7a` | Forwards to the object at `this+440`: `0x7e0ceb85(*(this+440))`. | pattern scan |
 | `0x7e0d9058` | 1 | `store_1_f176_f180_7e0d9058` | `*(this+176) = *(this+180) = 1`. | pattern scan |
@@ -17457,84 +17462,84 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0db397` | 1 | `store_1_f176_f180_7e0db397` | `*(this+176) = *(this+180) = 1`. | pattern scan |
 | `0x7e0db3ac` | 1 | `store_2_f176_f180_7e0db3ac` | `*(this+176) = *(this+180) = 2`. | pattern scan |
 | `0x7e0db4b0` | 1 | `call2_7e0db552_7e0db836_7e0db4b0` | Calls `0x7e0db552(this)` and then `0x7e0db836(this)`. | pattern scan |
-| `0x7e0db852` | 2 | `call_7e1e67f6_ret_null_7e0db852` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0db8bd` | 1 | `call_7e1e67f6_ret_null_7e0db8bd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0db92c` | 1 | `call_7e1e67f6_ret_null_7e0db92c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0db9a4` | 1 | `call_7e1e67f6_ret_null_7e0db9a4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dba18` | 1 | `call_7e1e67f6_ret_null_7e0dba18` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dba83` | 1 | `call_7e1e67f6_ret_null_7e0dba83` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbafe` | 1 | `call_7e1e67f6_ret_null_7e0dbafe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbb69` | 1 | `call_7e1e67f6_ret_null_7e0dbb69` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbbd4` | 1 | `call_7e1e67f6_ret_null_7e0dbbd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbc3f` | 1 | `call_7e1e67f6_ret_null_7e0dbc3f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbcaa` | 1 | `call_7e1e67f6_ret_null_7e0dbcaa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbd15` | 1 | `call_7e1e67f6_ret_null_7e0dbd15` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbde6` | 2 | `call_7e1e67f6_ret_null_7e0dbde6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbe51` | 1 | `call_7e1e67f6_ret_null_7e0dbe51` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbf47` | 1 | `call_7e1e67f6_ret_null_7e0dbf47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dbfb2` | 1 | `call_7e1e67f6_ret_null_7e0dbfb2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc01d` | 1 | `call_7e1e67f6_ret_null_7e0dc01d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc089` | 1 | `call_7e1e67f6_ret_null_7e0dc089` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc0f5` | 1 | `call_7e1e67f6_ret_null_7e0dc0f5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc161` | 1 | `call_7e1e67f6_ret_null_7e0dc161` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc1cd` | 1 | `call_7e1e67f6_ret_null_7e0dc1cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc239` | 1 | `call_7e1e67f6_ret_null_7e0dc239` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc2a5` | 1 | `call_7e1e67f6_ret_null_7e0dc2a5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dc311` | 1 | `call_7e1e67f6_ret_null_7e0dc311` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dcedb` | 1 | `store_4_f176_call_7e1e86dd_7e0dcedb` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0db852` | 2 | `call_7e1e67f6_ret_null_7e0db852` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0db8bd` | 1 | `call_7e1e67f6_ret_null_7e0db8bd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0db92c` | 1 | `call_7e1e67f6_ret_null_7e0db92c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0db9a4` | 1 | `call_7e1e67f6_ret_null_7e0db9a4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dba18` | 1 | `call_7e1e67f6_ret_null_7e0dba18` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dba83` | 1 | `call_7e1e67f6_ret_null_7e0dba83` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbafe` | 1 | `call_7e1e67f6_ret_null_7e0dbafe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbb69` | 1 | `call_7e1e67f6_ret_null_7e0dbb69` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbbd4` | 1 | `call_7e1e67f6_ret_null_7e0dbbd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbc3f` | 1 | `call_7e1e67f6_ret_null_7e0dbc3f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbcaa` | 1 | `call_7e1e67f6_ret_null_7e0dbcaa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbd15` | 1 | `call_7e1e67f6_ret_null_7e0dbd15` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbde6` | 2 | `call_7e1e67f6_ret_null_7e0dbde6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbe51` | 1 | `call_7e1e67f6_ret_null_7e0dbe51` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbf47` | 1 | `call_7e1e67f6_ret_null_7e0dbf47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dbfb2` | 1 | `call_7e1e67f6_ret_null_7e0dbfb2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc01d` | 1 | `call_7e1e67f6_ret_null_7e0dc01d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc089` | 1 | `call_7e1e67f6_ret_null_7e0dc089` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc0f5` | 1 | `call_7e1e67f6_ret_null_7e0dc0f5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc161` | 1 | `call_7e1e67f6_ret_null_7e0dc161` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc1cd` | 1 | `call_7e1e67f6_ret_null_7e0dc1cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc239` | 1 | `call_7e1e67f6_ret_null_7e0dc239` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc2a5` | 1 | `call_7e1e67f6_ret_null_7e0dc2a5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dc311` | 1 | `call_7e1e67f6_ret_null_7e0dc311` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dcedb` | 1 | `store_4_f176_call_7e1e86dd_7e0dcedb` | `*(this+176) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0dcf0c` | 1 | `call2_7e0dcedb_7e0dcf55_7e0dcf0c` | Calls `0x7e0dcedb(this)` and then `0x7e0dcf55(this)`. | pattern scan |
-| `0x7e0dcf6f` | 1 | `call_7e0dd00a_ret_1_7e0dcf6f` | Calls `0x7e0dd00a`, then returns 1. | pattern scan |
+| `0x7e0dcf6f` | 1 | `call_7e0dd00a_ret_1_7e0dcf6f` | Calls `0x7e0dd00a`, then returns 1. Target: `call2_7e0dd019_7e0dd0fb_7e0dd00a`. | pattern scan |
 | `0x7e0dd00a` | 1 | `call2_7e0dd019_7e0dd0fb_7e0dd00a` | Calls `0x7e0dd019(this)` and then `0x7e0dd0fb(this)`. | pattern scan |
-| `0x7e0dd019` | 1 | `store_7_f1980_call_7e0dc440_7e0dd019` | `*(this+1980) = 7`, then calls `0x7e0dc440`. | pattern scan |
-| `0x7e0dd1a3` | 1 | `call_7e1e67f6_ret_null_7e0dd1a3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dd1fe` | 1 | `call_7e1e67f6_ret_null_7e0dd1fe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dd25a` | 1 | `call_7e1e67f6_ret_null_7e0dd25a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dd019` | 1 | `store_7_f1980_call_7e0dc440_7e0dd019` | `*(this+1980) = 7`, then calls `0x7e0dc440`. Target: `CmpSts_PanoramaCombineController_7e0dc440`. | pattern scan |
+| `0x7e0dd1a3` | 1 | `call_7e1e67f6_ret_null_7e0dd1a3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dd1fe` | 1 | `call_7e1e67f6_ret_null_7e0dd1fe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dd25a` | 1 | `call_7e1e67f6_ret_null_7e0dd25a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0dd6fa` | 1 | `call2_7e0dd70c_7e0dd7a4_7e0dd6fa` | Calls `0x7e0dd70c(this)` and then `0x7e0dd7a4(this)`. | pattern scan |
-| `0x7e0dd70c` | 1 | `store_4_f176_call_7e1e86dd_7e0dd70c` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0dd70c` | 1 | `store_4_f176_call_7e1e86dd_7e0dd70c` | `*(this+176) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e0dd7ac` | 1 | `store_5_f192_f180_7e0dd7ac` | `*(this+192) = *(this+180) = 5`. | pattern scan |
 | `0x7e0dd92a` | 1 | `store_7_f192_f180_7e0dd92a` | `*(this+192) = *(this+180) = 7`. | pattern scan |
 | `0x7e0ddda8` | 1 | `store_5_f192_f180_7e0ddda8` | `*(this+192) = *(this+180) = 5`. | pattern scan |
 | `0x7e0dde27` | 1 | `store_6_f192_f180_7e0dde27` | `*(this+192) = *(this+180) = 6`. | pattern scan |
 | `0x7e0ddeb3` | 1 | `store_7_f192_f180_7e0ddeb3` | `*(this+192) = *(this+180) = 7`. | pattern scan |
-| `0x7e0df78f` | 1 | `call_7e1e67f6_ret_null_7e0df78f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0df7fa` | 1 | `call_7e1e67f6_ret_null_7e0df7fa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0df865` | 1 | `call_7e1e67f6_ret_null_7e0df865` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0df8d0` | 1 | `call_7e1e67f6_ret_null_7e0df8d0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0df93b` | 1 | `call_7e1e67f6_ret_null_7e0df93b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0df9a6` | 1 | `call_7e1e67f6_ret_null_7e0df9a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dfa11` | 1 | `call_7e1e67f6_ret_null_7e0dfa11` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dfa76` | 1 | `call_7e1e67f6_ret_null_7e0dfa76` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dfadb` | 1 | `call_7e1e67f6_ret_null_7e0dfadb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dfb46` | 1 | `call_7e1e67f6_ret_null_7e0dfb46` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0dfbb1` | 1 | `call_7e1e67f6_ret_null_7e0dfbb1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df78f` | 1 | `call_7e1e67f6_ret_null_7e0df78f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0df7fa` | 1 | `call_7e1e67f6_ret_null_7e0df7fa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0df865` | 1 | `call_7e1e67f6_ret_null_7e0df865` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0df8d0` | 1 | `call_7e1e67f6_ret_null_7e0df8d0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0df93b` | 1 | `call_7e1e67f6_ret_null_7e0df93b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0df9a6` | 1 | `call_7e1e67f6_ret_null_7e0df9a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dfa11` | 1 | `call_7e1e67f6_ret_null_7e0dfa11` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dfa76` | 1 | `call_7e1e67f6_ret_null_7e0dfa76` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dfadb` | 1 | `call_7e1e67f6_ret_null_7e0dfadb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dfb46` | 1 | `call_7e1e67f6_ret_null_7e0dfb46` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0dfbb1` | 1 | `call_7e1e67f6_ret_null_7e0dfbb1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e0dfdb3` | 2 | `this_plus_996_7e0dfdb3` | Leaf `return this+996` (address of a member or base sub-object). | pattern scan |
-| `0x7e0e0652` | 1 | `call_7e1e49f1_on_0_7e0e0652` | Calls `0x7e1e49f1` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e0e0652` | 1 | `call_7e1e49f1_on_0_7e0e0652` | Calls `0x7e1e49f1` with `a0 = 0x0` (a fixed address). Target: `global_60452068_set_7e1e49f1`. | pattern scan |
 | `0x7e0e4e78` | 1 | `store_14_f976_f256_7e0e4e78` | `*(this+976) = *(this+256) = 14`. | pattern scan |
 | `0x7e0e4edf` | 1 | `call2_7e0e4eee_7e0e51b7_7e0e4edf` | Calls `0x7e0e4eee(this)` and then `0x7e0e51b7(this)`. | pattern scan |
-| `0x7e0e6791` | 9 | `adj_thunk_356_to_7dfc0ad2_7e0e6791` | Adds 356 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0e679f` | 1 | `adj_thunk_356_to_7dfc0b9f_7e0e679f` | Adds 356 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0e6802` | 5 | `adj_thunk_536_to_7dfc0ad2_7e0e6802` | Adds 536 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0e6810` | 2 | `adj_thunk_536_to_7dfc0b9f_7e0e6810` | Adds 536 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
-| `0x7e0e6ab3` | 1 | `store_2_f252_call_7e0e6c9b_7e0e6ab3` | `*(this+252) = 2`, then calls `0x7e0e6c9b`. | pattern scan |
-| `0x7e0e6ff0` | 2 | `call_7e1e67f6_ret_null_7e0e6ff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e705b` | 2 | `call_7e1e67f6_ret_null_7e0e705b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e70c6` | 2 | `call_7e1e67f6_ret_null_7e0e70c6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e7135` | 1 | `call_7e1e67f6_ret_null_7e0e7135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e71ad` | 1 | `call_7e1e67f6_ret_null_7e0e71ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e7216` | 1 | `call_7e1e67f6_ret_null_7e0e7216` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e727f` | 1 | `call_7e1e67f6_ret_null_7e0e727f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e8d6b` | 1 | `call_7e1e67f6_ret_null_7e0e8d6b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e8dd4` | 1 | `call_7e1e67f6_ret_null_7e0e8dd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e8ec6` | 1 | `call_7e1e67f6_ret_null_7e0e8ec6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e8f2f` | 1 | `call_7e1e67f6_ret_null_7e0e8f2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e9003` | 1 | `call_7e1e67f6_ret_null_7e0e9003` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0e906c` | 1 | `call_7e1e67f6_ret_null_7e0e906c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0ea396` | 1 | `call_7e205040_ret_null_7e0ea396` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e0ecbcb` | 1 | `call_7e0edd17_arg_1_7e0ecbcb` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
-| `0x7e0ecf2d` | 1 | `call_7e0edd17_arg_1_7e0ecf2d` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
-| `0x7e0ecf37` | 1 | `call_7e0edd17_arg_1_7e0ecf37` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
-| `0x7e0ecf41` | 1 | `call_7e0edd33_arg_1_7e0ecf41` | Calls `0x7e0edd33` with `d0 = 1`. | pattern scan |
-| `0x7e0ecf4b` | 1 | `call_7e0edd33_arg_1_7e0ecf4b` | Calls `0x7e0edd33` with `d0 = 1`. | pattern scan |
+| `0x7e0e6791` | 9 | `adj_thunk_356_to_7dfc0ad2_7e0e6791` | Adds 356 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
+| `0x7e0e679f` | 1 | `adj_thunk_356_to_7dfc0b9f_7e0e679f` | Adds 356 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. Target: `vec_erase_value_swap`. | pattern scan |
+| `0x7e0e6802` | 5 | `adj_thunk_536_to_7dfc0ad2_7e0e6802` | Adds 536 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
+| `0x7e0e6810` | 2 | `adj_thunk_536_to_7dfc0b9f_7e0e6810` | Adds 536 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. Target: `vec_erase_value_swap`. | pattern scan |
+| `0x7e0e6ab3` | 1 | `store_2_f252_call_7e0e6c9b_7e0e6ab3` | `*(this+252) = 2`, then calls `0x7e0e6c9b`. Target: `entry_thunk_7e0e6c9b`. | pattern scan |
+| `0x7e0e6ff0` | 2 | `call_7e1e67f6_ret_null_7e0e6ff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e705b` | 2 | `call_7e1e67f6_ret_null_7e0e705b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e70c6` | 2 | `call_7e1e67f6_ret_null_7e0e70c6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e7135` | 1 | `call_7e1e67f6_ret_null_7e0e7135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e71ad` | 1 | `call_7e1e67f6_ret_null_7e0e71ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e7216` | 1 | `call_7e1e67f6_ret_null_7e0e7216` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e727f` | 1 | `call_7e1e67f6_ret_null_7e0e727f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e8d6b` | 1 | `call_7e1e67f6_ret_null_7e0e8d6b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e8dd4` | 1 | `call_7e1e67f6_ret_null_7e0e8dd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e8ec6` | 1 | `call_7e1e67f6_ret_null_7e0e8ec6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e8f2f` | 1 | `call_7e1e67f6_ret_null_7e0e8f2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e9003` | 1 | `call_7e1e67f6_ret_null_7e0e9003` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0e906c` | 1 | `call_7e1e67f6_ret_null_7e0e906c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e0ea396` | 1 | `call_7e205040_ret_null_7e0ea396` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e0ecbcb` | 1 | `call_7e0edd17_arg_1_7e0ecbcb` | Calls `0x7e0edd17` with `d0 = 1`. Target: `fwd_f160_to_7e0b0ce3_7e0edd17`. | pattern scan |
+| `0x7e0ecf2d` | 1 | `call_7e0edd17_arg_1_7e0ecf2d` | Calls `0x7e0edd17` with `d0 = 1`. Target: `fwd_f160_to_7e0b0ce3_7e0edd17`. | pattern scan |
+| `0x7e0ecf37` | 1 | `call_7e0edd17_arg_1_7e0ecf37` | Calls `0x7e0edd17` with `d0 = 1`. Target: `fwd_f160_to_7e0b0ce3_7e0edd17`. | pattern scan |
+| `0x7e0ecf41` | 1 | `call_7e0edd33_arg_1_7e0ecf41` | Calls `0x7e0edd33` with `d0 = 1`. Target: `fwd_f160_to_7e0b0de1_7e0edd33`. | pattern scan |
+| `0x7e0ecf4b` | 1 | `call_7e0edd33_arg_1_7e0ecf4b` | Calls `0x7e0edd33` with `d0 = 1`. Target: `fwd_f160_to_7e0b0de1_7e0edd33`. | pattern scan |
 | `0x7e0ecfae` | 1 | `fwd_f168_vslot260_7e0ecfae` | Forwards to the object at `this+168`: calls its vtable slot `+260`. | pattern scan |
 | `0x7e0ed18c` | 1 | `fwd_f160_to_7e0afc89_7e0ed18c` | Forwards to the object at `this+160`: `0x7e0afc89(*(this+160))`. | pattern scan |
 | `0x7e0ed249` | 1 | `fwd_f160_to_7e0b094a_7e0ed249` | Forwards to the object at `this+160`: `0x7e0b094a(*(this+160))`. | pattern scan |
@@ -17566,11 +17571,11 @@ what the target does is described at the target, if it is labelled.
 | `0x7e0edf5e` | 1 | `fwd_f160_to_7e0af9e6_7e0edf5e` | Forwards to the object at `this+160`: `0x7e0af9e6(*(this+160))`. | pattern scan |
 | `0x7e0edf6c` | 1 | `fwd_f160_to_7e0afb87_7e0edf6c` | Forwards to the object at `this+160`: `0x7e0afb87(*(this+160))`. | pattern scan |
 | `0x7e0edf8a` | 1 | `fwd_f160_to_7e0afc03_7e0edf8a` | Forwards to the object at `this+160`: `0x7e0afc03(*(this+160))`. | pattern scan |
-| `0x7e0efe5d` | 8 | `call_7e1e49fa_on_0_7e0efe5d` | Calls `0x7e1e49fa` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e0efe5d` | 8 | `call_7e1e49fa_on_0_7e0efe5d` | Calls `0x7e1e49fa` with `a0 = 0x0` (a fixed address). Target: `global_6045206c_set_7e1e49fa`. | pattern scan |
 | `0x7e0f3745` | 1 | `fwd_f604_to_7e09810d_7e0f3745` | Forwards to the object at `this+604`: `0x7e09810d(*(this+604))`. | pattern scan |
 | `0x7e0f383b` | 10 | `fwd_f612_to_7e08c508_7e0f383b` | Forwards to the object at `this+612`: `0x7e08c508(*(this+612))`. | pattern scan |
 | `0x7e100020` | 8 | `fwd_f620_to_7e092c54_7e100020` | Forwards to the object at `this+620`: `0x7e092c54(*(this+620))`. | pattern scan |
-| `0x7e10067e` | 8 | `call_7e1002ad_arg_1_7e10067e` | Calls `0x7e1002ad` with `d0 = 1`. | pattern scan |
+| `0x7e10067e` | 8 | `call_7e1002ad_arg_1_7e10067e` | Calls `0x7e1002ad` with `d0 = 1`. Target: `cmpsqp_start_highlight_7e10`. | pattern scan |
 | `0x7e1024a4` | 7 | `call_7e107fc9_arg_1_7e1024a4` | Calls `0x7e107fc9` with `d0 = 1`. | pattern scan |
 | `0x7e10345f` | 1 | `call2_7e1059ae_7e10504d_7e10345f` | Calls `0x7e1059ae(this)` and then `0x7e10504d(this)`. | pattern scan |
 | `0x7e1038d7` | 1 | `fwd_f612_to_7e08c318_7e1038d7` | Forwards to the object at `this+612`: `0x7e08c318(*(this+612))`. | pattern scan |
@@ -17579,7 +17584,7 @@ what the target does is described at the target, if it is labelled.
 | `0x7e10534d` | 3 | `fwd_f612_to_7e08c5bc_7e10534d` | Forwards to the object at `this+612`: `0x7e08c5bc(*(this+612))`. | pattern scan |
 | `0x7e10efbd` | 7 | `call_7e100b31_arg_2_7e10efbd` | Calls `0x7e100b31` with `d0 = 2`. | pattern scan |
 | `0x7e111c00` | 1 | `fwd_f584_to_7e0d5548_7e111c00` | Forwards to the object at `this+584`: `0x7e0d5548(*(this+584))`. | pattern scan |
-| `0x7e113d1a` | 2 | `call_7e10ab6a_arg_10_7e113d1a` | Calls `0x7e10ab6a` with `d0 = 10`. | pattern scan |
+| `0x7e113d1a` | 2 | `call_7e10ab6a_arg_10_7e113d1a` | Calls `0x7e10ab6a` with `d0 = 10`. Target: `cmpsqp_flag_clear_7e10`. | pattern scan |
 | `0x7e113e62` | 1 | `call_7e114801_arg_33554444_7e113e62` | Calls `0x7e114801` with `d0 = 33554444`. | pattern scan |
 | `0x7e113e70` | 1 | `call_7e114801_arg_33685516_7e113e70` | Calls `0x7e114801` with `d0 = 33685516`. | pattern scan |
 | `0x7e113e7e` | 1 | `call_7e114801_arg_33686528_7e113e7e` | Calls `0x7e114801` with `d0 = 33686528`. | pattern scan |
@@ -17597,23 +17602,23 @@ what the target does is described at the target, if it is labelled.
 | `0x7e113f26` | 1 | `call_7e114801_arg_50331649_7e113f26` | Calls `0x7e114801` with `d0 = 50331649`. | pattern scan |
 | `0x7e113f34` | 1 | `call_7e114801_arg_50331648_7e113f34` | Calls `0x7e114801` with `d0 = 50331648`. | pattern scan |
 | `0x7e113f42` | 1 | `call_7e114801_arg_33690147_7e113f42` | Calls `0x7e114801` with `d0 = 33690147`. | pattern scan |
-| `0x7e11414e` | 1 | `call_7e114828_arg_33554444_7e11414e` | Calls `0x7e114828` with `d0 = 33554444`. | pattern scan |
-| `0x7e11415c` | 1 | `call_7e114828_arg_33685516_7e11415c` | Calls `0x7e114828` with `d0 = 33685516`. | pattern scan |
-| `0x7e11416a` | 1 | `call_7e114828_arg_33686528_7e11416a` | Calls `0x7e114828` with `d0 = 33686528`. | pattern scan |
-| `0x7e114178` | 1 | `call_7e114828_arg_33686785_7e114178` | Calls `0x7e114828` with `d0 = 33686785`. | pattern scan |
-| `0x7e114186` | 1 | `call_7e114828_arg_33690886_7e114186` | Calls `0x7e114828` with `d0 = 33690886`. | pattern scan |
-| `0x7e114194` | 1 | `call_7e114828_arg_33690904_7e114194` | Calls `0x7e114828` with `d0 = 33690904`. | pattern scan |
-| `0x7e1141a2` | 1 | `call_7e114828_arg_67764338_7e1141a2` | Calls `0x7e114828` with `d0 = 67764338`. | pattern scan |
-| `0x7e1141b0` | 1 | `call_7e114828_arg_67764337_7e1141b0` | Calls `0x7e114828` with `d0 = 67764337`. | pattern scan |
-| `0x7e1141be` | 1 | `call_7e114828_arg_16777474_7e1141be` | Calls `0x7e114828` with `d0 = 16777474`. | pattern scan |
-| `0x7e1141cc` | 1 | `call_7e114828_arg_67829888_7e1141cc` | Calls `0x7e114828` with `d0 = 67829888`. | pattern scan |
-| `0x7e1141da` | 1 | `call_7e114828_arg_67502176_7e1141da` | Calls `0x7e114828` with `d0 = 67502176`. | pattern scan |
-| `0x7e1141e8` | 1 | `call_7e114828_arg_67502177_7e1141e8` | Calls `0x7e114828` with `d0 = 67502177`. | pattern scan |
-| `0x7e1141f6` | 1 | `call_7e114828_arg_16777489_7e1141f6` | Calls `0x7e114828` with `d0 = 16777489`. | pattern scan |
-| `0x7e114204` | 1 | `call_7e114828_arg_33697802_7e114204` | Calls `0x7e114828` with `d0 = 33697802`. | pattern scan |
-| `0x7e114212` | 1 | `call_7e114828_arg_50331649_7e114212` | Calls `0x7e114828` with `d0 = 50331649`. | pattern scan |
-| `0x7e114220` | 1 | `call_7e114828_arg_50331648_7e114220` | Calls `0x7e114828` with `d0 = 50331648`. | pattern scan |
-| `0x7e11422e` | 1 | `call_7e114828_arg_33690147_7e11422e` | Calls `0x7e114828` with `d0 = 33690147`. | pattern scan |
+| `0x7e11414e` | 1 | `call_7e114828_arg_33554444_7e11414e` | Calls `0x7e114828` with `d0 = 33554444`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e11415c` | 1 | `call_7e114828_arg_33685516_7e11415c` | Calls `0x7e114828` with `d0 = 33685516`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e11416a` | 1 | `call_7e114828_arg_33686528_7e11416a` | Calls `0x7e114828` with `d0 = 33686528`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114178` | 1 | `call_7e114828_arg_33686785_7e114178` | Calls `0x7e114828` with `d0 = 33686785`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114186` | 1 | `call_7e114828_arg_33690886_7e114186` | Calls `0x7e114828` with `d0 = 33690886`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114194` | 1 | `call_7e114828_arg_33690904_7e114194` | Calls `0x7e114828` with `d0 = 33690904`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141a2` | 1 | `call_7e114828_arg_67764338_7e1141a2` | Calls `0x7e114828` with `d0 = 67764338`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141b0` | 1 | `call_7e114828_arg_67764337_7e1141b0` | Calls `0x7e114828` with `d0 = 67764337`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141be` | 1 | `call_7e114828_arg_16777474_7e1141be` | Calls `0x7e114828` with `d0 = 16777474`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141cc` | 1 | `call_7e114828_arg_67829888_7e1141cc` | Calls `0x7e114828` with `d0 = 67829888`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141da` | 1 | `call_7e114828_arg_67502176_7e1141da` | Calls `0x7e114828` with `d0 = 67502176`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141e8` | 1 | `call_7e114828_arg_67502177_7e1141e8` | Calls `0x7e114828` with `d0 = 67502177`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e1141f6` | 1 | `call_7e114828_arg_16777489_7e1141f6` | Calls `0x7e114828` with `d0 = 16777489`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114204` | 1 | `call_7e114828_arg_33697802_7e114204` | Calls `0x7e114828` with `d0 = 33697802`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114212` | 1 | `call_7e114828_arg_50331649_7e114212` | Calls `0x7e114828` with `d0 = 50331649`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e114220` | 1 | `call_7e114828_arg_50331648_7e114220` | Calls `0x7e114828` with `d0 = 50331648`. Target: `entry_stub_7e114828`. | pattern scan |
+| `0x7e11422e` | 1 | `call_7e114828_arg_33690147_7e11422e` | Calls `0x7e114828` with `d0 = 33690147`. Target: `entry_stub_7e114828`. | pattern scan |
 | `0x7e114473` | 1 | `call_7e11486e_arg_33554444_7e114473` | Calls `0x7e11486e` with `d0 = 33554444`. | pattern scan |
 | `0x7e114481` | 1 | `call_7e11486e_arg_33685516_7e114481` | Calls `0x7e11486e` with `d0 = 33685516`. | pattern scan |
 | `0x7e11448f` | 1 | `call_7e11486e_arg_33686528_7e11448f` | Calls `0x7e11486e` with `d0 = 33686528`. | pattern scan |
@@ -17635,230 +17640,230 @@ what the target does is described at the target, if it is labelled.
 | `0x7e114814` | 2 | `call_7e11498a_arg_64_7e114814` | Calls `0x7e11498a` with `d0 = 64`. | pattern scan |
 | `0x7e11481e` | 1 | `call_7e11498a_arg_32_7e11481e` | Calls `0x7e11498a` with `d0 = 32`. | pattern scan |
 | `0x7e114968` | 1 | `fwd_f560_vslot144_7e114968` | Forwards to the object at `this+560`: calls its vtable slot `+144`. | pattern scan |
-| `0x7e114a33` | 1 | `call_7e106d9e_arg_4_7e114a33` | Calls `0x7e106d9e` with `d0 = 4`. | pattern scan |
+| `0x7e114a33` | 1 | `call_7e106d9e_arg_4_7e114a33` | Calls `0x7e106d9e` with `d0 = 4`. Target: `cmpsqp_restart_dispatch`. | pattern scan |
 | `0x7e114b98` | 1 | `fwd_f592_to_7e0de16f_7e114b98` | Forwards to the object at `this+592`: `0x7e0de16f(*(this+592))`. | pattern scan |
 | `0x7e116eb9` | 1 | `fwd_f568_to_7e0da577_7e116eb9` | Forwards to the object at `this+568`: `0x7e0da577(*(this+568))`. | pattern scan |
 | `0x7e1176e1` | 1 | `fwd_f568_to_7e0da85c_7e1176e1` | Forwards to the object at `this+568`: `0x7e0da85c(*(this+568))`. | pattern scan |
 | `0x7e1176f2` | 6 | `fwd_f568_to_7e0da7e9_7e1176f2` | Forwards to the object at `this+568`: `0x7e0da7e9(*(this+568))`. | pattern scan |
 | `0x7e117703` | 3 | `fwd_f568_to_7e0da821_7e117703` | Forwards to the object at `this+568`: `0x7e0da821(*(this+568))`. | pattern scan |
-| `0x7e11b104` | 3 | `call_7e11b10e_arg_6_7e11b104` | Calls `0x7e11b10e` with `d0 = 6`. | pattern scan |
+| `0x7e11b104` | 3 | `call_7e11b10e_arg_6_7e11b104` | Calls `0x7e11b10e` with `d0 = 6`. Target: `set_u16_f672_7e11b10e`. | pattern scan |
 | `0x7e11c44f` | 1 | `call2_7e11c505_7e11e192_7e11c44f` | Calls `0x7e11c505(this)` and then `0x7e11e192(this)`. | pattern scan |
 | `0x7e11e27c` | 1 | `store_8_f452_f456_7e11e27c` | `*(this+452) = *(this+456) = 8`. | pattern scan |
 | `0x7e11e2b7` | 2 | `call2_7e11e2c6_7e11e831_7e11e2b7` | Calls `0x7e11e2c6(this)` and then `0x7e11e831(this)`. | pattern scan |
-| `0x7e11e2c6` | 1 | `store_9_f452_call_7e1e86dd_7e11e2c6` | `*(this+452) = 9`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e11e2c6` | 1 | `store_9_f452_call_7e1e86dd_7e11e2c6` | `*(this+452) = 9`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e11eca9` | 1 | `store_11_f460_f456_7e11eca9` | `*(this+460) = *(this+456) = 11`. | pattern scan |
 | `0x7e11ecc6` | 1 | `store_12_f460_f456_7e11ecc6` | `*(this+460) = *(this+456) = 12`. | pattern scan |
 | `0x7e11ece3` | 1 | `store_13_f460_f456_7e11ece3` | `*(this+460) = *(this+456) = 13`. | pattern scan |
 | `0x7e11f0b9` | 1 | `call2_7e11f0c8_7e11f3cb_7e11f0b9` | Calls `0x7e11f0c8(this)` and then `0x7e11f3cb(this)`. | pattern scan |
-| `0x7e11f0c8` | 1 | `store_17_f452_call_7e1e86dd_7e11f0c8` | `*(this+452) = 17`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e11f0c8` | 1 | `store_17_f452_call_7e1e86dd_7e11f0c8` | `*(this+452) = 17`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e11f293` | 1 | `store_18_f464_f456_7e11f293` | `*(this+464) = *(this+456) = 18`. | pattern scan |
 | `0x7e11f803` | 1 | `store_22_f464_f456_7e11f803` | `*(this+464) = *(this+456) = 22`. | pattern scan |
 | `0x7e11f851` | 1 | `store_23_f452_f456_7e11f851` | `*(this+452) = *(this+456) = 23`. | pattern scan |
 | `0x7e11ff34` | 1 | `call2_7e11ff43_7e120460_7e11ff34` | Calls `0x7e11ff43(this)` and then `0x7e120460(this)`. | pattern scan |
-| `0x7e11ff43` | 1 | `store_25_f452_call_7e1e86dd_7e11ff43` | `*(this+452) = 25`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e11ff43` | 1 | `store_25_f452_call_7e1e86dd_7e11ff43` | `*(this+452) = 25`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e12044b` | 1 | `store_27_f468_f456_7e12044b` | `*(this+468) = *(this+456) = 27`. | pattern scan |
 | `0x7e12054d` | 1 | `store_29_f452_f456_7e12054d` | `*(this+452) = *(this+456) = 29`. | pattern scan |
-| `0x7e12267f` | 1 | `store_6_f664_call_7e1238e4_7e12267f` | `*(this+664) = 6`, then calls `0x7e1238e4`. | pattern scan |
+| `0x7e12267f` | 1 | `store_6_f664_call_7e1238e4_7e12267f` | `*(this+664) = 6`, then calls `0x7e1238e4`. Target: `entry_thunk_7e1238e4`. | pattern scan |
 | `0x7e122a99` | 1 | `call2_7e122aed_7e122c6d_7e122a99` | Calls `0x7e122aed(this)` and then `0x7e122c6d(this)`. | pattern scan |
-| `0x7e12322c` | 1 | `store_11_f672_call_7e123369_7e12322c` | `*(this+672) = 11`, then calls `0x7e123369`. | pattern scan |
-| `0x7e12351b` | 1 | `store_15_f672_call_7e123658_7e12351b` | `*(this+672) = 15`, then calls `0x7e123658`. | pattern scan |
+| `0x7e12322c` | 1 | `store_11_f672_call_7e123369_7e12322c` | `*(this+672) = 11`, then calls `0x7e123369`. Target: `entry_thunk_7e123369`. | pattern scan |
+| `0x7e12351b` | 1 | `store_15_f672_call_7e123658_7e12351b` | `*(this+672) = 15`, then calls `0x7e123658`. Target: `entry_thunk_7e123658`. | pattern scan |
 | `0x7e1238ec` | 2 | `store_19_f672_f668_7e1238ec` | `*(this+672) = *(this+668) = 19`. | pattern scan |
 | `0x7e124141` | 2 | `store_21_f672_f668_7e124141` | `*(this+672) = *(this+668) = 21`. | pattern scan |
-| `0x7e1241fb` | 1 | `store_23_f704_call_7e124426_7e1241fb` | `*(this+704) = 23`, then calls `0x7e124426`. | pattern scan |
+| `0x7e1241fb` | 1 | `store_23_f704_call_7e124426_7e1241fb` | `*(this+704) = 23`, then calls `0x7e124426`. Target: `entry_thunk_7e124426`. | pattern scan |
 | `0x7e12442e` | 1 | `store_26_f712_f708_7e12442e` | `*(this+712) = *(this+708) = 26`. | pattern scan |
-| `0x7e12454b` | 1 | `store_28_f716_call_7e1248b9_7e12454b` | `*(this+716) = 28`, then calls `0x7e1248b9`. | pattern scan |
+| `0x7e12454b` | 1 | `store_28_f716_call_7e1248b9_7e12454b` | `*(this+716) = 28`, then calls `0x7e1248b9`. Target: `entry_thunk_7e1248b9`. | pattern scan |
 | `0x7e1246e9` | 1 | `store_29_f724_f720_7e1246e9` | `*(this+724) = *(this+720) = 29`. | pattern scan |
 | `0x7e1248c1` | 1 | `store_31_f724_f720_7e1248c1` | `*(this+724) = *(this+720) = 31`. | pattern scan |
-| `0x7e124a53` | 1 | `store_33_f728_call_7e124a6d_7e124a53` | `*(this+728) = 33`, then calls `0x7e124a6d`. | pattern scan |
-| `0x7e124ffa` | 1 | `call_7e1e6239_ret_null_7e124ffa` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e125731` | 1 | `store_4_f176_call_7e1e86dd_7e125731` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e124a53` | 1 | `store_33_f728_call_7e124a6d_7e124a53` | `*(this+728) = 33`, then calls `0x7e124a6d`. Target: `entry_thunk_7e124a6d`. | pattern scan |
+| `0x7e124ffa` | 1 | `call_7e1e6239_ret_null_7e124ffa` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e6239`. | pattern scan |
+| `0x7e125731` | 1 | `store_4_f176_call_7e1e86dd_7e125731` | `*(this+176) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e125749` | 1 | `call2_7e125731_7e1258d2_7e125749` | Calls `0x7e125731(this)` and then `0x7e1258d2(this)`. | pattern scan |
-| `0x7e125db5` | 1 | `call_7e192164_ret_null_7e125db5` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e125db5` | 1 | `call_7e192164_ret_null_7e125db5` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e192164`. | pattern scan |
 | `0x7e126413` | 1 | `call2_7e126425_7e127bf4_7e126413` | Calls `0x7e126425(this)` and then `0x7e127bf4(this)`. | pattern scan |
-| `0x7e126425` | 1 | `store_4_f252_call_7e1e86dd_7e126425` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e126425` | 1 | `store_4_f252_call_7e1e86dd_7e126425` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e130e9b` | 2 | `call2_7e130eaa_7e130f64_7e130e9b` | Calls `0x7e130eaa(this)` and then `0x7e130f64(this)`. | pattern scan |
-| `0x7e131715` | 1 | `store_11_f11816_call_7e13175f_7e131715` | `*(this+11816) = 11`, then calls `0x7e13175f`. | pattern scan |
-| `0x7e1317b6` | 1 | `store_13_f11816_call_7e131800_7e1317b6` | `*(this+11816) = 13`, then calls `0x7e131800`. | pattern scan |
-| `0x7e131824` | 1 | `store_56_f11816_call_7e13186e_7e131824` | `*(this+11816) = 56`, then calls `0x7e13186e`. | pattern scan |
-| `0x7e1324e6` | 1 | `store_58_f11816_call_7e132530_7e1324e6` | `*(this+11816) = 58`, then calls `0x7e132530`. | pattern scan |
-| `0x7e132719` | 1 | `store_61_f11816_call_7e132763_7e132719` | `*(this+11816) = 61`, then calls `0x7e132763`. | pattern scan |
-| `0x7e132b09` | 1 | `store_63_f11816_call_7e132b53_7e132b09` | `*(this+11816) = 63`, then calls `0x7e132b53`. | pattern scan |
-| `0x7e132c1d` | 1 | `store_66_f11816_call_7e132c67_7e132c1d` | `*(this+11816) = 66`, then calls `0x7e132c67`. | pattern scan |
-| `0x7e132d19` | 1 | `store_68_f11816_call_7e132d63_7e132d19` | `*(this+11816) = 68`, then calls `0x7e132d63`. | pattern scan |
-| `0x7e132f84` | 1 | `store_70_f11816_call_7e132fce_7e132f84` | `*(this+11816) = 70`, then calls `0x7e132fce`. | pattern scan |
-| `0x7e1332e0` | 1 | `store_72_f11816_call_7e13332a_7e1332e0` | `*(this+11816) = 72`, then calls `0x7e13332a`. | pattern scan |
-| `0x7e1334f6` | 1 | `store_74_f11816_call_7e133540_7e1334f6` | `*(this+11816) = 74`, then calls `0x7e133540`. | pattern scan |
-| `0x7e133602` | 1 | `store_76_f11816_call_7e13364c_7e133602` | `*(this+11816) = 76`, then calls `0x7e13364c`. | pattern scan |
-| `0x7e133758` | 1 | `store_79_f11816_call_7e1337a2_7e133758` | `*(this+11816) = 79`, then calls `0x7e1337a2`. | pattern scan |
-| `0x7e133939` | 1 | `store_81_f11816_call_7e133983_7e133939` | `*(this+11816) = 81`, then calls `0x7e133983`. | pattern scan |
-| `0x7e133bee` | 1 | `store_83_f11816_call_7e133c38_7e133bee` | `*(this+11816) = 83`, then calls `0x7e133c38`. | pattern scan |
-| `0x7e133d47` | 1 | `store_85_f11816_call_7e133d91_7e133d47` | `*(this+11816) = 85`, then calls `0x7e133d91`. | pattern scan |
-| `0x7e133e43` | 1 | `store_87_f11816_call_7e133e8d_7e133e43` | `*(this+11816) = 87`, then calls `0x7e133e8d`. | pattern scan |
-| `0x7e133f66` | 1 | `store_89_f11816_call_7e133fb0_7e133f66` | `*(this+11816) = 89`, then calls `0x7e133fb0`. | pattern scan |
-| `0x7e134074` | 1 | `store_16_f11816_call_7e1340be_7e134074` | `*(this+11816) = 16`, then calls `0x7e1340be`. | pattern scan |
-| `0x7e1340e2` | 1 | `store_18_f11816_call_7e13412c_7e1340e2` | `*(this+11816) = 18`, then calls `0x7e13412c`. | pattern scan |
-| `0x7e134150` | 1 | `store_20_f11816_call_7e13419a_7e134150` | `*(this+11816) = 20`, then calls `0x7e13419a`. | pattern scan |
-| `0x7e1341be` | 1 | `store_22_f11816_call_7e134208_7e1341be` | `*(this+11816) = 22`, then calls `0x7e134208`. | pattern scan |
-| `0x7e13422c` | 1 | `store_24_f11816_call_7e134276_7e13422c` | `*(this+11816) = 24`, then calls `0x7e134276`. | pattern scan |
-| `0x7e13429a` | 1 | `store_26_f11816_call_7e1342e4_7e13429a` | `*(this+11816) = 26`, then calls `0x7e1342e4`. | pattern scan |
-| `0x7e134308` | 1 | `store_28_f11816_call_7e134352_7e134308` | `*(this+11816) = 28`, then calls `0x7e134352`. | pattern scan |
-| `0x7e1343c0` | 1 | `store_30_f11816_call_7e13440a_7e1343c0` | `*(this+11816) = 30`, then calls `0x7e13440a`. | pattern scan |
-| `0x7e13442e` | 1 | `store_32_f11816_call_7e134478_7e13442e` | `*(this+11816) = 32`, then calls `0x7e134478`. | pattern scan |
-| `0x7e13449c` | 1 | `store_34_f11816_call_7e1344e6_7e13449c` | `*(this+11816) = 34`, then calls `0x7e1344e6`. | pattern scan |
-| `0x7e13450a` | 1 | `store_36_f11816_call_7e134554_7e13450a` | `*(this+11816) = 36`, then calls `0x7e134554`. | pattern scan |
-| `0x7e13464a` | 1 | `store_38_f11816_call_7e134694_7e13464a` | `*(this+11816) = 38`, then calls `0x7e134694`. | pattern scan |
-| `0x7e1346b8` | 1 | `store_40_f11816_call_7e134702_7e1346b8` | `*(this+11816) = 40`, then calls `0x7e134702`. | pattern scan |
-| `0x7e134726` | 1 | `store_42_f11816_call_7e13477e_7e134726` | `*(this+11816) = 42`, then calls `0x7e13477e`. | pattern scan |
-| `0x7e1347a2` | 1 | `store_44_f11816_call_7e1347ec_7e1347a2` | `*(this+11816) = 44`, then calls `0x7e1347ec`. | pattern scan |
-| `0x7e134810` | 1 | `store_46_f11816_call_7e13485a_7e134810` | `*(this+11816) = 46`, then calls `0x7e13485a`. | pattern scan |
+| `0x7e131715` | 1 | `store_11_f11816_call_7e13175f_7e131715` | `*(this+11816) = 11`, then calls `0x7e13175f`. Target: `entry_thunk_7e13175f`. | pattern scan |
+| `0x7e1317b6` | 1 | `store_13_f11816_call_7e131800_7e1317b6` | `*(this+11816) = 13`, then calls `0x7e131800`. Target: `entry_thunk_7e131800`. | pattern scan |
+| `0x7e131824` | 1 | `store_56_f11816_call_7e13186e_7e131824` | `*(this+11816) = 56`, then calls `0x7e13186e`. Target: `entry_thunk_7e13186e`. | pattern scan |
+| `0x7e1324e6` | 1 | `store_58_f11816_call_7e132530_7e1324e6` | `*(this+11816) = 58`, then calls `0x7e132530`. Target: `entry_thunk_7e132530`. | pattern scan |
+| `0x7e132719` | 1 | `store_61_f11816_call_7e132763_7e132719` | `*(this+11816) = 61`, then calls `0x7e132763`. Target: `entry_thunk_7e132763`. | pattern scan |
+| `0x7e132b09` | 1 | `store_63_f11816_call_7e132b53_7e132b09` | `*(this+11816) = 63`, then calls `0x7e132b53`. Target: `entry_thunk_7e132b53`. | pattern scan |
+| `0x7e132c1d` | 1 | `store_66_f11816_call_7e132c67_7e132c1d` | `*(this+11816) = 66`, then calls `0x7e132c67`. Target: `entry_thunk_7e132c67`. | pattern scan |
+| `0x7e132d19` | 1 | `store_68_f11816_call_7e132d63_7e132d19` | `*(this+11816) = 68`, then calls `0x7e132d63`. Target: `entry_thunk_7e132d63`. | pattern scan |
+| `0x7e132f84` | 1 | `store_70_f11816_call_7e132fce_7e132f84` | `*(this+11816) = 70`, then calls `0x7e132fce`. Target: `entry_thunk_7e132fce`. | pattern scan |
+| `0x7e1332e0` | 1 | `store_72_f11816_call_7e13332a_7e1332e0` | `*(this+11816) = 72`, then calls `0x7e13332a`. Target: `entry_thunk_7e13332a`. | pattern scan |
+| `0x7e1334f6` | 1 | `store_74_f11816_call_7e133540_7e1334f6` | `*(this+11816) = 74`, then calls `0x7e133540`. Target: `entry_thunk_7e133540`. | pattern scan |
+| `0x7e133602` | 1 | `store_76_f11816_call_7e13364c_7e133602` | `*(this+11816) = 76`, then calls `0x7e13364c`. Target: `entry_thunk_7e13364c`. | pattern scan |
+| `0x7e133758` | 1 | `store_79_f11816_call_7e1337a2_7e133758` | `*(this+11816) = 79`, then calls `0x7e1337a2`. Target: `entry_thunk_7e1337a2`. | pattern scan |
+| `0x7e133939` | 1 | `store_81_f11816_call_7e133983_7e133939` | `*(this+11816) = 81`, then calls `0x7e133983`. Target: `entry_thunk_7e133983`. | pattern scan |
+| `0x7e133bee` | 1 | `store_83_f11816_call_7e133c38_7e133bee` | `*(this+11816) = 83`, then calls `0x7e133c38`. Target: `entry_thunk_7e133c38`. | pattern scan |
+| `0x7e133d47` | 1 | `store_85_f11816_call_7e133d91_7e133d47` | `*(this+11816) = 85`, then calls `0x7e133d91`. Target: `entry_thunk_7e133d91`. | pattern scan |
+| `0x7e133e43` | 1 | `store_87_f11816_call_7e133e8d_7e133e43` | `*(this+11816) = 87`, then calls `0x7e133e8d`. Target: `entry_thunk_7e133e8d`. | pattern scan |
+| `0x7e133f66` | 1 | `store_89_f11816_call_7e133fb0_7e133f66` | `*(this+11816) = 89`, then calls `0x7e133fb0`. Target: `entry_thunk_7e133fb0`. | pattern scan |
+| `0x7e134074` | 1 | `store_16_f11816_call_7e1340be_7e134074` | `*(this+11816) = 16`, then calls `0x7e1340be`. Target: `entry_thunk_7e1340be`. | pattern scan |
+| `0x7e1340e2` | 1 | `store_18_f11816_call_7e13412c_7e1340e2` | `*(this+11816) = 18`, then calls `0x7e13412c`. Target: `entry_thunk_7e13412c`. | pattern scan |
+| `0x7e134150` | 1 | `store_20_f11816_call_7e13419a_7e134150` | `*(this+11816) = 20`, then calls `0x7e13419a`. Target: `entry_thunk_7e13419a`. | pattern scan |
+| `0x7e1341be` | 1 | `store_22_f11816_call_7e134208_7e1341be` | `*(this+11816) = 22`, then calls `0x7e134208`. Target: `entry_thunk_7e134208`. | pattern scan |
+| `0x7e13422c` | 1 | `store_24_f11816_call_7e134276_7e13422c` | `*(this+11816) = 24`, then calls `0x7e134276`. Target: `entry_thunk_7e134276`. | pattern scan |
+| `0x7e13429a` | 1 | `store_26_f11816_call_7e1342e4_7e13429a` | `*(this+11816) = 26`, then calls `0x7e1342e4`. Target: `entry_thunk_7e1342e4`. | pattern scan |
+| `0x7e134308` | 1 | `store_28_f11816_call_7e134352_7e134308` | `*(this+11816) = 28`, then calls `0x7e134352`. Target: `entry_thunk_7e134352`. | pattern scan |
+| `0x7e1343c0` | 1 | `store_30_f11816_call_7e13440a_7e1343c0` | `*(this+11816) = 30`, then calls `0x7e13440a`. Target: `entry_thunk_7e13440a`. | pattern scan |
+| `0x7e13442e` | 1 | `store_32_f11816_call_7e134478_7e13442e` | `*(this+11816) = 32`, then calls `0x7e134478`. Target: `entry_thunk_7e134478`. | pattern scan |
+| `0x7e13449c` | 1 | `store_34_f11816_call_7e1344e6_7e13449c` | `*(this+11816) = 34`, then calls `0x7e1344e6`. Target: `entry_thunk_7e1344e6`. | pattern scan |
+| `0x7e13450a` | 1 | `store_36_f11816_call_7e134554_7e13450a` | `*(this+11816) = 36`, then calls `0x7e134554`. Target: `entry_thunk_7e134554`. | pattern scan |
+| `0x7e13464a` | 1 | `store_38_f11816_call_7e134694_7e13464a` | `*(this+11816) = 38`, then calls `0x7e134694`. Target: `entry_thunk_7e134694`. | pattern scan |
+| `0x7e1346b8` | 1 | `store_40_f11816_call_7e134702_7e1346b8` | `*(this+11816) = 40`, then calls `0x7e134702`. Target: `entry_thunk_7e134702`. | pattern scan |
+| `0x7e134726` | 1 | `store_42_f11816_call_7e13477e_7e134726` | `*(this+11816) = 42`, then calls `0x7e13477e`. Target: `entry_thunk_7e13477e`. | pattern scan |
+| `0x7e1347a2` | 1 | `store_44_f11816_call_7e1347ec_7e1347a2` | `*(this+11816) = 44`, then calls `0x7e1347ec`. Target: `entry_thunk_7e1347ec`. | pattern scan |
+| `0x7e134810` | 1 | `store_46_f11816_call_7e13485a_7e134810` | `*(this+11816) = 46`, then calls `0x7e13485a`. Target: `entry_thunk_7e13485a`. | pattern scan |
 | `0x7e141ea0` | 2 | `call2_7e141eaf_7e1420b6_7e141ea0` | Calls `0x7e141eaf(this)` and then `0x7e1420b6(this)`. | pattern scan |
-| `0x7e14274f` | 1 | `store_57_f15652_call_7e142799_7e14274f` | `*(this+15652) = 57`, then calls `0x7e142799`. | pattern scan |
-| `0x7e142d1a` | 1 | `store_59_f15652_call_7e142d64_7e142d1a` | `*(this+15652) = 59`, then calls `0x7e142d64`. | pattern scan |
-| `0x7e142f48` | 1 | `store_61_f15652_call_7e142f92_7e142f48` | `*(this+15652) = 61`, then calls `0x7e142f92`. | pattern scan |
-| `0x7e143105` | 1 | `store_11_f15652_call_7e14314f_7e143105` | `*(this+15652) = 11`, then calls `0x7e14314f`. | pattern scan |
-| `0x7e1431f0` | 1 | `store_64_f15652_call_7e14323a_7e1431f0` | `*(this+15652) = 64`, then calls `0x7e14323a`. | pattern scan |
-| `0x7e143407` | 1 | `store_70_f15652_call_7e143451_7e143407` | `*(this+15652) = 70`, then calls `0x7e143451`. | pattern scan |
-| `0x7e14388b` | 1 | `store_72_f15652_call_7e1438d5_7e14388b` | `*(this+15652) = 72`, then calls `0x7e1438d5`. | pattern scan |
-| `0x7e143ac3` | 1 | `store_13_f15652_call_7e143b0d_7e143ac3` | `*(this+15652) = 13`, then calls `0x7e143b0d`. | pattern scan |
-| `0x7e143b31` | 1 | `store_74_f15652_call_7e143b7b_7e143b31` | `*(this+15652) = 74`, then calls `0x7e143b7b`. | pattern scan |
-| `0x7e143f1f` | 1 | `store_76_f15652_call_7e143f69_7e143f1f` | `*(this+15652) = 76`, then calls `0x7e143f69`. | pattern scan |
-| `0x7e14423b` | 1 | `store_78_f15652_call_7e144285_7e14423b` | `*(this+15652) = 78`, then calls `0x7e144285`. | pattern scan |
-| `0x7e1448a9` | 1 | `store_80_f15652_call_7e144cc2_7e1448a9` | `*(this+15652) = 80`, then calls `0x7e144cc2`. | pattern scan |
-| `0x7e144e3e` | 1 | `store_83_f15652_call_7e144e88_7e144e3e` | `*(this+15652) = 83`, then calls `0x7e144e88`. | pattern scan |
-| `0x7e1450a1` | 1 | `store_16_f15652_call_7e1450eb_7e1450a1` | `*(this+15652) = 16`, then calls `0x7e1450eb`. | pattern scan |
-| `0x7e14510f` | 1 | `store_18_f15652_call_7e145159_7e14510f` | `*(this+15652) = 18`, then calls `0x7e145159`. | pattern scan |
-| `0x7e14517d` | 1 | `store_20_f15652_call_7e1451c7_7e14517d` | `*(this+15652) = 20`, then calls `0x7e1451c7`. | pattern scan |
-| `0x7e1451eb` | 1 | `store_85_f15652_call_7e145235_7e1451eb` | `*(this+15652) = 85`, then calls `0x7e145235`. | pattern scan |
-| `0x7e1452f5` | 1 | `store_87_f15652_call_7e14533f_7e1452f5` | `*(this+15652) = 87`, then calls `0x7e14533f`. | pattern scan |
-| `0x7e14595c` | 1 | `store_22_f15652_call_7e1459a6_7e14595c` | `*(this+15652) = 22`, then calls `0x7e1459a6`. | pattern scan |
-| `0x7e1459ca` | 1 | `store_24_f15652_call_7e145a14_7e1459ca` | `*(this+15652) = 24`, then calls `0x7e145a14`. | pattern scan |
-| `0x7e145a38` | 1 | `store_26_f15652_call_7e145a82_7e145a38` | `*(this+15652) = 26`, then calls `0x7e145a82`. | pattern scan |
-| `0x7e145aa6` | 1 | `store_28_f15652_call_7e145af0_7e145aa6` | `*(this+15652) = 28`, then calls `0x7e145af0`. | pattern scan |
-| `0x7e145b14` | 1 | `store_30_f15652_call_7e145b5e_7e145b14` | `*(this+15652) = 30`, then calls `0x7e145b5e`. | pattern scan |
-| `0x7e145b82` | 1 | `store_32_f15652_call_7e145bcc_7e145b82` | `*(this+15652) = 32`, then calls `0x7e145bcc`. | pattern scan |
-| `0x7e145bf0` | 1 | `store_34_f15652_call_7e145c3a_7e145bf0` | `*(this+15652) = 34`, then calls `0x7e145c3a`. | pattern scan |
-| `0x7e145c5e` | 1 | `store_89_f15652_call_7e145ca8_7e145c5e` | `*(this+15652) = 89`, then calls `0x7e145ca8`. | pattern scan |
-| `0x7e1463f6` | 1 | `store_91_f15652_call_7e146440_7e1463f6` | `*(this+15652) = 91`, then calls `0x7e146440`. | pattern scan |
-| `0x7e146741` | 1 | `store_93_f15652_call_7e14678b_7e146741` | `*(this+15652) = 93`, then calls `0x7e14678b`. | pattern scan |
-| `0x7e146d24` | 1 | `store_95_f15652_call_7e146d6e_7e146d24` | `*(this+15652) = 95`, then calls `0x7e146d6e`. | pattern scan |
-| `0x7e146fd5` | 1 | `store_97_f15652_call_7e14701f_7e146fd5` | `*(this+15652) = 97`, then calls `0x7e14701f`. | pattern scan |
-| `0x7e1472bf` | 1 | `store_99_f15652_call_7e147309_7e1472bf` | `*(this+15652) = 99`, then calls `0x7e147309`. | pattern scan |
-| `0x7e14750e` | 1 | `store_36_f15652_call_7e147558_7e14750e` | `*(this+15652) = 36`, then calls `0x7e147558`. | pattern scan |
-| `0x7e14764e` | 1 | `store_101_f15652_call_7e147698_7e14764e` | `*(this+15652) = 101`, then calls `0x7e147698`. | pattern scan |
-| `0x7e1478de` | 1 | `store_38_f15652_call_7e147928_7e1478de` | `*(this+15652) = 38`, then calls `0x7e147928`. | pattern scan |
-| `0x7e1479e0` | 1 | `store_108_f15652_call_7e147a2a_7e1479e0` | `*(this+15652) = 108`, then calls `0x7e147a2a`. | pattern scan |
-| `0x7e147b01` | 1 | `store_40_f15652_call_7e147b4b_7e147b01` | `*(this+15652) = 40`, then calls `0x7e147b4b`. | pattern scan |
-| `0x7e147b6f` | 1 | `store_42_f15652_call_7e147bc7_7e147b6f` | `*(this+15652) = 42`, then calls `0x7e147bc7`. | pattern scan |
-| `0x7e147beb` | 1 | `store_44_f15652_call_7e147c35_7e147beb` | `*(this+15652) = 44`, then calls `0x7e147c35`. | pattern scan |
-| `0x7e147c59` | 1 | `store_110_f15652_call_7e147ca3_7e147c59` | `*(this+15652) = 110`, then calls `0x7e147ca3`. | pattern scan |
-| `0x7e147deb` | 1 | `store_46_f15652_call_7e147e35_7e147deb` | `*(this+15652) = 46`, then calls `0x7e147e35`. | pattern scan |
-| `0x7e147e59` | 1 | `store_112_f15652_call_7e147ea3_7e147e59` | `*(this+15652) = 112`, then calls `0x7e147ea3`. | pattern scan |
-| `0x7e147fd5` | 1 | `store_114_f15652_call_7e14801f_7e147fd5` | `*(this+15652) = 114`, then calls `0x7e14801f`. | pattern scan |
-| `0x7e14819d` | 1 | `store_116_f15652_call_7e1481e7_7e14819d` | `*(this+15652) = 116`, then calls `0x7e1481e7`. | pattern scan |
-| `0x7e148911` | 1 | `call_7e1e67f6_ret_null_7e148911` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14274f` | 1 | `store_57_f15652_call_7e142799_7e14274f` | `*(this+15652) = 57`, then calls `0x7e142799`. Target: `entry_thunk_7e142799`. | pattern scan |
+| `0x7e142d1a` | 1 | `store_59_f15652_call_7e142d64_7e142d1a` | `*(this+15652) = 59`, then calls `0x7e142d64`. Target: `entry_thunk_7e142d64`. | pattern scan |
+| `0x7e142f48` | 1 | `store_61_f15652_call_7e142f92_7e142f48` | `*(this+15652) = 61`, then calls `0x7e142f92`. Target: `entry_thunk_7e142f92`. | pattern scan |
+| `0x7e143105` | 1 | `store_11_f15652_call_7e14314f_7e143105` | `*(this+15652) = 11`, then calls `0x7e14314f`. Target: `entry_thunk_7e14314f`. | pattern scan |
+| `0x7e1431f0` | 1 | `store_64_f15652_call_7e14323a_7e1431f0` | `*(this+15652) = 64`, then calls `0x7e14323a`. Target: `entry_thunk_7e14323a`. | pattern scan |
+| `0x7e143407` | 1 | `store_70_f15652_call_7e143451_7e143407` | `*(this+15652) = 70`, then calls `0x7e143451`. Target: `entry_thunk_7e143451`. | pattern scan |
+| `0x7e14388b` | 1 | `store_72_f15652_call_7e1438d5_7e14388b` | `*(this+15652) = 72`, then calls `0x7e1438d5`. Target: `entry_thunk_7e1438d5`. | pattern scan |
+| `0x7e143ac3` | 1 | `store_13_f15652_call_7e143b0d_7e143ac3` | `*(this+15652) = 13`, then calls `0x7e143b0d`. Target: `entry_thunk_7e143b0d`. | pattern scan |
+| `0x7e143b31` | 1 | `store_74_f15652_call_7e143b7b_7e143b31` | `*(this+15652) = 74`, then calls `0x7e143b7b`. Target: `entry_thunk_7e143b7b`. | pattern scan |
+| `0x7e143f1f` | 1 | `store_76_f15652_call_7e143f69_7e143f1f` | `*(this+15652) = 76`, then calls `0x7e143f69`. Target: `entry_thunk_7e143f69`. | pattern scan |
+| `0x7e14423b` | 1 | `store_78_f15652_call_7e144285_7e14423b` | `*(this+15652) = 78`, then calls `0x7e144285`. Target: `entry_thunk_7e144285`. | pattern scan |
+| `0x7e1448a9` | 1 | `store_80_f15652_call_7e144cc2_7e1448a9` | `*(this+15652) = 80`, then calls `0x7e144cc2`. Target: `entry_thunk_7e144cc2`. | pattern scan |
+| `0x7e144e3e` | 1 | `store_83_f15652_call_7e144e88_7e144e3e` | `*(this+15652) = 83`, then calls `0x7e144e88`. Target: `entry_thunk_7e144e88`. | pattern scan |
+| `0x7e1450a1` | 1 | `store_16_f15652_call_7e1450eb_7e1450a1` | `*(this+15652) = 16`, then calls `0x7e1450eb`. Target: `entry_thunk_7e1450eb`. | pattern scan |
+| `0x7e14510f` | 1 | `store_18_f15652_call_7e145159_7e14510f` | `*(this+15652) = 18`, then calls `0x7e145159`. Target: `entry_thunk_7e145159`. | pattern scan |
+| `0x7e14517d` | 1 | `store_20_f15652_call_7e1451c7_7e14517d` | `*(this+15652) = 20`, then calls `0x7e1451c7`. Target: `entry_thunk_7e1451c7`. | pattern scan |
+| `0x7e1451eb` | 1 | `store_85_f15652_call_7e145235_7e1451eb` | `*(this+15652) = 85`, then calls `0x7e145235`. Target: `entry_thunk_7e145235`. | pattern scan |
+| `0x7e1452f5` | 1 | `store_87_f15652_call_7e14533f_7e1452f5` | `*(this+15652) = 87`, then calls `0x7e14533f`. Target: `entry_thunk_7e14533f`. | pattern scan |
+| `0x7e14595c` | 1 | `store_22_f15652_call_7e1459a6_7e14595c` | `*(this+15652) = 22`, then calls `0x7e1459a6`. Target: `entry_thunk_7e1459a6`. | pattern scan |
+| `0x7e1459ca` | 1 | `store_24_f15652_call_7e145a14_7e1459ca` | `*(this+15652) = 24`, then calls `0x7e145a14`. Target: `entry_thunk_7e145a14`. | pattern scan |
+| `0x7e145a38` | 1 | `store_26_f15652_call_7e145a82_7e145a38` | `*(this+15652) = 26`, then calls `0x7e145a82`. Target: `entry_thunk_7e145a82`. | pattern scan |
+| `0x7e145aa6` | 1 | `store_28_f15652_call_7e145af0_7e145aa6` | `*(this+15652) = 28`, then calls `0x7e145af0`. Target: `entry_thunk_7e145af0`. | pattern scan |
+| `0x7e145b14` | 1 | `store_30_f15652_call_7e145b5e_7e145b14` | `*(this+15652) = 30`, then calls `0x7e145b5e`. Target: `entry_thunk_7e145b5e`. | pattern scan |
+| `0x7e145b82` | 1 | `store_32_f15652_call_7e145bcc_7e145b82` | `*(this+15652) = 32`, then calls `0x7e145bcc`. Target: `entry_thunk_7e145bcc`. | pattern scan |
+| `0x7e145bf0` | 1 | `store_34_f15652_call_7e145c3a_7e145bf0` | `*(this+15652) = 34`, then calls `0x7e145c3a`. Target: `entry_thunk_7e145c3a`. | pattern scan |
+| `0x7e145c5e` | 1 | `store_89_f15652_call_7e145ca8_7e145c5e` | `*(this+15652) = 89`, then calls `0x7e145ca8`. Target: `entry_thunk_7e145ca8`. | pattern scan |
+| `0x7e1463f6` | 1 | `store_91_f15652_call_7e146440_7e1463f6` | `*(this+15652) = 91`, then calls `0x7e146440`. Target: `entry_thunk_7e146440`. | pattern scan |
+| `0x7e146741` | 1 | `store_93_f15652_call_7e14678b_7e146741` | `*(this+15652) = 93`, then calls `0x7e14678b`. Target: `entry_thunk_7e14678b`. | pattern scan |
+| `0x7e146d24` | 1 | `store_95_f15652_call_7e146d6e_7e146d24` | `*(this+15652) = 95`, then calls `0x7e146d6e`. Target: `entry_thunk_7e146d6e`. | pattern scan |
+| `0x7e146fd5` | 1 | `store_97_f15652_call_7e14701f_7e146fd5` | `*(this+15652) = 97`, then calls `0x7e14701f`. Target: `entry_thunk_7e14701f`. | pattern scan |
+| `0x7e1472bf` | 1 | `store_99_f15652_call_7e147309_7e1472bf` | `*(this+15652) = 99`, then calls `0x7e147309`. Target: `entry_thunk_7e147309`. | pattern scan |
+| `0x7e14750e` | 1 | `store_36_f15652_call_7e147558_7e14750e` | `*(this+15652) = 36`, then calls `0x7e147558`. Target: `entry_thunk_7e147558`. | pattern scan |
+| `0x7e14764e` | 1 | `store_101_f15652_call_7e147698_7e14764e` | `*(this+15652) = 101`, then calls `0x7e147698`. Target: `entry_thunk_7e147698`. | pattern scan |
+| `0x7e1478de` | 1 | `store_38_f15652_call_7e147928_7e1478de` | `*(this+15652) = 38`, then calls `0x7e147928`. Target: `entry_thunk_7e147928`. | pattern scan |
+| `0x7e1479e0` | 1 | `store_108_f15652_call_7e147a2a_7e1479e0` | `*(this+15652) = 108`, then calls `0x7e147a2a`. Target: `entry_thunk_7e147a2a`. | pattern scan |
+| `0x7e147b01` | 1 | `store_40_f15652_call_7e147b4b_7e147b01` | `*(this+15652) = 40`, then calls `0x7e147b4b`. Target: `entry_thunk_7e147b4b`. | pattern scan |
+| `0x7e147b6f` | 1 | `store_42_f15652_call_7e147bc7_7e147b6f` | `*(this+15652) = 42`, then calls `0x7e147bc7`. Target: `entry_thunk_7e147bc7`. | pattern scan |
+| `0x7e147beb` | 1 | `store_44_f15652_call_7e147c35_7e147beb` | `*(this+15652) = 44`, then calls `0x7e147c35`. Target: `entry_thunk_7e147c35`. | pattern scan |
+| `0x7e147c59` | 1 | `store_110_f15652_call_7e147ca3_7e147c59` | `*(this+15652) = 110`, then calls `0x7e147ca3`. Target: `entry_thunk_7e147ca3`. | pattern scan |
+| `0x7e147deb` | 1 | `store_46_f15652_call_7e147e35_7e147deb` | `*(this+15652) = 46`, then calls `0x7e147e35`. Target: `entry_thunk_7e147e35`. | pattern scan |
+| `0x7e147e59` | 1 | `store_112_f15652_call_7e147ea3_7e147e59` | `*(this+15652) = 112`, then calls `0x7e147ea3`. Target: `entry_thunk_7e147ea3`. | pattern scan |
+| `0x7e147fd5` | 1 | `store_114_f15652_call_7e14801f_7e147fd5` | `*(this+15652) = 114`, then calls `0x7e14801f`. Target: `entry_thunk_7e14801f`. | pattern scan |
+| `0x7e14819d` | 1 | `store_116_f15652_call_7e1481e7_7e14819d` | `*(this+15652) = 116`, then calls `0x7e1481e7`. Target: `entry_thunk_7e1481e7`. | pattern scan |
+| `0x7e148911` | 1 | `call_7e1e67f6_ret_null_7e148911` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e148f00` | 1 | `this_plus_112_7e148f00` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e149658` | 1 | `call2_7e14966a_7e14b090_7e149658` | Calls `0x7e14966a(this)` and then `0x7e14b090(this)`. | pattern scan |
-| `0x7e14966a` | 1 | `store_4_f252_call_7e1e86dd_7e14966a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e14b595` | 1 | `call_7e1e67f6_ret_null_7e14b595` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14966a` | 1 | `store_4_f252_call_7e1e86dd_7e14966a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e14b595` | 1 | `call_7e1e67f6_ret_null_7e14b595` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e14b77d` | 1 | `this_plus_112_7e14b77d` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e14b803` | 1 | `call_7e192164_ret_null_7e14b803` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14b803` | 1 | `call_7e192164_ret_null_7e14b803` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e192164`. | pattern scan |
 | `0x7e14c838` | 1 | `call2_7e14c84a_7e14e0b3_7e14c838` | Calls `0x7e14c84a(this)` and then `0x7e14e0b3(this)`. | pattern scan |
-| `0x7e14c84a` | 1 | `store_4_f252_call_7e1e86dd_7e14c84a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e14c84a` | 1 | `store_4_f252_call_7e1e86dd_7e14c84a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e14e7f5` | 1 | `this_plus_112_7e14e7f5` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e14e883` | 1 | `call_7e1a2fac_ret_null_7e14e883` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14e883` | 1 | `call_7e1a2fac_ret_null_7e14e883` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e14eefb` | 1 | `call2_7e14ef0d_7e1514b8_7e14eefb` | Calls `0x7e14ef0d(this)` and then `0x7e1514b8(this)`. | pattern scan |
-| `0x7e14ef0d` | 1 | `store_4_f252_call_7e1e86dd_7e14ef0d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e14ef0d` | 1 | `store_4_f252_call_7e1e86dd_7e14ef0d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e151cce` | 1 | `this_plus_112_7e151cce` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e151d54` | 1 | `call_7e1a2fac_ret_null_7e151d54` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e151d54` | 1 | `call_7e1a2fac_ret_null_7e151d54` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e152a19` | 1 | `call2_7e152a2b_7e15619d_7e152a19` | Calls `0x7e152a2b(this)` and then `0x7e15619d(this)`. | pattern scan |
-| `0x7e152a2b` | 1 | `store_4_f252_call_7e1e86dd_7e152a2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e152a2b` | 1 | `store_4_f252_call_7e1e86dd_7e152a2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1569b3` | 1 | `this_plus_112_7e1569b3` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e156a48` | 1 | `call_7e1a2fac_ret_null_7e156a48` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e156a48` | 1 | `call_7e1a2fac_ret_null_7e156a48` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e157204` | 1 | `call2_7e157216_7e15a2ff_7e157204` | Calls `0x7e157216(this)` and then `0x7e15a2ff(this)`. | pattern scan |
-| `0x7e157216` | 1 | `store_4_f252_call_7e1e86dd_7e157216` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e157216` | 1 | `store_4_f252_call_7e1e86dd_7e157216` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e15ab83` | 1 | `this_plus_112_7e15ab83` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e15ac21` | 1 | `call_7e1a2fac_ret_null_7e15ac21` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e15ac21` | 1 | `call_7e1a2fac_ret_null_7e15ac21` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e15bae2` | 1 | `call2_7e15baf4_7e15f2ee_7e15bae2` | Calls `0x7e15baf4(this)` and then `0x7e15f2ee(this)`. | pattern scan |
-| `0x7e15baf4` | 1 | `store_4_f252_call_7e1e86dd_7e15baf4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e15baf4` | 1 | `store_4_f252_call_7e1e86dd_7e15baf4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e15cca6` | 1 | `call2_7e15ccb5_7e15cd14_7e15cca6` | Calls `0x7e15ccb5(this)` and then `0x7e15cd14(this)`. | pattern scan |
 | `0x7e15fb72` | 1 | `this_plus_112_7e15fb72` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e15fbf8` | 1 | `call_7e1a2fac_ret_null_7e15fbf8` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e15fbf8` | 1 | `call_7e1a2fac_ret_null_7e15fbf8` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e1602a0` | 1 | `call2_7e1602b2_7e161797_7e1602a0` | Calls `0x7e1602b2(this)` and then `0x7e161797(this)`. | pattern scan |
-| `0x7e1602b2` | 1 | `store_4_f252_call_7e1e86dd_7e1602b2` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1602b2` | 1 | `store_4_f252_call_7e1e86dd_7e1602b2` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e161fff` | 1 | `this_plus_160_7e161fff` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
 | `0x7e163b55` | 1 | `call2_7e163b67_7e16652d_7e163b55` | Calls `0x7e163b67(this)` and then `0x7e16652d(this)`. | pattern scan |
-| `0x7e163b67` | 1 | `store_4_f252_call_7e1e86dd_7e163b67` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e163b67` | 1 | `store_4_f252_call_7e1e86dd_7e163b67` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e166e19` | 1 | `this_plus_112_7e166e19` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e167762` | 1 | `call2_7e167774_7e16a20f_7e167762` | Calls `0x7e167774(this)` and then `0x7e16a20f(this)`. | pattern scan |
-| `0x7e167774` | 1 | `store_4_f252_call_7e1e86dd_7e167774` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e167774` | 1 | `store_4_f252_call_7e1e86dd_7e167774` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e169e46` | 1 | `call2_7e169e55_7e169eb4_7e169e46` | Calls `0x7e169e55(this)` and then `0x7e169eb4(this)`. | pattern scan |
 | `0x7e16aa25` | 1 | `this_plus_112_7e16aa25` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e16aaab` | 1 | `call_7e1a2fac_ret_null_7e16aaab` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e16aaab` | 1 | `call_7e1a2fac_ret_null_7e16aaab` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e16b0de` | 1 | `call2_7e16b0f0_7e16d0a3_7e16b0de` | Calls `0x7e16b0f0(this)` and then `0x7e16d0a3(this)`. | pattern scan |
-| `0x7e16b0f0` | 1 | `store_4_f252_call_7e1e86dd_7e16b0f0` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e16b0f0` | 1 | `store_4_f252_call_7e1e86dd_7e16b0f0` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e16d95f` | 1 | `this_plus_112_7e16d95f` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e16d9f1` | 1 | `call_7e1a2fac_ret_null_7e16d9f1` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e16d9f1` | 1 | `call_7e1a2fac_ret_null_7e16d9f1` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e16e623` | 1 | `call2_7e16e635_7e16fda0_7e16e623` | Calls `0x7e16e635(this)` and then `0x7e16fda0(this)`. | pattern scan |
-| `0x7e16e635` | 1 | `store_4_f252_call_7e1e86dd_7e16e635` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e16e635` | 1 | `store_4_f252_call_7e1e86dd_7e16e635` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1705b6` | 1 | `this_plus_112_7e1705b6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e170f20` | 1 | `call2_7e170f32_7e1738d9_7e170f20` | Calls `0x7e170f32(this)` and then `0x7e1738d9(this)`. | pattern scan |
-| `0x7e170f32` | 1 | `store_4_f252_call_7e1e86dd_7e170f32` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e170f32` | 1 | `store_4_f252_call_7e1e86dd_7e170f32` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e174125` | 1 | `this_plus_112_7e174125` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1741af` | 1 | `call_7e1a2fac_ret_null_7e1741af` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1741af` | 1 | `call_7e1a2fac_ret_null_7e1741af` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e175d04` | 1 | `call2_7e175d16_7e178d8f_7e175d04` | Calls `0x7e175d16(this)` and then `0x7e178d8f(this)`. | pattern scan |
-| `0x7e175d16` | 1 | `store_4_f252_call_7e1e86dd_7e175d16` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e175d16` | 1 | `store_4_f252_call_7e1e86dd_7e175d16` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e179471` | 1 | `this_plus_112_7e179471` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1797be` | 1 | `store_2_f252_call_7e1799c3_7e1797be` | `*(this+252) = 2`, then calls `0x7e1799c3`. | pattern scan |
-| `0x7e179d2f` | 1 | `call_7e1e67f6_ret_null_7e179d2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179d9a` | 1 | `call_7e1e67f6_ret_null_7e179d9a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179e0a` | 1 | `call_7e1e67f6_ret_null_7e179e0a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179e75` | 1 | `call_7e1e67f6_ret_null_7e179e75` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179ee0` | 1 | `call_7e1e67f6_ret_null_7e179ee0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179f4b` | 1 | `call_7e1e67f6_ret_null_7e179f4b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e179fb6` | 1 | `call_7e1e67f6_ret_null_7e179fb6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a021` | 1 | `call_7e1e67f6_ret_null_7e17a021` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a08c` | 1 | `call_7e1e67f6_ret_null_7e17a08c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a0f9` | 1 | `call_7e1e67f6_ret_null_7e17a0f9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a166` | 1 | `call_7e1e67f6_ret_null_7e17a166` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a1d3` | 1 | `call_7e1e67f6_ret_null_7e17a1d3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a240` | 1 | `call_7e1e67f6_ret_null_7e17a240` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a2ad` | 1 | `call_7e1e67f6_ret_null_7e17a2ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17a318` | 1 | `call_7e1e67f6_ret_null_7e17a318` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1797be` | 1 | `store_2_f252_call_7e1799c3_7e1797be` | `*(this+252) = 2`, then calls `0x7e1799c3`. Target: `entry_thunk_7e1799c3`. | pattern scan |
+| `0x7e179d2f` | 1 | `call_7e1e67f6_ret_null_7e179d2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179d9a` | 1 | `call_7e1e67f6_ret_null_7e179d9a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179e0a` | 1 | `call_7e1e67f6_ret_null_7e179e0a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179e75` | 1 | `call_7e1e67f6_ret_null_7e179e75` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179ee0` | 1 | `call_7e1e67f6_ret_null_7e179ee0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179f4b` | 1 | `call_7e1e67f6_ret_null_7e179f4b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e179fb6` | 1 | `call_7e1e67f6_ret_null_7e179fb6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a021` | 1 | `call_7e1e67f6_ret_null_7e17a021` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a08c` | 1 | `call_7e1e67f6_ret_null_7e17a08c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a0f9` | 1 | `call_7e1e67f6_ret_null_7e17a0f9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a166` | 1 | `call_7e1e67f6_ret_null_7e17a166` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a1d3` | 1 | `call_7e1e67f6_ret_null_7e17a1d3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a240` | 1 | `call_7e1e67f6_ret_null_7e17a240` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a2ad` | 1 | `call_7e1e67f6_ret_null_7e17a2ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17a318` | 1 | `call_7e1e67f6_ret_null_7e17a318` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e17abf8` | 1 | `this_plus_892_7e17abf8` | Leaf `return this+892` (address of a member or base sub-object). | pattern scan |
-| `0x7e17ac8a` | 1 | `call_7e1e67f6_ret_null_7e17ac8a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17acf5` | 1 | `call_7e1e67f6_ret_null_7e17acf5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17ad60` | 1 | `call_7e1e67f6_ret_null_7e17ad60` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17adcb` | 1 | `call_7e1e67f6_ret_null_7e17adcb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17ae36` | 1 | `call_7e1e67f6_ret_null_7e17ae36` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17aea1` | 1 | `call_7e1e67f6_ret_null_7e17aea1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17afa5` | 1 | `call_7e1e67f6_ret_null_7e17afa5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b010` | 1 | `call_7e1e67f6_ret_null_7e17b010` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b07b` | 1 | `call_7e1e67f6_ret_null_7e17b07b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b0e6` | 1 | `call_7e1e67f6_ret_null_7e17b0e6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b151` | 1 | `call_7e1e67f6_ret_null_7e17b151` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b1bc` | 1 | `call_7e1e67f6_ret_null_7e17b1bc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b227` | 1 | `call_7e1e67f6_ret_null_7e17b227` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b292` | 1 | `call_7e1e67f6_ret_null_7e17b292` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b3b2` | 1 | `call_7e1e67f6_ret_null_7e17b3b2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b41d` | 1 | `call_7e1e67f6_ret_null_7e17b41d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b488` | 1 | `call_7e1e67f6_ret_null_7e17b488` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b4f3` | 1 | `call_7e1e67f6_ret_null_7e17b4f3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b55e` | 1 | `call_7e1e67f6_ret_null_7e17b55e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b5c9` | 1 | `call_7e1e67f6_ret_null_7e17b5c9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b634` | 1 | `call_7e1e67f6_ret_null_7e17b634` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b69f` | 1 | `call_7e1e67f6_ret_null_7e17b69f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b70a` | 1 | `call_7e1e67f6_ret_null_7e17b70a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b775` | 1 | `call_7e1e67f6_ret_null_7e17b775` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b7e0` | 1 | `call_7e1e67f6_ret_null_7e17b7e0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b84b` | 1 | `call_7e1e67f6_ret_null_7e17b84b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e17b8b6` | 1 | `call_7e1e67f6_ret_null_7e17b8b6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17ac8a` | 1 | `call_7e1e67f6_ret_null_7e17ac8a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17acf5` | 1 | `call_7e1e67f6_ret_null_7e17acf5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17ad60` | 1 | `call_7e1e67f6_ret_null_7e17ad60` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17adcb` | 1 | `call_7e1e67f6_ret_null_7e17adcb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17ae36` | 1 | `call_7e1e67f6_ret_null_7e17ae36` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17aea1` | 1 | `call_7e1e67f6_ret_null_7e17aea1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17afa5` | 1 | `call_7e1e67f6_ret_null_7e17afa5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b010` | 1 | `call_7e1e67f6_ret_null_7e17b010` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b07b` | 1 | `call_7e1e67f6_ret_null_7e17b07b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b0e6` | 1 | `call_7e1e67f6_ret_null_7e17b0e6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b151` | 1 | `call_7e1e67f6_ret_null_7e17b151` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b1bc` | 1 | `call_7e1e67f6_ret_null_7e17b1bc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b227` | 1 | `call_7e1e67f6_ret_null_7e17b227` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b292` | 1 | `call_7e1e67f6_ret_null_7e17b292` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b3b2` | 1 | `call_7e1e67f6_ret_null_7e17b3b2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b41d` | 1 | `call_7e1e67f6_ret_null_7e17b41d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b488` | 1 | `call_7e1e67f6_ret_null_7e17b488` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b4f3` | 1 | `call_7e1e67f6_ret_null_7e17b4f3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b55e` | 1 | `call_7e1e67f6_ret_null_7e17b55e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b5c9` | 1 | `call_7e1e67f6_ret_null_7e17b5c9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b634` | 1 | `call_7e1e67f6_ret_null_7e17b634` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b69f` | 1 | `call_7e1e67f6_ret_null_7e17b69f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b70a` | 1 | `call_7e1e67f6_ret_null_7e17b70a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b775` | 1 | `call_7e1e67f6_ret_null_7e17b775` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b7e0` | 1 | `call_7e1e67f6_ret_null_7e17b7e0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b84b` | 1 | `call_7e1e67f6_ret_null_7e17b84b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e17b8b6` | 1 | `call_7e1e67f6_ret_null_7e17b8b6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e17d850` | 1 | `store_24_f1356_f1360_7e17d850` | `*(this+1356) = *(this+1360) = 24`. | pattern scan |
 | `0x7e17e661` | 1 | `store_31_f1372_f1376_7e17e661` | `*(this+1372) = *(this+1376) = 31`. | pattern scan |
 | `0x7e17e744` | 1 | `call2_7e17e753_7e17e82c_7e17e744` | Calls `0x7e17e753(this)` and then `0x7e17e82c(this)`. | pattern scan |
 | `0x7e17eeeb` | 7 | `call2_7e17eefa_7e17ef9b_7e17eeeb` | Calls `0x7e17eefa(this)` and then `0x7e17ef9b(this)`. | pattern scan |
-| `0x7e17f813` | 1 | `call_7e17fb28_ret_1_7e17f813` | Calls `0x7e17fb28`, then returns 1. | pattern scan |
+| `0x7e17f813` | 1 | `call_7e17fb28_ret_1_7e17f813` | Calls `0x7e17fb28`, then returns 1. Target: `call2_7e17fb37_7e17ff1e_7e17fb28`. | pattern scan |
 | `0x7e17fb28` | 1 | `call2_7e17fb37_7e17ff1e_7e17fb28` | Calls `0x7e17fb37(this)` and then `0x7e17ff1e(this)`. | pattern scan |
-| `0x7e1809d3` | 1 | `store_55_f1372_call_7e180a1d_7e1809d3` | `*(this+1372) = 55`, then calls `0x7e180a1d`. | pattern scan |
+| `0x7e1809d3` | 1 | `store_55_f1372_call_7e180a1d_7e1809d3` | `*(this+1372) = 55`, then calls `0x7e180a1d`. Target: `entry_thunk_7e180a1d`. | pattern scan |
 | `0x7e1811c4` | 1 | `call2_7e1811d3_7e181446_7e1811c4` | Calls `0x7e1811d3(this)` and then `0x7e181446(this)`. | pattern scan |
 | `0x7e181583` | 1 | `call2_7e181592_7e18168b_7e181583` | Calls `0x7e181592(this)` and then `0x7e18168b(this)`. | pattern scan |
 | `0x7e18180c` | 1 | `store_66_f1372_f1376_7e18180c` | `*(this+1372) = *(this+1376) = 66`. | pattern scan |
@@ -17867,13 +17872,13 @@ what the target does is described at the target, if it is labelled.
 | `0x7e181add` | 2 | `call2_7e181aec_7e1827f4_7e181add` | Calls `0x7e181aec(this)` and then `0x7e1827f4(this)`. | pattern scan |
 | `0x7e181bb0` | 1 | `store_72_f1408_f1376_7e181bb0` | `*(this+1408) = *(this+1376) = 72`. | pattern scan |
 | `0x7e1829cc` | 1 | `store_79_f1408_f1376_7e1829cc` | `*(this+1408) = *(this+1376) = 79`. | pattern scan |
-| `0x7e1834ba` | 1 | `store_12_f1372_call_7e183506_7e1834ba` | `*(this+1372) = 12`, then calls `0x7e183506`. | pattern scan |
+| `0x7e1834ba` | 1 | `store_12_f1372_call_7e183506_7e1834ba` | `*(this+1372) = 12`, then calls `0x7e183506`. Target: `entry_thunk_7e183506`. | pattern scan |
 | `0x7e18350e` | 1 | `store_85_f1412_f1376_7e18350e` | `*(this+1412) = *(this+1376) = 85`. | pattern scan |
 | `0x7e184459` | 2 | `call2_7e184468_7e184783_7e184459` | Calls `0x7e184468(this)` and then `0x7e184783(this)`. | pattern scan |
 | `0x7e184863` | 1 | `call2_7e184872_7e184b7d_7e184863` | Calls `0x7e184872(this)` and then `0x7e184b7d(this)`. | pattern scan |
 | `0x7e184e20` | 1 | `call2_7e184e2f_7e184f47_7e184e20` | Calls `0x7e184e2f(this)` and then `0x7e184f47(this)`. | pattern scan |
 | `0x7e18515f` | 2 | `call2_7e18516e_7e185cc0_7e18515f` | Calls `0x7e18516e(this)` and then `0x7e185cc0(this)`. | pattern scan |
-| `0x7e185a45` | 1 | `call_7e18658f_ret_1_7e185a45` | Calls `0x7e18658f`, then returns 1. | pattern scan |
+| `0x7e185a45` | 1 | `call_7e18658f_ret_1_7e185a45` | Calls `0x7e18658f`, then returns 1. Target: `call2_7e18659e_7e18686d_7e18658f`. | pattern scan |
 | `0x7e185e04` | 1 | `call2_7e185e13_7e186054_7e185e04` | Calls `0x7e185e13(this)` and then `0x7e186054(this)`. | pattern scan |
 | `0x7e1864e5` | 1 | `store_124_f1436_f1376_7e1864e5` | `*(this+1436) = *(this+1376) = 124`. | pattern scan |
 | `0x7e18658f` | 1 | `call2_7e18659e_7e18686d_7e18658f` | Calls `0x7e18659e(this)` and then `0x7e18686d(this)`. | pattern scan |
@@ -17885,66 +17890,66 @@ what the target does is described at the target, if it is labelled.
 | `0x7e188ce2` | 1 | `store_136_f1372_f1376_7e188ce2` | `*(this+1372) = *(this+1376) = 136`. | pattern scan |
 | `0x7e189744` | 3 | `call2_7e189753_7e189a81_7e189744` | Calls `0x7e189753(this)` and then `0x7e189a81(this)`. | pattern scan |
 | `0x7e18a717` | 1 | `call2_7e18a726_7e18a76c_7e18a717` | Calls `0x7e18a726(this)` and then `0x7e18a76c(this)`. | pattern scan |
-| `0x7e18aaab` | 1 | `store_18_f1372_call_7e18aaf5_7e18aaab` | `*(this+1372) = 18`, then calls `0x7e18aaf5`. | pattern scan |
+| `0x7e18aaab` | 1 | `store_18_f1372_call_7e18aaf5_7e18aaab` | `*(this+1372) = 18`, then calls `0x7e18aaf5`. Target: `entry_thunk_7e18aaf5`. | pattern scan |
 | `0x7e18ac89` | 1 | `store_20_f584_f1376_7e18ac89` | `*(this+584) = *(this+1376) = 20`. | pattern scan |
 | `0x7e18ba1b` | 1 | `call2_7e18ba2a_7e18be67_7e18ba1b` | Calls `0x7e18ba2a(this)` and then `0x7e18be67(this)`. | pattern scan |
-| `0x7e18c0cd` | 1 | `call_7e1e67f6_ret_null_7e18c0cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e18c138` | 1 | `call_7e1e67f6_ret_null_7e18c138` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e18c0cd` | 1 | `call_7e1e67f6_ret_null_7e18c0cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e18c138` | 1 | `call_7e1e67f6_ret_null_7e18c138` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e18d299` | 1 | `this_plus_112_7e18d299` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e18d323` | 1 | `call_7e1a4ef2_ret_null_7e18d323` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e18d323` | 1 | `call_7e1a4ef2_ret_null_7e18d323` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). Target: `call_7e1b8a8d_ret_null_7e1a4ef2`. | pattern scan |
 | `0x7e18da8c` | 1 | `call2_7e18da9e_7e18fd68_7e18da8c` | Calls `0x7e18da9e(this)` and then `0x7e18fd68(this)`. | pattern scan |
-| `0x7e18da9e` | 1 | `store_4_f252_call_7e1e86dd_7e18da9e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e18da9e` | 1 | `store_4_f252_call_7e1e86dd_7e18da9e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1905e6` | 1 | `this_plus_112_7e1905e6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e1a0662` | 1 | `this_plus_112_7e1a0662` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1a06e8` | 1 | `call_7e192164_ret_null_7e1a06e8` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a06e8` | 1 | `call_7e192164_ret_null_7e1a06e8` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e192164`. | pattern scan |
 | `0x7e1a0d19` | 1 | `call2_7e1a0d2b_7e1a2a95_7e1a0d19` | Calls `0x7e1a0d2b(this)` and then `0x7e1a2a95(this)`. | pattern scan |
-| `0x7e1a0d2b` | 1 | `store_4_f252_call_7e1e86dd_7e1a0d2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e1a2fac` | 14 | `call_7e1a4ef2_ret_null_7e1a2fac` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1a4ef2` | 3 | `call_7e1b8a8d_ret_null_7e1a4ef2` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a0d2b` | 1 | `store_4_f252_call_7e1e86dd_7e1a0d2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e1a2fac` | 14 | `call_7e1a4ef2_ret_null_7e1a2fac` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). Target: `call_7e1b8a8d_ret_null_7e1a4ef2`. | pattern scan |
+| `0x7e1a4ef2` | 3 | `call_7e1b8a8d_ret_null_7e1a4ef2` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b8a8d`. | pattern scan |
 | `0x7e1a790e` | 1 | `this_plus_112_7e1a790e` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e1a7c46` | 1 | `this_plus_112_7e1a7c46` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1a7cde` | 1 | `call_7e1b8a8d_ret_null_7e1a7cde` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a7cde` | 1 | `call_7e1b8a8d_ret_null_7e1a7cde` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1b8a8d`. | pattern scan |
 | `0x7e1a8aa9` | 1 | `call2_7e1a8abb_7e1ac1cf_7e1a8aa9` | Calls `0x7e1a8abb(this)` and then `0x7e1ac1cf(this)`. | pattern scan |
-| `0x7e1a8abb` | 1 | `store_4_f252_call_7e1e86dd_7e1a8abb` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1a8abb` | 1 | `store_4_f252_call_7e1e86dd_7e1a8abb` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1aca21` | 1 | `this_plus_208_7e1aca21` | Leaf `return this+208` (address of a member or base sub-object). | pattern scan |
 | `0x7e1ad850` | 1 | `call2_7e1ad862_7e1aff74_7e1ad850` | Calls `0x7e1ad862(this)` and then `0x7e1aff74(this)`. | pattern scan |
-| `0x7e1ad862` | 1 | `store_4_f252_call_7e1e86dd_7e1ad862` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e1b0479` | 1 | `call_7e1e67f6_ret_null_7e1b0479` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b05a6` | 1 | `call_7e1e67f6_ret_null_7e1b05a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b0611` | 1 | `call_7e1e67f6_ret_null_7e1b0611` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b067c` | 1 | `call_7e1e67f6_ret_null_7e1b067c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b08b0` | 1 | `call_7e1e67f6_ret_null_7e1b08b0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b091b` | 1 | `call_7e1e67f6_ret_null_7e1b091b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b0986` | 1 | `call_7e1e67f6_ret_null_7e1b0986` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ad862` | 1 | `store_4_f252_call_7e1e86dd_7e1ad862` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e1b0479` | 1 | `call_7e1e67f6_ret_null_7e1b0479` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b05a6` | 1 | `call_7e1e67f6_ret_null_7e1b05a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b0611` | 1 | `call_7e1e67f6_ret_null_7e1b0611` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b067c` | 1 | `call_7e1e67f6_ret_null_7e1b067c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b08b0` | 1 | `call_7e1e67f6_ret_null_7e1b08b0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b091b` | 1 | `call_7e1e67f6_ret_null_7e1b091b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b0986` | 1 | `call_7e1e67f6_ret_null_7e1b0986` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1b0d0a` | 1 | `this_plus_160_7e1b0d0a` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
-| `0x7e1b0d80` | 1 | `call_7e1e67f6_ret_null_7e1b0d80` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1b0deb` | 1 | `call_7e1e67f6_ret_null_7e1b0deb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b0d80` | 1 | `call_7e1e67f6_ret_null_7e1b0d80` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1b0deb` | 1 | `call_7e1e67f6_ret_null_7e1b0deb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1b18d5` | 1 | `call2_7e1b18e7_7e1b3a52_7e1b18d5` | Calls `0x7e1b18e7(this)` and then `0x7e1b3a52(this)`. | pattern scan |
-| `0x7e1b18e7` | 1 | `store_4_f252_call_7e1e86dd_7e1b18e7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1b18e7` | 1 | `store_4_f252_call_7e1e86dd_7e1b18e7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1b26ed` | 2 | `call2_7e1b2b38_7e1b279f_7e1b26ed` | Calls `0x7e1b2b38(this)` and then `0x7e1b279f(this)`. | pattern scan |
 | `0x7e1b26fc` | 1 | `store_56_f948_f256_7e1b26fc` | `*(this+948) = *(this+256) = 56`. | pattern scan |
 | `0x7e1b2a5e` | 1 | `store_61_f8764_f8768_7e1b2a5e` | `*(this+8764) = *(this+8768) = 61`. | pattern scan |
 | `0x7e1b2b74` | 1 | `store_63_f8772_f8776_7e1b2b74` | `*(this+8772) = *(this+8776) = 63`. | pattern scan |
 | `0x7e1b41e6` | 1 | `this_plus_112_7e1b41e6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1b4287` | 1 | `call_7e1a2fac_ret_null_7e1b4287` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b4287` | 1 | `call_7e1a2fac_ret_null_7e1b4287` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e1b5d08` | 1 | `call2_7e1b5d1a_7e1b8431_7e1b5d08` | Calls `0x7e1b5d1a(this)` and then `0x7e1b8431(this)`. | pattern scan |
-| `0x7e1b5d1a` | 1 | `store_4_f252_call_7e1e86dd_7e1b5d1a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1b5d1a` | 1 | `store_4_f252_call_7e1e86dd_7e1b5d1a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1b801b` | 1 | `call2_7e1b802a_7e1b8089_7e1b801b` | Calls `0x7e1b802a(this)` and then `0x7e1b8089(this)`. | pattern scan |
 | `0x7e1bc9cf` | 1 | `this_plus_208_7e1bc9cf` | Leaf `return this+208` (address of a member or base sub-object). | pattern scan |
-| `0x7e1bca47` | 1 | `call_7e1e67f6_ret_null_7e1bca47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1bca6a` | 1 | `call_7e1e67f6_ret_null_7e1bca6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bca47` | 1 | `call_7e1e67f6_ret_null_7e1bca47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1bca6a` | 1 | `call_7e1e67f6_ret_null_7e1bca6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1bcf78` | 1 | `this_plus_284_7e1bcf78` | Leaf `return this+284` (address of a member or base sub-object). | pattern scan |
-| `0x7e1bcff0` | 1 | `call_7e1e67f6_ret_null_7e1bcff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1bd06d` | 1 | `call_7e1e67f6_ret_null_7e1bd06d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1bd0ea` | 1 | `call_7e1e67f6_ret_null_7e1bd0ea` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1bd167` | 1 | `call_7e1e67f6_ret_null_7e1bd167` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1bd1e8` | 1 | `call_7e1e67f6_ret_null_7e1bd1e8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bcff0` | 1 | `call_7e1e67f6_ret_null_7e1bcff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1bd06d` | 1 | `call_7e1e67f6_ret_null_7e1bd06d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1bd0ea` | 1 | `call_7e1e67f6_ret_null_7e1bd0ea` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1bd167` | 1 | `call_7e1e67f6_ret_null_7e1bd167` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1bd1e8` | 1 | `call_7e1e67f6_ret_null_7e1bd1e8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1be942` | 1 | `call2_7e1be954_7e1c1d21_7e1be942` | Calls `0x7e1be954(this)` and then `0x7e1c1d21(this)`. | pattern scan |
-| `0x7e1be954` | 1 | `store_4_f252_call_7e1e86dd_7e1be954` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1be954` | 1 | `store_4_f252_call_7e1e86dd_7e1be954` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1c24b2` | 1 | `this_plus_112_7e1c24b2` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1c2538` | 1 | `call_7e192164_ret_null_7e1c2538` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1c2538` | 1 | `call_7e192164_ret_null_7e1c2538` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e192164`. | pattern scan |
 | `0x7e1c2b23` | 1 | `call2_7e1c2b35_7e1c3ddf_7e1c2b23` | Calls `0x7e1c2b35(this)` and then `0x7e1c3ddf(this)`. | pattern scan |
-| `0x7e1c2b35` | 1 | `store_4_f252_call_7e1e86dd_7e1c2b35` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c2b35` | 1 | `store_4_f252_call_7e1e86dd_7e1c2b35` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1c4b26` | 1 | `store_11_f580_f256_7e1c4b26` | `*(this+580) = *(this+256) = 11`. | pattern scan |
 | `0x7e1c4b74` | 1 | `store_12_f580_f256_7e1c4b74` | `*(this+580) = *(this+256) = 12`. | pattern scan |
 | `0x7e1c4bc2` | 1 | `store_13_f580_f256_7e1c4bc2` | `*(this+580) = *(this+256) = 13`. | pattern scan |
@@ -17952,34 +17957,34 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1c4e15` | 1 | `store_15_f580_f256_7e1c4e15` | `*(this+580) = *(this+256) = 15`. | pattern scan |
 | `0x7e1c4e63` | 1 | `store_16_f580_f256_7e1c4e63` | `*(this+580) = *(this+256) = 16`. | pattern scan |
 | `0x7e1c4eb1` | 1 | `store_17_f580_f256_7e1c4eb1` | `*(this+580) = *(this+256) = 17`. | pattern scan |
-| `0x7e1c4ef7` | 1 | `store_18_f580_call_7e1c4f4c_7e1c4ef7` | `*(this+580) = 18`, then calls `0x7e1c4f4c`. | pattern scan |
+| `0x7e1c4ef7` | 1 | `store_18_f580_call_7e1c4f4c_7e1c4ef7` | `*(this+580) = 18`, then calls `0x7e1c4f4c`. Target: `entry_thunk_7e1c4f4c`. | pattern scan |
 | `0x7e1c50de` | 1 | `store_20_f584_f256_7e1c50de` | `*(this+584) = *(this+256) = 20`. | pattern scan |
 | `0x7e1c5540` | 1 | `this_plus_112_7e1c5540` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
-| `0x7e1c55d5` | 1 | `call_7e1a2fac_ret_null_7e1c55d5` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1c55d5` | 1 | `call_7e1a2fac_ret_null_7e1c55d5` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). Target: `call_7e1a4ef2_ret_null_7e1a2fac`. | pattern scan |
 | `0x7e1c5e27` | 1 | `call2_7e1c5e39_7e1c8c22_7e1c5e27` | Calls `0x7e1c5e39(this)` and then `0x7e1c8c22(this)`. | pattern scan |
-| `0x7e1c5e39` | 1 | `store_4_f252_call_7e1e86dd_7e1c5e39` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c5e39` | 1 | `store_4_f252_call_7e1e86dd_7e1c5e39` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1c94e2` | 1 | `this_plus_112_7e1c94e2` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e1c9d92` | 1 | `call2_7e1c9da4_7e1cbd4f_7e1c9d92` | Calls `0x7e1c9da4(this)` and then `0x7e1cbd4f(this)`. | pattern scan |
-| `0x7e1c9da4` | 1 | `store_4_f252_call_7e1e86dd_7e1c9da4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c9da4` | 1 | `store_4_f252_call_7e1e86dd_7e1c9da4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1cc47a` | 1 | `this_plus_112_7e1cc47a` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
 | `0x7e1cc943` | 1 | `call2_7e1cc924_7e1cce14_7e1cc943` | Calls `0x7e1cc924(this)` and then `0x7e1cce14(this)`. | pattern scan |
-| `0x7e1cd2b7` | 1 | `call_7e205040_ret_null_7e1cd2b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1cd366` | 1 | `call_7e205040_ret_null_7e1cd366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1cd41e` | 1 | `call_7e205040_ret_null_7e1cd41e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1cda63` | 1 | `call_7e205040_ret_null_7e1cda63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1cdf76` | 1 | `call_7e205040_ret_null_7e1cdf76` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce189` | 1 | `call_7e205040_ret_null_7e1ce189` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce229` | 1 | `call_7e205040_ret_null_7e1ce229` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce28c` | 1 | `call_7e205040_ret_null_7e1ce28c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce2fa` | 1 | `call_7e205040_ret_null_7e1ce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce556` | 1 | `call_7e205040_ret_null_7e1ce556` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce727` | 1 | `call_7e205040_ret_null_7e1ce727` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1ce7f9` | 1 | `call_7e205040_ret_null_7e1ce7f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cd2b7` | 1 | `call_7e205040_ret_null_7e1cd2b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1cd366` | 1 | `call_7e205040_ret_null_7e1cd366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1cd41e` | 1 | `call_7e205040_ret_null_7e1cd41e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1cda63` | 1 | `call_7e205040_ret_null_7e1cda63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1cdf76` | 1 | `call_7e205040_ret_null_7e1cdf76` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce189` | 1 | `call_7e205040_ret_null_7e1ce189` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce229` | 1 | `call_7e205040_ret_null_7e1ce229` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce28c` | 1 | `call_7e205040_ret_null_7e1ce28c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce2fa` | 1 | `call_7e205040_ret_null_7e1ce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce556` | 1 | `call_7e205040_ret_null_7e1ce556` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce727` | 1 | `call_7e205040_ret_null_7e1ce727` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
+| `0x7e1ce7f9` | 1 | `call_7e205040_ret_null_7e1ce7f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7e1ce95c` | 1 | `this_plus_1460_7e1ce95c` | Leaf `return this+1460` (address of a member or base sub-object). | pattern scan |
-| `0x7e1ceb71` | 1 | `call_7e1e6239_ret_null_7e1ceb71` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1cee68` | 1 | `call_7e0dfcef_ret_null_7e1cee68` | Calls `0x7e0dfcef`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ceb71` | 1 | `call_7e1e6239_ret_null_7e1ceb71` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e6239`. | pattern scan |
+| `0x7e1cee68` | 1 | `call_7e0dfcef_ret_null_7e1cee68` | Calls `0x7e0dfcef`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e0dfcef`. | pattern scan |
 | `0x7e1cf9a1` | 1 | `call2_7e1cf9b5_7e1d116b_7e1cf9a1` | Calls `0x7e1cf9b5(this)` and then `0x7e1d116b(this)`. | pattern scan |
-| `0x7e1cfa0e` | 1 | `call_7e0e7841_ret_1_7e1cfa0e` | Calls `0x7e0e7841`, then returns 1. | pattern scan |
+| `0x7e1cfa0e` | 1 | `call_7e0e7841_ret_1_7e1cfa0e` | Calls `0x7e0e7841`, then returns 1. Target: `entry_stub_7e0e7841`. | pattern scan |
 | `0x7e1d1173` | 1 | `store_14_f976_f256_7e1d1173` | `*(this+976) = *(this+256) = 14`. | pattern scan |
 | `0x7e1d11da` | 1 | `call2_7e1d11e9_7e1d14aa_7e1d11da` | Calls `0x7e1d11e9(this)` and then `0x7e1d14aa(this)`. | pattern scan |
 | `0x7e1d1a0d` | 1 | `call_7e0ce5c5_ret_null_7e1d1a0d` | Calls `0x7e0ce5c5`, then returns a null pointer (`a0 = 0`). | pattern scan |
@@ -18292,31 +18297,31 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1d3f24` | 1 | `call2_7e1d3f38_7e1d40ff_7e1d3f24` | Calls `0x7e1d3f38(this)` and then `0x7e1d40ff(this)`. | pattern scan |
 | `0x7e1e1b91` | 1 | `store_30_f3916_f3912_7e1e1b91` | `*(this+3916) = *(this+3912) = 30`. | pattern scan |
 | `0x7e1e616f` | 2 | `call_7dfc7173_ret_null_7e1e616f` | Calls `0x7dfc7173`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6860` | 1 | `call_7e1e67f6_ret_null_7e1e6860` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6908` | 11 | `call_7e1e67f6_ret_null_7e1e6908` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e696f` | 5 | `call_7e1e67f6_ret_null_7e1e696f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e69d4` | 3 | `call_7e1e67f6_ret_null_7e1e69d4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6a39` | 1 | `call_7e1e67f6_ret_null_7e1e6a39` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6a9e` | 2 | `call_7e1e67f6_ret_null_7e1e6a9e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6b05` | 14 | `call_7e1e67f6_ret_null_7e1e6b05` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6b6a` | 11 | `call_7e1e67f6_ret_null_7e1e6b6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6bcf` | 14 | `call_7e1e67f6_ret_null_7e1e6bcf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6c34` | 5 | `call_7e1e67f6_ret_null_7e1e6c34` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6cbb` | 11 | `call_7e1e67f6_ret_null_7e1e6cbb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e6d22` | 6 | `call_7e1e67f6_ret_null_7e1e6d22` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6860` | 1 | `call_7e1e67f6_ret_null_7e1e6860` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6908` | 11 | `call_7e1e67f6_ret_null_7e1e6908` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e696f` | 5 | `call_7e1e67f6_ret_null_7e1e696f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e69d4` | 3 | `call_7e1e67f6_ret_null_7e1e69d4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6a39` | 1 | `call_7e1e67f6_ret_null_7e1e6a39` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6a9e` | 2 | `call_7e1e67f6_ret_null_7e1e6a9e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6b05` | 14 | `call_7e1e67f6_ret_null_7e1e6b05` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6b6a` | 11 | `call_7e1e67f6_ret_null_7e1e6b6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6bcf` | 14 | `call_7e1e67f6_ret_null_7e1e6bcf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6c34` | 5 | `call_7e1e67f6_ret_null_7e1e6c34` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6cbb` | 11 | `call_7e1e67f6_ret_null_7e1e6cbb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e1e6d22` | 6 | `call_7e1e67f6_ret_null_7e1e6d22` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1e8799` | 1 | `adj_thunk_120_to_7e207732_7e1e8799` | Adds 120 to `this`, then calls `0x7e207732`: entry for a base or member sub-object. | pattern scan |
 | `0x7e1e8e37` | 13 | `call_7e1ea080_ret_null_7e1e8e37` | Calls `0x7e1ea080`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e9736` | 2 | `call_7e1e9b6e_ret_null_7e1e9736` | Calls `0x7e1e9b6e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1e9b6e` | 2 | `call_7e1e8854_ret_null_7e1e9b6e` | Calls `0x7e1e8854`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e9736` | 2 | `call_7e1e9b6e_ret_null_7e1e9736` | Calls `0x7e1e9b6e`, then returns a null pointer (`a0 = 0`). Target: `call_7e1e8854_ret_null_7e1e9b6e`. | pattern scan |
+| `0x7e1e9b6e` | 2 | `call_7e1e8854_ret_null_7e1e9b6e` | Calls `0x7e1e8854`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e1e8854`. | pattern scan |
 | `0x7e1ea170` | 5 | `this_plus_180_7e1ea170` | Leaf `return this+180` (address of a member or base sub-object). | pattern scan |
 | `0x7e1ea177` | 3 | `this_plus_204_7e1ea177` | Leaf `return this+204` (address of a member or base sub-object). | pattern scan |
 | `0x7e1ea75d` | 1 | `this_plus_1872_7e1ea75d` | Leaf `return this+1872` (address of a member or base sub-object). | pattern scan |
-| `0x7e1eaf32` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1eaf32` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1eaf32` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1eaf32` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
 | `0x7e1eb2d3` | 1 | `store_6_f324_f256_7e1eb2d3` | `*(this+324) = *(this+256) = 6`. | pattern scan |
-| `0x7e1eb38f` | 1 | `store_4_f252_call_7e1e86dd_7e1eb38f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1eb38f` | 1 | `store_4_f252_call_7e1e86dd_7e1eb38f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1eb3be` | 1 | `call2_7e1eb38f_7e1eb667_7e1eb3be` | Calls `0x7e1eb38f(this)` and then `0x7e1eb667(this)`. | pattern scan |
-| `0x7e1eb49e` | 1 | `store_7_f328_call_7e1eb54b_7e1eb49e` | `*(this+328) = 7`, then calls `0x7e1eb54b`. | pattern scan |
-| `0x7e1eb667` | 2 | `store_10_f328_call_7e1eb717_7e1eb667` | `*(this+328) = 10`, then calls `0x7e1eb717`. | pattern scan |
+| `0x7e1eb49e` | 1 | `store_7_f328_call_7e1eb54b_7e1eb49e` | `*(this+328) = 7`, then calls `0x7e1eb54b`. Target: `entry_thunk_7e1eb54b`. | pattern scan |
+| `0x7e1eb667` | 2 | `store_10_f328_call_7e1eb717_7e1eb667` | `*(this+328) = 10`, then calls `0x7e1eb717`. Target: `entry_thunk_7e1eb717`. | pattern scan |
 | `0x7e1eb86d` | 3 | `call2_7e1eb87c_7e1eba94_7e1eb86d` | Calls `0x7e1eb87c(this)` and then `0x7e1eba94(this)`. | pattern scan |
 | `0x7e1eba7f` | 1 | `store_13_f340_f256_7e1eba7f` | `*(this+340) = *(this+256) = 13`. | pattern scan |
 | `0x7e1eba9c` | 1 | `store_14_f340_f256_7e1eba9c` | `*(this+340) = *(this+256) = 14`. | pattern scan |
@@ -18331,10 +18336,10 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1ec482` | 7 | `this_plus_256_7e1ec482` | Leaf `return this+256` (address of a member or base sub-object). | pattern scan |
 | `0x7e1ec489` | 6 | `this_plus_280_7e1ec489` | Leaf `return this+280` (address of a member or base sub-object). | pattern scan |
 | `0x7e1ec490` | 7 | `this_plus_304_7e1ec490` | Leaf `return this+304` (address of a member or base sub-object). | pattern scan |
-| `0x7e1ec7a7` | 1 | `store_4_f176_call_7e1e86dd_7e1ec7a7` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
-| `0x7e1ec825` | 6 | `store_5_f328_call_7e1ec977_7e1ec825` | `*(this+328) = 5`, then calls `0x7e1ec977`. | pattern scan |
+| `0x7e1ec7a7` | 1 | `store_4_f176_call_7e1e86dd_7e1ec7a7` | `*(this+176) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
+| `0x7e1ec825` | 6 | `store_5_f328_call_7e1ec977_7e1ec825` | `*(this+328) = 5`, then calls `0x7e1ec977`. Target: `entry_thunk_7e1ec977`. | pattern scan |
 | `0x7e1ecb17` | 1 | `call2_7e1eccc5_7e1ecb26_7e1ecb17` | Calls `0x7e1eccc5(this)` and then `0x7e1ecb26(this)`. | pattern scan |
-| `0x7e1ed059` | 8 | `call_7e1e67f6_ret_null_7e1ed059` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ed059` | 8 | `call_7e1e67f6_ret_null_7e1ed059` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1ed714` | 2 | `fwd_f60_to_7e1e7e39_7e1ed714` | Forwards to the object at `this+60`: `0x7e1e7e39(*(this+60))`. | pattern scan |
 | `0x7e1ed722` | 2 | `fwd_f64_to_7e1e7e39_7e1ed722` | Forwards to the object at `this+64`: `0x7e1e7e39(*(this+64))`. | pattern scan |
 | `0x7e1ee05f` | 2 | `fwd_f40_to_7e1e802d_7e1ee05f` | Forwards to the object at `this+40`: `0x7e1e802d(*(this+40))`. | pattern scan |
@@ -18342,12 +18347,12 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1ee07b` | 2 | `fwd_f56_to_7e1e802d_7e1ee07b` | Forwards to the object at `this+56`: `0x7e1e802d(*(this+56))`. | pattern scan |
 | `0x7e1ee089` | 2 | `fwd_f60_to_7e1e802d_7e1ee089` | Forwards to the object at `this+60`: `0x7e1e802d(*(this+60))`. | pattern scan |
 | `0x7e1ee097` | 2 | `fwd_f64_to_7e1e802d_7e1ee097` | Forwards to the object at `this+64`: `0x7e1e802d(*(this+64))`. | pattern scan |
-| `0x7e1ee8e7` | 1 | `adj_thunk_16_to_7e1e7e39_7e1ee8e7` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1ee8f4` | 1 | `adj_thunk_112_to_7e1e7e39_7e1ee8f4` | Adds 112 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1eed5a` | 1 | `adj_thunk_16_to_7e1e7e39_7e1eed5a` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1eed67` | 1 | `adj_thunk_72_to_7e1e7e39_7e1eed67` | Adds 72 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1eed74` | 1 | `adj_thunk_128_to_7e1e7e39_7e1eed74` | Adds 128 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1ef1de` | 2 | `call_7e1e881e_ret_null_7e1ef1de` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ee8e7` | 1 | `adj_thunk_16_to_7e1e7e39_7e1ee8e7` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e1ee8f4` | 1 | `adj_thunk_112_to_7e1e7e39_7e1ee8f4` | Adds 112 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e1eed5a` | 1 | `adj_thunk_16_to_7e1e7e39_7e1eed5a` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e1eed67` | 1 | `adj_thunk_72_to_7e1e7e39_7e1eed67` | Adds 72 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e1eed74` | 1 | `adj_thunk_128_to_7e1e7e39_7e1eed74` | Adds 128 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. Target: `addObserver`. | pattern scan |
+| `0x7e1ef1de` | 2 | `call_7e1e881e_ret_null_7e1ef1de` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e1e881e`. | pattern scan |
 | `0x7e1ef726` | 1 | `fwd_f44_to_7e1e802d_7e1ef726` | Forwards to the object at `this+44`: `0x7e1e802d(*(this+44))`. | pattern scan |
 | `0x7e1ef734` | 1 | `fwd_f48_to_7e1e802d_7e1ef734` | Forwards to the object at `this+48`: `0x7e1e802d(*(this+48))`. | pattern scan |
 | `0x7e1ef742` | 1 | `fwd_f56_to_7e1e802d_7e1ef742` | Forwards to the object at `this+56`: `0x7e1e802d(*(this+56))`. | pattern scan |
@@ -18356,13 +18361,13 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1ef80c` | 1 | `fwd_f20_to_7e1e802d_7e1ef80c` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
 | `0x7e1ef8f1` | 1 | `fwd_f36_to_7e1e802d_7e1ef8f1` | Forwards to the object at `this+36`: `0x7e1e802d(*(this+36))`. | pattern scan |
 | `0x7e1ef8ff` | 1 | `fwd_f24_to_7e1e802d_7e1ef8ff` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
-| `0x7e1f08be` | 1 | `call_7e1ed6d9_ret_null_7e1f08be` | Calls `0x7e1ed6d9`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f08be` | 1 | `call_7e1ed6d9_ret_null_7e1f08be` | Calls `0x7e1ed6d9`, then returns a null pointer (`a0 = 0`). Target: `cls_7e427c04__ctordtor_7e1ed6d9`. | pattern scan |
 | `0x7e1f203c` | 1 | `call_7e1f0868_ret_null_7e1f203c` | Calls `0x7e1f0868`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e1f2489` | 1 | `call_7dba3e9b_arg_7000_7e1f2489` | Calls `0x7dba3e9b` with `d0 = 7000`. | pattern scan |
 | `0x7e1f2499` | 1 | `call_7dba3e9b_arg_m1_7e1f2499` | Calls `0x7dba3e9b` with `d0 = -1`. | pattern scan |
-| `0x7e1f3704` | 1 | `call_7db67de7_arg_3_7e1f3704` | Calls `0x7db67de7` with `d0 = 3`. | pattern scan |
-| `0x7e1f38c3` | 1 | `call_7db67dc3_on_0_7e1f38c3` | Calls `0x7db67dc3` with `a0 = 0x0` (a fixed address). | pattern scan |
-| `0x7e1f38d8` | 1 | `call_7db67dcb_on_0_7e1f38d8` | Calls `0x7db67dcb` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e1f3704` | 1 | `call_7db67de7_arg_3_7e1f3704` | Calls `0x7db67de7` with `d0 = 3`. Target: `thunk_argu16_7db6fefc_7db67de7`. | pattern scan |
+| `0x7e1f38c3` | 1 | `call_7db67dc3_on_0_7e1f38c3` | Calls `0x7db67dc3` with `a0 = 0x0` (a fixed address). Target: `entry_stub_7db67dc3`. | pattern scan |
+| `0x7e1f38d8` | 1 | `call_7db67dcb_on_0_7e1f38d8` | Calls `0x7db67dcb` with `a0 = 0x0` (a fixed address). Target: `entry_stub_7db67dcb`. | pattern scan |
 | `0x7e1f3b6f` | 1 | `fwd_f4_to_7e1e7e39_7e1f3b6f` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
 | `0x7e1f3b7f` | 1 | `fwd_f8_to_7e1e7e39_7e1f3b7f` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
 | `0x7e1f3d04` | 1 | `this_plus_72_7e1f3d04` | Leaf `return this+72` (address of a member or base sub-object). | pattern scan |
@@ -18370,24 +18375,24 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1f3e3f` | 1 | `fwd_f36_to_7e1e7e39_7e1f3e3f` | Forwards to the object at `this+36`: `0x7e1e7e39(*(this+36))`. | pattern scan |
 | `0x7e1f3e4f` | 1 | `fwd_f40_to_7e1e7e39_7e1f3e4f` | Forwards to the object at `this+40`: `0x7e1e7e39(*(this+40))`. | pattern scan |
 | `0x7e1f4375` | 1 | `fwd_f40_to_7e1e802d_7e1f4375` | Forwards to the object at `this+40`: `0x7e1e802d(*(this+40))`. | pattern scan |
-| `0x7e1f4752` | 1 | `call_7e1e881e_ret_null_7e1f4752` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e1f476d` | 1 | `call_7e1e881e_ret_null_7e1f476d` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f4752` | 1 | `call_7e1e881e_ret_null_7e1f4752` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e1e881e`. | pattern scan |
+| `0x7e1f476d` | 1 | `call_7e1e881e_ret_null_7e1f476d` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e1e881e`. | pattern scan |
 | `0x7e1f49c9` | 1 | `this_plus_512_7e1f49c9` | Leaf `return this+512` (address of a member or base sub-object). | pattern scan |
-| `0x7e1f4ad8` | 6 | `call_7e1e67f6_ret_null_7e1f4ad8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f4ad8` | 6 | `call_7e1e67f6_ret_null_7e1f4ad8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1f4d17` | 1 | `this_plus_464_7e1f4d17` | Leaf `return this+464` (address of a member or base sub-object). | pattern scan |
-| `0x7e1f5524` | 1 | `store_4_f252_call_7e1e86dd_7e1f5524` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f5524` | 1 | `store_4_f252_call_7e1e86dd_7e1f5524` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1f553c` | 1 | `call2_7e1f5524_7e1f56e9_7e1f553c` | Calls `0x7e1f5524(this)` and then `0x7e1f56e9(this)`. | pattern scan |
 | `0x7e1f56f1` | 1 | `store_11_f356_f256_7e1f56f1` | `*(this+356) = *(this+256) = 11`. | pattern scan |
 | `0x7e1f5786` | 1 | `store_12_f356_f256_7e1f5786` | `*(this+356) = *(this+256) = 12`. | pattern scan |
-| `0x7e1f5cc6` | 1 | `adj_thunk_308_to_7dfc0ad2_7e1f5cc6` | Adds 308 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
-| `0x7e1f6c20` | 1 | `store_4_f252_call_7e1e86dd_7e1f6c20` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f5cc6` | 1 | `adj_thunk_308_to_7dfc0ad2_7e1f5cc6` | Adds 308 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
+| `0x7e1f6c20` | 1 | `store_4_f252_call_7e1e86dd_7e1f6c20` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1f6dca` | 1 | `store_9_f348_f256_7e1f6dca` | `*(this+348) = *(this+256) = 9`. | pattern scan |
 | `0x7e1f6e9e` | 1 | `store_10_f348_f256_7e1f6e9e` | `*(this+348) = *(this+256) = 10`. | pattern scan |
-| `0x7e1f73c6` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1f73c6` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1f73c6` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1f73c6` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. Target: `vec_push_u32`. | pattern scan |
 | `0x7e1f7d5b` | 1 | `this_plus_536_7e1f7d5b` | Leaf `return this+536` (address of a member or base sub-object). | pattern scan |
-| `0x7e1f7e42` | 3 | `call_7e1e67f6_ret_null_7e1f7e42` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f7e42` | 3 | `call_7e1e67f6_ret_null_7e1f7e42` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e1f802c` | 1 | `this_plus_508_7e1f802c` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
-| `0x7e1f8e29` | 1 | `store_4_f252_call_7e1e86dd_7e1f8e29` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f8e29` | 1 | `store_4_f252_call_7e1e86dd_7e1f8e29` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1f8e41` | 1 | `call2_7e1f8e29_7e1f8fee_7e1f8e41` | Calls `0x7e1f8e29(this)` and then `0x7e1f8fee(this)`. | pattern scan |
 | `0x7e1f8ff6` | 1 | `store_11_f368_f256_7e1f8ff6` | `*(this+368) = *(this+256) = 11`. | pattern scan |
 | `0x7e1fa356` | 1 | `store_12_f368_f256_7e1fa356` | `*(this+368) = *(this+256) = 12`. | pattern scan |
@@ -18426,19 +18431,19 @@ what the target does is described at the target, if it is labelled.
 | `0x7e1fd39c` | 1 | `store_48_f368_f256_7e1fd39c` | `*(this+368) = *(this+256) = 48`. | pattern scan |
 | `0x7e1fd4f6` | 1 | `store_49_f368_f256_7e1fd4f6` | `*(this+368) = *(this+256) = 49`. | pattern scan |
 | `0x7e1fd650` | 1 | `store_50_f368_f256_7e1fd650` | `*(this+368) = *(this+256) = 50`. | pattern scan |
-| `0x7e1fdd53` | 1 | `store_4_f252_call_7e1e86dd_7e1fdd53` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1fdd53` | 1 | `store_4_f252_call_7e1e86dd_7e1fdd53` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1fdd6b` | 1 | `call2_7e1fdd53_7e1fdee1_7e1fdd6b` | Calls `0x7e1fdd53(this)` and then `0x7e1fdee1(this)`. | pattern scan |
 | `0x7e1fdee9` | 1 | `store_9_f344_f256_7e1fdee9` | `*(this+344) = *(this+256) = 9`. | pattern scan |
 | `0x7e1fdfb9` | 1 | `store_10_f344_f256_7e1fdfb9` | `*(this+344) = *(this+256) = 10`. | pattern scan |
 | `0x7e1fe285` | 1 | `this_plus_536_7e1fe285` | Leaf `return this+536` (address of a member or base sub-object). | pattern scan |
-| `0x7e1fec4d` | 3 | `store_4_f252_call_7e1e86dd_7e1fec4d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1fec4d` | 3 | `store_4_f252_call_7e1e86dd_7e1fec4d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1fec77` | 1 | `call2_7e1fec4d_7e1ff0f8_7e1fec77` | Calls `0x7e1fec4d(this)` and then `0x7e1ff0f8(this)`. | pattern scan |
 | `0x7e1fefa6` | 2 | `store_12_f376_f256_7e1fefa6` | `*(this+376) = *(this+256) = 12`. | pattern scan |
 | `0x7e1ff100` | 2 | `store_13_f376_f256_7e1ff100` | `*(this+376) = *(this+256) = 13`. | pattern scan |
 | `0x7e1ff2c0` | 1 | `this_plus_508_7e1ff2c0` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
-| `0x7e1ff3a3` | 1 | `call_7e200731_ret_null_7e1ff3a3` | Calls `0x7e200731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ff3a3` | 1 | `call_7e200731_ret_null_7e1ff3a3` | Calls `0x7e200731`, then returns a null pointer (`a0 = 0`). Target: `OlyHfwOpeSndCtlSoundEvFw__ctordtor_7e200731`. | pattern scan |
 | `0x7e1ffbd3` | 1 | `call2_7e1ffc6f_7e1ffeff_7e1ffbd3` | Calls `0x7e1ffc6f(this)` and then `0x7e1ffeff(this)`. | pattern scan |
-| `0x7e1ffc6f` | 3 | `store_4_f252_call_7e1e86dd_7e1ffc6f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1ffc6f` | 3 | `store_4_f252_call_7e1e86dd_7e1ffc6f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. Target: `hls_check_overflow`. | pattern scan |
 | `0x7e1fff07` | 2 | `store_11_f440_f256_7e1fff07` | `*(this+440) = *(this+256) = 11`. | pattern scan |
 | `0x7e20014a` | 2 | `store_12_f440_f256_7e20014a` | `*(this+440) = *(this+256) = 12`. | pattern scan |
 | `0x7e200280` | 2 | `store_13_f440_f256_7e200280` | `*(this+440) = *(this+256) = 13`. | pattern scan |
@@ -18451,246 +18456,246 @@ what the target does is described at the target, if it is labelled.
 | `0x7e201b3a` | 2 | `store_14_f440_f256_7e201b3a` | `*(this+440) = *(this+256) = 14`. | pattern scan |
 | `0x7e201c70` | 2 | `store_15_f440_f256_7e201c70` | `*(this+440) = *(this+256) = 15`. | pattern scan |
 | `0x7e201cd1` | 2 | `store_16_f440_f256_7e201cd1` | `*(this+440) = *(this+256) = 16`. | pattern scan |
-| `0x7e201e18` | 2 | `call_7e201efb_ret_null_7e201e18` | Calls `0x7e201efb`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e201e4e` | 2 | `call_7e1e67f6_ret_null_7e201e4e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e201ead` | 1 | `call_7e1e67f6_ret_null_7e201ead` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e201e18` | 2 | `call_7e201efb_ret_null_7e201e18` | Calls `0x7e201efb`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e201efb`. | pattern scan |
+| `0x7e201e4e` | 2 | `call_7e1e67f6_ret_null_7e201e4e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
+| `0x7e201ead` | 1 | `call_7e1e67f6_ret_null_7e201ead` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). Target: `evtsrc_dtor`. | pattern scan |
 | `0x7e2023eb` | 1 | `fwd_f8_to_7e1e7e39_7e2023eb` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
 | `0x7e2023fb` | 1 | `fwd_f16_to_7e1e7e39_7e2023fb` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
 | `0x7e20240b` | 1 | `fwd_f12_to_7e1e7e39_7e20240b` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
 | `0x7e20241b` | 1 | `fwd_f20_to_7e1e7e39_7e20241b` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
-| `0x7e203461` | 1 | `adj_thunk_12_to_7e201e22_7e203461` | Adds 12 to `this`, then calls `0x7e201e22`: entry for a base or member sub-object. | pattern scan |
+| `0x7e203461` | 1 | `adj_thunk_12_to_7e201e22_7e203461` | Adds 12 to `this`, then calls `0x7e201e22`: entry for a base or member sub-object. Target: `get_f4_7e201e22`. | pattern scan |
 | `0x7e203f04` | 1 | `fwd_f24_vslot4_7e203f04` | Forwards to the object at `this+24`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e203f14` | 1 | `fwd_f28_vslot4_7e203f14` | Forwards to the object at `this+28`: calls its vtable slot `+4`. | pattern scan |
 | `0x7e204d7e` | 1 | `this_plus_104_7e204d7e` | Leaf `return this+104` (address of a member or base sub-object). | pattern scan |
-| `0x7e20751b` | 1 | `call_7e205040_ret_null_7e20751b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e20751b` | 1 | `call_7e205040_ret_null_7e20751b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). Target: `base_reset_vtbl_7e42c02c`. | pattern scan |
 | `0x7e2079b2` | 1 | `this_plus_64_7e2079b2` | Leaf `return this+64` (address of a member or base sub-object). | pattern scan |
 | `0x7e2079cc` | 1 | `adj_thunk_56_to_7e206a85_7e2079cc` | Adds 56 to `this`, then calls `0x7e206a85`: entry for a base or member sub-object. | pattern scan |
 | `0x7e207a95` | 4 | `adj_thunk_56_to_7e206a97_7e207a95` | Adds 56 to `this`, then calls `0x7e206a97`: entry for a base or member sub-object. | pattern scan |
 | `0x7e207f49` | 1 | `adj_thunk_12_to_7dfc3f5f_7e207f49` | Adds 12 to `this`, then calls `0x7dfc3f5f`: entry for a base or member sub-object. | pattern scan |
-| `0x7e208094` | 2 | `call_7e2080ef_ret_null_7e208094` | Calls `0x7e2080ef`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e208094` | 2 | `call_7e2080ef_ret_null_7e208094` | Calls `0x7e2080ef`, then returns a null pointer (`a0 = 0`). Target: `copy4x_7dfcf296_7e2080ef`. | pattern scan |
 | `0x7e208251` | 1 | `call_7e2081d9_ret_null_7e208251` | Calls `0x7e2081d9`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e208321` | 1 | `fwd_f52_to_7e221c50_7e208321` | Forwards to the object at `this+52`: `0x7e221c50(*(this+52))`. | pattern scan |
-| `0x7e20b8d3` | 1 | `call_7e20d793_arg_454_7e20b8d3` | Calls `0x7e20d793` with `d0 = 454`. | pattern scan |
+| `0x7e20b8d3` | 1 | `call_7e20d793_arg_454_7e20b8d3` | Calls `0x7e20d793` with `d0 = 454`. Target: `ca_getSetting`. | pattern scan |
 | `0x7e20d133` | 1 | `call_7e20d325_arg_1_7e20d133` | Calls `0x7e20d325` with `d0 = 1`. | pattern scan |
-| `0x7e20d609` | 0 | `call_7e20d616_arg_1_7e20d609` | Calls `0x7e20d616` with `d0 = 1`. | pattern scan |
-| `0x7e20dff8` | 1 | `call_7e20d793_arg_99_7e20dff8` | Calls `0x7e20d793` with `d0 = 99`. | pattern scan |
-| `0x7e20ecf3` | 1 | `call_7e20ed42_arg_3_7e20ecf3` | Calls `0x7e20ed42` with `d0 = 3`. | pattern scan |
-| `0x7e20ed35` | 0 | `call_7e20ed42_arg_1_7e20ed35` | Calls `0x7e20ed42` with `d0 = 1`. | pattern scan |
-| `0x7e21143e` | 0 | `call_7e20ed42_arg_8_7e21143e` | Calls `0x7e20ed42` with `d0 = 8`. | pattern scan |
-| `0x7e2133f1` | 0 | `call_7e20ed42_arg_8_7e2133f1` | Calls `0x7e20ed42` with `d0 = 8`. | pattern scan |
-| `0x7e21b01b` | 0 | `call_7e20ed42_arg_7_7e21b01b` | Calls `0x7e20ed42` with `d0 = 7`. | pattern scan |
+| `0x7e20d609` | 0 | `call_7e20d616_arg_1_7e20d609` | Calls `0x7e20d616` with `d0 = 1`. Target: `global_6076d654_set_7e20d616`. | pattern scan |
+| `0x7e20dff8` | 1 | `call_7e20d793_arg_99_7e20dff8` | Calls `0x7e20d793` with `d0 = 99`. Target: `ca_getSetting`. | pattern scan |
+| `0x7e20ecf3` | 1 | `call_7e20ed42_arg_3_7e20ecf3` | Calls `0x7e20ed42` with `d0 = 3`. Target: `shootingcmn_move_to_ready`. | pattern scan |
+| `0x7e20ed35` | 0 | `call_7e20ed42_arg_1_7e20ed35` | Calls `0x7e20ed42` with `d0 = 1`. Target: `shootingcmn_move_to_ready`. | pattern scan |
+| `0x7e21143e` | 0 | `call_7e20ed42_arg_8_7e21143e` | Calls `0x7e20ed42` with `d0 = 8`. Target: `shootingcmn_move_to_ready`. | pattern scan |
+| `0x7e2133f1` | 0 | `call_7e20ed42_arg_8_7e2133f1` | Calls `0x7e20ed42` with `d0 = 8`. Target: `shootingcmn_move_to_ready`. | pattern scan |
+| `0x7e21b01b` | 0 | `call_7e20ed42_arg_7_7e21b01b` | Calls `0x7e20ed42` with `d0 = 7`. Target: `shootingcmn_move_to_ready`. | pattern scan |
 | `0x7e21b950` | 6 | `this_plus_12_7e21b950` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
 | `0x7e21b955` | 6 | `this_plus_36_7e21b955` | Leaf `return this+36` (address of a member or base sub-object). | pattern scan |
 | `0x7e21b95a` | 4 | `this_plus_60_7e21b95a` | Leaf `return this+60` (address of a member or base sub-object). | pattern scan |
-| `0x7e21bbe4` | 1 | `call_7e21b943_ret_null_7e21bbe4` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e21c119` | 0 | `call_7e215ae5_arg_1_7e21c119` | Calls `0x7e215ae5` with `d0 = 1`. | pattern scan |
-| `0x7e21c569` | 1 | `call_7e21b943_ret_null_7e21c569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e21cd79` | 1 | `call_7e21b943_ret_null_7e21cd79` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e21d8f1` | 1 | `call_7e21b943_ret_null_7e21d8f1` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e21dff2` | 0 | `call_7e215da4_arg_1_7e21dff2` | Calls `0x7e215da4` with `d0 = 1`. | pattern scan |
-| `0x7e21e0b2` | 1 | `call_7e21b943_ret_null_7e21e0b2` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e21e84d` | 1 | `call_7e21b943_ret_null_7e21e84d` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e220569` | 1 | `call_7e21b943_ret_null_7e220569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e223ebc` | 2 | `call_7e223db3_ret_null_7e223ebc` | Calls `0x7e223db3`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21bbe4` | 1 | `call_7e21b943_ret_null_7e21bbe4` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e21c119` | 0 | `call_7e215ae5_arg_1_7e21c119` | Calls `0x7e215ae5` with `d0 = 1`. Target: `global_6076d768_set_7e215ae5`. | pattern scan |
+| `0x7e21c569` | 1 | `call_7e21b943_ret_null_7e21c569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e21cd79` | 1 | `call_7e21b943_ret_null_7e21cd79` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e21d8f1` | 1 | `call_7e21b943_ret_null_7e21d8f1` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e21dff2` | 0 | `call_7e215da4_arg_1_7e21dff2` | Calls `0x7e215da4` with `d0 = 1`. Target: `global_604522cc_set_7e215da4`. | pattern scan |
+| `0x7e21e0b2` | 1 | `call_7e21b943_ret_null_7e21e0b2` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e21e84d` | 1 | `call_7e21b943_ret_null_7e21e84d` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e220569` | 1 | `call_7e21b943_ret_null_7e220569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e21b943`. | pattern scan |
+| `0x7e223ebc` | 2 | `call_7e223db3_ret_null_7e223ebc` | Calls `0x7e223db3`, then returns a null pointer (`a0 = 0`). Target: `cls_7e45c060__ctordtor_7e223db3`. | pattern scan |
 | `0x7e226fb2` | 2 | `call_7e226d52_arg_1_7e226fb2` | Calls `0x7e226d52` with `d0 = 1`. | pattern scan |
 | `0x7e226fbc` | 3 | `call_7e226d52_arg_1_7e226fbc` | Calls `0x7e226d52` with `d0 = 1`. | pattern scan |
-| `0x7e22ccdd` | 1 | `adj_thunk_16_to_7e22c9a5_7e22ccdd` | Adds 16 to `this`, then calls `0x7e22c9a5`: entry for a base or member sub-object. | pattern scan |
-| `0x7e2300bb` | 2 | `call_7e2304ef_ret_ptr_7e22c3a5_7e2300bb` | Calls `0x7e2304ef`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
-| `0x7e23208a` | 14 | `call_7e22b601_ret_ptr_7e22c3a5_7e23208a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
-| `0x7e232861` | 3 | `call_7e22b601_ret_ptr_7e22c3a5_7e232861` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
-| `0x7e232a5a` | 5 | `call_7e22b601_ret_ptr_7e22c3a5_7e232a5a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e22ccdd` | 1 | `adj_thunk_16_to_7e22c9a5_7e22ccdd` | Adds 16 to `this`, then calls `0x7e22c9a5`: entry for a base or member sub-object. Target: `thunk_s16_7e22cd88_7e22c9a5`. | pattern scan |
+| `0x7e2300bb` | 2 | `call_7e2304ef_ret_ptr_7e22c3a5_7e2300bb` | Calls `0x7e2304ef`, then returns the fixed address `0x7e22c3a5` (in `a0`). Target: `rec_free_via_app_tags`. | pattern scan |
+| `0x7e23208a` | 14 | `call_7e22b601_ret_ptr_7e22c3a5_7e23208a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `get_bidi_classify`, `rec_free_via_app_tags`. | pattern scan |
+| `0x7e232861` | 3 | `call_7e22b601_ret_ptr_7e22c3a5_7e232861` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `get_bidi_classify`, `rec_free_via_app_tags`. | pattern scan |
+| `0x7e232a5a` | 5 | `call_7e22b601_ret_ptr_7e22c3a5_7e232a5a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `get_bidi_classify`, `rec_free_via_app_tags`. | pattern scan |
 | `0x7e232b3e` | 14 | `this_plus_76_7e232b3e` | Leaf `return this+76` (address of a member or base sub-object). | pattern scan |
 | `0x7e232d44` | 9 | `fwd_f8_to_7e23bca2_7e232d44` | Forwards to the object at `this+8`: `0x7e23bca2(*(this+8))`. | pattern scan |
 | `0x7e233df6` | 1 | `call_7e233dd0_arg_1_7e233df6` | Calls `0x7e233dd0` with `d0 = 1`. | pattern scan |
-| `0x7e23d504` | 1 | `call_7e2300bb_ret_ptr_7e22c3a5_7e23d504` | Calls `0x7e2300bb`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e23d504` | 1 | `call_7e2300bb_ret_ptr_7e22c3a5_7e23d504` | Calls `0x7e2300bb`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `call_7e2304ef_ret_ptr_7e22c3a5_7e2300bb`, `rec_free_via_app_tags`. | pattern scan |
 | `0x7e23f32b` | 2 | `this_plus_20_7e23f32b` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
 | `0x7e246417` | 2 | `set_f44_7e246417` | `*(this+44) = d0`. | pattern scan |
 | `0x7e2582e1` | 5 | `this_plus_136_7e2582e1` | Leaf `return this+136` (address of a member or base sub-object). | pattern scan |
-| `0x7e25c9b5` | 1 | `call_7e25d53c_ret_ptr_7e22c3a5_7e25c9b5` | Calls `0x7e25d53c`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e25c9b5` | 1 | `call_7e25d53c_ret_ptr_7e22c3a5_7e25c9b5` | Calls `0x7e25d53c`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `vt_get_bidi_classify`, `rec_free_via_app_tags`. | pattern scan |
 | `0x7e25ec18` | 3 | `call_7e22f0ee_ret_1_7e25ec18` | Calls `0x7e22f0ee`, then returns 1. | pattern scan |
 | `0x7e25ec4b` | 4 | `this_plus_2080_7e25ec4b` | Leaf `return this+2080` (address of a member or base sub-object). | pattern scan |
 | `0x7e262001` | 15 | `this_plus_196_7e262001` | Leaf `return this+196` (address of a member or base sub-object). | pattern scan |
-| `0x7e262032` | 1 | `adj_thunk_196_to_7e264b78_7e262032` | Adds 196 to `this`, then calls `0x7e264b78`: entry for a base or member sub-object. | pattern scan |
+| `0x7e262032` | 1 | `adj_thunk_196_to_7e264b78_7e262032` | Adds 196 to `this`, then calls `0x7e264b78`: entry for a base or member sub-object. Target: `get_f144_7e264b78`. | pattern scan |
 | `0x7e263ea6` | 3 | `this_plus_140_7e263ea6` | Leaf `return this+140` (address of a member or base sub-object). | pattern scan |
-| `0x7e264a78` | 1 | `call_7e23208a_ret_ptr_7e22c3a5_7e264a78` | Calls `0x7e23208a`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
-| `0x7e26505c` | 1 | `call_7e264a78_ret_ptr_7e22c3a5_7e26505c` | Calls `0x7e264a78`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e264a78` | 1 | `call_7e23208a_ret_ptr_7e22c3a5_7e264a78` | Calls `0x7e23208a`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `call_7e22b601_ret_ptr_7e22c3a5_7e23208a`, `rec_free_via_app_tags`. | pattern scan |
+| `0x7e26505c` | 1 | `call_7e264a78_ret_ptr_7e22c3a5_7e26505c` | Calls `0x7e264a78`, then returns the fixed address `0x7e22c3a5` (in `a0`). Targets: `call_7e23208a_ret_ptr_7e22c3a5_7e264a78`, `rec_free_via_app_tags`. | pattern scan |
 | `0x7e266806` | 2 | `this_plus_132_7e266806` | Leaf `return this+132` (address of a member or base sub-object). | pattern scan |
 | `0x7e2a85eb` | 2 | `call2_7e2a88ad_7e2a892d_7e2a85eb` | Calls `0x7e2a88ad(this)` and then `0x7e2a892d(this)`. | pattern scan |
 | `0x7e2a862d` | 2 | `call2_7e2a8a76_7e2a8c1b_7e2a862d` | Calls `0x7e2a8a76(this)` and then `0x7e2a8c1b(this)`. | pattern scan |
-| `0x7e2c7bc6` | 0 | `call_7e337a27_arg_526_7e2c7bc6` | Calls `0x7e337a27` with `d0 = 526`. | pattern scan |
-| `0x7e2c7bd6` | 0 | `call_7e337a27_arg_526_7e2c7bd6` | Calls `0x7e337a27` with `d0 = 526`. | pattern scan |
-| `0x7e2c98ee` | 0 | `call_7e337a27_arg_525_7e2c98ee` | Calls `0x7e337a27` with `d0 = 525`. | pattern scan |
-| `0x7e2c98fe` | 0 | `call_7e337a27_arg_525_7e2c98fe` | Calls `0x7e337a27` with `d0 = 525`. | pattern scan |
+| `0x7e2c7bc6` | 0 | `call_7e337a27_arg_526_7e2c7bc6` | Calls `0x7e337a27` with `d0 = 526`. Target: `guiapp_slot_unregister`. | pattern scan |
+| `0x7e2c7bd6` | 0 | `call_7e337a27_arg_526_7e2c7bd6` | Calls `0x7e337a27` with `d0 = 526`. Target: `guiapp_slot_unregister`. | pattern scan |
+| `0x7e2c98ee` | 0 | `call_7e337a27_arg_525_7e2c98ee` | Calls `0x7e337a27` with `d0 = 525`. Target: `guiapp_slot_unregister`. | pattern scan |
+| `0x7e2c98fe` | 0 | `call_7e337a27_arg_525_7e2c98fe` | Calls `0x7e337a27` with `d0 = 525`. Target: `guiapp_slot_unregister`. | pattern scan |
 | `0x7e2d9ff9` | 1 | `store_0xffff_g6045ee18_7e2d9ff9` | `*0x6045ee18 = 0xffff`. | pattern scan |
-| `0x7e2da0e4` | 0 | `call_7e2daa34_ret_null_7e2da0e4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2da0e4` | 0 | `call_7e2daa34_ret_null_7e2da0e4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
 | `0x7e2da80c` | 0 | `call_7e2d9e56_ret_null_7e2da80c` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2dad87` | 0 | `call_7e2daa34_ret_null_7e2dad87` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2dafdc` | 0 | `call_7e2daa34_ret_null_7e2dafdc` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2db327` | 0 | `call_7e2daa34_ret_null_7e2db327` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2db644` | 0 | `call_7e2daa34_ret_null_7e2db644` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dad87` | 0 | `call_7e2daa34_ret_null_7e2dad87` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2dafdc` | 0 | `call_7e2daa34_ret_null_7e2dafdc` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2db327` | 0 | `call_7e2daa34_ret_null_7e2db327` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2db644` | 0 | `call_7e2daa34_ret_null_7e2db644` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
 | `0x7e2dc859` | 0 | `call_7e2d9e56_ret_null_7e2dc859` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2dd12e` | 1 | `call_7e2dda2e_ret_null_7e2dd12e` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dd12e` | 1 | `call_7e2dda2e_ret_null_7e2dd12e` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). Target: `call_7e2d9e56_ret_null_7e2dda2e`. | pattern scan |
 | `0x7e2dda2e` | 3 | `call_7e2d9e56_ret_null_7e2dda2e` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2e0f0c` | 0 | `call_7e2daa34_ret_null_7e2e0f0c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2e524a` | 0 | `call_7e2daa34_ret_null_7e2e524a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2e565e` | 0 | `call_7e2daa34_ret_null_7e2e565e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2e59dc` | 1 | `call_7e2cd053_ret_null_7e2e59dc` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2e9d72` | 1 | `call_7e2dda2e_ret_null_7e2e9d72` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e0f0c` | 0 | `call_7e2daa34_ret_null_7e2e0f0c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2e524a` | 0 | `call_7e2daa34_ret_null_7e2e524a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2e565e` | 0 | `call_7e2daa34_ret_null_7e2e565e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2e59dc` | 1 | `call_7e2cd053_ret_null_7e2e59dc` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). Target: `guiapp_null_leaf_7e2c`. | pattern scan |
+| `0x7e2e9d72` | 1 | `call_7e2dda2e_ret_null_7e2e9d72` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). Target: `call_7e2d9e56_ret_null_7e2dda2e`. | pattern scan |
 | `0x7e2eae6d` | 0 | `call_7e2d9e56_ret_null_7e2eae6d` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e2ebbc8` | 0 | `call_7e2d9e56_ret_null_7e2ebbc8` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e2eca23` | 0 | `call_7e2d9e56_ret_null_7e2eca23` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2ee3b0` | 1 | `call_7e2cd053_ret_null_7e2ee3b0` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2ee705` | 1 | `call_7e337a27_arg_502_7e2ee705` | Calls `0x7e337a27` with `d0 = 502`. | pattern scan |
-| `0x7e2ee883` | 4 | `call_7e2daa34_ret_null_7e2ee883` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2ee3b0` | 1 | `call_7e2cd053_ret_null_7e2ee3b0` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). Target: `guiapp_null_leaf_7e2c`. | pattern scan |
+| `0x7e2ee705` | 1 | `call_7e337a27_arg_502_7e2ee705` | Calls `0x7e337a27` with `d0 = 502`. Target: `guiapp_slot_unregister`. | pattern scan |
+| `0x7e2ee883` | 4 | `call_7e2daa34_ret_null_7e2ee883` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
 | `0x7e2efa57` | 0 | `call_7e2d9e56_ret_null_7e2efa57` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2eff80` | 0 | `call_7e2daa34_ret_null_7e2eff80` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2f0501` | 0 | `call_7e2daa34_ret_null_7e2f0501` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2f07b1` | 0 | `call_7e2daa34_ret_null_7e2f07b1` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e2f0916` | 1 | `call_7e2daa34_ret_null_7e2f0916` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2eff80` | 0 | `call_7e2daa34_ret_null_7e2eff80` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2f0501` | 0 | `call_7e2daa34_ret_null_7e2f0501` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2f07b1` | 0 | `call_7e2daa34_ret_null_7e2f07b1` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e2f0916` | 1 | `call_7e2daa34_ret_null_7e2f0916` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
 | `0x7e2f395c` | 1 | `fwd_f120_vslot32_7e2f395c` | Forwards to the object at `this+120`: calls its vtable slot `+32`. | pattern scan |
-| `0x7e3022c8` | 1 | `call_7e33e025_arg_8_7e3022c8` | Calls `0x7e33e025` with `d0 = 8`. | pattern scan |
-| `0x7e3022d7` | 1 | `call_7e33e025_arg_14_7e3022d7` | Calls `0x7e33e025` with `d0 = 14`. | pattern scan |
-| `0x7e302307` | 1 | `call_7e33e025_arg_21_7e302307` | Calls `0x7e33e025` with `d0 = 21`. | pattern scan |
-| `0x7e302316` | 1 | `call_7e33e025_arg_2_7e302316` | Calls `0x7e33e025` with `d0 = 2`. | pattern scan |
-| `0x7e302325` | 1 | `call_7e33e025_arg_4_7e302325` | Calls `0x7e33e025` with `d0 = 4`. | pattern scan |
-| `0x7e302334` | 1 | `call_7e33e025_arg_22_7e302334` | Calls `0x7e33e025` with `d0 = 22`. | pattern scan |
-| `0x7e302343` | 1 | `call_7e33e025_arg_23_7e302343` | Calls `0x7e33e025` with `d0 = 23`. | pattern scan |
-| `0x7e302352` | 1 | `call_7e33e025_arg_1_7e302352` | Calls `0x7e33e025` with `d0 = 1`. | pattern scan |
-| `0x7e302361` | 1 | `call_7e33e025_arg_3_7e302361` | Calls `0x7e33e025` with `d0 = 3`. | pattern scan |
-| `0x7e302370` | 1 | `call_7e33e025_arg_5_7e302370` | Calls `0x7e33e025` with `d0 = 5`. | pattern scan |
-| `0x7e3023a6` | 1 | `call_7e33e025_arg_6_7e3023a6` | Calls `0x7e33e025` with `d0 = 6`. | pattern scan |
-| `0x7e3023d4` | 1 | `call_7e33e025_arg_11_7e3023d4` | Calls `0x7e33e025` with `d0 = 11`. | pattern scan |
-| `0x7e3023e3` | 0 | `call_7e337a27_arg_520_7e3023e3` | Calls `0x7e337a27` with `d0 = 520`. | pattern scan |
-| `0x7e30479c` | 1 | `call_7e33e025_arg_7_7e30479c` | Calls `0x7e33e025` with `d0 = 7`. | pattern scan |
+| `0x7e3022c8` | 1 | `call_7e33e025_arg_8_7e3022c8` | Calls `0x7e33e025` with `d0 = 8`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e3022d7` | 1 | `call_7e33e025_arg_14_7e3022d7` | Calls `0x7e33e025` with `d0 = 14`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302307` | 1 | `call_7e33e025_arg_21_7e302307` | Calls `0x7e33e025` with `d0 = 21`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302316` | 1 | `call_7e33e025_arg_2_7e302316` | Calls `0x7e33e025` with `d0 = 2`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302325` | 1 | `call_7e33e025_arg_4_7e302325` | Calls `0x7e33e025` with `d0 = 4`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302334` | 1 | `call_7e33e025_arg_22_7e302334` | Calls `0x7e33e025` with `d0 = 22`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302343` | 1 | `call_7e33e025_arg_23_7e302343` | Calls `0x7e33e025` with `d0 = 23`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302352` | 1 | `call_7e33e025_arg_1_7e302352` | Calls `0x7e33e025` with `d0 = 1`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302361` | 1 | `call_7e33e025_arg_3_7e302361` | Calls `0x7e33e025` with `d0 = 3`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e302370` | 1 | `call_7e33e025_arg_5_7e302370` | Calls `0x7e33e025` with `d0 = 5`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e3023a6` | 1 | `call_7e33e025_arg_6_7e3023a6` | Calls `0x7e33e025` with `d0 = 6`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e3023d4` | 1 | `call_7e33e025_arg_11_7e3023d4` | Calls `0x7e33e025` with `d0 = 11`. Target: `gui_bigstate_build`. | pattern scan |
+| `0x7e3023e3` | 0 | `call_7e337a27_arg_520_7e3023e3` | Calls `0x7e337a27` with `d0 = 520`. Target: `guiapp_slot_unregister`. | pattern scan |
+| `0x7e30479c` | 1 | `call_7e33e025_arg_7_7e30479c` | Calls `0x7e33e025` with `d0 = 7`. Target: `gui_bigstate_build`. | pattern scan |
 | `0x7e31ed36` | 9 | `fwd_f8_vslot4_7e31ed36` | Forwards to the object at `this+8`: calls its vtable slot `+4`. | pattern scan |
-| `0x7e31f46e` | 0 | `call_7e31edb0_ret_null_7e31f46e` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e31f8d3` | 0 | `call_7e31edb0_ret_null_7e31f8d3` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e320004` | 0 | `call_7e31edb0_ret_null_7e320004` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3209f8` | 0 | `call_7e31edb0_ret_null_7e3209f8` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e320b1b` | 0 | `call_7e31edb0_ret_null_7e320b1b` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3255a2` | 1 | `call_7e2dda2e_ret_null_7e3255a2` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e31f46e` | 0 | `call_7e31edb0_ret_null_7e31f46e` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e31edb0`. | pattern scan |
+| `0x7e31f8d3` | 0 | `call_7e31edb0_ret_null_7e31f8d3` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e31edb0`. | pattern scan |
+| `0x7e320004` | 0 | `call_7e31edb0_ret_null_7e320004` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e31edb0`. | pattern scan |
+| `0x7e3209f8` | 0 | `call_7e31edb0_ret_null_7e3209f8` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e31edb0`. | pattern scan |
+| `0x7e320b1b` | 0 | `call_7e31edb0_ret_null_7e320b1b` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e31edb0`. | pattern scan |
+| `0x7e3255a2` | 1 | `call_7e2dda2e_ret_null_7e3255a2` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). Target: `call_7e2d9e56_ret_null_7e2dda2e`. | pattern scan |
 | `0x7e327ad0` | 0 | `call_7e2d9e56_ret_null_7e327ad0` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
 | `0x7e327d08` | 0 | `call_7e2d9e56_ret_null_7e327d08` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3282f9` | 0 | `call_7e2daa34_ret_null_7e3282f9` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e328633` | 0 | `call_7e2daa34_ret_null_7e328633` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32880c` | 0 | `call_7e2daa34_ret_null_7e32880c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e328c2b` | 0 | `call_7e2daa34_ret_null_7e328c2b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e328fea` | 0 | `call_7e2daa34_ret_null_7e328fea` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32936f` | 0 | `call_7e2daa34_ret_null_7e32936f` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3295be` | 0 | `call_7e2daa34_ret_null_7e3295be` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e329965` | 0 | `call_7e2daa34_ret_null_7e329965` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e329d19` | 0 | `call_7e2daa34_ret_null_7e329d19` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32a095` | 0 | `call_7e2daa34_ret_null_7e32a095` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32a4cb` | 0 | `call_7e2daa34_ret_null_7e32a4cb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32a815` | 0 | `call_7e2daa34_ret_null_7e32a815` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32c38d` | 0 | `call_7e2daa34_ret_null_7e32c38d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32c90d` | 0 | `call_7e2daa34_ret_null_7e32c90d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32ce2d` | 0 | `call_7e2daa34_ret_null_7e32ce2d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3282f9` | 0 | `call_7e2daa34_ret_null_7e3282f9` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e328633` | 0 | `call_7e2daa34_ret_null_7e328633` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32880c` | 0 | `call_7e2daa34_ret_null_7e32880c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e328c2b` | 0 | `call_7e2daa34_ret_null_7e328c2b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e328fea` | 0 | `call_7e2daa34_ret_null_7e328fea` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32936f` | 0 | `call_7e2daa34_ret_null_7e32936f` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e3295be` | 0 | `call_7e2daa34_ret_null_7e3295be` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e329965` | 0 | `call_7e2daa34_ret_null_7e329965` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e329d19` | 0 | `call_7e2daa34_ret_null_7e329d19` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32a095` | 0 | `call_7e2daa34_ret_null_7e32a095` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32a4cb` | 0 | `call_7e2daa34_ret_null_7e32a4cb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32a815` | 0 | `call_7e2daa34_ret_null_7e32a815` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32c38d` | 0 | `call_7e2daa34_ret_null_7e32c38d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32c90d` | 0 | `call_7e2daa34_ret_null_7e32c90d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32ce2d` | 0 | `call_7e2daa34_ret_null_7e32ce2d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
 | `0x7e32d10e` | 0 | `call_7e32bb05_ret_null_7e32d10e` | Calls `0x7e32bb05`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32d6c0` | 0 | `call_7e2daa34_ret_null_7e32d6c0` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32d8fb` | 0 | `call_7e2daa34_ret_null_7e32d8fb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32e512` | 0 | `call_7e2daa34_ret_null_7e32e512` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32ebd7` | 0 | `call_7e2daa34_ret_null_7e32ebd7` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32ef9d` | 0 | `call_7e2daa34_ret_null_7e32ef9d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32fab5` | 0 | `call_7e2daa34_ret_null_7e32fab5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32fc32` | 0 | `call_7e2daa34_ret_null_7e32fc32` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e32ff28` | 0 | `call_7e2daa34_ret_null_7e32ff28` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3303e5` | 0 | `call_7e2daa34_ret_null_7e3303e5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3305b4` | 0 | `call_7e2daa34_ret_null_7e3305b4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e330774` | 0 | `call_7e2daa34_ret_null_7e330774` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e330927` | 0 | `call_7e2daa34_ret_null_7e330927` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e330c01` | 0 | `call_7e2daa34_ret_null_7e330c01` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e330d7a` | 0 | `call_7e2daa34_ret_null_7e330d7a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e330f0e` | 0 | `call_7e2daa34_ret_null_7e330f0e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3310a8` | 0 | `call_7e2daa34_ret_null_7e3310a8` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e331276` | 0 | `call_7e2daa34_ret_null_7e331276` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e331593` | 0 | `call_7e2daa34_ret_null_7e331593` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e331847` | 0 | `call_7e2daa34_ret_null_7e331847` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e331bf5` | 0 | `call_7e2daa34_ret_null_7e331bf5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e331fa2` | 0 | `call_7e2daa34_ret_null_7e331fa2` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e332889` | 0 | `call_7e2daa34_ret_null_7e332889` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e33313c` | 0 | `call_7e2daa34_ret_null_7e33313c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e333b12` | 0 | `call_7e2daa34_ret_null_7e333b12` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e333ef4` | 0 | `call_7e2daa34_ret_null_7e333ef4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e33446b` | 0 | `call_7e2daa34_ret_null_7e33446b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e33bba1` | 3 | `call_7e33c5f8_ret_null_7e33bba1` | Calls `0x7e33c5f8`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34963c` | 1 | `call_7e349625_ret_null_7e34963c` | Calls `0x7e349625`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34bd72` | 1 | `call_7e33c67e_ret_null_7e34bd72` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34cd7b` | 1 | `call_7e33c67e_ret_null_7e34cd7b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34dcc5` | 1 | `call_7e33c67e_ret_null_7e34dcc5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34de6b` | 1 | `call_7e33c67e_ret_null_7e34de6b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34e0e0` | 1 | `call_7e33c67e_ret_null_7e34e0e0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32d6c0` | 0 | `call_7e2daa34_ret_null_7e32d6c0` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32d8fb` | 0 | `call_7e2daa34_ret_null_7e32d8fb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32e512` | 0 | `call_7e2daa34_ret_null_7e32e512` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32ebd7` | 0 | `call_7e2daa34_ret_null_7e32ebd7` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32ef9d` | 0 | `call_7e2daa34_ret_null_7e32ef9d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32fab5` | 0 | `call_7e2daa34_ret_null_7e32fab5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32fc32` | 0 | `call_7e2daa34_ret_null_7e32fc32` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e32ff28` | 0 | `call_7e2daa34_ret_null_7e32ff28` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e3303e5` | 0 | `call_7e2daa34_ret_null_7e3303e5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e3305b4` | 0 | `call_7e2daa34_ret_null_7e3305b4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e330774` | 0 | `call_7e2daa34_ret_null_7e330774` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e330927` | 0 | `call_7e2daa34_ret_null_7e330927` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e330c01` | 0 | `call_7e2daa34_ret_null_7e330c01` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e330d7a` | 0 | `call_7e2daa34_ret_null_7e330d7a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e330f0e` | 0 | `call_7e2daa34_ret_null_7e330f0e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e3310a8` | 0 | `call_7e2daa34_ret_null_7e3310a8` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e331276` | 0 | `call_7e2daa34_ret_null_7e331276` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e331593` | 0 | `call_7e2daa34_ret_null_7e331593` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e331847` | 0 | `call_7e2daa34_ret_null_7e331847` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e331bf5` | 0 | `call_7e2daa34_ret_null_7e331bf5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e331fa2` | 0 | `call_7e2daa34_ret_null_7e331fa2` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e332889` | 0 | `call_7e2daa34_ret_null_7e332889` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e33313c` | 0 | `call_7e2daa34_ret_null_7e33313c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e333b12` | 0 | `call_7e2daa34_ret_null_7e333b12` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e333ef4` | 0 | `call_7e2daa34_ret_null_7e333ef4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e33446b` | 0 | `call_7e2daa34_ret_null_7e33446b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). Target: `gui_view_dtor`. | pattern scan |
+| `0x7e33bba1` | 3 | `call_7e33c5f8_ret_null_7e33bba1` | Calls `0x7e33c5f8`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e33c5f8`. | pattern scan |
+| `0x7e34963c` | 1 | `call_7e349625_ret_null_7e34963c` | Calls `0x7e349625`, then returns a null pointer (`a0 = 0`). Target: `ret_ptr_00000000_7e349625`. | pattern scan |
+| `0x7e34bd72` | 1 | `call_7e33c67e_ret_null_7e34bd72` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34cd7b` | 1 | `call_7e33c67e_ret_null_7e34cd7b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34dcc5` | 1 | `call_7e33c67e_ret_null_7e34dcc5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34de6b` | 1 | `call_7e33c67e_ret_null_7e34de6b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34e0e0` | 1 | `call_7e33c67e_ret_null_7e34e0e0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
 | `0x7e34e658` | 1 | `call2_7e34e530_7e34e2cc_7e34e658` | Calls `0x7e34e530(this)` and then `0x7e34e2cc(this)`. | pattern scan |
-| `0x7e34e75e` | 1 | `call_7e33c67e_ret_null_7e34e75e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34ea6e` | 1 | `call_7e33c67e_ret_null_7e34ea6e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34f0b5` | 1 | `call_7e33c67e_ret_null_7e34f0b5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34f1b6` | 1 | `call_7e33c67e_ret_null_7e34f1b6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34f2f7` | 1 | `call_7e34f411_ret_null_7e34f2f7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34fa22` | 1 | `call_7e34f411_ret_null_7e34fa22` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34fb3a` | 1 | `call_7e34fc0e_ret_null_7e34fb3a` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e34fc0e` | 4 | `call_7e33c67e_ret_null_7e34fc0e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3500ec` | 1 | `call_7e34f411_ret_null_7e3500ec` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e350464` | 1 | `call_7e34f411_ret_null_7e350464` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e350570` | 1 | `call_7e34f411_ret_null_7e350570` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3506c3` | 1 | `call_7e34f411_ret_null_7e3506c3` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3509d5` | 1 | `call_7e34f411_ret_null_7e3509d5` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e350cfc` | 1 | `call_7e35089c_ret_2_7e350cfc` | Calls `0x7e35089c`, then returns 2. | pattern scan |
-| `0x7e350e6c` | 1 | `call_7e34fc0e_ret_null_7e350e6c` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e351449` | 1 | `call_7e34f411_ret_null_7e351449` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e351536` | 1 | `call_7e33c67e_ret_null_7e351536` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3519b2` | 1 | `call_7e33c67e_ret_null_7e3519b2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35271f` | 1 | `call_7e34f411_ret_null_7e35271f` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35287c` | 1 | `call_7e34f411_ret_null_7e35287c` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e352976` | 1 | `call_7e34fc0e_ret_null_7e352976` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e352b6f` | 4 | `call_7e33c67e_ret_null_7e352b6f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e353002` | 1 | `call_7e34f411_ret_null_7e353002` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e353155` | 1 | `call_7e34f411_ret_null_7e353155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3536f6` | 1 | `call_7e33c67e_ret_null_7e3536f6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e353708` | 1 | `call_7e339444_arg_1_7e353708` | Calls `0x7e339444` with `d0 = 1`. | pattern scan |
-| `0x7e353fa0` | 1 | `call_7e34f411_ret_null_7e353fa0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e354155` | 1 | `call_7e34f411_ret_null_7e354155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35470d` | 1 | `call_7e34f411_ret_null_7e35470d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e354916` | 1 | `call_7e34fc0e_ret_null_7e354916` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e354b02` | 1 | `call_7e33c67e_ret_null_7e354b02` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34e75e` | 1 | `call_7e33c67e_ret_null_7e34e75e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34ea6e` | 1 | `call_7e33c67e_ret_null_7e34ea6e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34f0b5` | 1 | `call_7e33c67e_ret_null_7e34f0b5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34f1b6` | 1 | `call_7e33c67e_ret_null_7e34f1b6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e34f2f7` | 1 | `call_7e34f411_ret_null_7e34f2f7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e34fa22` | 1 | `call_7e34f411_ret_null_7e34fa22` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e34fb3a` | 1 | `call_7e34fc0e_ret_null_7e34fb3a` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). Target: `call_7e33c67e_ret_null_7e34fc0e`. | pattern scan |
+| `0x7e34fc0e` | 4 | `call_7e33c67e_ret_null_7e34fc0e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e3500ec` | 1 | `call_7e34f411_ret_null_7e3500ec` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e350464` | 1 | `call_7e34f411_ret_null_7e350464` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e350570` | 1 | `call_7e34f411_ret_null_7e350570` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e3506c3` | 1 | `call_7e34f411_ret_null_7e3506c3` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e3509d5` | 1 | `call_7e34f411_ret_null_7e3509d5` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e350cfc` | 1 | `call_7e35089c_ret_2_7e350cfc` | Calls `0x7e35089c`, then returns 2. Target: `startImageComp_7e35089c`. | pattern scan |
+| `0x7e350e6c` | 1 | `call_7e34fc0e_ret_null_7e350e6c` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). Target: `call_7e33c67e_ret_null_7e34fc0e`. | pattern scan |
+| `0x7e351449` | 1 | `call_7e34f411_ret_null_7e351449` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e351536` | 1 | `call_7e33c67e_ret_null_7e351536` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e3519b2` | 1 | `call_7e33c67e_ret_null_7e3519b2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35271f` | 1 | `call_7e34f411_ret_null_7e35271f` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e35287c` | 1 | `call_7e34f411_ret_null_7e35287c` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e352976` | 1 | `call_7e34fc0e_ret_null_7e352976` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). Target: `call_7e33c67e_ret_null_7e34fc0e`. | pattern scan |
+| `0x7e352b6f` | 4 | `call_7e33c67e_ret_null_7e352b6f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e353002` | 1 | `call_7e34f411_ret_null_7e353002` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e353155` | 1 | `call_7e34f411_ret_null_7e353155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e3536f6` | 1 | `call_7e33c67e_ret_null_7e3536f6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e353708` | 1 | `call_7e339444_arg_1_7e353708` | Calls `0x7e339444` with `d0 = 1`. Target: `CPlaySingleFrame__NEXT_REC_7e339444`. | pattern scan |
+| `0x7e353fa0` | 1 | `call_7e34f411_ret_null_7e353fa0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e354155` | 1 | `call_7e34f411_ret_null_7e354155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e35470d` | 1 | `call_7e34f411_ret_null_7e35470d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e354916` | 1 | `call_7e34fc0e_ret_null_7e354916` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). Target: `call_7e33c67e_ret_null_7e34fc0e`. | pattern scan |
+| `0x7e354b02` | 1 | `call_7e33c67e_ret_null_7e354b02` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
 | `0x7e354f09` | 1 | `store_u16_0xffff_f200_7e354f09` | `*(u16*)(this+200) = 0xffff`. | pattern scan |
-| `0x7e3583c7` | 1 | `call_7e34f411_ret_null_7e3583c7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e358841` | 1 | `call_7e34f411_ret_null_7e358841` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e358f6d` | 1 | `call_7e34f411_ret_null_7e358f6d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e359092` | 1 | `call_7e34f411_ret_null_7e359092` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e3591c6` | 1 | `call_7e34f411_ret_null_7e3591c6` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35931a` | 1 | `call_7e33c67e_ret_null_7e35931a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e359a10` | 1 | `call_7e34f411_ret_null_7e359a10` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3583c7` | 1 | `call_7e34f411_ret_null_7e3583c7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e358841` | 1 | `call_7e34f411_ret_null_7e358841` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e358f6d` | 1 | `call_7e34f411_ret_null_7e358f6d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e359092` | 1 | `call_7e34f411_ret_null_7e359092` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e3591c6` | 1 | `call_7e34f411_ret_null_7e3591c6` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e35931a` | 1 | `call_7e33c67e_ret_null_7e35931a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e359a10` | 1 | `call_7e34f411_ret_null_7e359a10` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
 | `0x7e359abf` | 1 | `call_7e33bd35_ret_1_7e359abf` | Calls `0x7e33bd35`, then returns 1. | pattern scan |
-| `0x7e359ae0` | 1 | `call_7e34f411_ret_null_7e359ae0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e359cbc` | 1 | `call_7e34f411_ret_null_7e359cbc` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e359df0` | 1 | `call_7e34f411_ret_null_7e359df0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e359eac` | 1 | `call_7e33c67e_ret_null_7e359eac` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359ae0` | 1 | `call_7e34f411_ret_null_7e359ae0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e359cbc` | 1 | `call_7e34f411_ret_null_7e359cbc` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e359df0` | 1 | `call_7e34f411_ret_null_7e359df0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). Target: `usercommonwizard1n_dtor_7e34`. | pattern scan |
+| `0x7e359eac` | 1 | `call_7e33c67e_ret_null_7e359eac` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
 | `0x7e35a29f` | 1 | `store_u16_0xffff_f200_7e35a29f` | `*(u16*)(this+200) = 0xffff`. | pattern scan |
-| `0x7e35a6fe` | 1 | `call_7e33c67e_ret_null_7e35a6fe` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35a8c1` | 1 | `call_7e33c67e_ret_null_7e35a8c1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35aa1d` | 1 | `call_7e33c67e_ret_null_7e35aa1d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35ab6d` | 1 | `call_7e33c67e_ret_null_7e35ab6d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35acd8` | 1 | `call_7e33c67e_ret_null_7e35acd8` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35ae4b` | 1 | `call_7e33c67e_ret_null_7e35ae4b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35afca` | 1 | `call_7e33c67e_ret_null_7e35afca` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b12f` | 1 | `call_7e33c67e_ret_null_7e35b12f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b29b` | 1 | `call_7e33c67e_ret_null_7e35b29b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b40e` | 1 | `call_7e33c67e_ret_null_7e35b40e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b58d` | 1 | `call_7e33c67e_ret_null_7e35b58d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b6f9` | 1 | `call_7e33c67e_ret_null_7e35b6f9` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b815` | 1 | `call_7e33c67e_ret_null_7e35b815` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35b92e` | 1 | `call_7e33c67e_ret_null_7e35b92e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35bb3a` | 1 | `call_7e33c67e_ret_null_7e35bb3a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35bc97` | 1 | `call_7e33c67e_ret_null_7e35bc97` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35bef0` | 1 | `call_7e33c67e_ret_null_7e35bef0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35c160` | 1 | `call_7e33c67e_ret_null_7e35c160` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35c4f2` | 1 | `call_7e33c67e_ret_null_7e35c4f2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35c60e` | 1 | `call_7e33c67e_ret_null_7e35c60e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35cbe1` | 1 | `call_7e33c67e_ret_null_7e35cbe1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35ce3e` | 1 | `call_7e33c67e_ret_null_7e35ce3e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35cf82` | 1 | `call_7e35d02d_ret_null_7e35cf82` | Calls `0x7e35d02d`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e35d02d` | 1 | `call_7e33c67e_ret_null_7e35d02d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
-| `0x7e6a1626` | 0 | `call_7e6a1ee5_ret_1_7e6a1626` | Calls `0x7e6a1ee5`, then returns 1. | pattern scan |
+| `0x7e35a6fe` | 1 | `call_7e33c67e_ret_null_7e35a6fe` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35a8c1` | 1 | `call_7e33c67e_ret_null_7e35a8c1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35aa1d` | 1 | `call_7e33c67e_ret_null_7e35aa1d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35ab6d` | 1 | `call_7e33c67e_ret_null_7e35ab6d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35acd8` | 1 | `call_7e33c67e_ret_null_7e35acd8` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35ae4b` | 1 | `call_7e33c67e_ret_null_7e35ae4b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35afca` | 1 | `call_7e33c67e_ret_null_7e35afca` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b12f` | 1 | `call_7e33c67e_ret_null_7e35b12f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b29b` | 1 | `call_7e33c67e_ret_null_7e35b29b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b40e` | 1 | `call_7e33c67e_ret_null_7e35b40e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b58d` | 1 | `call_7e33c67e_ret_null_7e35b58d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b6f9` | 1 | `call_7e33c67e_ret_null_7e35b6f9` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b815` | 1 | `call_7e33c67e_ret_null_7e35b815` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35b92e` | 1 | `call_7e33c67e_ret_null_7e35b92e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35bb3a` | 1 | `call_7e33c67e_ret_null_7e35bb3a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35bc97` | 1 | `call_7e33c67e_ret_null_7e35bc97` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35bef0` | 1 | `call_7e33c67e_ret_null_7e35bef0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35c160` | 1 | `call_7e33c67e_ret_null_7e35c160` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35c4f2` | 1 | `call_7e33c67e_ret_null_7e35c4f2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35c60e` | 1 | `call_7e33c67e_ret_null_7e35c60e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35cbe1` | 1 | `call_7e33c67e_ret_null_7e35cbe1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35ce3e` | 1 | `call_7e33c67e_ret_null_7e35ce3e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e35cf82` | 1 | `call_7e35d02d_ret_null_7e35cf82` | Calls `0x7e35d02d`, then returns a null pointer (`a0 = 0`). Target: `call_7e33c67e_ret_null_7e35d02d`. | pattern scan |
+| `0x7e35d02d` | 1 | `call_7e33c67e_ret_null_7e35d02d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). Target: `inst_get_null_stub`. | pattern scan |
+| `0x7e6a1626` | 0 | `call_7e6a1ee5_ret_1_7e6a1626` | Calls `0x7e6a1ee5`, then returns 1. Target: `call_7e6a1e5a_arg_10_7e6a1ee5`. | pattern scan |
 | `0x7e6a1ee5` | 3 | `call_7e6a1e5a_arg_10_7e6a1ee5` | Calls `0x7e6a1e5a` with `d0 = 10`. | pattern scan |
 | `0x7e6c5dec` | 1 | `call_7e6c5d64_arg_1_7e6c5dec` | Calls `0x7e6c5d64` with `d0 = 1`. | pattern scan |
 | `0x7e6c6203` | 1 | `call_7e6c6179_arg_1_7e6c6203` | Calls `0x7e6c6179` with `d0 = 1`. | pattern scan |
@@ -18700,13 +18705,13 @@ what the target does is described at the target, if it is labelled.
 | `0x7e6e7950` | 1 | `call_7e6d03eb_on_7cc2ab3c_7e6e7950` | Calls `0x7e6d03eb` with `a0 = 0x7cc2ab3c` (a fixed address). | pattern scan |
 | `0x7e6ea388` | 2 | `fwd_f392_to_7e6e68d9_7e6ea388` | Forwards to the object at `this+392`: `0x7e6e68d9(*(this+392))`. | pattern scan |
 | `0x7e6ea394` | 2 | `fwd_f396_to_7e6e68d9_7e6ea394` | Forwards to the object at `this+396`: `0x7e6e68d9(*(this+396))`. | pattern scan |
-| `0x7e6f39e1` | 1 | `call_7d996e85_on_7e770374_7e6f39e1` | Calls `0x7d996e85` with `a0 = 0x7e770374` (a fixed address). | pattern scan |
-| `0x7e6f5d5b` | 1 | `call_7d9a0635_on_7e770530_7e6f5d5b` | Calls `0x7d9a0635` with `a0 = 0x7e770530` (a fixed address). | pattern scan |
-| `0x7e6f5d6b` | 2 | `call_7d9a0635_on_7e770524_7e6f5d6b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
-| `0x7e6f5d7b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d7b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
-| `0x7e6f5d8b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d8b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
-| `0x7e6f5d9b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d9b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
-| `0x7e6f92dd` | 1 | `call_7d9a0635_on_7e77071c_7e6f92dd` | Calls `0x7d9a0635` with `a0 = 0x7e77071c` (a fixed address). | pattern scan |
+| `0x7e6f39e1` | 1 | `call_7d996e85_on_7e770374_7e6f39e1` | Calls `0x7d996e85` with `a0 = 0x7e770374` (a fixed address). Target: `console_out`. | pattern scan |
+| `0x7e6f5d5b` | 1 | `call_7d9a0635_on_7e770530_7e6f5d5b` | Calls `0x7d9a0635` with `a0 = 0x7e770530` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
+| `0x7e6f5d6b` | 2 | `call_7d9a0635_on_7e770524_7e6f5d6b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
+| `0x7e6f5d7b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d7b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
+| `0x7e6f5d8b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d8b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
+| `0x7e6f5d9b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d9b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
+| `0x7e6f92dd` | 1 | `call_7d9a0635_on_7e77071c_7e6f92dd` | Calls `0x7d9a0635` with `a0 = 0x7e77071c` (a fixed address). Target: `kn_obj_create_7d9a`. | pattern scan |
 | `0x7e6f92ed` | 1 | `call_7d9a0127_on_7e770710_7e6f92ed` | Calls `0x7d9a0127` with `a0 = 0x7e770710` (a fixed address). | pattern scan |
 | `0x7e7003c8` | 1 | `call_7e6f3bcf_on_60461f48_7e7003c8` | Calls `0x7e6f3bcf` with `a0 = 0x60461f48` (a fixed address). | pattern scan |
 | `0x7e7003d8` | 2 | `call_7e6f3bcf_on_60461f4c_7e7003d8` | Calls `0x7e6f3bcf` with `a0 = 0x60461f4c` (a fixed address). | pattern scan |
@@ -18716,10 +18721,10 @@ what the target does is described at the target, if it is labelled.
 | `0x7e700421` | 1 | `call_7e6f3bcf_on_60462078_7e700421` | Calls `0x7e6f3bcf` with `a0 = 0x60462078` (a fixed address). | pattern scan |
 | `0x7e700431` | 1 | `call_7e6f3bcf_on_6046207c_7e700431` | Calls `0x7e6f3bcf` with `a0 = 0x6046207c` (a fixed address). | pattern scan |
 | `0x7e700441` | 1 | `call_7e6f3bcf_on_60462080_7e700441` | Calls `0x7e6f3bcf` with `a0 = 0x60462080` (a fixed address). | pattern scan |
-| `0x7e701e11` | 1 | `call_7d996e85_on_7e77d458_7e701e11` | Calls `0x7d996e85` with `a0 = 0x7e77d458` (a fixed address). | pattern scan |
+| `0x7e701e11` | 1 | `call_7d996e85_on_7e77d458_7e701e11` | Calls `0x7d996e85` with `a0 = 0x7e77d458` (a fixed address). Target: `console_out`. | pattern scan |
 | `0x7e716f5b` | 9 | `call_7e7c9952_on_604623a0_7e716f5b` | Calls `0x7e7c9952` with `a0 = 0x604623a0` (a fixed address). | pattern scan |
-| `0x7e7d8e5b` | 1 | `call_7d9c580c_arg_6_7e7d8e5b` | Calls `0x7d9c580c` with `d0 = 6`. | pattern scan |
-| `0x7e7d93e4` | 1 | `call_7da89440_on_a0939898_7e7d93e4` | Calls `0x7da89440` with `a0 = 0xa0939898` (a fixed address). | pattern scan |
+| `0x7e7d8e5b` | 1 | `call_7d9c580c_arg_6_7e7d8e5b` | Calls `0x7d9c580c` with `d0 = 6`. Target: `irq_save`. | pattern scan |
+| `0x7e7d93e4` | 1 | `call_7da89440_on_a0939898_7e7d93e4` | Calls `0x7da89440` with `a0 = 0xa0939898` (a fixed address). Target: `get_u32le`. | pattern scan |
 | `0x7e7dd5da` | 2 | `store_0xe000_g98f01008_7e7dd5da` | `*0x98f01008 = 0xe000`. | pattern scan |
 | `0x7e7f5cc2` | 6 | `this_plus_84_7e7f5cc2` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
 | `0x7e7f5cc7` | 10 | `this_plus_84_7e7f5cc7` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
@@ -18732,23 +18737,23 @@ what the target does is described at the target, if it is labelled.
 | `0x7e7f77a5` | 1 | `adj_thunk_84_to_7e7fb23c_7e7f77a5` | Adds 84 to `this`, then calls `0x7e7fb23c`: entry for a base or member sub-object. | pattern scan |
 | `0x7e7f78ab` | 1 | `adj_thunk_84_to_7e7fb1ff_7e7f78ab` | Adds 84 to `this`, then calls `0x7e7fb1ff`: entry for a base or member sub-object. | pattern scan |
 | `0x7e7f8910` | 4 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f8910` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
-| `0x7e7f8a02` | 1 | `call_7e7f8c5a_ret_ptr_7e7f1567_7e7f8a02` | Calls `0x7e7f8c5a`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f8a02` | 1 | `call_7e7f8c5a_ret_ptr_7e7f1567_7e7f8a02` | Calls `0x7e7f8c5a`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7f9178_ret_ptr_7e7f1567_7e7f8c5a`. | pattern scan |
 | `0x7e7f8c5a` | 1 | `call_7e7f9178_ret_ptr_7e7f1567_7e7f8c5a` | Calls `0x7e7f9178`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e7fae09` | 1 | `adj_thunk_8_to_7e7faf52_7e7fae09` | Adds 8 to `this`, then calls `0x7e7faf52`: entry for a base or member sub-object. | pattern scan |
 | `0x7e7faf16` | 1 | `adj_thunk_8_to_7e7fb008_7e7faf16` | Adds 8 to `this`, then calls `0x7e7fb008`: entry for a base or member sub-object. | pattern scan |
 | `0x7e7fb199` | 2 | `call_7e7fb1a7_ret_ptr_7e7f1567_7e7fb199` | Calls `0x7e7fb1a7`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
-| `0x7e7fc580` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e7fc580` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fc580` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e7fc580` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7fb1a7_ret_ptr_7e7f1567_7e7fb199`. | pattern scan |
 | `0x7e7fd27d` | 1 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e7fd27d` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e7fd2b7` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e7fd2b7` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e7fd2ca` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e7fd2ca` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
-| `0x7e80008a` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e80008a` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
-| `0x7e80018e` | 24 | `call_7e7f8910_ret_ptr_7e7f1567_7e80018e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e80008a` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e80008a` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7fb1a7_ret_ptr_7e7f1567_7e7fb199`. | pattern scan |
+| `0x7e80018e` | 24 | `call_7e7f8910_ret_ptr_7e7f1567_7e80018e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f8910`. | pattern scan |
 | `0x7e800d15` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e800d15` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e800fcb` | 1 | `fwd_f4_vslot24_7e800fcb` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
 | `0x7e80107c` | 1 | `fwd_f4_vslot24_7e80107c` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
 | `0x7e801120` | 1 | `fwd_f4_vslot24_7e801120` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
 | `0x7e802125` | 1 | `fwd_f60_vslot24_7e802125` | Forwards to the object at `this+60`: calls its vtable slot `+24`. | pattern scan |
-| `0x7e80389f` | 18 | `call_7e7f8910_ret_ptr_7e7f1567_7e80389f` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e80389f` | 18 | `call_7e7f8910_ret_ptr_7e7f1567_7e80389f` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f8910`. | pattern scan |
 | `0x7e804ee7` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e804ee7` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e807e5f` | 3 | `this_plus_960_7e807e5f` | Leaf `return this+960` (address of a member or base sub-object). | pattern scan |
 | `0x7e810d25` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e810d25` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
@@ -18757,7 +18762,7 @@ what the target does is described at the target, if it is labelled.
 | `0x7e810df9` | 2 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e810df9` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
 | `0x7e816b0f` | 1 | `fwd_f12_to_7e8190b3_7e816b0f` | Forwards to the object at `this+12`: `0x7e8190b3(*(this+12))`. | pattern scan |
 | `0x7e8257e3` | 2 | `fwd_f12_to_7e7fb083_7e8257e3` | Forwards to the object at `this+12`: `0x7e7fb083(*(this+12))`. | pattern scan |
-| `0x7e82f88e` | 10 | `call_7e7f8910_ret_ptr_7e7f1567_7e82f88e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e82f88e` | 10 | `call_7e7f8910_ret_ptr_7e7f1567_7e82f88e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). Target: `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f8910`. | pattern scan |
 | `0x7e83474c` | 1 | `fwd_f28_vslot64_7e83474c` | Forwards to the object at `this+28`: calls its vtable slot `+64`. | pattern scan |
 | `0x7e834759` | 2 | `fwd_f28_vslot68_7e834759` | Forwards to the object at `this+28`: calls its vtable slot `+68`. | pattern scan |
 | `0x7e83efd3` | 1 | `fwd_f8_to_7e83f44d_7e83efd3` | Forwards to the object at `this+8`: `0x7e83f44d(*(this+8))`. | pattern scan |
