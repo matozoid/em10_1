@@ -19,6 +19,67 @@ Names that concern firmware update or the debug channel are left out of this lis
 
 Regenerate with the scan described in `symbol-strings.md` (Pass 4); the numbers come from block 0 only.
 
+## API class vtables
+
+The public entry functions of one API class are the members of one vtable. Matching the names above against
+the vtable member rows in `symbol-families.md` (`cls_<vtable>__vfn<N>_…`) gives the class of 47 vtables;
+every one of them has members of a single class only. `named` counts the members that log a trace id.
+
+| vtable | API class | members | named |
+|---|---|---|---|
+| `0x7e3a3b60` | `BackGroundCtrl` | 6 | 4 |
+| `0x7e3a3b90` | `Bluetooth` | 35 | 34 |
+| `0x7e3860a0` | `CameraCommon` | 72 | 70 |
+| `0x7e3a3c30` | `CustomPrint` | 36 | 32 |
+| `0x7e3a3cd0` | `DateCtrl` | 13 | 12 |
+| `0x7e3a3d0c` | `DeviceLink` | 5 | 4 |
+| `0x7e3a3d28` | `EasyPrint` | 11 | 10 |
+| `0x7e3a3d5c` | `EditAspect` | 8 | 7 |
+| `0x7e3a3d88` | `EditBeautyAdjust` | 7 | 6 |
+| `0x7e3a3dbc` | `EditColor` | 6 | 4 |
+| `0x7e3a3de8` | `EditImageOverlay` | 15 | 12 |
+| `0x7e3a3e48` | `EditRaw` | 14 | 13 |
+| `0x7e3a3e88` | `EditRedEyeAdjust` | 6 | 5 |
+| `0x7e3a3ea8` | `EditResize` | 6 | 5 |
+| `0x7e3a3ec8` | `EditShadowAdjust` | 6 | 5 |
+| `0x7e3a3ee8` | `EditTrimming` | 10 | 9 |
+| `0x7e3a3f3c` | `FlashAir` | 13 | 12 |
+| `0x7e3a3f78` | `GpsCtrl` | 32 | 18 |
+| `0x7e3a4010` | `InternalWiFi` | 12 | 10 |
+| `0x7e3a4078` | `KeyCtrl` | 11 | 9 |
+| `0x7e3a40c4` | `LevelCtrl` | 7 | 6 |
+| `0x7e3a40f0` | `LifeTest` | 6 | 4 |
+| `0x7e3a4108` | `LogoScreen` | 5 | 4 |
+| `0x7e3861c8` | `Maintenance` | 6 | 5 |
+| `0x7e386238` | `MediaCtrl` | 22 | 21 |
+| `0x7e3a411c` | `OnetouchLightCtrl` | 4 | 3 |
+| `0x7e3a414c` | `PlayCalendar` | 10 | 6 |
+| `0x7e3a4194` | `PlayCommon` | 19 | 18 |
+| `0x7e3a4214` | `PlayEventView` | 7 | 5 |
+| `0x7e3a4254` | `PlayIndex` | 21 | 15 |
+| `0x7e3a42bc` | `PlayLightBox` | 17 | 15 |
+| `0x7e3a4308` | `PlayMovie` | 11 | 10 |
+| `0x7e3a4334` | `PlayPanorama` | 10 | 8 |
+| `0x7e3a435c` | `PlayRecord` | 6 | 5 |
+| `0x7e3a4388` | `PlaySelect` | 14 | 11 |
+| `0x7e3a43e4` | `PlaySingleFrame` | 30 | 27 |
+| `0x7e3a4490` | `PlaySlideShow` | 10 | 9 |
+| `0x7e3a44cc` | `PlaySound` | 5 | 4 |
+| `0x7e3862d0` | `PowerSupplyControl` | 8 | 7 |
+| `0x7e3a4500` | `ReservePrint` | 16 | 15 |
+| `0x7e3a4544` | `ReserveTransfer` | 13 | 10 |
+| `0x7e3a4578` | `ReserveUpload` | 4 | 3 |
+| `0x7e3a459c` | `SelectOverlay` | 9 | 7 |
+| `0x7e3a45d4` | `SelfAdjust` | 24 | 21 |
+| `0x7e3a472c` | `SettingController` | 34 | 30 |
+| `0x7e3a4b7c` | `SoundCtrl` | 12 | 11 |
+| `0x7e3a4bc0` | `TouchPanel` | 8 | 7 |
+
+`Shooting`, the largest class, is not in this list: its entry functions are not members of one such vtable
+(only one member of `0x7e3a4890` logs a `Shooting` id).
+
+## Names by id
+
 | id | name | entry function |
 |---|---|---|
 | `0x10101` | `CameraCommon::initializeApi` | `0x7dff5ac5`, `0x7dffcd9b` |
