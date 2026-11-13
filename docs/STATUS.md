@@ -80,15 +80,20 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   renames (`classes.md`, `blocks.md`, `memory-map.md`).
 - Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
   one over at least part of the table** (see the correction there); needs re-deriving.
-- **About 25 400 of the ~72 600 block-0 functions have a documented name** (2026-11-12), in three files:
-  - `symbol-map.md` (~1 860 rows): hand-analysed, with a description each. ~40 subsystems: heap
+- **About 36 300 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
+  - `symbol-map.md` (~1 890 rows): hand-analysed, with a description each. ~40 subsystems: heap
     allocator, object model, OS/IPC primitives, libc, soft-float, GUI base/container classes, Super
     Control Panel, playback components (Cmp*), movie playback, AE, sensor black-correction, audio
     codec, VG draw engine, embedded Expat 1.95.5, OKAO face detection, on-camera httpd, Wi-Fi.
-  - `symbol-families.md` (~14 500 rows): per-class copies of small routines, compiler entry stubs,
-    one- and two-instruction accessors, vtable members; each family explained once.
+  - `symbol-families.md` (~25 500 rows): machine-listed groups, each explained once: per-class copies
+    of small routines, compiler entry stubs, register-save prologues, one- and two-instruction
+    accessors, vtable members, and (added 2026-11-13, ~11 000 rows) small call wrappers, forwarders,
+    constructors and class-id checks. These names are **structural**: they record a function's shape
+    and what it calls (`call_<target>_ret_null_…`, `ctor_vt<vtable>_base_<target>_…`), and say what it
+    does only where the call target has a name of its own.
   - `symbol-strings.md` (~9 000 rows): names derived from log strings. Heuristic; `symbol-map.md`
     takes precedence.
+  So roughly 11 000 names carry a meaning (hand-analysed or from log strings) and 25 000 a shape.
   `tools/symbols.py stats` prints current counts; `tools/symbol_index.py --once ADDR` finds an address.
   The names are also applied in the Ghidra project (`tools/ghidra/ApplyNames.java`).
 - Factory/test features seen while labelling, not investigated further: white-chart calibration and
