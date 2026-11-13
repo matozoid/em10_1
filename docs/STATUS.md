@@ -80,24 +80,27 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   renames (`classes.md`, `blocks.md`, `memory-map.md`).
 - Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
   one over at least part of the table** (see the correction there); needs re-deriving.
-- **About 37 700 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
-  - `symbol-map.md` (~1 890 rows): hand-analysed, with a description each. ~40 subsystems: heap
-    allocator, object model, OS/IPC primitives, libc, soft-float, GUI base/container classes, Super
-    Control Panel, playback components (Cmp*), movie playback, AE, sensor black-correction, audio
-    codec, VG draw engine, embedded Expat 1.95.5, OKAO face detection, on-camera httpd, Wi-Fi.
-  - `symbol-families.md` (~25 500 rows): machine-listed groups, each explained once: per-class copies
+- **About 39 600 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
+  - `symbol-map.md` (~2 040 rows): hand-analysed, with a description each. ~40 subsystems: heap
+    allocator, object model, OS/IPC primitives and the kernel's services (`knl_*`), libc, soft-float,
+    GUI base/container classes, Super Control Panel, playback components (Cmp*), movie playback, AE,
+    sensor black-correction, audio codec, VG draw engine, embedded Expat 1.95.5, OKAO face detection,
+    on-camera httpd, Wi-Fi.
+  - `symbol-families.md` (~27 600 rows): machine-listed groups, each explained once: per-class copies
     of small routines, compiler entry stubs, register-save prologues, one- and two-instruction
-    accessors, vtable members, and (added 2026-11-13, ~11 000 rows) small call wrappers, forwarders,
-    constructors and class-id checks. These names are **structural**: they record a function's shape
-    and what it calls (`call_<target>_ret_null_…`, `ctor_vt<vtable>_base_<target>_…`), and say what it
-    does only where the call target has a name of its own.
-  - `symbol-strings.md` (~9 000 rows): names derived from log strings. Heuristic; `symbol-map.md`
-    takes precedence.
-  So roughly 11 600 names carry a meaning (hand-analysed, from log strings, or the firmware's own API
-  names) and 25 000 a shape.
+    accessors, vtable members, small call wrappers, forwarders, constructors and class-id checks, and
+    single-caller helpers named after their caller. Most of these names are **structural**: they record
+    a function's shape, what it calls or who calls it, and say what it does only where the related
+    function has a name of its own.
+  - `symbol-strings.md` (~10 100 rows): names from text in the firmware. Passes 1 to 3 are guesses from
+    log strings; passes 4 to 6 are the firmware's own names (API names from the trace catalog, the API
+    command table, name/function tables) and are reliable.
+  Roughly 13 000 names carry a meaning and 26 600 a shape or a place.
 - **The API layer's names are known** (2026-11-13): 1,195 `Class::method` names in 58 classes, resolved
-  from the trace catalog image in block 0, with the entry function for most of them:
-  [`firmware/trace-catalog.md`](firmware/trace-catalog.md), `tools/trace_catalog.py`.
+  from the trace catalog image in block 0, with the entry function for most of them and the vtable of 47
+  classes: [`firmware/trace-catalog.md`](firmware/trace-catalog.md), `tools/trace_catalog.py`. A second
+  table (852 records `{code, method, handler}`) confirms them. The initialised-data image that makes this
+  possible is described in [`firmware/data-image.md`](firmware/data-image.md).
   `tools/symbols.py stats` prints current counts; `tools/symbol_index.py --once ADDR` finds an address.
   The names are also applied in the Ghidra project (`tools/ghidra/ApplyNames.java`).
 - Factory/test features seen while labelling, not investigated further: white-chart calibration and
