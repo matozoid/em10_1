@@ -15357,3 +15357,3431 @@ as one routine, with the opening instructions quoted.
 | `0x7e86b7a8` | 1 | `copy4x_7e8684bd_7e86b7a8` | One of 4 byte-identical copies (122 bytes, 52 instructions) of the routine first seen at `0x7e8684bd`. Starts `mov d0,a0; clr d2; and -2147483648,d0; beq 0x7e8684ca; mov 1,d2; mov a0,d0; …` (call and branch targets are those of the first copy). Not read further. | pattern scan |
 | `0x7e86ff9d` | 9 | `copy4x_7e8684bd_7e86ff9d` | One of 4 byte-identical copies (122 bytes, 52 instructions) of the routine first seen at `0x7e8684bd`. Starts `mov d0,a0; clr d2; and -2147483648,d0; beq 0x7e8684ca; mov 1,d2; mov a0,d0; …` (call and branch targets are those of the first copy). Not read further. | pattern scan |
 | `0x7e87675a` | 11 | `copy4x_7e8684bd_7e87675a` | One of 4 byte-identical copies (122 bytes, 52 instructions) of the routine first seen at `0x7e8684bd`. Starts `mov d0,a0; clr d2; and -2147483648,d0; beq 0x7e8684ca; mov 1,d2; mov a0,d0; …` (call and branch targets are those of the first copy). Not read further. | pattern scan |
+
+## Small call wrappers and forwarders (pattern family)
+Unlabelled functions of at most 16 bytes whose body is one or two calls plus at most two set-up
+instructions, classified from their disassembly on 2026-11-13 by `tools/func_patterns.py small 16`
+(a leading stack-frame adjustment is ignored). 3407 listed. The name records the shape and the call target;
+what the target does is described at the target, if it is labelled.
+- `call_<target>_ret_null_<addr>`: call `target`, return a null pointer (1037; most common targets `0x7e205040` ×608, `0x7e1e67f6` ×173, `0x7e2daa34` ×54, `0x7e33c67e` ×40, `0x7dfd5731` ×25, `0x7e34f411` ×24).
+- `call_<target>_ret_ptr_<value>` / `call_<target>_ret_<value>`: call `target`, return a fixed address or number.
+- `call_<target>_arg_<value>`: call `target` with `d0` set to a constant. `call_<target>_on_<address>`:
+  call it on an object at a fixed address. `call_<target>_on_g<address>`: on the object whose pointer is
+  stored at that address.
+- `fwd_f<off>_to_<target>`: call `target` on the member object whose pointer is at `this+off`.
+  `fwd_f<off>_vslot<n>`: call that member object's vtable slot `+n`.
+- `adj_thunk_<n>_to_<target>`: add `n` to `this`, then call `target` (entry for a base or member sub-object).
+  `this_plus_<n>`: return `this+n`.
+- `call2_<a>_<b>`: call `a(this)`, then `b(this)`.
+- `store_<value>_f<off>_call_<target>`: store a constant in a field, then call `target`.
+  `store_<value>_f<a>_f<b>`: store the same constant in two fields.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d9976b1` | 3 | `call_7d996ee2_on_7d998c98_7d9976b1` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976bf` | 1 | `call_7d996ee2_on_7d998c98_7d9976bf` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976cd` | 1 | `call_7d996ee2_on_7d998c98_7d9976cd` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976db` | 1 | `call_7d996ee2_on_7d998c98_7d9976db` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976e9` | 1 | `call_7d996ee2_on_7d998c98_7d9976e9` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9976f7` | 1 | `call_7d996ee2_on_7d998c98_7d9976f7` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d997705` | 1 | `call_7d996ee2_on_7d998c98_7d997705` | Calls `0x7d996ee2` with `a0 = 0x7d998c98` (a fixed address). | pattern scan |
+| `0x7d9b1499` | 1 | `call_7d9b14ad_arg_2_7d9b1499` | Calls `0x7d9b14ad` with `d0 = 2`. | pattern scan |
+| `0x7d9b14a3` | 1 | `call_7d9b1578_arg_2_7d9b14a3` | Calls `0x7d9b1578` with `d0 = 2`. | pattern scan |
+| `0x7d9c6e4c` | 3 | `call_7d996ee2_on_7d9f6e2f_7d9c6e4c` | Calls `0x7d996ee2` with `a0 = 0x7d9f6e2f` (a fixed address). | pattern scan |
+| `0x7d9d5abd` | 1 | `call_7d9e1084_arg_158_7d9d5abd` | Calls `0x7d9e1084` with `d0 = 158`. | pattern scan |
+| `0x7d9d796b` | 6 | `call_7d9e9319_arg_7_7d9d796b` | Calls `0x7d9e9319` with `d0 = 7`. | pattern scan |
+| `0x7d9e43a0` | 1 | `call_7d9e43ba_arg_1_7d9e43a0` | Calls `0x7d9e43ba` with `d0 = 1`. | pattern scan |
+| `0x7d9e43ad` | 1 | `call_7d9e43ba_arg_2_7d9e43ad` | Calls `0x7d9e43ba` with `d0 = 2`. | pattern scan |
+| `0x7d9e83b6` | 0 | `call_7d9e84c2_arg_1_7d9e83b6` | Calls `0x7d9e84c2` with `d0 = 1`. | pattern scan |
+| `0x7d9e83c3` | 0 | `call_7d9e84c2_arg_2_7d9e83c3` | Calls `0x7d9e84c2` with `d0 = 2`. | pattern scan |
+| `0x7d9e83d0` | 0 | `call_7d9e84c2_arg_3_7d9e83d0` | Calls `0x7d9e84c2` with `d0 = 3`. | pattern scan |
+| `0x7d9e83dd` | 0 | `call_7d9e84c2_arg_4_7d9e83dd` | Calls `0x7d9e84c2` with `d0 = 4`. | pattern scan |
+| `0x7d9e83ea` | 0 | `call_7d9e84c2_arg_5_7d9e83ea` | Calls `0x7d9e84c2` with `d0 = 5`. | pattern scan |
+| `0x7d9e8403` | 0 | `call_7d9e84c2_arg_1_7d9e8403` | Calls `0x7d9e84c2` with `d0 = 1`. | pattern scan |
+| `0x7d9e8410` | 0 | `call_7d9e84c2_arg_2_7d9e8410` | Calls `0x7d9e84c2` with `d0 = 2`. | pattern scan |
+| `0x7d9e841d` | 0 | `call_7d9e84c2_arg_3_7d9e841d` | Calls `0x7d9e84c2` with `d0 = 3`. | pattern scan |
+| `0x7d9e842a` | 0 | `call_7d9e84c2_arg_4_7d9e842a` | Calls `0x7d9e84c2` with `d0 = 4`. | pattern scan |
+| `0x7d9e8437` | 0 | `call_7d9e84c2_arg_5_7d9e8437` | Calls `0x7d9e84c2` with `d0 = 5`. | pattern scan |
+| `0x7d9e848e` | 0 | `call_7d9e8c89_arg_4_7d9e848e` | Calls `0x7d9e8c89` with `d0 = 4`. | pattern scan |
+| `0x7d9e849b` | 0 | `call_7d9e8d55_arg_4_7d9e849b` | Calls `0x7d9e8d55` with `d0 = 4`. | pattern scan |
+| `0x7d9e84a8` | 0 | `call_7d9e8c89_arg_5_7d9e84a8` | Calls `0x7d9e8c89` with `d0 = 5`. | pattern scan |
+| `0x7d9e84b5` | 0 | `call_7d9e8d55_arg_5_7d9e84b5` | Calls `0x7d9e8d55` with `d0 = 5`. | pattern scan |
+| `0x7d9ed20c` | 1 | `call_7d9ed10a_arg_1_7d9ed20c` | Calls `0x7d9ed10a` with `d0 = 1`. | pattern scan |
+| `0x7d9ed219` | 1 | `call_7d9ed10a_arg_2_7d9ed219` | Calls `0x7d9ed10a` with `d0 = 2`. | pattern scan |
+| `0x7d9ed226` | 1 | `call_7d9ed10a_arg_3_7d9ed226` | Calls `0x7d9ed10a` with `d0 = 3`. | pattern scan |
+| `0x7d9ed233` | 1 | `call_7d9ed10a_arg_4_7d9ed233` | Calls `0x7d9ed10a` with `d0 = 4`. | pattern scan |
+| `0x7d9ed240` | 1 | `call_7d9ed10a_arg_5_7d9ed240` | Calls `0x7d9ed10a` with `d0 = 5`. | pattern scan |
+| `0x7d9ed24d` | 1 | `call_7d9ed10a_arg_6_7d9ed24d` | Calls `0x7d9ed10a` with `d0 = 6`. | pattern scan |
+| `0x7d9ed25a` | 1 | `call_7d9ed10a_arg_7_7d9ed25a` | Calls `0x7d9ed10a` with `d0 = 7`. | pattern scan |
+| `0x7d9ed267` | 1 | `call_7d9ed10a_arg_8_7d9ed267` | Calls `0x7d9ed10a` with `d0 = 8`. | pattern scan |
+| `0x7da675e0` | 20 | `global_u16_6000112c_set_7da675e0` | `*(u16*)0x6000112c = d0`. | pattern scan |
+| `0x7da84ef1` | 1 | `call_7d996e85_on_7dbbf2a4_7da84ef1` | Calls `0x7d996e85` with `a0 = 0x7dbbf2a4` (a fixed address). | pattern scan |
+| `0x7da8ff8b` | 1 | `call_7da8ffaa_arg_82837528_7da8ff8b` | Calls `0x7da8ffaa` with `d0 = 82837528`. | pattern scan |
+| `0x7da8ff9c` | 1 | `call_7da8ffaa_arg_82837529_7da8ff9c` | Calls `0x7da8ffaa` with `d0 = 82837529`. | pattern scan |
+| `0x7da95332` | 2 | `call_7d996e85_on_7dbc39dc_7da95332` | Calls `0x7d996e85` with `a0 = 0x7dbc39dc` (a fixed address). | pattern scan |
+| `0x7da987f5` | 1 | `call_7da90c9a_on_0_7da987f5` | Calls `0x7da90c9a` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7dab45c5` | 6 | `call_7d996ee2_on_7dbd1540_7dab45c5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). | pattern scan |
+| `0x7dab45d5` | 1 | `call_7d996ee2_on_7dbd1540_7dab45d5` | Calls `0x7d996ee2` with `a0 = 0x7dbd1540` (a fixed address). | pattern scan |
+| `0x7dac5427` | 1 | `call_7dac29b7_arg_128_7dac5427` | Calls `0x7dac29b7` with `d0 = 128`. | pattern scan |
+| `0x7dac9751` | 8 | `call_7dac5245_on_7dbd5b6c_7dac9751` | Calls `0x7dac5245` with `a0 = 0x7dbd5b6c` (a fixed address). | pattern scan |
+| `0x7dacc94b` | 1 | `call_7d9d3a9a_arg_32882_7dacc94b` | Calls `0x7d9d3a9a` with `d0 = 32882`. | pattern scan |
+| `0x7dacf442` | 1 | `call_7d996e85_on_7dbd7da0_7dacf442` | Calls `0x7d996e85` with `a0 = 0x7dbd7da0` (a fixed address). | pattern scan |
+| `0x7dad0aec` | 1 | `call_7d996e85_on_7dbd8170_7dad0aec` | Calls `0x7d996e85` with `a0 = 0x7dbd8170` (a fixed address). | pattern scan |
+| `0x7dad168f` | 2 | `call_7d9e9319_arg_1_7dad168f` | Calls `0x7d9e9319` with `d0 = 1`. | pattern scan |
+| `0x7dad1af3` | 1 | `call_7d9e1084_arg_163_7dad1af3` | Calls `0x7d9e1084` with `d0 = 163`. | pattern scan |
+| `0x7dad2640` | 2 | `call_7d9e109f_arg_157_7dad2640` | Calls `0x7d9e109f` with `d0 = 157`. | pattern scan |
+| `0x7dadcfeb` | 1 | `call_7d996e85_on_7dbdaaa5_7dadcfeb` | Calls `0x7d996e85` with `a0 = 0x7dbdaaa5` (a fixed address). | pattern scan |
+| `0x7dae14f2` | 4 | `fwd_f4_to_7dae1500_7dae14f2` | Forwards to the object at `this+4`: `0x7dae1500(*(this+4))`. | pattern scan |
+| `0x7daf8c02` | 2 | `call_7de51f69_arg_1_7daf8c02` | Calls `0x7de51f69` with `d0 = 1`. | pattern scan |
+| `0x7daf9f9b` | 3 | `call_7daf8c0e_on_606c6574_7daf9f9b` | Calls `0x7daf8c0e` with `a0 = 0x606c6574` (a fixed address). | pattern scan |
+| `0x7db00b97` | 1 | `call_7db00baa_arg_1_7db00b97` | Calls `0x7db00baa` with `d0 = 1`. | pattern scan |
+| `0x7db0b081` | 5 | `call_7db04132_on_606c941c_7db0b081` | Calls `0x7db04132` with `a0 = 0x606c941c` (a fixed address). | pattern scan |
+| `0x7db0b0ee` | 2 | `call_7db04132_on_606c941e_7db0b0ee` | Calls `0x7db04132` with `a0 = 0x606c941e` (a fixed address). | pattern scan |
+| `0x7db0b16e` | 2 | `call_7db04132_on_606c9428_7db0b16e` | Calls `0x7db04132` with `a0 = 0x606c9428` (a fixed address). | pattern scan |
+| `0x7db0bc5b` | 5 | `call_7d9d5163_arg_1_7db0bc5b` | Calls `0x7d9d5163` with `d0 = 1`. | pattern scan |
+| `0x7db12984` | 1 | `call_7db04132_on_606c9a66_7db12984` | Calls `0x7db04132` with `a0 = 0x606c9a66` (a fixed address). | pattern scan |
+| `0x7db13425` | 2 | `call_7db4c2d9_on_g606c9a88_7db13425` | Calls `0x7db4c2d9` on the object whose pointer is stored at `0x606c9a88`. | pattern scan |
+| `0x7db22adb` | 1 | `call_7db22246_arg_2_7db22adb` | Calls `0x7db22246` with `d0 = 2`. | pattern scan |
+| `0x7db334fb` | 1 | `call_7d996e85_on_7dbe8c7c_7db334fb` | Calls `0x7d996e85` with `a0 = 0x7dbe8c7c` (a fixed address). | pattern scan |
+| `0x7db595e4` | 1 | `call2_7db59fff_7db59881_7db595e4` | Calls `0x7db59fff(this)` and then `0x7db59881(this)`. | pattern scan |
+| `0x7db5a011` | 4 | `call_7db22cd9_on_g606ef3ec_7db5a011` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3ec`. | pattern scan |
+| `0x7db5a021` | 3 | `call_7db22cd9_on_g606ef3f4_7db5a021` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3f4`. | pattern scan |
+| `0x7db5a031` | 3 | `call_7db22cd9_on_g606ef3f8_7db5a031` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3f8`. | pattern scan |
+| `0x7db5a041` | 3 | `call_7db22cd9_on_g606ef3f0_7db5a041` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3f0`. | pattern scan |
+| `0x7db5a051` | 2 | `call_7db22cd9_on_g606ef3fc_7db5a051` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef3fc`. | pattern scan |
+| `0x7db5a061` | 2 | `call_7db22cd9_on_g606ef400_7db5a061` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef400`. | pattern scan |
+| `0x7db5a071` | 1 | `call_7db22cd9_on_g606ef404_7db5a071` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef404`. | pattern scan |
+| `0x7db5a081` | 3 | `call_7db22cd9_on_g606ef408_7db5a081` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef408`. | pattern scan |
+| `0x7db5a091` | 2 | `call_7db22cd9_on_g606ef40c_7db5a091` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef40c`. | pattern scan |
+| `0x7db5a0a1` | 1 | `call_7db22cd9_on_g606ef410_7db5a0a1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef410`. | pattern scan |
+| `0x7db5a0b1` | 1 | `call_7db22cd9_on_g606ef414_7db5a0b1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef414`. | pattern scan |
+| `0x7db5a0c1` | 3 | `call_7db22cd9_on_g606ef418_7db5a0c1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef418`. | pattern scan |
+| `0x7db5a0d1` | 1 | `call_7db22cd9_on_g606ef46c_7db5a0d1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef46c`. | pattern scan |
+| `0x7db5a0e1` | 1 | `call_7db22cd9_on_g606ef460_7db5a0e1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef460`. | pattern scan |
+| `0x7db5a0f1` | 1 | `call_7db22cd9_on_g606ef494_7db5a0f1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef494`. | pattern scan |
+| `0x7db5a101` | 2 | `call_7db22cd9_on_g606ef474_7db5a101` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef474`. | pattern scan |
+| `0x7db5a111` | 1 | `call_7db22cd9_on_g606ef41c_7db5a111` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef41c`. | pattern scan |
+| `0x7db5a121` | 2 | `call_7db22cd9_on_g606ef424_7db5a121` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef424`. | pattern scan |
+| `0x7db5a131` | 1 | `call_7db22cd9_on_g606ef470_7db5a131` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef470`. | pattern scan |
+| `0x7db5a141` | 1 | `call_7db22cd9_on_g606ef428_7db5a141` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef428`. | pattern scan |
+| `0x7db5a151` | 1 | `call_7db22cd9_on_g606ef42c_7db5a151` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef42c`. | pattern scan |
+| `0x7db5a161` | 5 | `call_7db22cd9_on_g606ef438_7db5a161` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef438`. | pattern scan |
+| `0x7db5a171` | 5 | `call_7db22cd9_on_g606ef43c_7db5a171` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef43c`. | pattern scan |
+| `0x7db5a181` | 5 | `call_7db22cd9_on_g606ef440_7db5a181` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef440`. | pattern scan |
+| `0x7db5a191` | 5 | `call_7db22cd9_on_g606ef444_7db5a191` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef444`. | pattern scan |
+| `0x7db5a1a1` | 1 | `call_7db22cd9_on_g606ef448_7db5a1a1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef448`. | pattern scan |
+| `0x7db5a1b1` | 1 | `call_7db22cd9_on_g606ef44c_7db5a1b1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef44c`. | pattern scan |
+| `0x7db5a1c1` | 5 | `call_7db22cd9_on_g606ef454_7db5a1c1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef454`. | pattern scan |
+| `0x7db5a1d1` | 5 | `call_7db22cd9_on_g606ef450_7db5a1d1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef450`. | pattern scan |
+| `0x7db5a1e1` | 1 | `call_7db22cd9_on_g606ef45c_7db5a1e1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef45c`. | pattern scan |
+| `0x7db5a1f1` | 2 | `call_7db22cd9_on_g606ef458_7db5a1f1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef458`. | pattern scan |
+| `0x7db5a201` | 1 | `call_7db22cd9_on_g606ef434_7db5a201` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef434`. | pattern scan |
+| `0x7db5a211` | 1 | `call_7db22cd9_on_g606ef430_7db5a211` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef430`. | pattern scan |
+| `0x7db5a221` | 1 | `call_7db22cd9_on_g606ef420_7db5a221` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef420`. | pattern scan |
+| `0x7db5a231` | 2 | `call_7db22cd9_on_g606ef464_7db5a231` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef464`. | pattern scan |
+| `0x7db5a241` | 2 | `call_7db22cd9_on_g606ef468_7db5a241` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef468`. | pattern scan |
+| `0x7db5a251` | 3 | `call_7db22cd9_on_g606ef478_7db5a251` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef478`. | pattern scan |
+| `0x7db5a261` | 3 | `call_7db22cd9_on_g606ef47c_7db5a261` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef47c`. | pattern scan |
+| `0x7db5a271` | 3 | `call_7db22cd9_on_g606ef480_7db5a271` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef480`. | pattern scan |
+| `0x7db5a281` | 3 | `call_7db22cd9_on_g606ef484_7db5a281` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef484`. | pattern scan |
+| `0x7db5a291` | 2 | `call_7db22cd9_on_g606ef488_7db5a291` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef488`. | pattern scan |
+| `0x7db5a2a1` | 2 | `call_7db22cd9_on_g606ef48c_7db5a2a1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef48c`. | pattern scan |
+| `0x7db5a2b1` | 2 | `call_7db22cd9_on_g606ef490_7db5a2b1` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef490`. | pattern scan |
+| `0x7db5e48d` | 1 | `call2_7db5e4ea_7db5e61d_7db5e48d` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
+| `0x7db5e4bd` | 1 | `call2_7db5e4ea_7db5e61d_7db5e4bd` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
+| `0x7db5e4cc` | 1 | `call2_7db5e4ea_7db5e61d_7db5e4cc` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
+| `0x7db5e4db` | 1 | `call2_7db5e4ea_7db5e61d_7db5e4db` | Calls `0x7db5e4ea(this)` and then `0x7db5e61d(this)`. | pattern scan |
+| `0x7db61927` | 1 | `call_7db22cd9_on_g606ef590_7db61927` | Calls `0x7db22cd9` on the object whose pointer is stored at `0x606ef590`. | pattern scan |
+| `0x7db681a4` | 2 | `call_7db67e71_arg_2341_7db681a4` | Calls `0x7db67e71` with `d0 = 2341`. | pattern scan |
+| `0x7db6a1a2` | 0 | `call_7db93fb8_arg_64_7db6a1a2` | Calls `0x7db93fb8` with `d0 = 64`. | pattern scan |
+| `0x7db6a1b1` | 0 | `call_7db944dc_arg_64_7db6a1b1` | Calls `0x7db944dc` with `d0 = 64`. | pattern scan |
+| `0x7db6a1c0` | 0 | `call_7db93fb8_arg_141_7db6a1c0` | Calls `0x7db93fb8` with `d0 = 141`. | pattern scan |
+| `0x7db6a1d0` | 0 | `call_7db944dc_arg_141_7db6a1d0` | Calls `0x7db944dc` with `d0 = 141`. | pattern scan |
+| `0x7db6e910` | 1 | `call_7db6b24f_arg_10058_7db6e910` | Calls `0x7db6b24f` with `d0 = 10058`. | pattern scan |
+| `0x7db704e8` | 0 | `call_7db6be3a_arg_1_7db704e8` | Calls `0x7db6be3a` with `d0 = 1`. | pattern scan |
+| `0x7db704f5` | 0 | `call_7db6beee_arg_1_7db704f5` | Calls `0x7db6beee` with `d0 = 1`. | pattern scan |
+| `0x7db70502` | 0 | `call_7db6bf80_arg_1_7db70502` | Calls `0x7db6bf80` with `d0 = 1`. | pattern scan |
+| `0x7db7050f` | 0 | `call_7db6c03f_arg_1_7db7050f` | Calls `0x7db6c03f` with `d0 = 1`. | pattern scan |
+| `0x7db706c1` | 0 | `call_7db705f7_arg_1_7db706c1` | Calls `0x7db705f7` with `d0 = 1`. | pattern scan |
+| `0x7db70753` | 0 | `call_7db706ce_arg_1_7db70753` | Calls `0x7db706ce` with `d0 = 1`. | pattern scan |
+| `0x7db7089d` | 0 | `call_7db7082e_arg_1_7db7089d` | Calls `0x7db7082e` with `d0 = 1`. | pattern scan |
+| `0x7db70982` | 0 | `call_7db708aa_arg_1_7db70982` | Calls `0x7db708aa` with `d0 = 1`. | pattern scan |
+| `0x7db70c49` | 0 | `call_7db70bce_arg_1_7db70c49` | Calls `0x7db70bce` with `d0 = 1`. | pattern scan |
+| `0x7db70f19` | 0 | `call_7db70e9a_arg_1_7db70f19` | Calls `0x7db70e9a` with `d0 = 1`. | pattern scan |
+| `0x7db7117d` | 0 | `call_7db71085_arg_1_7db7117d` | Calls `0x7db71085` with `d0 = 1`. | pattern scan |
+| `0x7db71247` | 0 | `call_7db7118a_arg_1_7db71247` | Calls `0x7db7118a` with `d0 = 1`. | pattern scan |
+| `0x7db7160e` | 0 | `call_7db6c20d_arg_1_7db7160e` | Calls `0x7db6c20d` with `d0 = 1`. | pattern scan |
+| `0x7db7161b` | 0 | `call_7db6c24e_arg_1_7db7161b` | Calls `0x7db6c24e` with `d0 = 1`. | pattern scan |
+| `0x7db71d1f` | 0 | `call_7db6c0b1_arg_1_7db71d1f` | Calls `0x7db6c0b1` with `d0 = 1`. | pattern scan |
+| `0x7db71d30` | 0 | `call_7db6c101_arg_1_7db71d30` | Calls `0x7db6c101` with `d0 = 1`. | pattern scan |
+| `0x7db71d3d` | 0 | `call_7db6c151_arg_1_7db71d3d` | Calls `0x7db6c151` with `d0 = 1`. | pattern scan |
+| `0x7db71d4a` | 0 | `call_7db6c1a1_arg_1_7db71d4a` | Calls `0x7db6c1a1` with `d0 = 1`. | pattern scan |
+| `0x7db71d98` | 0 | `call_7db71d5b_arg_1_7db71d98` | Calls `0x7db71d5b` with `d0 = 1`. | pattern scan |
+| `0x7db73813` | 1 | `call_7db7387f_arg_1_7db73813` | Calls `0x7db7387f` with `d0 = 1`. | pattern scan |
+| `0x7db78da3` | 3 | `call_7db78c2c_ret_1_7db78da3` | Calls `0x7db78c2c`, then returns 1. | pattern scan |
+| `0x7db834ce` | 1 | `call_7db83e1d_on_7db83c93_7db834ce` | Calls `0x7db83e1d` with `a0 = 0x7db83c93` (a fixed address). | pattern scan |
+| `0x7db853da` | 1 | `call_7d996ee2_on_7dc4ff28_7db853da` | Calls `0x7d996ee2` with `a0 = 0x7dc4ff28` (a fixed address). | pattern scan |
+| `0x7dba3d95` | 1 | `call_7da89732_arg_1_7dba3d95` | Calls `0x7da89732` with `d0 = 1`. | pattern scan |
+| `0x7dbae165` | 1 | `call2_7dbae27f_7dbae174_7dbae165` | Calls `0x7dbae27f(this)` and then `0x7dbae174(this)`. | pattern scan |
+| `0x7dbb47f9` | 3 | `call_7d9e1084_arg_112_7dbb47f9` | Calls `0x7d9e1084` with `d0 = 112`. | pattern scan |
+| `0x7dbb4805` | 1 | `call_7d9e109f_arg_112_7dbb4805` | Calls `0x7d9e109f` with `d0 = 112`. | pattern scan |
+| `0x7dbb5af9` | 1 | `call_7d9e9319_arg_2_7dbb5af9` | Calls `0x7d9e9319` with `d0 = 2`. | pattern scan |
+| `0x7dc9d17f` | 1 | `call_7d9db57e_ret_1_7dc9d17f` | Calls `0x7d9db57e`, then returns 1. | pattern scan |
+| `0x7dd43689` | 1 | `call_7dd4389e_on_7deddba2_7dd43689` | Calls `0x7dd4389e` with `a0 = 0x7deddba2` (a fixed address). | pattern scan |
+| `0x7dd4fdf6` | 1 | `call_7dd4fe04_arg_65535_7dd4fdf6` | Calls `0x7dd4fe04` with `d0 = 65535`. | pattern scan |
+| `0x7dd6e9f5` | 1 | `call_7d996e85_on_7def3714_7dd6e9f5` | Calls `0x7d996e85` with `a0 = 0x7def3714` (a fixed address). | pattern scan |
+| `0x7dd6ef4f` | 1 | `call_7d996e85_on_7def3eec_7dd6ef4f` | Calls `0x7d996e85` with `a0 = 0x7def3eec` (a fixed address). | pattern scan |
+| `0x7dd7225e` | 1 | `call_7dd71ed9_ret_14086_7dd7225e` | Calls `0x7dd71ed9`, then returns 14086. | pattern scan |
+| `0x7dd7226c` | 0 | `call_7dd71ed9_ret_14086_7dd7226c` | Calls `0x7dd71ed9`, then returns 14086. | pattern scan |
+| `0x7dd7c5f7` | 1 | `adj_thunk_2764_to_7db130d2_7dd7c5f7` | Adds 2764 to `this`, then calls `0x7db130d2`: entry for a base or member sub-object. | pattern scan |
+| `0x7ddda80a` | 12 | `call_7de17c1b_arg_776_7ddda80a` | Calls `0x7de17c1b` with `d0 = 776`. | pattern scan |
+| `0x7dddbeb3` | 6 | `call2_7dddc079_7dddc2b3_7dddbeb3` | Calls `0x7dddc079(this)` and then `0x7dddc2b3(this)`. | pattern scan |
+| `0x7dde42d5` | 2 | `fwd_f8_to_7de16d46_7dde42d5` | Forwards to the object at `this+8`: `0x7de16d46(*(this+8))`. | pattern scan |
+| `0x7dde42e2` | 2 | `fwd_f8_to_7de16d98_7dde42e2` | Forwards to the object at `this+8`: `0x7de16d98(*(this+8))`. | pattern scan |
+| `0x7dde42ef` | 2 | `fwd_f8_to_7de16dea_7dde42ef` | Forwards to the object at `this+8`: `0x7de16dea(*(this+8))`. | pattern scan |
+| `0x7dde42fc` | 2 | `fwd_f8_to_7de16e3c_7dde42fc` | Forwards to the object at `this+8`: `0x7de16e3c(*(this+8))`. | pattern scan |
+| `0x7de00b4a` | 16 | `call_7de17c1b_arg_769_7de00b4a` | Calls `0x7de17c1b` with `d0 = 769`. | pattern scan |
+| `0x7de2da82` | 5 | `call_7de2d394_on_7df37964_7de2da82` | Calls `0x7de2d394` with `a0 = 0x7df37964` (a fixed address). | pattern scan |
+| `0x7de2db30` | 1 | `call_7de2d394_on_7df37bbf_7de2db30` | Calls `0x7de2d394` with `a0 = 0x7df37bbf` (a fixed address). | pattern scan |
+| `0x7de2dc94` | 1 | `call_7de2d394_on_7df37f2a_7de2dc94` | Calls `0x7de2d394` with `a0 = 0x7df37f2a` (a fixed address). | pattern scan |
+| `0x7de3e858` | 1 | `call_7d996e85_on_7df41614_7de3e858` | Calls `0x7d996e85` with `a0 = 0x7df41614` (a fixed address). | pattern scan |
+| `0x7de55542` | 1 | `call_7de56c1c_on_a0a73850_7de55542` | Calls `0x7de56c1c` with `a0 = 0xa0a73850` (a fixed address). | pattern scan |
+| `0x7de5df7f` | 1 | `call_7d996ee2_on_7df4b8bd_7de5df7f` | Calls `0x7d996ee2` with `a0 = 0x7df4b8bd` (a fixed address). | pattern scan |
+| `0x7de5f4c8` | 1 | `call_7d996ee2_on_7df4be7a_7de5f4c8` | Calls `0x7d996ee2` with `a0 = 0x7df4be7a` (a fixed address). | pattern scan |
+| `0x7de5f7f9` | 2 | `call_7d996e85_on_7df4c29e_7de5f7f9` | Calls `0x7d996e85` with `a0 = 0x7df4c29e` (a fixed address). | pattern scan |
+| `0x7de5f8f1` | 1 | `call_7d996e85_on_7df4c781_7de5f8f1` | Calls `0x7d996e85` with `a0 = 0x7df4c781` (a fixed address). | pattern scan |
+| `0x7de5f96a` | 1 | `call_7d996e85_on_7df4c89c_7de5f96a` | Calls `0x7d996e85` with `a0 = 0x7df4c89c` (a fixed address). | pattern scan |
+| `0x7de5fa1a` | 1 | `call_7d996e85_on_7df4ca58_7de5fa1a` | Calls `0x7d996e85` with `a0 = 0x7df4ca58` (a fixed address). | pattern scan |
+| `0x7de5fa2a` | 1 | `call_7d996e85_on_7df4cb40_7de5fa2a` | Calls `0x7d996e85` with `a0 = 0x7df4cb40` (a fixed address). | pattern scan |
+| `0x7de9ae03` | 1 | `call_7d996e85_on_7df55f37_7de9ae03` | Calls `0x7d996e85` with `a0 = 0x7df55f37` (a fixed address). | pattern scan |
+| `0x7deab1d7` | 2 | `call_7deaafca_arg_1_7deab1d7` | Calls `0x7deaafca` with `d0 = 1`. | pattern scan |
+| `0x7dfc0795` | 10 | `fwd_f8_vslot16_7dfc0795` | Forwards to the object at `this+8`: calls its vtable slot `+16`. | pattern scan |
+| `0x7dfc1a9e` | 18 | `call_7dfc056a_on_6075abb0_7dfc1a9e` | Calls `0x7dfc056a` with `a0 = 0x6075abb0` (a fixed address). | pattern scan |
+| `0x7dfc38b5` | 1 | `call_7e205040_ret_null_7dfc38b5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc38c7` | 1 | `call_7e205040_ret_null_7dfc38c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc38d6` | 1 | `call_7e205040_ret_null_7dfc38d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc38e2` | 1 | `call_7e205040_ret_null_7dfc38e2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc38f4` | 2 | `call_7e205040_ret_null_7dfc38f4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3900` | 1 | `call_7e205040_ret_null_7dfc3900` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc390f` | 1 | `call_7e205040_ret_null_7dfc390f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc391e` | 1 | `call_7e205040_ret_null_7dfc391e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc392d` | 1 | `call_7e205040_ret_null_7dfc392d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc393c` | 1 | `call_7e205040_ret_null_7dfc393c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc394b` | 1 | `call_7e205040_ret_null_7dfc394b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc395a` | 1 | `call_7e205040_ret_null_7dfc395a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3969` | 1 | `call_7e205040_ret_null_7dfc3969` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3978` | 1 | `call_7e205040_ret_null_7dfc3978` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3987` | 1 | `call_7e205040_ret_null_7dfc3987` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3996` | 1 | `call_7e205040_ret_null_7dfc3996` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39a8` | 1 | `call_7e205040_ret_null_7dfc39a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39b7` | 1 | `call_7e205040_ret_null_7dfc39b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39c3` | 1 | `call_7e205040_ret_null_7dfc39c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39d2` | 1 | `call_7e205040_ret_null_7dfc39d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39e1` | 1 | `call_7e205040_ret_null_7dfc39e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc39f0` | 1 | `call_7e205040_ret_null_7dfc39f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a02` | 1 | `call_7e205040_ret_null_7dfc3a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a11` | 1 | `call_7e205040_ret_null_7dfc3a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a1d` | 1 | `call_7e205040_ret_null_7dfc3a1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a2c` | 1 | `call_7e205040_ret_null_7dfc3a2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a3b` | 1 | `call_7e205040_ret_null_7dfc3a3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a4a` | 1 | `call_7e205040_ret_null_7dfc3a4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a5c` | 1 | `call_7e205040_ret_null_7dfc3a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a6b` | 1 | `call_7e205040_ret_null_7dfc3a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a7a` | 1 | `call_7e205040_ret_null_7dfc3a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a89` | 1 | `call_7e205040_ret_null_7dfc3a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3a98` | 1 | `call_7e205040_ret_null_7dfc3a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3aa7` | 1 | `call_7e205040_ret_null_7dfc3aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ab6` | 1 | `call_7e205040_ret_null_7dfc3ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ac5` | 1 | `call_7e205040_ret_null_7dfc3ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ad4` | 1 | `call_7e205040_ret_null_7dfc3ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ae3` | 1 | `call_7e205040_ret_null_7dfc3ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3af2` | 1 | `call_7e205040_ret_null_7dfc3af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b01` | 1 | `call_7e205040_ret_null_7dfc3b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b10` | 1 | `call_7e205040_ret_null_7dfc3b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b1f` | 1 | `call_7e205040_ret_null_7dfc3b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b2e` | 1 | `call_7e205040_ret_null_7dfc3b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b3d` | 1 | `call_7e205040_ret_null_7dfc3b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b4c` | 1 | `call_7e205040_ret_null_7dfc3b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b5b` | 1 | `call_7e205040_ret_null_7dfc3b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b67` | 1 | `call_7e205040_ret_null_7dfc3b67` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b79` | 1 | `call_7e205040_ret_null_7dfc3b79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b88` | 1 | `call_7e205040_ret_null_7dfc3b88` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3b97` | 1 | `call_7e205040_ret_null_7dfc3b97` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ba6` | 1 | `call_7e205040_ret_null_7dfc3ba6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3bb5` | 1 | `call_7e205040_ret_null_7dfc3bb5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3bc4` | 1 | `call_7e205040_ret_null_7dfc3bc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3bd3` | 1 | `call_7e205040_ret_null_7dfc3bd3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3be2` | 1 | `call_7e205040_ret_null_7dfc3be2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3bf1` | 1 | `call_7e205040_ret_null_7dfc3bf1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3bfd` | 1 | `call_7e205040_ret_null_7dfc3bfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c0f` | 2 | `call_7e205040_ret_null_7dfc3c0f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c1e` | 1 | `call_7e205040_ret_null_7dfc3c1e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c2d` | 1 | `call_7e205040_ret_null_7dfc3c2d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c3c` | 1 | `call_7e205040_ret_null_7dfc3c3c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c4b` | 1 | `call_7e205040_ret_null_7dfc3c4b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c57` | 1 | `call_7e205040_ret_null_7dfc3c57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c66` | 1 | `call_7e205040_ret_null_7dfc3c66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c75` | 1 | `call_7e205040_ret_null_7dfc3c75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c84` | 1 | `call_7e205040_ret_null_7dfc3c84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3c93` | 1 | `call_7e205040_ret_null_7dfc3c93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ca2` | 1 | `call_7e205040_ret_null_7dfc3ca2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3cb1` | 1 | `call_7e205040_ret_null_7dfc3cb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3cc0` | 1 | `call_7e205040_ret_null_7dfc3cc0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3cd2` | 1 | `call_7e205040_ret_null_7dfc3cd2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3ce1` | 1 | `call_7e205040_ret_null_7dfc3ce1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3cf0` | 1 | `call_7e205040_ret_null_7dfc3cf0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3cfc` | 1 | `call_7e205040_ret_null_7dfc3cfc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3d0b` | 1 | `call_7e205040_ret_null_7dfc3d0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3d1a` | 1 | `call_7e205040_ret_null_7dfc3d1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3d29` | 1 | `call_7e205040_ret_null_7dfc3d29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3d38` | 1 | `call_7e205040_ret_null_7dfc3d38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc3d47` | 1 | `call_7e205040_ret_null_7dfc3d47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc705f` | 1 | `call_7dfc7173_ret_null_7dfc705f` | Calls `0x7dfc7173`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc7530` | 4 | `call_7e205100_arg_1_7dfc7530` | Calls `0x7e205100` with `d0 = 1`. | pattern scan |
+| `0x7dfc8a83` | 1 | `call_7e205040_ret_null_7dfc8a83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8a92` | 1 | `call_7e205040_ret_null_7dfc8a92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8aa4` | 3 | `call_7e205040_ret_null_7dfc8aa4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8ab3` | 1 | `call_7e205040_ret_null_7dfc8ab3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8ac2` | 1 | `call_7e205040_ret_null_7dfc8ac2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8ad1` | 1 | `call_7e205040_ret_null_7dfc8ad1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8ae0` | 1 | `call_7e205040_ret_null_7dfc8ae0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8aec` | 1 | `call_7e205040_ret_null_7dfc8aec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8afb` | 1 | `call_7e205040_ret_null_7dfc8afb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b0a` | 1 | `call_7e205040_ret_null_7dfc8b0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b19` | 1 | `call_7e205040_ret_null_7dfc8b19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b28` | 1 | `call_7e205040_ret_null_7dfc8b28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b37` | 1 | `call_7e205040_ret_null_7dfc8b37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b46` | 1 | `call_7e205040_ret_null_7dfc8b46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b55` | 1 | `call_7e205040_ret_null_7dfc8b55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b64` | 1 | `call_7e205040_ret_null_7dfc8b64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b73` | 1 | `call_7e205040_ret_null_7dfc8b73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b82` | 1 | `call_7e205040_ret_null_7dfc8b82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8b91` | 1 | `call_7e205040_ret_null_7dfc8b91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8ba0` | 1 | `call_7e205040_ret_null_7dfc8ba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8baf` | 1 | `call_7e205040_ret_null_7dfc8baf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8bbe` | 1 | `call_7e205040_ret_null_7dfc8bbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8bcd` | 1 | `call_7e205040_ret_null_7dfc8bcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8bdc` | 1 | `call_7e205040_ret_null_7dfc8bdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8beb` | 1 | `call_7e205040_ret_null_7dfc8beb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc8bfa` | 1 | `call_7e205040_ret_null_7dfc8bfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc95bb` | 1 | `call_7e205040_ret_null_7dfc95bb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc95ca` | 1 | `call_7e205040_ret_null_7dfc95ca` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc95d9` | 1 | `call_7e205040_ret_null_7dfc95d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc95e8` | 1 | `call_7e205040_ret_null_7dfc95e8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc95f7` | 1 | `call_7e205040_ret_null_7dfc95f7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9606` | 1 | `call_7e205040_ret_null_7dfc9606` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9615` | 1 | `call_7e205040_ret_null_7dfc9615` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9624` | 1 | `call_7e205040_ret_null_7dfc9624` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9636` | 1 | `call_7e205040_ret_null_7dfc9636` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9645` | 1 | `call_7e205040_ret_null_7dfc9645` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9654` | 1 | `call_7e205040_ret_null_7dfc9654` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9663` | 1 | `call_7e205040_ret_null_7dfc9663` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9672` | 1 | `call_7e205040_ret_null_7dfc9672` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9681` | 1 | `call_7e205040_ret_null_7dfc9681` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9690` | 1 | `call_7e205040_ret_null_7dfc9690` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc969f` | 2 | `call_7e205040_ret_null_7dfc969f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96ae` | 2 | `call_7e205040_ret_null_7dfc96ae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96bd` | 1 | `call_7e205040_ret_null_7dfc96bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96c9` | 1 | `call_7e205040_ret_null_7dfc96c9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96d8` | 1 | `call_7e205040_ret_null_7dfc96d8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96e7` | 1 | `call_7e205040_ret_null_7dfc96e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc96f9` | 2 | `call_7e205040_ret_null_7dfc96f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9708` | 1 | `call_7e205040_ret_null_7dfc9708` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9717` | 1 | `call_7e205040_ret_null_7dfc9717` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9723` | 1 | `call_7e205040_ret_null_7dfc9723` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9735` | 4 | `call_7e205040_ret_null_7dfc9735` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9741` | 1 | `call_7e205040_ret_null_7dfc9741` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9750` | 1 | `call_7e205040_ret_null_7dfc9750` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9762` | 1 | `call_7e205040_ret_null_7dfc9762` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9771` | 1 | `call_7e205040_ret_null_7dfc9771` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9780` | 1 | `call_7e205040_ret_null_7dfc9780` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc978c` | 1 | `call_7e205040_ret_null_7dfc978c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc979e` | 4 | `call_7e205040_ret_null_7dfc979e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97aa` | 1 | `call_7e205040_ret_null_7dfc97aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97b9` | 1 | `call_7e205040_ret_null_7dfc97b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97c8` | 1 | `call_7e205040_ret_null_7dfc97c8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97da` | 1 | `call_7e205040_ret_null_7dfc97da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97e9` | 1 | `call_7e205040_ret_null_7dfc97e9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc97f5` | 1 | `call_7e205040_ret_null_7dfc97f5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9807` | 2 | `call_7e205040_ret_null_7dfc9807` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9813` | 1 | `call_7e205040_ret_null_7dfc9813` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9822` | 1 | `call_7e205040_ret_null_7dfc9822` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9831` | 1 | `call_7e205040_ret_null_7dfc9831` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9840` | 1 | `call_7e205040_ret_null_7dfc9840` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc984f` | 1 | `call_7e205040_ret_null_7dfc984f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9861` | 1 | `call_7e205040_ret_null_7dfc9861` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc9870` | 1 | `call_7e205040_ret_null_7dfc9870` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc987c` | 1 | `call_7e205040_ret_null_7dfc987c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc988b` | 1 | `call_7e205040_ret_null_7dfc988b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc989d` | 1 | `call_7e205040_ret_null_7dfc989d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc98ac` | 1 | `call_7e205040_ret_null_7dfc98ac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc98b8` | 1 | `call_7e205040_ret_null_7dfc98b8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc98c7` | 1 | `call_7e205040_ret_null_7dfc98c7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfc98d6` | 1 | `call_7e205040_ret_null_7dfc98d6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcad69` | 1 | `call_7e205040_ret_null_7dfcad69` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcad78` | 1 | `call_7e205040_ret_null_7dfcad78` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcad87` | 1 | `call_7e205040_ret_null_7dfcad87` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcad96` | 1 | `call_7e205040_ret_null_7dfcad96` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcada5` | 1 | `call_7e205040_ret_null_7dfcada5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcadb4` | 1 | `call_7e205040_ret_null_7dfcadb4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcadc3` | 1 | `call_7e205040_ret_null_7dfcadc3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcadd5` | 2 | `call_7e205040_ret_null_7dfcadd5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcade4` | 2 | `call_7e205040_ret_null_7dfcade4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcadf3` | 1 | `call_7e205040_ret_null_7dfcadf3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcadff` | 1 | `call_7e205040_ret_null_7dfcadff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae11` | 2 | `call_7e205040_ret_null_7dfcae11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae20` | 1 | `call_7e205040_ret_null_7dfcae20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae2c` | 1 | `call_7e205040_ret_null_7dfcae2c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae3b` | 1 | `call_7e205040_ret_null_7dfcae3b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae4a` | 1 | `call_7e205040_ret_null_7dfcae4a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae59` | 1 | `call_7e205040_ret_null_7dfcae59` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae68` | 1 | `call_7e205040_ret_null_7dfcae68` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae7a` | 2 | `call_7e205040_ret_null_7dfcae7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae89` | 1 | `call_7e205040_ret_null_7dfcae89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcae98` | 4 | `call_7e205040_ret_null_7dfcae98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaea7` | 7 | `call_7e205040_ret_null_7dfcaea7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaeb3` | 1 | `call_7e205040_ret_null_7dfcaeb3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaec5` | 11 | `call_7e205040_ret_null_7dfcaec5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaed4` | 8 | `call_7e205040_ret_null_7dfcaed4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaee0` | 1 | `call_7e205040_ret_null_7dfcaee0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaeef` | 1 | `call_7e205040_ret_null_7dfcaeef` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf01` | 1 | `call_7e205040_ret_null_7dfcaf01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf0d` | 1 | `call_7e205040_ret_null_7dfcaf0d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf1c` | 1 | `call_7e205040_ret_null_7dfcaf1c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf2b` | 1 | `call_7e205040_ret_null_7dfcaf2b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf3d` | 3 | `call_7e205040_ret_null_7dfcaf3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf4c` | 7 | `call_7e205040_ret_null_7dfcaf4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf5b` | 6 | `call_7e205040_ret_null_7dfcaf5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf6a` | 6 | `call_7e205040_ret_null_7dfcaf6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf79` | 4 | `call_7e205040_ret_null_7dfcaf79` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf85` | 1 | `call_7e205040_ret_null_7dfcaf85` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaf94` | 1 | `call_7e205040_ret_null_7dfcaf94` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcafa3` | 1 | `call_7e205040_ret_null_7dfcafa3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcafb2` | 1 | `call_7e205040_ret_null_7dfcafb2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcafc4` | 2 | `call_7e205040_ret_null_7dfcafc4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcafd0` | 1 | `call_7e205040_ret_null_7dfcafd0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcafe2` | 2 | `call_7e205040_ret_null_7dfcafe2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcaff1` | 2 | `call_7e205040_ret_null_7dfcaff1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb000` | 2 | `call_7e205040_ret_null_7dfcb000` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb00c` | 1 | `call_7e205040_ret_null_7dfcb00c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb01b` | 1 | `call_7e205040_ret_null_7dfcb01b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb02d` | 4 | `call_7e205040_ret_null_7dfcb02d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb039` | 1 | `call_7e205040_ret_null_7dfcb039` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb04b` | 2 | `call_7e205040_ret_null_7dfcb04b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb05a` | 1 | `call_7e205040_ret_null_7dfcb05a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb066` | 1 | `call_7e205040_ret_null_7dfcb066` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb075` | 1 | `call_7e205040_ret_null_7dfcb075` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb087` | 1 | `call_7e205040_ret_null_7dfcb087` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb096` | 2 | `call_7e205040_ret_null_7dfcb096` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0a5` | 2 | `call_7e205040_ret_null_7dfcb0a5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0b4` | 1 | `call_7e205040_ret_null_7dfcb0b4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0c3` | 1 | `call_7e205040_ret_null_7dfcb0c3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0d2` | 6 | `call_7e205040_ret_null_7dfcb0d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0e1` | 1 | `call_7e205040_ret_null_7dfcb0e1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0f0` | 1 | `call_7e205040_ret_null_7dfcb0f0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb0ff` | 3 | `call_7e205040_ret_null_7dfcb0ff` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb10b` | 1 | `call_7e205040_ret_null_7dfcb10b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb11a` | 1 | `call_7e205040_ret_null_7dfcb11a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb129` | 1 | `call_7e205040_ret_null_7dfcb129` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb13b` | 3 | `call_7e205040_ret_null_7dfcb13b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb147` | 1 | `call_7e205040_ret_null_7dfcb147` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb156` | 1 | `call_7e205040_ret_null_7dfcb156` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb165` | 1 | `call_7e205040_ret_null_7dfcb165` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb174` | 1 | `call_7e205040_ret_null_7dfcb174` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb183` | 1 | `call_7e205040_ret_null_7dfcb183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb192` | 1 | `call_7e205040_ret_null_7dfcb192` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1a1` | 1 | `call_7e205040_ret_null_7dfcb1a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1b0` | 1 | `call_7e205040_ret_null_7dfcb1b0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1c2` | 1 | `call_7e205040_ret_null_7dfcb1c2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1d1` | 1 | `call_7e205040_ret_null_7dfcb1d1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1e0` | 1 | `call_7e205040_ret_null_7dfcb1e0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1ec` | 1 | `call_7e205040_ret_null_7dfcb1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb1fb` | 1 | `call_7e205040_ret_null_7dfcb1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb20a` | 1 | `call_7e205040_ret_null_7dfcb20a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb21c` | 2 | `call_7e205040_ret_null_7dfcb21c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb22b` | 2 | `call_7e205040_ret_null_7dfcb22b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb23a` | 1 | `call_7e205040_ret_null_7dfcb23a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb246` | 1 | `call_7e205040_ret_null_7dfcb246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb255` | 1 | `call_7e205040_ret_null_7dfcb255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb264` | 1 | `call_7e205040_ret_null_7dfcb264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb273` | 1 | `call_7e205040_ret_null_7dfcb273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb282` | 1 | `call_7e205040_ret_null_7dfcb282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb291` | 1 | `call_7e205040_ret_null_7dfcb291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2a0` | 1 | `call_7e205040_ret_null_7dfcb2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2af` | 1 | `call_7e205040_ret_null_7dfcb2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2be` | 1 | `call_7e205040_ret_null_7dfcb2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2cd` | 1 | `call_7e205040_ret_null_7dfcb2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2df` | 1 | `call_7e205040_ret_null_7dfcb2df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2ee` | 1 | `call_7e205040_ret_null_7dfcb2ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb2fd` | 2 | `call_7e205040_ret_null_7dfcb2fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb30c` | 3 | `call_7e205040_ret_null_7dfcb30c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb31b` | 4 | `call_7e205040_ret_null_7dfcb31b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb32a` | 3 | `call_7e205040_ret_null_7dfcb32a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb339` | 1 | `call_7e205040_ret_null_7dfcb339` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb348` | 3 | `call_7e205040_ret_null_7dfcb348` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb357` | 3 | `call_7e205040_ret_null_7dfcb357` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb366` | 4 | `call_7e205040_ret_null_7dfcb366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb375` | 2 | `call_7e205040_ret_null_7dfcb375` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb384` | 2 | `call_7e205040_ret_null_7dfcb384` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb393` | 1 | `call_7e205040_ret_null_7dfcb393` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3a2` | 4 | `call_7e205040_ret_null_7dfcb3a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3b1` | 1 | `call_7e205040_ret_null_7dfcb3b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3c0` | 1 | `call_7e205040_ret_null_7dfcb3c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3cc` | 1 | `call_7e205040_ret_null_7dfcb3cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3db` | 1 | `call_7e205040_ret_null_7dfcb3db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3ea` | 1 | `call_7e205040_ret_null_7dfcb3ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb3f9` | 1 | `call_7e205040_ret_null_7dfcb3f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb408` | 1 | `call_7e205040_ret_null_7dfcb408` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb417` | 1 | `call_7e205040_ret_null_7dfcb417` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb426` | 1 | `call_7e205040_ret_null_7dfcb426` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb435` | 1 | `call_7e205040_ret_null_7dfcb435` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb444` | 1 | `call_7e205040_ret_null_7dfcb444` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb456` | 1 | `call_7e205040_ret_null_7dfcb456` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb462` | 1 | `call_7e205040_ret_null_7dfcb462` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb474` | 2 | `call_7e205040_ret_null_7dfcb474` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb483` | 2 | `call_7e205040_ret_null_7dfcb483` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb492` | 2 | `call_7e205040_ret_null_7dfcb492` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb4a1` | 6 | `call_7e205040_ret_null_7dfcb4a1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb4ad` | 1 | `call_7e205040_ret_null_7dfcb4ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb4bc` | 1 | `call_7e205040_ret_null_7dfcb4bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcb4cb` | 1 | `call_7e205040_ret_null_7dfcb4cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcbb2f` | 1 | `call_7dfc4546_ret_null_7dfcbb2f` | Calls `0x7dfc4546`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcc2e8` | 1 | `call_7db93fb8_arg_33_7dfcc2e8` | Calls `0x7db93fb8` with `d0 = 33`. | pattern scan |
+| `0x7dfccdb7` | 1 | `call_7dfcbb2f_ret_null_7dfccdb7` | Calls `0x7dfcbb2f`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcce48` | 1 | `call_7dfc6731_ret_null_7dfcce48` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcd069` | 4 | `call_7dff0eda_ret_null_7dfcd069` | Calls `0x7dff0eda`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce0bd` | 1 | `call_7e205040_ret_null_7dfce0bd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce0cc` | 1 | `call_7e205040_ret_null_7dfce0cc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce0db` | 1 | `call_7e205040_ret_null_7dfce0db` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce0ea` | 1 | `call_7e205040_ret_null_7dfce0ea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce0f9` | 1 | `call_7e205040_ret_null_7dfce0f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce108` | 1 | `call_7e205040_ret_null_7dfce108` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce117` | 1 | `call_7e205040_ret_null_7dfce117` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce126` | 1 | `call_7e205040_ret_null_7dfce126` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce135` | 1 | `call_7e205040_ret_null_7dfce135` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce144` | 1 | `call_7e205040_ret_null_7dfce144` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce153` | 1 | `call_7e205040_ret_null_7dfce153` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce162` | 1 | `call_7e205040_ret_null_7dfce162` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce171` | 1 | `call_7e205040_ret_null_7dfce171` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce183` | 4 | `call_7e205040_ret_null_7dfce183` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce18f` | 1 | `call_7e205040_ret_null_7dfce18f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce19e` | 1 | `call_7e205040_ret_null_7dfce19e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1ad` | 1 | `call_7e205040_ret_null_7dfce1ad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1bc` | 1 | `call_7e205040_ret_null_7dfce1bc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1cb` | 1 | `call_7e205040_ret_null_7dfce1cb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1da` | 1 | `call_7e205040_ret_null_7dfce1da` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1ec` | 2 | `call_7e205040_ret_null_7dfce1ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce1fb` | 2 | `call_7e205040_ret_null_7dfce1fb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce207` | 1 | `call_7e205040_ret_null_7dfce207` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce219` | 1 | `call_7e205040_ret_null_7dfce219` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce228` | 1 | `call_7e205040_ret_null_7dfce228` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce237` | 1 | `call_7e205040_ret_null_7dfce237` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce246` | 1 | `call_7e205040_ret_null_7dfce246` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce255` | 1 | `call_7e205040_ret_null_7dfce255` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce264` | 1 | `call_7e205040_ret_null_7dfce264` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce273` | 1 | `call_7e205040_ret_null_7dfce273` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce282` | 1 | `call_7e205040_ret_null_7dfce282` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce291` | 1 | `call_7e205040_ret_null_7dfce291` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2a0` | 1 | `call_7e205040_ret_null_7dfce2a0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2af` | 1 | `call_7e205040_ret_null_7dfce2af` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2be` | 1 | `call_7e205040_ret_null_7dfce2be` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2cd` | 1 | `call_7e205040_ret_null_7dfce2cd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2dc` | 1 | `call_7e205040_ret_null_7dfce2dc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2eb` | 1 | `call_7e205040_ret_null_7dfce2eb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce2fa` | 1 | `call_7e205040_ret_null_7dfce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce42f` | 1 | `this_plus_112_7dfce42f` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7dfce434` | 1 | `this_plus_156_7dfce434` | Leaf `return this+156` (address of a member or base sub-object). | pattern scan |
+| `0x7dfce7b2` | 1 | `call_7e205040_ret_null_7dfce7b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7c1` | 1 | `call_7e205040_ret_null_7dfce7c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7d0` | 1 | `call_7e205040_ret_null_7dfce7d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7df` | 1 | `call_7e205040_ret_null_7dfce7df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7ee` | 1 | `call_7e205040_ret_null_7dfce7ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce7fd` | 1 | `call_7e205040_ret_null_7dfce7fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce80c` | 1 | `call_7e205040_ret_null_7dfce80c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce81b` | 1 | `call_7e205040_ret_null_7dfce81b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce82a` | 1 | `call_7e205040_ret_null_7dfce82a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce839` | 1 | `call_7e205040_ret_null_7dfce839` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce848` | 1 | `call_7e205040_ret_null_7dfce848` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce857` | 1 | `call_7e205040_ret_null_7dfce857` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce866` | 1 | `call_7e205040_ret_null_7dfce866` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce875` | 1 | `call_7e205040_ret_null_7dfce875` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce884` | 1 | `call_7e205040_ret_null_7dfce884` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce893` | 1 | `call_7e205040_ret_null_7dfce893` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfce8a2` | 1 | `call_7e205040_ret_null_7dfce8a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcf291` | 2 | `this_plus_12_7dfcf291` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
+| `0x7dfcf73c` | 3 | `call_7dfcb664_ret_null_7dfcf73c` | Calls `0x7dfcb664`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfcfc7b` | 1 | `call_7dfd0387_ret_null_7dfcfc7b` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd0ce8` | 8 | `call_7dff143a_ret_null_7dfd0ce8` | Calls `0x7dff143a`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd4189` | 2 | `adj_thunk_12_to_7dfc66d8_7dfd4189` | Adds 12 to `this`, then calls `0x7dfc66d8`: entry for a base or member sub-object. | pattern scan |
+| `0x7dfd4685` | 1 | `call_7dfd4c7d_arg_1_7dfd4685` | Calls `0x7dfd4c7d` with `d0 = 1`. | pattern scan |
+| `0x7dfd5ee7` | 1 | `this_plus_112_7dfd5ee7` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7dfd6051` | 1 | `call_7e205040_ret_null_7dfd6051` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd6060` | 1 | `call_7e205040_ret_null_7dfd6060` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd606f` | 1 | `call_7e205040_ret_null_7dfd606f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd607e` | 1 | `call_7e205040_ret_null_7dfd607e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd608d` | 1 | `call_7e205040_ret_null_7dfd608d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd609c` | 1 | `call_7e205040_ret_null_7dfd609c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd60ab` | 1 | `call_7e205040_ret_null_7dfd60ab` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd60ba` | 1 | `call_7e205040_ret_null_7dfd60ba` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfd6c7b` | 1 | `call_7dfd5731_ret_null_7dfd6c7b` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfda419` | 1 | `adj_thunk_72_to_7dfecfa8_7dfda419` | Adds 72 to `this`, then calls `0x7dfecfa8`: entry for a base or member sub-object. | pattern scan |
+| `0x7dfdffcc` | 1 | `call_7dfe0386_arg_3_7dfdffcc` | Calls `0x7dfe0386` with `d0 = 3`. | pattern scan |
+| `0x7dfe0277` | 1 | `call_7dfe0386_arg_2_7dfe0277` | Calls `0x7dfe0386` with `d0 = 2`. | pattern scan |
+| `0x7dfe0281` | 1 | `call_7dfe0386_arg_1_7dfe0281` | Calls `0x7dfe0386` with `d0 = 1`. | pattern scan |
+| `0x7dfe0824` | 1 | `call_7dfd2fec_ret_null_7dfe0824` | Calls `0x7dfd2fec`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7206` | 1 | `call_7e205040_ret_null_7dfe7206` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7215` | 2 | `call_7e205040_ret_null_7dfe7215` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7224` | 2 | `call_7e205040_ret_null_7dfe7224` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7233` | 3 | `call_7e205040_ret_null_7dfe7233` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7242` | 3 | `call_7e205040_ret_null_7dfe7242` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7251` | 1 | `call_7e205040_ret_null_7dfe7251` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7260` | 2 | `call_7e205040_ret_null_7dfe7260` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe726c` | 1 | `call_7e205040_ret_null_7dfe726c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe727e` | 4 | `call_7e205040_ret_null_7dfe727e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe728d` | 1 | `call_7e205040_ret_null_7dfe728d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe729c` | 1 | `call_7e205040_ret_null_7dfe729c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72a8` | 1 | `call_7e205040_ret_null_7dfe72a8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72b7` | 1 | `call_7e205040_ret_null_7dfe72b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72c6` | 1 | `call_7e205040_ret_null_7dfe72c6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72d5` | 1 | `call_7e205040_ret_null_7dfe72d5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72e7` | 2 | `call_7e205040_ret_null_7dfe72e7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe72f6` | 1 | `call_7e205040_ret_null_7dfe72f6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7305` | 1 | `call_7e205040_ret_null_7dfe7305` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7314` | 1 | `call_7e205040_ret_null_7dfe7314` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7320` | 1 | `call_7e205040_ret_null_7dfe7320` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7332` | 1 | `call_7e205040_ret_null_7dfe7332` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe733e` | 1 | `call_7e205040_ret_null_7dfe733e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe734d` | 1 | `call_7e205040_ret_null_7dfe734d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe735c` | 1 | `call_7e205040_ret_null_7dfe735c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe736b` | 1 | `call_7e205040_ret_null_7dfe736b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe737d` | 2 | `call_7e205040_ret_null_7dfe737d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7389` | 1 | `call_7e205040_ret_null_7dfe7389` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7398` | 1 | `call_7e205040_ret_null_7dfe7398` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73aa` | 2 | `call_7e205040_ret_null_7dfe73aa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73b9` | 3 | `call_7e205040_ret_null_7dfe73b9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73c5` | 1 | `call_7e205040_ret_null_7dfe73c5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73d4` | 1 | `call_7e205040_ret_null_7dfe73d4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73e3` | 1 | `call_7e205040_ret_null_7dfe73e3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe73f2` | 1 | `call_7e205040_ret_null_7dfe73f2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7404` | 3 | `call_7e205040_ret_null_7dfe7404` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe7410` | 1 | `call_7e205040_ret_null_7dfe7410` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe741f` | 1 | `call_7e205040_ret_null_7dfe741f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe742e` | 1 | `call_7e205040_ret_null_7dfe742e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe743d` | 1 | `call_7e205040_ret_null_7dfe743d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe744c` | 1 | `call_7e205040_ret_null_7dfe744c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe745e` | 1 | `call_7e205040_ret_null_7dfe745e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe84a4` | 1 | `this_plus_124_7dfe84a4` | Leaf `return this+124` (address of a member or base sub-object). | pattern scan |
+| `0x7dfe84a9` | 1 | `this_plus_260_7dfe84a9` | Leaf `return this+260` (address of a member or base sub-object). | pattern scan |
+| `0x7dfe8a02` | 1 | `call_7e205040_ret_null_7dfe8a02` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a11` | 1 | `call_7e205040_ret_null_7dfe8a11` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a20` | 1 | `call_7e205040_ret_null_7dfe8a20` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a2f` | 1 | `call_7e205040_ret_null_7dfe8a2f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a3e` | 1 | `call_7e205040_ret_null_7dfe8a3e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a4d` | 1 | `call_7e205040_ret_null_7dfe8a4d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a5c` | 1 | `call_7e205040_ret_null_7dfe8a5c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a6b` | 1 | `call_7e205040_ret_null_7dfe8a6b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a7a` | 1 | `call_7e205040_ret_null_7dfe8a7a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a89` | 1 | `call_7e205040_ret_null_7dfe8a89` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8a98` | 1 | `call_7e205040_ret_null_7dfe8a98` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8aa7` | 1 | `call_7e205040_ret_null_7dfe8aa7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8ab6` | 1 | `call_7e205040_ret_null_7dfe8ab6` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8ac5` | 1 | `call_7e205040_ret_null_7dfe8ac5` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8ad4` | 1 | `call_7e205040_ret_null_7dfe8ad4` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8ae3` | 1 | `call_7e205040_ret_null_7dfe8ae3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8af2` | 1 | `call_7e205040_ret_null_7dfe8af2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b01` | 1 | `call_7e205040_ret_null_7dfe8b01` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b10` | 1 | `call_7e205040_ret_null_7dfe8b10` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b1f` | 1 | `call_7e205040_ret_null_7dfe8b1f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b2e` | 1 | `call_7e205040_ret_null_7dfe8b2e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b3d` | 1 | `call_7e205040_ret_null_7dfe8b3d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b4c` | 1 | `call_7e205040_ret_null_7dfe8b4c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b5b` | 1 | `call_7e205040_ret_null_7dfe8b5b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8b6a` | 1 | `call_7e205040_ret_null_7dfe8b6a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfe8c0e` | 10 | `this_plus_48_7dfe8c0e` | Leaf `return this+48` (address of a member or base sub-object). | pattern scan |
+| `0x7dfe8c13` | 9 | `this_plus_112_7dfe8c13` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7dfea42d` | 1 | `call_7dfcb664_ret_null_7dfea42d` | Calls `0x7dfcb664`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeab28` | 1 | `this_plus_124_7dfeab28` | Leaf `return this+124` (address of a member or base sub-object). | pattern scan |
+| `0x7dfeab2d` | 1 | `this_plus_328_7dfeab2d` | Leaf `return this+328` (address of a member or base sub-object). | pattern scan |
+| `0x7dfeb13a` | 2 | `call_7dfc6731_ret_null_7dfeb13a` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeb2ea` | 1 | `call_7e051330_ret_null_7dfeb2ea` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeb5b2` | 1 | `this_plus_224_7dfeb5b2` | Leaf `return this+224` (address of a member or base sub-object). | pattern scan |
+| `0x7dfeb5b9` | 1 | `this_plus_904_7dfeb5b9` | Leaf `return this+904` (address of a member or base sub-object). | pattern scan |
+| `0x7dfec7fe` | 1 | `call_7e205040_ret_null_7dfec7fe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec80d` | 1 | `call_7e205040_ret_null_7dfec80d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec81c` | 1 | `call_7e205040_ret_null_7dfec81c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec82b` | 1 | `call_7e205040_ret_null_7dfec82b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec83a` | 1 | `call_7e205040_ret_null_7dfec83a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec849` | 1 | `call_7e205040_ret_null_7dfec849` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec858` | 1 | `call_7e205040_ret_null_7dfec858` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec867` | 1 | `call_7e205040_ret_null_7dfec867` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec876` | 1 | `call_7e205040_ret_null_7dfec876` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec885` | 1 | `call_7e205040_ret_null_7dfec885` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec894` | 1 | `call_7e205040_ret_null_7dfec894` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8a3` | 1 | `call_7e205040_ret_null_7dfec8a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8b2` | 1 | `call_7e205040_ret_null_7dfec8b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8c1` | 1 | `call_7e205040_ret_null_7dfec8c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8d0` | 1 | `call_7e205040_ret_null_7dfec8d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8df` | 1 | `call_7e205040_ret_null_7dfec8df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8ee` | 1 | `call_7e205040_ret_null_7dfec8ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec8fd` | 1 | `call_7e205040_ret_null_7dfec8fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec90c` | 1 | `call_7e205040_ret_null_7dfec90c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec91b` | 1 | `call_7e205040_ret_null_7dfec91b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec92a` | 1 | `call_7e205040_ret_null_7dfec92a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec939` | 1 | `call_7e205040_ret_null_7dfec939` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec948` | 1 | `call_7e205040_ret_null_7dfec948` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec957` | 1 | `call_7e205040_ret_null_7dfec957` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec966` | 1 | `call_7e205040_ret_null_7dfec966` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec975` | 1 | `call_7e205040_ret_null_7dfec975` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec984` | 1 | `call_7e205040_ret_null_7dfec984` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec993` | 1 | `call_7e205040_ret_null_7dfec993` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9a2` | 1 | `call_7e205040_ret_null_7dfec9a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9b1` | 1 | `call_7e205040_ret_null_7dfec9b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9c0` | 1 | `call_7e205040_ret_null_7dfec9c0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9d2` | 1 | `call_7e205040_ret_null_7dfec9d2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9de` | 1 | `call_7e205040_ret_null_7dfec9de` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9ed` | 1 | `call_7e205040_ret_null_7dfec9ed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfec9fc` | 1 | `call_7e205040_ret_null_7dfec9fc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca0b` | 1 | `call_7e205040_ret_null_7dfeca0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca1a` | 1 | `call_7e205040_ret_null_7dfeca1a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca29` | 1 | `call_7e205040_ret_null_7dfeca29` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca38` | 1 | `call_7e205040_ret_null_7dfeca38` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca47` | 1 | `call_7e205040_ret_null_7dfeca47` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca56` | 1 | `call_7e205040_ret_null_7dfeca56` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca65` | 1 | `call_7e205040_ret_null_7dfeca65` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca74` | 1 | `call_7e205040_ret_null_7dfeca74` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca83` | 1 | `call_7e205040_ret_null_7dfeca83` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeca92` | 1 | `call_7e205040_ret_null_7dfeca92` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecaa1` | 1 | `call_7e205040_ret_null_7dfecaa1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecab0` | 1 | `call_7e205040_ret_null_7dfecab0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecabf` | 1 | `call_7e205040_ret_null_7dfecabf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecace` | 1 | `call_7e205040_ret_null_7dfecace` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecadd` | 1 | `call_7e205040_ret_null_7dfecadd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecaec` | 1 | `call_7e205040_ret_null_7dfecaec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecafb` | 1 | `call_7e205040_ret_null_7dfecafb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb0a` | 1 | `call_7e205040_ret_null_7dfecb0a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb19` | 1 | `call_7e205040_ret_null_7dfecb19` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb28` | 1 | `call_7e205040_ret_null_7dfecb28` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb37` | 1 | `call_7e205040_ret_null_7dfecb37` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb46` | 1 | `call_7e205040_ret_null_7dfecb46` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb55` | 1 | `call_7e205040_ret_null_7dfecb55` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb64` | 1 | `call_7e205040_ret_null_7dfecb64` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb73` | 1 | `call_7e205040_ret_null_7dfecb73` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb82` | 1 | `call_7e205040_ret_null_7dfecb82` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecb91` | 1 | `call_7e205040_ret_null_7dfecb91` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecba0` | 1 | `call_7e205040_ret_null_7dfecba0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbaf` | 1 | `call_7e205040_ret_null_7dfecbaf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbbe` | 1 | `call_7e205040_ret_null_7dfecbbe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbcd` | 1 | `call_7e205040_ret_null_7dfecbcd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbdc` | 1 | `call_7e205040_ret_null_7dfecbdc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbeb` | 1 | `call_7e205040_ret_null_7dfecbeb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecbfa` | 1 | `call_7e205040_ret_null_7dfecbfa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc09` | 1 | `call_7e205040_ret_null_7dfecc09` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc18` | 1 | `call_7e205040_ret_null_7dfecc18` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc27` | 1 | `call_7e205040_ret_null_7dfecc27` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc36` | 1 | `call_7e205040_ret_null_7dfecc36` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc45` | 1 | `call_7e205040_ret_null_7dfecc45` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc54` | 1 | `call_7e205040_ret_null_7dfecc54` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc63` | 1 | `call_7e205040_ret_null_7dfecc63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc72` | 1 | `call_7e205040_ret_null_7dfecc72` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc81` | 1 | `call_7e205040_ret_null_7dfecc81` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc90` | 1 | `call_7e205040_ret_null_7dfecc90` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecc9f` | 1 | `call_7e205040_ret_null_7dfecc9f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeccae` | 1 | `call_7e205040_ret_null_7dfeccae` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeccbd` | 1 | `call_7e205040_ret_null_7dfeccbd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecccc` | 1 | `call_7e205040_ret_null_7dfecccc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeccdb` | 1 | `call_7e205040_ret_null_7dfeccdb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeccea` | 1 | `call_7e205040_ret_null_7dfeccea` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeccf9` | 1 | `call_7e205040_ret_null_7dfeccf9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd08` | 1 | `call_7e205040_ret_null_7dfecd08` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd17` | 1 | `call_7e205040_ret_null_7dfecd17` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd26` | 1 | `call_7e205040_ret_null_7dfecd26` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd35` | 1 | `call_7e205040_ret_null_7dfecd35` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd44` | 1 | `call_7e205040_ret_null_7dfecd44` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd53` | 1 | `call_7e205040_ret_null_7dfecd53` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd62` | 1 | `call_7e205040_ret_null_7dfecd62` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd71` | 1 | `call_7e205040_ret_null_7dfecd71` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd80` | 1 | `call_7e205040_ret_null_7dfecd80` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd8f` | 1 | `call_7e205040_ret_null_7dfecd8f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecd9e` | 1 | `call_7e205040_ret_null_7dfecd9e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecdad` | 1 | `call_7e205040_ret_null_7dfecdad` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecdbc` | 1 | `call_7e205040_ret_null_7dfecdbc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecdcb` | 1 | `call_7e205040_ret_null_7dfecdcb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecdda` | 1 | `call_7e205040_ret_null_7dfecdda` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecde9` | 1 | `call_7e205040_ret_null_7dfecde9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecdf8` | 1 | `call_7e205040_ret_null_7dfecdf8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece07` | 1 | `call_7e205040_ret_null_7dfece07` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece16` | 1 | `call_7e205040_ret_null_7dfece16` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece25` | 1 | `call_7e205040_ret_null_7dfece25` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece34` | 1 | `call_7e205040_ret_null_7dfece34` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece43` | 1 | `call_7e205040_ret_null_7dfece43` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece52` | 1 | `call_7e205040_ret_null_7dfece52` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece61` | 1 | `call_7e205040_ret_null_7dfece61` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece70` | 1 | `call_7e205040_ret_null_7dfece70` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece7f` | 1 | `call_7e205040_ret_null_7dfece7f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece8e` | 1 | `call_7e205040_ret_null_7dfece8e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfece9d` | 1 | `call_7e205040_ret_null_7dfece9d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeceac` | 1 | `call_7e205040_ret_null_7dfeceac` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecebb` | 1 | `call_7e205040_ret_null_7dfecebb` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfececa` | 1 | `call_7e205040_ret_null_7dfececa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfeced9` | 1 | `call_7e205040_ret_null_7dfeced9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecee8` | 1 | `call_7e205040_ret_null_7dfecee8` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecef7` | 1 | `call_7e205040_ret_null_7dfecef7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf06` | 1 | `call_7e205040_ret_null_7dfecf06` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf15` | 1 | `call_7e205040_ret_null_7dfecf15` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf24` | 1 | `call_7e205040_ret_null_7dfecf24` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf33` | 1 | `call_7e205040_ret_null_7dfecf33` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf42` | 1 | `call_7e205040_ret_null_7dfecf42` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf51` | 1 | `call_7e205040_ret_null_7dfecf51` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf60` | 1 | `call_7e205040_ret_null_7dfecf60` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf6f` | 1 | `call_7e205040_ret_null_7dfecf6f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfecf9c` | 1 | `call_7dfc6731_ret_null_7dfecf9c` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed0e1` | 1 | `call_7dfed0aa_ret_null_7dfed0e1` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed100` | 1 | `call_7dfed0aa_ret_null_7dfed100` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed11f` | 1 | `call_7dfed0aa_ret_null_7dfed11f` | Calls `0x7dfed0aa`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed1ef` | 1 | `call_7dfed22c_ret_null_7dfed1ef` | Calls `0x7dfed22c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed22c` | 1 | `call_7dfce8c2_ret_null_7dfed22c` | Calls `0x7dfce8c2`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfed462` | 1 | `store_7_f192_f196_7dfed462` | `*(this+192) = *(this+196) = 7`. | pattern scan |
+| `0x7dfed4f3` | 1 | `store_9_f200_f204_7dfed4f3` | `*(this+200) = *(this+204) = 9`. | pattern scan |
+| `0x7dfed580` | 1 | `store_12_f208_f212_7dfed580` | `*(this+208) = *(this+212) = 12`. | pattern scan |
+| `0x7dfef42d` | 1 | `call_7dfc6731_ret_null_7dfef42d` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dfefc41` | 1 | `call_7dff065e_arg_1_7dfefc41` | Calls `0x7dff065e` with `d0 = 1`. | pattern scan |
+| `0x7dff1309` | 3 | `adj_thunk_16_to_7dfc056a_7dff1309` | Adds 16 to `this`, then calls `0x7dfc056a`: entry for a base or member sub-object. | pattern scan |
+| `0x7dff1362` | 3 | `adj_thunk_16_to_7dfc057a_7dff1362` | Adds 16 to `this`, then calls `0x7dfc057a`: entry for a base or member sub-object. | pattern scan |
+| `0x7dff23ef` | 1 | `call_7dfd0387_ret_null_7dff23ef` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7dff9a1c` | 1 | `this_plus_8_7dff9a1c` | Leaf `return this+8` (address of a member or base sub-object). | pattern scan |
+| `0x7dff9a21` | 1 | `this_plus_12_7dff9a21` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
+| `0x7dff9a26` | 1 | `this_plus_16_7dff9a26` | Leaf `return this+16` (address of a member or base sub-object). | pattern scan |
+| `0x7dff9a2b` | 1 | `this_plus_20_7dff9a2b` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
+| `0x7dffb918` | 1 | `call_7e205040_ret_null_7dffb918` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03671b` | 2 | `this_plus_12_7e03671b` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
+| `0x7e036831` | 1 | `this_plus_112_7e036831` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e036836` | 1 | `this_plus_160_7e036836` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
+| `0x7e036929` | 1 | `call_7dfcf73c_ret_null_7e036929` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0376b3` | 1 | `call_7dfcf73c_ret_null_7e0376b3` | Calls `0x7dfcf73c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e037a46` | 1 | `call_7dfd5731_ret_null_7e037a46` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03810d` | 1 | `call_7dfd5731_ret_null_7e03810d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0385f1` | 1 | `call_7dfd5731_ret_null_7e0385f1` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e038da6` | 1 | `call_7dfd5731_ret_null_7e038da6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0398de` | 1 | `call_7dfd5731_ret_null_7e0398de` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03a3aa` | 1 | `call_7dfd5731_ret_null_7e03a3aa` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03a8a2` | 1 | `call_7dfd5731_ret_null_7e03a8a2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03ad18` | 1 | `call_7dfd5731_ret_null_7e03ad18` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03b27c` | 1 | `call_7dfd5731_ret_null_7e03b27c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03c13e` | 2 | `this_plus_20_7e03c13e` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
+| `0x7e03c2ee` | 1 | `this_plus_112_7e03c2ee` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e03e833` | 1 | `call_7e051330_ret_null_7e03e833` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e03f015` | 1 | `call_7dfc6731_ret_null_7e03f015` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0401b6` | 1 | `store_1_f248_f252_7e0401b6` | `*(this+248) = *(this+252) = 1`. | pattern scan |
+| `0x7e04020c` | 1 | `store_2_f248_call_7e04174e_7e04020c` | `*(this+248) = 2`, then calls `0x7e04174e`. | pattern scan |
+| `0x7e0403ce` | 1 | `call2_7e0403dd_7e04045c_7e0403ce` | Calls `0x7e0403dd(this)` and then `0x7e04045c(this)`. | pattern scan |
+| `0x7e04052b` | 1 | `call2_7e04053a_7e0405ba_7e04052b` | Calls `0x7e04053a(this)` and then `0x7e0405ba(this)`. | pattern scan |
+| `0x7e04089b` | 1 | `store_12_f272_f252_7e04089b` | `*(this+272) = *(this+252) = 12`. | pattern scan |
+| `0x7e0408f1` | 1 | `store_13_f272_call_7e04091b_7e0408f1` | `*(this+272) = 13`, then calls `0x7e04091b`. | pattern scan |
+| `0x7e040c1a` | 1 | `store_19_f256_call_7e040ef3_7e040c1a` | `*(this+256) = 19`, then calls `0x7e040ef3`. | pattern scan |
+| `0x7e040ff5` | 1 | `store_24_f288_f252_7e040ff5` | `*(this+288) = *(this+252) = 24`. | pattern scan |
+| `0x7e0411b3` | 1 | `store_26_f256_call_7e0413e8_7e0411b3` | `*(this+256) = 26`, then calls `0x7e0413e8`. | pattern scan |
+| `0x7e041591` | 1 | `store_31_f296_f252_7e041591` | `*(this+296) = *(this+252) = 31`. | pattern scan |
+| `0x7e0415f8` | 1 | `store_32_f256_call_7e041622_7e0415f8` | `*(this+256) = 32`, then calls `0x7e041622`. | pattern scan |
+| `0x7e041b0f` | 1 | `call2_7e041b1e_7e041c31_7e041b0f` | Calls `0x7e041b1e(this)` and then `0x7e041c31(this)`. | pattern scan |
+| `0x7e041c31` | 1 | `store_39_f320_call_7e041d0b_7e041c31` | `*(this+320) = 39`, then calls `0x7e041d0b`. | pattern scan |
+| `0x7e041e07` | 1 | `store_42_f320_call_7e0425bd_7e041e07` | `*(this+320) = 42`, then calls `0x7e0425bd`. | pattern scan |
+| `0x7e041e7d` | 1 | `store_43_f332_f252_7e041e7d` | `*(this+332) = *(this+252) = 43`. | pattern scan |
+| `0x7e041ed9` | 1 | `store_44_f332_f252_7e041ed9` | `*(this+332) = *(this+252) = 44`. | pattern scan |
+| `0x7e0427c5` | 1 | `store_56_f332_f252_7e0427c5` | `*(this+332) = *(this+252) = 56`. | pattern scan |
+| `0x7e04280b` | 1 | `call2_7e04281a_7e042944_7e04280b` | Calls `0x7e04281a(this)` and then `0x7e042944(this)`. | pattern scan |
+| `0x7e042a46` | 1 | `store_59_f340_f252_7e042a46` | `*(this+340) = *(this+252) = 59`. | pattern scan |
+| `0x7e042dae` | 1 | `store_63_f348_f252_7e042dae` | `*(this+348) = *(this+252) = 63`. | pattern scan |
+| `0x7e042e5d` | 1 | `call2_7e042e6c_7e043130_7e042e5d` | Calls `0x7e042e6c(this)` and then `0x7e043130(this)`. | pattern scan |
+| `0x7e043232` | 1 | `store_69_f352_f252_7e043232` | `*(this+352) = *(this+252) = 69`. | pattern scan |
+| `0x7e043278` | 1 | `store_70_f256_call_7e0434ad_7e043278` | `*(this+256) = 70`, then calls `0x7e0434ad`. | pattern scan |
+| `0x7e0435af` | 1 | `store_74_f360_f252_7e0435af` | `*(this+360) = *(this+252) = 74`. | pattern scan |
+| `0x7e0437dc` | 1 | `store_77_f368_f252_7e0437dc` | `*(this+368) = *(this+252) = 77`. | pattern scan |
+| `0x7e0439cf` | 1 | `store_79_f256_call_7e043d9e_7e0439cf` | `*(this+256) = 79`, then calls `0x7e043d9e`. | pattern scan |
+| `0x7e043fcb` | 1 | `store_85_f380_f252_7e043fcb` | `*(this+380) = *(this+252) = 85`. | pattern scan |
+| `0x7e044165` | 1 | `call_7e051330_ret_null_7e044165` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04433d` | 1 | `call_7dfce9cb_ret_null_7e04433d` | Calls `0x7dfce9cb`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0443b6` | 1 | `call_7dfd2fec_ret_null_7e0443b6` | Calls `0x7dfd2fec`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e044aa3` | 1 | `call_7dfd5731_ret_null_7e044aa3` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e045494` | 1 | `call_7dfd5731_ret_null_7e045494` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0454c2` | 1 | `call_7dfd5731_ret_null_7e0454c2` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e045afb` | 1 | `call_7dfd5731_ret_null_7e045afb` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e046a0e` | 1 | `call_7dfd5731_ret_null_7e046a0e` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e047640` | 1 | `call_7dfd5731_ret_null_7e047640` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e047d5d` | 1 | `call_7dfd5731_ret_null_7e047d5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0480e9` | 1 | `call_7dfd5731_ret_null_7e0480e9` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e048d0a` | 1 | `call_7dfd5731_ret_null_7e048d0a` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04a824` | 1 | `call_7dfd5731_ret_null_7e04a824` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04ab9c` | 1 | `call_7dfd5731_ret_null_7e04ab9c` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04b2d3` | 1 | `call_7e051330_ret_null_7e04b2d3` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04b3d7` | 1 | `call_7dfd0387_ret_null_7e04b3d7` | Calls `0x7dfd0387`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04b51a` | 1 | `call_7e051330_ret_null_7e04b51a` | Calls `0x7e051330`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04b5f6` | 1 | `call_7dfd5731_ret_null_7e04b5f6` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04c084` | 1 | `call_7dfd5731_ret_null_7e04c084` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04c9be` | 1 | `call_7dfd5731_ret_null_7e04c9be` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04cc5d` | 1 | `call_7dfd5731_ret_null_7e04cc5d` | Calls `0x7dfd5731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04e4d9` | 1 | `call_7dfc6731_ret_null_7e04e4d9` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04e65c` | 1 | `adj_thunk_16_to_7dfc3eda_7e04e65c` | Adds 16 to `this`, then calls `0x7dfc3eda`: entry for a base or member sub-object. | pattern scan |
+| `0x7e04e66e` | 1 | `adj_thunk_16_to_7dfc3eb8_7e04e66e` | Adds 16 to `this`, then calls `0x7dfc3eb8`: entry for a base or member sub-object. | pattern scan |
+| `0x7e04e7c6` | 2 | `call_7e04e746_ret_null_7e04e7c6` | Calls `0x7e04e746`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e04f6ca` | 2 | `adj_thunk_8_to_7dfc0ad2_7e04f6ca` | Adds 8 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e04f6d6` | 2 | `adj_thunk_8_to_7dfc0b9f_7e04f6d6` | Adds 8 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e04f7b1` | 4 | `call_7dfc6731_ret_null_7e04f7b1` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e050701` | 1 | `call_7dfc6731_ret_null_7e050701` | Calls `0x7dfc6731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e051420` | 3 | `fwd_f4_to_7e051515_7e051420` | Forwards to the object at `this+4`: `0x7e051515(*(this+4))`. | pattern scan |
+| `0x7e05217e` | 1 | `store_5_f172_f176_7e05217e` | `*(this+172) = *(this+176) = 5`. | pattern scan |
+| `0x7e0539ff` | 3 | `call_7e054042_arg_2055_7e0539ff` | Calls `0x7e054042` with `d0 = 2055`. | pattern scan |
+| `0x7e056793` | 1 | `call_7e205040_ret_null_7e056793` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0567a2` | 1 | `call_7e205040_ret_null_7e0567a2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0567b1` | 1 | `call_7e205040_ret_null_7e0567b1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056994` | 1 | `call_7e205040_ret_null_7e056994` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569a3` | 1 | `call_7e205040_ret_null_7e0569a3` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569b2` | 1 | `call_7e205040_ret_null_7e0569b2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569c1` | 1 | `call_7e205040_ret_null_7e0569c1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569d0` | 1 | `call_7e205040_ret_null_7e0569d0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569df` | 1 | `call_7e205040_ret_null_7e0569df` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569ee` | 1 | `call_7e205040_ret_null_7e0569ee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0569fd` | 1 | `call_7e205040_ret_null_7e0569fd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056a0c` | 1 | `call_7e205040_ret_null_7e056a0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056a1b` | 1 | `call_7e205040_ret_null_7e056a1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056a2a` | 1 | `call_7e205040_ret_null_7e056a2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056a39` | 1 | `call_7e205040_ret_null_7e056a39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056a48` | 1 | `call_7e205040_ret_null_7e056a48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ddf` | 1 | `call_7e205040_ret_null_7e056ddf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056dee` | 1 | `call_7e205040_ret_null_7e056dee` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056dfd` | 1 | `call_7e205040_ret_null_7e056dfd` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e0c` | 1 | `call_7e205040_ret_null_7e056e0c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e1b` | 1 | `call_7e205040_ret_null_7e056e1b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e2a` | 1 | `call_7e205040_ret_null_7e056e2a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e39` | 1 | `call_7e205040_ret_null_7e056e39` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e48` | 1 | `call_7e205040_ret_null_7e056e48` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e57` | 1 | `call_7e205040_ret_null_7e056e57` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e66` | 1 | `call_7e205040_ret_null_7e056e66` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e75` | 1 | `call_7e205040_ret_null_7e056e75` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e84` | 1 | `call_7e205040_ret_null_7e056e84` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056e93` | 1 | `call_7e205040_ret_null_7e056e93` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ea2` | 1 | `call_7e205040_ret_null_7e056ea2` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056eb1` | 1 | `call_7e205040_ret_null_7e056eb1` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ec0` | 1 | `call_7e205040_ret_null_7e056ec0` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ecf` | 1 | `call_7e205040_ret_null_7e056ecf` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ede` | 1 | `call_7e205040_ret_null_7e056ede` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056eed` | 1 | `call_7e205040_ret_null_7e056eed` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056efc` | 1 | `call_7e205040_ret_null_7e056efc` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056f0b` | 1 | `call_7e205040_ret_null_7e056f0b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e056ffe` | 1 | `call_7e205040_ret_null_7e056ffe` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e05700d` | 1 | `call_7e205040_ret_null_7e05700d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e05701c` | 1 | `call_7e205040_ret_null_7e05701c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e05702b` | 1 | `call_7e205040_ret_null_7e05702b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e05703a` | 1 | `call_7e205040_ret_null_7e05703a` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e057049` | 1 | `call_7e205040_ret_null_7e057049` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e057058` | 1 | `call_7e205040_ret_null_7e057058` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e057147` | 1 | `call_7e05476c_ret_null_7e057147` | Calls `0x7e05476c`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0580a6` | 1 | `call_7e0583aa_arg_3_7e0580a6` | Calls `0x7e0583aa` with `d0 = 3`. | pattern scan |
+| `0x7e0580b0` | 1 | `call_7e0583aa_arg_2_7e0580b0` | Calls `0x7e0583aa` with `d0 = 2`. | pattern scan |
+| `0x7e0580c3` | 1 | `call_7e0583aa_arg_1_7e0580c3` | Calls `0x7e0583aa` with `d0 = 1`. | pattern scan |
+| `0x7e058812` | 1 | `call_7e1e67f6_ret_null_7e058812` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e058917` | 7 | `call_7e058a5e_arg_1_7e058917` | Calls `0x7e058a5e` with `d0 = 1`. | pattern scan |
+| `0x7e058968` | 3 | `store_1_f284_call_7e058a5e_7e058968` | `*(this+284) = 1`, then calls `0x7e058a5e`. | pattern scan |
+| `0x7e058ee4` | 1 | `adj_thunk_736_to_7e1e7e39_7e058ee4` | Adds 736 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e059828` | 1 | `this_plus_736_7e059828` | Leaf `return this+736` (address of a member or base sub-object). | pattern scan |
+| `0x7e059918` | 1 | `adj_thunk_716_to_7dfc0ad2_7e059918` | Adds 716 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e059926` | 2 | `adj_thunk_716_to_7dfc0b9f_7e059926` | Adds 716 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05bd7f` | 3 | `call_7e05c1fb_arg_65536_7e05bd7f` | Calls `0x7e05c1fb` with `d0 = 65536`. | pattern scan |
+| `0x7e05bd8d` | 1 | `call_7e05c211_arg_32_7e05bd8d` | Calls `0x7e05c211` with `d0 = 32`. | pattern scan |
+| `0x7e05bdc4` | 2 | `call_7e05c211_arg_16_7e05bdc4` | Calls `0x7e05c211` with `d0 = 16`. | pattern scan |
+| `0x7e05be49` | 1 | `call_7e05c23d_arg_512_7e05be49` | Calls `0x7e05c23d` with `d0 = 512`. | pattern scan |
+| `0x7e05be88` | 2 | `call_7e05c23d_arg_256_7e05be88` | Calls `0x7e05c23d` with `d0 = 256`. | pattern scan |
+| `0x7e05bf16` | 2 | `call_7e05c253_arg_4096_7e05bf16` | Calls `0x7e05c253` with `d0 = 4096`. | pattern scan |
+| `0x7e05c55e` | 1 | `adj_thunk_296_to_7e1e7e39_7e05c55e` | Adds 296 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05c5f9` | 2 | `fwd_f372_vslot84_7e05c5f9` | Forwards to the object at `this+372`: calls its vtable slot `+84`. | pattern scan |
+| `0x7e05c6ca` | 2 | `fwd_f372_vslot128_7e05c6ca` | Forwards to the object at `this+372`: calls its vtable slot `+128`. | pattern scan |
+| `0x7e05c6d9` | 1 | `adj_thunk_296_to_7e1e802d_7e05c6d9` | Adds 296 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05c7c6` | 2 | `fwd_f372_vslot160_7e05c7c6` | Forwards to the object at `this+372`: calls its vtable slot `+160`. | pattern scan |
+| `0x7e05c7d5` | 1 | `fwd_f372_vslot164_7e05c7d5` | Forwards to the object at `this+372`: calls its vtable slot `+164`. | pattern scan |
+| `0x7e05c7f4` | 5 | `fwd_f372_vslot180_7e05c7f4` | Forwards to the object at `this+372`: calls its vtable slot `+180`. | pattern scan |
+| `0x7e05cab8` | 1 | `store_7_f400_f404_7e05cab8` | `*(this+400) = *(this+404) = 7`. | pattern scan |
+| `0x7e05cb4f` | 1 | `store_8_f400_call_7e05cb5d_7e05cb4f` | `*(this+400) = 8`, then calls `0x7e05cb5d`. | pattern scan |
+| `0x7e05cd38` | 9 | `call2_7e05d13d_7e05d067_7e05cd38` | Calls `0x7e05d13d(this)` and then `0x7e05d067(this)`. | pattern scan |
+| `0x7e05cd47` | 1 | `store_11_f408_f404_7e05cd47` | `*(this+408) = *(this+404) = 11`. | pattern scan |
+| `0x7e05d095` | 1 | `store_13_f412_f416_7e05d095` | `*(this+412) = *(this+416) = 13`. | pattern scan |
+| `0x7e05d0e9` | 1 | `store_14_f412_f416_7e05d0e9` | `*(this+412) = *(this+416) = 14`. | pattern scan |
+| `0x7e05d16b` | 1 | `store_16_f420_f424_7e05d16b` | `*(this+420) = *(this+424) = 16`. | pattern scan |
+| `0x7e05d1d4` | 1 | `store_17_f420_f424_7e05d1d4` | `*(this+420) = *(this+424) = 17`. | pattern scan |
+| `0x7e05e30d` | 1 | `adj_thunk_5156_to_7e1e7e39_7e05e30d` | Adds 5156 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05e31e` | 2 | `adj_thunk_5204_to_7e1e7e39_7e05e31e` | Adds 5204 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05e32f` | 2 | `adj_thunk_5180_to_7e1e7e39_7e05e32f` | Adds 5180 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e05e340` | 2 | `adj_thunk_5228_to_7e1e7e39_7e05e340` | Adds 5228 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e066fd3` | 1 | `adj_thunk_5132_to_7e1e802d_7e066fd3` | Adds 5132 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e066fe1` | 1 | `adj_thunk_5156_to_7e1e802d_7e066fe1` | Adds 5156 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e066ff2` | 4 | `adj_thunk_5204_to_7e1e802d_7e066ff2` | Adds 5204 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e067000` | 4 | `adj_thunk_5180_to_7e1e802d_7e067000` | Adds 5180 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e067011` | 4 | `adj_thunk_5228_to_7e1e802d_7e067011` | Adds 5228 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07c609` | 1 | `adj_thunk_8036_to_7e1e7e39_7e07c609` | Adds 8036 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07c617` | 1 | `adj_thunk_8060_to_7e1e7e39_7e07c617` | Adds 8060 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07c625` | 1 | `adj_thunk_8012_to_7e1e7e39_7e07c625` | Adds 8012 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07d045` | 3 | `adj_thunk_8036_to_7e1e802d_7e07d045` | Adds 8036 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07d053` | 3 | `adj_thunk_8060_to_7e1e802d_7e07d053` | Adds 8060 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07d061` | 2 | `adj_thunk_8012_to_7e1e802d_7e07d061` | Adds 8012 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07d06f` | 1 | `adj_thunk_8084_to_7e1e802d_7e07d06f` | Adds 8084 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e07de7e` | 1 | `store_4_f252_call_7e1e86dd_7e07de7e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e07de8e` | 1 | `call2_7e07de7e_7e07e007_7e07de8e` | Calls `0x7e07de7e(this)` and then `0x7e07e007(this)`. | pattern scan |
+| `0x7e07e78b` | 1 | `call_7e1e67f6_ret_null_7e07e78b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07e7f4` | 1 | `call_7e1e67f6_ret_null_7e07e7f4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07e8d9` | 1 | `call_7e205040_ret_null_7e07e8d9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07ec52` | 2 | `call_7e1e67f6_ret_null_7e07ec52` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07ed55` | 1 | `this_plus_396_7e07ed55` | Leaf `return this+396` (address of a member or base sub-object). | pattern scan |
+| `0x7e07edeb` | 1 | `call_7e07e91d_ret_null_7e07edeb` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e07f4c0` | 1 | `fwd_f4_to_7e1ea0fc_7e07f4c0` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e07f4d3` | 1 | `fwd_f4_to_7e1ea11a_7e07f4d3` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e07f7de` | 1 | `this_plus_632_7e07f7de` | Leaf `return this+632` (address of a member or base sub-object). | pattern scan |
+| `0x7e0800ba` | 1 | `store_1_f320_call_7e080108_7e0800ba` | `*(this+320) = 1`, then calls `0x7e080108`. | pattern scan |
+| `0x7e080110` | 1 | `store_2_f328_f324_7e080110` | `*(this+328) = *(this+324) = 2`. | pattern scan |
+| `0x7e08128f` | 2 | `fwd_f488_vslot4_7e08128f` | Forwards to the object at `this+488`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e08129d` | 1 | `fwd_f492_vslot4_7e08129d` | Forwards to the object at `this+492`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e081480` | 1 | `this_plus_368_7e081480` | Leaf `return this+368` (address of a member or base sub-object). | pattern scan |
+| `0x7e081487` | 3 | `this_plus_392_7e081487` | Leaf `return this+392` (address of a member or base sub-object). | pattern scan |
+| `0x7e0814ce` | 3 | `adj_thunk_420_to_7dfc0ad2_7e0814ce` | Adds 420 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0818d1` | 1 | `call2_7e081bd2_7e0819f1_7e0818d1` | Calls `0x7e081bd2(this)` and then `0x7e0819f1(this)`. | pattern scan |
+| `0x7e081a1f` | 1 | `store_6_f500_f504_7e081a1f` | `*(this+500) = *(this+504) = 6`. | pattern scan |
+| `0x7e081abb` | 1 | `store_7_f500_f504_7e081abb` | `*(this+500) = *(this+504) = 7`. | pattern scan |
+| `0x7e081c1a` | 1 | `call2_7e081c29_7e081c9c_7e081c1a` | Calls `0x7e081c29(this)` and then `0x7e081c9c(this)`. | pattern scan |
+| `0x7e082035` | 1 | `store_13_f508_f512_7e082035` | `*(this+508) = *(this+512) = 13`. | pattern scan |
+| `0x7e08210f` | 1 | `fwd_f4_to_7e0803be_7e08210f` | Forwards to the object at `this+4`: `0x7e0803be(*(this+4))`. | pattern scan |
+| `0x7e08211d` | 1 | `fwd_f8_to_7e1e7e39_7e08211d` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e08215c` | 1 | `fwd_f12_to_7e1e7e39_7e08215c` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e08216f` | 1 | `fwd_f16_to_7e1e7e39_7e08216f` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e08217f` | 1 | `fwd_f24_to_7e1e7e39_7e08217f` | Forwards to the object at `this+24`: `0x7e1e7e39(*(this+24))`. | pattern scan |
+| `0x7e08218f` | 1 | `fwd_f20_to_7e1e7e39_7e08218f` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e08219f` | 1 | `fwd_f28_to_7e1e7e39_7e08219f` | Forwards to the object at `this+28`: `0x7e1e7e39(*(this+28))`. | pattern scan |
+| `0x7e0821af` | 1 | `fwd_f32_to_7e1e7e39_7e0821af` | Forwards to the object at `this+32`: `0x7e1e7e39(*(this+32))`. | pattern scan |
+| `0x7e0821bf` | 1 | `fwd_f36_to_7e1e7e39_7e0821bf` | Forwards to the object at `this+36`: `0x7e1e7e39(*(this+36))`. | pattern scan |
+| `0x7e0821cf` | 1 | `fwd_f40_to_7e1e7e39_7e0821cf` | Forwards to the object at `this+40`: `0x7e1e7e39(*(this+40))`. | pattern scan |
+| `0x7e0821fa` | 1 | `fwd_f48_to_7e1e7e39_7e0821fa` | Forwards to the object at `this+48`: `0x7e1e7e39(*(this+48))`. | pattern scan |
+| `0x7e08220a` | 1 | `fwd_f44_to_7e1e7e39_7e08220a` | Forwards to the object at `this+44`: `0x7e1e7e39(*(this+44))`. | pattern scan |
+| `0x7e082229` | 1 | `fwd_f4_to_7e08042c_7e082229` | Forwards to the object at `this+4`: `0x7e08042c(*(this+4))`. | pattern scan |
+| `0x7e082237` | 1 | `fwd_f4_to_7e08045d_7e082237` | Forwards to the object at `this+4`: `0x7e08045d(*(this+4))`. | pattern scan |
+| `0x7e082245` | 1 | `fwd_f4_to_7e080469_7e082245` | Forwards to the object at `this+4`: `0x7e080469(*(this+4))`. | pattern scan |
+| `0x7e082253` | 1 | `fwd_f4_to_7e080470_7e082253` | Forwards to the object at `this+4`: `0x7e080470(*(this+4))`. | pattern scan |
+| `0x7e082275` | 1 | `fwd_f4_to_7e0804eb_7e082275` | Forwards to the object at `this+4`: `0x7e0804eb(*(this+4))`. | pattern scan |
+| `0x7e0822b2` | 1 | `fwd_f4_to_7e0805a4_7e0822b2` | Forwards to the object at `this+4`: `0x7e0805a4(*(this+4))`. | pattern scan |
+| `0x7e0822c0` | 1 | `fwd_f4_to_7e080965_7e0822c0` | Forwards to the object at `this+4`: `0x7e080965(*(this+4))`. | pattern scan |
+| `0x7e0822ce` | 1 | `fwd_f8_to_7e1e802d_7e0822ce` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
+| `0x7e0822de` | 1 | `fwd_f4_to_7e1ea0fc_7e0822de` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0822ee` | 1 | `fwd_f12_to_7e1e802d_7e0822ee` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e082301` | 1 | `fwd_f16_to_7e1e802d_7e082301` | Forwards to the object at `this+16`: `0x7e1e802d(*(this+16))`. | pattern scan |
+| `0x7e082311` | 1 | `fwd_f24_to_7e1e802d_7e082311` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
+| `0x7e082321` | 1 | `fwd_f20_to_7e1e802d_7e082321` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
+| `0x7e082331` | 1 | `fwd_f28_to_7e1e802d_7e082331` | Forwards to the object at `this+28`: `0x7e1e802d(*(this+28))`. | pattern scan |
+| `0x7e082341` | 1 | `fwd_f32_to_7e1e802d_7e082341` | Forwards to the object at `this+32`: `0x7e1e802d(*(this+32))`. | pattern scan |
+| `0x7e082351` | 1 | `fwd_f36_to_7e1e802d_7e082351` | Forwards to the object at `this+36`: `0x7e1e802d(*(this+36))`. | pattern scan |
+| `0x7e082361` | 1 | `fwd_f40_to_7e1e802d_7e082361` | Forwards to the object at `this+40`: `0x7e1e802d(*(this+40))`. | pattern scan |
+| `0x7e082374` | 1 | `fwd_f4_to_7e1ea11a_7e082374` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e082384` | 1 | `fwd_f48_to_7e1e802d_7e082384` | Forwards to the object at `this+48`: `0x7e1e802d(*(this+48))`. | pattern scan |
+| `0x7e082394` | 1 | `fwd_f44_to_7e1e802d_7e082394` | Forwards to the object at `this+44`: `0x7e1e802d(*(this+44))`. | pattern scan |
+| `0x7e0823a4` | 1 | `fwd_f4_to_7e080992_7e0823a4` | Forwards to the object at `this+4`: `0x7e080992(*(this+4))`. | pattern scan |
+| `0x7e0823c4` | 1 | `fwd_f4_to_7e080ac2_7e0823c4` | Forwards to the object at `this+4`: `0x7e080ac2(*(this+4))`. | pattern scan |
+| `0x7e0823d2` | 1 | `fwd_f4_to_7e080b56_7e0823d2` | Forwards to the object at `this+4`: `0x7e080b56(*(this+4))`. | pattern scan |
+| `0x7e0823e0` | 1 | `fwd_f4_to_7e080c0c_7e0823e0` | Forwards to the object at `this+4`: `0x7e080c0c(*(this+4))`. | pattern scan |
+| `0x7e0823ee` | 1 | `fwd_f4_to_7e080c43_7e0823ee` | Forwards to the object at `this+4`: `0x7e080c43(*(this+4))`. | pattern scan |
+| `0x7e0823fc` | 1 | `fwd_f4_to_7e1e8308_7e0823fc` | Forwards to the object at `this+4`: `0x7e1e8308(*(this+4))`. | pattern scan |
+| `0x7e0825ec` | 1 | `call_7e205040_ret_null_7e0825ec` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e082724` | 1 | `call_7e205040_ret_null_7e082724` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0832f4` | 1 | `call_7e083bb2_arg_3_7e0832f4` | Calls `0x7e083bb2` with `d0 = 3`. | pattern scan |
+| `0x7e084058` | 1 | `call_7e0840ed_ret_null_7e084058` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e086bce` | 2 | `global_u16_6044fd86_get_7e086bce` | Leaf `return (u16)*0x6044fd86`. | pattern scan |
+| `0x7e08ba2e` | 2 | `adj_thunk_2212_to_7e1e7e39_7e08ba2e` | Adds 2212 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08ba50` | 4 | `adj_thunk_2288_to_7e1e7e39_7e08ba50` | Adds 2288 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08ba72` | 1 | `adj_thunk_2412_to_7e1e7e39_7e08ba72` | Adds 2412 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08ba83` | 4 | `adj_thunk_2516_to_7e1e7e39_7e08ba83` | Adds 2516 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08ba94` | 4 | `adj_thunk_2464_to_7e1e7e39_7e08ba94` | Adds 2464 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08bac7` | 1 | `adj_thunk_2644_to_7e1e7e39_7e08bac7` | Adds 2644 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08bad8` | 1 | `adj_thunk_2668_to_7e1e7e39_7e08bad8` | Adds 2668 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08bae9` | 1 | `adj_thunk_2692_to_7e1e7e39_7e08bae9` | Adds 2692 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08bafa` | 1 | `adj_thunk_2716_to_7e1e7e39_7e08bafa` | Adds 2716 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08bfda` | 4 | `fwd_f2796_vslot44_7e08bfda` | Forwards to the object at `this+2796`: calls its vtable slot `+44`. | pattern scan |
+| `0x7e08bfeb` | 10 | `fwd_f2796_vslot48_7e08bfeb` | Forwards to the object at `this+2796`: calls its vtable slot `+48`. | pattern scan |
+| `0x7e08bffc` | 1 | `fwd_f2796_vslot52_7e08bffc` | Forwards to the object at `this+2796`: calls its vtable slot `+52`. | pattern scan |
+| `0x7e08c5da` | 5 | `adj_thunk_2212_to_7e1e802d_7e08c5da` | Adds 2212 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08c5fc` | 4 | `adj_thunk_2288_to_7e1e802d_7e08c5fc` | Adds 2288 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08c62f` | 4 | `adj_thunk_2516_to_7e1e802d_7e08c62f` | Adds 2516 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08c640` | 4 | `adj_thunk_2464_to_7e1e802d_7e08c640` | Adds 2464 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08cbca` | 1 | `adj_thunk_2616_to_7e1e682c_7e08cbca` | Adds 2616 to `this`, then calls `0x7e1e682c`: entry for a base or member sub-object. | pattern scan |
+| `0x7e08cec8` | 1 | `call_7db9d93d_arg_1_7e08cec8` | Calls `0x7db9d93d` with `d0 = 1`. | pattern scan |
+| `0x7e08ced4` | 1 | `call_7db9d93d_arg_2_7e08ced4` | Calls `0x7db9d93d` with `d0 = 2`. | pattern scan |
+| `0x7e08cee0` | 1 | `call_7db9d93d_arg_4_7e08cee0` | Calls `0x7db9d93d` with `d0 = 4`. | pattern scan |
+| `0x7e08ceec` | 1 | `call_7db9d93d_arg_3_7e08ceec` | Calls `0x7db9d93d` with `d0 = 3`. | pattern scan |
+| `0x7e08d7aa` | 2 | `fwd_f2820_to_7e093677_7e08d7aa` | Forwards to the object at `this+2820`: `0x7e093677(*(this+2820))`. | pattern scan |
+| `0x7e08e876` | 1 | `store_1_f252_f256_7e08e876` | `*(this+252) = *(this+256) = 1`. | pattern scan |
+| `0x7e08f4f6` | 1 | `call_7e1e67f6_ret_null_7e08f4f6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e08f55b` | 1 | `call_7e1e67f6_ret_null_7e08f55b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e08f5c0` | 1 | `call_7e1e67f6_ret_null_7e08f5c0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e08f62b` | 1 | `call_7e0840ed_ret_null_7e08f62b` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e092384` | 1 | `call_7e091e69_arg_1_7e092384` | Calls `0x7e091e69` with `d0 = 1`. | pattern scan |
+| `0x7e0977cf` | 6 | `call2_7e097872_7e0977de_7e0977cf` | Calls `0x7e097872(this)` and then `0x7e0977de(this)`. | pattern scan |
+| `0x7e097b21` | 1 | `store_4_f252_f256_7e097b21` | `*(this+252) = *(this+256) = 4`. | pattern scan |
+| `0x7e097c78` | 1 | `call_7e0840ed_ret_null_7e097c78` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0990b6` | 1 | `this_plus_10148_7e0990b6` | Leaf `return this+10148` (address of a member or base sub-object). | pattern scan |
+| `0x7e09b092` | 1 | `fwd_f4_to_7e09924c_7e09b092` | Forwards to the object at `this+4`: `0x7e09924c(*(this+4))`. | pattern scan |
+| `0x7e09b0a0` | 1 | `fwd_f4_to_7e099270_7e09b0a0` | Forwards to the object at `this+4`: `0x7e099270(*(this+4))`. | pattern scan |
+| `0x7e09b0ae` | 1 | `fwd_f4_to_7e099283_7e09b0ae` | Forwards to the object at `this+4`: `0x7e099283(*(this+4))`. | pattern scan |
+| `0x7e09b0bc` | 1 | `fwd_f4_to_7e099295_7e09b0bc` | Forwards to the object at `this+4`: `0x7e099295(*(this+4))`. | pattern scan |
+| `0x7e09b14c` | 1 | `fwd_f4_to_7e099861_7e09b14c` | Forwards to the object at `this+4`: `0x7e099861(*(this+4))`. | pattern scan |
+| `0x7e09b188` | 1 | `fwd_f4_to_7e099a96_7e09b188` | Forwards to the object at `this+4`: `0x7e099a96(*(this+4))`. | pattern scan |
+| `0x7e09b196` | 1 | `fwd_f4_to_7e099ac2_7e09b196` | Forwards to the object at `this+4`: `0x7e099ac2(*(this+4))`. | pattern scan |
+| `0x7e09b200` | 1 | `fwd_f4_to_7e099bb2_7e09b200` | Forwards to the object at `this+4`: `0x7e099bb2(*(this+4))`. | pattern scan |
+| `0x7e09b20e` | 1 | `fwd_f4_to_7e099be9_7e09b20e` | Forwards to the object at `this+4`: `0x7e099be9(*(this+4))`. | pattern scan |
+| `0x7e09b25b` | 1 | `fwd_f4_to_7e099c1b_7e09b25b` | Forwards to the object at `this+4`: `0x7e099c1b(*(this+4))`. | pattern scan |
+| `0x7e09b3db` | 1 | `this_plus_412_7e09b3db` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
+| `0x7e09bf7b` | 1 | `fwd_f4_to_7e09b529_7e09bf7b` | Forwards to the object at `this+4`: `0x7e09b529(*(this+4))`. | pattern scan |
+| `0x7e09bf98` | 1 | `fwd_f4_to_7e09bb67_7e09bf98` | Forwards to the object at `this+4`: `0x7e09bb67(*(this+4))`. | pattern scan |
+| `0x7e09bfb5` | 1 | `fwd_f4_to_7e09bb78_7e09bfb5` | Forwards to the object at `this+4`: `0x7e09bb78(*(this+4))`. | pattern scan |
+| `0x7e09bfc3` | 1 | `fwd_f4_to_7e09bb91_7e09bfc3` | Forwards to the object at `this+4`: `0x7e09bb91(*(this+4))`. | pattern scan |
+| `0x7e09bff1` | 1 | `fwd_f4_to_7e1ea0fc_7e09bff1` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e09c004` | 1 | `fwd_f4_to_7e1ea11a_7e09c004` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e09c0e7` | 1 | `this_plus_760_7e09c0e7` | Leaf `return this+760` (address of a member or base sub-object). | pattern scan |
+| `0x7e09c7d0` | 5 | `call2_7e09c7df_7e09c839_7e09c7d0` | Calls `0x7e09c7df(this)` and then `0x7e09c839(this)`. | pattern scan |
+| `0x7e09fe66` | 1 | `fwd_f4_to_7e1ea0fc_7e09fe66` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e09fe79` | 1 | `fwd_f4_to_7e1ea11a_7e09fe79` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e09ff5a` | 1 | `this_plus_396_7e09ff5a` | Leaf `return this+396` (address of a member or base sub-object). | pattern scan |
+| `0x7e09fff2` | 1 | `call_7e07e91d_ret_null_7e09fff2` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a05ed` | 1 | `fwd_f4_to_7e0a0083_7e0a05ed` | Forwards to the object at `this+4`: `0x7e0a0083(*(this+4))`. | pattern scan |
+| `0x7e0a063b` | 1 | `fwd_f4_to_7e0a00b2_7e0a063b` | Forwards to the object at `this+4`: `0x7e0a00b2(*(this+4))`. | pattern scan |
+| `0x7e0a0649` | 1 | `fwd_f4_to_7e0a00b7_7e0a0649` | Forwards to the object at `this+4`: `0x7e0a00b7(*(this+4))`. | pattern scan |
+| `0x7e0a0657` | 1 | `fwd_f4_to_7e0a00cc_7e0a0657` | Forwards to the object at `this+4`: `0x7e0a00cc(*(this+4))`. | pattern scan |
+| `0x7e0a0665` | 1 | `fwd_f4_to_7e0a00f5_7e0a0665` | Forwards to the object at `this+4`: `0x7e0a00f5(*(this+4))`. | pattern scan |
+| `0x7e0a0673` | 1 | `fwd_f4_to_7e0a014f_7e0a0673` | Forwards to the object at `this+4`: `0x7e0a014f(*(this+4))`. | pattern scan |
+| `0x7e0a0681` | 1 | `fwd_f4_to_7e0a0153_7e0a0681` | Forwards to the object at `this+4`: `0x7e0a0153(*(this+4))`. | pattern scan |
+| `0x7e0a068f` | 1 | `fwd_f4_to_7e0a017b_7e0a068f` | Forwards to the object at `this+4`: `0x7e0a017b(*(this+4))`. | pattern scan |
+| `0x7e0a06bb` | 1 | `fwd_f4_to_7e0a01a9_7e0a06bb` | Forwards to the object at `this+4`: `0x7e0a01a9(*(this+4))`. | pattern scan |
+| `0x7e0a06da` | 1 | `fwd_f4_to_7e0a01e2_7e0a06da` | Forwards to the object at `this+4`: `0x7e0a01e2(*(this+4))`. | pattern scan |
+| `0x7e0a06fc` | 1 | `fwd_f4_to_7e0a0223_7e0a06fc` | Forwards to the object at `this+4`: `0x7e0a0223(*(this+4))`. | pattern scan |
+| `0x7e0a070a` | 1 | `fwd_f4_to_7e0a0237_7e0a070a` | Forwards to the object at `this+4`: `0x7e0a0237(*(this+4))`. | pattern scan |
+| `0x7e0a0729` | 1 | `fwd_f4_to_7e1ea0fc_7e0a0729` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0a073c` | 1 | `fwd_f4_to_7e1ea11a_7e0a073c` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0a075e` | 1 | `fwd_f4_to_7e0a0246_7e0a075e` | Forwards to the object at `this+4`: `0x7e0a0246(*(this+4))`. | pattern scan |
+| `0x7e0a084a` | 1 | `this_plus_532_7e0a084a` | Leaf `return this+532` (address of a member or base sub-object). | pattern scan |
+| `0x7e0a2c68` | 1 | `fwd_f4_to_7e1ea11a_7e0a2c68` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0a2cc3` | 1 | `fwd_f4_to_7e1ea0fc_7e0a2cc3` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0a3bff` | 2 | `fwd_f312_to_7e059284_7e0a3bff` | Forwards to the object at `this+312`: `0x7e059284(*(this+312))`. | pattern scan |
+| `0x7e0a4794` | 1 | `adj_thunk_284_to_7e1e7e39_7e0a4794` | Adds 284 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0a47a2` | 1 | `adj_thunk_308_to_7e1e7e39_7e0a47a2` | Adds 308 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0a47ea` | 1 | `adj_thunk_284_to_7e1e802d_7e0a47ea` | Adds 284 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0a47f8` | 1 | `adj_thunk_308_to_7e1e802d_7e0a47f8` | Adds 308 to `this`, then calls `0x7e1e802d`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0a4c13` | 1 | `call_7e0840ed_ret_null_7e0a4c13` | Calls `0x7e0840ed`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a4e64` | 1 | `this_plus_1108_7e0a4e64` | Leaf `return this+1108` (address of a member or base sub-object). | pattern scan |
+| `0x7e0a662c` | 1 | `store_6_f948_f952_7e0a662c` | `*(this+948) = *(this+952) = 6`. | pattern scan |
+| `0x7e0a6639` | 1 | `call2_7e0a6648_7e0a6702_7e0a6639` | Calls `0x7e0a6648(this)` and then `0x7e0a6702(this)`. | pattern scan |
+| `0x7e0a670a` | 1 | `store_8_f956_f952_7e0a670a` | `*(this+956) = *(this+952) = 8`. | pattern scan |
+| `0x7e0a691a` | 1 | `store_11_f948_f952_7e0a691a` | `*(this+948) = *(this+952) = 11`. | pattern scan |
+| `0x7e0a69a9` | 1 | `store_13_f964_f968_7e0a69a9` | `*(this+964) = *(this+968) = 13`. | pattern scan |
+| `0x7e0a6a04` | 1 | `call2_7e0a6a13_7e0a6aec_7e0a6a04` | Calls `0x7e0a6a13(this)` and then `0x7e0a6aec(this)`. | pattern scan |
+| `0x7e0a6aec` | 1 | `call2_7e0a6afb_7e0a6be9_7e0a6aec` | Calls `0x7e0a6afb(this)` and then `0x7e0a6be9(this)`. | pattern scan |
+| `0x7e0a6bf1` | 1 | `store_16_f976_f968_7e0a6bf1` | `*(this+976) = *(this+968) = 16`. | pattern scan |
+| `0x7e0a6d06` | 1 | `store_19_f980_f984_7e0a6d06` | `*(this+980) = *(this+984) = 19`. | pattern scan |
+| `0x7e0a6fd9` | 1 | `store_23_f988_f992_7e0a6fd9` | `*(this+988) = *(this+992) = 23`. | pattern scan |
+| `0x7e0a71ec` | 1 | `fwd_f4_to_7e1ea0fc_7e0a71ec` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0a7312` | 1 | `call_7e1e67f6_ret_null_7e0a7312` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a7375` | 1 | `call_7e1e67f6_ret_null_7e0a7375` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a73d8` | 1 | `call_7e1e67f6_ret_null_7e0a73d8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0a7585` | 1 | `this_plus_508_7e0a7585` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
+| `0x7e0a79bb` | 1 | `call2_7e0a7ac0_7e0a7c01_7e0a79bb` | Calls `0x7e0a7ac0(this)` and then `0x7e0a7c01(this)`. | pattern scan |
+| `0x7e0a7af9` | 1 | `store_6_f280_f284_7e0a7af9` | `*(this+280) = *(this+284) = 6`. | pattern scan |
+| `0x7e0a7c93` | 1 | `store_11_f288_f292_7e0a7c93` | `*(this+288) = *(this+292) = 11`. | pattern scan |
+| `0x7e0a7dae` | 1 | `fwd_f4_to_7e1ea0fc_7e0a7dae` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0a7de1` | 1 | `fwd_f4_to_7e1ea11a_7e0a7de1` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0a7eeb` | 1 | `this_plus_412_7e0a7eeb` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
+| `0x7e0a7fbd` | 1 | `fwd_f296_vslot4_7e0a7fbd` | Forwards to the object at `this+296`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e0a847d` | 1 | `this_plus_452_7e0a847d` | Leaf `return this+452` (address of a member or base sub-object). | pattern scan |
+| `0x7e0a87ce` | 1 | `store_1_f252_call_7e0a8820_7e0a87ce` | `*(this+252) = 1`, then calls `0x7e0a8820`. | pattern scan |
+| `0x7e0a8b6a` | 1 | `call2_7e0a8b79_7e0a8cdb_7e0a8b6a` | Calls `0x7e0a8b79(this)` and then `0x7e0a8cdb(this)`. | pattern scan |
+| `0x7e0a8df1` | 1 | `fwd_f4_to_7e1ea0fc_7e0a8df1` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0a8e24` | 1 | `fwd_f4_to_7e1ea11a_7e0a8e24` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0a9075` | 1 | `this_plus_568_7e0a9075` | Leaf `return this+568` (address of a member or base sub-object). | pattern scan |
+| `0x7e0aa46e` | 1 | `fwd_f4_to_7e1ea0fc_7e0aa46e` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0aa5e5` | 1 | `call_7e1e67f6_ret_null_7e0aa5e5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa64e` | 1 | `call_7e1e67f6_ret_null_7e0aa64e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa6b1` | 1 | `call_7e1e67f6_ret_null_7e0aa6b1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa71a` | 1 | `call_7e1e67f6_ret_null_7e0aa71a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa783` | 1 | `call_7e1e67f6_ret_null_7e0aa783` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa7ec` | 1 | `call_7e1e67f6_ret_null_7e0aa7ec` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa84f` | 1 | `call_7e1e67f6_ret_null_7e0aa84f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aa8b8` | 1 | `call_7e1e67f6_ret_null_7e0aa8b8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aaa45` | 1 | `this_plus_404_7e0aaa45` | Leaf `return this+404` (address of a member or base sub-object). | pattern scan |
+| `0x7e0abb33` | 1 | `fwd_f8_to_7e1ea0fc_7e0abb33` | Forwards to the object at `this+8`: `0x7e1ea0fc(*(this+8))`. | pattern scan |
+| `0x7e0abb46` | 1 | `fwd_f8_to_7e1ea11a_7e0abb46` | Forwards to the object at `this+8`: `0x7e1ea11a(*(this+8))`. | pattern scan |
+| `0x7e0abe01` | 1 | `this_plus_504_7e0abe01` | Leaf `return this+504` (address of a member or base sub-object). | pattern scan |
+| `0x7e0acb1d` | 1 | `store_4_f252_call_7e1e86dd_7e0acb1d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0accbc` | 1 | `store_6_f336_f256_7e0accbc` | `*(this+336) = *(this+256) = 6`. | pattern scan |
+| `0x7e0ace08` | 1 | `store_7_f336_f256_7e0ace08` | `*(this+336) = *(this+256) = 7`. | pattern scan |
+| `0x7e0acf85` | 1 | `fwd_f4_to_7e1ea0fc_7e0acf85` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0ad0c2` | 1 | `this_plus_412_7e0ad0c2` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
+| `0x7e0ad259` | 1 | `fwd_f284_vslot76_7e0ad259` | Forwards to the object at `this+284`: calls its vtable slot `+76`. | pattern scan |
+| `0x7e0ad267` | 1 | `fwd_f284_vslot80_7e0ad267` | Forwards to the object at `this+284`: calls its vtable slot `+80`. | pattern scan |
+| `0x7e0ad3ac` | 1 | `store_1_f252_call_7e0ad3fe_7e0ad3ac` | `*(this+252) = 1`, then calls `0x7e0ad3fe`. | pattern scan |
+| `0x7e0ad469` | 1 | `store_2_f252_call_7e0ad511_7e0ad469` | `*(this+252) = 2`, then calls `0x7e0ad511`. | pattern scan |
+| `0x7e0ad64a` | 1 | `store_4_f252_call_7e1e86dd_7e0ad64a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0ad662` | 1 | `call2_7e0ad64a_7e0ad754_7e0ad662` | Calls `0x7e0ad64a(this)` and then `0x7e0ad754(this)`. | pattern scan |
+| `0x7e0ad70e` | 1 | `store_7_f296_f256_7e0ad70e` | `*(this+296) = *(this+256) = 7`. | pattern scan |
+| `0x7e0ad818` | 1 | `fwd_f4_to_7e0ad186_7e0ad818` | Forwards to the object at `this+4`: `0x7e0ad186(*(this+4))`. | pattern scan |
+| `0x7e0ad83e` | 1 | `fwd_f4_to_7e0ad1e0_7e0ad83e` | Forwards to the object at `this+4`: `0x7e0ad1e0(*(this+4))`. | pattern scan |
+| `0x7e0ad898` | 1 | `fwd_f4_to_7e0ad259_7e0ad898` | Forwards to the object at `this+4`: `0x7e0ad259(*(this+4))`. | pattern scan |
+| `0x7e0ad8a6` | 1 | `fwd_f4_to_7e0ad267_7e0ad8a6` | Forwards to the object at `this+4`: `0x7e0ad267(*(this+4))`. | pattern scan |
+| `0x7e0ada51` | 1 | `this_plus_680_7e0ada51` | Leaf `return this+680` (address of a member or base sub-object). | pattern scan |
+| `0x7e0ae3fe` | 1 | `call2_7e0ae3d1_7e0ae451_7e0ae3fe` | Calls `0x7e0ae3d1(this)` and then `0x7e0ae451(this)`. | pattern scan |
+| `0x7e0ae750` | 1 | `store_4_f252_call_7e1e86dd_7e0ae750` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0ae768` | 1 | `call2_7e0ae750_7e0aea05_7e0ae768` | Calls `0x7e0ae750(this)` and then `0x7e0aea05(this)`. | pattern scan |
+| `0x7e0aea7c` | 1 | `call_7e1e67f6_ret_null_7e0aea7c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aeca5` | 1 | `call_7e1e67f6_ret_null_7e0aeca5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0aed16` | 1 | `fwd_f4_to_7e0ae06c_7e0aed16` | Forwards to the object at `this+4`: `0x7e0ae06c(*(this+4))`. | pattern scan |
+| `0x7e0aed42` | 1 | `fwd_f4_to_7e1ea0b0_7e0aed42` | Forwards to the object at `this+4`: `0x7e1ea0b0(*(this+4))`. | pattern scan |
+| `0x7e0aee59` | 1 | `fwd_f4_to_7e0ae0fe_7e0aee59` | Forwards to the object at `this+4`: `0x7e0ae0fe(*(this+4))`. | pattern scan |
+| `0x7e0aee76` | 1 | `fwd_f4_to_7e0ae14d_7e0aee76` | Forwards to the object at `this+4`: `0x7e0ae14d(*(this+4))`. | pattern scan |
+| `0x7e0aee84` | 1 | `fwd_f4_to_7e0ae15c_7e0aee84` | Forwards to the object at `this+4`: `0x7e0ae15c(*(this+4))`. | pattern scan |
+| `0x7e0aee92` | 1 | `fwd_f4_to_7e1ea0fc_7e0aee92` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0aeea2` | 1 | `fwd_f4_to_7e1ea10b_7e0aeea2` | Forwards to the object at `this+4`: `0x7e1ea10b(*(this+4))`. | pattern scan |
+| `0x7e0aef61` | 1 | `fwd_f4_to_7e1ea11a_7e0aef61` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0aef71` | 1 | `fwd_f4_to_7e0ae1a1_7e0aef71` | Forwards to the object at `this+4`: `0x7e0ae1a1(*(this+4))`. | pattern scan |
+| `0x7e0aefad` | 1 | `fwd_f4_to_7e0ae237_7e0aefad` | Forwards to the object at `this+4`: `0x7e0ae237(*(this+4))`. | pattern scan |
+| `0x7e0afc89` | 1 | `call_7e0b1a21_arg_1024_7e0afc89` | Calls `0x7e0b1a21` with `d0 = 1024`. | pattern scan |
+| `0x7e0b08b8` | 6 | `call_7e0b1a21_arg_512_7e0b08b8` | Calls `0x7e0b1a21` with `d0 = 512`. | pattern scan |
+| `0x7e0b08c3` | 5 | `call_7e0b1a21_arg_256_7e0b08c3` | Calls `0x7e0b1a21` with `d0 = 256`. | pattern scan |
+| `0x7e0b08ce` | 1 | `call_7e0b1a21_arg_16_7e0b08ce` | Calls `0x7e0b1a21` with `d0 = 16`. | pattern scan |
+| `0x7e0b090d` | 1 | `call_7e0b1a21_arg_2_7e0b090d` | Calls `0x7e0b1a21` with `d0 = 2`. | pattern scan |
+| `0x7e0b0917` | 1 | `call_7e0b1a21_arg_64_7e0b0917` | Calls `0x7e0b1a21` with `d0 = 64`. | pattern scan |
+| `0x7e0b0921` | 1 | `call_7e0b1a21_arg_4_7e0b0921` | Calls `0x7e0b1a21` with `d0 = 4`. | pattern scan |
+| `0x7e0b092b` | 1 | `call_7e0b1a21_arg_32_7e0b092b` | Calls `0x7e0b1a21` with `d0 = 32`. | pattern scan |
+| `0x7e0b0935` | 1 | `call_7e0b1a21_arg_128_7e0b0935` | Calls `0x7e0b1a21` with `d0 = 128`. | pattern scan |
+| `0x7e0b0940` | 1 | `call_7e0b1a21_arg_8_7e0b0940` | Calls `0x7e0b1a21` with `d0 = 8`. | pattern scan |
+| `0x7e0b1f51` | 1 | `store_4_f252_f256_7e0b1f51` | `*(this+252) = *(this+256) = 4`. | pattern scan |
+| `0x7e0b26f1` | 1 | `this_plus_708_7e0b26f1` | Leaf `return this+708` (address of a member or base sub-object). | pattern scan |
+| `0x7e0b3e9a` | 1 | `call2_7e0b3ea9_7e0b3fb8_7e0b3e9a` | Calls `0x7e0b3ea9(this)` and then `0x7e0b3fb8(this)`. | pattern scan |
+| `0x7e0b3ea9` | 1 | `store_5_f420_call_7e1e86dd_7e0b3ea9` | `*(this+420) = 5`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b40b1` | 1 | `store_7_f428_call_7e0b41ae_7e0b40b1` | `*(this+428) = 7`, then calls `0x7e0b41ae`. | pattern scan |
+| `0x7e0b4452` | 1 | `store_13_f428_call_7e0b468a_7e0b4452` | `*(this+428) = 13`, then calls `0x7e0b468a`. | pattern scan |
+| `0x7e0b4a8c` | 1 | `store_21_f428_call_7e0b4aef_7e0b4a8c` | `*(this+428) = 21`, then calls `0x7e0b4aef`. | pattern scan |
+| `0x7e0b504c` | 1 | `fwd_f4_to_7e1e7e39_7e0b504c` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
+| `0x7e0b505c` | 1 | `fwd_f8_to_7e1e7e39_7e0b505c` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0b506c` | 1 | `fwd_f12_to_7e1e7e39_7e0b506c` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e0b507c` | 1 | `fwd_f16_to_7e1e7e39_7e0b507c` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0b508c` | 1 | `fwd_f20_to_7e1e7e39_7e0b508c` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0b509c` | 1 | `fwd_f24_to_7e1e7e39_7e0b509c` | Forwards to the object at `this+24`: `0x7e1e7e39(*(this+24))`. | pattern scan |
+| `0x7e0b50ac` | 1 | `fwd_f28_to_7e1e7e39_7e0b50ac` | Forwards to the object at `this+28`: `0x7e1e7e39(*(this+28))`. | pattern scan |
+| `0x7e0b50bf` | 1 | `fwd_f32_to_7e0b2979_7e0b50bf` | Forwards to the object at `this+32`: `0x7e0b2979(*(this+32))`. | pattern scan |
+| `0x7e0b50cd` | 1 | `fwd_f32_to_7e0b29da_7e0b50cd` | Forwards to the object at `this+32`: `0x7e0b29da(*(this+32))`. | pattern scan |
+| `0x7e0b50db` | 1 | `fwd_f32_to_7e0b2a63_7e0b50db` | Forwards to the object at `this+32`: `0x7e0b2a63(*(this+32))`. | pattern scan |
+| `0x7e0b50f8` | 1 | `fwd_f32_to_7e0b2a73_7e0b50f8` | Forwards to the object at `this+32`: `0x7e0b2a73(*(this+32))`. | pattern scan |
+| `0x7e0b5106` | 1 | `fwd_f32_to_7e0b2ac5_7e0b5106` | Forwards to the object at `this+32`: `0x7e0b2ac5(*(this+32))`. | pattern scan |
+| `0x7e0b5114` | 1 | `fwd_f32_to_7e0b2b52_7e0b5114` | Forwards to the object at `this+32`: `0x7e0b2b52(*(this+32))`. | pattern scan |
+| `0x7e0b5122` | 1 | `fwd_f32_to_7e0b314e_7e0b5122` | Forwards to the object at `this+32`: `0x7e0b314e(*(this+32))`. | pattern scan |
+| `0x7e0b5130` | 1 | `fwd_f32_to_7e0b3272_7e0b5130` | Forwards to the object at `this+32`: `0x7e0b3272(*(this+32))`. | pattern scan |
+| `0x7e0b513e` | 1 | `fwd_f32_to_7e0b3404_7e0b513e` | Forwards to the object at `this+32`: `0x7e0b3404(*(this+32))`. | pattern scan |
+| `0x7e0b514c` | 1 | `fwd_f32_to_7e0b346e_7e0b514c` | Forwards to the object at `this+32`: `0x7e0b346e(*(this+32))`. | pattern scan |
+| `0x7e0b515a` | 1 | `fwd_f32_to_7e0b3503_7e0b515a` | Forwards to the object at `this+32`: `0x7e0b3503(*(this+32))`. | pattern scan |
+| `0x7e0b5168` | 1 | `fwd_f32_to_7e0b35cb_7e0b5168` | Forwards to the object at `this+32`: `0x7e0b35cb(*(this+32))`. | pattern scan |
+| `0x7e0b5176` | 1 | `fwd_f32_to_7e0b3657_7e0b5176` | Forwards to the object at `this+32`: `0x7e0b3657(*(this+32))`. | pattern scan |
+| `0x7e0b5184` | 1 | `fwd_f32_to_7e0b36e3_7e0b5184` | Forwards to the object at `this+32`: `0x7e0b36e3(*(this+32))`. | pattern scan |
+| `0x7e0b5192` | 1 | `fwd_f32_to_7e0b376f_7e0b5192` | Forwards to the object at `this+32`: `0x7e0b376f(*(this+32))`. | pattern scan |
+| `0x7e0b51a0` | 1 | `fwd_f32_to_7e0b37fb_7e0b51a0` | Forwards to the object at `this+32`: `0x7e0b37fb(*(this+32))`. | pattern scan |
+| `0x7e0b51ae` | 1 | `fwd_f32_to_7e0b38e5_7e0b51ae` | Forwards to the object at `this+32`: `0x7e0b38e5(*(this+32))`. | pattern scan |
+| `0x7e0b51bc` | 1 | `fwd_f32_to_7e0b3911_7e0b51bc` | Forwards to the object at `this+32`: `0x7e0b3911(*(this+32))`. | pattern scan |
+| `0x7e0b51ca` | 1 | `fwd_f32_to_7e0b3999_7e0b51ca` | Forwards to the object at `this+32`: `0x7e0b3999(*(this+32))`. | pattern scan |
+| `0x7e0b51d8` | 1 | `fwd_f32_to_7e0b39df_7e0b51d8` | Forwards to the object at `this+32`: `0x7e0b39df(*(this+32))`. | pattern scan |
+| `0x7e0b51e6` | 1 | `fwd_f32_to_7e0b3a46_7e0b51e6` | Forwards to the object at `this+32`: `0x7e0b3a46(*(this+32))`. | pattern scan |
+| `0x7e0b51f4` | 1 | `fwd_f32_to_7e0b3ab8_7e0b51f4` | Forwards to the object at `this+32`: `0x7e0b3ab8(*(this+32))`. | pattern scan |
+| `0x7e0b5202` | 1 | `fwd_f32_to_7e0b3b2a_7e0b5202` | Forwards to the object at `this+32`: `0x7e0b3b2a(*(this+32))`. | pattern scan |
+| `0x7e0b5210` | 1 | `fwd_f32_to_7e0b3b9c_7e0b5210` | Forwards to the object at `this+32`: `0x7e0b3b9c(*(this+32))`. | pattern scan |
+| `0x7e0b5235` | 1 | `fwd_f4_to_7e1e802d_7e0b5235` | Forwards to the object at `this+4`: `0x7e1e802d(*(this+4))`. | pattern scan |
+| `0x7e0b5245` | 1 | `fwd_f8_to_7e1e802d_7e0b5245` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
+| `0x7e0b5255` | 1 | `fwd_f12_to_7e1e802d_7e0b5255` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e0b5265` | 1 | `fwd_f16_to_7e1e802d_7e0b5265` | Forwards to the object at `this+16`: `0x7e1e802d(*(this+16))`. | pattern scan |
+| `0x7e0b5275` | 1 | `fwd_f20_to_7e1e802d_7e0b5275` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
+| `0x7e0b5285` | 1 | `fwd_f24_to_7e1e802d_7e0b5285` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
+| `0x7e0b5295` | 1 | `fwd_f28_to_7e1e802d_7e0b5295` | Forwards to the object at `this+28`: `0x7e1e802d(*(this+28))`. | pattern scan |
+| `0x7e0b53f0` | 1 | `this_plus_432_7e0b53f0` | Leaf `return this+432` (address of a member or base sub-object). | pattern scan |
+| `0x7e0b569f` | 1 | `call_7e07e91d_ret_null_7e0b569f` | Calls `0x7e07e91d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0b6303` | 1 | `this_plus_412_7e0b6303` | Leaf `return this+412` (address of a member or base sub-object). | pattern scan |
+| `0x7e0b63dd` | 1 | `fwd_f268_vslot4_7e0b63dd` | Forwards to the object at `this+268`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e0b63f0` | 1 | `fwd_f268_vslot8_7e0b63f0` | Forwards to the object at `this+268`: calls its vtable slot `+8`. | pattern scan |
+| `0x7e0b6738` | 1 | `store_4_f252_call_7e1e86dd_7e0b6738` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b675e` | 1 | `call2_7e0b6738_7e0b686f_7e0b675e` | Calls `0x7e0b6738(this)` and then `0x7e0b686f(this)`. | pattern scan |
+| `0x7e0b6877` | 1 | `store_6_f272_f256_7e0b6877` | `*(this+272) = *(this+256) = 6`. | pattern scan |
+| `0x7e0b696f` | 1 | `fwd_f8_to_7e1ea0fc_7e0b696f` | Forwards to the object at `this+8`: `0x7e1ea0fc(*(this+8))`. | pattern scan |
+| `0x7e0b6982` | 1 | `fwd_f8_to_7e1ea11a_7e0b6982` | Forwards to the object at `this+8`: `0x7e1ea11a(*(this+8))`. | pattern scan |
+| `0x7e0b6b93` | 1 | `this_plus_660_7e0b6b93` | Leaf `return this+660` (address of a member or base sub-object). | pattern scan |
+| `0x7e0b740a` | 1 | `store_4_f252_call_7e1e86dd_7e0b740a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b7422` | 1 | `call2_7e0b740a_7e0b74f9_7e0b7422` | Calls `0x7e0b740a(this)` and then `0x7e0b74f9(this)`. | pattern scan |
+| `0x7e0b7501` | 1 | `store_6_f340_f256_7e0b7501` | `*(this+340) = *(this+256) = 6`. | pattern scan |
+| `0x7e0b774c` | 1 | `fwd_f12_to_7e1e802d_7e0b774c` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e0b795f` | 1 | `call_7e205040_ret_null_7e0b795f` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0b7cfc` | 1 | `this_plus_980_7e0b7cfc` | Leaf `return this+980` (address of a member or base sub-object). | pattern scan |
+| `0x7e0b88f1` | 2 | `fwd_f824_vslot4_7e0b88f1` | Forwards to the object at `this+824`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e0b8ecc` | 2 | `call2_7e0b90ad_7e0b9017_7e0b8ecc` | Calls `0x7e0b90ad(this)` and then `0x7e0b9017(this)`. | pattern scan |
+| `0x7e0b9038` | 1 | `store_6_f840_f844_7e0b9038` | `*(this+840) = *(this+844) = 6`. | pattern scan |
+| `0x7e0b91ec` | 1 | `store_8_f848_call_7e1e86dd_7e0b91ec` | `*(this+848) = 8`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b9894` | 1 | `store_13_f848_call_7e1e86dd_7e0b9894` | `*(this+848) = 13`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0b9c9e` | 1 | `call2_7e0b9cad_7e0b9da0_7e0b9c9e` | Calls `0x7e0b9cad(this)` and then `0x7e0b9da0(this)`. | pattern scan |
+| `0x7e0b9cad` | 1 | `store_18_f848_call_7e1e86dd_7e0b9cad` | `*(this+848) = 18`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0ba0b9` | 1 | `fwd_f24_to_7e1e7e39_7e0ba0b9` | Forwards to the object at `this+24`: `0x7e1e7e39(*(this+24))`. | pattern scan |
+| `0x7e0ba0c9` | 1 | `fwd_f8_to_7e1e7e39_7e0ba0c9` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0ba0d9` | 1 | `fwd_f12_to_7e1e7e39_7e0ba0d9` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e0ba0e9` | 1 | `fwd_f16_to_7e1e7e39_7e0ba0e9` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0ba0f9` | 1 | `fwd_f20_to_7e1e7e39_7e0ba0f9` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0ba109` | 1 | `fwd_f28_to_7e1e7e39_7e0ba109` | Forwards to the object at `this+28`: `0x7e1e7e39(*(this+28))`. | pattern scan |
+| `0x7e0ba140` | 1 | `fwd_f32_to_7e1e7e39_7e0ba140` | Forwards to the object at `this+32`: `0x7e1e7e39(*(this+32))`. | pattern scan |
+| `0x7e0ba150` | 1 | `fwd_f36_to_7e1e7e39_7e0ba150` | Forwards to the object at `this+36`: `0x7e1e7e39(*(this+36))`. | pattern scan |
+| `0x7e0ba313` | 1 | `fwd_f24_to_7e1e802d_7e0ba313` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
+| `0x7e0ba323` | 1 | `fwd_f8_to_7e1e802d_7e0ba323` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
+| `0x7e0ba333` | 1 | `fwd_f12_to_7e1e802d_7e0ba333` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e0ba343` | 1 | `fwd_f16_to_7e1e802d_7e0ba343` | Forwards to the object at `this+16`: `0x7e1e802d(*(this+16))`. | pattern scan |
+| `0x7e0ba353` | 1 | `fwd_f20_to_7e1e802d_7e0ba353` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
+| `0x7e0ba363` | 1 | `fwd_f28_to_7e1e802d_7e0ba363` | Forwards to the object at `this+28`: `0x7e1e802d(*(this+28))`. | pattern scan |
+| `0x7e0ba39a` | 1 | `fwd_f32_to_7e1e802d_7e0ba39a` | Forwards to the object at `this+32`: `0x7e1e802d(*(this+32))`. | pattern scan |
+| `0x7e0ba3aa` | 1 | `fwd_f36_to_7e1e802d_7e0ba3aa` | Forwards to the object at `this+36`: `0x7e1e802d(*(this+36))`. | pattern scan |
+| `0x7e0ba803` | 1 | `this_plus_724_7e0ba803` | Leaf `return this+724` (address of a member or base sub-object). | pattern scan |
+| `0x7e0bb314` | 1 | `store_4_f252_call_7e1e86dd_7e0bb314` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0bb6cd` | 1 | `call2_7e0bb6dc_7e0bbdbf_7e0bb6cd` | Calls `0x7e0bb6dc(this)` and then `0x7e0bbdbf(this)`. | pattern scan |
+| `0x7e0bbf9e` | 1 | `store_11_f600_call_7e0bc02b_7e0bbf9e` | `*(this+600) = 11`, then calls `0x7e0bc02b`. | pattern scan |
+| `0x7e0bca12` | 1 | `fwd_f8_to_7e1e7e39_7e0bca12` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0bca25` | 1 | `fwd_f12_to_7e1e7e39_7e0bca25` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e0bca35` | 1 | `fwd_f16_to_7e1e7e39_7e0bca35` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0bca45` | 1 | `fwd_f20_to_7e1e7e39_7e0bca45` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0bca55` | 1 | `fwd_f24_to_7e1e7e39_7e0bca55` | Forwards to the object at `this+24`: `0x7e1e7e39(*(this+24))`. | pattern scan |
+| `0x7e0bca65` | 1 | `fwd_f28_to_7e1e7e39_7e0bca65` | Forwards to the object at `this+28`: `0x7e1e7e39(*(this+28))`. | pattern scan |
+| `0x7e0bca75` | 1 | `fwd_f32_to_7e1e7e39_7e0bca75` | Forwards to the object at `this+32`: `0x7e1e7e39(*(this+32))`. | pattern scan |
+| `0x7e0bca85` | 1 | `fwd_f36_to_7e1e7e39_7e0bca85` | Forwards to the object at `this+36`: `0x7e1e7e39(*(this+36))`. | pattern scan |
+| `0x7e0bca98` | 1 | `fwd_f40_to_7e1e7e39_7e0bca98` | Forwards to the object at `this+40`: `0x7e1e7e39(*(this+40))`. | pattern scan |
+| `0x7e0bcafc` | 1 | `fwd_f4_to_7e0bab1b_7e0bcafc` | Forwards to the object at `this+4`: `0x7e0bab1b(*(this+4))`. | pattern scan |
+| `0x7e0bcb2f` | 1 | `fwd_f4_to_7e0bab73_7e0bcb2f` | Forwards to the object at `this+4`: `0x7e0bab73(*(this+4))`. | pattern scan |
+| `0x7e0bcb4e` | 1 | `fwd_f4_to_7e0bab90_7e0bcb4e` | Forwards to the object at `this+4`: `0x7e0bab90(*(this+4))`. | pattern scan |
+| `0x7e0bcb5c` | 1 | `fwd_f4_to_7e1ea0fc_7e0bcb5c` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0bcb72` | 1 | `fwd_f4_to_7e1ea11a_7e0bcb72` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0bcc88` | 1 | `call_7e1e67f6_ret_null_7e0bcc88` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bcceb` | 2 | `call_7e1e67f6_ret_null_7e0bcceb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bcd54` | 1 | `call_7e1e67f6_ret_null_7e0bcd54` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bcdbd` | 1 | `call_7e1e67f6_ret_null_7e0bcdbd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bce20` | 1 | `call_7e1e67f6_ret_null_7e0bce20` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0bcf97` | 1 | `this_plus_1424_7e0bcf97` | Leaf `return this+1424` (address of a member or base sub-object). | pattern scan |
+| `0x7e0be25f` | 1 | `store_4_f252_call_7e1e86dd_7e0be25f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0be313` | 1 | `call2_7e0be25f_7e0be8ca_7e0be313` | Calls `0x7e0be25f(this)` and then `0x7e0be8ca(this)`. | pattern scan |
+| `0x7e0be43d` | 2 | `call2_7e0be44c_7e0be776_7e0be43d` | Calls `0x7e0be44c(this)` and then `0x7e0be776(this)`. | pattern scan |
+| `0x7e0beae8` | 1 | `fwd_f8_to_7e1e7e39_7e0beae8` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0beb0d` | 1 | `fwd_f12_to_7e1e7e39_7e0beb0d` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e0beb1d` | 1 | `fwd_f16_to_7e1e7e39_7e0beb1d` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0beb2d` | 1 | `fwd_f20_to_7e1e7e39_7e0beb2d` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0bee8e` | 1 | `this_plus_548_7e0bee8e` | Leaf `return this+548` (address of a member or base sub-object). | pattern scan |
+| `0x7e0bf408` | 1 | `call2_7e0bf50d_7e0bf662_7e0bf408` | Calls `0x7e0bf50d(this)` and then `0x7e0bf662(this)`. | pattern scan |
+| `0x7e0bf53b` | 1 | `store_6_f320_f324_7e0bf53b` | `*(this+320) = *(this+324) = 6`. | pattern scan |
+| `0x7e0bf5bd` | 1 | `store_7_f320_f324_7e0bf5bd` | `*(this+320) = *(this+324) = 7`. | pattern scan |
+| `0x7e0bfc9e` | 1 | `this_plus_112_7e0bfc9e` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e0bfd70` | 1 | `fwd_f8_to_7e1e7e39_7e0bfd70` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0bfd9b` | 1 | `fwd_f4_to_7e0bfeb9_7e0bfd9b` | Forwards to the object at `this+4`: `0x7e0bfeb9(*(this+4))`. | pattern scan |
+| `0x7e0bfda9` | 1 | `fwd_f4_to_7e1ea0fc_7e0bfda9` | Forwards to the object at `this+4`: `0x7e1ea0fc(*(this+4))`. | pattern scan |
+| `0x7e0bfdb9` | 1 | `fwd_f8_to_7e1e802d_7e0bfdb9` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
+| `0x7e0bfdc9` | 1 | `fwd_f4_to_7e1ea11a_7e0bfdc9` | Forwards to the object at `this+4`: `0x7e1ea11a(*(this+4))`. | pattern scan |
+| `0x7e0c0630` | 1 | `call2_7e0c063f_7e0c0797_7e0c0630` | Calls `0x7e0c063f(this)` and then `0x7e0c0797(this)`. | pattern scan |
+| `0x7e0c063f` | 1 | `store_8_f396_call_7e1e86dd_7e0c063f` | `*(this+396) = 8`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0c0d1d` | 1 | `call_7e205040_ret_null_7e0c0d1d` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c14ea` | 1 | `this_plus_4816_7e0c14ea` | Leaf `return this+4816` (address of a member or base sub-object). | pattern scan |
+| `0x7e0c2d48` | 2 | `call2_7e0c2c16_7e0c2d2f_7e0c2d48` | Calls `0x7e0c2c16(this)` and then `0x7e0c2d2f(this)`. | pattern scan |
+| `0x7e0c3856` | 2 | `fwd_f4148_vslot56_7e0c3856` | Forwards to the object at `this+4148`: calls its vtable slot `+56`. | pattern scan |
+| `0x7e0c3864` | 2 | `fwd_f4148_vslot52_7e0c3864` | Forwards to the object at `this+4148`: calls its vtable slot `+52`. | pattern scan |
+| `0x7e0c38aa` | 7 | `call_7db93fb8_arg_23_7e0c38aa` | Calls `0x7db93fb8` with `d0 = 23`. | pattern scan |
+| `0x7e0c3c36` | 2 | `fwd_f4152_vslot84_7e0c3c36` | Forwards to the object at `this+4152`: calls its vtable slot `+84`. | pattern scan |
+| `0x7e0c3c7a` | 1 | `fwd_f4148_vslot96_7e0c3c7a` | Forwards to the object at `this+4148`: calls its vtable slot `+96`. | pattern scan |
+| `0x7e0c3c88` | 6 | `fwd_f4148_vslot24_7e0c3c88` | Forwards to the object at `this+4148`: calls its vtable slot `+24`. | pattern scan |
+| `0x7e0c3e02` | 2 | `fwd_f4148_vslot44_7e0c3e02` | Forwards to the object at `this+4148`: calls its vtable slot `+44`. | pattern scan |
+| `0x7e0c3e10` | 1 | `fwd_f4148_vslot80_7e0c3e10` | Forwards to the object at `this+4148`: calls its vtable slot `+80`. | pattern scan |
+| `0x7e0c3e1e` | 1 | `fwd_f4148_vslot20_7e0c3e1e` | Forwards to the object at `this+4148`: calls its vtable slot `+20`. | pattern scan |
+| `0x7e0c3e2c` | 1 | `fwd_f4148_vslot48_7e0c3e2c` | Forwards to the object at `this+4148`: calls its vtable slot `+48`. | pattern scan |
+| `0x7e0c3e3a` | 1 | `fwd_f4148_vslot60_7e0c3e3a` | Forwards to the object at `this+4148`: calls its vtable slot `+60`. | pattern scan |
+| `0x7e0c3e48` | 1 | `fwd_f4148_vslot40_7e0c3e48` | Forwards to the object at `this+4148`: calls its vtable slot `+40`. | pattern scan |
+| `0x7e0c3e56` | 1 | `fwd_f4148_vslot28_7e0c3e56` | Forwards to the object at `this+4148`: calls its vtable slot `+28`. | pattern scan |
+| `0x7e0c3e64` | 1 | `fwd_f4148_vslot36_7e0c3e64` | Forwards to the object at `this+4148`: calls its vtable slot `+36`. | pattern scan |
+| `0x7e0c3e72` | 1 | `fwd_f4148_vslot64_7e0c3e72` | Forwards to the object at `this+4148`: calls its vtable slot `+64`. | pattern scan |
+| `0x7e0c3e80` | 1 | `fwd_f4148_vslot32_7e0c3e80` | Forwards to the object at `this+4148`: calls its vtable slot `+32`. | pattern scan |
+| `0x7e0c3e8e` | 1 | `fwd_f4148_vslot16_7e0c3e8e` | Forwards to the object at `this+4148`: calls its vtable slot `+16`. | pattern scan |
+| `0x7e0c3e9c` | 1 | `fwd_f4148_vslot12_7e0c3e9c` | Forwards to the object at `this+4148`: calls its vtable slot `+12`. | pattern scan |
+| `0x7e0c3eaa` | 1 | `fwd_f4148_vslot92_7e0c3eaa` | Forwards to the object at `this+4148`: calls its vtable slot `+92`. | pattern scan |
+| `0x7e0c3eb8` | 2 | `fwd_f4148_vslot84_7e0c3eb8` | Forwards to the object at `this+4148`: calls its vtable slot `+84`. | pattern scan |
+| `0x7e0c46ad` | 1 | `store_8_f4236_f4240_7e0c46ad` | `*(this+4236) = *(this+4240) = 8`. | pattern scan |
+| `0x7e0c4940` | 1 | `store_9_f4236_f4240_7e0c4940` | `*(this+4236) = *(this+4240) = 9`. | pattern scan |
+| `0x7e0c4a14` | 1 | `store_12_f4244_f4248_7e0c4a14` | `*(this+4244) = *(this+4248) = 12`. | pattern scan |
+| `0x7e0c4bf1` | 2 | `call2_7e0c4c00_7e0c4c8f_7e0c4bf1` | Calls `0x7e0c4c00(this)` and then `0x7e0c4c8f(this)`. | pattern scan |
+| `0x7e0c4c97` | 1 | `store_17_f4260_f4256_7e0c4c97` | `*(this+4260) = *(this+4256) = 17`. | pattern scan |
+| `0x7e0c4e2b` | 2 | `store_19_f4252_f4256_7e0c4e2b` | `*(this+4252) = *(this+4256) = 19`. | pattern scan |
+| `0x7e0c533f` | 1 | `store_27_f4280_call_7e0c5394_7e0c533f` | `*(this+4280) = 27`, then calls `0x7e0c5394`. | pattern scan |
+| `0x7e0c55ce` | 1 | `store_30_f4280_f4284_7e0c55ce` | `*(this+4280) = *(this+4284) = 30`. | pattern scan |
+| `0x7e0c57cd` | 1 | `store_33_f4292_call_7e0c6d1a_7e0c57cd` | `*(this+4292) = 33`, then calls `0x7e0c6d1a`. | pattern scan |
+| `0x7e0c61c3` | 3 | `call2_7e0c61d2_7e0c6937_7e0c61c3` | Calls `0x7e0c61d2(this)` and then `0x7e0c6937(this)`. | pattern scan |
+| `0x7e0c682a` | 1 | `store_48_f4308_call_7e0c68d9_7e0c682a` | `*(this+4308) = 48`, then calls `0x7e0c68d9`. | pattern scan |
+| `0x7e0c718f` | 1 | `store_57_f4292_f4296_7e0c718f` | `*(this+4292) = *(this+4296) = 57`. | pattern scan |
+| `0x7e0c71d2` | 1 | `store_58_f4292_f4296_7e0c71d2` | `*(this+4292) = *(this+4296) = 58`. | pattern scan |
+| `0x7e0c7747` | 2 | `store_63_f4292_call_7e0c7791_7e0c7747` | `*(this+4292) = 63`, then calls `0x7e0c7791`. | pattern scan |
+| `0x7e0c7b37` | 1 | `call_7e1e67f6_ret_null_7e0c7b37` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c7ba0` | 1 | `call_7e1e67f6_ret_null_7e0c7ba0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c7c9b` | 1 | `call_7e1e67f6_ret_null_7e0c7c9b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c7d04` | 1 | `call_7e1e67f6_ret_null_7e0c7d04` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c7d6d` | 1 | `call_7e1e67f6_ret_null_7e0c7d6d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c80cc` | 1 | `call_7e1e67f6_ret_null_7e0c80cc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c8135` | 1 | `call_7e1e67f6_ret_null_7e0c8135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c81e1` | 1 | `call_7e1e67f6_ret_null_7e0c81e1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c824a` | 1 | `call_7e1e67f6_ret_null_7e0c824a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0c8591` | 1 | `fwd_f76_to_7e1ea0fc_7e0c8591` | Forwards to the object at `this+76`: `0x7e1ea0fc(*(this+76))`. | pattern scan |
+| `0x7e0c85a1` | 1 | `fwd_f76_to_7e1ea10b_7e0c85a1` | Forwards to the object at `this+76`: `0x7e1ea10b(*(this+76))`. | pattern scan |
+| `0x7e0c85b1` | 1 | `fwd_f76_to_7e1ea11a_7e0c85b1` | Forwards to the object at `this+76`: `0x7e1ea11a(*(this+76))`. | pattern scan |
+| `0x7e0c87fe` | 1 | `this_plus_508_7e0c87fe` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
+| `0x7e0c8e23` | 1 | `store_5_f320_f256_7e0c8e23` | `*(this+320) = *(this+256) = 5`. | pattern scan |
+| `0x7e0c92ca` | 1 | `fwd_f4_to_7e1e7e39_7e0c92ca` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
+| `0x7e0c92dd` | 1 | `fwd_f4_to_7e1e7e39_7e0c92dd` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
+| `0x7e0c932c` | 1 | `fwd_f16_to_7e1ea0fc_7e0c932c` | Forwards to the object at `this+16`: `0x7e1ea0fc(*(this+16))`. | pattern scan |
+| `0x7e0c933f` | 1 | `fwd_f16_to_7e1ea11a_7e0c933f` | Forwards to the object at `this+16`: `0x7e1ea11a(*(this+16))`. | pattern scan |
+| `0x7e0c94a4` | 1 | `this_plus_512_7e0c94a4` | Leaf `return this+512` (address of a member or base sub-object). | pattern scan |
+| `0x7e0c9ad7` | 1 | `store_4_f252_call_7e1e86dd_7e0c9ad7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0c9aef` | 1 | `call2_7e0c9ad7_7e0c9c12_7e0c9aef` | Calls `0x7e0c9ad7(this)` and then `0x7e0c9c12(this)`. | pattern scan |
+| `0x7e0c9c1a` | 1 | `store_6_f324_f256_7e0c9c1a` | `*(this+324) = *(this+256) = 6`. | pattern scan |
+| `0x7e0c9da4` | 1 | `fwd_f8_to_7e1e7e39_7e0c9da4` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0c9db4` | 1 | `fwd_f20_to_7e1e7e39_7e0c9db4` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0c9dc4` | 1 | `fwd_f16_to_7e1e7e39_7e0c9dc4` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0c9e04` | 1 | `fwd_f12_to_7e0c95cc_7e0c9e04` | Forwards to the object at `this+12`: `0x7e0c95cc(*(this+12))`. | pattern scan |
+| `0x7e0c9e2b` | 1 | `fwd_f12_to_7e1ea0fc_7e0c9e2b` | Forwards to the object at `this+12`: `0x7e1ea0fc(*(this+12))`. | pattern scan |
+| `0x7e0c9e4e` | 1 | `fwd_f12_to_7e1ea11a_7e0c9e4e` | Forwards to the object at `this+12`: `0x7e1ea11a(*(this+12))`. | pattern scan |
+| `0x7e0c9feb` | 1 | `this_plus_636_7e0c9feb` | Leaf `return this+636` (address of a member or base sub-object). | pattern scan |
+| `0x7e0cb2c3` | 1 | `call_7e1e67f6_ret_null_7e0cb2c3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0cb32c` | 1 | `call_7e1e67f6_ret_null_7e0cb32c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0cb395` | 1 | `call_7e1e67f6_ret_null_7e0cb395` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0cb43c` | 1 | `fwd_f24_to_7e1ea0b0_7e0cb43c` | Forwards to the object at `this+24`: `0x7e1ea0b0(*(this+24))`. | pattern scan |
+| `0x7e0cb44c` | 1 | `fwd_f4_to_7e1e7e39_7e0cb44c` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
+| `0x7e0cb45c` | 1 | `fwd_f8_to_7e1e7e39_7e0cb45c` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e0cb46c` | 1 | `fwd_f12_to_7e1e7e39_7e0cb46c` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e0cb47c` | 1 | `fwd_f16_to_7e1e7e39_7e0cb47c` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e0cb48c` | 1 | `fwd_f20_to_7e1e7e39_7e0cb48c` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e0cb4bd` | 1 | `fwd_f24_to_7e0ca1ad_7e0cb4bd` | Forwards to the object at `this+24`: `0x7e0ca1ad(*(this+24))`. | pattern scan |
+| `0x7e0cb4cb` | 1 | `fwd_f24_to_7e0ca2aa_7e0cb4cb` | Forwards to the object at `this+24`: `0x7e0ca2aa(*(this+24))`. | pattern scan |
+| `0x7e0cb4d9` | 1 | `fwd_f24_to_7e0ca321_7e0cb4d9` | Forwards to the object at `this+24`: `0x7e0ca321(*(this+24))`. | pattern scan |
+| `0x7e0cb4e7` | 1 | `fwd_f24_to_7e0ca397_7e0cb4e7` | Forwards to the object at `this+24`: `0x7e0ca397(*(this+24))`. | pattern scan |
+| `0x7e0cb4f5` | 1 | `fwd_f24_to_7e0ca40e_7e0cb4f5` | Forwards to the object at `this+24`: `0x7e0ca40e(*(this+24))`. | pattern scan |
+| `0x7e0cb503` | 1 | `fwd_f24_to_7e0ca49c_7e0cb503` | Forwards to the object at `this+24`: `0x7e0ca49c(*(this+24))`. | pattern scan |
+| `0x7e0cb53e` | 1 | `fwd_f24_to_7e0ca5d0_7e0cb53e` | Forwards to the object at `this+24`: `0x7e0ca5d0(*(this+24))`. | pattern scan |
+| `0x7e0cb54c` | 1 | `fwd_f24_to_7e0ca641_7e0cb54c` | Forwards to the object at `this+24`: `0x7e0ca641(*(this+24))`. | pattern scan |
+| `0x7e0cb55a` | 1 | `fwd_f24_to_7e0ca708_7e0cb55a` | Forwards to the object at `this+24`: `0x7e0ca708(*(this+24))`. | pattern scan |
+| `0x7e0cb568` | 1 | `fwd_f24_to_7e0ca7cf_7e0cb568` | Forwards to the object at `this+24`: `0x7e0ca7cf(*(this+24))`. | pattern scan |
+| `0x7e0cb576` | 1 | `fwd_f24_to_7e0ca840_7e0cb576` | Forwards to the object at `this+24`: `0x7e0ca840(*(this+24))`. | pattern scan |
+| `0x7e0cb584` | 1 | `fwd_f24_to_7e0ca894_7e0cb584` | Forwards to the object at `this+24`: `0x7e0ca894(*(this+24))`. | pattern scan |
+| `0x7e0cb592` | 1 | `fwd_f24_to_7e0caa38_7e0cb592` | Forwards to the object at `this+24`: `0x7e0caa38(*(this+24))`. | pattern scan |
+| `0x7e0cb5a0` | 1 | `fwd_f24_to_7e0caa5c_7e0cb5a0` | Forwards to the object at `this+24`: `0x7e0caa5c(*(this+24))`. | pattern scan |
+| `0x7e0cb5e4` | 1 | `fwd_f24_to_7e1ea10b_7e0cb5e4` | Forwards to the object at `this+24`: `0x7e1ea10b(*(this+24))`. | pattern scan |
+| `0x7e0cb5f4` | 1 | `fwd_f4_to_7e1e802d_7e0cb5f4` | Forwards to the object at `this+4`: `0x7e1e802d(*(this+4))`. | pattern scan |
+| `0x7e0cb604` | 1 | `fwd_f8_to_7e1e802d_7e0cb604` | Forwards to the object at `this+8`: `0x7e1e802d(*(this+8))`. | pattern scan |
+| `0x7e0cb614` | 1 | `fwd_f12_to_7e1e802d_7e0cb614` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e0cb624` | 1 | `fwd_f16_to_7e1e802d_7e0cb624` | Forwards to the object at `this+16`: `0x7e1e802d(*(this+16))`. | pattern scan |
+| `0x7e0cb634` | 1 | `fwd_f20_to_7e1e802d_7e0cb634` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
+| `0x7e0cb7c4` | 1 | `this_plus_636_7e0cb7c4` | Leaf `return this+636` (address of a member or base sub-object). | pattern scan |
+| `0x7e0cd186` | 1 | `fwd_f16_to_7e1ea10b_7e0cd186` | Forwards to the object at `this+16`: `0x7e1ea10b(*(this+16))`. | pattern scan |
+| `0x7e0ce7bd` | 1 | `fwd_f2828_to_7e0ef5a7_7e0ce7bd` | Forwards to the object at `this+2828`: `0x7e0ef5a7(*(this+2828))`. | pattern scan |
+| `0x7e0ce7cb` | 4 | `fwd_f2828_to_7e0ef8d2_7e0ce7cb` | Forwards to the object at `this+2828`: `0x7e0ef8d2(*(this+2828))`. | pattern scan |
+| `0x7e0ce7d9` | 4 | `fwd_f2828_to_7e0ef8f3_7e0ce7d9` | Forwards to the object at `this+2828`: `0x7e0ef8f3(*(this+2828))`. | pattern scan |
+| `0x7e0ce80f` | 1 | `fwd_f2828_to_7e0f265b_7e0ce80f` | Forwards to the object at `this+2828`: `0x7e0f265b(*(this+2828))`. | pattern scan |
+| `0x7e0cea31` | 2 | `fwd_f2828_to_7e108f27_7e0cea31` | Forwards to the object at `this+2828`: `0x7e108f27(*(this+2828))`. | pattern scan |
+| `0x7e0cea3f` | 1 | `fwd_f2828_to_7e108eec_7e0cea3f` | Forwards to the object at `this+2828`: `0x7e108eec(*(this+2828))`. | pattern scan |
+| `0x7e0cea4d` | 1 | `fwd_f2828_vslot4488_7e0cea4d` | Forwards to the object at `this+2828`: calls its vtable slot `+4488`. | pattern scan |
+| `0x7e0cea5c` | 3 | `fwd_f2828_to_7e0f3745_7e0cea5c` | Forwards to the object at `this+2828`: `0x7e0f3745(*(this+2828))`. | pattern scan |
+| `0x7e0cea7c` | 1 | `fwd_f2828_to_7e10a3bf_7e0cea7c` | Forwards to the object at `this+2828`: `0x7e10a3bf(*(this+2828))`. | pattern scan |
+| `0x7e0cea9c` | 1 | `fwd_f2828_to_7e0f2f48_7e0cea9c` | Forwards to the object at `this+2828`: `0x7e0f2f48(*(this+2828))`. | pattern scan |
+| `0x7e0ceaaa` | 3 | `fwd_f2828_vslot468_7e0ceaaa` | Forwards to the object at `this+2828`: calls its vtable slot `+468`. | pattern scan |
+| `0x7e0ceab9` | 6 | `fwd_f2828_to_7e0f2fce_7e0ceab9` | Forwards to the object at `this+2828`: `0x7e0f2fce(*(this+2828))`. | pattern scan |
+| `0x7e0ceac7` | 1 | `fwd_f2828_to_7e0f2fd8_7e0ceac7` | Forwards to the object at `this+2828`: `0x7e0f2fd8(*(this+2828))`. | pattern scan |
+| `0x7e0ceb45` | 1 | `fwd_f2828_to_7e0f3009_7e0ceb45` | Forwards to the object at `this+2828`: `0x7e0f3009(*(this+2828))`. | pattern scan |
+| `0x7e0ceb77` | 1 | `fwd_f2828_to_7e0f3025_7e0ceb77` | Forwards to the object at `this+2828`: `0x7e0f3025(*(this+2828))`. | pattern scan |
+| `0x7e0ceb85` | 1 | `fwd_f2828_vslot476_7e0ceb85` | Forwards to the object at `this+2828`: calls its vtable slot `+476`. | pattern scan |
+| `0x7e0cebb7` | 1 | `fwd_f2828_vslot488_7e0cebb7` | Forwards to the object at `this+2828`: calls its vtable slot `+488`. | pattern scan |
+| `0x7e0cebc6` | 1 | `fwd_f2828_to_7e0f332b_7e0cebc6` | Forwards to the object at `this+2828`: `0x7e0f332b(*(this+2828))`. | pattern scan |
+| `0x7e0cebd4` | 2 | `fwd_f2828_to_7e0f33ba_7e0cebd4` | Forwards to the object at `this+2828`: `0x7e0f33ba(*(this+2828))`. | pattern scan |
+| `0x7e0cebf4` | 3 | `fwd_f2828_to_7e0f3488_7e0cebf4` | Forwards to the object at `this+2828`: `0x7e0f3488(*(this+2828))`. | pattern scan |
+| `0x7e0cec14` | 1 | `fwd_f2828_to_7e0f3513_7e0cec14` | Forwards to the object at `this+2828`: `0x7e0f3513(*(this+2828))`. | pattern scan |
+| `0x7e0cec34` | 1 | `fwd_f2828_to_7e0f352d_7e0cec34` | Forwards to the object at `this+2828`: `0x7e0f352d(*(this+2828))`. | pattern scan |
+| `0x7e0cec42` | 1 | `fwd_f2828_to_7e0f3770_7e0cec42` | Forwards to the object at `this+2828`: `0x7e0f3770(*(this+2828))`. | pattern scan |
+| `0x7e0cec50` | 1 | `fwd_f2828_to_7e0f3753_7e0cec50` | Forwards to the object at `this+2828`: `0x7e0f3753(*(this+2828))`. | pattern scan |
+| `0x7e0cec6d` | 1 | `fwd_f2828_to_7e0f37ae_7e0cec6d` | Forwards to the object at `this+2828`: `0x7e0f37ae(*(this+2828))`. | pattern scan |
+| `0x7e0cec99` | 1 | `fwd_f2828_to_7e0f5402_7e0cec99` | Forwards to the object at `this+2828`: `0x7e0f5402(*(this+2828))`. | pattern scan |
+| `0x7e0ceca7` | 2 | `fwd_f2828_to_7e0f37cb_7e0ceca7` | Forwards to the object at `this+2828`: `0x7e0f37cb(*(this+2828))`. | pattern scan |
+| `0x7e0cecf3` | 2 | `fwd_f2828_to_7e0ffa1f_7e0cecf3` | Forwards to the object at `this+2828`: `0x7e0ffa1f(*(this+2828))`. | pattern scan |
+| `0x7e0ced01` | 2 | `fwd_f2828_to_7e0ffac6_7e0ced01` | Forwards to the object at `this+2828`: `0x7e0ffac6(*(this+2828))`. | pattern scan |
+| `0x7e0ced3a` | 4 | `fwd_f2828_to_7e0f3686_7e0ced3a` | Forwards to the object at `this+2828`: `0x7e0f3686(*(this+2828))`. | pattern scan |
+| `0x7e0ced48` | 1 | `fwd_f2828_to_7e0f36c9_7e0ced48` | Forwards to the object at `this+2828`: `0x7e0f36c9(*(this+2828))`. | pattern scan |
+| `0x7e0ced56` | 1 | `fwd_f2828_to_7e0f361e_7e0ced56` | Forwards to the object at `this+2828`: `0x7e0f361e(*(this+2828))`. | pattern scan |
+| `0x7e0ced74` | 1 | `fwd_f2828_vslot3852_7e0ced74` | Forwards to the object at `this+2828`: calls its vtable slot `+3852`. | pattern scan |
+| `0x7e0ced83` | 1 | `fwd_f2828_to_7e1002d0_7e0ced83` | Forwards to the object at `this+2828`: `0x7e1002d0(*(this+2828))`. | pattern scan |
+| `0x7e0cf1ca` | 1 | `fwd_f2828_vslot164_7e0cf1ca` | Forwards to the object at `this+2828`: calls its vtable slot `+164`. | pattern scan |
+| `0x7e0cf83d` | 17 | `fwd_f2828_to_7e0ef6c1_7e0cf83d` | Forwards to the object at `this+2828`: `0x7e0ef6c1(*(this+2828))`. | pattern scan |
+| `0x7e0cfc55` | 1 | `fwd_f2828_vslot216_7e0cfc55` | Forwards to the object at `this+2828`: calls its vtable slot `+216`. | pattern scan |
+| `0x7e0cfc9d` | 1 | `fwd_f2828_vslot244_7e0cfc9d` | Forwards to the object at `this+2828`: calls its vtable slot `+244`. | pattern scan |
+| `0x7e0cfcaf` | 1 | `fwd_f2828_vslot248_7e0cfcaf` | Forwards to the object at `this+2828`: calls its vtable slot `+248`. | pattern scan |
+| `0x7e0cfcc1` | 1 | `fwd_f2828_vslot252_7e0cfcc1` | Forwards to the object at `this+2828`: calls its vtable slot `+252`. | pattern scan |
+| `0x7e0cfcfd` | 1 | `fwd_f2828_vslot260_7e0cfcfd` | Forwards to the object at `this+2828`: calls its vtable slot `+260`. | pattern scan |
+| `0x7e0cfd0c` | 1 | `fwd_f2828_vslot288_7e0cfd0c` | Forwards to the object at `this+2828`: calls its vtable slot `+288`. | pattern scan |
+| `0x7e0d0197` | 1 | `fwd_f2828_vslot312_7e0d0197` | Forwards to the object at `this+2828`: calls its vtable slot `+312`. | pattern scan |
+| `0x7e0d01a9` | 1 | `fwd_f2828_vslot316_7e0d01a9` | Forwards to the object at `this+2828`: calls its vtable slot `+316`. | pattern scan |
+| `0x7e0d01d6` | 1 | `fwd_f2828_vslot324_7e0d01d6` | Forwards to the object at `this+2828`: calls its vtable slot `+324`. | pattern scan |
+| `0x7e0d01e5` | 1 | `fwd_f2828_vslot332_7e0d01e5` | Forwards to the object at `this+2828`: calls its vtable slot `+332`. | pattern scan |
+| `0x7e0d0240` | 3 | `fwd_f2828_vslot340_7e0d0240` | Forwards to the object at `this+2828`: calls its vtable slot `+340`. | pattern scan |
+| `0x7e0d0252` | 4 | `fwd_f2828_vslot344_7e0d0252` | Forwards to the object at `this+2828`: calls its vtable slot `+344`. | pattern scan |
+| `0x7e0d0264` | 2 | `fwd_f2828_vslot348_7e0d0264` | Forwards to the object at `this+2828`: calls its vtable slot `+348`. | pattern scan |
+| `0x7e0d0276` | 3 | `fwd_f2828_vslot352_7e0d0276` | Forwards to the object at `this+2828`: calls its vtable slot `+352`. | pattern scan |
+| `0x7e0d028e` | 1 | `fwd_f2828_vslot384_7e0d028e` | Forwards to the object at `this+2828`: calls its vtable slot `+384`. | pattern scan |
+| `0x7e0d02a0` | 2 | `fwd_f2828_vslot416_7e0d02a0` | Forwards to the object at `this+2828`: calls its vtable slot `+416`. | pattern scan |
+| `0x7e0d02af` | 2 | `fwd_f2828_vslot436_7e0d02af` | Forwards to the object at `this+2828`: calls its vtable slot `+436`. | pattern scan |
+| `0x7e0d04c6` | 1 | `fwd_f2828_vslot456_7e0d04c6` | Forwards to the object at `this+2828`: calls its vtable slot `+456`. | pattern scan |
+| `0x7e0d04f5` | 1 | `fwd_f2828_vslot500_7e0d04f5` | Forwards to the object at `this+2828`: calls its vtable slot `+500`. | pattern scan |
+| `0x7e0d0504` | 1 | `fwd_f2828_vslot528_7e0d0504` | Forwards to the object at `this+2828`: calls its vtable slot `+528`. | pattern scan |
+| `0x7e0d0516` | 1 | `fwd_f2828_to_7e114719_7e0d0516` | Forwards to the object at `this+2828`: `0x7e114719(*(this+2828))`. | pattern scan |
+| `0x7e0d0527` | 1 | `fwd_f2828_vslot2436_7e0d0527` | Forwards to the object at `this+2828`: calls its vtable slot `+2436`. | pattern scan |
+| `0x7e0d0539` | 1 | `fwd_f2828_vslot2456_7e0d0539` | Forwards to the object at `this+2828`: calls its vtable slot `+2456`. | pattern scan |
+| `0x7e0d054b` | 1 | `fwd_f2828_vslot2440_7e0d054b` | Forwards to the object at `this+2828`: calls its vtable slot `+2440`. | pattern scan |
+| `0x7e0d055d` | 1 | `fwd_f2828_vslot2444_7e0d055d` | Forwards to the object at `this+2828`: calls its vtable slot `+2444`. | pattern scan |
+| `0x7e0d056f` | 1 | `fwd_f2828_vslot2452_7e0d056f` | Forwards to the object at `this+2828`: calls its vtable slot `+2452`. | pattern scan |
+| `0x7e0d0581` | 1 | `fwd_f2828_vslot2448_7e0d0581` | Forwards to the object at `this+2828`: calls its vtable slot `+2448`. | pattern scan |
+| `0x7e0d0593` | 1 | `fwd_f2828_vslot2400_7e0d0593` | Forwards to the object at `this+2828`: calls its vtable slot `+2400`. | pattern scan |
+| `0x7e0d05a5` | 1 | `fwd_f2828_vslot2404_7e0d05a5` | Forwards to the object at `this+2828`: calls its vtable slot `+2404`. | pattern scan |
+| `0x7e0d05b7` | 1 | `fwd_f2828_vslot2408_7e0d05b7` | Forwards to the object at `this+2828`: calls its vtable slot `+2408`. | pattern scan |
+| `0x7e0d05c9` | 1 | `fwd_f2828_vslot2432_7e0d05c9` | Forwards to the object at `this+2828`: calls its vtable slot `+2432`. | pattern scan |
+| `0x7e0d05db` | 1 | `fwd_f2828_vslot2412_7e0d05db` | Forwards to the object at `this+2828`: calls its vtable slot `+2412`. | pattern scan |
+| `0x7e0d05ed` | 1 | `fwd_f2828_vslot2396_7e0d05ed` | Forwards to the object at `this+2828`: calls its vtable slot `+2396`. | pattern scan |
+| `0x7e0d05ff` | 1 | `fwd_f2828_vslot2416_7e0d05ff` | Forwards to the object at `this+2828`: calls its vtable slot `+2416`. | pattern scan |
+| `0x7e0d0611` | 1 | `fwd_f2828_vslot2424_7e0d0611` | Forwards to the object at `this+2828`: calls its vtable slot `+2424`. | pattern scan |
+| `0x7e0d0623` | 1 | `fwd_f2828_vslot2420_7e0d0623` | Forwards to the object at `this+2828`: calls its vtable slot `+2420`. | pattern scan |
+| `0x7e0d0635` | 1 | `fwd_f2828_vslot2428_7e0d0635` | Forwards to the object at `this+2828`: calls its vtable slot `+2428`. | pattern scan |
+| `0x7e0d0647` | 1 | `fwd_f2828_vslot2244_7e0d0647` | Forwards to the object at `this+2828`: calls its vtable slot `+2244`. | pattern scan |
+| `0x7e0d0659` | 1 | `fwd_f2828_vslot2264_7e0d0659` | Forwards to the object at `this+2828`: calls its vtable slot `+2264`. | pattern scan |
+| `0x7e0d066b` | 1 | `fwd_f2828_vslot2248_7e0d066b` | Forwards to the object at `this+2828`: calls its vtable slot `+2248`. | pattern scan |
+| `0x7e0d067d` | 1 | `fwd_f2828_vslot2252_7e0d067d` | Forwards to the object at `this+2828`: calls its vtable slot `+2252`. | pattern scan |
+| `0x7e0d068f` | 1 | `fwd_f2828_vslot2260_7e0d068f` | Forwards to the object at `this+2828`: calls its vtable slot `+2260`. | pattern scan |
+| `0x7e0d06a1` | 1 | `fwd_f2828_vslot2256_7e0d06a1` | Forwards to the object at `this+2828`: calls its vtable slot `+2256`. | pattern scan |
+| `0x7e0d06b3` | 1 | `fwd_f2828_vslot2208_7e0d06b3` | Forwards to the object at `this+2828`: calls its vtable slot `+2208`. | pattern scan |
+| `0x7e0d06c5` | 1 | `fwd_f2828_vslot2212_7e0d06c5` | Forwards to the object at `this+2828`: calls its vtable slot `+2212`. | pattern scan |
+| `0x7e0d06d7` | 1 | `fwd_f2828_vslot2216_7e0d06d7` | Forwards to the object at `this+2828`: calls its vtable slot `+2216`. | pattern scan |
+| `0x7e0d06e9` | 1 | `fwd_f2828_vslot2240_7e0d06e9` | Forwards to the object at `this+2828`: calls its vtable slot `+2240`. | pattern scan |
+| `0x7e0d06fb` | 1 | `fwd_f2828_vslot2220_7e0d06fb` | Forwards to the object at `this+2828`: calls its vtable slot `+2220`. | pattern scan |
+| `0x7e0d070d` | 1 | `fwd_f2828_vslot2204_7e0d070d` | Forwards to the object at `this+2828`: calls its vtable slot `+2204`. | pattern scan |
+| `0x7e0d071f` | 1 | `fwd_f2828_vslot2224_7e0d071f` | Forwards to the object at `this+2828`: calls its vtable slot `+2224`. | pattern scan |
+| `0x7e0d0731` | 1 | `fwd_f2828_vslot2232_7e0d0731` | Forwards to the object at `this+2828`: calls its vtable slot `+2232`. | pattern scan |
+| `0x7e0d0743` | 1 | `fwd_f2828_vslot2228_7e0d0743` | Forwards to the object at `this+2828`: calls its vtable slot `+2228`. | pattern scan |
+| `0x7e0d0755` | 1 | `fwd_f2828_vslot2236_7e0d0755` | Forwards to the object at `this+2828`: calls its vtable slot `+2236`. | pattern scan |
+| `0x7e0d0767` | 1 | `fwd_f2828_vslot2500_7e0d0767` | Forwards to the object at `this+2828`: calls its vtable slot `+2500`. | pattern scan |
+| `0x7e0d0779` | 1 | `fwd_f2828_vslot2524_7e0d0779` | Forwards to the object at `this+2828`: calls its vtable slot `+2524`. | pattern scan |
+| `0x7e0d078b` | 1 | `fwd_f2828_vslot2508_7e0d078b` | Forwards to the object at `this+2828`: calls its vtable slot `+2508`. | pattern scan |
+| `0x7e0d079d` | 1 | `fwd_f2828_vslot2512_7e0d079d` | Forwards to the object at `this+2828`: calls its vtable slot `+2512`. | pattern scan |
+| `0x7e0d07af` | 1 | `fwd_f2828_vslot2516_7e0d07af` | Forwards to the object at `this+2828`: calls its vtable slot `+2516`. | pattern scan |
+| `0x7e0d07c1` | 1 | `fwd_f2828_vslot2520_7e0d07c1` | Forwards to the object at `this+2828`: calls its vtable slot `+2520`. | pattern scan |
+| `0x7e0d07d3` | 1 | `fwd_f2828_vslot2504_7e0d07d3` | Forwards to the object at `this+2828`: calls its vtable slot `+2504`. | pattern scan |
+| `0x7e0d07e5` | 1 | `fwd_f2828_vslot2464_7e0d07e5` | Forwards to the object at `this+2828`: calls its vtable slot `+2464`. | pattern scan |
+| `0x7e0d07f7` | 1 | `fwd_f2828_vslot2468_7e0d07f7` | Forwards to the object at `this+2828`: calls its vtable slot `+2468`. | pattern scan |
+| `0x7e0d0809` | 1 | `fwd_f2828_vslot2472_7e0d0809` | Forwards to the object at `this+2828`: calls its vtable slot `+2472`. | pattern scan |
+| `0x7e0d081b` | 1 | `fwd_f2828_vslot2496_7e0d081b` | Forwards to the object at `this+2828`: calls its vtable slot `+2496`. | pattern scan |
+| `0x7e0d082d` | 1 | `fwd_f2828_vslot2476_7e0d082d` | Forwards to the object at `this+2828`: calls its vtable slot `+2476`. | pattern scan |
+| `0x7e0d083f` | 1 | `fwd_f2828_vslot2460_7e0d083f` | Forwards to the object at `this+2828`: calls its vtable slot `+2460`. | pattern scan |
+| `0x7e0d0851` | 1 | `fwd_f2828_vslot2480_7e0d0851` | Forwards to the object at `this+2828`: calls its vtable slot `+2480`. | pattern scan |
+| `0x7e0d0863` | 1 | `fwd_f2828_vslot2488_7e0d0863` | Forwards to the object at `this+2828`: calls its vtable slot `+2488`. | pattern scan |
+| `0x7e0d0875` | 1 | `fwd_f2828_vslot2484_7e0d0875` | Forwards to the object at `this+2828`: calls its vtable slot `+2484`. | pattern scan |
+| `0x7e0d0887` | 1 | `fwd_f2828_vslot2492_7e0d0887` | Forwards to the object at `this+2828`: calls its vtable slot `+2492`. | pattern scan |
+| `0x7e0d0899` | 1 | `fwd_f2828_vslot1084_7e0d0899` | Forwards to the object at `this+2828`: calls its vtable slot `+1084`. | pattern scan |
+| `0x7e0d08ab` | 1 | `fwd_f2828_vslot1104_7e0d08ab` | Forwards to the object at `this+2828`: calls its vtable slot `+1104`. | pattern scan |
+| `0x7e0d08bd` | 1 | `fwd_f2828_vslot1088_7e0d08bd` | Forwards to the object at `this+2828`: calls its vtable slot `+1088`. | pattern scan |
+| `0x7e0d08cf` | 1 | `fwd_f2828_vslot1092_7e0d08cf` | Forwards to the object at `this+2828`: calls its vtable slot `+1092`. | pattern scan |
+| `0x7e0d08e1` | 1 | `fwd_f2828_vslot1100_7e0d08e1` | Forwards to the object at `this+2828`: calls its vtable slot `+1100`. | pattern scan |
+| `0x7e0d08f3` | 1 | `fwd_f2828_vslot1096_7e0d08f3` | Forwards to the object at `this+2828`: calls its vtable slot `+1096`. | pattern scan |
+| `0x7e0d0905` | 1 | `fwd_f2828_vslot1048_7e0d0905` | Forwards to the object at `this+2828`: calls its vtable slot `+1048`. | pattern scan |
+| `0x7e0d0917` | 1 | `fwd_f2828_vslot1052_7e0d0917` | Forwards to the object at `this+2828`: calls its vtable slot `+1052`. | pattern scan |
+| `0x7e0d0929` | 1 | `fwd_f2828_vslot1056_7e0d0929` | Forwards to the object at `this+2828`: calls its vtable slot `+1056`. | pattern scan |
+| `0x7e0d093b` | 1 | `fwd_f2828_vslot1080_7e0d093b` | Forwards to the object at `this+2828`: calls its vtable slot `+1080`. | pattern scan |
+| `0x7e0d094d` | 1 | `fwd_f2828_vslot1060_7e0d094d` | Forwards to the object at `this+2828`: calls its vtable slot `+1060`. | pattern scan |
+| `0x7e0d095f` | 1 | `fwd_f2828_vslot1044_7e0d095f` | Forwards to the object at `this+2828`: calls its vtable slot `+1044`. | pattern scan |
+| `0x7e0d0971` | 1 | `fwd_f2828_vslot1064_7e0d0971` | Forwards to the object at `this+2828`: calls its vtable slot `+1064`. | pattern scan |
+| `0x7e0d0983` | 1 | `fwd_f2828_vslot1072_7e0d0983` | Forwards to the object at `this+2828`: calls its vtable slot `+1072`. | pattern scan |
+| `0x7e0d0995` | 1 | `fwd_f2828_vslot1068_7e0d0995` | Forwards to the object at `this+2828`: calls its vtable slot `+1068`. | pattern scan |
+| `0x7e0d09a7` | 1 | `fwd_f2828_vslot1076_7e0d09a7` | Forwards to the object at `this+2828`: calls its vtable slot `+1076`. | pattern scan |
+| `0x7e0d09b9` | 1 | `fwd_f2828_vslot1148_7e0d09b9` | Forwards to the object at `this+2828`: calls its vtable slot `+1148`. | pattern scan |
+| `0x7e0d09cb` | 1 | `fwd_f2828_vslot1168_7e0d09cb` | Forwards to the object at `this+2828`: calls its vtable slot `+1168`. | pattern scan |
+| `0x7e0d09dd` | 1 | `fwd_f2828_vslot1152_7e0d09dd` | Forwards to the object at `this+2828`: calls its vtable slot `+1152`. | pattern scan |
+| `0x7e0d09ef` | 1 | `fwd_f2828_vslot1156_7e0d09ef` | Forwards to the object at `this+2828`: calls its vtable slot `+1156`. | pattern scan |
+| `0x7e0d0a01` | 1 | `fwd_f2828_vslot1164_7e0d0a01` | Forwards to the object at `this+2828`: calls its vtable slot `+1164`. | pattern scan |
+| `0x7e0d0a13` | 1 | `fwd_f2828_vslot1160_7e0d0a13` | Forwards to the object at `this+2828`: calls its vtable slot `+1160`. | pattern scan |
+| `0x7e0d0a25` | 1 | `fwd_f2828_vslot1112_7e0d0a25` | Forwards to the object at `this+2828`: calls its vtable slot `+1112`. | pattern scan |
+| `0x7e0d0a37` | 1 | `fwd_f2828_vslot1116_7e0d0a37` | Forwards to the object at `this+2828`: calls its vtable slot `+1116`. | pattern scan |
+| `0x7e0d0a49` | 1 | `fwd_f2828_vslot1120_7e0d0a49` | Forwards to the object at `this+2828`: calls its vtable slot `+1120`. | pattern scan |
+| `0x7e0d0a5b` | 1 | `fwd_f2828_vslot1144_7e0d0a5b` | Forwards to the object at `this+2828`: calls its vtable slot `+1144`. | pattern scan |
+| `0x7e0d0a6d` | 1 | `fwd_f2828_vslot1124_7e0d0a6d` | Forwards to the object at `this+2828`: calls its vtable slot `+1124`. | pattern scan |
+| `0x7e0d0a7f` | 1 | `fwd_f2828_vslot1108_7e0d0a7f` | Forwards to the object at `this+2828`: calls its vtable slot `+1108`. | pattern scan |
+| `0x7e0d0a91` | 1 | `fwd_f2828_vslot1128_7e0d0a91` | Forwards to the object at `this+2828`: calls its vtable slot `+1128`. | pattern scan |
+| `0x7e0d0aa3` | 1 | `fwd_f2828_vslot1136_7e0d0aa3` | Forwards to the object at `this+2828`: calls its vtable slot `+1136`. | pattern scan |
+| `0x7e0d0ab5` | 1 | `fwd_f2828_vslot1132_7e0d0ab5` | Forwards to the object at `this+2828`: calls its vtable slot `+1132`. | pattern scan |
+| `0x7e0d0ac7` | 1 | `fwd_f2828_vslot1140_7e0d0ac7` | Forwards to the object at `this+2828`: calls its vtable slot `+1140`. | pattern scan |
+| `0x7e0d0ad9` | 1 | `fwd_f2828_vslot2180_7e0d0ad9` | Forwards to the object at `this+2828`: calls its vtable slot `+2180`. | pattern scan |
+| `0x7e0d0aeb` | 1 | `fwd_f2828_vslot2200_7e0d0aeb` | Forwards to the object at `this+2828`: calls its vtable slot `+2200`. | pattern scan |
+| `0x7e0d0afd` | 1 | `fwd_f2828_vslot2184_7e0d0afd` | Forwards to the object at `this+2828`: calls its vtable slot `+2184`. | pattern scan |
+| `0x7e0d0b0f` | 1 | `fwd_f2828_vslot2188_7e0d0b0f` | Forwards to the object at `this+2828`: calls its vtable slot `+2188`. | pattern scan |
+| `0x7e0d0b21` | 1 | `fwd_f2828_vslot2196_7e0d0b21` | Forwards to the object at `this+2828`: calls its vtable slot `+2196`. | pattern scan |
+| `0x7e0d0b33` | 1 | `fwd_f2828_vslot2192_7e0d0b33` | Forwards to the object at `this+2828`: calls its vtable slot `+2192`. | pattern scan |
+| `0x7e0d0b45` | 1 | `fwd_f2828_vslot2144_7e0d0b45` | Forwards to the object at `this+2828`: calls its vtable slot `+2144`. | pattern scan |
+| `0x7e0d0b57` | 1 | `fwd_f2828_vslot2148_7e0d0b57` | Forwards to the object at `this+2828`: calls its vtable slot `+2148`. | pattern scan |
+| `0x7e0d0b69` | 1 | `fwd_f2828_vslot2152_7e0d0b69` | Forwards to the object at `this+2828`: calls its vtable slot `+2152`. | pattern scan |
+| `0x7e0d0b7b` | 1 | `fwd_f2828_vslot2176_7e0d0b7b` | Forwards to the object at `this+2828`: calls its vtable slot `+2176`. | pattern scan |
+| `0x7e0d0b8d` | 1 | `fwd_f2828_vslot2156_7e0d0b8d` | Forwards to the object at `this+2828`: calls its vtable slot `+2156`. | pattern scan |
+| `0x7e0d0b9f` | 1 | `fwd_f2828_vslot2140_7e0d0b9f` | Forwards to the object at `this+2828`: calls its vtable slot `+2140`. | pattern scan |
+| `0x7e0d0bb1` | 1 | `fwd_f2828_vslot2160_7e0d0bb1` | Forwards to the object at `this+2828`: calls its vtable slot `+2160`. | pattern scan |
+| `0x7e0d0bc3` | 1 | `fwd_f2828_vslot2168_7e0d0bc3` | Forwards to the object at `this+2828`: calls its vtable slot `+2168`. | pattern scan |
+| `0x7e0d0bd5` | 1 | `fwd_f2828_vslot2164_7e0d0bd5` | Forwards to the object at `this+2828`: calls its vtable slot `+2164`. | pattern scan |
+| `0x7e0d0be7` | 1 | `fwd_f2828_vslot2172_7e0d0be7` | Forwards to the object at `this+2828`: calls its vtable slot `+2172`. | pattern scan |
+| `0x7e0d0bf9` | 1 | `fwd_f2828_vslot1276_7e0d0bf9` | Forwards to the object at `this+2828`: calls its vtable slot `+1276`. | pattern scan |
+| `0x7e0d0c0b` | 1 | `fwd_f2828_vslot1296_7e0d0c0b` | Forwards to the object at `this+2828`: calls its vtable slot `+1296`. | pattern scan |
+| `0x7e0d0c1d` | 1 | `fwd_f2828_vslot1280_7e0d0c1d` | Forwards to the object at `this+2828`: calls its vtable slot `+1280`. | pattern scan |
+| `0x7e0d0c2f` | 1 | `fwd_f2828_vslot1284_7e0d0c2f` | Forwards to the object at `this+2828`: calls its vtable slot `+1284`. | pattern scan |
+| `0x7e0d0c41` | 1 | `fwd_f2828_vslot1292_7e0d0c41` | Forwards to the object at `this+2828`: calls its vtable slot `+1292`. | pattern scan |
+| `0x7e0d0c53` | 1 | `fwd_f2828_vslot1288_7e0d0c53` | Forwards to the object at `this+2828`: calls its vtable slot `+1288`. | pattern scan |
+| `0x7e0d0c65` | 1 | `fwd_f2828_vslot1240_7e0d0c65` | Forwards to the object at `this+2828`: calls its vtable slot `+1240`. | pattern scan |
+| `0x7e0d0c77` | 1 | `fwd_f2828_vslot1244_7e0d0c77` | Forwards to the object at `this+2828`: calls its vtable slot `+1244`. | pattern scan |
+| `0x7e0d0c89` | 1 | `fwd_f2828_vslot1248_7e0d0c89` | Forwards to the object at `this+2828`: calls its vtable slot `+1248`. | pattern scan |
+| `0x7e0d0c9b` | 1 | `fwd_f2828_vslot1272_7e0d0c9b` | Forwards to the object at `this+2828`: calls its vtable slot `+1272`. | pattern scan |
+| `0x7e0d0cad` | 1 | `fwd_f2828_vslot1252_7e0d0cad` | Forwards to the object at `this+2828`: calls its vtable slot `+1252`. | pattern scan |
+| `0x7e0d0cbf` | 1 | `fwd_f2828_vslot1236_7e0d0cbf` | Forwards to the object at `this+2828`: calls its vtable slot `+1236`. | pattern scan |
+| `0x7e0d0cd1` | 1 | `fwd_f2828_vslot1256_7e0d0cd1` | Forwards to the object at `this+2828`: calls its vtable slot `+1256`. | pattern scan |
+| `0x7e0d0ce3` | 1 | `fwd_f2828_vslot1264_7e0d0ce3` | Forwards to the object at `this+2828`: calls its vtable slot `+1264`. | pattern scan |
+| `0x7e0d0cf5` | 1 | `fwd_f2828_vslot1260_7e0d0cf5` | Forwards to the object at `this+2828`: calls its vtable slot `+1260`. | pattern scan |
+| `0x7e0d0d07` | 1 | `fwd_f2828_vslot1268_7e0d0d07` | Forwards to the object at `this+2828`: calls its vtable slot `+1268`. | pattern scan |
+| `0x7e0d0d19` | 1 | `fwd_f2828_vslot1212_7e0d0d19` | Forwards to the object at `this+2828`: calls its vtable slot `+1212`. | pattern scan |
+| `0x7e0d0d2b` | 1 | `fwd_f2828_vslot1232_7e0d0d2b` | Forwards to the object at `this+2828`: calls its vtable slot `+1232`. | pattern scan |
+| `0x7e0d0d3d` | 1 | `fwd_f2828_vslot1216_7e0d0d3d` | Forwards to the object at `this+2828`: calls its vtable slot `+1216`. | pattern scan |
+| `0x7e0d0d4f` | 1 | `fwd_f2828_vslot1220_7e0d0d4f` | Forwards to the object at `this+2828`: calls its vtable slot `+1220`. | pattern scan |
+| `0x7e0d0d61` | 1 | `fwd_f2828_vslot1228_7e0d0d61` | Forwards to the object at `this+2828`: calls its vtable slot `+1228`. | pattern scan |
+| `0x7e0d0d73` | 1 | `fwd_f2828_vslot1224_7e0d0d73` | Forwards to the object at `this+2828`: calls its vtable slot `+1224`. | pattern scan |
+| `0x7e0d0d85` | 1 | `fwd_f2828_vslot1176_7e0d0d85` | Forwards to the object at `this+2828`: calls its vtable slot `+1176`. | pattern scan |
+| `0x7e0d0d97` | 1 | `fwd_f2828_vslot1180_7e0d0d97` | Forwards to the object at `this+2828`: calls its vtable slot `+1180`. | pattern scan |
+| `0x7e0d0da9` | 1 | `fwd_f2828_vslot1184_7e0d0da9` | Forwards to the object at `this+2828`: calls its vtable slot `+1184`. | pattern scan |
+| `0x7e0d0dbb` | 1 | `fwd_f2828_vslot1208_7e0d0dbb` | Forwards to the object at `this+2828`: calls its vtable slot `+1208`. | pattern scan |
+| `0x7e0d0dcd` | 1 | `fwd_f2828_vslot1188_7e0d0dcd` | Forwards to the object at `this+2828`: calls its vtable slot `+1188`. | pattern scan |
+| `0x7e0d0ddf` | 1 | `fwd_f2828_vslot1172_7e0d0ddf` | Forwards to the object at `this+2828`: calls its vtable slot `+1172`. | pattern scan |
+| `0x7e0d0df1` | 1 | `fwd_f2828_vslot1192_7e0d0df1` | Forwards to the object at `this+2828`: calls its vtable slot `+1192`. | pattern scan |
+| `0x7e0d0e03` | 1 | `fwd_f2828_vslot1200_7e0d0e03` | Forwards to the object at `this+2828`: calls its vtable slot `+1200`. | pattern scan |
+| `0x7e0d0e15` | 1 | `fwd_f2828_vslot1196_7e0d0e15` | Forwards to the object at `this+2828`: calls its vtable slot `+1196`. | pattern scan |
+| `0x7e0d0e27` | 1 | `fwd_f2828_vslot1204_7e0d0e27` | Forwards to the object at `this+2828`: calls its vtable slot `+1204`. | pattern scan |
+| `0x7e0d0e39` | 1 | `fwd_f2828_vslot1340_7e0d0e39` | Forwards to the object at `this+2828`: calls its vtable slot `+1340`. | pattern scan |
+| `0x7e0d0e4b` | 1 | `fwd_f2828_vslot1360_7e0d0e4b` | Forwards to the object at `this+2828`: calls its vtable slot `+1360`. | pattern scan |
+| `0x7e0d0e5d` | 1 | `fwd_f2828_vslot1344_7e0d0e5d` | Forwards to the object at `this+2828`: calls its vtable slot `+1344`. | pattern scan |
+| `0x7e0d0e6f` | 1 | `fwd_f2828_vslot1348_7e0d0e6f` | Forwards to the object at `this+2828`: calls its vtable slot `+1348`. | pattern scan |
+| `0x7e0d0e81` | 1 | `fwd_f2828_vslot1356_7e0d0e81` | Forwards to the object at `this+2828`: calls its vtable slot `+1356`. | pattern scan |
+| `0x7e0d0e93` | 1 | `fwd_f2828_vslot1352_7e0d0e93` | Forwards to the object at `this+2828`: calls its vtable slot `+1352`. | pattern scan |
+| `0x7e0d0ea5` | 1 | `fwd_f2828_vslot1304_7e0d0ea5` | Forwards to the object at `this+2828`: calls its vtable slot `+1304`. | pattern scan |
+| `0x7e0d0eb7` | 1 | `fwd_f2828_vslot1308_7e0d0eb7` | Forwards to the object at `this+2828`: calls its vtable slot `+1308`. | pattern scan |
+| `0x7e0d0ec9` | 1 | `fwd_f2828_vslot1312_7e0d0ec9` | Forwards to the object at `this+2828`: calls its vtable slot `+1312`. | pattern scan |
+| `0x7e0d0edb` | 1 | `fwd_f2828_vslot1336_7e0d0edb` | Forwards to the object at `this+2828`: calls its vtable slot `+1336`. | pattern scan |
+| `0x7e0d0eed` | 1 | `fwd_f2828_vslot1316_7e0d0eed` | Forwards to the object at `this+2828`: calls its vtable slot `+1316`. | pattern scan |
+| `0x7e0d0eff` | 1 | `fwd_f2828_vslot1300_7e0d0eff` | Forwards to the object at `this+2828`: calls its vtable slot `+1300`. | pattern scan |
+| `0x7e0d0f11` | 1 | `fwd_f2828_vslot1320_7e0d0f11` | Forwards to the object at `this+2828`: calls its vtable slot `+1320`. | pattern scan |
+| `0x7e0d0f23` | 1 | `fwd_f2828_vslot1328_7e0d0f23` | Forwards to the object at `this+2828`: calls its vtable slot `+1328`. | pattern scan |
+| `0x7e0d0f35` | 1 | `fwd_f2828_vslot1324_7e0d0f35` | Forwards to the object at `this+2828`: calls its vtable slot `+1324`. | pattern scan |
+| `0x7e0d0f47` | 1 | `fwd_f2828_vslot1332_7e0d0f47` | Forwards to the object at `this+2828`: calls its vtable slot `+1332`. | pattern scan |
+| `0x7e0d0f59` | 1 | `fwd_f2828_vslot1988_7e0d0f59` | Forwards to the object at `this+2828`: calls its vtable slot `+1988`. | pattern scan |
+| `0x7e0d0f6b` | 1 | `fwd_f2828_vslot2008_7e0d0f6b` | Forwards to the object at `this+2828`: calls its vtable slot `+2008`. | pattern scan |
+| `0x7e0d0f7d` | 1 | `fwd_f2828_vslot1992_7e0d0f7d` | Forwards to the object at `this+2828`: calls its vtable slot `+1992`. | pattern scan |
+| `0x7e0d0f8f` | 1 | `fwd_f2828_vslot1996_7e0d0f8f` | Forwards to the object at `this+2828`: calls its vtable slot `+1996`. | pattern scan |
+| `0x7e0d0fa1` | 1 | `fwd_f2828_vslot2004_7e0d0fa1` | Forwards to the object at `this+2828`: calls its vtable slot `+2004`. | pattern scan |
+| `0x7e0d0fb3` | 1 | `fwd_f2828_vslot2000_7e0d0fb3` | Forwards to the object at `this+2828`: calls its vtable slot `+2000`. | pattern scan |
+| `0x7e0d0fc5` | 1 | `fwd_f2828_vslot1952_7e0d0fc5` | Forwards to the object at `this+2828`: calls its vtable slot `+1952`. | pattern scan |
+| `0x7e0d0fd7` | 1 | `fwd_f2828_vslot1956_7e0d0fd7` | Forwards to the object at `this+2828`: calls its vtable slot `+1956`. | pattern scan |
+| `0x7e0d0fe9` | 1 | `fwd_f2828_vslot1960_7e0d0fe9` | Forwards to the object at `this+2828`: calls its vtable slot `+1960`. | pattern scan |
+| `0x7e0d0ffb` | 1 | `fwd_f2828_vslot1984_7e0d0ffb` | Forwards to the object at `this+2828`: calls its vtable slot `+1984`. | pattern scan |
+| `0x7e0d100d` | 1 | `fwd_f2828_vslot1964_7e0d100d` | Forwards to the object at `this+2828`: calls its vtable slot `+1964`. | pattern scan |
+| `0x7e0d101f` | 1 | `fwd_f2828_vslot1948_7e0d101f` | Forwards to the object at `this+2828`: calls its vtable slot `+1948`. | pattern scan |
+| `0x7e0d1031` | 1 | `fwd_f2828_vslot1968_7e0d1031` | Forwards to the object at `this+2828`: calls its vtable slot `+1968`. | pattern scan |
+| `0x7e0d1043` | 1 | `fwd_f2828_vslot1976_7e0d1043` | Forwards to the object at `this+2828`: calls its vtable slot `+1976`. | pattern scan |
+| `0x7e0d1055` | 1 | `fwd_f2828_vslot1972_7e0d1055` | Forwards to the object at `this+2828`: calls its vtable slot `+1972`. | pattern scan |
+| `0x7e0d1067` | 1 | `fwd_f2828_vslot1980_7e0d1067` | Forwards to the object at `this+2828`: calls its vtable slot `+1980`. | pattern scan |
+| `0x7e0d1079` | 1 | `fwd_f2828_vslot1404_7e0d1079` | Forwards to the object at `this+2828`: calls its vtable slot `+1404`. | pattern scan |
+| `0x7e0d108b` | 1 | `fwd_f2828_vslot1424_7e0d108b` | Forwards to the object at `this+2828`: calls its vtable slot `+1424`. | pattern scan |
+| `0x7e0d109d` | 1 | `fwd_f2828_vslot1408_7e0d109d` | Forwards to the object at `this+2828`: calls its vtable slot `+1408`. | pattern scan |
+| `0x7e0d10af` | 1 | `fwd_f2828_vslot1412_7e0d10af` | Forwards to the object at `this+2828`: calls its vtable slot `+1412`. | pattern scan |
+| `0x7e0d10c1` | 1 | `fwd_f2828_vslot1420_7e0d10c1` | Forwards to the object at `this+2828`: calls its vtable slot `+1420`. | pattern scan |
+| `0x7e0d10d3` | 1 | `fwd_f2828_vslot1416_7e0d10d3` | Forwards to the object at `this+2828`: calls its vtable slot `+1416`. | pattern scan |
+| `0x7e0d10e5` | 1 | `fwd_f2828_vslot1368_7e0d10e5` | Forwards to the object at `this+2828`: calls its vtable slot `+1368`. | pattern scan |
+| `0x7e0d10f7` | 1 | `fwd_f2828_vslot1372_7e0d10f7` | Forwards to the object at `this+2828`: calls its vtable slot `+1372`. | pattern scan |
+| `0x7e0d1109` | 1 | `fwd_f2828_vslot1376_7e0d1109` | Forwards to the object at `this+2828`: calls its vtable slot `+1376`. | pattern scan |
+| `0x7e0d111b` | 1 | `fwd_f2828_vslot1400_7e0d111b` | Forwards to the object at `this+2828`: calls its vtable slot `+1400`. | pattern scan |
+| `0x7e0d112d` | 1 | `fwd_f2828_vslot1380_7e0d112d` | Forwards to the object at `this+2828`: calls its vtable slot `+1380`. | pattern scan |
+| `0x7e0d113f` | 1 | `fwd_f2828_vslot1364_7e0d113f` | Forwards to the object at `this+2828`: calls its vtable slot `+1364`. | pattern scan |
+| `0x7e0d1151` | 1 | `fwd_f2828_vslot1384_7e0d1151` | Forwards to the object at `this+2828`: calls its vtable slot `+1384`. | pattern scan |
+| `0x7e0d1163` | 1 | `fwd_f2828_vslot1392_7e0d1163` | Forwards to the object at `this+2828`: calls its vtable slot `+1392`. | pattern scan |
+| `0x7e0d1175` | 1 | `fwd_f2828_vslot1388_7e0d1175` | Forwards to the object at `this+2828`: calls its vtable slot `+1388`. | pattern scan |
+| `0x7e0d1187` | 1 | `fwd_f2828_vslot1396_7e0d1187` | Forwards to the object at `this+2828`: calls its vtable slot `+1396`. | pattern scan |
+| `0x7e0d1199` | 1 | `fwd_f2828_vslot3916_7e0d1199` | Forwards to the object at `this+2828`: calls its vtable slot `+3916`. | pattern scan |
+| `0x7e0d11ab` | 1 | `fwd_f2828_vslot3936_7e0d11ab` | Forwards to the object at `this+2828`: calls its vtable slot `+3936`. | pattern scan |
+| `0x7e0d11bd` | 1 | `fwd_f2828_vslot3920_7e0d11bd` | Forwards to the object at `this+2828`: calls its vtable slot `+3920`. | pattern scan |
+| `0x7e0d11cf` | 1 | `fwd_f2828_vslot3924_7e0d11cf` | Forwards to the object at `this+2828`: calls its vtable slot `+3924`. | pattern scan |
+| `0x7e0d11e1` | 1 | `fwd_f2828_vslot3932_7e0d11e1` | Forwards to the object at `this+2828`: calls its vtable slot `+3932`. | pattern scan |
+| `0x7e0d11f3` | 1 | `fwd_f2828_vslot3928_7e0d11f3` | Forwards to the object at `this+2828`: calls its vtable slot `+3928`. | pattern scan |
+| `0x7e0d1205` | 1 | `fwd_f2828_vslot3820_7e0d1205` | Forwards to the object at `this+2828`: calls its vtable slot `+3820`. | pattern scan |
+| `0x7e0d1217` | 1 | `fwd_f2828_vslot3880_7e0d1217` | Forwards to the object at `this+2828`: calls its vtable slot `+3880`. | pattern scan |
+| `0x7e0d1229` | 1 | `fwd_f2828_vslot3884_7e0d1229` | Forwards to the object at `this+2828`: calls its vtable slot `+3884`. | pattern scan |
+| `0x7e0d123b` | 1 | `fwd_f2828_vslot3888_7e0d123b` | Forwards to the object at `this+2828`: calls its vtable slot `+3888`. | pattern scan |
+| `0x7e0d124d` | 1 | `fwd_f2828_vslot3912_7e0d124d` | Forwards to the object at `this+2828`: calls its vtable slot `+3912`. | pattern scan |
+| `0x7e0d125f` | 1 | `fwd_f2828_vslot3892_7e0d125f` | Forwards to the object at `this+2828`: calls its vtable slot `+3892`. | pattern scan |
+| `0x7e0d1271` | 1 | `fwd_f2828_vslot3876_7e0d1271` | Forwards to the object at `this+2828`: calls its vtable slot `+3876`. | pattern scan |
+| `0x7e0d1283` | 1 | `fwd_f2828_vslot3896_7e0d1283` | Forwards to the object at `this+2828`: calls its vtable slot `+3896`. | pattern scan |
+| `0x7e0d1295` | 1 | `fwd_f2828_vslot3904_7e0d1295` | Forwards to the object at `this+2828`: calls its vtable slot `+3904`. | pattern scan |
+| `0x7e0d12a7` | 1 | `fwd_f2828_vslot3900_7e0d12a7` | Forwards to the object at `this+2828`: calls its vtable slot `+3900`. | pattern scan |
+| `0x7e0d12b9` | 1 | `fwd_f2828_vslot3908_7e0d12b9` | Forwards to the object at `this+2828`: calls its vtable slot `+3908`. | pattern scan |
+| `0x7e0d12cb` | 1 | `fwd_f2828_vslot2696_7e0d12cb` | Forwards to the object at `this+2828`: calls its vtable slot `+2696`. | pattern scan |
+| `0x7e0d12dd` | 1 | `fwd_f2828_vslot2716_7e0d12dd` | Forwards to the object at `this+2828`: calls its vtable slot `+2716`. | pattern scan |
+| `0x7e0d12ef` | 1 | `fwd_f2828_vslot2700_7e0d12ef` | Forwards to the object at `this+2828`: calls its vtable slot `+2700`. | pattern scan |
+| `0x7e0d1301` | 1 | `fwd_f2828_vslot2704_7e0d1301` | Forwards to the object at `this+2828`: calls its vtable slot `+2704`. | pattern scan |
+| `0x7e0d1313` | 1 | `fwd_f2828_vslot2712_7e0d1313` | Forwards to the object at `this+2828`: calls its vtable slot `+2712`. | pattern scan |
+| `0x7e0d1325` | 1 | `fwd_f2828_vslot2708_7e0d1325` | Forwards to the object at `this+2828`: calls its vtable slot `+2708`. | pattern scan |
+| `0x7e0d1337` | 1 | `fwd_f2828_vslot2660_7e0d1337` | Forwards to the object at `this+2828`: calls its vtable slot `+2660`. | pattern scan |
+| `0x7e0d1349` | 1 | `fwd_f2828_vslot2664_7e0d1349` | Forwards to the object at `this+2828`: calls its vtable slot `+2664`. | pattern scan |
+| `0x7e0d135b` | 1 | `fwd_f2828_vslot2668_7e0d135b` | Forwards to the object at `this+2828`: calls its vtable slot `+2668`. | pattern scan |
+| `0x7e0d136d` | 1 | `fwd_f2828_vslot2692_7e0d136d` | Forwards to the object at `this+2828`: calls its vtable slot `+2692`. | pattern scan |
+| `0x7e0d137f` | 1 | `fwd_f2828_vslot2672_7e0d137f` | Forwards to the object at `this+2828`: calls its vtable slot `+2672`. | pattern scan |
+| `0x7e0d1391` | 1 | `fwd_f2828_vslot2656_7e0d1391` | Forwards to the object at `this+2828`: calls its vtable slot `+2656`. | pattern scan |
+| `0x7e0d13a3` | 1 | `fwd_f2828_vslot2676_7e0d13a3` | Forwards to the object at `this+2828`: calls its vtable slot `+2676`. | pattern scan |
+| `0x7e0d13b5` | 1 | `fwd_f2828_vslot2684_7e0d13b5` | Forwards to the object at `this+2828`: calls its vtable slot `+2684`. | pattern scan |
+| `0x7e0d13c7` | 1 | `fwd_f2828_vslot2680_7e0d13c7` | Forwards to the object at `this+2828`: calls its vtable slot `+2680`. | pattern scan |
+| `0x7e0d13d9` | 1 | `fwd_f2828_vslot2688_7e0d13d9` | Forwards to the object at `this+2828`: calls its vtable slot `+2688`. | pattern scan |
+| `0x7e0d13ee` | 1 | `fwd_f2828_to_7e114b98_7e0d13ee` | Forwards to the object at `this+2828`: `0x7e114b98(*(this+2828))`. | pattern scan |
+| `0x7e0d13ff` | 1 | `fwd_f2828_to_7e1095c3_7e0d13ff` | Forwards to the object at `this+2828`: `0x7e1095c3(*(this+2828))`. | pattern scan |
+| `0x7e0d14e5` | 1 | `fwd_f2828_vslot2308_7e0d14e5` | Forwards to the object at `this+2828`: calls its vtable slot `+2308`. | pattern scan |
+| `0x7e0d14f7` | 1 | `fwd_f2828_vslot2328_7e0d14f7` | Forwards to the object at `this+2828`: calls its vtable slot `+2328`. | pattern scan |
+| `0x7e0d1509` | 1 | `fwd_f2828_vslot2312_7e0d1509` | Forwards to the object at `this+2828`: calls its vtable slot `+2312`. | pattern scan |
+| `0x7e0d151b` | 1 | `fwd_f2828_vslot2316_7e0d151b` | Forwards to the object at `this+2828`: calls its vtable slot `+2316`. | pattern scan |
+| `0x7e0d152d` | 1 | `fwd_f2828_vslot2324_7e0d152d` | Forwards to the object at `this+2828`: calls its vtable slot `+2324`. | pattern scan |
+| `0x7e0d153f` | 1 | `fwd_f2828_vslot2320_7e0d153f` | Forwards to the object at `this+2828`: calls its vtable slot `+2320`. | pattern scan |
+| `0x7e0d1551` | 1 | `fwd_f2828_vslot2272_7e0d1551` | Forwards to the object at `this+2828`: calls its vtable slot `+2272`. | pattern scan |
+| `0x7e0d1563` | 1 | `fwd_f2828_vslot2276_7e0d1563` | Forwards to the object at `this+2828`: calls its vtable slot `+2276`. | pattern scan |
+| `0x7e0d1575` | 1 | `fwd_f2828_vslot2280_7e0d1575` | Forwards to the object at `this+2828`: calls its vtable slot `+2280`. | pattern scan |
+| `0x7e0d1587` | 1 | `fwd_f2828_vslot2304_7e0d1587` | Forwards to the object at `this+2828`: calls its vtable slot `+2304`. | pattern scan |
+| `0x7e0d1599` | 1 | `fwd_f2828_vslot2284_7e0d1599` | Forwards to the object at `this+2828`: calls its vtable slot `+2284`. | pattern scan |
+| `0x7e0d15ab` | 1 | `fwd_f2828_vslot2268_7e0d15ab` | Forwards to the object at `this+2828`: calls its vtable slot `+2268`. | pattern scan |
+| `0x7e0d15bd` | 1 | `fwd_f2828_vslot2288_7e0d15bd` | Forwards to the object at `this+2828`: calls its vtable slot `+2288`. | pattern scan |
+| `0x7e0d15cf` | 1 | `fwd_f2828_vslot2296_7e0d15cf` | Forwards to the object at `this+2828`: calls its vtable slot `+2296`. | pattern scan |
+| `0x7e0d15e1` | 1 | `fwd_f2828_vslot2292_7e0d15e1` | Forwards to the object at `this+2828`: calls its vtable slot `+2292`. | pattern scan |
+| `0x7e0d15f3` | 1 | `fwd_f2828_vslot2300_7e0d15f3` | Forwards to the object at `this+2828`: calls its vtable slot `+2300`. | pattern scan |
+| `0x7e0d1602` | 1 | `fwd_f2828_vslot956_7e0d1602` | Forwards to the object at `this+2828`: calls its vtable slot `+956`. | pattern scan |
+| `0x7e0d1636` | 1 | `fwd_f2828_vslot960_7e0d1636` | Forwards to the object at `this+2828`: calls its vtable slot `+960`. | pattern scan |
+| `0x7e0d1648` | 1 | `fwd_f2828_vslot968_7e0d1648` | Forwards to the object at `this+2828`: calls its vtable slot `+968`. | pattern scan |
+| `0x7e0d1657` | 1 | `fwd_f2828_to_7e1093f7_7e0d1657` | Forwards to the object at `this+2828`: `0x7e1093f7(*(this+2828))`. | pattern scan |
+| `0x7e0d1668` | 1 | `fwd_f2828_vslot996_7e0d1668` | Forwards to the object at `this+2828`: calls its vtable slot `+996`. | pattern scan |
+| `0x7e0d167a` | 1 | `fwd_f2828_vslot1468_7e0d167a` | Forwards to the object at `this+2828`: calls its vtable slot `+1468`. | pattern scan |
+| `0x7e0d168c` | 1 | `fwd_f2828_vslot1488_7e0d168c` | Forwards to the object at `this+2828`: calls its vtable slot `+1488`. | pattern scan |
+| `0x7e0d169e` | 1 | `fwd_f2828_vslot1472_7e0d169e` | Forwards to the object at `this+2828`: calls its vtable slot `+1472`. | pattern scan |
+| `0x7e0d16b0` | 1 | `fwd_f2828_vslot1476_7e0d16b0` | Forwards to the object at `this+2828`: calls its vtable slot `+1476`. | pattern scan |
+| `0x7e0d16c2` | 1 | `fwd_f2828_vslot1484_7e0d16c2` | Forwards to the object at `this+2828`: calls its vtable slot `+1484`. | pattern scan |
+| `0x7e0d16d4` | 1 | `fwd_f2828_vslot1480_7e0d16d4` | Forwards to the object at `this+2828`: calls its vtable slot `+1480`. | pattern scan |
+| `0x7e0d16e6` | 1 | `fwd_f2828_vslot1432_7e0d16e6` | Forwards to the object at `this+2828`: calls its vtable slot `+1432`. | pattern scan |
+| `0x7e0d16f8` | 1 | `fwd_f2828_vslot1436_7e0d16f8` | Forwards to the object at `this+2828`: calls its vtable slot `+1436`. | pattern scan |
+| `0x7e0d170a` | 1 | `fwd_f2828_vslot1440_7e0d170a` | Forwards to the object at `this+2828`: calls its vtable slot `+1440`. | pattern scan |
+| `0x7e0d171c` | 1 | `fwd_f2828_vslot1464_7e0d171c` | Forwards to the object at `this+2828`: calls its vtable slot `+1464`. | pattern scan |
+| `0x7e0d172e` | 1 | `fwd_f2828_vslot1444_7e0d172e` | Forwards to the object at `this+2828`: calls its vtable slot `+1444`. | pattern scan |
+| `0x7e0d1740` | 1 | `fwd_f2828_vslot1428_7e0d1740` | Forwards to the object at `this+2828`: calls its vtable slot `+1428`. | pattern scan |
+| `0x7e0d1752` | 1 | `fwd_f2828_vslot1448_7e0d1752` | Forwards to the object at `this+2828`: calls its vtable slot `+1448`. | pattern scan |
+| `0x7e0d1764` | 1 | `fwd_f2828_vslot1456_7e0d1764` | Forwards to the object at `this+2828`: calls its vtable slot `+1456`. | pattern scan |
+| `0x7e0d1776` | 1 | `fwd_f2828_vslot1452_7e0d1776` | Forwards to the object at `this+2828`: calls its vtable slot `+1452`. | pattern scan |
+| `0x7e0d1788` | 1 | `fwd_f2828_vslot1460_7e0d1788` | Forwards to the object at `this+2828`: calls its vtable slot `+1460`. | pattern scan |
+| `0x7e0d179a` | 1 | `fwd_f2828_vslot2632_7e0d179a` | Forwards to the object at `this+2828`: calls its vtable slot `+2632`. | pattern scan |
+| `0x7e0d17ac` | 1 | `fwd_f2828_vslot2652_7e0d17ac` | Forwards to the object at `this+2828`: calls its vtable slot `+2652`. | pattern scan |
+| `0x7e0d17be` | 1 | `fwd_f2828_vslot2636_7e0d17be` | Forwards to the object at `this+2828`: calls its vtable slot `+2636`. | pattern scan |
+| `0x7e0d17d0` | 1 | `fwd_f2828_vslot2640_7e0d17d0` | Forwards to the object at `this+2828`: calls its vtable slot `+2640`. | pattern scan |
+| `0x7e0d17e2` | 1 | `fwd_f2828_vslot2648_7e0d17e2` | Forwards to the object at `this+2828`: calls its vtable slot `+2648`. | pattern scan |
+| `0x7e0d17f4` | 1 | `fwd_f2828_vslot2644_7e0d17f4` | Forwards to the object at `this+2828`: calls its vtable slot `+2644`. | pattern scan |
+| `0x7e0d1806` | 1 | `fwd_f2828_vslot2596_7e0d1806` | Forwards to the object at `this+2828`: calls its vtable slot `+2596`. | pattern scan |
+| `0x7e0d1818` | 1 | `fwd_f2828_vslot2600_7e0d1818` | Forwards to the object at `this+2828`: calls its vtable slot `+2600`. | pattern scan |
+| `0x7e0d182a` | 1 | `fwd_f2828_vslot2604_7e0d182a` | Forwards to the object at `this+2828`: calls its vtable slot `+2604`. | pattern scan |
+| `0x7e0d183c` | 1 | `fwd_f2828_vslot2628_7e0d183c` | Forwards to the object at `this+2828`: calls its vtable slot `+2628`. | pattern scan |
+| `0x7e0d184e` | 1 | `fwd_f2828_vslot2608_7e0d184e` | Forwards to the object at `this+2828`: calls its vtable slot `+2608`. | pattern scan |
+| `0x7e0d1860` | 1 | `fwd_f2828_vslot2592_7e0d1860` | Forwards to the object at `this+2828`: calls its vtable slot `+2592`. | pattern scan |
+| `0x7e0d1872` | 1 | `fwd_f2828_vslot2612_7e0d1872` | Forwards to the object at `this+2828`: calls its vtable slot `+2612`. | pattern scan |
+| `0x7e0d1884` | 1 | `fwd_f2828_vslot2620_7e0d1884` | Forwards to the object at `this+2828`: calls its vtable slot `+2620`. | pattern scan |
+| `0x7e0d1896` | 1 | `fwd_f2828_vslot2616_7e0d1896` | Forwards to the object at `this+2828`: calls its vtable slot `+2616`. | pattern scan |
+| `0x7e0d18a8` | 1 | `fwd_f2828_vslot2624_7e0d18a8` | Forwards to the object at `this+2828`: calls its vtable slot `+2624`. | pattern scan |
+| `0x7e0d18b7` | 1 | `fwd_f2828_vslot2996_7e0d18b7` | Forwards to the object at `this+2828`: calls its vtable slot `+2996`. | pattern scan |
+| `0x7e0d18c6` | 1 | `fwd_f2828_vslot3000_7e0d18c6` | Forwards to the object at `this+2828`: calls its vtable slot `+3000`. | pattern scan |
+| `0x7e0d18d8` | 1 | `fwd_f2828_vslot3004_7e0d18d8` | Forwards to the object at `this+2828`: calls its vtable slot `+3004`. | pattern scan |
+| `0x7e0d18e7` | 1 | `fwd_f2828_vslot3008_7e0d18e7` | Forwards to the object at `this+2828`: calls its vtable slot `+3008`. | pattern scan |
+| `0x7e0d18f9` | 1 | `fwd_f2828_vslot3012_7e0d18f9` | Forwards to the object at `this+2828`: calls its vtable slot `+3012`. | pattern scan |
+| `0x7e0d1908` | 1 | `fwd_f2828_vslot3016_7e0d1908` | Forwards to the object at `this+2828`: calls its vtable slot `+3016`. | pattern scan |
+| `0x7e0d191d` | 1 | `fwd_f2828_to_7e114666_7e0d191d` | Forwards to the object at `this+2828`: `0x7e114666(*(this+2828))`. | pattern scan |
+| `0x7e0d192e` | 1 | `fwd_f2828_to_7e11464f_7e0d192e` | Forwards to the object at `this+2828`: `0x7e11464f(*(this+2828))`. | pattern scan |
+| `0x7e0d195a` | 1 | `fwd_f2828_to_7e114702_7e0d195a` | Forwards to the object at `this+2828`: `0x7e114702(*(this+2828))`. | pattern scan |
+| `0x7e0d196b` | 1 | `fwd_f2828_vslot3044_7e0d196b` | Forwards to the object at `this+2828`: calls its vtable slot `+3044`. | pattern scan |
+| `0x7e0d197d` | 1 | `fwd_f2828_to_7e1146eb_7e0d197d` | Forwards to the object at `this+2828`: `0x7e1146eb(*(this+2828))`. | pattern scan |
+| `0x7e0d198b` | 1 | `fwd_f2828_vslot3072_7e0d198b` | Forwards to the object at `this+2828`: calls its vtable slot `+3072`. | pattern scan |
+| `0x7e0d199a` | 1 | `fwd_f2828_vslot3076_7e0d199a` | Forwards to the object at `this+2828`: calls its vtable slot `+3076`. | pattern scan |
+| `0x7e0d1afe` | 1 | `fwd_f2828_to_7e0fbc83_7e0d1afe` | Forwards to the object at `this+2828`: `0x7e0fbc83(*(this+2828))`. | pattern scan |
+| `0x7e0d1b0c` | 1 | `fwd_f2828_to_7e0fbc8b_7e0d1b0c` | Forwards to the object at `this+2828`: `0x7e0fbc8b(*(this+2828))`. | pattern scan |
+| `0x7e0d1c8b` | 1 | `fwd_f2828_vslot3084_7e0d1c8b` | Forwards to the object at `this+2828`: calls its vtable slot `+3084`. | pattern scan |
+| `0x7e0d1c9a` | 1 | `fwd_f2828_vslot3088_7e0d1c9a` | Forwards to the object at `this+2828`: calls its vtable slot `+3088`. | pattern scan |
+| `0x7e0d1f7d` | 1 | `fwd_f2828_to_7e1090d3_7e0d1f7d` | Forwards to the object at `this+2828`: `0x7e1090d3(*(this+2828))`. | pattern scan |
+| `0x7e0d1f8e` | 1 | `fwd_f2828_vslot3040_7e0d1f8e` | Forwards to the object at `this+2828`: calls its vtable slot `+3040`. | pattern scan |
+| `0x7e0d1fa0` | 1 | `fwd_f2828_vslot1532_7e0d1fa0` | Forwards to the object at `this+2828`: calls its vtable slot `+1532`. | pattern scan |
+| `0x7e0d1fb2` | 1 | `fwd_f2828_vslot1552_7e0d1fb2` | Forwards to the object at `this+2828`: calls its vtable slot `+1552`. | pattern scan |
+| `0x7e0d1fc4` | 1 | `fwd_f2828_vslot1536_7e0d1fc4` | Forwards to the object at `this+2828`: calls its vtable slot `+1536`. | pattern scan |
+| `0x7e0d1fd6` | 1 | `fwd_f2828_vslot1540_7e0d1fd6` | Forwards to the object at `this+2828`: calls its vtable slot `+1540`. | pattern scan |
+| `0x7e0d1fe8` | 1 | `fwd_f2828_vslot1548_7e0d1fe8` | Forwards to the object at `this+2828`: calls its vtable slot `+1548`. | pattern scan |
+| `0x7e0d1ffa` | 1 | `fwd_f2828_vslot1544_7e0d1ffa` | Forwards to the object at `this+2828`: calls its vtable slot `+1544`. | pattern scan |
+| `0x7e0d200c` | 1 | `fwd_f2828_vslot1496_7e0d200c` | Forwards to the object at `this+2828`: calls its vtable slot `+1496`. | pattern scan |
+| `0x7e0d201e` | 1 | `fwd_f2828_vslot1500_7e0d201e` | Forwards to the object at `this+2828`: calls its vtable slot `+1500`. | pattern scan |
+| `0x7e0d2030` | 1 | `fwd_f2828_vslot1504_7e0d2030` | Forwards to the object at `this+2828`: calls its vtable slot `+1504`. | pattern scan |
+| `0x7e0d2042` | 1 | `fwd_f2828_vslot1528_7e0d2042` | Forwards to the object at `this+2828`: calls its vtable slot `+1528`. | pattern scan |
+| `0x7e0d2054` | 1 | `fwd_f2828_vslot1508_7e0d2054` | Forwards to the object at `this+2828`: calls its vtable slot `+1508`. | pattern scan |
+| `0x7e0d2066` | 1 | `fwd_f2828_vslot1492_7e0d2066` | Forwards to the object at `this+2828`: calls its vtable slot `+1492`. | pattern scan |
+| `0x7e0d2078` | 1 | `fwd_f2828_vslot1512_7e0d2078` | Forwards to the object at `this+2828`: calls its vtable slot `+1512`. | pattern scan |
+| `0x7e0d208a` | 1 | `fwd_f2828_vslot1520_7e0d208a` | Forwards to the object at `this+2828`: calls its vtable slot `+1520`. | pattern scan |
+| `0x7e0d209c` | 1 | `fwd_f2828_vslot1516_7e0d209c` | Forwards to the object at `this+2828`: calls its vtable slot `+1516`. | pattern scan |
+| `0x7e0d20ae` | 1 | `fwd_f2828_vslot1524_7e0d20ae` | Forwards to the object at `this+2828`: calls its vtable slot `+1524`. | pattern scan |
+| `0x7e0d20c0` | 1 | `fwd_f2828_vslot1596_7e0d20c0` | Forwards to the object at `this+2828`: calls its vtable slot `+1596`. | pattern scan |
+| `0x7e0d20d2` | 1 | `fwd_f2828_vslot1616_7e0d20d2` | Forwards to the object at `this+2828`: calls its vtable slot `+1616`. | pattern scan |
+| `0x7e0d20e4` | 1 | `fwd_f2828_vslot1600_7e0d20e4` | Forwards to the object at `this+2828`: calls its vtable slot `+1600`. | pattern scan |
+| `0x7e0d20f6` | 1 | `fwd_f2828_vslot1604_7e0d20f6` | Forwards to the object at `this+2828`: calls its vtable slot `+1604`. | pattern scan |
+| `0x7e0d2108` | 1 | `fwd_f2828_vslot1612_7e0d2108` | Forwards to the object at `this+2828`: calls its vtable slot `+1612`. | pattern scan |
+| `0x7e0d211a` | 1 | `fwd_f2828_vslot1608_7e0d211a` | Forwards to the object at `this+2828`: calls its vtable slot `+1608`. | pattern scan |
+| `0x7e0d212c` | 1 | `fwd_f2828_vslot1560_7e0d212c` | Forwards to the object at `this+2828`: calls its vtable slot `+1560`. | pattern scan |
+| `0x7e0d213e` | 1 | `fwd_f2828_vslot1564_7e0d213e` | Forwards to the object at `this+2828`: calls its vtable slot `+1564`. | pattern scan |
+| `0x7e0d2150` | 1 | `fwd_f2828_vslot1568_7e0d2150` | Forwards to the object at `this+2828`: calls its vtable slot `+1568`. | pattern scan |
+| `0x7e0d2162` | 1 | `fwd_f2828_vslot1592_7e0d2162` | Forwards to the object at `this+2828`: calls its vtable slot `+1592`. | pattern scan |
+| `0x7e0d2174` | 1 | `fwd_f2828_vslot1572_7e0d2174` | Forwards to the object at `this+2828`: calls its vtable slot `+1572`. | pattern scan |
+| `0x7e0d2186` | 1 | `fwd_f2828_vslot1556_7e0d2186` | Forwards to the object at `this+2828`: calls its vtable slot `+1556`. | pattern scan |
+| `0x7e0d2198` | 1 | `fwd_f2828_vslot1576_7e0d2198` | Forwards to the object at `this+2828`: calls its vtable slot `+1576`. | pattern scan |
+| `0x7e0d21aa` | 1 | `fwd_f2828_vslot1584_7e0d21aa` | Forwards to the object at `this+2828`: calls its vtable slot `+1584`. | pattern scan |
+| `0x7e0d21bc` | 1 | `fwd_f2828_vslot1580_7e0d21bc` | Forwards to the object at `this+2828`: calls its vtable slot `+1580`. | pattern scan |
+| `0x7e0d21ce` | 1 | `fwd_f2828_vslot1588_7e0d21ce` | Forwards to the object at `this+2828`: calls its vtable slot `+1588`. | pattern scan |
+| `0x7e0d21e0` | 1 | `fwd_f2828_vslot2052_7e0d21e0` | Forwards to the object at `this+2828`: calls its vtable slot `+2052`. | pattern scan |
+| `0x7e0d21f2` | 1 | `fwd_f2828_vslot2072_7e0d21f2` | Forwards to the object at `this+2828`: calls its vtable slot `+2072`. | pattern scan |
+| `0x7e0d2204` | 1 | `fwd_f2828_vslot2056_7e0d2204` | Forwards to the object at `this+2828`: calls its vtable slot `+2056`. | pattern scan |
+| `0x7e0d2216` | 1 | `fwd_f2828_vslot2060_7e0d2216` | Forwards to the object at `this+2828`: calls its vtable slot `+2060`. | pattern scan |
+| `0x7e0d2228` | 1 | `fwd_f2828_vslot2068_7e0d2228` | Forwards to the object at `this+2828`: calls its vtable slot `+2068`. | pattern scan |
+| `0x7e0d223a` | 1 | `fwd_f2828_vslot2064_7e0d223a` | Forwards to the object at `this+2828`: calls its vtable slot `+2064`. | pattern scan |
+| `0x7e0d224c` | 1 | `fwd_f2828_vslot2016_7e0d224c` | Forwards to the object at `this+2828`: calls its vtable slot `+2016`. | pattern scan |
+| `0x7e0d225e` | 1 | `fwd_f2828_vslot2020_7e0d225e` | Forwards to the object at `this+2828`: calls its vtable slot `+2020`. | pattern scan |
+| `0x7e0d2270` | 1 | `fwd_f2828_vslot2024_7e0d2270` | Forwards to the object at `this+2828`: calls its vtable slot `+2024`. | pattern scan |
+| `0x7e0d2282` | 1 | `fwd_f2828_vslot2048_7e0d2282` | Forwards to the object at `this+2828`: calls its vtable slot `+2048`. | pattern scan |
+| `0x7e0d2294` | 1 | `fwd_f2828_vslot2028_7e0d2294` | Forwards to the object at `this+2828`: calls its vtable slot `+2028`. | pattern scan |
+| `0x7e0d22a6` | 1 | `fwd_f2828_vslot2012_7e0d22a6` | Forwards to the object at `this+2828`: calls its vtable slot `+2012`. | pattern scan |
+| `0x7e0d22b8` | 1 | `fwd_f2828_vslot2032_7e0d22b8` | Forwards to the object at `this+2828`: calls its vtable slot `+2032`. | pattern scan |
+| `0x7e0d22ca` | 1 | `fwd_f2828_vslot2040_7e0d22ca` | Forwards to the object at `this+2828`: calls its vtable slot `+2040`. | pattern scan |
+| `0x7e0d22dc` | 1 | `fwd_f2828_vslot2036_7e0d22dc` | Forwards to the object at `this+2828`: calls its vtable slot `+2036`. | pattern scan |
+| `0x7e0d22ee` | 1 | `fwd_f2828_vslot2044_7e0d22ee` | Forwards to the object at `this+2828`: calls its vtable slot `+2044`. | pattern scan |
+| `0x7e0d2300` | 1 | `fwd_f2828_vslot2116_7e0d2300` | Forwards to the object at `this+2828`: calls its vtable slot `+2116`. | pattern scan |
+| `0x7e0d2312` | 1 | `fwd_f2828_vslot2136_7e0d2312` | Forwards to the object at `this+2828`: calls its vtable slot `+2136`. | pattern scan |
+| `0x7e0d2324` | 1 | `fwd_f2828_vslot2120_7e0d2324` | Forwards to the object at `this+2828`: calls its vtable slot `+2120`. | pattern scan |
+| `0x7e0d2336` | 1 | `fwd_f2828_vslot2124_7e0d2336` | Forwards to the object at `this+2828`: calls its vtable slot `+2124`. | pattern scan |
+| `0x7e0d2348` | 1 | `fwd_f2828_vslot2132_7e0d2348` | Forwards to the object at `this+2828`: calls its vtable slot `+2132`. | pattern scan |
+| `0x7e0d235a` | 1 | `fwd_f2828_vslot2128_7e0d235a` | Forwards to the object at `this+2828`: calls its vtable slot `+2128`. | pattern scan |
+| `0x7e0d236c` | 1 | `fwd_f2828_vslot2080_7e0d236c` | Forwards to the object at `this+2828`: calls its vtable slot `+2080`. | pattern scan |
+| `0x7e0d237e` | 1 | `fwd_f2828_vslot2084_7e0d237e` | Forwards to the object at `this+2828`: calls its vtable slot `+2084`. | pattern scan |
+| `0x7e0d2390` | 1 | `fwd_f2828_vslot2088_7e0d2390` | Forwards to the object at `this+2828`: calls its vtable slot `+2088`. | pattern scan |
+| `0x7e0d23a2` | 1 | `fwd_f2828_vslot2112_7e0d23a2` | Forwards to the object at `this+2828`: calls its vtable slot `+2112`. | pattern scan |
+| `0x7e0d23b4` | 1 | `fwd_f2828_vslot2092_7e0d23b4` | Forwards to the object at `this+2828`: calls its vtable slot `+2092`. | pattern scan |
+| `0x7e0d23c6` | 1 | `fwd_f2828_vslot2076_7e0d23c6` | Forwards to the object at `this+2828`: calls its vtable slot `+2076`. | pattern scan |
+| `0x7e0d23d8` | 1 | `fwd_f2828_vslot2096_7e0d23d8` | Forwards to the object at `this+2828`: calls its vtable slot `+2096`. | pattern scan |
+| `0x7e0d23ea` | 1 | `fwd_f2828_vslot2104_7e0d23ea` | Forwards to the object at `this+2828`: calls its vtable slot `+2104`. | pattern scan |
+| `0x7e0d23fc` | 1 | `fwd_f2828_vslot2100_7e0d23fc` | Forwards to the object at `this+2828`: calls its vtable slot `+2100`. | pattern scan |
+| `0x7e0d240e` | 1 | `fwd_f2828_vslot2108_7e0d240e` | Forwards to the object at `this+2828`: calls its vtable slot `+2108`. | pattern scan |
+| `0x7e0d2420` | 1 | `fwd_f2828_vslot3104_7e0d2420` | Forwards to the object at `this+2828`: calls its vtable slot `+3104`. | pattern scan |
+| `0x7e0d2432` | 1 | `fwd_f2828_vslot3108_7e0d2432` | Forwards to the object at `this+2828`: calls its vtable slot `+3108`. | pattern scan |
+| `0x7e0d2444` | 1 | `fwd_f2828_vslot3112_7e0d2444` | Forwards to the object at `this+2828`: calls its vtable slot `+3112`. | pattern scan |
+| `0x7e0d2456` | 1 | `fwd_f2828_vslot3116_7e0d2456` | Forwards to the object at `this+2828`: calls its vtable slot `+3116`. | pattern scan |
+| `0x7e0d2468` | 1 | `fwd_f2828_vslot3100_7e0d2468` | Forwards to the object at `this+2828`: calls its vtable slot `+3100`. | pattern scan |
+| `0x7e0d247a` | 1 | `fwd_f2828_vslot2760_7e0d247a` | Forwards to the object at `this+2828`: calls its vtable slot `+2760`. | pattern scan |
+| `0x7e0d248c` | 1 | `fwd_f2828_vslot2780_7e0d248c` | Forwards to the object at `this+2828`: calls its vtable slot `+2780`. | pattern scan |
+| `0x7e0d249e` | 1 | `fwd_f2828_vslot2764_7e0d249e` | Forwards to the object at `this+2828`: calls its vtable slot `+2764`. | pattern scan |
+| `0x7e0d24b0` | 1 | `fwd_f2828_vslot2768_7e0d24b0` | Forwards to the object at `this+2828`: calls its vtable slot `+2768`. | pattern scan |
+| `0x7e0d24c2` | 1 | `fwd_f2828_vslot2776_7e0d24c2` | Forwards to the object at `this+2828`: calls its vtable slot `+2776`. | pattern scan |
+| `0x7e0d24d4` | 1 | `fwd_f2828_vslot2772_7e0d24d4` | Forwards to the object at `this+2828`: calls its vtable slot `+2772`. | pattern scan |
+| `0x7e0d24e6` | 1 | `fwd_f2828_vslot2724_7e0d24e6` | Forwards to the object at `this+2828`: calls its vtable slot `+2724`. | pattern scan |
+| `0x7e0d24f8` | 1 | `fwd_f2828_vslot2728_7e0d24f8` | Forwards to the object at `this+2828`: calls its vtable slot `+2728`. | pattern scan |
+| `0x7e0d250a` | 1 | `fwd_f2828_vslot2732_7e0d250a` | Forwards to the object at `this+2828`: calls its vtable slot `+2732`. | pattern scan |
+| `0x7e0d251c` | 1 | `fwd_f2828_vslot2756_7e0d251c` | Forwards to the object at `this+2828`: calls its vtable slot `+2756`. | pattern scan |
+| `0x7e0d252e` | 1 | `fwd_f2828_vslot2736_7e0d252e` | Forwards to the object at `this+2828`: calls its vtable slot `+2736`. | pattern scan |
+| `0x7e0d2540` | 1 | `fwd_f2828_vslot2720_7e0d2540` | Forwards to the object at `this+2828`: calls its vtable slot `+2720`. | pattern scan |
+| `0x7e0d2552` | 1 | `fwd_f2828_vslot2740_7e0d2552` | Forwards to the object at `this+2828`: calls its vtable slot `+2740`. | pattern scan |
+| `0x7e0d2564` | 1 | `fwd_f2828_vslot2748_7e0d2564` | Forwards to the object at `this+2828`: calls its vtable slot `+2748`. | pattern scan |
+| `0x7e0d2576` | 1 | `fwd_f2828_vslot2744_7e0d2576` | Forwards to the object at `this+2828`: calls its vtable slot `+2744`. | pattern scan |
+| `0x7e0d2588` | 1 | `fwd_f2828_vslot2752_7e0d2588` | Forwards to the object at `this+2828`: calls its vtable slot `+2752`. | pattern scan |
+| `0x7e0d259a` | 1 | `fwd_f2828_vslot1660_7e0d259a` | Forwards to the object at `this+2828`: calls its vtable slot `+1660`. | pattern scan |
+| `0x7e0d25ac` | 1 | `fwd_f2828_vslot1680_7e0d25ac` | Forwards to the object at `this+2828`: calls its vtable slot `+1680`. | pattern scan |
+| `0x7e0d25be` | 1 | `fwd_f2828_vslot1664_7e0d25be` | Forwards to the object at `this+2828`: calls its vtable slot `+1664`. | pattern scan |
+| `0x7e0d25d0` | 1 | `fwd_f2828_vslot1668_7e0d25d0` | Forwards to the object at `this+2828`: calls its vtable slot `+1668`. | pattern scan |
+| `0x7e0d25e2` | 1 | `fwd_f2828_vslot1676_7e0d25e2` | Forwards to the object at `this+2828`: calls its vtable slot `+1676`. | pattern scan |
+| `0x7e0d25f4` | 1 | `fwd_f2828_vslot1672_7e0d25f4` | Forwards to the object at `this+2828`: calls its vtable slot `+1672`. | pattern scan |
+| `0x7e0d2606` | 1 | `fwd_f2828_vslot1624_7e0d2606` | Forwards to the object at `this+2828`: calls its vtable slot `+1624`. | pattern scan |
+| `0x7e0d2618` | 1 | `fwd_f2828_vslot1628_7e0d2618` | Forwards to the object at `this+2828`: calls its vtable slot `+1628`. | pattern scan |
+| `0x7e0d262a` | 1 | `fwd_f2828_vslot1632_7e0d262a` | Forwards to the object at `this+2828`: calls its vtable slot `+1632`. | pattern scan |
+| `0x7e0d263c` | 1 | `fwd_f2828_vslot1656_7e0d263c` | Forwards to the object at `this+2828`: calls its vtable slot `+1656`. | pattern scan |
+| `0x7e0d264e` | 1 | `fwd_f2828_vslot1636_7e0d264e` | Forwards to the object at `this+2828`: calls its vtable slot `+1636`. | pattern scan |
+| `0x7e0d2660` | 1 | `fwd_f2828_vslot1620_7e0d2660` | Forwards to the object at `this+2828`: calls its vtable slot `+1620`. | pattern scan |
+| `0x7e0d2672` | 1 | `fwd_f2828_vslot1640_7e0d2672` | Forwards to the object at `this+2828`: calls its vtable slot `+1640`. | pattern scan |
+| `0x7e0d2684` | 1 | `fwd_f2828_vslot1648_7e0d2684` | Forwards to the object at `this+2828`: calls its vtable slot `+1648`. | pattern scan |
+| `0x7e0d2696` | 1 | `fwd_f2828_vslot1644_7e0d2696` | Forwards to the object at `this+2828`: calls its vtable slot `+1644`. | pattern scan |
+| `0x7e0d26a8` | 1 | `fwd_f2828_vslot1652_7e0d26a8` | Forwards to the object at `this+2828`: calls its vtable slot `+1652`. | pattern scan |
+| `0x7e0d26ba` | 1 | `fwd_f2828_vslot2964_7e0d26ba` | Forwards to the object at `this+2828`: calls its vtable slot `+2964`. | pattern scan |
+| `0x7e0d26cc` | 1 | `fwd_f2828_vslot2984_7e0d26cc` | Forwards to the object at `this+2828`: calls its vtable slot `+2984`. | pattern scan |
+| `0x7e0d26de` | 1 | `fwd_f2828_vslot2968_7e0d26de` | Forwards to the object at `this+2828`: calls its vtable slot `+2968`. | pattern scan |
+| `0x7e0d26f0` | 1 | `fwd_f2828_vslot2972_7e0d26f0` | Forwards to the object at `this+2828`: calls its vtable slot `+2972`. | pattern scan |
+| `0x7e0d2702` | 1 | `fwd_f2828_vslot2980_7e0d2702` | Forwards to the object at `this+2828`: calls its vtable slot `+2980`. | pattern scan |
+| `0x7e0d2714` | 1 | `fwd_f2828_vslot2976_7e0d2714` | Forwards to the object at `this+2828`: calls its vtable slot `+2976`. | pattern scan |
+| `0x7e0d2726` | 1 | `fwd_f2828_vslot2928_7e0d2726` | Forwards to the object at `this+2828`: calls its vtable slot `+2928`. | pattern scan |
+| `0x7e0d2738` | 1 | `fwd_f2828_vslot2932_7e0d2738` | Forwards to the object at `this+2828`: calls its vtable slot `+2932`. | pattern scan |
+| `0x7e0d274a` | 1 | `fwd_f2828_vslot2936_7e0d274a` | Forwards to the object at `this+2828`: calls its vtable slot `+2936`. | pattern scan |
+| `0x7e0d275c` | 1 | `fwd_f2828_vslot2960_7e0d275c` | Forwards to the object at `this+2828`: calls its vtable slot `+2960`. | pattern scan |
+| `0x7e0d276e` | 1 | `fwd_f2828_vslot2940_7e0d276e` | Forwards to the object at `this+2828`: calls its vtable slot `+2940`. | pattern scan |
+| `0x7e0d2780` | 1 | `fwd_f2828_vslot2924_7e0d2780` | Forwards to the object at `this+2828`: calls its vtable slot `+2924`. | pattern scan |
+| `0x7e0d2792` | 1 | `fwd_f2828_vslot2944_7e0d2792` | Forwards to the object at `this+2828`: calls its vtable slot `+2944`. | pattern scan |
+| `0x7e0d27a4` | 1 | `fwd_f2828_vslot2952_7e0d27a4` | Forwards to the object at `this+2828`: calls its vtable slot `+2952`. | pattern scan |
+| `0x7e0d27b6` | 1 | `fwd_f2828_vslot2948_7e0d27b6` | Forwards to the object at `this+2828`: calls its vtable slot `+2948`. | pattern scan |
+| `0x7e0d27c8` | 1 | `fwd_f2828_vslot2956_7e0d27c8` | Forwards to the object at `this+2828`: calls its vtable slot `+2956`. | pattern scan |
+| `0x7e0d27da` | 1 | `fwd_f2828_vslot1724_7e0d27da` | Forwards to the object at `this+2828`: calls its vtable slot `+1724`. | pattern scan |
+| `0x7e0d27ec` | 1 | `fwd_f2828_vslot1744_7e0d27ec` | Forwards to the object at `this+2828`: calls its vtable slot `+1744`. | pattern scan |
+| `0x7e0d27fe` | 1 | `fwd_f2828_vslot1728_7e0d27fe` | Forwards to the object at `this+2828`: calls its vtable slot `+1728`. | pattern scan |
+| `0x7e0d2810` | 1 | `fwd_f2828_vslot1732_7e0d2810` | Forwards to the object at `this+2828`: calls its vtable slot `+1732`. | pattern scan |
+| `0x7e0d2822` | 1 | `fwd_f2828_vslot1740_7e0d2822` | Forwards to the object at `this+2828`: calls its vtable slot `+1740`. | pattern scan |
+| `0x7e0d2834` | 1 | `fwd_f2828_vslot1736_7e0d2834` | Forwards to the object at `this+2828`: calls its vtable slot `+1736`. | pattern scan |
+| `0x7e0d2846` | 1 | `fwd_f2828_vslot1688_7e0d2846` | Forwards to the object at `this+2828`: calls its vtable slot `+1688`. | pattern scan |
+| `0x7e0d2858` | 1 | `fwd_f2828_vslot1692_7e0d2858` | Forwards to the object at `this+2828`: calls its vtable slot `+1692`. | pattern scan |
+| `0x7e0d286a` | 1 | `fwd_f2828_vslot1696_7e0d286a` | Forwards to the object at `this+2828`: calls its vtable slot `+1696`. | pattern scan |
+| `0x7e0d287c` | 1 | `fwd_f2828_vslot1720_7e0d287c` | Forwards to the object at `this+2828`: calls its vtable slot `+1720`. | pattern scan |
+| `0x7e0d288e` | 1 | `fwd_f2828_vslot1700_7e0d288e` | Forwards to the object at `this+2828`: calls its vtable slot `+1700`. | pattern scan |
+| `0x7e0d28a0` | 1 | `fwd_f2828_vslot1684_7e0d28a0` | Forwards to the object at `this+2828`: calls its vtable slot `+1684`. | pattern scan |
+| `0x7e0d28b2` | 1 | `fwd_f2828_vslot1704_7e0d28b2` | Forwards to the object at `this+2828`: calls its vtable slot `+1704`. | pattern scan |
+| `0x7e0d28c4` | 1 | `fwd_f2828_vslot1712_7e0d28c4` | Forwards to the object at `this+2828`: calls its vtable slot `+1712`. | pattern scan |
+| `0x7e0d28d6` | 1 | `fwd_f2828_vslot1708_7e0d28d6` | Forwards to the object at `this+2828`: calls its vtable slot `+1708`. | pattern scan |
+| `0x7e0d28e8` | 1 | `fwd_f2828_vslot1716_7e0d28e8` | Forwards to the object at `this+2828`: calls its vtable slot `+1716`. | pattern scan |
+| `0x7e0d28fa` | 1 | `fwd_f2828_vslot1860_7e0d28fa` | Forwards to the object at `this+2828`: calls its vtable slot `+1860`. | pattern scan |
+| `0x7e0d290c` | 1 | `fwd_f2828_vslot1880_7e0d290c` | Forwards to the object at `this+2828`: calls its vtable slot `+1880`. | pattern scan |
+| `0x7e0d291e` | 1 | `fwd_f2828_vslot1864_7e0d291e` | Forwards to the object at `this+2828`: calls its vtable slot `+1864`. | pattern scan |
+| `0x7e0d2930` | 1 | `fwd_f2828_vslot1868_7e0d2930` | Forwards to the object at `this+2828`: calls its vtable slot `+1868`. | pattern scan |
+| `0x7e0d2942` | 1 | `fwd_f2828_vslot1876_7e0d2942` | Forwards to the object at `this+2828`: calls its vtable slot `+1876`. | pattern scan |
+| `0x7e0d2954` | 1 | `fwd_f2828_vslot1872_7e0d2954` | Forwards to the object at `this+2828`: calls its vtable slot `+1872`. | pattern scan |
+| `0x7e0d2966` | 1 | `fwd_f2828_vslot1824_7e0d2966` | Forwards to the object at `this+2828`: calls its vtable slot `+1824`. | pattern scan |
+| `0x7e0d2978` | 1 | `fwd_f2828_vslot1828_7e0d2978` | Forwards to the object at `this+2828`: calls its vtable slot `+1828`. | pattern scan |
+| `0x7e0d298a` | 1 | `fwd_f2828_vslot1832_7e0d298a` | Forwards to the object at `this+2828`: calls its vtable slot `+1832`. | pattern scan |
+| `0x7e0d299c` | 1 | `fwd_f2828_vslot1856_7e0d299c` | Forwards to the object at `this+2828`: calls its vtable slot `+1856`. | pattern scan |
+| `0x7e0d29ae` | 1 | `fwd_f2828_vslot1836_7e0d29ae` | Forwards to the object at `this+2828`: calls its vtable slot `+1836`. | pattern scan |
+| `0x7e0d29c0` | 1 | `fwd_f2828_vslot1820_7e0d29c0` | Forwards to the object at `this+2828`: calls its vtable slot `+1820`. | pattern scan |
+| `0x7e0d29d2` | 1 | `fwd_f2828_vslot1840_7e0d29d2` | Forwards to the object at `this+2828`: calls its vtable slot `+1840`. | pattern scan |
+| `0x7e0d29e4` | 1 | `fwd_f2828_vslot1848_7e0d29e4` | Forwards to the object at `this+2828`: calls its vtable slot `+1848`. | pattern scan |
+| `0x7e0d29f6` | 1 | `fwd_f2828_vslot1844_7e0d29f6` | Forwards to the object at `this+2828`: calls its vtable slot `+1844`. | pattern scan |
+| `0x7e0d2a08` | 1 | `fwd_f2828_vslot1852_7e0d2a08` | Forwards to the object at `this+2828`: calls its vtable slot `+1852`. | pattern scan |
+| `0x7e0d2a1a` | 1 | `fwd_f2828_vslot1792_7e0d2a1a` | Forwards to the object at `this+2828`: calls its vtable slot `+1792`. | pattern scan |
+| `0x7e0d2a2c` | 1 | `fwd_f2828_vslot1812_7e0d2a2c` | Forwards to the object at `this+2828`: calls its vtable slot `+1812`. | pattern scan |
+| `0x7e0d2a3e` | 1 | `fwd_f2828_vslot1796_7e0d2a3e` | Forwards to the object at `this+2828`: calls its vtable slot `+1796`. | pattern scan |
+| `0x7e0d2a50` | 1 | `fwd_f2828_vslot1800_7e0d2a50` | Forwards to the object at `this+2828`: calls its vtable slot `+1800`. | pattern scan |
+| `0x7e0d2a62` | 1 | `fwd_f2828_vslot1808_7e0d2a62` | Forwards to the object at `this+2828`: calls its vtable slot `+1808`. | pattern scan |
+| `0x7e0d2a74` | 1 | `fwd_f2828_vslot1804_7e0d2a74` | Forwards to the object at `this+2828`: calls its vtable slot `+1804`. | pattern scan |
+| `0x7e0d2a86` | 1 | `fwd_f2828_vslot1756_7e0d2a86` | Forwards to the object at `this+2828`: calls its vtable slot `+1756`. | pattern scan |
+| `0x7e0d2a98` | 1 | `fwd_f2828_vslot1760_7e0d2a98` | Forwards to the object at `this+2828`: calls its vtable slot `+1760`. | pattern scan |
+| `0x7e0d2aaa` | 1 | `fwd_f2828_vslot1764_7e0d2aaa` | Forwards to the object at `this+2828`: calls its vtable slot `+1764`. | pattern scan |
+| `0x7e0d2abc` | 1 | `fwd_f2828_vslot1788_7e0d2abc` | Forwards to the object at `this+2828`: calls its vtable slot `+1788`. | pattern scan |
+| `0x7e0d2ace` | 1 | `fwd_f2828_vslot1768_7e0d2ace` | Forwards to the object at `this+2828`: calls its vtable slot `+1768`. | pattern scan |
+| `0x7e0d2ae0` | 1 | `fwd_f2828_vslot1752_7e0d2ae0` | Forwards to the object at `this+2828`: calls its vtable slot `+1752`. | pattern scan |
+| `0x7e0d2af2` | 1 | `fwd_f2828_vslot1772_7e0d2af2` | Forwards to the object at `this+2828`: calls its vtable slot `+1772`. | pattern scan |
+| `0x7e0d2b04` | 1 | `fwd_f2828_vslot1780_7e0d2b04` | Forwards to the object at `this+2828`: calls its vtable slot `+1780`. | pattern scan |
+| `0x7e0d2b16` | 1 | `fwd_f2828_vslot1776_7e0d2b16` | Forwards to the object at `this+2828`: calls its vtable slot `+1776`. | pattern scan |
+| `0x7e0d2b28` | 1 | `fwd_f2828_vslot1784_7e0d2b28` | Forwards to the object at `this+2828`: calls its vtable slot `+1784`. | pattern scan |
+| `0x7e0d2b3a` | 1 | `fwd_f2828_vslot1924_7e0d2b3a` | Forwards to the object at `this+2828`: calls its vtable slot `+1924`. | pattern scan |
+| `0x7e0d2b4c` | 1 | `fwd_f2828_vslot1944_7e0d2b4c` | Forwards to the object at `this+2828`: calls its vtable slot `+1944`. | pattern scan |
+| `0x7e0d2b5e` | 1 | `fwd_f2828_vslot1928_7e0d2b5e` | Forwards to the object at `this+2828`: calls its vtable slot `+1928`. | pattern scan |
+| `0x7e0d2b70` | 1 | `fwd_f2828_vslot1932_7e0d2b70` | Forwards to the object at `this+2828`: calls its vtable slot `+1932`. | pattern scan |
+| `0x7e0d2b82` | 1 | `fwd_f2828_vslot1940_7e0d2b82` | Forwards to the object at `this+2828`: calls its vtable slot `+1940`. | pattern scan |
+| `0x7e0d2b94` | 1 | `fwd_f2828_vslot1936_7e0d2b94` | Forwards to the object at `this+2828`: calls its vtable slot `+1936`. | pattern scan |
+| `0x7e0d2ba6` | 1 | `fwd_f2828_vslot1888_7e0d2ba6` | Forwards to the object at `this+2828`: calls its vtable slot `+1888`. | pattern scan |
+| `0x7e0d2bb8` | 1 | `fwd_f2828_vslot1892_7e0d2bb8` | Forwards to the object at `this+2828`: calls its vtable slot `+1892`. | pattern scan |
+| `0x7e0d2bca` | 1 | `fwd_f2828_vslot1896_7e0d2bca` | Forwards to the object at `this+2828`: calls its vtable slot `+1896`. | pattern scan |
+| `0x7e0d2bdc` | 1 | `fwd_f2828_vslot1920_7e0d2bdc` | Forwards to the object at `this+2828`: calls its vtable slot `+1920`. | pattern scan |
+| `0x7e0d2bee` | 1 | `fwd_f2828_vslot1900_7e0d2bee` | Forwards to the object at `this+2828`: calls its vtable slot `+1900`. | pattern scan |
+| `0x7e0d2c00` | 1 | `fwd_f2828_vslot1884_7e0d2c00` | Forwards to the object at `this+2828`: calls its vtable slot `+1884`. | pattern scan |
+| `0x7e0d2c12` | 1 | `fwd_f2828_vslot1904_7e0d2c12` | Forwards to the object at `this+2828`: calls its vtable slot `+1904`. | pattern scan |
+| `0x7e0d2c24` | 1 | `fwd_f2828_vslot1912_7e0d2c24` | Forwards to the object at `this+2828`: calls its vtable slot `+1912`. | pattern scan |
+| `0x7e0d2c36` | 1 | `fwd_f2828_vslot1908_7e0d2c36` | Forwards to the object at `this+2828`: calls its vtable slot `+1908`. | pattern scan |
+| `0x7e0d2c48` | 1 | `fwd_f2828_vslot1916_7e0d2c48` | Forwards to the object at `this+2828`: calls its vtable slot `+1916`. | pattern scan |
+| `0x7e0d2c5a` | 1 | `fwd_f2828_vslot3120_7e0d2c5a` | Forwards to the object at `this+2828`: calls its vtable slot `+3120`. | pattern scan |
+| `0x7e0d2c69` | 1 | `fwd_f2828_vslot3124_7e0d2c69` | Forwards to the object at `this+2828`: calls its vtable slot `+3124`. | pattern scan |
+| `0x7e0d2c7b` | 1 | `fwd_f2828_to_7e114680_7e0d2c7b` | Forwards to the object at `this+2828`: `0x7e114680(*(this+2828))`. | pattern scan |
+| `0x7e0d2c8c` | 1 | `fwd_f2828_vslot3140_7e0d2c8c` | Forwards to the object at `this+2828`: calls its vtable slot `+3140`. | pattern scan |
+| `0x7e0d2c9e` | 1 | `fwd_f2828_to_7e114697_7e0d2c9e` | Forwards to the object at `this+2828`: `0x7e114697(*(this+2828))`. | pattern scan |
+| `0x7e0d2caf` | 1 | `fwd_f2828_vslot3152_7e0d2caf` | Forwards to the object at `this+2828`: calls its vtable slot `+3152`. | pattern scan |
+| `0x7e0d2cc1` | 1 | `fwd_f2828_vslot3160_7e0d2cc1` | Forwards to the object at `this+2828`: calls its vtable slot `+3160`. | pattern scan |
+| `0x7e0d2cd3` | 1 | `fwd_f2828_to_7e1146ae_7e0d2cd3` | Forwards to the object at `this+2828`: `0x7e1146ae(*(this+2828))`. | pattern scan |
+| `0x7e0d2ce1` | 1 | `fwd_f2828_to_7e109781_7e0d2ce1` | Forwards to the object at `this+2828`: `0x7e109781(*(this+2828))`. | pattern scan |
+| `0x7e0d2cf2` | 1 | `fwd_f2828_vslot2372_7e0d2cf2` | Forwards to the object at `this+2828`: calls its vtable slot `+2372`. | pattern scan |
+| `0x7e0d2d04` | 1 | `fwd_f2828_vslot2392_7e0d2d04` | Forwards to the object at `this+2828`: calls its vtable slot `+2392`. | pattern scan |
+| `0x7e0d2d16` | 1 | `fwd_f2828_vslot2376_7e0d2d16` | Forwards to the object at `this+2828`: calls its vtable slot `+2376`. | pattern scan |
+| `0x7e0d2d28` | 1 | `fwd_f2828_vslot2380_7e0d2d28` | Forwards to the object at `this+2828`: calls its vtable slot `+2380`. | pattern scan |
+| `0x7e0d2d3a` | 1 | `fwd_f2828_vslot2388_7e0d2d3a` | Forwards to the object at `this+2828`: calls its vtable slot `+2388`. | pattern scan |
+| `0x7e0d2d4c` | 1 | `fwd_f2828_vslot2384_7e0d2d4c` | Forwards to the object at `this+2828`: calls its vtable slot `+2384`. | pattern scan |
+| `0x7e0d2d5e` | 1 | `fwd_f2828_vslot2336_7e0d2d5e` | Forwards to the object at `this+2828`: calls its vtable slot `+2336`. | pattern scan |
+| `0x7e0d2d70` | 1 | `fwd_f2828_vslot2340_7e0d2d70` | Forwards to the object at `this+2828`: calls its vtable slot `+2340`. | pattern scan |
+| `0x7e0d2d82` | 1 | `fwd_f2828_vslot2344_7e0d2d82` | Forwards to the object at `this+2828`: calls its vtable slot `+2344`. | pattern scan |
+| `0x7e0d2d94` | 1 | `fwd_f2828_vslot2368_7e0d2d94` | Forwards to the object at `this+2828`: calls its vtable slot `+2368`. | pattern scan |
+| `0x7e0d2da6` | 1 | `fwd_f2828_vslot2348_7e0d2da6` | Forwards to the object at `this+2828`: calls its vtable slot `+2348`. | pattern scan |
+| `0x7e0d2db8` | 1 | `fwd_f2828_vslot2332_7e0d2db8` | Forwards to the object at `this+2828`: calls its vtable slot `+2332`. | pattern scan |
+| `0x7e0d2dca` | 1 | `fwd_f2828_vslot2352_7e0d2dca` | Forwards to the object at `this+2828`: calls its vtable slot `+2352`. | pattern scan |
+| `0x7e0d2ddc` | 1 | `fwd_f2828_vslot2360_7e0d2ddc` | Forwards to the object at `this+2828`: calls its vtable slot `+2360`. | pattern scan |
+| `0x7e0d2dee` | 1 | `fwd_f2828_vslot2356_7e0d2dee` | Forwards to the object at `this+2828`: calls its vtable slot `+2356`. | pattern scan |
+| `0x7e0d2e00` | 1 | `fwd_f2828_vslot2364_7e0d2e00` | Forwards to the object at `this+2828`: calls its vtable slot `+2364`. | pattern scan |
+| `0x7e0d2e12` | 1 | `fwd_f2828_vslot2568_7e0d2e12` | Forwards to the object at `this+2828`: calls its vtable slot `+2568`. | pattern scan |
+| `0x7e0d2e24` | 1 | `fwd_f2828_vslot2588_7e0d2e24` | Forwards to the object at `this+2828`: calls its vtable slot `+2588`. | pattern scan |
+| `0x7e0d2e36` | 1 | `fwd_f2828_vslot2572_7e0d2e36` | Forwards to the object at `this+2828`: calls its vtable slot `+2572`. | pattern scan |
+| `0x7e0d2e48` | 1 | `fwd_f2828_vslot2576_7e0d2e48` | Forwards to the object at `this+2828`: calls its vtable slot `+2576`. | pattern scan |
+| `0x7e0d2e5a` | 1 | `fwd_f2828_vslot2584_7e0d2e5a` | Forwards to the object at `this+2828`: calls its vtable slot `+2584`. | pattern scan |
+| `0x7e0d2e6c` | 1 | `fwd_f2828_vslot2580_7e0d2e6c` | Forwards to the object at `this+2828`: calls its vtable slot `+2580`. | pattern scan |
+| `0x7e0d2e7e` | 1 | `fwd_f2828_vslot2532_7e0d2e7e` | Forwards to the object at `this+2828`: calls its vtable slot `+2532`. | pattern scan |
+| `0x7e0d2e90` | 1 | `fwd_f2828_vslot2536_7e0d2e90` | Forwards to the object at `this+2828`: calls its vtable slot `+2536`. | pattern scan |
+| `0x7e0d2ea2` | 1 | `fwd_f2828_vslot2540_7e0d2ea2` | Forwards to the object at `this+2828`: calls its vtable slot `+2540`. | pattern scan |
+| `0x7e0d2eb4` | 1 | `fwd_f2828_vslot2564_7e0d2eb4` | Forwards to the object at `this+2828`: calls its vtable slot `+2564`. | pattern scan |
+| `0x7e0d2ec6` | 1 | `fwd_f2828_vslot2544_7e0d2ec6` | Forwards to the object at `this+2828`: calls its vtable slot `+2544`. | pattern scan |
+| `0x7e0d2ed8` | 1 | `fwd_f2828_vslot2528_7e0d2ed8` | Forwards to the object at `this+2828`: calls its vtable slot `+2528`. | pattern scan |
+| `0x7e0d2eea` | 1 | `fwd_f2828_vslot2548_7e0d2eea` | Forwards to the object at `this+2828`: calls its vtable slot `+2548`. | pattern scan |
+| `0x7e0d2efc` | 1 | `fwd_f2828_vslot2556_7e0d2efc` | Forwards to the object at `this+2828`: calls its vtable slot `+2556`. | pattern scan |
+| `0x7e0d2f0e` | 1 | `fwd_f2828_vslot2552_7e0d2f0e` | Forwards to the object at `this+2828`: calls its vtable slot `+2552`. | pattern scan |
+| `0x7e0d2f20` | 1 | `fwd_f2828_vslot2560_7e0d2f20` | Forwards to the object at `this+2828`: calls its vtable slot `+2560`. | pattern scan |
+| `0x7e0d2f2f` | 5 | `fwd_f2828_to_7e10f07d_7e0d2f2f` | Forwards to the object at `this+2828`: `0x7e10f07d(*(this+2828))`. | pattern scan |
+| `0x7e0d2f40` | 1 | `fwd_f2828_vslot3276_7e0d2f40` | Forwards to the object at `this+2828`: calls its vtable slot `+3276`. | pattern scan |
+| `0x7e0d2f4f` | 14 | `fwd_f2828_to_7e10f0f2_7e0d2f4f` | Forwards to the object at `this+2828`: `0x7e10f0f2(*(this+2828))`. | pattern scan |
+| `0x7e0d2f60` | 1 | `fwd_f2828_vslot3284_7e0d2f60` | Forwards to the object at `this+2828`: calls its vtable slot `+3284`. | pattern scan |
+| `0x7e0d2f6f` | 1 | `fwd_f2828_vslot3288_7e0d2f6f` | Forwards to the object at `this+2828`: calls its vtable slot `+3288`. | pattern scan |
+| `0x7e0d2f81` | 1 | `fwd_f2828_vslot3292_7e0d2f81` | Forwards to the object at `this+2828`: calls its vtable slot `+3292`. | pattern scan |
+| `0x7e0d2f90` | 1 | `fwd_f2828_vslot3308_7e0d2f90` | Forwards to the object at `this+2828`: calls its vtable slot `+3308`. | pattern scan |
+| `0x7e0d2f9f` | 15 | `fwd_f2828_to_7e10f235_7e0d2f9f` | Forwards to the object at `this+2828`: `0x7e10f235(*(this+2828))`. | pattern scan |
+| `0x7e0d2fad` | 9 | `fwd_f2828_to_7e10f16d_7e0d2fad` | Forwards to the object at `this+2828`: `0x7e10f16d(*(this+2828))`. | pattern scan |
+| `0x7e0d2fbb` | 2 | `fwd_f2828_to_7e10f11b_7e0d2fbb` | Forwards to the object at `this+2828`: `0x7e10f11b(*(this+2828))`. | pattern scan |
+| `0x7e0d2fcc` | 1 | `fwd_f2828_vslot3312_7e0d2fcc` | Forwards to the object at `this+2828`: calls its vtable slot `+3312`. | pattern scan |
+| `0x7e0d2fde` | 1 | `fwd_f2828_vslot3316_7e0d2fde` | Forwards to the object at `this+2828`: calls its vtable slot `+3316`. | pattern scan |
+| `0x7e0d2ff0` | 1 | `fwd_f2828_vslot3328_7e0d2ff0` | Forwards to the object at `this+2828`: calls its vtable slot `+3328`. | pattern scan |
+| `0x7e0d2fff` | 3 | `fwd_f2828_to_7e10f144_7e0d2fff` | Forwards to the object at `this+2828`: `0x7e10f144(*(this+2828))`. | pattern scan |
+| `0x7e0d3010` | 1 | `fwd_f2828_to_7e1146c5_7e0d3010` | Forwards to the object at `this+2828`: `0x7e1146c5(*(this+2828))`. | pattern scan |
+| `0x7e0d301e` | 12 | `fwd_f2828_to_7e10f30d_7e0d301e` | Forwards to the object at `this+2828`: `0x7e10f30d(*(this+2828))`. | pattern scan |
+| `0x7e0d302c` | 19 | `fwd_f2828_to_7e10f28d_7e0d302c` | Forwards to the object at `this+2828`: `0x7e10f28d(*(this+2828))`. | pattern scan |
+| `0x7e0d303d` | 1 | `fwd_f2828_vslot3360_7e0d303d` | Forwards to the object at `this+2828`: calls its vtable slot `+3360`. | pattern scan |
+| `0x7e0d304f` | 1 | `fwd_f2828_vslot900_7e0d304f` | Forwards to the object at `this+2828`: calls its vtable slot `+900`. | pattern scan |
+| `0x7e0d3061` | 1 | `fwd_f2828_vslot868_7e0d3061` | Forwards to the object at `this+2828`: calls its vtable slot `+868`. | pattern scan |
+| `0x7e0d3073` | 1 | `fwd_f2828_vslot872_7e0d3073` | Forwards to the object at `this+2828`: calls its vtable slot `+872`. | pattern scan |
+| `0x7e0d3085` | 1 | `fwd_f2828_vslot876_7e0d3085` | Forwards to the object at `this+2828`: calls its vtable slot `+876`. | pattern scan |
+| `0x7e0d3097` | 1 | `fwd_f2828_vslot888_7e0d3097` | Forwards to the object at `this+2828`: calls its vtable slot `+888`. | pattern scan |
+| `0x7e0d30a9` | 1 | `fwd_f2828_vslot892_7e0d30a9` | Forwards to the object at `this+2828`: calls its vtable slot `+892`. | pattern scan |
+| `0x7e0d30bb` | 1 | `fwd_f2828_vslot880_7e0d30bb` | Forwards to the object at `this+2828`: calls its vtable slot `+880`. | pattern scan |
+| `0x7e0d30cd` | 1 | `fwd_f2828_vslot896_7e0d30cd` | Forwards to the object at `this+2828`: calls its vtable slot `+896`. | pattern scan |
+| `0x7e0d30df` | 1 | `fwd_f2828_vslot884_7e0d30df` | Forwards to the object at `this+2828`: calls its vtable slot `+884`. | pattern scan |
+| `0x7e0d30f1` | 1 | `fwd_f2828_vslot864_7e0d30f1` | Forwards to the object at `this+2828`: calls its vtable slot `+864`. | pattern scan |
+| `0x7e0d3103` | 1 | `fwd_f2828_vslot756_7e0d3103` | Forwards to the object at `this+2828`: calls its vtable slot `+756`. | pattern scan |
+| `0x7e0d3115` | 1 | `fwd_f2828_vslot720_7e0d3115` | Forwards to the object at `this+2828`: calls its vtable slot `+720`. | pattern scan |
+| `0x7e0d3127` | 1 | `fwd_f2828_vslot724_7e0d3127` | Forwards to the object at `this+2828`: calls its vtable slot `+724`. | pattern scan |
+| `0x7e0d3139` | 1 | `fwd_f2828_vslot728_7e0d3139` | Forwards to the object at `this+2828`: calls its vtable slot `+728`. | pattern scan |
+| `0x7e0d314b` | 1 | `fwd_f2828_vslot752_7e0d314b` | Forwards to the object at `this+2828`: calls its vtable slot `+752`. | pattern scan |
+| `0x7e0d315d` | 1 | `fwd_f2828_vslot732_7e0d315d` | Forwards to the object at `this+2828`: calls its vtable slot `+732`. | pattern scan |
+| `0x7e0d316f` | 1 | `fwd_f2828_vslot716_7e0d316f` | Forwards to the object at `this+2828`: calls its vtable slot `+716`. | pattern scan |
+| `0x7e0d3181` | 1 | `fwd_f2828_vslot736_7e0d3181` | Forwards to the object at `this+2828`: calls its vtable slot `+736`. | pattern scan |
+| `0x7e0d3193` | 1 | `fwd_f2828_vslot744_7e0d3193` | Forwards to the object at `this+2828`: calls its vtable slot `+744`. | pattern scan |
+| `0x7e0d31a5` | 1 | `fwd_f2828_vslot740_7e0d31a5` | Forwards to the object at `this+2828`: calls its vtable slot `+740`. | pattern scan |
+| `0x7e0d31b7` | 1 | `fwd_f2828_vslot748_7e0d31b7` | Forwards to the object at `this+2828`: calls its vtable slot `+748`. | pattern scan |
+| `0x7e0d31c9` | 1 | `fwd_f2828_vslot712_7e0d31c9` | Forwards to the object at `this+2828`: calls its vtable slot `+712`. | pattern scan |
+| `0x7e0d31db` | 1 | `fwd_f2828_vslot860_7e0d31db` | Forwards to the object at `this+2828`: calls its vtable slot `+860`. | pattern scan |
+| `0x7e0d31ed` | 1 | `fwd_f2828_vslot828_7e0d31ed` | Forwards to the object at `this+2828`: calls its vtable slot `+828`. | pattern scan |
+| `0x7e0d31ff` | 1 | `fwd_f2828_vslot832_7e0d31ff` | Forwards to the object at `this+2828`: calls its vtable slot `+832`. | pattern scan |
+| `0x7e0d3211` | 1 | `fwd_f2828_vslot836_7e0d3211` | Forwards to the object at `this+2828`: calls its vtable slot `+836`. | pattern scan |
+| `0x7e0d3223` | 1 | `fwd_f2828_vslot848_7e0d3223` | Forwards to the object at `this+2828`: calls its vtable slot `+848`. | pattern scan |
+| `0x7e0d3235` | 1 | `fwd_f2828_vslot852_7e0d3235` | Forwards to the object at `this+2828`: calls its vtable slot `+852`. | pattern scan |
+| `0x7e0d3247` | 1 | `fwd_f2828_vslot840_7e0d3247` | Forwards to the object at `this+2828`: calls its vtable slot `+840`. | pattern scan |
+| `0x7e0d3259` | 1 | `fwd_f2828_vslot856_7e0d3259` | Forwards to the object at `this+2828`: calls its vtable slot `+856`. | pattern scan |
+| `0x7e0d326b` | 1 | `fwd_f2828_vslot844_7e0d326b` | Forwards to the object at `this+2828`: calls its vtable slot `+844`. | pattern scan |
+| `0x7e0d327d` | 1 | `fwd_f2828_vslot824_7e0d327d` | Forwards to the object at `this+2828`: calls its vtable slot `+824`. | pattern scan |
+| `0x7e0d328f` | 1 | `fwd_f2828_vslot2824_7e0d328f` | Forwards to the object at `this+2828`: calls its vtable slot `+2824`. | pattern scan |
+| `0x7e0d32a1` | 1 | `fwd_f2828_vslot2844_7e0d32a1` | Forwards to the object at `this+2828`: calls its vtable slot `+2844`. | pattern scan |
+| `0x7e0d32b3` | 1 | `fwd_f2828_vslot2828_7e0d32b3` | Forwards to the object at `this+2828`: calls its vtable slot `+2828`. | pattern scan |
+| `0x7e0d32c5` | 1 | `fwd_f2828_vslot2832_7e0d32c5` | Forwards to the object at `this+2828`: calls its vtable slot `+2832`. | pattern scan |
+| `0x7e0d32d7` | 1 | `fwd_f2828_vslot2840_7e0d32d7` | Forwards to the object at `this+2828`: calls its vtable slot `+2840`. | pattern scan |
+| `0x7e0d32e9` | 1 | `fwd_f2828_vslot2836_7e0d32e9` | Forwards to the object at `this+2828`: calls its vtable slot `+2836`. | pattern scan |
+| `0x7e0d32fb` | 1 | `fwd_f2828_vslot2788_7e0d32fb` | Forwards to the object at `this+2828`: calls its vtable slot `+2788`. | pattern scan |
+| `0x7e0d330d` | 1 | `fwd_f2828_vslot2792_7e0d330d` | Forwards to the object at `this+2828`: calls its vtable slot `+2792`. | pattern scan |
+| `0x7e0d331f` | 1 | `fwd_f2828_vslot2796_7e0d331f` | Forwards to the object at `this+2828`: calls its vtable slot `+2796`. | pattern scan |
+| `0x7e0d3331` | 1 | `fwd_f2828_vslot2820_7e0d3331` | Forwards to the object at `this+2828`: calls its vtable slot `+2820`. | pattern scan |
+| `0x7e0d3343` | 1 | `fwd_f2828_vslot2800_7e0d3343` | Forwards to the object at `this+2828`: calls its vtable slot `+2800`. | pattern scan |
+| `0x7e0d3355` | 1 | `fwd_f2828_vslot2784_7e0d3355` | Forwards to the object at `this+2828`: calls its vtable slot `+2784`. | pattern scan |
+| `0x7e0d3367` | 1 | `fwd_f2828_vslot2804_7e0d3367` | Forwards to the object at `this+2828`: calls its vtable slot `+2804`. | pattern scan |
+| `0x7e0d3379` | 1 | `fwd_f2828_vslot2812_7e0d3379` | Forwards to the object at `this+2828`: calls its vtable slot `+2812`. | pattern scan |
+| `0x7e0d338b` | 1 | `fwd_f2828_vslot2808_7e0d338b` | Forwards to the object at `this+2828`: calls its vtable slot `+2808`. | pattern scan |
+| `0x7e0d339d` | 1 | `fwd_f2828_vslot2816_7e0d339d` | Forwards to the object at `this+2828`: calls its vtable slot `+2816`. | pattern scan |
+| `0x7e0d3489` | 1 | `fwd_f2828_vslot3400_7e0d3489` | Forwards to the object at `this+2828`: calls its vtable slot `+3400`. | pattern scan |
+| `0x7e0d3f5e` | 7 | `fwd_f188_to_7e0ec703_7e0d3f5e` | Forwards to the object at `this+188`: `0x7e0ec703(*(this+188))`. | pattern scan |
+| `0x7e0d4a4d` | 2 | `call_7e1e67f6_ret_null_7e0d4a4d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d54c3` | 3 | `fwd_f184_to_7e0ed138_7e0d54c3` | Forwards to the object at `this+184`: `0x7e0ed138(*(this+184))`. | pattern scan |
+| `0x7e0d54d1` | 2 | `fwd_f184_to_7e0ed15e_7e0d54d1` | Forwards to the object at `this+184`: `0x7e0ed15e(*(this+184))`. | pattern scan |
+| `0x7e0d54df` | 1 | `fwd_f184_to_7e0edf6c_7e0d54df` | Forwards to the object at `this+184`: `0x7e0edf6c(*(this+184))`. | pattern scan |
+| `0x7e0d54ed` | 1 | `fwd_f184_to_7e0edf8a_7e0d54ed` | Forwards to the object at `this+184`: `0x7e0edf8a(*(this+184))`. | pattern scan |
+| `0x7e0d54fb` | 6 | `fwd_f184_to_7e0ed18c_7e0d54fb` | Forwards to the object at `this+184`: `0x7e0ed18c(*(this+184))`. | pattern scan |
+| `0x7e0d553a` | 2 | `fwd_f184_to_7e0ed1d4_7e0d553a` | Forwards to the object at `this+184`: `0x7e0ed1d4(*(this+184))`. | pattern scan |
+| `0x7e0d5548` | 1 | `fwd_f184_to_7e0ede85_7e0d5548` | Forwards to the object at `this+184`: `0x7e0ede85(*(this+184))`. | pattern scan |
+| `0x7e0d5568` | 1 | `fwd_f184_to_7e0edd6b_7e0d5568` | Forwards to the object at `this+184`: `0x7e0edd6b(*(this+184))`. | pattern scan |
+| `0x7e0d5579` | 20 | `fwd_f184_to_7e0ed20e_7e0d5579` | Forwards to the object at `this+184`: `0x7e0ed20e(*(this+184))`. | pattern scan |
+| `0x7e0d5587` | 2 | `fwd_f184_to_7e0edd41_7e0d5587` | Forwards to the object at `this+184`: `0x7e0edd41(*(this+184))`. | pattern scan |
+| `0x7e0d5595` | 1 | `fwd_f184_to_7e0ed249_7e0d5595` | Forwards to the object at `this+184`: `0x7e0ed249(*(this+184))`. | pattern scan |
+| `0x7e0d55d1` | 1 | `fwd_f184_to_7e0ecfdf_7e0d55d1` | Forwards to the object at `this+184`: `0x7e0ecfdf(*(this+184))`. | pattern scan |
+| `0x7e0d587b` | 2 | `fwd_f184_to_7e0edd4f_7e0d587b` | Forwards to the object at `this+184`: `0x7e0edd4f(*(this+184))`. | pattern scan |
+| `0x7e0d5894` | 5 | `fwd_f184_to_7e0edcd1_7e0d5894` | Forwards to the object at `this+184`: `0x7e0edcd1(*(this+184))`. | pattern scan |
+| `0x7e0d58a2` | 1 | `fwd_f184_to_7e0ed257_7e0d58a2` | Forwards to the object at `this+184`: `0x7e0ed257(*(this+184))`. | pattern scan |
+| `0x7e0d58b0` | 6 | `fwd_f184_to_7e0edc8b_7e0d58b0` | Forwards to the object at `this+184`: `0x7e0edc8b(*(this+184))`. | pattern scan |
+| `0x7e0d58be` | 3 | `fwd_f184_to_7e0edca7_7e0d58be` | Forwards to the object at `this+184`: `0x7e0edca7(*(this+184))`. | pattern scan |
+| `0x7e0d58cc` | 1 | `fwd_f184_to_7e0edf7a_7e0d58cc` | Forwards to the object at `this+184`: `0x7e0edf7a(*(this+184))`. | pattern scan |
+| `0x7e0d58da` | 3 | `fwd_f184_to_7e0edc44_7e0d58da` | Forwards to the object at `this+184`: `0x7e0edc44(*(this+184))`. | pattern scan |
+| `0x7e0d58e8` | 8 | `fwd_f184_to_7e0ed2a9_7e0d58e8` | Forwards to the object at `this+184`: `0x7e0ed2a9(*(this+184))`. | pattern scan |
+| `0x7e0d58f6` | 10 | `fwd_f184_to_7e0edc7d_7e0d58f6` | Forwards to the object at `this+184`: `0x7e0edc7d(*(this+184))`. | pattern scan |
+| `0x7e0d5904` | 1 | `fwd_f184_to_7e0edcb5_7e0d5904` | Forwards to the object at `this+184`: `0x7e0edcb5(*(this+184))`. | pattern scan |
+| `0x7e0d5912` | 1 | `fwd_f184_to_7e0ed2b7_7e0d5912` | Forwards to the object at `this+184`: `0x7e0ed2b7(*(this+184))`. | pattern scan |
+| `0x7e0d5920` | 1 | `fwd_f184_to_7e0ed0f7_7e0d5920` | Forwards to the object at `this+184`: `0x7e0ed0f7(*(this+184))`. | pattern scan |
+| `0x7e0d592e` | 2 | `fwd_f184_to_7e0ed2bd_7e0d592e` | Forwards to the object at `this+184`: `0x7e0ed2bd(*(this+184))`. | pattern scan |
+| `0x7e0d593c` | 1 | `fwd_f184_to_7e0edd33_7e0d593c` | Forwards to the object at `this+184`: `0x7e0edd33(*(this+184))`. | pattern scan |
+| `0x7e0d594a` | 1 | `fwd_f184_to_7e0edcfb_7e0d594a` | Forwards to the object at `this+184`: `0x7e0edcfb(*(this+184))`. | pattern scan |
+| `0x7e0d5958` | 1 | `fwd_f184_to_7e0ed1e3_7e0d5958` | Forwards to the object at `this+184`: `0x7e0ed1e3(*(this+184))`. | pattern scan |
+| `0x7e0d5969` | 1 | `fwd_f184_to_7e0edf5e_7e0d5969` | Forwards to the object at `this+184`: `0x7e0edf5e(*(this+184))`. | pattern scan |
+| `0x7e0d597a` | 2 | `fwd_f184_to_7e0ede77_7e0d597a` | Forwards to the object at `this+184`: `0x7e0ede77(*(this+184))`. | pattern scan |
+| `0x7e0d601f` | 3 | `call_7e0d593c_arg_1_7e0d601f` | Calls `0x7e0d593c` with `d0 = 1`. | pattern scan |
+| `0x7e0d6584` | 2 | `call_7e1e67f6_ret_null_7e0d6584` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d65ef` | 2 | `call_7e1e67f6_ret_null_7e0d65ef` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d665a` | 1 | `call_7e1e67f6_ret_null_7e0d665a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d66bf` | 1 | `call_7e1e67f6_ret_null_7e0d66bf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d697c` | 2 | `call_7e1e67f6_ret_null_7e0d697c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d69fb` | 1 | `call_7e1e6239_ret_null_7e0d69fb` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0d7523` | 1 | `store_4_f176_call_7e1e86dd_7e0d7523` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0d7547` | 1 | `call2_7e0d7523_7e0d759a_7e0d7547` | Calls `0x7e0d7523(this)` and then `0x7e0d759a(this)`. | pattern scan |
+| `0x7e0d8d7a` | 1 | `fwd_f440_to_7e0ceb85_7e0d8d7a` | Forwards to the object at `this+440`: `0x7e0ceb85(*(this+440))`. | pattern scan |
+| `0x7e0d9058` | 1 | `store_1_f176_f180_7e0d9058` | `*(this+176) = *(this+180) = 1`. | pattern scan |
+| `0x7e0d906d` | 1 | `store_2_f176_f180_7e0d906d` | `*(this+176) = *(this+180) = 2`. | pattern scan |
+| `0x7e0d92d0` | 1 | `store_6_f456_f460_7e0d92d0` | `*(this+456) = *(this+460) = 6`. | pattern scan |
+| `0x7e0d9422` | 1 | `store_9_f468_f472_7e0d9422` | `*(this+468) = *(this+472) = 9`. | pattern scan |
+| `0x7e0d9941` | 1 | `store_17_f484_f480_7e0d9941` | `*(this+484) = *(this+480) = 17`. | pattern scan |
+| `0x7e0d9995` | 1 | `store_18_f484_f480_7e0d9995` | `*(this+484) = *(this+480) = 18`. | pattern scan |
+| `0x7e0db397` | 1 | `store_1_f176_f180_7e0db397` | `*(this+176) = *(this+180) = 1`. | pattern scan |
+| `0x7e0db3ac` | 1 | `store_2_f176_f180_7e0db3ac` | `*(this+176) = *(this+180) = 2`. | pattern scan |
+| `0x7e0db4b0` | 1 | `call2_7e0db552_7e0db836_7e0db4b0` | Calls `0x7e0db552(this)` and then `0x7e0db836(this)`. | pattern scan |
+| `0x7e0db852` | 2 | `call_7e1e67f6_ret_null_7e0db852` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0db8bd` | 1 | `call_7e1e67f6_ret_null_7e0db8bd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0db92c` | 1 | `call_7e1e67f6_ret_null_7e0db92c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0db9a4` | 1 | `call_7e1e67f6_ret_null_7e0db9a4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dba18` | 1 | `call_7e1e67f6_ret_null_7e0dba18` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dba83` | 1 | `call_7e1e67f6_ret_null_7e0dba83` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbafe` | 1 | `call_7e1e67f6_ret_null_7e0dbafe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbb69` | 1 | `call_7e1e67f6_ret_null_7e0dbb69` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbbd4` | 1 | `call_7e1e67f6_ret_null_7e0dbbd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbc3f` | 1 | `call_7e1e67f6_ret_null_7e0dbc3f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbcaa` | 1 | `call_7e1e67f6_ret_null_7e0dbcaa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbd15` | 1 | `call_7e1e67f6_ret_null_7e0dbd15` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbde6` | 2 | `call_7e1e67f6_ret_null_7e0dbde6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbe51` | 1 | `call_7e1e67f6_ret_null_7e0dbe51` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbf47` | 1 | `call_7e1e67f6_ret_null_7e0dbf47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dbfb2` | 1 | `call_7e1e67f6_ret_null_7e0dbfb2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc01d` | 1 | `call_7e1e67f6_ret_null_7e0dc01d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc089` | 1 | `call_7e1e67f6_ret_null_7e0dc089` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc0f5` | 1 | `call_7e1e67f6_ret_null_7e0dc0f5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc161` | 1 | `call_7e1e67f6_ret_null_7e0dc161` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc1cd` | 1 | `call_7e1e67f6_ret_null_7e0dc1cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc239` | 1 | `call_7e1e67f6_ret_null_7e0dc239` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc2a5` | 1 | `call_7e1e67f6_ret_null_7e0dc2a5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dc311` | 1 | `call_7e1e67f6_ret_null_7e0dc311` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dcedb` | 1 | `store_4_f176_call_7e1e86dd_7e0dcedb` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0dcf0c` | 1 | `call2_7e0dcedb_7e0dcf55_7e0dcf0c` | Calls `0x7e0dcedb(this)` and then `0x7e0dcf55(this)`. | pattern scan |
+| `0x7e0dcf6f` | 1 | `call_7e0dd00a_ret_1_7e0dcf6f` | Calls `0x7e0dd00a`, then returns 1. | pattern scan |
+| `0x7e0dd00a` | 1 | `call2_7e0dd019_7e0dd0fb_7e0dd00a` | Calls `0x7e0dd019(this)` and then `0x7e0dd0fb(this)`. | pattern scan |
+| `0x7e0dd019` | 1 | `store_7_f1980_call_7e0dc440_7e0dd019` | `*(this+1980) = 7`, then calls `0x7e0dc440`. | pattern scan |
+| `0x7e0dd1a3` | 1 | `call_7e1e67f6_ret_null_7e0dd1a3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dd1fe` | 1 | `call_7e1e67f6_ret_null_7e0dd1fe` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dd25a` | 1 | `call_7e1e67f6_ret_null_7e0dd25a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dd6fa` | 1 | `call2_7e0dd70c_7e0dd7a4_7e0dd6fa` | Calls `0x7e0dd70c(this)` and then `0x7e0dd7a4(this)`. | pattern scan |
+| `0x7e0dd70c` | 1 | `store_4_f176_call_7e1e86dd_7e0dd70c` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e0dd7ac` | 1 | `store_5_f192_f180_7e0dd7ac` | `*(this+192) = *(this+180) = 5`. | pattern scan |
+| `0x7e0dd92a` | 1 | `store_7_f192_f180_7e0dd92a` | `*(this+192) = *(this+180) = 7`. | pattern scan |
+| `0x7e0ddda8` | 1 | `store_5_f192_f180_7e0ddda8` | `*(this+192) = *(this+180) = 5`. | pattern scan |
+| `0x7e0dde27` | 1 | `store_6_f192_f180_7e0dde27` | `*(this+192) = *(this+180) = 6`. | pattern scan |
+| `0x7e0ddeb3` | 1 | `store_7_f192_f180_7e0ddeb3` | `*(this+192) = *(this+180) = 7`. | pattern scan |
+| `0x7e0df78f` | 1 | `call_7e1e67f6_ret_null_7e0df78f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df7fa` | 1 | `call_7e1e67f6_ret_null_7e0df7fa` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df865` | 1 | `call_7e1e67f6_ret_null_7e0df865` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df8d0` | 1 | `call_7e1e67f6_ret_null_7e0df8d0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df93b` | 1 | `call_7e1e67f6_ret_null_7e0df93b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0df9a6` | 1 | `call_7e1e67f6_ret_null_7e0df9a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfa11` | 1 | `call_7e1e67f6_ret_null_7e0dfa11` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfa76` | 1 | `call_7e1e67f6_ret_null_7e0dfa76` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfadb` | 1 | `call_7e1e67f6_ret_null_7e0dfadb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfb46` | 1 | `call_7e1e67f6_ret_null_7e0dfb46` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfbb1` | 1 | `call_7e1e67f6_ret_null_7e0dfbb1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0dfdb3` | 2 | `this_plus_996_7e0dfdb3` | Leaf `return this+996` (address of a member or base sub-object). | pattern scan |
+| `0x7e0e0652` | 1 | `call_7e1e49f1_on_0_7e0e0652` | Calls `0x7e1e49f1` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e0e4e78` | 1 | `store_14_f976_f256_7e0e4e78` | `*(this+976) = *(this+256) = 14`. | pattern scan |
+| `0x7e0e4edf` | 1 | `call2_7e0e4eee_7e0e51b7_7e0e4edf` | Calls `0x7e0e4eee(this)` and then `0x7e0e51b7(this)`. | pattern scan |
+| `0x7e0e6791` | 9 | `adj_thunk_356_to_7dfc0ad2_7e0e6791` | Adds 356 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0e679f` | 1 | `adj_thunk_356_to_7dfc0b9f_7e0e679f` | Adds 356 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0e6802` | 5 | `adj_thunk_536_to_7dfc0ad2_7e0e6802` | Adds 536 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0e6810` | 2 | `adj_thunk_536_to_7dfc0b9f_7e0e6810` | Adds 536 to `this`, then calls `0x7dfc0b9f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e0e6ab3` | 1 | `store_2_f252_call_7e0e6c9b_7e0e6ab3` | `*(this+252) = 2`, then calls `0x7e0e6c9b`. | pattern scan |
+| `0x7e0e6ff0` | 2 | `call_7e1e67f6_ret_null_7e0e6ff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e705b` | 2 | `call_7e1e67f6_ret_null_7e0e705b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e70c6` | 2 | `call_7e1e67f6_ret_null_7e0e70c6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e7135` | 1 | `call_7e1e67f6_ret_null_7e0e7135` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e71ad` | 1 | `call_7e1e67f6_ret_null_7e0e71ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e7216` | 1 | `call_7e1e67f6_ret_null_7e0e7216` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e727f` | 1 | `call_7e1e67f6_ret_null_7e0e727f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e8d6b` | 1 | `call_7e1e67f6_ret_null_7e0e8d6b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e8dd4` | 1 | `call_7e1e67f6_ret_null_7e0e8dd4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e8ec6` | 1 | `call_7e1e67f6_ret_null_7e0e8ec6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e8f2f` | 1 | `call_7e1e67f6_ret_null_7e0e8f2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e9003` | 1 | `call_7e1e67f6_ret_null_7e0e9003` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0e906c` | 1 | `call_7e1e67f6_ret_null_7e0e906c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0ea396` | 1 | `call_7e205040_ret_null_7e0ea396` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e0ecbcb` | 1 | `call_7e0edd17_arg_1_7e0ecbcb` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
+| `0x7e0ecf2d` | 1 | `call_7e0edd17_arg_1_7e0ecf2d` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
+| `0x7e0ecf37` | 1 | `call_7e0edd17_arg_1_7e0ecf37` | Calls `0x7e0edd17` with `d0 = 1`. | pattern scan |
+| `0x7e0ecf41` | 1 | `call_7e0edd33_arg_1_7e0ecf41` | Calls `0x7e0edd33` with `d0 = 1`. | pattern scan |
+| `0x7e0ecf4b` | 1 | `call_7e0edd33_arg_1_7e0ecf4b` | Calls `0x7e0edd33` with `d0 = 1`. | pattern scan |
+| `0x7e0ecfae` | 1 | `fwd_f168_vslot260_7e0ecfae` | Forwards to the object at `this+168`: calls its vtable slot `+260`. | pattern scan |
+| `0x7e0ed18c` | 1 | `fwd_f160_to_7e0afc89_7e0ed18c` | Forwards to the object at `this+160`: `0x7e0afc89(*(this+160))`. | pattern scan |
+| `0x7e0ed249` | 1 | `fwd_f160_to_7e0b094a_7e0ed249` | Forwards to the object at `this+160`: `0x7e0b094a(*(this+160))`. | pattern scan |
+| `0x7e0ed257` | 2 | `fwd_f160_to_7e0b0c54_7e0ed257` | Forwards to the object at `this+160`: `0x7e0b0c54(*(this+160))`. | pattern scan |
+| `0x7e0ed2a9` | 1 | `fwd_f160_to_7e0b0d85_7e0ed2a9` | Forwards to the object at `this+160`: `0x7e0b0d85(*(this+160))`. | pattern scan |
+| `0x7e0ed2bd` | 1 | `fwd_f160_to_7e0b0dde_7e0ed2bd` | Forwards to the object at `this+160`: `0x7e0b0dde(*(this+160))`. | pattern scan |
+| `0x7e0edc53` | 3 | `fwd_f160_to_7e0af9d6_7e0edc53` | Forwards to the object at `this+160`: `0x7e0af9d6(*(this+160))`. | pattern scan |
+| `0x7e0edc61` | 13 | `fwd_f160_to_7e0b1d6b_7e0edc61` | Forwards to the object at `this+160`: `0x7e0b1d6b(*(this+160))`. | pattern scan |
+| `0x7e0edc6f` | 1 | `fwd_f160_to_7e0afcd3_7e0edc6f` | Forwards to the object at `this+160`: `0x7e0afcd3(*(this+160))`. | pattern scan |
+| `0x7e0edc7d` | 1 | `fwd_f160_to_7e0b0da3_7e0edc7d` | Forwards to the object at `this+160`: `0x7e0b0da3(*(this+160))`. | pattern scan |
+| `0x7e0edc8b` | 2 | `fwd_f160_to_7e0b0c6d_7e0edc8b` | Forwards to the object at `this+160`: `0x7e0b0c6d(*(this+160))`. | pattern scan |
+| `0x7e0edc99` | 1 | `fwd_f160_to_7e0b090d_7e0edc99` | Forwards to the object at `this+160`: `0x7e0b090d(*(this+160))`. | pattern scan |
+| `0x7e0edca7` | 1 | `fwd_f160_to_7e0b0c84_7e0edca7` | Forwards to the object at `this+160`: `0x7e0b0c84(*(this+160))`. | pattern scan |
+| `0x7e0edcb5` | 1 | `fwd_f160_to_7e0b0dba_7e0edcb5` | Forwards to the object at `this+160`: `0x7e0b0dba(*(this+160))`. | pattern scan |
+| `0x7e0edcc3` | 1 | `fwd_f160_to_7e0b0921_7e0edcc3` | Forwards to the object at `this+160`: `0x7e0b0921(*(this+160))`. | pattern scan |
+| `0x7e0edcd1` | 5 | `fwd_f160_to_7e0b0c3d_7e0edcd1` | Forwards to the object at `this+160`: `0x7e0b0c3d(*(this+160))`. | pattern scan |
+| `0x7e0edcdf` | 6 | `fwd_f160_to_7e0b08ce_7e0edcdf` | Forwards to the object at `this+160`: `0x7e0b08ce(*(this+160))`. | pattern scan |
+| `0x7e0edced` | 1 | `fwd_f160_to_7e0b092b_7e0edced` | Forwards to the object at `this+160`: `0x7e0b092b(*(this+160))`. | pattern scan |
+| `0x7e0edcfb` | 2 | `fwd_f160_to_7e0b0dfa_7e0edcfb` | Forwards to the object at `this+160`: `0x7e0b0dfa(*(this+160))`. | pattern scan |
+| `0x7e0edd09` | 2 | `fwd_f160_to_7e0b0940_7e0edd09` | Forwards to the object at `this+160`: `0x7e0b0940(*(this+160))`. | pattern scan |
+| `0x7e0edd17` | 9 | `fwd_f160_to_7e0b0ce3_7e0edd17` | Forwards to the object at `this+160`: `0x7e0b0ce3(*(this+160))`. | pattern scan |
+| `0x7e0edd25` | 1 | `fwd_f160_to_7e0b0917_7e0edd25` | Forwards to the object at `this+160`: `0x7e0b0917(*(this+160))`. | pattern scan |
+| `0x7e0edd33` | 7 | `fwd_f160_to_7e0b0de1_7e0edd33` | Forwards to the object at `this+160`: `0x7e0b0de1(*(this+160))`. | pattern scan |
+| `0x7e0edd41` | 1 | `fwd_f160_to_7e0b0935_7e0edd41` | Forwards to the object at `this+160`: `0x7e0b0935(*(this+160))`. | pattern scan |
+| `0x7e0edd4f` | 9 | `fwd_f160_to_7e0b0c1b_7e0edd4f` | Forwards to the object at `this+160`: `0x7e0b0c1b(*(this+160))`. | pattern scan |
+| `0x7e0edd5d` | 1 | `fwd_f160_to_7e0b08c3_7e0edd5d` | Forwards to the object at `this+160`: `0x7e0b08c3(*(this+160))`. | pattern scan |
+| `0x7e0edd6b` | 1 | `fwd_f160_to_7e0b08b8_7e0edd6b` | Forwards to the object at `this+160`: `0x7e0b08b8(*(this+160))`. | pattern scan |
+| `0x7e0ede77` | 1 | `fwd_f160_to_7e0afa16_7e0ede77` | Forwards to the object at `this+160`: `0x7e0afa16(*(this+160))`. | pattern scan |
+| `0x7e0edf5e` | 1 | `fwd_f160_to_7e0af9e6_7e0edf5e` | Forwards to the object at `this+160`: `0x7e0af9e6(*(this+160))`. | pattern scan |
+| `0x7e0edf6c` | 1 | `fwd_f160_to_7e0afb87_7e0edf6c` | Forwards to the object at `this+160`: `0x7e0afb87(*(this+160))`. | pattern scan |
+| `0x7e0edf8a` | 1 | `fwd_f160_to_7e0afc03_7e0edf8a` | Forwards to the object at `this+160`: `0x7e0afc03(*(this+160))`. | pattern scan |
+| `0x7e0efe5d` | 8 | `call_7e1e49fa_on_0_7e0efe5d` | Calls `0x7e1e49fa` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e0f3745` | 1 | `fwd_f604_to_7e09810d_7e0f3745` | Forwards to the object at `this+604`: `0x7e09810d(*(this+604))`. | pattern scan |
+| `0x7e0f383b` | 10 | `fwd_f612_to_7e08c508_7e0f383b` | Forwards to the object at `this+612`: `0x7e08c508(*(this+612))`. | pattern scan |
+| `0x7e100020` | 8 | `fwd_f620_to_7e092c54_7e100020` | Forwards to the object at `this+620`: `0x7e092c54(*(this+620))`. | pattern scan |
+| `0x7e10067e` | 8 | `call_7e1002ad_arg_1_7e10067e` | Calls `0x7e1002ad` with `d0 = 1`. | pattern scan |
+| `0x7e1024a4` | 7 | `call_7e107fc9_arg_1_7e1024a4` | Calls `0x7e107fc9` with `d0 = 1`. | pattern scan |
+| `0x7e10345f` | 1 | `call2_7e1059ae_7e10504d_7e10345f` | Calls `0x7e1059ae(this)` and then `0x7e10504d(this)`. | pattern scan |
+| `0x7e1038d7` | 1 | `fwd_f612_to_7e08c318_7e1038d7` | Forwards to the object at `this+612`: `0x7e08c318(*(this+612))`. | pattern scan |
+| `0x7e104f3e` | 2 | `call2_7e1043d1_7e104f6e_7e104f3e` | Calls `0x7e1043d1(this)` and then `0x7e104f6e(this)`. | pattern scan |
+| `0x7e1052cc` | 14 | `fwd_f612_to_7e08c570_7e1052cc` | Forwards to the object at `this+612`: `0x7e08c570(*(this+612))`. | pattern scan |
+| `0x7e10534d` | 3 | `fwd_f612_to_7e08c5bc_7e10534d` | Forwards to the object at `this+612`: `0x7e08c5bc(*(this+612))`. | pattern scan |
+| `0x7e10efbd` | 7 | `call_7e100b31_arg_2_7e10efbd` | Calls `0x7e100b31` with `d0 = 2`. | pattern scan |
+| `0x7e111c00` | 1 | `fwd_f584_to_7e0d5548_7e111c00` | Forwards to the object at `this+584`: `0x7e0d5548(*(this+584))`. | pattern scan |
+| `0x7e113d1a` | 2 | `call_7e10ab6a_arg_10_7e113d1a` | Calls `0x7e10ab6a` with `d0 = 10`. | pattern scan |
+| `0x7e113e62` | 1 | `call_7e114801_arg_33554444_7e113e62` | Calls `0x7e114801` with `d0 = 33554444`. | pattern scan |
+| `0x7e113e70` | 1 | `call_7e114801_arg_33685516_7e113e70` | Calls `0x7e114801` with `d0 = 33685516`. | pattern scan |
+| `0x7e113e7e` | 1 | `call_7e114801_arg_33686528_7e113e7e` | Calls `0x7e114801` with `d0 = 33686528`. | pattern scan |
+| `0x7e113e8c` | 1 | `call_7e114801_arg_33686785_7e113e8c` | Calls `0x7e114801` with `d0 = 33686785`. | pattern scan |
+| `0x7e113e9a` | 1 | `call_7e114801_arg_33690886_7e113e9a` | Calls `0x7e114801` with `d0 = 33690886`. | pattern scan |
+| `0x7e113ea8` | 1 | `call_7e114801_arg_33690904_7e113ea8` | Calls `0x7e114801` with `d0 = 33690904`. | pattern scan |
+| `0x7e113eb6` | 1 | `call_7e114801_arg_67764338_7e113eb6` | Calls `0x7e114801` with `d0 = 67764338`. | pattern scan |
+| `0x7e113ec4` | 1 | `call_7e114801_arg_67764337_7e113ec4` | Calls `0x7e114801` with `d0 = 67764337`. | pattern scan |
+| `0x7e113ed2` | 1 | `call_7e114801_arg_16777474_7e113ed2` | Calls `0x7e114801` with `d0 = 16777474`. | pattern scan |
+| `0x7e113ee0` | 1 | `call_7e114801_arg_67829888_7e113ee0` | Calls `0x7e114801` with `d0 = 67829888`. | pattern scan |
+| `0x7e113eee` | 1 | `call_7e114801_arg_67502176_7e113eee` | Calls `0x7e114801` with `d0 = 67502176`. | pattern scan |
+| `0x7e113efc` | 1 | `call_7e114801_arg_67502177_7e113efc` | Calls `0x7e114801` with `d0 = 67502177`. | pattern scan |
+| `0x7e113f0a` | 1 | `call_7e114801_arg_16777489_7e113f0a` | Calls `0x7e114801` with `d0 = 16777489`. | pattern scan |
+| `0x7e113f18` | 1 | `call_7e114801_arg_33697802_7e113f18` | Calls `0x7e114801` with `d0 = 33697802`. | pattern scan |
+| `0x7e113f26` | 1 | `call_7e114801_arg_50331649_7e113f26` | Calls `0x7e114801` with `d0 = 50331649`. | pattern scan |
+| `0x7e113f34` | 1 | `call_7e114801_arg_50331648_7e113f34` | Calls `0x7e114801` with `d0 = 50331648`. | pattern scan |
+| `0x7e113f42` | 1 | `call_7e114801_arg_33690147_7e113f42` | Calls `0x7e114801` with `d0 = 33690147`. | pattern scan |
+| `0x7e11414e` | 1 | `call_7e114828_arg_33554444_7e11414e` | Calls `0x7e114828` with `d0 = 33554444`. | pattern scan |
+| `0x7e11415c` | 1 | `call_7e114828_arg_33685516_7e11415c` | Calls `0x7e114828` with `d0 = 33685516`. | pattern scan |
+| `0x7e11416a` | 1 | `call_7e114828_arg_33686528_7e11416a` | Calls `0x7e114828` with `d0 = 33686528`. | pattern scan |
+| `0x7e114178` | 1 | `call_7e114828_arg_33686785_7e114178` | Calls `0x7e114828` with `d0 = 33686785`. | pattern scan |
+| `0x7e114186` | 1 | `call_7e114828_arg_33690886_7e114186` | Calls `0x7e114828` with `d0 = 33690886`. | pattern scan |
+| `0x7e114194` | 1 | `call_7e114828_arg_33690904_7e114194` | Calls `0x7e114828` with `d0 = 33690904`. | pattern scan |
+| `0x7e1141a2` | 1 | `call_7e114828_arg_67764338_7e1141a2` | Calls `0x7e114828` with `d0 = 67764338`. | pattern scan |
+| `0x7e1141b0` | 1 | `call_7e114828_arg_67764337_7e1141b0` | Calls `0x7e114828` with `d0 = 67764337`. | pattern scan |
+| `0x7e1141be` | 1 | `call_7e114828_arg_16777474_7e1141be` | Calls `0x7e114828` with `d0 = 16777474`. | pattern scan |
+| `0x7e1141cc` | 1 | `call_7e114828_arg_67829888_7e1141cc` | Calls `0x7e114828` with `d0 = 67829888`. | pattern scan |
+| `0x7e1141da` | 1 | `call_7e114828_arg_67502176_7e1141da` | Calls `0x7e114828` with `d0 = 67502176`. | pattern scan |
+| `0x7e1141e8` | 1 | `call_7e114828_arg_67502177_7e1141e8` | Calls `0x7e114828` with `d0 = 67502177`. | pattern scan |
+| `0x7e1141f6` | 1 | `call_7e114828_arg_16777489_7e1141f6` | Calls `0x7e114828` with `d0 = 16777489`. | pattern scan |
+| `0x7e114204` | 1 | `call_7e114828_arg_33697802_7e114204` | Calls `0x7e114828` with `d0 = 33697802`. | pattern scan |
+| `0x7e114212` | 1 | `call_7e114828_arg_50331649_7e114212` | Calls `0x7e114828` with `d0 = 50331649`. | pattern scan |
+| `0x7e114220` | 1 | `call_7e114828_arg_50331648_7e114220` | Calls `0x7e114828` with `d0 = 50331648`. | pattern scan |
+| `0x7e11422e` | 1 | `call_7e114828_arg_33690147_7e11422e` | Calls `0x7e114828` with `d0 = 33690147`. | pattern scan |
+| `0x7e114473` | 1 | `call_7e11486e_arg_33554444_7e114473` | Calls `0x7e11486e` with `d0 = 33554444`. | pattern scan |
+| `0x7e114481` | 1 | `call_7e11486e_arg_33685516_7e114481` | Calls `0x7e11486e` with `d0 = 33685516`. | pattern scan |
+| `0x7e11448f` | 1 | `call_7e11486e_arg_33686528_7e11448f` | Calls `0x7e11486e` with `d0 = 33686528`. | pattern scan |
+| `0x7e11449d` | 1 | `call_7e11486e_arg_33686785_7e11449d` | Calls `0x7e11486e` with `d0 = 33686785`. | pattern scan |
+| `0x7e1144ab` | 1 | `call_7e11486e_arg_33690886_7e1144ab` | Calls `0x7e11486e` with `d0 = 33690886`. | pattern scan |
+| `0x7e1144b9` | 1 | `call_7e11486e_arg_33690904_7e1144b9` | Calls `0x7e11486e` with `d0 = 33690904`. | pattern scan |
+| `0x7e1144c7` | 1 | `call_7e11486e_arg_67764338_7e1144c7` | Calls `0x7e11486e` with `d0 = 67764338`. | pattern scan |
+| `0x7e1144d5` | 1 | `call_7e11486e_arg_67764337_7e1144d5` | Calls `0x7e11486e` with `d0 = 67764337`. | pattern scan |
+| `0x7e1144e3` | 1 | `call_7e11486e_arg_16777474_7e1144e3` | Calls `0x7e11486e` with `d0 = 16777474`. | pattern scan |
+| `0x7e1144f1` | 1 | `call_7e11486e_arg_67829888_7e1144f1` | Calls `0x7e11486e` with `d0 = 67829888`. | pattern scan |
+| `0x7e1144ff` | 1 | `call_7e11486e_arg_67502176_7e1144ff` | Calls `0x7e11486e` with `d0 = 67502176`. | pattern scan |
+| `0x7e11450d` | 1 | `call_7e11486e_arg_67502177_7e11450d` | Calls `0x7e11486e` with `d0 = 67502177`. | pattern scan |
+| `0x7e11451b` | 1 | `call_7e11486e_arg_16777489_7e11451b` | Calls `0x7e11486e` with `d0 = 16777489`. | pattern scan |
+| `0x7e114529` | 1 | `call_7e11486e_arg_33697802_7e114529` | Calls `0x7e11486e` with `d0 = 33697802`. | pattern scan |
+| `0x7e114537` | 1 | `call_7e11486e_arg_50331649_7e114537` | Calls `0x7e11486e` with `d0 = 50331649`. | pattern scan |
+| `0x7e114545` | 1 | `call_7e11486e_arg_50331648_7e114545` | Calls `0x7e11486e` with `d0 = 50331648`. | pattern scan |
+| `0x7e114553` | 1 | `call_7e11486e_arg_33690147_7e114553` | Calls `0x7e11486e` with `d0 = 33690147`. | pattern scan |
+| `0x7e114740` | 1 | `fwd_f560_vslot140_7e114740` | Forwards to the object at `this+560`: calls its vtable slot `+140`. | pattern scan |
+| `0x7e114814` | 2 | `call_7e11498a_arg_64_7e114814` | Calls `0x7e11498a` with `d0 = 64`. | pattern scan |
+| `0x7e11481e` | 1 | `call_7e11498a_arg_32_7e11481e` | Calls `0x7e11498a` with `d0 = 32`. | pattern scan |
+| `0x7e114968` | 1 | `fwd_f560_vslot144_7e114968` | Forwards to the object at `this+560`: calls its vtable slot `+144`. | pattern scan |
+| `0x7e114a33` | 1 | `call_7e106d9e_arg_4_7e114a33` | Calls `0x7e106d9e` with `d0 = 4`. | pattern scan |
+| `0x7e114b98` | 1 | `fwd_f592_to_7e0de16f_7e114b98` | Forwards to the object at `this+592`: `0x7e0de16f(*(this+592))`. | pattern scan |
+| `0x7e116eb9` | 1 | `fwd_f568_to_7e0da577_7e116eb9` | Forwards to the object at `this+568`: `0x7e0da577(*(this+568))`. | pattern scan |
+| `0x7e1176e1` | 1 | `fwd_f568_to_7e0da85c_7e1176e1` | Forwards to the object at `this+568`: `0x7e0da85c(*(this+568))`. | pattern scan |
+| `0x7e1176f2` | 6 | `fwd_f568_to_7e0da7e9_7e1176f2` | Forwards to the object at `this+568`: `0x7e0da7e9(*(this+568))`. | pattern scan |
+| `0x7e117703` | 3 | `fwd_f568_to_7e0da821_7e117703` | Forwards to the object at `this+568`: `0x7e0da821(*(this+568))`. | pattern scan |
+| `0x7e11b104` | 3 | `call_7e11b10e_arg_6_7e11b104` | Calls `0x7e11b10e` with `d0 = 6`. | pattern scan |
+| `0x7e11c44f` | 1 | `call2_7e11c505_7e11e192_7e11c44f` | Calls `0x7e11c505(this)` and then `0x7e11e192(this)`. | pattern scan |
+| `0x7e11e27c` | 1 | `store_8_f452_f456_7e11e27c` | `*(this+452) = *(this+456) = 8`. | pattern scan |
+| `0x7e11e2b7` | 2 | `call2_7e11e2c6_7e11e831_7e11e2b7` | Calls `0x7e11e2c6(this)` and then `0x7e11e831(this)`. | pattern scan |
+| `0x7e11e2c6` | 1 | `store_9_f452_call_7e1e86dd_7e11e2c6` | `*(this+452) = 9`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e11eca9` | 1 | `store_11_f460_f456_7e11eca9` | `*(this+460) = *(this+456) = 11`. | pattern scan |
+| `0x7e11ecc6` | 1 | `store_12_f460_f456_7e11ecc6` | `*(this+460) = *(this+456) = 12`. | pattern scan |
+| `0x7e11ece3` | 1 | `store_13_f460_f456_7e11ece3` | `*(this+460) = *(this+456) = 13`. | pattern scan |
+| `0x7e11f0b9` | 1 | `call2_7e11f0c8_7e11f3cb_7e11f0b9` | Calls `0x7e11f0c8(this)` and then `0x7e11f3cb(this)`. | pattern scan |
+| `0x7e11f0c8` | 1 | `store_17_f452_call_7e1e86dd_7e11f0c8` | `*(this+452) = 17`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e11f293` | 1 | `store_18_f464_f456_7e11f293` | `*(this+464) = *(this+456) = 18`. | pattern scan |
+| `0x7e11f803` | 1 | `store_22_f464_f456_7e11f803` | `*(this+464) = *(this+456) = 22`. | pattern scan |
+| `0x7e11f851` | 1 | `store_23_f452_f456_7e11f851` | `*(this+452) = *(this+456) = 23`. | pattern scan |
+| `0x7e11ff34` | 1 | `call2_7e11ff43_7e120460_7e11ff34` | Calls `0x7e11ff43(this)` and then `0x7e120460(this)`. | pattern scan |
+| `0x7e11ff43` | 1 | `store_25_f452_call_7e1e86dd_7e11ff43` | `*(this+452) = 25`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e12044b` | 1 | `store_27_f468_f456_7e12044b` | `*(this+468) = *(this+456) = 27`. | pattern scan |
+| `0x7e12054d` | 1 | `store_29_f452_f456_7e12054d` | `*(this+452) = *(this+456) = 29`. | pattern scan |
+| `0x7e12267f` | 1 | `store_6_f664_call_7e1238e4_7e12267f` | `*(this+664) = 6`, then calls `0x7e1238e4`. | pattern scan |
+| `0x7e122a99` | 1 | `call2_7e122aed_7e122c6d_7e122a99` | Calls `0x7e122aed(this)` and then `0x7e122c6d(this)`. | pattern scan |
+| `0x7e12322c` | 1 | `store_11_f672_call_7e123369_7e12322c` | `*(this+672) = 11`, then calls `0x7e123369`. | pattern scan |
+| `0x7e12351b` | 1 | `store_15_f672_call_7e123658_7e12351b` | `*(this+672) = 15`, then calls `0x7e123658`. | pattern scan |
+| `0x7e1238ec` | 2 | `store_19_f672_f668_7e1238ec` | `*(this+672) = *(this+668) = 19`. | pattern scan |
+| `0x7e124141` | 2 | `store_21_f672_f668_7e124141` | `*(this+672) = *(this+668) = 21`. | pattern scan |
+| `0x7e1241fb` | 1 | `store_23_f704_call_7e124426_7e1241fb` | `*(this+704) = 23`, then calls `0x7e124426`. | pattern scan |
+| `0x7e12442e` | 1 | `store_26_f712_f708_7e12442e` | `*(this+712) = *(this+708) = 26`. | pattern scan |
+| `0x7e12454b` | 1 | `store_28_f716_call_7e1248b9_7e12454b` | `*(this+716) = 28`, then calls `0x7e1248b9`. | pattern scan |
+| `0x7e1246e9` | 1 | `store_29_f724_f720_7e1246e9` | `*(this+724) = *(this+720) = 29`. | pattern scan |
+| `0x7e1248c1` | 1 | `store_31_f724_f720_7e1248c1` | `*(this+724) = *(this+720) = 31`. | pattern scan |
+| `0x7e124a53` | 1 | `store_33_f728_call_7e124a6d_7e124a53` | `*(this+728) = 33`, then calls `0x7e124a6d`. | pattern scan |
+| `0x7e124ffa` | 1 | `call_7e1e6239_ret_null_7e124ffa` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e125731` | 1 | `store_4_f176_call_7e1e86dd_7e125731` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e125749` | 1 | `call2_7e125731_7e1258d2_7e125749` | Calls `0x7e125731(this)` and then `0x7e1258d2(this)`. | pattern scan |
+| `0x7e125db5` | 1 | `call_7e192164_ret_null_7e125db5` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e126413` | 1 | `call2_7e126425_7e127bf4_7e126413` | Calls `0x7e126425(this)` and then `0x7e127bf4(this)`. | pattern scan |
+| `0x7e126425` | 1 | `store_4_f252_call_7e1e86dd_7e126425` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e130e9b` | 2 | `call2_7e130eaa_7e130f64_7e130e9b` | Calls `0x7e130eaa(this)` and then `0x7e130f64(this)`. | pattern scan |
+| `0x7e131715` | 1 | `store_11_f11816_call_7e13175f_7e131715` | `*(this+11816) = 11`, then calls `0x7e13175f`. | pattern scan |
+| `0x7e1317b6` | 1 | `store_13_f11816_call_7e131800_7e1317b6` | `*(this+11816) = 13`, then calls `0x7e131800`. | pattern scan |
+| `0x7e131824` | 1 | `store_56_f11816_call_7e13186e_7e131824` | `*(this+11816) = 56`, then calls `0x7e13186e`. | pattern scan |
+| `0x7e1324e6` | 1 | `store_58_f11816_call_7e132530_7e1324e6` | `*(this+11816) = 58`, then calls `0x7e132530`. | pattern scan |
+| `0x7e132719` | 1 | `store_61_f11816_call_7e132763_7e132719` | `*(this+11816) = 61`, then calls `0x7e132763`. | pattern scan |
+| `0x7e132b09` | 1 | `store_63_f11816_call_7e132b53_7e132b09` | `*(this+11816) = 63`, then calls `0x7e132b53`. | pattern scan |
+| `0x7e132c1d` | 1 | `store_66_f11816_call_7e132c67_7e132c1d` | `*(this+11816) = 66`, then calls `0x7e132c67`. | pattern scan |
+| `0x7e132d19` | 1 | `store_68_f11816_call_7e132d63_7e132d19` | `*(this+11816) = 68`, then calls `0x7e132d63`. | pattern scan |
+| `0x7e132f84` | 1 | `store_70_f11816_call_7e132fce_7e132f84` | `*(this+11816) = 70`, then calls `0x7e132fce`. | pattern scan |
+| `0x7e1332e0` | 1 | `store_72_f11816_call_7e13332a_7e1332e0` | `*(this+11816) = 72`, then calls `0x7e13332a`. | pattern scan |
+| `0x7e1334f6` | 1 | `store_74_f11816_call_7e133540_7e1334f6` | `*(this+11816) = 74`, then calls `0x7e133540`. | pattern scan |
+| `0x7e133602` | 1 | `store_76_f11816_call_7e13364c_7e133602` | `*(this+11816) = 76`, then calls `0x7e13364c`. | pattern scan |
+| `0x7e133758` | 1 | `store_79_f11816_call_7e1337a2_7e133758` | `*(this+11816) = 79`, then calls `0x7e1337a2`. | pattern scan |
+| `0x7e133939` | 1 | `store_81_f11816_call_7e133983_7e133939` | `*(this+11816) = 81`, then calls `0x7e133983`. | pattern scan |
+| `0x7e133bee` | 1 | `store_83_f11816_call_7e133c38_7e133bee` | `*(this+11816) = 83`, then calls `0x7e133c38`. | pattern scan |
+| `0x7e133d47` | 1 | `store_85_f11816_call_7e133d91_7e133d47` | `*(this+11816) = 85`, then calls `0x7e133d91`. | pattern scan |
+| `0x7e133e43` | 1 | `store_87_f11816_call_7e133e8d_7e133e43` | `*(this+11816) = 87`, then calls `0x7e133e8d`. | pattern scan |
+| `0x7e133f66` | 1 | `store_89_f11816_call_7e133fb0_7e133f66` | `*(this+11816) = 89`, then calls `0x7e133fb0`. | pattern scan |
+| `0x7e134074` | 1 | `store_16_f11816_call_7e1340be_7e134074` | `*(this+11816) = 16`, then calls `0x7e1340be`. | pattern scan |
+| `0x7e1340e2` | 1 | `store_18_f11816_call_7e13412c_7e1340e2` | `*(this+11816) = 18`, then calls `0x7e13412c`. | pattern scan |
+| `0x7e134150` | 1 | `store_20_f11816_call_7e13419a_7e134150` | `*(this+11816) = 20`, then calls `0x7e13419a`. | pattern scan |
+| `0x7e1341be` | 1 | `store_22_f11816_call_7e134208_7e1341be` | `*(this+11816) = 22`, then calls `0x7e134208`. | pattern scan |
+| `0x7e13422c` | 1 | `store_24_f11816_call_7e134276_7e13422c` | `*(this+11816) = 24`, then calls `0x7e134276`. | pattern scan |
+| `0x7e13429a` | 1 | `store_26_f11816_call_7e1342e4_7e13429a` | `*(this+11816) = 26`, then calls `0x7e1342e4`. | pattern scan |
+| `0x7e134308` | 1 | `store_28_f11816_call_7e134352_7e134308` | `*(this+11816) = 28`, then calls `0x7e134352`. | pattern scan |
+| `0x7e1343c0` | 1 | `store_30_f11816_call_7e13440a_7e1343c0` | `*(this+11816) = 30`, then calls `0x7e13440a`. | pattern scan |
+| `0x7e13442e` | 1 | `store_32_f11816_call_7e134478_7e13442e` | `*(this+11816) = 32`, then calls `0x7e134478`. | pattern scan |
+| `0x7e13449c` | 1 | `store_34_f11816_call_7e1344e6_7e13449c` | `*(this+11816) = 34`, then calls `0x7e1344e6`. | pattern scan |
+| `0x7e13450a` | 1 | `store_36_f11816_call_7e134554_7e13450a` | `*(this+11816) = 36`, then calls `0x7e134554`. | pattern scan |
+| `0x7e13464a` | 1 | `store_38_f11816_call_7e134694_7e13464a` | `*(this+11816) = 38`, then calls `0x7e134694`. | pattern scan |
+| `0x7e1346b8` | 1 | `store_40_f11816_call_7e134702_7e1346b8` | `*(this+11816) = 40`, then calls `0x7e134702`. | pattern scan |
+| `0x7e134726` | 1 | `store_42_f11816_call_7e13477e_7e134726` | `*(this+11816) = 42`, then calls `0x7e13477e`. | pattern scan |
+| `0x7e1347a2` | 1 | `store_44_f11816_call_7e1347ec_7e1347a2` | `*(this+11816) = 44`, then calls `0x7e1347ec`. | pattern scan |
+| `0x7e134810` | 1 | `store_46_f11816_call_7e13485a_7e134810` | `*(this+11816) = 46`, then calls `0x7e13485a`. | pattern scan |
+| `0x7e141ea0` | 2 | `call2_7e141eaf_7e1420b6_7e141ea0` | Calls `0x7e141eaf(this)` and then `0x7e1420b6(this)`. | pattern scan |
+| `0x7e14274f` | 1 | `store_57_f15652_call_7e142799_7e14274f` | `*(this+15652) = 57`, then calls `0x7e142799`. | pattern scan |
+| `0x7e142d1a` | 1 | `store_59_f15652_call_7e142d64_7e142d1a` | `*(this+15652) = 59`, then calls `0x7e142d64`. | pattern scan |
+| `0x7e142f48` | 1 | `store_61_f15652_call_7e142f92_7e142f48` | `*(this+15652) = 61`, then calls `0x7e142f92`. | pattern scan |
+| `0x7e143105` | 1 | `store_11_f15652_call_7e14314f_7e143105` | `*(this+15652) = 11`, then calls `0x7e14314f`. | pattern scan |
+| `0x7e1431f0` | 1 | `store_64_f15652_call_7e14323a_7e1431f0` | `*(this+15652) = 64`, then calls `0x7e14323a`. | pattern scan |
+| `0x7e143407` | 1 | `store_70_f15652_call_7e143451_7e143407` | `*(this+15652) = 70`, then calls `0x7e143451`. | pattern scan |
+| `0x7e14388b` | 1 | `store_72_f15652_call_7e1438d5_7e14388b` | `*(this+15652) = 72`, then calls `0x7e1438d5`. | pattern scan |
+| `0x7e143ac3` | 1 | `store_13_f15652_call_7e143b0d_7e143ac3` | `*(this+15652) = 13`, then calls `0x7e143b0d`. | pattern scan |
+| `0x7e143b31` | 1 | `store_74_f15652_call_7e143b7b_7e143b31` | `*(this+15652) = 74`, then calls `0x7e143b7b`. | pattern scan |
+| `0x7e143f1f` | 1 | `store_76_f15652_call_7e143f69_7e143f1f` | `*(this+15652) = 76`, then calls `0x7e143f69`. | pattern scan |
+| `0x7e14423b` | 1 | `store_78_f15652_call_7e144285_7e14423b` | `*(this+15652) = 78`, then calls `0x7e144285`. | pattern scan |
+| `0x7e1448a9` | 1 | `store_80_f15652_call_7e144cc2_7e1448a9` | `*(this+15652) = 80`, then calls `0x7e144cc2`. | pattern scan |
+| `0x7e144e3e` | 1 | `store_83_f15652_call_7e144e88_7e144e3e` | `*(this+15652) = 83`, then calls `0x7e144e88`. | pattern scan |
+| `0x7e1450a1` | 1 | `store_16_f15652_call_7e1450eb_7e1450a1` | `*(this+15652) = 16`, then calls `0x7e1450eb`. | pattern scan |
+| `0x7e14510f` | 1 | `store_18_f15652_call_7e145159_7e14510f` | `*(this+15652) = 18`, then calls `0x7e145159`. | pattern scan |
+| `0x7e14517d` | 1 | `store_20_f15652_call_7e1451c7_7e14517d` | `*(this+15652) = 20`, then calls `0x7e1451c7`. | pattern scan |
+| `0x7e1451eb` | 1 | `store_85_f15652_call_7e145235_7e1451eb` | `*(this+15652) = 85`, then calls `0x7e145235`. | pattern scan |
+| `0x7e1452f5` | 1 | `store_87_f15652_call_7e14533f_7e1452f5` | `*(this+15652) = 87`, then calls `0x7e14533f`. | pattern scan |
+| `0x7e14595c` | 1 | `store_22_f15652_call_7e1459a6_7e14595c` | `*(this+15652) = 22`, then calls `0x7e1459a6`. | pattern scan |
+| `0x7e1459ca` | 1 | `store_24_f15652_call_7e145a14_7e1459ca` | `*(this+15652) = 24`, then calls `0x7e145a14`. | pattern scan |
+| `0x7e145a38` | 1 | `store_26_f15652_call_7e145a82_7e145a38` | `*(this+15652) = 26`, then calls `0x7e145a82`. | pattern scan |
+| `0x7e145aa6` | 1 | `store_28_f15652_call_7e145af0_7e145aa6` | `*(this+15652) = 28`, then calls `0x7e145af0`. | pattern scan |
+| `0x7e145b14` | 1 | `store_30_f15652_call_7e145b5e_7e145b14` | `*(this+15652) = 30`, then calls `0x7e145b5e`. | pattern scan |
+| `0x7e145b82` | 1 | `store_32_f15652_call_7e145bcc_7e145b82` | `*(this+15652) = 32`, then calls `0x7e145bcc`. | pattern scan |
+| `0x7e145bf0` | 1 | `store_34_f15652_call_7e145c3a_7e145bf0` | `*(this+15652) = 34`, then calls `0x7e145c3a`. | pattern scan |
+| `0x7e145c5e` | 1 | `store_89_f15652_call_7e145ca8_7e145c5e` | `*(this+15652) = 89`, then calls `0x7e145ca8`. | pattern scan |
+| `0x7e1463f6` | 1 | `store_91_f15652_call_7e146440_7e1463f6` | `*(this+15652) = 91`, then calls `0x7e146440`. | pattern scan |
+| `0x7e146741` | 1 | `store_93_f15652_call_7e14678b_7e146741` | `*(this+15652) = 93`, then calls `0x7e14678b`. | pattern scan |
+| `0x7e146d24` | 1 | `store_95_f15652_call_7e146d6e_7e146d24` | `*(this+15652) = 95`, then calls `0x7e146d6e`. | pattern scan |
+| `0x7e146fd5` | 1 | `store_97_f15652_call_7e14701f_7e146fd5` | `*(this+15652) = 97`, then calls `0x7e14701f`. | pattern scan |
+| `0x7e1472bf` | 1 | `store_99_f15652_call_7e147309_7e1472bf` | `*(this+15652) = 99`, then calls `0x7e147309`. | pattern scan |
+| `0x7e14750e` | 1 | `store_36_f15652_call_7e147558_7e14750e` | `*(this+15652) = 36`, then calls `0x7e147558`. | pattern scan |
+| `0x7e14764e` | 1 | `store_101_f15652_call_7e147698_7e14764e` | `*(this+15652) = 101`, then calls `0x7e147698`. | pattern scan |
+| `0x7e1478de` | 1 | `store_38_f15652_call_7e147928_7e1478de` | `*(this+15652) = 38`, then calls `0x7e147928`. | pattern scan |
+| `0x7e1479e0` | 1 | `store_108_f15652_call_7e147a2a_7e1479e0` | `*(this+15652) = 108`, then calls `0x7e147a2a`. | pattern scan |
+| `0x7e147b01` | 1 | `store_40_f15652_call_7e147b4b_7e147b01` | `*(this+15652) = 40`, then calls `0x7e147b4b`. | pattern scan |
+| `0x7e147b6f` | 1 | `store_42_f15652_call_7e147bc7_7e147b6f` | `*(this+15652) = 42`, then calls `0x7e147bc7`. | pattern scan |
+| `0x7e147beb` | 1 | `store_44_f15652_call_7e147c35_7e147beb` | `*(this+15652) = 44`, then calls `0x7e147c35`. | pattern scan |
+| `0x7e147c59` | 1 | `store_110_f15652_call_7e147ca3_7e147c59` | `*(this+15652) = 110`, then calls `0x7e147ca3`. | pattern scan |
+| `0x7e147deb` | 1 | `store_46_f15652_call_7e147e35_7e147deb` | `*(this+15652) = 46`, then calls `0x7e147e35`. | pattern scan |
+| `0x7e147e59` | 1 | `store_112_f15652_call_7e147ea3_7e147e59` | `*(this+15652) = 112`, then calls `0x7e147ea3`. | pattern scan |
+| `0x7e147fd5` | 1 | `store_114_f15652_call_7e14801f_7e147fd5` | `*(this+15652) = 114`, then calls `0x7e14801f`. | pattern scan |
+| `0x7e14819d` | 1 | `store_116_f15652_call_7e1481e7_7e14819d` | `*(this+15652) = 116`, then calls `0x7e1481e7`. | pattern scan |
+| `0x7e148911` | 1 | `call_7e1e67f6_ret_null_7e148911` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e148f00` | 1 | `this_plus_112_7e148f00` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e149658` | 1 | `call2_7e14966a_7e14b090_7e149658` | Calls `0x7e14966a(this)` and then `0x7e14b090(this)`. | pattern scan |
+| `0x7e14966a` | 1 | `store_4_f252_call_7e1e86dd_7e14966a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e14b595` | 1 | `call_7e1e67f6_ret_null_7e14b595` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14b77d` | 1 | `this_plus_112_7e14b77d` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e14b803` | 1 | `call_7e192164_ret_null_7e14b803` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14c838` | 1 | `call2_7e14c84a_7e14e0b3_7e14c838` | Calls `0x7e14c84a(this)` and then `0x7e14e0b3(this)`. | pattern scan |
+| `0x7e14c84a` | 1 | `store_4_f252_call_7e1e86dd_7e14c84a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e14e7f5` | 1 | `this_plus_112_7e14e7f5` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e14e883` | 1 | `call_7e1a2fac_ret_null_7e14e883` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e14eefb` | 1 | `call2_7e14ef0d_7e1514b8_7e14eefb` | Calls `0x7e14ef0d(this)` and then `0x7e1514b8(this)`. | pattern scan |
+| `0x7e14ef0d` | 1 | `store_4_f252_call_7e1e86dd_7e14ef0d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e151cce` | 1 | `this_plus_112_7e151cce` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e151d54` | 1 | `call_7e1a2fac_ret_null_7e151d54` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e152a19` | 1 | `call2_7e152a2b_7e15619d_7e152a19` | Calls `0x7e152a2b(this)` and then `0x7e15619d(this)`. | pattern scan |
+| `0x7e152a2b` | 1 | `store_4_f252_call_7e1e86dd_7e152a2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1569b3` | 1 | `this_plus_112_7e1569b3` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e156a48` | 1 | `call_7e1a2fac_ret_null_7e156a48` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e157204` | 1 | `call2_7e157216_7e15a2ff_7e157204` | Calls `0x7e157216(this)` and then `0x7e15a2ff(this)`. | pattern scan |
+| `0x7e157216` | 1 | `store_4_f252_call_7e1e86dd_7e157216` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e15ab83` | 1 | `this_plus_112_7e15ab83` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e15ac21` | 1 | `call_7e1a2fac_ret_null_7e15ac21` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e15bae2` | 1 | `call2_7e15baf4_7e15f2ee_7e15bae2` | Calls `0x7e15baf4(this)` and then `0x7e15f2ee(this)`. | pattern scan |
+| `0x7e15baf4` | 1 | `store_4_f252_call_7e1e86dd_7e15baf4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e15cca6` | 1 | `call2_7e15ccb5_7e15cd14_7e15cca6` | Calls `0x7e15ccb5(this)` and then `0x7e15cd14(this)`. | pattern scan |
+| `0x7e15fb72` | 1 | `this_plus_112_7e15fb72` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e15fbf8` | 1 | `call_7e1a2fac_ret_null_7e15fbf8` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1602a0` | 1 | `call2_7e1602b2_7e161797_7e1602a0` | Calls `0x7e1602b2(this)` and then `0x7e161797(this)`. | pattern scan |
+| `0x7e1602b2` | 1 | `store_4_f252_call_7e1e86dd_7e1602b2` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e161fff` | 1 | `this_plus_160_7e161fff` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
+| `0x7e163b55` | 1 | `call2_7e163b67_7e16652d_7e163b55` | Calls `0x7e163b67(this)` and then `0x7e16652d(this)`. | pattern scan |
+| `0x7e163b67` | 1 | `store_4_f252_call_7e1e86dd_7e163b67` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e166e19` | 1 | `this_plus_112_7e166e19` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e167762` | 1 | `call2_7e167774_7e16a20f_7e167762` | Calls `0x7e167774(this)` and then `0x7e16a20f(this)`. | pattern scan |
+| `0x7e167774` | 1 | `store_4_f252_call_7e1e86dd_7e167774` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e169e46` | 1 | `call2_7e169e55_7e169eb4_7e169e46` | Calls `0x7e169e55(this)` and then `0x7e169eb4(this)`. | pattern scan |
+| `0x7e16aa25` | 1 | `this_plus_112_7e16aa25` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e16aaab` | 1 | `call_7e1a2fac_ret_null_7e16aaab` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e16b0de` | 1 | `call2_7e16b0f0_7e16d0a3_7e16b0de` | Calls `0x7e16b0f0(this)` and then `0x7e16d0a3(this)`. | pattern scan |
+| `0x7e16b0f0` | 1 | `store_4_f252_call_7e1e86dd_7e16b0f0` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e16d95f` | 1 | `this_plus_112_7e16d95f` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e16d9f1` | 1 | `call_7e1a2fac_ret_null_7e16d9f1` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e16e623` | 1 | `call2_7e16e635_7e16fda0_7e16e623` | Calls `0x7e16e635(this)` and then `0x7e16fda0(this)`. | pattern scan |
+| `0x7e16e635` | 1 | `store_4_f252_call_7e1e86dd_7e16e635` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1705b6` | 1 | `this_plus_112_7e1705b6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e170f20` | 1 | `call2_7e170f32_7e1738d9_7e170f20` | Calls `0x7e170f32(this)` and then `0x7e1738d9(this)`. | pattern scan |
+| `0x7e170f32` | 1 | `store_4_f252_call_7e1e86dd_7e170f32` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e174125` | 1 | `this_plus_112_7e174125` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1741af` | 1 | `call_7e1a2fac_ret_null_7e1741af` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e175d04` | 1 | `call2_7e175d16_7e178d8f_7e175d04` | Calls `0x7e175d16(this)` and then `0x7e178d8f(this)`. | pattern scan |
+| `0x7e175d16` | 1 | `store_4_f252_call_7e1e86dd_7e175d16` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e179471` | 1 | `this_plus_112_7e179471` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1797be` | 1 | `store_2_f252_call_7e1799c3_7e1797be` | `*(this+252) = 2`, then calls `0x7e1799c3`. | pattern scan |
+| `0x7e179d2f` | 1 | `call_7e1e67f6_ret_null_7e179d2f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179d9a` | 1 | `call_7e1e67f6_ret_null_7e179d9a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179e0a` | 1 | `call_7e1e67f6_ret_null_7e179e0a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179e75` | 1 | `call_7e1e67f6_ret_null_7e179e75` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179ee0` | 1 | `call_7e1e67f6_ret_null_7e179ee0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179f4b` | 1 | `call_7e1e67f6_ret_null_7e179f4b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e179fb6` | 1 | `call_7e1e67f6_ret_null_7e179fb6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a021` | 1 | `call_7e1e67f6_ret_null_7e17a021` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a08c` | 1 | `call_7e1e67f6_ret_null_7e17a08c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a0f9` | 1 | `call_7e1e67f6_ret_null_7e17a0f9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a166` | 1 | `call_7e1e67f6_ret_null_7e17a166` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a1d3` | 1 | `call_7e1e67f6_ret_null_7e17a1d3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a240` | 1 | `call_7e1e67f6_ret_null_7e17a240` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a2ad` | 1 | `call_7e1e67f6_ret_null_7e17a2ad` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17a318` | 1 | `call_7e1e67f6_ret_null_7e17a318` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17abf8` | 1 | `this_plus_892_7e17abf8` | Leaf `return this+892` (address of a member or base sub-object). | pattern scan |
+| `0x7e17ac8a` | 1 | `call_7e1e67f6_ret_null_7e17ac8a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17acf5` | 1 | `call_7e1e67f6_ret_null_7e17acf5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17ad60` | 1 | `call_7e1e67f6_ret_null_7e17ad60` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17adcb` | 1 | `call_7e1e67f6_ret_null_7e17adcb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17ae36` | 1 | `call_7e1e67f6_ret_null_7e17ae36` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17aea1` | 1 | `call_7e1e67f6_ret_null_7e17aea1` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17afa5` | 1 | `call_7e1e67f6_ret_null_7e17afa5` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b010` | 1 | `call_7e1e67f6_ret_null_7e17b010` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b07b` | 1 | `call_7e1e67f6_ret_null_7e17b07b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b0e6` | 1 | `call_7e1e67f6_ret_null_7e17b0e6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b151` | 1 | `call_7e1e67f6_ret_null_7e17b151` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b1bc` | 1 | `call_7e1e67f6_ret_null_7e17b1bc` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b227` | 1 | `call_7e1e67f6_ret_null_7e17b227` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b292` | 1 | `call_7e1e67f6_ret_null_7e17b292` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b3b2` | 1 | `call_7e1e67f6_ret_null_7e17b3b2` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b41d` | 1 | `call_7e1e67f6_ret_null_7e17b41d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b488` | 1 | `call_7e1e67f6_ret_null_7e17b488` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b4f3` | 1 | `call_7e1e67f6_ret_null_7e17b4f3` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b55e` | 1 | `call_7e1e67f6_ret_null_7e17b55e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b5c9` | 1 | `call_7e1e67f6_ret_null_7e17b5c9` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b634` | 1 | `call_7e1e67f6_ret_null_7e17b634` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b69f` | 1 | `call_7e1e67f6_ret_null_7e17b69f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b70a` | 1 | `call_7e1e67f6_ret_null_7e17b70a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b775` | 1 | `call_7e1e67f6_ret_null_7e17b775` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b7e0` | 1 | `call_7e1e67f6_ret_null_7e17b7e0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b84b` | 1 | `call_7e1e67f6_ret_null_7e17b84b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17b8b6` | 1 | `call_7e1e67f6_ret_null_7e17b8b6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e17d850` | 1 | `store_24_f1356_f1360_7e17d850` | `*(this+1356) = *(this+1360) = 24`. | pattern scan |
+| `0x7e17e661` | 1 | `store_31_f1372_f1376_7e17e661` | `*(this+1372) = *(this+1376) = 31`. | pattern scan |
+| `0x7e17e744` | 1 | `call2_7e17e753_7e17e82c_7e17e744` | Calls `0x7e17e753(this)` and then `0x7e17e82c(this)`. | pattern scan |
+| `0x7e17eeeb` | 7 | `call2_7e17eefa_7e17ef9b_7e17eeeb` | Calls `0x7e17eefa(this)` and then `0x7e17ef9b(this)`. | pattern scan |
+| `0x7e17f813` | 1 | `call_7e17fb28_ret_1_7e17f813` | Calls `0x7e17fb28`, then returns 1. | pattern scan |
+| `0x7e17fb28` | 1 | `call2_7e17fb37_7e17ff1e_7e17fb28` | Calls `0x7e17fb37(this)` and then `0x7e17ff1e(this)`. | pattern scan |
+| `0x7e1809d3` | 1 | `store_55_f1372_call_7e180a1d_7e1809d3` | `*(this+1372) = 55`, then calls `0x7e180a1d`. | pattern scan |
+| `0x7e1811c4` | 1 | `call2_7e1811d3_7e181446_7e1811c4` | Calls `0x7e1811d3(this)` and then `0x7e181446(this)`. | pattern scan |
+| `0x7e181583` | 1 | `call2_7e181592_7e18168b_7e181583` | Calls `0x7e181592(this)` and then `0x7e18168b(this)`. | pattern scan |
+| `0x7e18180c` | 1 | `store_66_f1372_f1376_7e18180c` | `*(this+1372) = *(this+1376) = 66`. | pattern scan |
+| `0x7e18189c` | 1 | `call2_7e1818ab_7e1818f0_7e18189c` | Calls `0x7e1818ab(this)` and then `0x7e1818f0(this)`. | pattern scan |
+| `0x7e1818f8` | 1 | `store_68_f1404_f1376_7e1818f8` | `*(this+1404) = *(this+1376) = 68`. | pattern scan |
+| `0x7e181add` | 2 | `call2_7e181aec_7e1827f4_7e181add` | Calls `0x7e181aec(this)` and then `0x7e1827f4(this)`. | pattern scan |
+| `0x7e181bb0` | 1 | `store_72_f1408_f1376_7e181bb0` | `*(this+1408) = *(this+1376) = 72`. | pattern scan |
+| `0x7e1829cc` | 1 | `store_79_f1408_f1376_7e1829cc` | `*(this+1408) = *(this+1376) = 79`. | pattern scan |
+| `0x7e1834ba` | 1 | `store_12_f1372_call_7e183506_7e1834ba` | `*(this+1372) = 12`, then calls `0x7e183506`. | pattern scan |
+| `0x7e18350e` | 1 | `store_85_f1412_f1376_7e18350e` | `*(this+1412) = *(this+1376) = 85`. | pattern scan |
+| `0x7e184459` | 2 | `call2_7e184468_7e184783_7e184459` | Calls `0x7e184468(this)` and then `0x7e184783(this)`. | pattern scan |
+| `0x7e184863` | 1 | `call2_7e184872_7e184b7d_7e184863` | Calls `0x7e184872(this)` and then `0x7e184b7d(this)`. | pattern scan |
+| `0x7e184e20` | 1 | `call2_7e184e2f_7e184f47_7e184e20` | Calls `0x7e184e2f(this)` and then `0x7e184f47(this)`. | pattern scan |
+| `0x7e18515f` | 2 | `call2_7e18516e_7e185cc0_7e18515f` | Calls `0x7e18516e(this)` and then `0x7e185cc0(this)`. | pattern scan |
+| `0x7e185a45` | 1 | `call_7e18658f_ret_1_7e185a45` | Calls `0x7e18658f`, then returns 1. | pattern scan |
+| `0x7e185e04` | 1 | `call2_7e185e13_7e186054_7e185e04` | Calls `0x7e185e13(this)` and then `0x7e186054(this)`. | pattern scan |
+| `0x7e1864e5` | 1 | `store_124_f1436_f1376_7e1864e5` | `*(this+1436) = *(this+1376) = 124`. | pattern scan |
+| `0x7e18658f` | 1 | `call2_7e18659e_7e18686d_7e18658f` | Calls `0x7e18659e(this)` and then `0x7e18686d(this)`. | pattern scan |
+| `0x7e18692d` | 1 | `store_132_f1432_f1376_7e18692d` | `*(this+1432) = *(this+1376) = 132`. | pattern scan |
+| `0x7e188bd6` | 1 | `store_14_f1372_f1376_7e188bd6` | `*(this+1372) = *(this+1376) = 14`. | pattern scan |
+| `0x7e188c19` | 1 | `store_15_f1372_f1376_7e188c19` | `*(this+1372) = *(this+1376) = 15`. | pattern scan |
+| `0x7e188c5c` | 1 | `store_16_f1372_f1376_7e188c5c` | `*(this+1372) = *(this+1376) = 16`. | pattern scan |
+| `0x7e188c9f` | 1 | `store_17_f1372_f1376_7e188c9f` | `*(this+1372) = *(this+1376) = 17`. | pattern scan |
+| `0x7e188ce2` | 1 | `store_136_f1372_f1376_7e188ce2` | `*(this+1372) = *(this+1376) = 136`. | pattern scan |
+| `0x7e189744` | 3 | `call2_7e189753_7e189a81_7e189744` | Calls `0x7e189753(this)` and then `0x7e189a81(this)`. | pattern scan |
+| `0x7e18a717` | 1 | `call2_7e18a726_7e18a76c_7e18a717` | Calls `0x7e18a726(this)` and then `0x7e18a76c(this)`. | pattern scan |
+| `0x7e18aaab` | 1 | `store_18_f1372_call_7e18aaf5_7e18aaab` | `*(this+1372) = 18`, then calls `0x7e18aaf5`. | pattern scan |
+| `0x7e18ac89` | 1 | `store_20_f584_f1376_7e18ac89` | `*(this+584) = *(this+1376) = 20`. | pattern scan |
+| `0x7e18ba1b` | 1 | `call2_7e18ba2a_7e18be67_7e18ba1b` | Calls `0x7e18ba2a(this)` and then `0x7e18be67(this)`. | pattern scan |
+| `0x7e18c0cd` | 1 | `call_7e1e67f6_ret_null_7e18c0cd` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e18c138` | 1 | `call_7e1e67f6_ret_null_7e18c138` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e18d299` | 1 | `this_plus_112_7e18d299` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e18d323` | 1 | `call_7e1a4ef2_ret_null_7e18d323` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e18da8c` | 1 | `call2_7e18da9e_7e18fd68_7e18da8c` | Calls `0x7e18da9e(this)` and then `0x7e18fd68(this)`. | pattern scan |
+| `0x7e18da9e` | 1 | `store_4_f252_call_7e1e86dd_7e18da9e` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1905e6` | 1 | `this_plus_112_7e1905e6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1a0662` | 1 | `this_plus_112_7e1a0662` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1a06e8` | 1 | `call_7e192164_ret_null_7e1a06e8` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a0d19` | 1 | `call2_7e1a0d2b_7e1a2a95_7e1a0d19` | Calls `0x7e1a0d2b(this)` and then `0x7e1a2a95(this)`. | pattern scan |
+| `0x7e1a0d2b` | 1 | `store_4_f252_call_7e1e86dd_7e1a0d2b` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1a2fac` | 14 | `call_7e1a4ef2_ret_null_7e1a2fac` | Calls `0x7e1a4ef2`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a4ef2` | 3 | `call_7e1b8a8d_ret_null_7e1a4ef2` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a790e` | 1 | `this_plus_112_7e1a790e` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1a7c46` | 1 | `this_plus_112_7e1a7c46` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1a7cde` | 1 | `call_7e1b8a8d_ret_null_7e1a7cde` | Calls `0x7e1b8a8d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1a8aa9` | 1 | `call2_7e1a8abb_7e1ac1cf_7e1a8aa9` | Calls `0x7e1a8abb(this)` and then `0x7e1ac1cf(this)`. | pattern scan |
+| `0x7e1a8abb` | 1 | `store_4_f252_call_7e1e86dd_7e1a8abb` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1aca21` | 1 | `this_plus_208_7e1aca21` | Leaf `return this+208` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ad850` | 1 | `call2_7e1ad862_7e1aff74_7e1ad850` | Calls `0x7e1ad862(this)` and then `0x7e1aff74(this)`. | pattern scan |
+| `0x7e1ad862` | 1 | `store_4_f252_call_7e1e86dd_7e1ad862` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1b0479` | 1 | `call_7e1e67f6_ret_null_7e1b0479` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b05a6` | 1 | `call_7e1e67f6_ret_null_7e1b05a6` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b0611` | 1 | `call_7e1e67f6_ret_null_7e1b0611` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b067c` | 1 | `call_7e1e67f6_ret_null_7e1b067c` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b08b0` | 1 | `call_7e1e67f6_ret_null_7e1b08b0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b091b` | 1 | `call_7e1e67f6_ret_null_7e1b091b` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b0986` | 1 | `call_7e1e67f6_ret_null_7e1b0986` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b0d0a` | 1 | `this_plus_160_7e1b0d0a` | Leaf `return this+160` (address of a member or base sub-object). | pattern scan |
+| `0x7e1b0d80` | 1 | `call_7e1e67f6_ret_null_7e1b0d80` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b0deb` | 1 | `call_7e1e67f6_ret_null_7e1b0deb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b18d5` | 1 | `call2_7e1b18e7_7e1b3a52_7e1b18d5` | Calls `0x7e1b18e7(this)` and then `0x7e1b3a52(this)`. | pattern scan |
+| `0x7e1b18e7` | 1 | `store_4_f252_call_7e1e86dd_7e1b18e7` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1b26ed` | 2 | `call2_7e1b2b38_7e1b279f_7e1b26ed` | Calls `0x7e1b2b38(this)` and then `0x7e1b279f(this)`. | pattern scan |
+| `0x7e1b26fc` | 1 | `store_56_f948_f256_7e1b26fc` | `*(this+948) = *(this+256) = 56`. | pattern scan |
+| `0x7e1b2a5e` | 1 | `store_61_f8764_f8768_7e1b2a5e` | `*(this+8764) = *(this+8768) = 61`. | pattern scan |
+| `0x7e1b2b74` | 1 | `store_63_f8772_f8776_7e1b2b74` | `*(this+8772) = *(this+8776) = 63`. | pattern scan |
+| `0x7e1b41e6` | 1 | `this_plus_112_7e1b41e6` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1b4287` | 1 | `call_7e1a2fac_ret_null_7e1b4287` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1b5d08` | 1 | `call2_7e1b5d1a_7e1b8431_7e1b5d08` | Calls `0x7e1b5d1a(this)` and then `0x7e1b8431(this)`. | pattern scan |
+| `0x7e1b5d1a` | 1 | `store_4_f252_call_7e1e86dd_7e1b5d1a` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1b801b` | 1 | `call2_7e1b802a_7e1b8089_7e1b801b` | Calls `0x7e1b802a(this)` and then `0x7e1b8089(this)`. | pattern scan |
+| `0x7e1bc9cf` | 1 | `this_plus_208_7e1bc9cf` | Leaf `return this+208` (address of a member or base sub-object). | pattern scan |
+| `0x7e1bca47` | 1 | `call_7e1e67f6_ret_null_7e1bca47` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bca6a` | 1 | `call_7e1e67f6_ret_null_7e1bca6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bcf78` | 1 | `this_plus_284_7e1bcf78` | Leaf `return this+284` (address of a member or base sub-object). | pattern scan |
+| `0x7e1bcff0` | 1 | `call_7e1e67f6_ret_null_7e1bcff0` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bd06d` | 1 | `call_7e1e67f6_ret_null_7e1bd06d` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bd0ea` | 1 | `call_7e1e67f6_ret_null_7e1bd0ea` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bd167` | 1 | `call_7e1e67f6_ret_null_7e1bd167` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1bd1e8` | 1 | `call_7e1e67f6_ret_null_7e1bd1e8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1be942` | 1 | `call2_7e1be954_7e1c1d21_7e1be942` | Calls `0x7e1be954(this)` and then `0x7e1c1d21(this)`. | pattern scan |
+| `0x7e1be954` | 1 | `store_4_f252_call_7e1e86dd_7e1be954` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c24b2` | 1 | `this_plus_112_7e1c24b2` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1c2538` | 1 | `call_7e192164_ret_null_7e1c2538` | Calls `0x7e192164`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1c2b23` | 1 | `call2_7e1c2b35_7e1c3ddf_7e1c2b23` | Calls `0x7e1c2b35(this)` and then `0x7e1c3ddf(this)`. | pattern scan |
+| `0x7e1c2b35` | 1 | `store_4_f252_call_7e1e86dd_7e1c2b35` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c4b26` | 1 | `store_11_f580_f256_7e1c4b26` | `*(this+580) = *(this+256) = 11`. | pattern scan |
+| `0x7e1c4b74` | 1 | `store_12_f580_f256_7e1c4b74` | `*(this+580) = *(this+256) = 12`. | pattern scan |
+| `0x7e1c4bc2` | 1 | `store_13_f580_f256_7e1c4bc2` | `*(this+580) = *(this+256) = 13`. | pattern scan |
+| `0x7e1c4dc7` | 1 | `store_14_f580_f256_7e1c4dc7` | `*(this+580) = *(this+256) = 14`. | pattern scan |
+| `0x7e1c4e15` | 1 | `store_15_f580_f256_7e1c4e15` | `*(this+580) = *(this+256) = 15`. | pattern scan |
+| `0x7e1c4e63` | 1 | `store_16_f580_f256_7e1c4e63` | `*(this+580) = *(this+256) = 16`. | pattern scan |
+| `0x7e1c4eb1` | 1 | `store_17_f580_f256_7e1c4eb1` | `*(this+580) = *(this+256) = 17`. | pattern scan |
+| `0x7e1c4ef7` | 1 | `store_18_f580_call_7e1c4f4c_7e1c4ef7` | `*(this+580) = 18`, then calls `0x7e1c4f4c`. | pattern scan |
+| `0x7e1c50de` | 1 | `store_20_f584_f256_7e1c50de` | `*(this+584) = *(this+256) = 20`. | pattern scan |
+| `0x7e1c5540` | 1 | `this_plus_112_7e1c5540` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1c55d5` | 1 | `call_7e1a2fac_ret_null_7e1c55d5` | Calls `0x7e1a2fac`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1c5e27` | 1 | `call2_7e1c5e39_7e1c8c22_7e1c5e27` | Calls `0x7e1c5e39(this)` and then `0x7e1c8c22(this)`. | pattern scan |
+| `0x7e1c5e39` | 1 | `store_4_f252_call_7e1e86dd_7e1c5e39` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1c94e2` | 1 | `this_plus_112_7e1c94e2` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1c9d92` | 1 | `call2_7e1c9da4_7e1cbd4f_7e1c9d92` | Calls `0x7e1c9da4(this)` and then `0x7e1cbd4f(this)`. | pattern scan |
+| `0x7e1c9da4` | 1 | `store_4_f252_call_7e1e86dd_7e1c9da4` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1cc47a` | 1 | `this_plus_112_7e1cc47a` | Leaf `return this+112` (address of a member or base sub-object). | pattern scan |
+| `0x7e1cc943` | 1 | `call2_7e1cc924_7e1cce14_7e1cc943` | Calls `0x7e1cc924(this)` and then `0x7e1cce14(this)`. | pattern scan |
+| `0x7e1cd2b7` | 1 | `call_7e205040_ret_null_7e1cd2b7` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cd366` | 1 | `call_7e205040_ret_null_7e1cd366` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cd41e` | 1 | `call_7e205040_ret_null_7e1cd41e` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cda63` | 1 | `call_7e205040_ret_null_7e1cda63` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cdf76` | 1 | `call_7e205040_ret_null_7e1cdf76` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce189` | 1 | `call_7e205040_ret_null_7e1ce189` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce229` | 1 | `call_7e205040_ret_null_7e1ce229` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce28c` | 1 | `call_7e205040_ret_null_7e1ce28c` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce2fa` | 1 | `call_7e205040_ret_null_7e1ce2fa` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce556` | 1 | `call_7e205040_ret_null_7e1ce556` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce727` | 1 | `call_7e205040_ret_null_7e1ce727` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce7f9` | 1 | `call_7e205040_ret_null_7e1ce7f9` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ce95c` | 1 | `this_plus_1460_7e1ce95c` | Leaf `return this+1460` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ceb71` | 1 | `call_7e1e6239_ret_null_7e1ceb71` | Calls `0x7e1e6239`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cee68` | 1 | `call_7e0dfcef_ret_null_7e1cee68` | Calls `0x7e0dfcef`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1cf9a1` | 1 | `call2_7e1cf9b5_7e1d116b_7e1cf9a1` | Calls `0x7e1cf9b5(this)` and then `0x7e1d116b(this)`. | pattern scan |
+| `0x7e1cfa0e` | 1 | `call_7e0e7841_ret_1_7e1cfa0e` | Calls `0x7e0e7841`, then returns 1. | pattern scan |
+| `0x7e1d1173` | 1 | `store_14_f976_f256_7e1d1173` | `*(this+976) = *(this+256) = 14`. | pattern scan |
+| `0x7e1d11da` | 1 | `call2_7e1d11e9_7e1d14aa_7e1d11da` | Calls `0x7e1d11e9(this)` and then `0x7e1d14aa(this)`. | pattern scan |
+| `0x7e1d1a0d` | 1 | `call_7e0ce5c5_ret_null_7e1d1a0d` | Calls `0x7e0ce5c5`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1d1a1c` | 1 | `fwd_f2828_to_7e111c0e_7e1d1a1c` | Forwards to the object at `this+2828`: `0x7e111c0e(*(this+2828))`. | pattern scan |
+| `0x7e1d1a8c` | 1 | `fwd_f2828_to_7e10f3ee_7e1d1a8c` | Forwards to the object at `this+2828`: `0x7e10f3ee(*(this+2828))`. | pattern scan |
+| `0x7e1d1aae` | 1 | `fwd_f2828_vslot212_7e1d1aae` | Forwards to the object at `this+2828`: calls its vtable slot `+212`. | pattern scan |
+| `0x7e1d1ac0` | 1 | `fwd_f2828_vslot220_7e1d1ac0` | Forwards to the object at `this+2828`: calls its vtable slot `+220`. | pattern scan |
+| `0x7e1d1ad2` | 1 | `fwd_f2828_vslot224_7e1d1ad2` | Forwards to the object at `this+2828`: calls its vtable slot `+224`. | pattern scan |
+| `0x7e1d1ae4` | 1 | `fwd_f2828_vslot232_7e1d1ae4` | Forwards to the object at `this+2828`: calls its vtable slot `+232`. | pattern scan |
+| `0x7e1d1af6` | 1 | `fwd_f2828_vslot236_7e1d1af6` | Forwards to the object at `this+2828`: calls its vtable slot `+236`. | pattern scan |
+| `0x7e1d1b24` | 1 | `fwd_f2828_vslot3672_7e1d1b24` | Forwards to the object at `this+2828`: calls its vtable slot `+3672`. | pattern scan |
+| `0x7e1d1b36` | 1 | `fwd_f2828_vslot264_7e1d1b36` | Forwards to the object at `this+2828`: calls its vtable slot `+264`. | pattern scan |
+| `0x7e1d1b48` | 1 | `fwd_f2828_vslot268_7e1d1b48` | Forwards to the object at `this+2828`: calls its vtable slot `+268`. | pattern scan |
+| `0x7e1d1b5a` | 1 | `fwd_f2828_vslot272_7e1d1b5a` | Forwards to the object at `this+2828`: calls its vtable slot `+272`. | pattern scan |
+| `0x7e1d1b6c` | 1 | `fwd_f2828_vslot276_7e1d1b6c` | Forwards to the object at `this+2828`: calls its vtable slot `+276`. | pattern scan |
+| `0x7e1d1b7e` | 1 | `fwd_f2828_vslot280_7e1d1b7e` | Forwards to the object at `this+2828`: calls its vtable slot `+280`. | pattern scan |
+| `0x7e1d1b90` | 1 | `fwd_f2828_vslot284_7e1d1b90` | Forwards to the object at `this+2828`: calls its vtable slot `+284`. | pattern scan |
+| `0x7e1d1ba2` | 1 | `fwd_f2828_vslot292_7e1d1ba2` | Forwards to the object at `this+2828`: calls its vtable slot `+292`. | pattern scan |
+| `0x7e1d1bb4` | 1 | `fwd_f2828_vslot296_7e1d1bb4` | Forwards to the object at `this+2828`: calls its vtable slot `+296`. | pattern scan |
+| `0x7e1d1bc6` | 1 | `fwd_f2828_vslot300_7e1d1bc6` | Forwards to the object at `this+2828`: calls its vtable slot `+300`. | pattern scan |
+| `0x7e1d1bdb` | 1 | `fwd_f2828_vslot304_7e1d1bdb` | Forwards to the object at `this+2828`: calls its vtable slot `+304`. | pattern scan |
+| `0x7e1d1bed` | 1 | `fwd_f2828_vslot308_7e1d1bed` | Forwards to the object at `this+2828`: calls its vtable slot `+308`. | pattern scan |
+| `0x7e1d1bff` | 1 | `fwd_f2828_vslot328_7e1d1bff` | Forwards to the object at `this+2828`: calls its vtable slot `+328`. | pattern scan |
+| `0x7e1d1c11` | 3 | `fwd_f2828_vslot3676_7e1d1c11` | Forwards to the object at `this+2828`: calls its vtable slot `+3676`. | pattern scan |
+| `0x7e1d1c29` | 5 | `fwd_f2828_vslot364_7e1d1c29` | Forwards to the object at `this+2828`: calls its vtable slot `+364`. | pattern scan |
+| `0x7e1d1c3b` | 1 | `fwd_f2828_vslot3832_7e1d1c3b` | Forwards to the object at `this+2828`: calls its vtable slot `+3832`. | pattern scan |
+| `0x7e1d1c4d` | 1 | `fwd_f2828_vslot388_7e1d1c4d` | Forwards to the object at `this+2828`: calls its vtable slot `+388`. | pattern scan |
+| `0x7e1d1c5f` | 1 | `fwd_f2828_vslot400_7e1d1c5f` | Forwards to the object at `this+2828`: calls its vtable slot `+400`. | pattern scan |
+| `0x7e1d1c71` | 1 | `fwd_f2828_vslot404_7e1d1c71` | Forwards to the object at `this+2828`: calls its vtable slot `+404`. | pattern scan |
+| `0x7e1d1c80` | 1 | `fwd_f2828_vslot392_7e1d1c80` | Forwards to the object at `this+2828`: calls its vtable slot `+392`. | pattern scan |
+| `0x7e1d1c92` | 1 | `fwd_f2828_vslot396_7e1d1c92` | Forwards to the object at `this+2828`: calls its vtable slot `+396`. | pattern scan |
+| `0x7e1d1cc2` | 2 | `fwd_f2828_vslot412_7e1d1cc2` | Forwards to the object at `this+2828`: calls its vtable slot `+412`. | pattern scan |
+| `0x7e1d1cd4` | 1 | `fwd_f2828_vslot3848_7e1d1cd4` | Forwards to the object at `this+2828`: calls its vtable slot `+3848`. | pattern scan |
+| `0x7e1d1ce6` | 2 | `fwd_f2828_vslot3844_7e1d1ce6` | Forwards to the object at `this+2828`: calls its vtable slot `+3844`. | pattern scan |
+| `0x7e1d1cf8` | 2 | `fwd_f2828_vslot420_7e1d1cf8` | Forwards to the object at `this+2828`: calls its vtable slot `+420`. | pattern scan |
+| `0x7e1d1d0a` | 2 | `fwd_f2828_vslot424_7e1d1d0a` | Forwards to the object at `this+2828`: calls its vtable slot `+424`. | pattern scan |
+| `0x7e1d1d1c` | 2 | `fwd_f2828_vslot428_7e1d1d1c` | Forwards to the object at `this+2828`: calls its vtable slot `+428`. | pattern scan |
+| `0x7e1d1d2e` | 2 | `fwd_f2828_vslot432_7e1d1d2e` | Forwards to the object at `this+2828`: calls its vtable slot `+432`. | pattern scan |
+| `0x7e1d1d44` | 2 | `fwd_f2828_vslot3836_7e1d1d44` | Forwards to the object at `this+2828`: calls its vtable slot `+3836`. | pattern scan |
+| `0x7e1d1d56` | 1 | `fwd_f2828_vslot440_7e1d1d56` | Forwards to the object at `this+2828`: calls its vtable slot `+440`. | pattern scan |
+| `0x7e1d1d68` | 2 | `fwd_f2828_vslot3840_7e1d1d68` | Forwards to the object at `this+2828`: calls its vtable slot `+3840`. | pattern scan |
+| `0x7e1d1d7a` | 2 | `fwd_f2828_vslot380_7e1d1d7a` | Forwards to the object at `this+2828`: calls its vtable slot `+380`. | pattern scan |
+| `0x7e1d1d8c` | 2 | `fwd_f2828_vslot444_7e1d1d8c` | Forwards to the object at `this+2828`: calls its vtable slot `+444`. | pattern scan |
+| `0x7e1d1d9e` | 2 | `fwd_f2828_vslot448_7e1d1d9e` | Forwards to the object at `this+2828`: calls its vtable slot `+448`. | pattern scan |
+| `0x7e1d1db0` | 2 | `fwd_f2828_vslot452_7e1d1db0` | Forwards to the object at `this+2828`: calls its vtable slot `+452`. | pattern scan |
+| `0x7e1d1dc2` | 1 | `fwd_f2828_to_7e111c24_7e1d1dc2` | Forwards to the object at `this+2828`: `0x7e111c24(*(this+2828))`. | pattern scan |
+| `0x7e1d1dd3` | 1 | `fwd_f2828_to_7e111e01_7e1d1dd3` | Forwards to the object at `this+2828`: `0x7e111e01(*(this+2828))`. | pattern scan |
+| `0x7e1d1de4` | 1 | `fwd_f2828_to_7e111f19_7e1d1de4` | Forwards to the object at `this+2828`: `0x7e111f19(*(this+2828))`. | pattern scan |
+| `0x7e1d1df5` | 1 | `fwd_f2828_to_7e111f21_7e1d1df5` | Forwards to the object at `this+2828`: `0x7e111f21(*(this+2828))`. | pattern scan |
+| `0x7e1d1e06` | 1 | `fwd_f2828_to_7e111e8d_7e1d1e06` | Forwards to the object at `this+2828`: `0x7e111e8d(*(this+2828))`. | pattern scan |
+| `0x7e1d1e17` | 1 | `fwd_f2828_to_7e111f29_7e1d1e17` | Forwards to the object at `this+2828`: `0x7e111f29(*(this+2828))`. | pattern scan |
+| `0x7e1d1e28` | 1 | `fwd_f2828_to_7e111fbc_7e1d1e28` | Forwards to the object at `this+2828`: `0x7e111fbc(*(this+2828))`. | pattern scan |
+| `0x7e1d1e39` | 1 | `fwd_f2828_to_7e111fc4_7e1d1e39` | Forwards to the object at `this+2828`: `0x7e111fc4(*(this+2828))`. | pattern scan |
+| `0x7e1d1e4a` | 1 | `fwd_f2828_to_7e111fcc_7e1d1e4a` | Forwards to the object at `this+2828`: `0x7e111fcc(*(this+2828))`. | pattern scan |
+| `0x7e1d1e5b` | 1 | `fwd_f2828_to_7e112052_7e1d1e5b` | Forwards to the object at `this+2828`: `0x7e112052(*(this+2828))`. | pattern scan |
+| `0x7e1d1e6c` | 1 | `fwd_f2828_vslot504_7e1d1e6c` | Forwards to the object at `this+2828`: calls its vtable slot `+504`. | pattern scan |
+| `0x7e1d1e7e` | 1 | `fwd_f2828_vslot508_7e1d1e7e` | Forwards to the object at `this+2828`: calls its vtable slot `+508`. | pattern scan |
+| `0x7e1d1e90` | 1 | `fwd_f2828_vslot520_7e1d1e90` | Forwards to the object at `this+2828`: calls its vtable slot `+520`. | pattern scan |
+| `0x7e1d1ea2` | 1 | `fwd_f2828_vslot524_7e1d1ea2` | Forwards to the object at `this+2828`: calls its vtable slot `+524`. | pattern scan |
+| `0x7e1d1eb4` | 1 | `fwd_f2828_vslot532_7e1d1eb4` | Forwards to the object at `this+2828`: calls its vtable slot `+532`. | pattern scan |
+| `0x7e1d1ec6` | 1 | `fwd_f2828_vslot536_7e1d1ec6` | Forwards to the object at `this+2828`: calls its vtable slot `+536`. | pattern scan |
+| `0x7e1d1ed8` | 1 | `fwd_f2828_vslot548_7e1d1ed8` | Forwards to the object at `this+2828`: calls its vtable slot `+548`. | pattern scan |
+| `0x7e1d1eea` | 1 | `fwd_f2828_vslot552_7e1d1eea` | Forwards to the object at `this+2828`: calls its vtable slot `+552`. | pattern scan |
+| `0x7e1d1efc` | 1 | `fwd_f2828_vslot556_7e1d1efc` | Forwards to the object at `this+2828`: calls its vtable slot `+556`. | pattern scan |
+| `0x7e1d1f0e` | 1 | `fwd_f2828_to_7e112347_7e1d1f0e` | Forwards to the object at `this+2828`: `0x7e112347(*(this+2828))`. | pattern scan |
+| `0x7e1d1f1f` | 1 | `fwd_f2828_to_7e112372_7e1d1f1f` | Forwards to the object at `this+2828`: `0x7e112372(*(this+2828))`. | pattern scan |
+| `0x7e1d23fe` | 1 | `fwd_f2828_vslot564_7e1d23fe` | Forwards to the object at `this+2828`: calls its vtable slot `+564`. | pattern scan |
+| `0x7e1d2410` | 1 | `fwd_f2828_vslot568_7e1d2410` | Forwards to the object at `this+2828`: calls its vtable slot `+568`. | pattern scan |
+| `0x7e1d2422` | 1 | `fwd_f2828_vslot3788_7e1d2422` | Forwards to the object at `this+2828`: calls its vtable slot `+3788`. | pattern scan |
+| `0x7e1d2434` | 1 | `fwd_f2828_vslot3776_7e1d2434` | Forwards to the object at `this+2828`: calls its vtable slot `+3776`. | pattern scan |
+| `0x7e1d2446` | 1 | `fwd_f2828_vslot3704_7e1d2446` | Forwards to the object at `this+2828`: calls its vtable slot `+3704`. | pattern scan |
+| `0x7e1d2458` | 1 | `fwd_f2828_vslot3708_7e1d2458` | Forwards to the object at `this+2828`: calls its vtable slot `+3708`. | pattern scan |
+| `0x7e1d246a` | 1 | `fwd_f2828_vslot3772_7e1d246a` | Forwards to the object at `this+2828`: calls its vtable slot `+3772`. | pattern scan |
+| `0x7e1d247c` | 1 | `fwd_f2828_vslot3716_7e1d247c` | Forwards to the object at `this+2828`: calls its vtable slot `+3716`. | pattern scan |
+| `0x7e1d248e` | 1 | `fwd_f2828_vslot3712_7e1d248e` | Forwards to the object at `this+2828`: calls its vtable slot `+3712`. | pattern scan |
+| `0x7e1d24a0` | 1 | `fwd_f2828_vslot3720_7e1d24a0` | Forwards to the object at `this+2828`: calls its vtable slot `+3720`. | pattern scan |
+| `0x7e1d24b2` | 1 | `fwd_f2828_vslot3760_7e1d24b2` | Forwards to the object at `this+2828`: calls its vtable slot `+3760`. | pattern scan |
+| `0x7e1d24c4` | 1 | `fwd_f2828_vslot3724_7e1d24c4` | Forwards to the object at `this+2828`: calls its vtable slot `+3724`. | pattern scan |
+| `0x7e1d24d6` | 1 | `fwd_f2828_vslot3872_7e1d24d6` | Forwards to the object at `this+2828`: calls its vtable slot `+3872`. | pattern scan |
+| `0x7e1d24e8` | 1 | `fwd_f2828_vslot3868_7e1d24e8` | Forwards to the object at `this+2828`: calls its vtable slot `+3868`. | pattern scan |
+| `0x7e1d24fa` | 1 | `fwd_f2828_vslot3800_7e1d24fa` | Forwards to the object at `this+2828`: calls its vtable slot `+3800`. | pattern scan |
+| `0x7e1d271f` | 1 | `fwd_f2828_to_7e109f7a_7e1d271f` | Forwards to the object at `this+2828`: `0x7e109f7a(*(this+2828))`. | pattern scan |
+| `0x7e1d2730` | 1 | `fwd_f2828_to_7e109d5a_7e1d2730` | Forwards to the object at `this+2828`: `0x7e109d5a(*(this+2828))`. | pattern scan |
+| `0x7e1d2741` | 1 | `fwd_f2828_to_7e109c45_7e1d2741` | Forwards to the object at `this+2828`: `0x7e109c45(*(this+2828))`. | pattern scan |
+| `0x7e1d2752` | 1 | `fwd_f2828_to_7e109915_7e1d2752` | Forwards to the object at `this+2828`: `0x7e109915(*(this+2828))`. | pattern scan |
+| `0x7e1d276e` | 1 | `fwd_f2828_vslot3580_7e1d276e` | Forwards to the object at `this+2828`: calls its vtable slot `+3580`. | pattern scan |
+| `0x7e1d2782` | 1 | `fwd_f2828_vslot3584_7e1d2782` | Forwards to the object at `this+2828`: calls its vtable slot `+3584`. | pattern scan |
+| `0x7e1d2861` | 1 | `fwd_f2828_vslot912_7e1d2861` | Forwards to the object at `this+2828`: calls its vtable slot `+912`. | pattern scan |
+| `0x7e1d2879` | 1 | `fwd_f2828_vslot3560_7e1d2879` | Forwards to the object at `this+2828`: calls its vtable slot `+3560`. | pattern scan |
+| `0x7e1d288b` | 1 | `fwd_f2828_vslot3564_7e1d288b` | Forwards to the object at `this+2828`: calls its vtable slot `+3564`. | pattern scan |
+| `0x7e1d289f` | 1 | `fwd_f2828_vslot3440_7e1d289f` | Forwards to the object at `this+2828`: calls its vtable slot `+3440`. | pattern scan |
+| `0x7e1d28b1` | 1 | `fwd_f2828_vslot924_7e1d28b1` | Forwards to the object at `this+2828`: calls its vtable slot `+924`. | pattern scan |
+| `0x7e1d2a8f` | 1 | `fwd_f2828_vslot3604_7e1d2a8f` | Forwards to the object at `this+2828`: calls its vtable slot `+3604`. | pattern scan |
+| `0x7e1d2aa1` | 1 | `fwd_f2828_vslot3576_7e1d2aa1` | Forwards to the object at `this+2828`: calls its vtable slot `+3576`. | pattern scan |
+| `0x7e1d2ab3` | 1 | `fwd_f2828_vslot3780_7e1d2ab3` | Forwards to the object at `this+2828`: calls its vtable slot `+3780`. | pattern scan |
+| `0x7e1d2b94` | 1 | `fwd_f2828_vslot940_7e1d2b94` | Forwards to the object at `this+2828`: calls its vtable slot `+940`. | pattern scan |
+| `0x7e1d2ba8` | 1 | `fwd_f2828_vslot944_7e1d2ba8` | Forwards to the object at `this+2828`: calls its vtable slot `+944`. | pattern scan |
+| `0x7e1d2bba` | 1 | `fwd_f2828_to_7e0fb6f8_7e1d2bba` | Forwards to the object at `this+2828`: `0x7e0fb6f8(*(this+2828))`. | pattern scan |
+| `0x7e1d2bcb` | 1 | `fwd_f2828_to_7e0fb752_7e1d2bcb` | Forwards to the object at `this+2828`: `0x7e0fb752(*(this+2828))`. | pattern scan |
+| `0x7e1d2bdc` | 1 | `fwd_f2828_vslot964_7e1d2bdc` | Forwards to the object at `this+2828`: calls its vtable slot `+964`. | pattern scan |
+| `0x7e1d2bf0` | 1 | `fwd_f2828_vslot972_7e1d2bf0` | Forwards to the object at `this+2828`: calls its vtable slot `+972`. | pattern scan |
+| `0x7e1d2c02` | 1 | `fwd_f2828_vslot3448_7e1d2c02` | Forwards to the object at `this+2828`: calls its vtable slot `+3448`. | pattern scan |
+| `0x7e1d2c14` | 1 | `fwd_f2828_vslot976_7e1d2c14` | Forwards to the object at `this+2828`: calls its vtable slot `+976`. | pattern scan |
+| `0x7e1d2c26` | 1 | `fwd_f2828_vslot980_7e1d2c26` | Forwards to the object at `this+2828`: calls its vtable slot `+980`. | pattern scan |
+| `0x7e1d2c38` | 1 | `fwd_f2828_vslot984_7e1d2c38` | Forwards to the object at `this+2828`: calls its vtable slot `+984`. | pattern scan |
+| `0x7e1d2c4a` | 1 | `fwd_f2828_vslot988_7e1d2c4a` | Forwards to the object at `this+2828`: calls its vtable slot `+988`. | pattern scan |
+| `0x7e1d2c5c` | 1 | `fwd_f2828_vslot992_7e1d2c5c` | Forwards to the object at `this+2828`: calls its vtable slot `+992`. | pattern scan |
+| `0x7e1d2c6e` | 1 | `fwd_f2828_vslot1000_7e1d2c6e` | Forwards to the object at `this+2828`: calls its vtable slot `+1000`. | pattern scan |
+| `0x7e1d2c80` | 1 | `fwd_f2828_vslot1004_7e1d2c80` | Forwards to the object at `this+2828`: calls its vtable slot `+1004`. | pattern scan |
+| `0x7e1d2c92` | 1 | `fwd_f2828_vslot1008_7e1d2c92` | Forwards to the object at `this+2828`: calls its vtable slot `+1008`. | pattern scan |
+| `0x7e1d2d72` | 1 | `fwd_f2828_vslot1016_7e1d2d72` | Forwards to the object at `this+2828`: calls its vtable slot `+1016`. | pattern scan |
+| `0x7e1d2d84` | 1 | `fwd_f2828_vslot3364_7e1d2d84` | Forwards to the object at `this+2828`: calls its vtable slot `+3364`. | pattern scan |
+| `0x7e1d2d96` | 1 | `fwd_f2828_vslot3368_7e1d2d96` | Forwards to the object at `this+2828`: calls its vtable slot `+3368`. | pattern scan |
+| `0x7e1d2da8` | 1 | `fwd_f2828_vslot3372_7e1d2da8` | Forwards to the object at `this+2828`: calls its vtable slot `+3372`. | pattern scan |
+| `0x7e1d2dba` | 1 | `fwd_f2828_vslot3376_7e1d2dba` | Forwards to the object at `this+2828`: calls its vtable slot `+3376`. | pattern scan |
+| `0x7e1d2dcc` | 1 | `fwd_f2828_vslot3380_7e1d2dcc` | Forwards to the object at `this+2828`: calls its vtable slot `+3380`. | pattern scan |
+| `0x7e1d2dde` | 1 | `fwd_f2828_vslot1020_7e1d2dde` | Forwards to the object at `this+2828`: calls its vtable slot `+1020`. | pattern scan |
+| `0x7e1d2df0` | 1 | `fwd_f2828_vslot1024_7e1d2df0` | Forwards to the object at `this+2828`: calls its vtable slot `+1024`. | pattern scan |
+| `0x7e1d2e02` | 1 | `fwd_f2828_vslot1028_7e1d2e02` | Forwards to the object at `this+2828`: calls its vtable slot `+1028`. | pattern scan |
+| `0x7e1d2e14` | 1 | `fwd_f2828_vslot3636_7e1d2e14` | Forwards to the object at `this+2828`: calls its vtable slot `+3636`. | pattern scan |
+| `0x7e1d2e26` | 1 | `fwd_f2828_vslot3632_7e1d2e26` | Forwards to the object at `this+2828`: calls its vtable slot `+3632`. | pattern scan |
+| `0x7e1d2e38` | 1 | `fwd_f2828_vslot3628_7e1d2e38` | Forwards to the object at `this+2828`: calls its vtable slot `+3628`. | pattern scan |
+| `0x7e1d2e4c` | 1 | `fwd_f2828_vslot3624_7e1d2e4c` | Forwards to the object at `this+2828`: calls its vtable slot `+3624`. | pattern scan |
+| `0x7e1d2e60` | 1 | `fwd_f2828_vslot3620_7e1d2e60` | Forwards to the object at `this+2828`: calls its vtable slot `+3620`. | pattern scan |
+| `0x7e1d2e74` | 1 | `fwd_f2828_vslot3616_7e1d2e74` | Forwards to the object at `this+2828`: calls its vtable slot `+3616`. | pattern scan |
+| `0x7e1d2e88` | 1 | `fwd_f2828_vslot3612_7e1d2e88` | Forwards to the object at `this+2828`: calls its vtable slot `+3612`. | pattern scan |
+| `0x7e1d2e9c` | 1 | `fwd_f2828_vslot3608_7e1d2e9c` | Forwards to the object at `this+2828`: calls its vtable slot `+3608`. | pattern scan |
+| `0x7e1d2eb4` | 1 | `fwd_f2828_vslot3728_7e1d2eb4` | Forwards to the object at `this+2828`: calls its vtable slot `+3728`. | pattern scan |
+| `0x7e1d2ec6` | 1 | `fwd_f2828_vslot3796_7e1d2ec6` | Forwards to the object at `this+2828`: calls its vtable slot `+3796`. | pattern scan |
+| `0x7e1d2ed8` | 1 | `fwd_f2828_vslot2988_7e1d2ed8` | Forwards to the object at `this+2828`: calls its vtable slot `+2988`. | pattern scan |
+| `0x7e1d2eea` | 1 | `fwd_f2828_vslot628_7e1d2eea` | Forwards to the object at `this+2828`: calls its vtable slot `+628`. | pattern scan |
+| `0x7e1d2efc` | 1 | `fwd_f2828_vslot2992_7e1d2efc` | Forwards to the object at `this+2828`: calls its vtable slot `+2992`. | pattern scan |
+| `0x7e1d2f0e` | 1 | `fwd_f2828_vslot3020_7e1d2f0e` | Forwards to the object at `this+2828`: calls its vtable slot `+3020`. | pattern scan |
+| `0x7e1d2f20` | 1 | `fwd_f2828_vslot3024_7e1d2f20` | Forwards to the object at `this+2828`: calls its vtable slot `+3024`. | pattern scan |
+| `0x7e1d2f32` | 1 | `fwd_f2828_vslot3528_7e1d2f32` | Forwards to the object at `this+2828`: calls its vtable slot `+3528`. | pattern scan |
+| `0x7e1d2f44` | 1 | `fwd_f2828_vslot3588_7e1d2f44` | Forwards to the object at `this+2828`: calls its vtable slot `+3588`. | pattern scan |
+| `0x7e1d2f56` | 1 | `fwd_f2828_vslot3592_7e1d2f56` | Forwards to the object at `this+2828`: calls its vtable slot `+3592`. | pattern scan |
+| `0x7e1d2f68` | 1 | `fwd_f2828_vslot3568_7e1d2f68` | Forwards to the object at `this+2828`: calls its vtable slot `+3568`. | pattern scan |
+| `0x7e1d2f7a` | 1 | `fwd_f2828_vslot3572_7e1d2f7a` | Forwards to the object at `this+2828`: calls its vtable slot `+3572`. | pattern scan |
+| `0x7e1d3128` | 1 | `fwd_f2828_vslot3048_7e1d3128` | Forwards to the object at `this+2828`: calls its vtable slot `+3048`. | pattern scan |
+| `0x7e1d3142` | 1 | `fwd_f2828_vslot3068_7e1d3142` | Forwards to the object at `this+2828`: calls its vtable slot `+3068`. | pattern scan |
+| `0x7e1d3156` | 1 | `fwd_f2828_vslot3856_7e1d3156` | Forwards to the object at `this+2828`: calls its vtable slot `+3856`. | pattern scan |
+| `0x7e1d316a` | 1 | `fwd_f2828_vslot3860_7e1d316a` | Forwards to the object at `this+2828`: calls its vtable slot `+3860`. | pattern scan |
+| `0x7e1d3182` | 1 | `fwd_f2828_vslot3552_7e1d3182` | Forwards to the object at `this+2828`: calls its vtable slot `+3552`. | pattern scan |
+| `0x7e1d3194` | 1 | `fwd_f2828_vslot3556_7e1d3194` | Forwards to the object at `this+2828`: calls its vtable slot `+3556`. | pattern scan |
+| `0x7e1d31a6` | 1 | `fwd_f2828_vslot3732_7e1d31a6` | Forwards to the object at `this+2828`: calls its vtable slot `+3732`. | pattern scan |
+| `0x7e1d31b8` | 1 | `fwd_f2828_vslot3736_7e1d31b8` | Forwards to the object at `this+2828`: calls its vtable slot `+3736`. | pattern scan |
+| `0x7e1d31ca` | 1 | `fwd_f2828_vslot3764_7e1d31ca` | Forwards to the object at `this+2828`: calls its vtable slot `+3764`. | pattern scan |
+| `0x7e1d31dc` | 1 | `fwd_f2828_vslot3768_7e1d31dc` | Forwards to the object at `this+2828`: calls its vtable slot `+3768`. | pattern scan |
+| `0x7e1d31ee` | 1 | `fwd_f2828_vslot3804_7e1d31ee` | Forwards to the object at `this+2828`: calls its vtable slot `+3804`. | pattern scan |
+| `0x7e1d3200` | 1 | `fwd_f2828_vslot3740_7e1d3200` | Forwards to the object at `this+2828`: calls its vtable slot `+3740`. | pattern scan |
+| `0x7e1d3212` | 1 | `fwd_f2828_vslot3812_7e1d3212` | Forwards to the object at `this+2828`: calls its vtable slot `+3812`. | pattern scan |
+| `0x7e1d3224` | 1 | `fwd_f2828_vslot3744_7e1d3224` | Forwards to the object at `this+2828`: calls its vtable slot `+3744`. | pattern scan |
+| `0x7e1d3236` | 1 | `fwd_f2828_vslot3752_7e1d3236` | Forwards to the object at `this+2828`: calls its vtable slot `+3752`. | pattern scan |
+| `0x7e1d3248` | 1 | `fwd_f2828_vslot3748_7e1d3248` | Forwards to the object at `this+2828`: calls its vtable slot `+3748`. | pattern scan |
+| `0x7e1d325a` | 1 | `fwd_f2828_vslot3756_7e1d325a` | Forwards to the object at `this+2828`: calls its vtable slot `+3756`. | pattern scan |
+| `0x7e1d3269` | 1 | `fwd_f2828_vslot2916_7e1d3269` | Forwards to the object at `this+2828`: calls its vtable slot `+2916`. | pattern scan |
+| `0x7e1d3278` | 1 | `fwd_f2828_vslot2920_7e1d3278` | Forwards to the object at `this+2828`: calls its vtable slot `+2920`. | pattern scan |
+| `0x7e1d328a` | 1 | `fwd_f2828_vslot3128_7e1d328a` | Forwards to the object at `this+2828`: calls its vtable slot `+3128`. | pattern scan |
+| `0x7e1d329f` | 1 | `fwd_f2828_vslot3132_7e1d329f` | Forwards to the object at `this+2828`: calls its vtable slot `+3132`. | pattern scan |
+| `0x7e1d32b1` | 1 | `fwd_f2828_vslot3136_7e1d32b1` | Forwards to the object at `this+2828`: calls its vtable slot `+3136`. | pattern scan |
+| `0x7e1d32c3` | 1 | `fwd_f2828_vslot1036_7e1d32c3` | Forwards to the object at `this+2828`: calls its vtable slot `+1036`. | pattern scan |
+| `0x7e1d32d5` | 1 | `fwd_f2828_vslot3144_7e1d32d5` | Forwards to the object at `this+2828`: calls its vtable slot `+3144`. | pattern scan |
+| `0x7e1d32e7` | 1 | `fwd_f2828_vslot3148_7e1d32e7` | Forwards to the object at `this+2828`: calls its vtable slot `+3148`. | pattern scan |
+| `0x7e1d32f9` | 1 | `fwd_f2828_vslot3156_7e1d32f9` | Forwards to the object at `this+2828`: calls its vtable slot `+3156`. | pattern scan |
+| `0x7e1d330b` | 1 | `fwd_f2828_vslot3164_7e1d330b` | Forwards to the object at `this+2828`: calls its vtable slot `+3164`. | pattern scan |
+| `0x7e1d331d` | 1 | `fwd_f2828_vslot3168_7e1d331d` | Forwards to the object at `this+2828`: calls its vtable slot `+3168`. | pattern scan |
+| `0x7e1d332f` | 1 | `fwd_f2828_vslot3172_7e1d332f` | Forwards to the object at `this+2828`: calls its vtable slot `+3172`. | pattern scan |
+| `0x7e1d3344` | 1 | `fwd_f2828_vslot3176_7e1d3344` | Forwards to the object at `this+2828`: calls its vtable slot `+3176`. | pattern scan |
+| `0x7e1d3356` | 1 | `fwd_f2828_vslot3180_7e1d3356` | Forwards to the object at `this+2828`: calls its vtable slot `+3180`. | pattern scan |
+| `0x7e1d3368` | 1 | `fwd_f2828_vslot3184_7e1d3368` | Forwards to the object at `this+2828`: calls its vtable slot `+3184`. | pattern scan |
+| `0x7e1d337a` | 1 | `fwd_f2828_vslot3188_7e1d337a` | Forwards to the object at `this+2828`: calls its vtable slot `+3188`. | pattern scan |
+| `0x7e1d338c` | 1 | `fwd_f2828_vslot3192_7e1d338c` | Forwards to the object at `this+2828`: calls its vtable slot `+3192`. | pattern scan |
+| `0x7e1d339e` | 1 | `fwd_f2828_vslot3196_7e1d339e` | Forwards to the object at `this+2828`: calls its vtable slot `+3196`. | pattern scan |
+| `0x7e1d33b0` | 1 | `fwd_f2828_vslot3200_7e1d33b0` | Forwards to the object at `this+2828`: calls its vtable slot `+3200`. | pattern scan |
+| `0x7e1d33c2` | 1 | `fwd_f2828_vslot3204_7e1d33c2` | Forwards to the object at `this+2828`: calls its vtable slot `+3204`. | pattern scan |
+| `0x7e1d33d4` | 1 | `fwd_f2828_vslot3208_7e1d33d4` | Forwards to the object at `this+2828`: calls its vtable slot `+3208`. | pattern scan |
+| `0x7e1d33e6` | 1 | `fwd_f2828_vslot3212_7e1d33e6` | Forwards to the object at `this+2828`: calls its vtable slot `+3212`. | pattern scan |
+| `0x7e1d33f8` | 1 | `fwd_f2828_vslot3220_7e1d33f8` | Forwards to the object at `this+2828`: calls its vtable slot `+3220`. | pattern scan |
+| `0x7e1d340a` | 1 | `fwd_f2828_vslot3224_7e1d340a` | Forwards to the object at `this+2828`: calls its vtable slot `+3224`. | pattern scan |
+| `0x7e1d341c` | 1 | `fwd_f2828_vslot3228_7e1d341c` | Forwards to the object at `this+2828`: calls its vtable slot `+3228`. | pattern scan |
+| `0x7e1d342e` | 1 | `fwd_f2828_vslot3232_7e1d342e` | Forwards to the object at `this+2828`: calls its vtable slot `+3232`. | pattern scan |
+| `0x7e1d3440` | 1 | `fwd_f2828_vslot3700_7e1d3440` | Forwards to the object at `this+2828`: calls its vtable slot `+3700`. | pattern scan |
+| `0x7e1d3452` | 1 | `fwd_f2828_vslot3060_7e1d3452` | Forwards to the object at `this+2828`: calls its vtable slot `+3060`. | pattern scan |
+| `0x7e1d3461` | 1 | `fwd_f2828_vslot3064_7e1d3461` | Forwards to the object at `this+2828`: calls its vtable slot `+3064`. | pattern scan |
+| `0x7e1d3473` | 1 | `fwd_f2828_vslot3240_7e1d3473` | Forwards to the object at `this+2828`: calls its vtable slot `+3240`. | pattern scan |
+| `0x7e1d3485` | 2 | `fwd_f2828_vslot3244_7e1d3485` | Forwards to the object at `this+2828`: calls its vtable slot `+3244`. | pattern scan |
+| `0x7e1d349a` | 1 | `fwd_f2828_vslot3248_7e1d349a` | Forwards to the object at `this+2828`: calls its vtable slot `+3248`. | pattern scan |
+| `0x7e1d34ac` | 1 | `fwd_f2828_vslot3680_7e1d34ac` | Forwards to the object at `this+2828`: calls its vtable slot `+3680`. | pattern scan |
+| `0x7e1d34be` | 1 | `fwd_f2828_vslot908_7e1d34be` | Forwards to the object at `this+2828`: calls its vtable slot `+908`. | pattern scan |
+| `0x7e1d34d0` | 1 | `fwd_f2828_vslot3252_7e1d34d0` | Forwards to the object at `this+2828`: calls its vtable slot `+3252`. | pattern scan |
+| `0x7e1d34e2` | 1 | `fwd_f2828_vslot3256_7e1d34e2` | Forwards to the object at `this+2828`: calls its vtable slot `+3256`. | pattern scan |
+| `0x7e1d34f7` | 1 | `fwd_f2828_vslot3260_7e1d34f7` | Forwards to the object at `this+2828`: calls its vtable slot `+3260`. | pattern scan |
+| `0x7e1d3509` | 1 | `fwd_f2828_vslot3264_7e1d3509` | Forwards to the object at `this+2828`: calls its vtable slot `+3264`. | pattern scan |
+| `0x7e1d3518` | 1 | `fwd_f2828_vslot2904_7e1d3518` | Forwards to the object at `this+2828`: calls its vtable slot `+2904`. | pattern scan |
+| `0x7e1d3527` | 1 | `fwd_f2828_vslot2908_7e1d3527` | Forwards to the object at `this+2828`: calls its vtable slot `+2908`. | pattern scan |
+| `0x7e1d3539` | 1 | `fwd_f2828_vslot3268_7e1d3539` | Forwards to the object at `this+2828`: calls its vtable slot `+3268`. | pattern scan |
+| `0x7e1d354b` | 1 | `fwd_f2828_vslot3272_7e1d354b` | Forwards to the object at `this+2828`: calls its vtable slot `+3272`. | pattern scan |
+| `0x7e1d355d` | 1 | `fwd_f2828_to_7e10a2f5_7e1d355d` | Forwards to the object at `this+2828`: `0x7e10a2f5(*(this+2828))`. | pattern scan |
+| `0x7e1d356e` | 1 | `fwd_f2828_vslot3784_7e1d356e` | Forwards to the object at `this+2828`: calls its vtable slot `+3784`. | pattern scan |
+| `0x7e1d3580` | 1 | `fwd_f2828_vslot3792_7e1d3580` | Forwards to the object at `this+2828`: calls its vtable slot `+3792`. | pattern scan |
+| `0x7e1d3592` | 1 | `fwd_f2828_to_7e11237a_7e1d3592` | Forwards to the object at `this+2828`: `0x7e11237a(*(this+2828))`. | pattern scan |
+| `0x7e1d35a3` | 1 | `fwd_f2828_to_7e1120c3_7e1d35a3` | Forwards to the object at `this+2828`: `0x7e1120c3(*(this+2828))`. | pattern scan |
+| `0x7e1d35b4` | 1 | `fwd_f2828_to_7e11214e_7e1d35b4` | Forwards to the object at `this+2828`: `0x7e11214e(*(this+2828))`. | pattern scan |
+| `0x7e1d35c5` | 1 | `fwd_f2828_to_7e1121e4_7e1d35c5` | Forwards to the object at `this+2828`: `0x7e1121e4(*(this+2828))`. | pattern scan |
+| `0x7e1d35d6` | 1 | `fwd_f2828_to_7e1121ec_7e1d35d6` | Forwards to the object at `this+2828`: `0x7e1121ec(*(this+2828))`. | pattern scan |
+| `0x7e1d35e7` | 1 | `fwd_f2828_to_7e1121f4_7e1d35e7` | Forwards to the object at `this+2828`: `0x7e1121f4(*(this+2828))`. | pattern scan |
+| `0x7e1d35f8` | 1 | `fwd_f2828_to_7e11227d_7e1d35f8` | Forwards to the object at `this+2828`: `0x7e11227d(*(this+2828))`. | pattern scan |
+| `0x7e1d3609` | 1 | `fwd_f2828_vslot3640_7e1d3609` | Forwards to the object at `this+2828`: calls its vtable slot `+3640`. | pattern scan |
+| `0x7e1d361b` | 2 | `fwd_f2828_vslot3280_7e1d361b` | Forwards to the object at `this+2828`: calls its vtable slot `+3280`. | pattern scan |
+| `0x7e1d362d` | 1 | `fwd_f2828_vslot3660_7e1d362d` | Forwards to the object at `this+2828`: calls its vtable slot `+3660`. | pattern scan |
+| `0x7e1d363f` | 2 | `fwd_f2828_vslot3300_7e1d363f` | Forwards to the object at `this+2828`: calls its vtable slot `+3300`. | pattern scan |
+| `0x7e1d3651` | 2 | `fwd_f2828_vslot3304_7e1d3651` | Forwards to the object at `this+2828`: calls its vtable slot `+3304`. | pattern scan |
+| `0x7e1d3663` | 1 | `fwd_f2828_vslot3644_7e1d3663` | Forwards to the object at `this+2828`: calls its vtable slot `+3644`. | pattern scan |
+| `0x7e1d3675` | 1 | `fwd_f2828_vslot3296_7e1d3675` | Forwards to the object at `this+2828`: calls its vtable slot `+3296`. | pattern scan |
+| `0x7e1d368a` | 1 | `fwd_f2828_vslot3696_7e1d368a` | Forwards to the object at `this+2828`: calls its vtable slot `+3696`. | pattern scan |
+| `0x7e1d369c` | 1 | `fwd_f2828_vslot3320_7e1d369c` | Forwards to the object at `this+2828`: calls its vtable slot `+3320`. | pattern scan |
+| `0x7e1d36ae` | 1 | `fwd_f2828_vslot3648_7e1d36ae` | Forwards to the object at `this+2828`: calls its vtable slot `+3648`. | pattern scan |
+| `0x7e1d36c0` | 1 | `fwd_f2828_vslot3332_7e1d36c0` | Forwards to the object at `this+2828`: calls its vtable slot `+3332`. | pattern scan |
+| `0x7e1d36d2` | 1 | `fwd_f2828_vslot3336_7e1d36d2` | Forwards to the object at `this+2828`: calls its vtable slot `+3336`. | pattern scan |
+| `0x7e1d36e4` | 1 | `fwd_f2828_vslot3340_7e1d36e4` | Forwards to the object at `this+2828`: calls its vtable slot `+3340`. | pattern scan |
+| `0x7e1d36f6` | 2 | `fwd_f2828_vslot3652_7e1d36f6` | Forwards to the object at `this+2828`: calls its vtable slot `+3652`. | pattern scan |
+| `0x7e1d3708` | 1 | `fwd_f2828_vslot3344_7e1d3708` | Forwards to the object at `this+2828`: calls its vtable slot `+3344`. | pattern scan |
+| `0x7e1d371a` | 1 | `fwd_f2828_vslot3348_7e1d371a` | Forwards to the object at `this+2828`: calls its vtable slot `+3348`. | pattern scan |
+| `0x7e1d372f` | 1 | `fwd_f2828_vslot3352_7e1d372f` | Forwards to the object at `this+2828`: calls its vtable slot `+3352`. | pattern scan |
+| `0x7e1d3741` | 1 | `fwd_f2828_vslot3356_7e1d3741` | Forwards to the object at `this+2828`: calls its vtable slot `+3356`. | pattern scan |
+| `0x7e1d3755` | 1 | `fwd_f2828_vslot3596_7e1d3755` | Forwards to the object at `this+2828`: calls its vtable slot `+3596`. | pattern scan |
+| `0x7e1d3769` | 1 | `fwd_f2828_vslot3600_7e1d3769` | Forwards to the object at `this+2828`: calls its vtable slot `+3600`. | pattern scan |
+| `0x7e1d3778` | 1 | `fwd_f2828_vslot2896_7e1d3778` | Forwards to the object at `this+2828`: calls its vtable slot `+2896`. | pattern scan |
+| `0x7e1d3787` | 1 | `fwd_f2828_vslot2900_7e1d3787` | Forwards to the object at `this+2828`: calls its vtable slot `+2900`. | pattern scan |
+| `0x7e1d3796` | 1 | `fwd_f2828_vslot2848_7e1d3796` | Forwards to the object at `this+2828`: calls its vtable slot `+2848`. | pattern scan |
+| `0x7e1d37a5` | 1 | `fwd_f2828_vslot2852_7e1d37a5` | Forwards to the object at `this+2828`: calls its vtable slot `+2852`. | pattern scan |
+| `0x7e1d37b7` | 1 | `fwd_f2828_vslot3816_7e1d37b7` | Forwards to the object at `this+2828`: calls its vtable slot `+3816`. | pattern scan |
+| `0x7e1d37c9` | 1 | `fwd_f2828_vslot764_7e1d37c9` | Forwards to the object at `this+2828`: calls its vtable slot `+764`. | pattern scan |
+| `0x7e1d37db` | 1 | `fwd_f2828_vslot760_7e1d37db` | Forwards to the object at `this+2828`: calls its vtable slot `+760`. | pattern scan |
+| `0x7e1d37ed` | 1 | `fwd_f2828_vslot820_7e1d37ed` | Forwards to the object at `this+2828`: calls its vtable slot `+820`. | pattern scan |
+| `0x7e1d37ff` | 1 | `fwd_f2828_vslot792_7e1d37ff` | Forwards to the object at `this+2828`: calls its vtable slot `+792`. | pattern scan |
+| `0x7e1d3811` | 1 | `fwd_f2828_vslot796_7e1d3811` | Forwards to the object at `this+2828`: calls its vtable slot `+796`. | pattern scan |
+| `0x7e1d3823` | 1 | `fwd_f2828_vslot800_7e1d3823` | Forwards to the object at `this+2828`: calls its vtable slot `+800`. | pattern scan |
+| `0x7e1d3835` | 1 | `fwd_f2828_vslot804_7e1d3835` | Forwards to the object at `this+2828`: calls its vtable slot `+804`. | pattern scan |
+| `0x7e1d3847` | 1 | `fwd_f2828_vslot788_7e1d3847` | Forwards to the object at `this+2828`: calls its vtable slot `+788`. | pattern scan |
+| `0x7e1d3859` | 1 | `fwd_f2828_vslot808_7e1d3859` | Forwards to the object at `this+2828`: calls its vtable slot `+808`. | pattern scan |
+| `0x7e1d386b` | 1 | `fwd_f2828_vslot812_7e1d386b` | Forwards to the object at `this+2828`: calls its vtable slot `+812`. | pattern scan |
+| `0x7e1d387d` | 1 | `fwd_f2828_vslot816_7e1d387d` | Forwards to the object at `this+2828`: calls its vtable slot `+816`. | pattern scan |
+| `0x7e1d388f` | 1 | `fwd_f2828_vslot784_7e1d388f` | Forwards to the object at `this+2828`: calls its vtable slot `+784`. | pattern scan |
+| `0x7e1d38a1` | 1 | `fwd_f2828_vslot668_7e1d38a1` | Forwards to the object at `this+2828`: calls its vtable slot `+668`. | pattern scan |
+| `0x7e1d38b3` | 1 | `fwd_f2828_vslot616_7e1d38b3` | Forwards to the object at `this+2828`: calls its vtable slot `+616`. | pattern scan |
+| `0x7e1d38c5` | 1 | `fwd_f2828_vslot648_7e1d38c5` | Forwards to the object at `this+2828`: calls its vtable slot `+648`. | pattern scan |
+| `0x7e1d38d7` | 1 | `fwd_f2828_vslot600_7e1d38d7` | Forwards to the object at `this+2828`: calls its vtable slot `+600`. | pattern scan |
+| `0x7e1d38e9` | 1 | `fwd_f2828_vslot632_7e1d38e9` | Forwards to the object at `this+2828`: calls its vtable slot `+632`. | pattern scan |
+| `0x7e1d38fb` | 1 | `fwd_f2828_vslot588_7e1d38fb` | Forwards to the object at `this+2828`: calls its vtable slot `+588`. | pattern scan |
+| `0x7e1d390d` | 1 | `fwd_f2828_vslot640_7e1d390d` | Forwards to the object at `this+2828`: calls its vtable slot `+640`. | pattern scan |
+| `0x7e1d391f` | 1 | `fwd_f2828_vslot592_7e1d391f` | Forwards to the object at `this+2828`: calls its vtable slot `+592`. | pattern scan |
+| `0x7e1d3931` | 1 | `fwd_f2828_vslot704_7e1d3931` | Forwards to the object at `this+2828`: calls its vtable slot `+704`. | pattern scan |
+| `0x7e1d3943` | 1 | `fwd_f2828_vslot708_7e1d3943` | Forwards to the object at `this+2828`: calls its vtable slot `+708`. | pattern scan |
+| `0x7e1d3955` | 1 | `fwd_f2828_vslot700_7e1d3955` | Forwards to the object at `this+2828`: calls its vtable slot `+700`. | pattern scan |
+| `0x7e1d3967` | 1 | `fwd_f2828_vslot696_7e1d3967` | Forwards to the object at `this+2828`: calls its vtable slot `+696`. | pattern scan |
+| `0x7e1d3979` | 1 | `fwd_f2828_vslot692_7e1d3979` | Forwards to the object at `this+2828`: calls its vtable slot `+692`. | pattern scan |
+| `0x7e1d398b` | 1 | `fwd_f2828_vslot684_7e1d398b` | Forwards to the object at `this+2828`: calls its vtable slot `+684`. | pattern scan |
+| `0x7e1d399d` | 1 | `fwd_f2828_vslot688_7e1d399d` | Forwards to the object at `this+2828`: calls its vtable slot `+688`. | pattern scan |
+| `0x7e1d39af` | 1 | `fwd_f2828_vslot680_7e1d39af` | Forwards to the object at `this+2828`: calls its vtable slot `+680`. | pattern scan |
+| `0x7e1d39c1` | 1 | `fwd_f2828_vslot676_7e1d39c1` | Forwards to the object at `this+2828`: calls its vtable slot `+676`. | pattern scan |
+| `0x7e1d39d3` | 1 | `fwd_f2828_vslot672_7e1d39d3` | Forwards to the object at `this+2828`: calls its vtable slot `+672`. | pattern scan |
+| `0x7e1d39e5` | 1 | `fwd_f2828_vslot772_7e1d39e5` | Forwards to the object at `this+2828`: calls its vtable slot `+772`. | pattern scan |
+| `0x7e1d39f7` | 1 | `fwd_f2828_vslot768_7e1d39f7` | Forwards to the object at `this+2828`: calls its vtable slot `+768`. | pattern scan |
+| `0x7e1d3a09` | 1 | `fwd_f2828_vslot652_7e1d3a09` | Forwards to the object at `this+2828`: calls its vtable slot `+652`. | pattern scan |
+| `0x7e1d3a1b` | 1 | `fwd_f2828_vslot604_7e1d3a1b` | Forwards to the object at `this+2828`: calls its vtable slot `+604`. | pattern scan |
+| `0x7e1d3a2d` | 1 | `fwd_f2828_vslot904_7e1d3a2d` | Forwards to the object at `this+2828`: calls its vtable slot `+904`. | pattern scan |
+| `0x7e1d3a3f` | 1 | `fwd_f2828_vslot620_7e1d3a3f` | Forwards to the object at `this+2828`: calls its vtable slot `+620`. | pattern scan |
+| `0x7e1d3a51` | 1 | `fwd_f2828_vslot664_7e1d3a51` | Forwards to the object at `this+2828`: calls its vtable slot `+664`. | pattern scan |
+| `0x7e1d3a63` | 1 | `fwd_f2828_vslot624_7e1d3a63` | Forwards to the object at `this+2828`: calls its vtable slot `+624`. | pattern scan |
+| `0x7e1d3a75` | 1 | `fwd_f2828_vslot780_7e1d3a75` | Forwards to the object at `this+2828`: calls its vtable slot `+780`. | pattern scan |
+| `0x7e1d3a87` | 1 | `fwd_f2828_vslot776_7e1d3a87` | Forwards to the object at `this+2828`: calls its vtable slot `+776`. | pattern scan |
+| `0x7e1d3a99` | 1 | `fwd_f2828_vslot656_7e1d3a99` | Forwards to the object at `this+2828`: calls its vtable slot `+656`. | pattern scan |
+| `0x7e1d3aab` | 1 | `fwd_f2828_vslot608_7e1d3aab` | Forwards to the object at `this+2828`: calls its vtable slot `+608`. | pattern scan |
+| `0x7e1d3abd` | 1 | `fwd_f2828_vslot660_7e1d3abd` | Forwards to the object at `this+2828`: calls its vtable slot `+660`. | pattern scan |
+| `0x7e1d3acf` | 1 | `fwd_f2828_vslot612_7e1d3acf` | Forwards to the object at `this+2828`: calls its vtable slot `+612`. | pattern scan |
+| `0x7e1d3ae1` | 1 | `fwd_f2828_vslot644_7e1d3ae1` | Forwards to the object at `this+2828`: calls its vtable slot `+644`. | pattern scan |
+| `0x7e1d3af3` | 1 | `fwd_f2828_vslot596_7e1d3af3` | Forwards to the object at `this+2828`: calls its vtable slot `+596`. | pattern scan |
+| `0x7e1d3b05` | 1 | `fwd_f2828_vslot3808_7e1d3b05` | Forwards to the object at `this+2828`: calls its vtable slot `+3808`. | pattern scan |
+| `0x7e1d3b26` | 1 | `fwd_f2828_vslot2856_7e1d3b26` | Forwards to the object at `this+2828`: calls its vtable slot `+2856`. | pattern scan |
+| `0x7e1d3b35` | 1 | `fwd_f2828_vslot2860_7e1d3b35` | Forwards to the object at `this+2828`: calls its vtable slot `+2860`. | pattern scan |
+| `0x7e1d3b44` | 1 | `fwd_f2828_vslot2864_7e1d3b44` | Forwards to the object at `this+2828`: calls its vtable slot `+2864`. | pattern scan |
+| `0x7e1d3b53` | 1 | `fwd_f2828_vslot2868_7e1d3b53` | Forwards to the object at `this+2828`: calls its vtable slot `+2868`. | pattern scan |
+| `0x7e1d3b62` | 1 | `fwd_f2828_vslot2872_7e1d3b62` | Forwards to the object at `this+2828`: calls its vtable slot `+2872`. | pattern scan |
+| `0x7e1d3b71` | 1 | `fwd_f2828_vslot2876_7e1d3b71` | Forwards to the object at `this+2828`: calls its vtable slot `+2876`. | pattern scan |
+| `0x7e1d3b80` | 1 | `fwd_f2828_vslot2880_7e1d3b80` | Forwards to the object at `this+2828`: calls its vtable slot `+2880`. | pattern scan |
+| `0x7e1d3b8f` | 1 | `fwd_f2828_vslot2884_7e1d3b8f` | Forwards to the object at `this+2828`: calls its vtable slot `+2884`. | pattern scan |
+| `0x7e1d3b9e` | 1 | `fwd_f2828_vslot2888_7e1d3b9e` | Forwards to the object at `this+2828`: calls its vtable slot `+2888`. | pattern scan |
+| `0x7e1d3bad` | 1 | `fwd_f2828_vslot2892_7e1d3bad` | Forwards to the object at `this+2828`: calls its vtable slot `+2892`. | pattern scan |
+| `0x7e1d3bc2` | 1 | `fwd_f2828_vslot3396_7e1d3bc2` | Forwards to the object at `this+2828`: calls its vtable slot `+3396`. | pattern scan |
+| `0x7e1d3bd4` | 1 | `fwd_f2828_vslot3436_7e1d3bd4` | Forwards to the object at `this+2828`: calls its vtable slot `+3436`. | pattern scan |
+| `0x7e1d3be6` | 1 | `fwd_f2828_vslot3684_7e1d3be6` | Forwards to the object at `this+2828`: calls its vtable slot `+3684`. | pattern scan |
+| `0x7e1d3bf8` | 1 | `fwd_f2828_vslot3408_7e1d3bf8` | Forwards to the object at `this+2828`: calls its vtable slot `+3408`. | pattern scan |
+| `0x7e1d3c0a` | 1 | `fwd_f2828_to_7e10f4ac_7e1d3c0a` | Forwards to the object at `this+2828`: `0x7e10f4ac(*(this+2828))`. | pattern scan |
+| `0x7e1d3c1b` | 1 | `fwd_f2828_to_7e10f3e6_7e1d3c1b` | Forwards to the object at `this+2828`: `0x7e10f3e6(*(this+2828))`. | pattern scan |
+| `0x7e1d3c2f` | 1 | `fwd_f2828_vslot3412_7e1d3c2f` | Forwards to the object at `this+2828`: calls its vtable slot `+3412`. | pattern scan |
+| `0x7e1d3c41` | 1 | `fwd_f2828_vslot3416_7e1d3c41` | Forwards to the object at `this+2828`: calls its vtable slot `+3416`. | pattern scan |
+| `0x7e1d3c59` | 1 | `fwd_f2828_vslot3692_7e1d3c59` | Forwards to the object at `this+2828`: calls its vtable slot `+3692`. | pattern scan |
+| `0x7e1d3c6b` | 1 | `fwd_f2828_vslot3424_7e1d3c6b` | Forwards to the object at `this+2828`: calls its vtable slot `+3424`. | pattern scan |
+| `0x7e1d3c7d` | 2 | `fwd_f2828_to_7e10f4f4_7e1d3c7d` | Forwards to the object at `this+2828`: `0x7e10f4f4(*(this+2828))`. | pattern scan |
+| `0x7e1d3c8e` | 2 | `fwd_f2828_to_7e10f4db_7e1d3c8e` | Forwards to the object at `this+2828`: `0x7e10f4db(*(this+2828))`. | pattern scan |
+| `0x7e1d3c9f` | 2 | `fwd_f2828_to_7e10f50d_7e1d3c9f` | Forwards to the object at `this+2828`: `0x7e10f50d(*(this+2828))`. | pattern scan |
+| `0x7e1d3cb0` | 1 | `fwd_f2828_vslot3688_7e1d3cb0` | Forwards to the object at `this+2828`: calls its vtable slot `+3688`. | pattern scan |
+| `0x7e1d3cc2` | 2 | `fwd_f2828_vslot3428_7e1d3cc2` | Forwards to the object at `this+2828`: calls its vtable slot `+3428`. | pattern scan |
+| `0x7e1d3cd4` | 4 | `fwd_f2828_vslot3864_7e1d3cd4` | Forwards to the object at `this+2828`: calls its vtable slot `+3864`. | pattern scan |
+| `0x7e1d3ce6` | 2 | `fwd_f2828_vslot3432_7e1d3ce6` | Forwards to the object at `this+2828`: calls its vtable slot `+3432`. | pattern scan |
+| `0x7e1d3d0d` | 1 | `fwd_f2828_vslot3056_7e1d3d0d` | Forwards to the object at `this+2828`: calls its vtable slot `+3056`. | pattern scan |
+| `0x7e1d3dbf` | 1 | `call2_7e1d3dd3_7e1d3e8a_7e1d3dbf` | Calls `0x7e1d3dd3(this)` and then `0x7e1d3e8a(this)`. | pattern scan |
+| `0x7e1d3f24` | 1 | `call2_7e1d3f38_7e1d40ff_7e1d3f24` | Calls `0x7e1d3f38(this)` and then `0x7e1d40ff(this)`. | pattern scan |
+| `0x7e1e1b91` | 1 | `store_30_f3916_f3912_7e1e1b91` | `*(this+3916) = *(this+3912) = 30`. | pattern scan |
+| `0x7e1e616f` | 2 | `call_7dfc7173_ret_null_7e1e616f` | Calls `0x7dfc7173`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6860` | 1 | `call_7e1e67f6_ret_null_7e1e6860` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6908` | 11 | `call_7e1e67f6_ret_null_7e1e6908` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e696f` | 5 | `call_7e1e67f6_ret_null_7e1e696f` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e69d4` | 3 | `call_7e1e67f6_ret_null_7e1e69d4` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6a39` | 1 | `call_7e1e67f6_ret_null_7e1e6a39` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6a9e` | 2 | `call_7e1e67f6_ret_null_7e1e6a9e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6b05` | 14 | `call_7e1e67f6_ret_null_7e1e6b05` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6b6a` | 11 | `call_7e1e67f6_ret_null_7e1e6b6a` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6bcf` | 14 | `call_7e1e67f6_ret_null_7e1e6bcf` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6c34` | 5 | `call_7e1e67f6_ret_null_7e1e6c34` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6cbb` | 11 | `call_7e1e67f6_ret_null_7e1e6cbb` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e6d22` | 6 | `call_7e1e67f6_ret_null_7e1e6d22` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e8799` | 1 | `adj_thunk_120_to_7e207732_7e1e8799` | Adds 120 to `this`, then calls `0x7e207732`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1e8e37` | 13 | `call_7e1ea080_ret_null_7e1e8e37` | Calls `0x7e1ea080`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e9736` | 2 | `call_7e1e9b6e_ret_null_7e1e9736` | Calls `0x7e1e9b6e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1e9b6e` | 2 | `call_7e1e8854_ret_null_7e1e9b6e` | Calls `0x7e1e8854`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ea170` | 5 | `this_plus_180_7e1ea170` | Leaf `return this+180` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ea177` | 3 | `this_plus_204_7e1ea177` | Leaf `return this+204` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ea75d` | 1 | `this_plus_1872_7e1ea75d` | Leaf `return this+1872` (address of a member or base sub-object). | pattern scan |
+| `0x7e1eaf32` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1eaf32` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1eb2d3` | 1 | `store_6_f324_f256_7e1eb2d3` | `*(this+324) = *(this+256) = 6`. | pattern scan |
+| `0x7e1eb38f` | 1 | `store_4_f252_call_7e1e86dd_7e1eb38f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1eb3be` | 1 | `call2_7e1eb38f_7e1eb667_7e1eb3be` | Calls `0x7e1eb38f(this)` and then `0x7e1eb667(this)`. | pattern scan |
+| `0x7e1eb49e` | 1 | `store_7_f328_call_7e1eb54b_7e1eb49e` | `*(this+328) = 7`, then calls `0x7e1eb54b`. | pattern scan |
+| `0x7e1eb667` | 2 | `store_10_f328_call_7e1eb717_7e1eb667` | `*(this+328) = 10`, then calls `0x7e1eb717`. | pattern scan |
+| `0x7e1eb86d` | 3 | `call2_7e1eb87c_7e1eba94_7e1eb86d` | Calls `0x7e1eb87c(this)` and then `0x7e1eba94(this)`. | pattern scan |
+| `0x7e1eba7f` | 1 | `store_13_f340_f256_7e1eba7f` | `*(this+340) = *(this+256) = 13`. | pattern scan |
+| `0x7e1eba9c` | 1 | `store_14_f340_f256_7e1eba9c` | `*(this+340) = *(this+256) = 14`. | pattern scan |
+| `0x7e1ebb3e` | 3 | `call2_7e1ebb4d_7e1ebd69_7e1ebb3e` | Calls `0x7e1ebb4d(this)` and then `0x7e1ebd69(this)`. | pattern scan |
+| `0x7e1ebd54` | 1 | `store_16_f344_f256_7e1ebd54` | `*(this+344) = *(this+256) = 16`. | pattern scan |
+| `0x7e1ebd71` | 1 | `store_17_f344_f256_7e1ebd71` | `*(this+344) = *(this+256) = 17`. | pattern scan |
+| `0x7e1ebe13` | 3 | `call2_7e1ebe22_7e1ec039_7e1ebe13` | Calls `0x7e1ebe22(this)` and then `0x7e1ec039(this)`. | pattern scan |
+| `0x7e1ec024` | 1 | `store_19_f348_f256_7e1ec024` | `*(this+348) = *(this+256) = 19`. | pattern scan |
+| `0x7e1ec041` | 1 | `store_20_f348_f256_7e1ec041` | `*(this+348) = *(this+256) = 20`. | pattern scan |
+| `0x7e1ec474` | 1 | `this_plus_192_7e1ec474` | Leaf `return this+192` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ec47b` | 1 | `this_plus_216_7e1ec47b` | Leaf `return this+216` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ec482` | 7 | `this_plus_256_7e1ec482` | Leaf `return this+256` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ec489` | 6 | `this_plus_280_7e1ec489` | Leaf `return this+280` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ec490` | 7 | `this_plus_304_7e1ec490` | Leaf `return this+304` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ec7a7` | 1 | `store_4_f176_call_7e1e86dd_7e1ec7a7` | `*(this+176) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1ec825` | 6 | `store_5_f328_call_7e1ec977_7e1ec825` | `*(this+328) = 5`, then calls `0x7e1ec977`. | pattern scan |
+| `0x7e1ecb17` | 1 | `call2_7e1eccc5_7e1ecb26_7e1ecb17` | Calls `0x7e1eccc5(this)` and then `0x7e1ecb26(this)`. | pattern scan |
+| `0x7e1ed059` | 8 | `call_7e1e67f6_ret_null_7e1ed059` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ed714` | 2 | `fwd_f60_to_7e1e7e39_7e1ed714` | Forwards to the object at `this+60`: `0x7e1e7e39(*(this+60))`. | pattern scan |
+| `0x7e1ed722` | 2 | `fwd_f64_to_7e1e7e39_7e1ed722` | Forwards to the object at `this+64`: `0x7e1e7e39(*(this+64))`. | pattern scan |
+| `0x7e1ee05f` | 2 | `fwd_f40_to_7e1e802d_7e1ee05f` | Forwards to the object at `this+40`: `0x7e1e802d(*(this+40))`. | pattern scan |
+| `0x7e1ee06d` | 2 | `fwd_f48_to_7e1e802d_7e1ee06d` | Forwards to the object at `this+48`: `0x7e1e802d(*(this+48))`. | pattern scan |
+| `0x7e1ee07b` | 2 | `fwd_f56_to_7e1e802d_7e1ee07b` | Forwards to the object at `this+56`: `0x7e1e802d(*(this+56))`. | pattern scan |
+| `0x7e1ee089` | 2 | `fwd_f60_to_7e1e802d_7e1ee089` | Forwards to the object at `this+60`: `0x7e1e802d(*(this+60))`. | pattern scan |
+| `0x7e1ee097` | 2 | `fwd_f64_to_7e1e802d_7e1ee097` | Forwards to the object at `this+64`: `0x7e1e802d(*(this+64))`. | pattern scan |
+| `0x7e1ee8e7` | 1 | `adj_thunk_16_to_7e1e7e39_7e1ee8e7` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1ee8f4` | 1 | `adj_thunk_112_to_7e1e7e39_7e1ee8f4` | Adds 112 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1eed5a` | 1 | `adj_thunk_16_to_7e1e7e39_7e1eed5a` | Adds 16 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1eed67` | 1 | `adj_thunk_72_to_7e1e7e39_7e1eed67` | Adds 72 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1eed74` | 1 | `adj_thunk_128_to_7e1e7e39_7e1eed74` | Adds 128 to `this`, then calls `0x7e1e7e39`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1ef1de` | 2 | `call_7e1e881e_ret_null_7e1ef1de` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ef726` | 1 | `fwd_f44_to_7e1e802d_7e1ef726` | Forwards to the object at `this+44`: `0x7e1e802d(*(this+44))`. | pattern scan |
+| `0x7e1ef734` | 1 | `fwd_f48_to_7e1e802d_7e1ef734` | Forwards to the object at `this+48`: `0x7e1e802d(*(this+48))`. | pattern scan |
+| `0x7e1ef742` | 1 | `fwd_f56_to_7e1e802d_7e1ef742` | Forwards to the object at `this+56`: `0x7e1e802d(*(this+56))`. | pattern scan |
+| `0x7e1ef7f0` | 1 | `fwd_f32_to_7e1e802d_7e1ef7f0` | Forwards to the object at `this+32`: `0x7e1e802d(*(this+32))`. | pattern scan |
+| `0x7e1ef7fe` | 1 | `fwd_f12_to_7e1e802d_7e1ef7fe` | Forwards to the object at `this+12`: `0x7e1e802d(*(this+12))`. | pattern scan |
+| `0x7e1ef80c` | 1 | `fwd_f20_to_7e1e802d_7e1ef80c` | Forwards to the object at `this+20`: `0x7e1e802d(*(this+20))`. | pattern scan |
+| `0x7e1ef8f1` | 1 | `fwd_f36_to_7e1e802d_7e1ef8f1` | Forwards to the object at `this+36`: `0x7e1e802d(*(this+36))`. | pattern scan |
+| `0x7e1ef8ff` | 1 | `fwd_f24_to_7e1e802d_7e1ef8ff` | Forwards to the object at `this+24`: `0x7e1e802d(*(this+24))`. | pattern scan |
+| `0x7e1f08be` | 1 | `call_7e1ed6d9_ret_null_7e1f08be` | Calls `0x7e1ed6d9`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f203c` | 1 | `call_7e1f0868_ret_null_7e1f203c` | Calls `0x7e1f0868`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f2489` | 1 | `call_7dba3e9b_arg_7000_7e1f2489` | Calls `0x7dba3e9b` with `d0 = 7000`. | pattern scan |
+| `0x7e1f2499` | 1 | `call_7dba3e9b_arg_m1_7e1f2499` | Calls `0x7dba3e9b` with `d0 = -1`. | pattern scan |
+| `0x7e1f3704` | 1 | `call_7db67de7_arg_3_7e1f3704` | Calls `0x7db67de7` with `d0 = 3`. | pattern scan |
+| `0x7e1f38c3` | 1 | `call_7db67dc3_on_0_7e1f38c3` | Calls `0x7db67dc3` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e1f38d8` | 1 | `call_7db67dcb_on_0_7e1f38d8` | Calls `0x7db67dcb` with `a0 = 0x0` (a fixed address). | pattern scan |
+| `0x7e1f3b6f` | 1 | `fwd_f4_to_7e1e7e39_7e1f3b6f` | Forwards to the object at `this+4`: `0x7e1e7e39(*(this+4))`. | pattern scan |
+| `0x7e1f3b7f` | 1 | `fwd_f8_to_7e1e7e39_7e1f3b7f` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e1f3d04` | 1 | `this_plus_72_7e1f3d04` | Leaf `return this+72` (address of a member or base sub-object). | pattern scan |
+| `0x7e1f3e29` | 1 | `fwd_f28_to_7e1e7e39_7e1f3e29` | Forwards to the object at `this+28`: `0x7e1e7e39(*(this+28))`. | pattern scan |
+| `0x7e1f3e3f` | 1 | `fwd_f36_to_7e1e7e39_7e1f3e3f` | Forwards to the object at `this+36`: `0x7e1e7e39(*(this+36))`. | pattern scan |
+| `0x7e1f3e4f` | 1 | `fwd_f40_to_7e1e7e39_7e1f3e4f` | Forwards to the object at `this+40`: `0x7e1e7e39(*(this+40))`. | pattern scan |
+| `0x7e1f4375` | 1 | `fwd_f40_to_7e1e802d_7e1f4375` | Forwards to the object at `this+40`: `0x7e1e802d(*(this+40))`. | pattern scan |
+| `0x7e1f4752` | 1 | `call_7e1e881e_ret_null_7e1f4752` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f476d` | 1 | `call_7e1e881e_ret_null_7e1f476d` | Calls `0x7e1e881e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f49c9` | 1 | `this_plus_512_7e1f49c9` | Leaf `return this+512` (address of a member or base sub-object). | pattern scan |
+| `0x7e1f4ad8` | 6 | `call_7e1e67f6_ret_null_7e1f4ad8` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f4d17` | 1 | `this_plus_464_7e1f4d17` | Leaf `return this+464` (address of a member or base sub-object). | pattern scan |
+| `0x7e1f5524` | 1 | `store_4_f252_call_7e1e86dd_7e1f5524` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f553c` | 1 | `call2_7e1f5524_7e1f56e9_7e1f553c` | Calls `0x7e1f5524(this)` and then `0x7e1f56e9(this)`. | pattern scan |
+| `0x7e1f56f1` | 1 | `store_11_f356_f256_7e1f56f1` | `*(this+356) = *(this+256) = 11`. | pattern scan |
+| `0x7e1f5786` | 1 | `store_12_f356_f256_7e1f5786` | `*(this+356) = *(this+256) = 12`. | pattern scan |
+| `0x7e1f5cc6` | 1 | `adj_thunk_308_to_7dfc0ad2_7e1f5cc6` | Adds 308 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1f6c20` | 1 | `store_4_f252_call_7e1e86dd_7e1f6c20` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f6dca` | 1 | `store_9_f348_f256_7e1f6dca` | `*(this+348) = *(this+256) = 9`. | pattern scan |
+| `0x7e1f6e9e` | 1 | `store_10_f348_f256_7e1f6e9e` | `*(this+348) = *(this+256) = 10`. | pattern scan |
+| `0x7e1f73c6` | 1 | `adj_thunk_300_to_7dfc0ad2_7e1f73c6` | Adds 300 to `this`, then calls `0x7dfc0ad2`: entry for a base or member sub-object. | pattern scan |
+| `0x7e1f7d5b` | 1 | `this_plus_536_7e1f7d5b` | Leaf `return this+536` (address of a member or base sub-object). | pattern scan |
+| `0x7e1f7e42` | 3 | `call_7e1e67f6_ret_null_7e1f7e42` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1f802c` | 1 | `this_plus_508_7e1f802c` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
+| `0x7e1f8e29` | 1 | `store_4_f252_call_7e1e86dd_7e1f8e29` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1f8e41` | 1 | `call2_7e1f8e29_7e1f8fee_7e1f8e41` | Calls `0x7e1f8e29(this)` and then `0x7e1f8fee(this)`. | pattern scan |
+| `0x7e1f8ff6` | 1 | `store_11_f368_f256_7e1f8ff6` | `*(this+368) = *(this+256) = 11`. | pattern scan |
+| `0x7e1fa356` | 1 | `store_12_f368_f256_7e1fa356` | `*(this+368) = *(this+256) = 12`. | pattern scan |
+| `0x7e1fa4b0` | 1 | `store_13_f368_f256_7e1fa4b0` | `*(this+368) = *(this+256) = 13`. | pattern scan |
+| `0x7e1fa60a` | 1 | `store_14_f368_f256_7e1fa60a` | `*(this+368) = *(this+256) = 14`. | pattern scan |
+| `0x7e1fa764` | 1 | `store_15_f368_f256_7e1fa764` | `*(this+368) = *(this+256) = 15`. | pattern scan |
+| `0x7e1fa8be` | 1 | `store_16_f368_f256_7e1fa8be` | `*(this+368) = *(this+256) = 16`. | pattern scan |
+| `0x7e1faa18` | 1 | `store_17_f368_f256_7e1faa18` | `*(this+368) = *(this+256) = 17`. | pattern scan |
+| `0x7e1fab72` | 1 | `store_18_f368_f256_7e1fab72` | `*(this+368) = *(this+256) = 18`. | pattern scan |
+| `0x7e1faccc` | 1 | `store_19_f368_f256_7e1faccc` | `*(this+368) = *(this+256) = 19`. | pattern scan |
+| `0x7e1fae26` | 1 | `store_20_f368_f256_7e1fae26` | `*(this+368) = *(this+256) = 20`. | pattern scan |
+| `0x7e1faf80` | 1 | `store_21_f368_f256_7e1faf80` | `*(this+368) = *(this+256) = 21`. | pattern scan |
+| `0x7e1fb0da` | 1 | `store_22_f368_f256_7e1fb0da` | `*(this+368) = *(this+256) = 22`. | pattern scan |
+| `0x7e1fb234` | 1 | `store_23_f368_f256_7e1fb234` | `*(this+368) = *(this+256) = 23`. | pattern scan |
+| `0x7e1fb38e` | 1 | `store_24_f368_f256_7e1fb38e` | `*(this+368) = *(this+256) = 24`. | pattern scan |
+| `0x7e1fb647` | 1 | `store_26_f368_f256_7e1fb647` | `*(this+368) = *(this+256) = 26`. | pattern scan |
+| `0x7e1fb7a1` | 1 | `store_27_f368_f256_7e1fb7a1` | `*(this+368) = *(this+256) = 27`. | pattern scan |
+| `0x7e1fb8fb` | 1 | `store_28_f368_f256_7e1fb8fb` | `*(this+368) = *(this+256) = 28`. | pattern scan |
+| `0x7e1fba55` | 1 | `store_29_f368_f256_7e1fba55` | `*(this+368) = *(this+256) = 29`. | pattern scan |
+| `0x7e1fbbaf` | 1 | `store_30_f368_f256_7e1fbbaf` | `*(this+368) = *(this+256) = 30`. | pattern scan |
+| `0x7e1fbd09` | 1 | `store_31_f368_f256_7e1fbd09` | `*(this+368) = *(this+256) = 31`. | pattern scan |
+| `0x7e1fbe63` | 1 | `store_32_f368_f256_7e1fbe63` | `*(this+368) = *(this+256) = 32`. | pattern scan |
+| `0x7e1fbfbd` | 1 | `store_33_f368_f256_7e1fbfbd` | `*(this+368) = *(this+256) = 33`. | pattern scan |
+| `0x7e1fc117` | 1 | `store_34_f368_f256_7e1fc117` | `*(this+368) = *(this+256) = 34`. | pattern scan |
+| `0x7e1fc1c5` | 1 | `store_35_f368_f256_7e1fc1c5` | `*(this+368) = *(this+256) = 35`. | pattern scan |
+| `0x7e1fc31f` | 1 | `store_36_f368_f256_7e1fc31f` | `*(this+368) = *(this+256) = 36`. | pattern scan |
+| `0x7e1fc479` | 1 | `store_37_f368_f256_7e1fc479` | `*(this+368) = *(this+256) = 37`. | pattern scan |
+| `0x7e1fc5d3` | 1 | `store_38_f368_f256_7e1fc5d3` | `*(this+368) = *(this+256) = 38`. | pattern scan |
+| `0x7e1fc72d` | 1 | `store_39_f368_f256_7e1fc72d` | `*(this+368) = *(this+256) = 39`. | pattern scan |
+| `0x7e1fc887` | 1 | `store_40_f368_f256_7e1fc887` | `*(this+368) = *(this+256) = 40`. | pattern scan |
+| `0x7e1fcb40` | 1 | `store_42_f368_f256_7e1fcb40` | `*(this+368) = *(this+256) = 42`. | pattern scan |
+| `0x7e1fcc9a` | 1 | `store_43_f368_f256_7e1fcc9a` | `*(this+368) = *(this+256) = 43`. | pattern scan |
+| `0x7e1fcdf4` | 1 | `store_44_f368_f256_7e1fcdf4` | `*(this+368) = *(this+256) = 44`. | pattern scan |
+| `0x7e1fcf4e` | 1 | `store_45_f368_f256_7e1fcf4e` | `*(this+368) = *(this+256) = 45`. | pattern scan |
+| `0x7e1fd0a8` | 1 | `store_46_f368_f256_7e1fd0a8` | `*(this+368) = *(this+256) = 46`. | pattern scan |
+| `0x7e1fd39c` | 1 | `store_48_f368_f256_7e1fd39c` | `*(this+368) = *(this+256) = 48`. | pattern scan |
+| `0x7e1fd4f6` | 1 | `store_49_f368_f256_7e1fd4f6` | `*(this+368) = *(this+256) = 49`. | pattern scan |
+| `0x7e1fd650` | 1 | `store_50_f368_f256_7e1fd650` | `*(this+368) = *(this+256) = 50`. | pattern scan |
+| `0x7e1fdd53` | 1 | `store_4_f252_call_7e1e86dd_7e1fdd53` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1fdd6b` | 1 | `call2_7e1fdd53_7e1fdee1_7e1fdd6b` | Calls `0x7e1fdd53(this)` and then `0x7e1fdee1(this)`. | pattern scan |
+| `0x7e1fdee9` | 1 | `store_9_f344_f256_7e1fdee9` | `*(this+344) = *(this+256) = 9`. | pattern scan |
+| `0x7e1fdfb9` | 1 | `store_10_f344_f256_7e1fdfb9` | `*(this+344) = *(this+256) = 10`. | pattern scan |
+| `0x7e1fe285` | 1 | `this_plus_536_7e1fe285` | Leaf `return this+536` (address of a member or base sub-object). | pattern scan |
+| `0x7e1fec4d` | 3 | `store_4_f252_call_7e1e86dd_7e1fec4d` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1fec77` | 1 | `call2_7e1fec4d_7e1ff0f8_7e1fec77` | Calls `0x7e1fec4d(this)` and then `0x7e1ff0f8(this)`. | pattern scan |
+| `0x7e1fefa6` | 2 | `store_12_f376_f256_7e1fefa6` | `*(this+376) = *(this+256) = 12`. | pattern scan |
+| `0x7e1ff100` | 2 | `store_13_f376_f256_7e1ff100` | `*(this+376) = *(this+256) = 13`. | pattern scan |
+| `0x7e1ff2c0` | 1 | `this_plus_508_7e1ff2c0` | Leaf `return this+508` (address of a member or base sub-object). | pattern scan |
+| `0x7e1ff3a3` | 1 | `call_7e200731_ret_null_7e1ff3a3` | Calls `0x7e200731`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e1ffbd3` | 1 | `call2_7e1ffc6f_7e1ffeff_7e1ffbd3` | Calls `0x7e1ffc6f(this)` and then `0x7e1ffeff(this)`. | pattern scan |
+| `0x7e1ffc6f` | 3 | `store_4_f252_call_7e1e86dd_7e1ffc6f` | `*(this+252) = 4`, then calls `0x7e1e86dd`. | pattern scan |
+| `0x7e1fff07` | 2 | `store_11_f440_f256_7e1fff07` | `*(this+440) = *(this+256) = 11`. | pattern scan |
+| `0x7e20014a` | 2 | `store_12_f440_f256_7e20014a` | `*(this+440) = *(this+256) = 12`. | pattern scan |
+| `0x7e200280` | 2 | `store_13_f440_f256_7e200280` | `*(this+440) = *(this+256) = 13`. | pattern scan |
+| `0x7e2003b6` | 2 | `store_14_f440_f256_7e2003b6` | `*(this+440) = *(this+256) = 14`. | pattern scan |
+| `0x7e200526` | 2 | `store_15_f440_f256_7e200526` | `*(this+440) = *(this+256) = 15`. | pattern scan |
+| `0x7e200587` | 2 | `store_16_f440_f256_7e200587` | `*(this+440) = *(this+256) = 16`. | pattern scan |
+| `0x7e20168b` | 2 | `store_11_f440_f256_7e20168b` | `*(this+440) = *(this+256) = 11`. | pattern scan |
+| `0x7e2018ce` | 2 | `store_12_f440_f256_7e2018ce` | `*(this+440) = *(this+256) = 12`. | pattern scan |
+| `0x7e201a04` | 2 | `store_13_f440_f256_7e201a04` | `*(this+440) = *(this+256) = 13`. | pattern scan |
+| `0x7e201b3a` | 2 | `store_14_f440_f256_7e201b3a` | `*(this+440) = *(this+256) = 14`. | pattern scan |
+| `0x7e201c70` | 2 | `store_15_f440_f256_7e201c70` | `*(this+440) = *(this+256) = 15`. | pattern scan |
+| `0x7e201cd1` | 2 | `store_16_f440_f256_7e201cd1` | `*(this+440) = *(this+256) = 16`. | pattern scan |
+| `0x7e201e18` | 2 | `call_7e201efb_ret_null_7e201e18` | Calls `0x7e201efb`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e201e4e` | 2 | `call_7e1e67f6_ret_null_7e201e4e` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e201ead` | 1 | `call_7e1e67f6_ret_null_7e201ead` | Calls `0x7e1e67f6`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2023eb` | 1 | `fwd_f8_to_7e1e7e39_7e2023eb` | Forwards to the object at `this+8`: `0x7e1e7e39(*(this+8))`. | pattern scan |
+| `0x7e2023fb` | 1 | `fwd_f16_to_7e1e7e39_7e2023fb` | Forwards to the object at `this+16`: `0x7e1e7e39(*(this+16))`. | pattern scan |
+| `0x7e20240b` | 1 | `fwd_f12_to_7e1e7e39_7e20240b` | Forwards to the object at `this+12`: `0x7e1e7e39(*(this+12))`. | pattern scan |
+| `0x7e20241b` | 1 | `fwd_f20_to_7e1e7e39_7e20241b` | Forwards to the object at `this+20`: `0x7e1e7e39(*(this+20))`. | pattern scan |
+| `0x7e203461` | 1 | `adj_thunk_12_to_7e201e22_7e203461` | Adds 12 to `this`, then calls `0x7e201e22`: entry for a base or member sub-object. | pattern scan |
+| `0x7e203f04` | 1 | `fwd_f24_vslot4_7e203f04` | Forwards to the object at `this+24`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e203f14` | 1 | `fwd_f28_vslot4_7e203f14` | Forwards to the object at `this+28`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e204d7e` | 1 | `this_plus_104_7e204d7e` | Leaf `return this+104` (address of a member or base sub-object). | pattern scan |
+| `0x7e20751b` | 1 | `call_7e205040_ret_null_7e20751b` | Calls `0x7e205040`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2079b2` | 1 | `this_plus_64_7e2079b2` | Leaf `return this+64` (address of a member or base sub-object). | pattern scan |
+| `0x7e2079cc` | 1 | `adj_thunk_56_to_7e206a85_7e2079cc` | Adds 56 to `this`, then calls `0x7e206a85`: entry for a base or member sub-object. | pattern scan |
+| `0x7e207a95` | 4 | `adj_thunk_56_to_7e206a97_7e207a95` | Adds 56 to `this`, then calls `0x7e206a97`: entry for a base or member sub-object. | pattern scan |
+| `0x7e207f49` | 1 | `adj_thunk_12_to_7dfc3f5f_7e207f49` | Adds 12 to `this`, then calls `0x7dfc3f5f`: entry for a base or member sub-object. | pattern scan |
+| `0x7e208094` | 2 | `call_7e2080ef_ret_null_7e208094` | Calls `0x7e2080ef`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e208251` | 1 | `call_7e2081d9_ret_null_7e208251` | Calls `0x7e2081d9`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e208321` | 1 | `fwd_f52_to_7e221c50_7e208321` | Forwards to the object at `this+52`: `0x7e221c50(*(this+52))`. | pattern scan |
+| `0x7e20b8d3` | 1 | `call_7e20d793_arg_454_7e20b8d3` | Calls `0x7e20d793` with `d0 = 454`. | pattern scan |
+| `0x7e20d133` | 1 | `call_7e20d325_arg_1_7e20d133` | Calls `0x7e20d325` with `d0 = 1`. | pattern scan |
+| `0x7e20d609` | 0 | `call_7e20d616_arg_1_7e20d609` | Calls `0x7e20d616` with `d0 = 1`. | pattern scan |
+| `0x7e20dff8` | 1 | `call_7e20d793_arg_99_7e20dff8` | Calls `0x7e20d793` with `d0 = 99`. | pattern scan |
+| `0x7e20ecf3` | 1 | `call_7e20ed42_arg_3_7e20ecf3` | Calls `0x7e20ed42` with `d0 = 3`. | pattern scan |
+| `0x7e20ed35` | 0 | `call_7e20ed42_arg_1_7e20ed35` | Calls `0x7e20ed42` with `d0 = 1`. | pattern scan |
+| `0x7e21143e` | 0 | `call_7e20ed42_arg_8_7e21143e` | Calls `0x7e20ed42` with `d0 = 8`. | pattern scan |
+| `0x7e2133f1` | 0 | `call_7e20ed42_arg_8_7e2133f1` | Calls `0x7e20ed42` with `d0 = 8`. | pattern scan |
+| `0x7e21b01b` | 0 | `call_7e20ed42_arg_7_7e21b01b` | Calls `0x7e20ed42` with `d0 = 7`. | pattern scan |
+| `0x7e21b950` | 6 | `this_plus_12_7e21b950` | Leaf `return this+12` (address of a member or base sub-object). | pattern scan |
+| `0x7e21b955` | 6 | `this_plus_36_7e21b955` | Leaf `return this+36` (address of a member or base sub-object). | pattern scan |
+| `0x7e21b95a` | 4 | `this_plus_60_7e21b95a` | Leaf `return this+60` (address of a member or base sub-object). | pattern scan |
+| `0x7e21bbe4` | 1 | `call_7e21b943_ret_null_7e21bbe4` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21c119` | 0 | `call_7e215ae5_arg_1_7e21c119` | Calls `0x7e215ae5` with `d0 = 1`. | pattern scan |
+| `0x7e21c569` | 1 | `call_7e21b943_ret_null_7e21c569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21cd79` | 1 | `call_7e21b943_ret_null_7e21cd79` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21d8f1` | 1 | `call_7e21b943_ret_null_7e21d8f1` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21dff2` | 0 | `call_7e215da4_arg_1_7e21dff2` | Calls `0x7e215da4` with `d0 = 1`. | pattern scan |
+| `0x7e21e0b2` | 1 | `call_7e21b943_ret_null_7e21e0b2` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e21e84d` | 1 | `call_7e21b943_ret_null_7e21e84d` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e220569` | 1 | `call_7e21b943_ret_null_7e220569` | Calls `0x7e21b943`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e223ebc` | 2 | `call_7e223db3_ret_null_7e223ebc` | Calls `0x7e223db3`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e226fb2` | 2 | `call_7e226d52_arg_1_7e226fb2` | Calls `0x7e226d52` with `d0 = 1`. | pattern scan |
+| `0x7e226fbc` | 3 | `call_7e226d52_arg_1_7e226fbc` | Calls `0x7e226d52` with `d0 = 1`. | pattern scan |
+| `0x7e22ccdd` | 1 | `adj_thunk_16_to_7e22c9a5_7e22ccdd` | Adds 16 to `this`, then calls `0x7e22c9a5`: entry for a base or member sub-object. | pattern scan |
+| `0x7e2300bb` | 2 | `call_7e2304ef_ret_ptr_7e22c3a5_7e2300bb` | Calls `0x7e2304ef`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e23208a` | 14 | `call_7e22b601_ret_ptr_7e22c3a5_7e23208a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e232861` | 3 | `call_7e22b601_ret_ptr_7e22c3a5_7e232861` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e232a5a` | 5 | `call_7e22b601_ret_ptr_7e22c3a5_7e232a5a` | Calls `0x7e22b601`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e232b3e` | 14 | `this_plus_76_7e232b3e` | Leaf `return this+76` (address of a member or base sub-object). | pattern scan |
+| `0x7e232d44` | 9 | `fwd_f8_to_7e23bca2_7e232d44` | Forwards to the object at `this+8`: `0x7e23bca2(*(this+8))`. | pattern scan |
+| `0x7e233df6` | 1 | `call_7e233dd0_arg_1_7e233df6` | Calls `0x7e233dd0` with `d0 = 1`. | pattern scan |
+| `0x7e23d504` | 1 | `call_7e2300bb_ret_ptr_7e22c3a5_7e23d504` | Calls `0x7e2300bb`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e23f32b` | 2 | `this_plus_20_7e23f32b` | Leaf `return this+20` (address of a member or base sub-object). | pattern scan |
+| `0x7e246417` | 2 | `set_f44_7e246417` | `*(this+44) = d0`. | pattern scan |
+| `0x7e2582e1` | 5 | `this_plus_136_7e2582e1` | Leaf `return this+136` (address of a member or base sub-object). | pattern scan |
+| `0x7e25c9b5` | 1 | `call_7e25d53c_ret_ptr_7e22c3a5_7e25c9b5` | Calls `0x7e25d53c`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e25ec18` | 3 | `call_7e22f0ee_ret_1_7e25ec18` | Calls `0x7e22f0ee`, then returns 1. | pattern scan |
+| `0x7e25ec4b` | 4 | `this_plus_2080_7e25ec4b` | Leaf `return this+2080` (address of a member or base sub-object). | pattern scan |
+| `0x7e262001` | 15 | `this_plus_196_7e262001` | Leaf `return this+196` (address of a member or base sub-object). | pattern scan |
+| `0x7e262032` | 1 | `adj_thunk_196_to_7e264b78_7e262032` | Adds 196 to `this`, then calls `0x7e264b78`: entry for a base or member sub-object. | pattern scan |
+| `0x7e263ea6` | 3 | `this_plus_140_7e263ea6` | Leaf `return this+140` (address of a member or base sub-object). | pattern scan |
+| `0x7e264a78` | 1 | `call_7e23208a_ret_ptr_7e22c3a5_7e264a78` | Calls `0x7e23208a`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e26505c` | 1 | `call_7e264a78_ret_ptr_7e22c3a5_7e26505c` | Calls `0x7e264a78`, then returns the fixed address `0x7e22c3a5` (in `a0`). | pattern scan |
+| `0x7e266806` | 2 | `this_plus_132_7e266806` | Leaf `return this+132` (address of a member or base sub-object). | pattern scan |
+| `0x7e2a85eb` | 2 | `call2_7e2a88ad_7e2a892d_7e2a85eb` | Calls `0x7e2a88ad(this)` and then `0x7e2a892d(this)`. | pattern scan |
+| `0x7e2a862d` | 2 | `call2_7e2a8a76_7e2a8c1b_7e2a862d` | Calls `0x7e2a8a76(this)` and then `0x7e2a8c1b(this)`. | pattern scan |
+| `0x7e2c7bc6` | 0 | `call_7e337a27_arg_526_7e2c7bc6` | Calls `0x7e337a27` with `d0 = 526`. | pattern scan |
+| `0x7e2c7bd6` | 0 | `call_7e337a27_arg_526_7e2c7bd6` | Calls `0x7e337a27` with `d0 = 526`. | pattern scan |
+| `0x7e2c98ee` | 0 | `call_7e337a27_arg_525_7e2c98ee` | Calls `0x7e337a27` with `d0 = 525`. | pattern scan |
+| `0x7e2c98fe` | 0 | `call_7e337a27_arg_525_7e2c98fe` | Calls `0x7e337a27` with `d0 = 525`. | pattern scan |
+| `0x7e2d9ff9` | 1 | `store_0xffff_g6045ee18_7e2d9ff9` | `*0x6045ee18 = 0xffff`. | pattern scan |
+| `0x7e2da0e4` | 0 | `call_7e2daa34_ret_null_7e2da0e4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2da80c` | 0 | `call_7e2d9e56_ret_null_7e2da80c` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dad87` | 0 | `call_7e2daa34_ret_null_7e2dad87` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dafdc` | 0 | `call_7e2daa34_ret_null_7e2dafdc` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2db327` | 0 | `call_7e2daa34_ret_null_7e2db327` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2db644` | 0 | `call_7e2daa34_ret_null_7e2db644` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dc859` | 0 | `call_7e2d9e56_ret_null_7e2dc859` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dd12e` | 1 | `call_7e2dda2e_ret_null_7e2dd12e` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2dda2e` | 3 | `call_7e2d9e56_ret_null_7e2dda2e` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e0f0c` | 0 | `call_7e2daa34_ret_null_7e2e0f0c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e524a` | 0 | `call_7e2daa34_ret_null_7e2e524a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e565e` | 0 | `call_7e2daa34_ret_null_7e2e565e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e59dc` | 1 | `call_7e2cd053_ret_null_7e2e59dc` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2e9d72` | 1 | `call_7e2dda2e_ret_null_7e2e9d72` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2eae6d` | 0 | `call_7e2d9e56_ret_null_7e2eae6d` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2ebbc8` | 0 | `call_7e2d9e56_ret_null_7e2ebbc8` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2eca23` | 0 | `call_7e2d9e56_ret_null_7e2eca23` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2ee3b0` | 1 | `call_7e2cd053_ret_null_7e2ee3b0` | Calls `0x7e2cd053`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2ee705` | 1 | `call_7e337a27_arg_502_7e2ee705` | Calls `0x7e337a27` with `d0 = 502`. | pattern scan |
+| `0x7e2ee883` | 4 | `call_7e2daa34_ret_null_7e2ee883` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2efa57` | 0 | `call_7e2d9e56_ret_null_7e2efa57` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2eff80` | 0 | `call_7e2daa34_ret_null_7e2eff80` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2f0501` | 0 | `call_7e2daa34_ret_null_7e2f0501` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2f07b1` | 0 | `call_7e2daa34_ret_null_7e2f07b1` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2f0916` | 1 | `call_7e2daa34_ret_null_7e2f0916` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e2f395c` | 1 | `fwd_f120_vslot32_7e2f395c` | Forwards to the object at `this+120`: calls its vtable slot `+32`. | pattern scan |
+| `0x7e3022c8` | 1 | `call_7e33e025_arg_8_7e3022c8` | Calls `0x7e33e025` with `d0 = 8`. | pattern scan |
+| `0x7e3022d7` | 1 | `call_7e33e025_arg_14_7e3022d7` | Calls `0x7e33e025` with `d0 = 14`. | pattern scan |
+| `0x7e302307` | 1 | `call_7e33e025_arg_21_7e302307` | Calls `0x7e33e025` with `d0 = 21`. | pattern scan |
+| `0x7e302316` | 1 | `call_7e33e025_arg_2_7e302316` | Calls `0x7e33e025` with `d0 = 2`. | pattern scan |
+| `0x7e302325` | 1 | `call_7e33e025_arg_4_7e302325` | Calls `0x7e33e025` with `d0 = 4`. | pattern scan |
+| `0x7e302334` | 1 | `call_7e33e025_arg_22_7e302334` | Calls `0x7e33e025` with `d0 = 22`. | pattern scan |
+| `0x7e302343` | 1 | `call_7e33e025_arg_23_7e302343` | Calls `0x7e33e025` with `d0 = 23`. | pattern scan |
+| `0x7e302352` | 1 | `call_7e33e025_arg_1_7e302352` | Calls `0x7e33e025` with `d0 = 1`. | pattern scan |
+| `0x7e302361` | 1 | `call_7e33e025_arg_3_7e302361` | Calls `0x7e33e025` with `d0 = 3`. | pattern scan |
+| `0x7e302370` | 1 | `call_7e33e025_arg_5_7e302370` | Calls `0x7e33e025` with `d0 = 5`. | pattern scan |
+| `0x7e3023a6` | 1 | `call_7e33e025_arg_6_7e3023a6` | Calls `0x7e33e025` with `d0 = 6`. | pattern scan |
+| `0x7e3023d4` | 1 | `call_7e33e025_arg_11_7e3023d4` | Calls `0x7e33e025` with `d0 = 11`. | pattern scan |
+| `0x7e3023e3` | 0 | `call_7e337a27_arg_520_7e3023e3` | Calls `0x7e337a27` with `d0 = 520`. | pattern scan |
+| `0x7e30479c` | 1 | `call_7e33e025_arg_7_7e30479c` | Calls `0x7e33e025` with `d0 = 7`. | pattern scan |
+| `0x7e31ed36` | 9 | `fwd_f8_vslot4_7e31ed36` | Forwards to the object at `this+8`: calls its vtable slot `+4`. | pattern scan |
+| `0x7e31f46e` | 0 | `call_7e31edb0_ret_null_7e31f46e` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e31f8d3` | 0 | `call_7e31edb0_ret_null_7e31f8d3` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e320004` | 0 | `call_7e31edb0_ret_null_7e320004` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3209f8` | 0 | `call_7e31edb0_ret_null_7e3209f8` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e320b1b` | 0 | `call_7e31edb0_ret_null_7e320b1b` | Calls `0x7e31edb0`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3255a2` | 1 | `call_7e2dda2e_ret_null_7e3255a2` | Calls `0x7e2dda2e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e327ad0` | 0 | `call_7e2d9e56_ret_null_7e327ad0` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e327d08` | 0 | `call_7e2d9e56_ret_null_7e327d08` | Calls `0x7e2d9e56`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3282f9` | 0 | `call_7e2daa34_ret_null_7e3282f9` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e328633` | 0 | `call_7e2daa34_ret_null_7e328633` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32880c` | 0 | `call_7e2daa34_ret_null_7e32880c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e328c2b` | 0 | `call_7e2daa34_ret_null_7e328c2b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e328fea` | 0 | `call_7e2daa34_ret_null_7e328fea` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32936f` | 0 | `call_7e2daa34_ret_null_7e32936f` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3295be` | 0 | `call_7e2daa34_ret_null_7e3295be` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e329965` | 0 | `call_7e2daa34_ret_null_7e329965` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e329d19` | 0 | `call_7e2daa34_ret_null_7e329d19` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32a095` | 0 | `call_7e2daa34_ret_null_7e32a095` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32a4cb` | 0 | `call_7e2daa34_ret_null_7e32a4cb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32a815` | 0 | `call_7e2daa34_ret_null_7e32a815` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32c38d` | 0 | `call_7e2daa34_ret_null_7e32c38d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32c90d` | 0 | `call_7e2daa34_ret_null_7e32c90d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32ce2d` | 0 | `call_7e2daa34_ret_null_7e32ce2d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32d10e` | 0 | `call_7e32bb05_ret_null_7e32d10e` | Calls `0x7e32bb05`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32d6c0` | 0 | `call_7e2daa34_ret_null_7e32d6c0` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32d8fb` | 0 | `call_7e2daa34_ret_null_7e32d8fb` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32e512` | 0 | `call_7e2daa34_ret_null_7e32e512` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32ebd7` | 0 | `call_7e2daa34_ret_null_7e32ebd7` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32ef9d` | 0 | `call_7e2daa34_ret_null_7e32ef9d` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32fab5` | 0 | `call_7e2daa34_ret_null_7e32fab5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32fc32` | 0 | `call_7e2daa34_ret_null_7e32fc32` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e32ff28` | 0 | `call_7e2daa34_ret_null_7e32ff28` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3303e5` | 0 | `call_7e2daa34_ret_null_7e3303e5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3305b4` | 0 | `call_7e2daa34_ret_null_7e3305b4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e330774` | 0 | `call_7e2daa34_ret_null_7e330774` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e330927` | 0 | `call_7e2daa34_ret_null_7e330927` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e330c01` | 0 | `call_7e2daa34_ret_null_7e330c01` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e330d7a` | 0 | `call_7e2daa34_ret_null_7e330d7a` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e330f0e` | 0 | `call_7e2daa34_ret_null_7e330f0e` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3310a8` | 0 | `call_7e2daa34_ret_null_7e3310a8` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e331276` | 0 | `call_7e2daa34_ret_null_7e331276` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e331593` | 0 | `call_7e2daa34_ret_null_7e331593` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e331847` | 0 | `call_7e2daa34_ret_null_7e331847` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e331bf5` | 0 | `call_7e2daa34_ret_null_7e331bf5` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e331fa2` | 0 | `call_7e2daa34_ret_null_7e331fa2` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e332889` | 0 | `call_7e2daa34_ret_null_7e332889` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e33313c` | 0 | `call_7e2daa34_ret_null_7e33313c` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e333b12` | 0 | `call_7e2daa34_ret_null_7e333b12` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e333ef4` | 0 | `call_7e2daa34_ret_null_7e333ef4` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e33446b` | 0 | `call_7e2daa34_ret_null_7e33446b` | Calls `0x7e2daa34`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e33bba1` | 3 | `call_7e33c5f8_ret_null_7e33bba1` | Calls `0x7e33c5f8`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34963c` | 1 | `call_7e349625_ret_null_7e34963c` | Calls `0x7e349625`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34bd72` | 1 | `call_7e33c67e_ret_null_7e34bd72` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34cd7b` | 1 | `call_7e33c67e_ret_null_7e34cd7b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34dcc5` | 1 | `call_7e33c67e_ret_null_7e34dcc5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34de6b` | 1 | `call_7e33c67e_ret_null_7e34de6b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34e0e0` | 1 | `call_7e33c67e_ret_null_7e34e0e0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34e658` | 1 | `call2_7e34e530_7e34e2cc_7e34e658` | Calls `0x7e34e530(this)` and then `0x7e34e2cc(this)`. | pattern scan |
+| `0x7e34e75e` | 1 | `call_7e33c67e_ret_null_7e34e75e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34ea6e` | 1 | `call_7e33c67e_ret_null_7e34ea6e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34f0b5` | 1 | `call_7e33c67e_ret_null_7e34f0b5` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34f1b6` | 1 | `call_7e33c67e_ret_null_7e34f1b6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34f2f7` | 1 | `call_7e34f411_ret_null_7e34f2f7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34fa22` | 1 | `call_7e34f411_ret_null_7e34fa22` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34fb3a` | 1 | `call_7e34fc0e_ret_null_7e34fb3a` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e34fc0e` | 4 | `call_7e33c67e_ret_null_7e34fc0e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3500ec` | 1 | `call_7e34f411_ret_null_7e3500ec` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e350464` | 1 | `call_7e34f411_ret_null_7e350464` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e350570` | 1 | `call_7e34f411_ret_null_7e350570` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3506c3` | 1 | `call_7e34f411_ret_null_7e3506c3` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3509d5` | 1 | `call_7e34f411_ret_null_7e3509d5` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e350cfc` | 1 | `call_7e35089c_ret_2_7e350cfc` | Calls `0x7e35089c`, then returns 2. | pattern scan |
+| `0x7e350e6c` | 1 | `call_7e34fc0e_ret_null_7e350e6c` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e351449` | 1 | `call_7e34f411_ret_null_7e351449` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e351536` | 1 | `call_7e33c67e_ret_null_7e351536` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3519b2` | 1 | `call_7e33c67e_ret_null_7e3519b2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35271f` | 1 | `call_7e34f411_ret_null_7e35271f` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35287c` | 1 | `call_7e34f411_ret_null_7e35287c` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e352976` | 1 | `call_7e34fc0e_ret_null_7e352976` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e352b6f` | 4 | `call_7e33c67e_ret_null_7e352b6f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e353002` | 1 | `call_7e34f411_ret_null_7e353002` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e353155` | 1 | `call_7e34f411_ret_null_7e353155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3536f6` | 1 | `call_7e33c67e_ret_null_7e3536f6` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e353708` | 1 | `call_7e339444_arg_1_7e353708` | Calls `0x7e339444` with `d0 = 1`. | pattern scan |
+| `0x7e353fa0` | 1 | `call_7e34f411_ret_null_7e353fa0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e354155` | 1 | `call_7e34f411_ret_null_7e354155` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35470d` | 1 | `call_7e34f411_ret_null_7e35470d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e354916` | 1 | `call_7e34fc0e_ret_null_7e354916` | Calls `0x7e34fc0e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e354b02` | 1 | `call_7e33c67e_ret_null_7e354b02` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e354f09` | 1 | `store_u16_0xffff_f200_7e354f09` | `*(u16*)(this+200) = 0xffff`. | pattern scan |
+| `0x7e3583c7` | 1 | `call_7e34f411_ret_null_7e3583c7` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e358841` | 1 | `call_7e34f411_ret_null_7e358841` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e358f6d` | 1 | `call_7e34f411_ret_null_7e358f6d` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359092` | 1 | `call_7e34f411_ret_null_7e359092` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e3591c6` | 1 | `call_7e34f411_ret_null_7e3591c6` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35931a` | 1 | `call_7e33c67e_ret_null_7e35931a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359a10` | 1 | `call_7e34f411_ret_null_7e359a10` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359abf` | 1 | `call_7e33bd35_ret_1_7e359abf` | Calls `0x7e33bd35`, then returns 1. | pattern scan |
+| `0x7e359ae0` | 1 | `call_7e34f411_ret_null_7e359ae0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359cbc` | 1 | `call_7e34f411_ret_null_7e359cbc` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359df0` | 1 | `call_7e34f411_ret_null_7e359df0` | Calls `0x7e34f411`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e359eac` | 1 | `call_7e33c67e_ret_null_7e359eac` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35a29f` | 1 | `store_u16_0xffff_f200_7e35a29f` | `*(u16*)(this+200) = 0xffff`. | pattern scan |
+| `0x7e35a6fe` | 1 | `call_7e33c67e_ret_null_7e35a6fe` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35a8c1` | 1 | `call_7e33c67e_ret_null_7e35a8c1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35aa1d` | 1 | `call_7e33c67e_ret_null_7e35aa1d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35ab6d` | 1 | `call_7e33c67e_ret_null_7e35ab6d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35acd8` | 1 | `call_7e33c67e_ret_null_7e35acd8` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35ae4b` | 1 | `call_7e33c67e_ret_null_7e35ae4b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35afca` | 1 | `call_7e33c67e_ret_null_7e35afca` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b12f` | 1 | `call_7e33c67e_ret_null_7e35b12f` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b29b` | 1 | `call_7e33c67e_ret_null_7e35b29b` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b40e` | 1 | `call_7e33c67e_ret_null_7e35b40e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b58d` | 1 | `call_7e33c67e_ret_null_7e35b58d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b6f9` | 1 | `call_7e33c67e_ret_null_7e35b6f9` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b815` | 1 | `call_7e33c67e_ret_null_7e35b815` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35b92e` | 1 | `call_7e33c67e_ret_null_7e35b92e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35bb3a` | 1 | `call_7e33c67e_ret_null_7e35bb3a` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35bc97` | 1 | `call_7e33c67e_ret_null_7e35bc97` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35bef0` | 1 | `call_7e33c67e_ret_null_7e35bef0` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35c160` | 1 | `call_7e33c67e_ret_null_7e35c160` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35c4f2` | 1 | `call_7e33c67e_ret_null_7e35c4f2` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35c60e` | 1 | `call_7e33c67e_ret_null_7e35c60e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35cbe1` | 1 | `call_7e33c67e_ret_null_7e35cbe1` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35ce3e` | 1 | `call_7e33c67e_ret_null_7e35ce3e` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35cf82` | 1 | `call_7e35d02d_ret_null_7e35cf82` | Calls `0x7e35d02d`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e35d02d` | 1 | `call_7e33c67e_ret_null_7e35d02d` | Calls `0x7e33c67e`, then returns a null pointer (`a0 = 0`). | pattern scan |
+| `0x7e6a1626` | 0 | `call_7e6a1ee5_ret_1_7e6a1626` | Calls `0x7e6a1ee5`, then returns 1. | pattern scan |
+| `0x7e6a1ee5` | 3 | `call_7e6a1e5a_arg_10_7e6a1ee5` | Calls `0x7e6a1e5a` with `d0 = 10`. | pattern scan |
+| `0x7e6c5dec` | 1 | `call_7e6c5d64_arg_1_7e6c5dec` | Calls `0x7e6c5d64` with `d0 = 1`. | pattern scan |
+| `0x7e6c6203` | 1 | `call_7e6c6179_arg_1_7e6c6203` | Calls `0x7e6c6179` with `d0 = 1`. | pattern scan |
+| `0x7e6d4206` | 5 | `call2_7e6d41dd_7e6d095f_7e6d4206` | Calls `0x7e6d41dd(this)` and then `0x7e6d095f(this)`. | pattern scan |
+| `0x7e6e51b0` | 1 | `call_7e6d03eb_on_7cc2aeac_7e6e51b0` | Calls `0x7e6d03eb` with `a0 = 0x7cc2aeac` (a fixed address). | pattern scan |
+| `0x7e6e6bab` | 1 | `call_7e6d03eb_on_7cc2ad80_7e6e6bab` | Calls `0x7e6d03eb` with `a0 = 0x7cc2ad80` (a fixed address). | pattern scan |
+| `0x7e6e7950` | 1 | `call_7e6d03eb_on_7cc2ab3c_7e6e7950` | Calls `0x7e6d03eb` with `a0 = 0x7cc2ab3c` (a fixed address). | pattern scan |
+| `0x7e6ea388` | 2 | `fwd_f392_to_7e6e68d9_7e6ea388` | Forwards to the object at `this+392`: `0x7e6e68d9(*(this+392))`. | pattern scan |
+| `0x7e6ea394` | 2 | `fwd_f396_to_7e6e68d9_7e6ea394` | Forwards to the object at `this+396`: `0x7e6e68d9(*(this+396))`. | pattern scan |
+| `0x7e6f39e1` | 1 | `call_7d996e85_on_7e770374_7e6f39e1` | Calls `0x7d996e85` with `a0 = 0x7e770374` (a fixed address). | pattern scan |
+| `0x7e6f5d5b` | 1 | `call_7d9a0635_on_7e770530_7e6f5d5b` | Calls `0x7d9a0635` with `a0 = 0x7e770530` (a fixed address). | pattern scan |
+| `0x7e6f5d6b` | 2 | `call_7d9a0635_on_7e770524_7e6f5d6b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
+| `0x7e6f5d7b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d7b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
+| `0x7e6f5d8b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d8b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
+| `0x7e6f5d9b` | 1 | `call_7d9a0635_on_7e770524_7e6f5d9b` | Calls `0x7d9a0635` with `a0 = 0x7e770524` (a fixed address). | pattern scan |
+| `0x7e6f92dd` | 1 | `call_7d9a0635_on_7e77071c_7e6f92dd` | Calls `0x7d9a0635` with `a0 = 0x7e77071c` (a fixed address). | pattern scan |
+| `0x7e6f92ed` | 1 | `call_7d9a0127_on_7e770710_7e6f92ed` | Calls `0x7d9a0127` with `a0 = 0x7e770710` (a fixed address). | pattern scan |
+| `0x7e7003c8` | 1 | `call_7e6f3bcf_on_60461f48_7e7003c8` | Calls `0x7e6f3bcf` with `a0 = 0x60461f48` (a fixed address). | pattern scan |
+| `0x7e7003d8` | 2 | `call_7e6f3bcf_on_60461f4c_7e7003d8` | Calls `0x7e6f3bcf` with `a0 = 0x60461f4c` (a fixed address). | pattern scan |
+| `0x7e7003e8` | 2 | `call_7e6f3bcf_on_60461f50_7e7003e8` | Calls `0x7e6f3bcf` with `a0 = 0x60461f50` (a fixed address). | pattern scan |
+| `0x7e7003f8` | 2 | `call_7e6f3bcf_on_60462050_7e7003f8` | Calls `0x7e6f3bcf` with `a0 = 0x60462050` (a fixed address). | pattern scan |
+| `0x7e700411` | 1 | `call_7e6f3bcf_on_60462074_7e700411` | Calls `0x7e6f3bcf` with `a0 = 0x60462074` (a fixed address). | pattern scan |
+| `0x7e700421` | 1 | `call_7e6f3bcf_on_60462078_7e700421` | Calls `0x7e6f3bcf` with `a0 = 0x60462078` (a fixed address). | pattern scan |
+| `0x7e700431` | 1 | `call_7e6f3bcf_on_6046207c_7e700431` | Calls `0x7e6f3bcf` with `a0 = 0x6046207c` (a fixed address). | pattern scan |
+| `0x7e700441` | 1 | `call_7e6f3bcf_on_60462080_7e700441` | Calls `0x7e6f3bcf` with `a0 = 0x60462080` (a fixed address). | pattern scan |
+| `0x7e701e11` | 1 | `call_7d996e85_on_7e77d458_7e701e11` | Calls `0x7d996e85` with `a0 = 0x7e77d458` (a fixed address). | pattern scan |
+| `0x7e716f5b` | 9 | `call_7e7c9952_on_604623a0_7e716f5b` | Calls `0x7e7c9952` with `a0 = 0x604623a0` (a fixed address). | pattern scan |
+| `0x7e7d8e5b` | 1 | `call_7d9c580c_arg_6_7e7d8e5b` | Calls `0x7d9c580c` with `d0 = 6`. | pattern scan |
+| `0x7e7d93e4` | 1 | `call_7da89440_on_a0939898_7e7d93e4` | Calls `0x7da89440` with `a0 = 0xa0939898` (a fixed address). | pattern scan |
+| `0x7e7dd5da` | 2 | `store_0xe000_g98f01008_7e7dd5da` | `*0x98f01008 = 0xe000`. | pattern scan |
+| `0x7e7f5cc2` | 6 | `this_plus_84_7e7f5cc2` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
+| `0x7e7f5cc7` | 10 | `this_plus_84_7e7f5cc7` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
+| `0x7e7f5ceb` | 4 | `this_plus_84_7e7f5ceb` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
+| `0x7e7f5cf0` | 7 | `this_plus_84_7e7f5cf0` | Leaf `return this+84` (address of a member or base sub-object). | pattern scan |
+| `0x7e7f601d` | 2 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f601d` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f62b1` | 8 | `fwd_f36_to_7e7f17b8_7e7f62b1` | Forwards to the object at `this+36`: `0x7e7f17b8(*(this+36))`. | pattern scan |
+| `0x7e7f758d` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e7f758d` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f76b8` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e7f76b8` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f77a5` | 1 | `adj_thunk_84_to_7e7fb23c_7e7f77a5` | Adds 84 to `this`, then calls `0x7e7fb23c`: entry for a base or member sub-object. | pattern scan |
+| `0x7e7f78ab` | 1 | `adj_thunk_84_to_7e7fb1ff_7e7f78ab` | Adds 84 to `this`, then calls `0x7e7fb1ff`: entry for a base or member sub-object. | pattern scan |
+| `0x7e7f8910` | 4 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e7f8910` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f8a02` | 1 | `call_7e7f8c5a_ret_ptr_7e7f1567_7e7f8a02` | Calls `0x7e7f8c5a`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7f8c5a` | 1 | `call_7e7f9178_ret_ptr_7e7f1567_7e7f8c5a` | Calls `0x7e7f9178`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fae09` | 1 | `adj_thunk_8_to_7e7faf52_7e7fae09` | Adds 8 to `this`, then calls `0x7e7faf52`: entry for a base or member sub-object. | pattern scan |
+| `0x7e7faf16` | 1 | `adj_thunk_8_to_7e7fb008_7e7faf16` | Adds 8 to `this`, then calls `0x7e7fb008`: entry for a base or member sub-object. | pattern scan |
+| `0x7e7fb199` | 2 | `call_7e7fb1a7_ret_ptr_7e7f1567_7e7fb199` | Calls `0x7e7fb1a7`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fc580` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e7fc580` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fd27d` | 1 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e7fd27d` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fd2b7` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e7fd2b7` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e7fd2ca` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e7fd2ca` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e80008a` | 1 | `call_7e7fb199_ret_ptr_7e7f1567_7e80008a` | Calls `0x7e7fb199`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e80018e` | 24 | `call_7e7f8910_ret_ptr_7e7f1567_7e80018e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e800d15` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e800d15` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e800fcb` | 1 | `fwd_f4_vslot24_7e800fcb` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
+| `0x7e80107c` | 1 | `fwd_f4_vslot24_7e80107c` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
+| `0x7e801120` | 1 | `fwd_f4_vslot24_7e801120` | Forwards to the object at `this+4`: calls its vtable slot `+24`. | pattern scan |
+| `0x7e802125` | 1 | `fwd_f60_vslot24_7e802125` | Forwards to the object at `this+60`: calls its vtable slot `+24`. | pattern scan |
+| `0x7e80389f` | 18 | `call_7e7f8910_ret_ptr_7e7f1567_7e80389f` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e804ee7` | 1 | `call_7e7f5d8c_ret_ptr_7e7f1567_7e804ee7` | Calls `0x7e7f5d8c`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e807e5f` | 3 | `this_plus_960_7e807e5f` | Leaf `return this+960` (address of a member or base sub-object). | pattern scan |
+| `0x7e810d25` | 1 | `call_7e7f1941_ret_ptr_7e7f1567_7e810d25` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e810d8e` | 1 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e810d8e` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e810dbc` | 2 | `call_7e7f1941_ret_ptr_7e7f1567_7e810dbc` | Calls `0x7e7f1941`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e810df9` | 2 | `call_7e7f1c9b_ret_ptr_7e7f1567_7e810df9` | Calls `0x7e7f1c9b`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e816b0f` | 1 | `fwd_f12_to_7e8190b3_7e816b0f` | Forwards to the object at `this+12`: `0x7e8190b3(*(this+12))`. | pattern scan |
+| `0x7e8257e3` | 2 | `fwd_f12_to_7e7fb083_7e8257e3` | Forwards to the object at `this+12`: `0x7e7fb083(*(this+12))`. | pattern scan |
+| `0x7e82f88e` | 10 | `call_7e7f8910_ret_ptr_7e7f1567_7e82f88e` | Calls `0x7e7f8910`, then returns the fixed address `0x7e7f1567` (in `a0`). | pattern scan |
+| `0x7e83474c` | 1 | `fwd_f28_vslot64_7e83474c` | Forwards to the object at `this+28`: calls its vtable slot `+64`. | pattern scan |
+| `0x7e834759` | 2 | `fwd_f28_vslot68_7e834759` | Forwards to the object at `this+28`: calls its vtable slot `+68`. | pattern scan |
+| `0x7e83efd3` | 1 | `fwd_f8_to_7e83f44d_7e83efd3` | Forwards to the object at `this+8`: `0x7e83f44d(*(this+8))`. | pattern scan |
+| `0x7e843e29` | 31 | `call_7e843e34_ret_3400_7e843e29` | Calls `0x7e843e34`, then returns 3400. | pattern scan |
+| `0x7e84416e` | 1 | `call_7e845e0e_ret_301_7e84416e` | Calls `0x7e845e0e`, then returns 301. | pattern scan |
+| `0x7e8442a5` | 1 | `call_7e8463b4_ret_301_7e8442a5` | Calls `0x7e8463b4`, then returns 301. | pattern scan |
+| `0x7e8442b0` | 1 | `call_7e84628f_ret_301_7e8442b0` | Calls `0x7e84628f`, then returns 301. | pattern scan |
+| `0x7e8442da` | 2 | `call_7e8464c9_ret_301_7e8442da` | Calls `0x7e8464c9`, then returns 301. | pattern scan |
+| `0x7e844397` | 1 | `call_7e8468ac_ret_301_7e844397` | Calls `0x7e8468ac`, then returns 301. | pattern scan |
+| `0x7e844448` | 1 | `call_7e846d42_ret_301_7e844448` | Calls `0x7e846d42`, then returns 301. | pattern scan |
+| `0x7e844453` | 1 | `call_7e846993_ret_301_7e844453` | Calls `0x7e846993`, then returns 301. | pattern scan |
+| `0x7e850eca` | 1 | `call_7e850f38_arg_257_7e850eca` | Calls `0x7e850f38` with `d0 = 257`. | pattern scan |
+| `0x7e850ed5` | 1 | `call_7e850f38_arg_279_7e850ed5` | Calls `0x7e850f38` with `d0 = 279`. | pattern scan |
+| `0x7e850ee0` | 1 | `call_7e850f38_arg_263_7e850ee0` | Calls `0x7e850f38` with `d0 = 263`. | pattern scan |
+| `0x7e850eeb` | 1 | `call_7e850f38_arg_267_7e850eeb` | Calls `0x7e850f38` with `d0 = 267`. | pattern scan |
+| `0x7e850ef6` | 1 | `call_7e850f38_arg_266_7e850ef6` | Calls `0x7e850f38` with `d0 = 266`. | pattern scan |
+| `0x7e850f01` | 1 | `call_7e850f38_arg_271_7e850f01` | Calls `0x7e850f38` with `d0 = 271`. | pattern scan |
+| `0x7e850f0c` | 1 | `call_7e850f38_arg_272_7e850f0c` | Calls `0x7e850f38` with `d0 = 272`. | pattern scan |
+| `0x7e850f17` | 1 | `call_7e850f38_arg_278_7e850f17` | Calls `0x7e850f38` with `d0 = 278`. | pattern scan |
+| `0x7e8554f7` | 3 | `call_7e880984_arg_1_7e8554f7` | Calls `0x7e880984` with `d0 = 1`. | pattern scan |
+| `0x7e868537` | 3 | `fwd_f4_to_7e875e9d_7e868537` | Forwards to the object at `this+4`: `0x7e875e9d(*(this+4))`. | pattern scan |
+| `0x7e86a82a` | 1 | `fwd_f4_to_7e875e9d_7e86a82a` | Forwards to the object at `this+4`: `0x7e875e9d(*(this+4))`. | pattern scan |
+| `0x7e86bfcc` | 2 | `fwd_f12_to_7e875e9d_7e86bfcc` | Forwards to the object at `this+12`: `0x7e875e9d(*(this+12))`. | pattern scan |
+| `0x7e8720a0` | 8 | `fwd_f12_to_7e875e9d_7e8720a0` | Forwards to the object at `this+12`: `0x7e875e9d(*(this+12))`. | pattern scan |
+| `0x7e87d73e` | 1 | `call_7e88cac9_on_60b07038_7e87d73e` | Calls `0x7e88cac9` with `a0 = 0x60b07038` (a fixed address). | pattern scan |
+| `0x7e87d74e` | 1 | `call_7e88caf3_on_60b07038_7e87d74e` | Calls `0x7e88caf3` with `a0 = 0x60b07038` (a fixed address). | pattern scan |
+| `0x7e880b8d` | 3 | `call_7e88ccba_on_60b07048_7e880b8d` | Calls `0x7e88ccba` with `a0 = 0x60b07048` (a fixed address). | pattern scan |

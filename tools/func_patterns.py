@@ -11,7 +11,9 @@ usage:
   func_patterns.py small [MAXBYTES=12]
       Disassemble every unlabelled function of 3..MAXBYTES bytes and classify bodies of one or two
       instructions (field/global getters and setters, constant stores, fixed-address returns, empty
-      functions, plain and narrowing thunks). Prints  address <TAB> refs <TAB> name <TAB> role.
+      functions, plain and narrowing thunks) and, for up to five instructions, bodies built around one or
+      two calls (forwarders to a member object, this-adjusting thunks, call-with-constant, call-then-return-
+      constant, store-then-call). Prints  address <TAB> refs <TAB> name <TAB> role.
   func_patterns.py shapes [MAXBYTES=12]
       Same disassembly, but only print how often each instruction-mnemonic sequence occurs: a quick way to
       see which shapes are worth a classifier.
@@ -127,6 +129,79 @@ def classify(ins):
     return None
 
 
+def hexv(text):
+    return "%x" % (int(text, 0) & 0xffffffff)
+
+
+def classify_small(ins):
+    """Second classifier, for bodies of up to five instructions around one or two calls.
+    A leading `add -N,sp` (frame set-up) is ignored. Returns (name, role) or None."""
+    if ins and re.fullmatch(r"add -\d+,sp", ins[0]):
+        ins = ins[1:]
+    if not ins or not ins[-1].startswith("ret"):
+        return None
+    body, n = ins[:-1], len(ins) - 1
+    call = lambda i: re.match(r"call (0x[0-9a-f]+),", i)
+    num = r"(-?\d+|0x[0-9a-f]+)"
+    if n == 1:
+        m = re.fullmatch(r"add (\d+),a0", body[0])
+        if m:
+            return "this_plus_%s" % m[1], "Leaf `return this+%s` (address of a member or base sub-object)." % m[1]
+    if n == 2:
+        c1, c0 = call(body[1]), call(body[0])
+        m = re.fullmatch(r"add (-?\d+),a0", body[0])
+        if m and c1:
+            return ("adj_thunk_%s_to_%s" % (m[1].replace("-", "m"), c1[1][2:]),
+                    "Adds %s to `this`, then calls `%s`: entry for a base or member sub-object." % (m[1], c1[1]))
+        m = re.fullmatch(r"mov \((\d+),a0\),a0", body[0])
+        if m and c1:
+            return ("fwd_f%s_to_%s" % (m[1], c1[1][2:]),
+                    "Forwards to the object at `this+%s`: `%s(*(this+%s))`." % (m[1], c1[1], m[1]))
+        m = re.fullmatch(r"mov \((0x[0-9a-f]+)\),a0", body[0])
+        if m and c1:
+            return ("call_%s_on_g%s" % (c1[1][2:], m[1][2:]),
+                    "Calls `%s` on the object whose pointer is stored at `%s`." % (c1[1], m[1]))
+        m = re.fullmatch(r"mov %s,(d0|a0)" % num, body[0])
+        if m and c1:
+            if m[2] == "a0":
+                return ("call_%s_on_%s" % (c1[1][2:], hexv(m[1])),
+                        "Calls `%s` with `a0 = 0x%s` (a fixed address)." % (c1[1], hexv(m[1])))
+            v = m[1].replace("-", "m")
+            return "call_%s_arg_%s" % (c1[1][2:], v), "Calls `%s` with `d0 = %s`." % (c1[1], m[1])
+        m = re.fullmatch(r"mov %s,(d0|a0)" % num, body[1])
+        if c0 and m:
+            if m[2] == "a0" and int(m[1], 0) == 0:
+                return ("call_%s_ret_null" % c0[1][2:],
+                        "Calls `%s`, then returns a null pointer (`a0 = 0`)." % c0[1])
+            if m[2] == "a0":
+                return ("call_%s_ret_ptr_%s" % (c0[1][2:], hexv(m[1])),
+                        "Calls `%s`, then returns the fixed address `0x%s` (in `a0`)." % (c0[1], hexv(m[1])))
+            return ("call_%s_ret_%s" % (c0[1][2:], m[1].replace("-", "m")),
+                    "Calls `%s`, then returns %s." % (c0[1], m[1]))
+    if n == 3:
+        m0 = re.fullmatch(r"mov %s,d0" % num, body[0])
+        m1 = re.fullmatch(r"mov d0,\((\d+),a0\)", body[1])
+        c2 = call(body[2])
+        m2 = re.fullmatch(r"mov d0,\((\d+),a0\)", body[2])
+        if m0 and m1 and c2:
+            return ("store_%s_f%s_call_%s" % (m0[1].replace("-", "m"), m1[1], c2[1][2:]),
+                    "`*(this+%s) = %s`, then calls `%s`." % (m1[1], m0[1], c2[1]))
+        if m0 and m1 and m2:
+            return ("store_%s_f%s_f%s" % (m0[1].replace("-", "m"), m1[1], m2[1]),
+                    "`*(this+%s) = *(this+%s) = %s`." % (m1[1], m2[1], m0[1]))
+    if n == 4:
+        m0 = re.fullmatch(r"mov \((\d+),a0\),a0", body[0])
+        m2 = re.fullmatch(r"mov \((\d+),a[12]\),a[12]", body[2])
+        if m0 and re.fullmatch(r"mov \(a0\),a[12]", body[1]) and m2 and body[3].startswith("calls"):
+            return ("fwd_f%s_vslot%s" % (m0[1], m2[1]),
+                    "Forwards to the object at `this+%s`: calls its vtable slot `+%s`." % (m0[1], m2[1]))
+        c1, c3 = call(body[1]), call(body[3])
+        if body[0] == "mov a0,a2" and c1 and body[2] == "mov a2,a0" and c3:
+            return ("call2_%s_%s" % (c1[1][2:], c3[1][2:]),
+                    "Calls `%s(this)` and then `%s(this)`." % (c1[1], c3[1]))
+    return None
+
+
 def cmd_clusters(minimum, maxsize):
     b = open(BLK, "rb").read()
     groups = collections.defaultdict(list)
@@ -150,7 +225,7 @@ def small(maxbytes):
 def cmd_small(maxbytes):
     n = collections.Counter()
     for (a, size, refs, _), ins in small(maxbytes):
-        r = classify(ins)
+        r = classify(ins) or classify_small(ins)
         if r:
             n[r[0].split("_")[0]] += 1
             print("%s\t%d\t%s_%s\t%s" % (a, refs, r[0], a, r[1]))
