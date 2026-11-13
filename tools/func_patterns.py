@@ -189,6 +189,40 @@ def classify_small(ins):
         if m0 and m1 and m2:
             return ("store_%s_f%s_f%s" % (m0[1].replace("-", "m"), m1[1], m2[1]),
                     "`*(this+%s) = *(this+%s) = %s`." % (m1[1], m2[1], m0[1]))
+    if n == 1 and call(body[0]):
+        t = call(body[0])[1]
+        return "thunk_to_%s" % t[2:], "Plain thunk with its own stack frame: `call %s; ret`." % t
+    if n == 1:
+        m = re.fullmatch(r"mov %s,d0" % num, body[0])
+        if m:
+            return "ret_%s" % m[1].replace("-", "m"), "`return %s` and nothing else." % m[1]
+    if n == 2 and call(body[0]) and body[1] == "clr d0":
+        t = call(body[0])[1]
+        return "call0_%s" % t[2:], "Calls `%s` and returns 0." % t
+    calls = [i for i, x in enumerate(body) if call(x)]
+    if len(calls) == 1 and calls[0] + 2 < n:
+        i = calls[0]
+        v = re.fullmatch(r"mov %s,d0" % num, body[i + 1])
+        pre_ok = all(re.fullmatch(r"clr d[01]|mov %s,(d0|d1|a1)|mov d0,d2|exthu d0|exth d0" % num, x) for x in body[:i])
+        rest = body[i + 3:]
+        rest_ok = all(re.fullmatch(r"clr d0|mov %s,d0|(mov|movhu|movbu) (d0|d2),\((\d+),a0\)" % num, x) for x in rest)
+        if v and body[i + 2] == "mov d0,(a0)" and int(v[1], 0) & 0xffffffff >= 0x7d000000 and pre_ok and rest_ok and (i or rest):
+            t = call(body[i])[1]
+            extra = []
+            if i:
+                extra.append("the base constructor gets constant arguments (`%s`)" % "; ".join(body[:i]))
+            if rest:
+                extra.append("afterwards it initialises fields (`%s`)" % "; ".join(rest))
+            return ("ctor_vt%s_base_%s_init" % (hexv(v[1]), t[2:]),
+                    "Constructor shape: calls `%s` (the base-class constructor, which returns the object) and stores `0x%s` "
+                    "at offset 0 of the object (its vtable pointer); %s." % (t, hexv(v[1]), " and ".join(extra)))
+    if len(calls) == 3 and n in (6, 7) and body[0] == "mov a0,a2" and calls == [1, 3, 5] \
+            and body[2] == "mov a2,a0" and body[4] == "mov a2,a0":
+        a, b, c = (call(body[j])[1] for j in calls)
+        tail = re.fullmatch(r"mov %s,d0|clr d0" % num, body[6]) if n == 7 else None
+        if n == 6 or tail:
+            return ("call3_%s_%s_%s" % (a[2:], b[2:], c[2:]),
+                    "Calls `%s(this)`, `%s(this)` and `%s(this)` in a row%s." % (a, b, c, (", then returns %s" % (tail[1] or "0")) if tail else ""))
     c0 = call(body[0]) if body else None
     if c0 and n == 2 and re.fullmatch(r"and %s,d0" % num, body[1]):
         k = re.fullmatch(r"and %s,d0" % num, body[1])[1]
