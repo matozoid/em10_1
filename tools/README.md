@@ -68,6 +68,7 @@ scripts that rename.
 | `DisasAt.java ADDR N ...` | disassemble N bytes at each address (clears and re-disassembles: not for `-readOnly`) |
 | `DumpDecomp.java OUT` | decompile every function into one C file |
 | `Callers.java ADDR` | callers of a function, with call sites |
+| `SingleCallers.java OUT` | every function with exactly one reference, with its caller (basis of the single-caller helper names) |
 | `DataRefs.java ADDR` | instructions referencing a data address, with read/write type |
 | `ScalarRefs.java LO HI` | instructions with a scalar operand in a range |
 | `StringXrefs.java TEXT...` | strings containing a substring and the functions that reference them |
