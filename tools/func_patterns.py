@@ -13,7 +13,7 @@ usage:
       instructions (field/global getters and setters, constant stores, fixed-address returns, empty
       functions, plain and narrowing thunks) and, for up to five instructions, bodies built around one or
       two calls (forwarders to a member object, this-adjusting thunks, call-with-constant, call-then-return-
-      constant, store-then-call). Prints  address <TAB> refs <TAB> name <TAB> role.
+      constant, store-then-call, constructors that install a vtable, compare-one-value-then-forward). Prints  address <TAB> refs <TAB> name <TAB> role.
   func_patterns.py shapes [MAXBYTES=12]
       Same disassembly, but only print how often each instruction-mnemonic sequence occurs: a quick way to
       see which shapes are worth a classifier.
@@ -189,6 +189,61 @@ def classify_small(ins):
         if m0 and m1 and m2:
             return ("store_%s_f%s_f%s" % (m0[1].replace("-", "m"), m1[1], m2[1]),
                     "`*(this+%s) = *(this+%s) = %s`." % (m1[1], m2[1], m0[1]))
+    c0 = call(body[0]) if body else None
+    if c0 and n == 2 and re.fullmatch(r"and %s,d0" % num, body[1]):
+        k = re.fullmatch(r"and %s,d0" % num, body[1])[1]
+        return "call_%s_and_%s" % (c0[1][2:], hexv(k)), "`return %s() & 0x%s`." % (c0[1], hexv(k))
+    if c0 and n in (3, 5):
+        v = re.fullmatch(r"mov %s,d0" % num, body[1])
+        if v and body[2] == "mov d0,(a0)" and int(v[1], 0) & 0xffffffff >= 0x7d000000:
+            name = "ctor_vt%s_base_%s" % (hexv(v[1]), c0[1][2:])
+            role = ("Constructor shape: calls `%s` (the base-class constructor, which returns the object) and stores "
+                    "`0x%s` at offset 0 of the object (its vtable pointer)." % (c0[1], hexv(v[1])))
+            if n == 3:
+                return name, role
+            k = re.fullmatch(r"mov %s,d0|clr d0" % num, body[3])
+            f = re.fullmatch(r"(mov|movhu|movbu) d0,\((\d+),a0\)", body[4])
+            if k and f:
+                kv = k[1] or "0"
+                return (name + "_f%s_%s" % (f[2], kv.replace("-", "m")),
+                        role + " Then sets the %sfield at `+%s` to %s." % (C[f[1]] and C[f[1]] + " ", f[2], kv))
+    if n == 4:
+        m0 = re.fullmatch(r"mov %s,d0" % num, body[0])
+        m1 = re.fullmatch(r"mov d0,\((\d+),a0\)", body[1])
+        m2 = re.fullmatch(r"mov d0,\((\d+),a0\)", body[2])
+        c3 = call(body[3])
+        if m0 and m1 and m2 and c3:
+            return ("store_%s_f%s_f%s_call_%s" % (m0[1].replace("-", "m"), m1[1], m2[1], c3[1][2:]),
+                    "`*(this+%s) = *(this+%s) = %s`, then calls `%s`." % (m1[1], m2[1], m0[1], c3[1]))
+        g = re.fullmatch(r"mov \((0x[0-9a-f]+)\),a0", body[0])
+        a = re.fullmatch(r"mov %s,d0" % num, body[1])
+        c2 = call(body[2])
+        if g and a and c2 and body[3] == "clr d0":
+            return ("call_%s_on_g%s_arg_%s_ret0" % (c2[1][2:], g[1][2:], a[1].replace("-", "m")),
+                    "Calls `%s` on the object whose pointer is stored at `%s` with `d0 = %s`; returns 0." % (c2[1], g[1], a[1]))
+    if n == 3:
+        g = re.fullmatch(r"mov \((0x[0-9a-f]+)\),a0", body[0])
+        a = re.fullmatch(r"mov %s,d0" % num, body[1])
+        c2 = call(body[2])
+        if g and a and c2:
+            return ("call_%s_on_g%s_arg_%s" % (c2[1][2:], g[1][2:], a[1].replace("-", "m")),
+                    "Calls `%s` on the object whose pointer is stored at `%s` with `d0 = %s`." % (c2[1], g[1], a[1]))
+    if n == 7 and body[0] == "mov d0,d1" and body[1] == "exth d1" and body[5] == "mov d1,d0":
+        k = re.fullmatch(r"mov %s,d0|clr d0" % num, body[2])
+        c = re.fullmatch(r"cmp %s,d1" % num, body[3])
+        t = call(body[6])
+        if k and c and body[4].startswith("beq") and t:
+            kv = k[1] or "0"
+            return ("s16_eq_%s_ret_%s_else_%s" % (c[1].replace("-", "m"), kv.replace("-", "m"), t[1][2:]),
+                    "`(s16)d0 == %s ? %s : %s((s16)d0)`: returns a constant for one value and passes every other value on." % (c[1], kv, t[1]))
+    if n == 6 and body[0] == "exthu d0" and body[2].startswith("beq") and body[4].startswith("bra"):
+        c = re.fullmatch(r"cmp %s,d0" % num, body[1])
+        t = call(body[3])
+        k = re.fullmatch(r"mov %s,d0|clr d0" % num, body[5])
+        if c and t and k:
+            kv = k[1] or "0"
+            return ("u16_eq_%s_ret_%s_else_%s" % (c[1].replace("-", "m"), kv.replace("-", "m"), t[1][2:]),
+                    "`(u16)d0 == %s ? %s : %s((u16)d0)`: returns a constant for one value and passes every other value on." % (c[1], kv, t[1]))
     if n == 4:
         m0 = re.fullmatch(r"mov \((\d+),a0\),a0", body[0])
         m2 = re.fullmatch(r"mov \((\d+),a[12]\),a[12]", body[2])
