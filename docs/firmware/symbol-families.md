@@ -5696,8 +5696,8 @@ that share one body per class. 1299 listed, named `entry_stub_<address>`; the ro
 ## Constant-return stubs (pattern family)
 Functions whose whole body is `return <constant>` (`clr d0; retf`, `mov imm8,d0; retf` or
 `mov imm32,d0; retf`). Mostly virtual-method defaults copied into each class. 439 listed, named
-`ret_<value>_<address>`. Most common values: 0 ×231, 1 ×55, 0xf0000028 ×21, 2 ×15, 3 ×8, 0xf0000049 ×7, m1 ×6, 0xc0000000 ×5. Values of the form `0xf00000NN` are API
-result codes (`0xf0000028` = `API_ERROR_NO_PRINT_TARGET`, `0xf0000049` = `API_ERROR_FILE_CHECK`); the full list is in `trace-catalog.md`.
+`ret_<value>_<address>`. Most common values: 0 ×231, 1 ×55, 0xf0000028 ×21, 2 ×15, 3 ×8, 0xf0000049 ×7, m1 ×6, 0xc0000000 ×5. Values of the form `0xf00000NN` match API
+result codes by value; whether each stub really returns an API result was not checked (`0xf0000028` = `API_ERROR_NO_PRINT_TARGET`, `0xf0000049` = `API_ERROR_FILE_CHECK`); the full list is in `trace-catalog.md`.
 
 | address | xrefs | symbol | role | source |
 |---|---|---|---|---|
@@ -5920,48 +5920,48 @@ result codes (`0xf0000028` = `API_ERROR_NO_PRINT_TARGET`, `0xf0000049` = `API_ER
 | `0x7dfc6ac1` | 1 | `ret_0_7dfc6ac1` | `return 0` and nothing else. | pattern scan |
 | `0x7dfcc810` | 1 | `ret_100_7dfcc810` | `return 100` and nothing else. | pattern scan |
 | `0x7dfd6f73` | 2 | `ret_0x20109_7dfd6f73` | `return 0x20109` and nothing else. | pattern scan |
-| `0x7dfd7e16` | 1 | `ret_0xf0000001_7dfd7e16` | `return 0xf0000001` and nothing else. The value is the API result code `API_NO_SOUND_PLAY`. | pattern scan |
-| `0x7dfd8534` | 1 | `ret_0xf0000001_7dfd8534` | `return 0xf0000001` and nothing else. The value is the API result code `API_NO_SOUND_PLAY`. | pattern scan |
+| `0x7dfd7e16` | 1 | `ret_0xf0000001_7dfd7e16` | `return 0xf0000001` and nothing else. The value equals the API result code `API_NO_SOUND_PLAY`. | pattern scan |
+| `0x7dfd8534` | 1 | `ret_0xf0000001_7dfd8534` | `return 0xf0000001` and nothing else. The value equals the API result code `API_NO_SOUND_PLAY`. | pattern scan |
 | `0x7dfdc9cc` | 1 | `ret_0_7dfdc9cc` | `return 0` and nothing else. | pattern scan |
 | `0x7dfde795` | 1 | `ret_0_7dfde795` | `return 0` and nothing else. | pattern scan |
-| `0x7dfded7e` | 1 | `ret_0xf0000001_7dfded7e` | `return 0xf0000001` and nothing else. The value is the API result code `API_NO_SOUND_PLAY`. | pattern scan |
+| `0x7dfded7e` | 1 | `ret_0xf0000001_7dfded7e` | `return 0xf0000001` and nothing else. The value equals the API result code `API_NO_SOUND_PLAY`. | pattern scan |
 | `0x7dfe1323` | 2 | `ret_0x20103_7dfe1323` | `return 0x20103` and nothing else. | pattern scan |
 | `0x7dfe580c` | 2 | `ret_0x2010c_7dfe580c` | `return 0x2010c` and nothing else. | pattern scan |
 | `0x7dfe9ee2` | 2 | `ret_0x2010c_7dfe9ee2` | `return 0x2010c` and nothing else. | pattern scan |
-| `0x7dfeee2a` | 1 | `ret_0xf0000028_7dfeee2a` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeee72` | 1 | `ret_0xf0000028_7dfeee72` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeee7b` | 1 | `ret_0xf0000028_7dfeee7b` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeee84` | 1 | `ret_0xf0000028_7dfeee84` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeee8d` | 1 | `ret_0xf0000028_7dfeee8d` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeee96` | 1 | `ret_0xf0000028_7dfeee96` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee2a` | 1 | `ret_0xf0000028_7dfeee2a` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee72` | 1 | `ret_0xf0000028_7dfeee72` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee7b` | 1 | `ret_0xf0000028_7dfeee7b` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee84` | 1 | `ret_0xf0000028_7dfeee84` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee8d` | 1 | `ret_0xf0000028_7dfeee8d` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeee96` | 1 | `ret_0xf0000028_7dfeee96` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
 | `0x7dfeee9f` | 1 | `ret_0_7dfeee9f` | `return 0` and nothing else. | pattern scan |
-| `0x7dfeeea3` | 1 | `ret_0xf0000028_7dfeeea3` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeeeac` | 1 | `ret_0xf0000028_7dfeeeac` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeeeb5` | 1 | `ret_0xf0000028_7dfeeeb5` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeeebe` | 1 | `ret_0xf0000028_7dfeeebe` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeeecb` | 1 | `ret_0xf0000028_7dfeeecb` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfeeffd` | 1 | `ret_0xf0000028_7dfeeffd` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeea3` | 1 | `ret_0xf0000028_7dfeeea3` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeeac` | 1 | `ret_0xf0000028_7dfeeeac` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeeb5` | 1 | `ret_0xf0000028_7dfeeeb5` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeebe` | 1 | `ret_0xf0000028_7dfeeebe` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeecb` | 1 | `ret_0xf0000028_7dfeeecb` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfeeffd` | 1 | `ret_0xf0000028_7dfeeffd` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
 | `0x7dfef006` | 1 | `ret_0_7dfef006` | `return 0` and nothing else. | pattern scan |
-| `0x7dfef00a` | 1 | `ret_0xf0000028_7dfef00a` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef013` | 1 | `ret_0xf0000028_7dfef013` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef01c` | 1 | `ret_0xf0000028_7dfef01c` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef025` | 1 | `ret_0xf0000028_7dfef025` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef02e` | 1 | `ret_0xf0000028_7dfef02e` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef037` | 1 | `ret_0xf0000028_7dfef037` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef040` | 1 | `ret_0xf0000028_7dfef040` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef049` | 1 | `ret_0xf0000028_7dfef049` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
-| `0x7dfef052` | 1 | `ret_0xf0000028_7dfef052` | `return 0xf0000028` and nothing else. The value is the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef00a` | 1 | `ret_0xf0000028_7dfef00a` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef013` | 1 | `ret_0xf0000028_7dfef013` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef01c` | 1 | `ret_0xf0000028_7dfef01c` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef025` | 1 | `ret_0xf0000028_7dfef025` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef02e` | 1 | `ret_0xf0000028_7dfef02e` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef037` | 1 | `ret_0xf0000028_7dfef037` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef040` | 1 | `ret_0xf0000028_7dfef040` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef049` | 1 | `ret_0xf0000028_7dfef049` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
+| `0x7dfef052` | 1 | `ret_0xf0000028_7dfef052` | `return 0xf0000028` and nothing else. The value equals the API result code `API_ERROR_NO_PRINT_TARGET`. | pattern scan |
 | `0x7dff03f1` | 4 | `ret_0_7dff03f1` | `return 0` and nothing else. | pattern scan |
-| `0x7e0345c0` | 1 | `ret_0xf0000049_7e0345c0` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345c9` | 17 | `ret_0xf0000049_7e0345c9` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345d2` | 1 | `ret_0xf0000049_7e0345d2` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345db` | 1 | `ret_0xf0000049_7e0345db` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345e4` | 1 | `ret_0xf0000049_7e0345e4` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345ed` | 1 | `ret_0xf0000049_7e0345ed` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
-| `0x7e0345f6` | 1 | `ret_0xf0000049_7e0345f6` | `return 0xf0000049` and nothing else. The value is the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345c0` | 1 | `ret_0xf0000049_7e0345c0` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345c9` | 17 | `ret_0xf0000049_7e0345c9` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345d2` | 1 | `ret_0xf0000049_7e0345d2` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345db` | 1 | `ret_0xf0000049_7e0345db` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345e4` | 1 | `ret_0xf0000049_7e0345e4` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345ed` | 1 | `ret_0xf0000049_7e0345ed` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
+| `0x7e0345f6` | 1 | `ret_0xf0000049_7e0345f6` | `return 0xf0000049` and nothing else. The value equals the API result code `API_ERROR_FILE_CHECK`. | pattern scan |
 | `0x7e034930` | 1 | `ret_0_7e034930` | `return 0` and nothing else. | pattern scan |
 | `0x7e034934` | 1 | `ret_0_7e034934` | `return 0` and nothing else. | pattern scan |
-| `0x7e034c0b` | 1 | `ret_0xf0000001_7e034c0b` | `return 0xf0000001` and nothing else. The value is the API result code `API_NO_SOUND_PLAY`. | pattern scan |
+| `0x7e034c0b` | 1 | `ret_0xf0000001_7e034c0b` | `return 0xf0000001` and nothing else. The value equals the API result code `API_NO_SOUND_PLAY`. | pattern scan |
 | `0x7e034ce7` | 1 | `ret_0_7e034ce7` | `return 0` and nothing else. | pattern scan |
 | `0x7e037e72` | 3 | `ret_0x2011e_7e037e72` | `return 0x2011e` and nothing else. | pattern scan |
 | `0x7e038510` | 3 | `ret_0x20116_7e038510` | `return 0x20116` and nothing else. | pattern scan |
