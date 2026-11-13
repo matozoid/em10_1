@@ -9049,3 +9049,211 @@ names that occur once are listed (25). Many are GUI-App menu/state-machine handl
 | `0x7e302249` | 1 | `doCmdSsDebugMenuColor_SettingEvtKeyPowerOn` | Logs `[GUI App   ]:doCmdSsDebugMenuColor_SettingEvtKeyPowerOn` at entry: its own name in this firmware's trace convention. | own trace string |
 | `0x7e31022a` | 1 | `doCmd_SsMenuMain_StMenuMaiWarning_EvtEndWarning` | Logs `[GUI App   ]00doCmd_SsMenuMain_StMenuMaiWarning_EvtEndWarning` at entry: its own name in this firmware's trace convention. | own trace string |
 | `0x7e3103f9` | 1 | `doCmd_SsMenuMain_StMenuMaiWarning_EvtKeyOkOn` | Logs `[GUI App   ]00doCmd_SsMenuMain_StMenuMaiWarning_EvtKeyOkOn` at entry: its own name in this firmware's trace convention. | own trace string |
+
+## Pass 3: remaining functions with an identifier, source-file or module-tag string
+Listed 2026-11-13 from the unlabelled functions that reference text (`research/decomp/func_strings_rt.tsv`).
+Three kinds, in decreasing order of how much the name says:
+- an identifier-like string (39): the function is named after it, with the address appended when the name
+  was taken;
+- a source-file name such as `cam.c` (93): named `<file>_fn_<address>`; this only places the function in a
+  source file;
+- a bracketed module tag such as `[DISP]` (62): named `<tag>_fn_<address>`, with the logged text quoted.
+None of these were read. Functions whose strings concern flash memory, start-up or firmware update were
+left out of this pass.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7d9d41b3` | 2 | `bchk_fn_7d9d41b3` | Logs with the module tag `[BCHK]`: `[BCHK]mode  XXX :`, `[BCHK]event XXX :`. Named after the tag only; not read. | string pass 3 |
+| `0x7d9e3c06` | 0 | `pc_fn_7d9e3c06` | Logs with the module tag `[PC]`: `[PC]`, `[PSW]`, `[LAST PROC]` …. Named after the tag only; not read. | string pass 3 |
+| `0x7daf28b5` | 2 | `mode_update_post` | References the identifier strings `mode_update_post`, `ems_restart`, `special_ems` → probably `mode_update_post` or a helper of it. | string pass 3 |
+| `0x7db0f5ce` | 1 | `update_disable` | References the identifier strings `mode`, `update_disable`, `capture_mid_count` … → probably `update_disable` or a helper of it. | string pass 3 |
+| `0x7db1368b` | 0 | `cam_c_fn_7db1368b` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db1371b` | 0 | `cam_c_fn_7db1371b` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db141ea` | 1 | `cam_c_fn_7db141ea` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db142b5` | 0 | `cam_c_fn_7db142b5` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14387` | 2 | `cam_c_fn_7db14387` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db143c0` | 0 | `cam_c_fn_7db143c0` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14400` | 0 | `cam_c_fn_7db14400` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14440` | 0 | `cam_c_fn_7db14440` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14479` | 0 | `cam_c_fn_7db14479` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db144b2` | 0 | `cam_c_fn_7db144b2` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db144eb` | 0 | `cam_c_fn_7db144eb` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14550` | 1 | `cam_c_fn_7db14550` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db149f0` | 2 | `cam_c_fn_7db149f0` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14c59` | 2 | `cam_c_fn_7db14c59` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14dcd` | 0 | `cam_c_fn_7db14dcd` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db14eb7` | 1 | `cam_c_fn_7db14eb7` | References the source-file name `cam.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7db8b826` | 1 | `api_disp_Disp_UpdateScreen` | References the identifier strings `api_disp_Disp_UpdateScreen`, `Disp_UpdateScreen`, `Disp_UpdateScreen param->img_handle[0]` … → probably `api_disp_Disp_UpdateScreen` or a helper of it. | string pass 3 |
+| `0x7db8c8f0` | 4 | `api_disp_Disp_OsdUpdateColorPallet` | References the identifier strings `api_disp_Disp_OsdUpdateColorPallet`, `Disp_OsdUpdateColorPallet osd_pallet[0]`, `Disp_OsdUpdateColorPallet osd_pallet[1]` … → probably `api_disp_Disp_OsdUpdateColorPallet` or a helper of it. | string pass 3 |
+| `0x7db8c9f9` | 4 | `api_disp_Disp_ImgUpdateScreen` | References the identifier strings `api_disp_Disp_ImgUpdateScreen`, `Disp_ImgUpdateScreen`, `Disp_ImgUpdateScreen param->img_handle[0]` … → probably `api_disp_Disp_ImgUpdateScreen` or a helper of it. | string pass 3 |
+| `0x7db8cb4a` | 1 | `api_disp_Disp_ImgUpdateScreen_Async` | References the identifier strings `api_disp_Disp_ImgUpdateScreen_Async`, `Disp_ImgUpdateScreen_Async`, `Disp_ImgUpdateScreen_Async param->img_handle[0]` … → probably `api_disp_Disp_ImgUpdateScreen_Async` or a helper of it. | string pass 3 |
+| `0x7db8ecd1` | 10 | `api_disp_Disp_Sync_Update_Osd` | References the identifier strings `api_disp_Disp_Sync_Update_Osd`, `Disp_Sync_Update_Osd param`, `Disp_Sync_Update_Osd osd_handle[0]` … → probably `api_disp_Disp_Sync_Update_Osd` or a helper of it. | string pass 3 |
+| `0x7db8ed5d` | 4 | `api_disp_Disp_Sync_Update_Img` | References the identifier strings `api_disp_Disp_Sync_Update_Img`, `Disp_Sync_Update_Img`, `Disp_Sync_Update_Img param` … → probably `api_disp_Disp_Sync_Update_Img` or a helper of it. | string pass 3 |
+| `0x7db8ef55` | 7 | `api_disp_Disp_Sync_Cancel_Update` | References the identifier strings `api_disp_Disp_Sync_Cancel_Update`, `Disp_Sync_Cancel_Update param`, `Disp_Sync_Cancel_Update ret` → probably `api_disp_Disp_Sync_Cancel_Update` or a helper of it. | string pass 3 |
+| `0x7db8efac` | 1 | `api_disp_Disp_Sync_Force_Update` | References the identifier strings `api_disp_Disp_Sync_Force_Update`, `Disp_Sync_Force_Update param`, `Disp_Sync_Force_Update ret` → probably `api_disp_Disp_Sync_Force_Update` or a helper of it. | string pass 3 |
+| `0x7db907a4` | 1 | `api_disp_UpdateThroughArea_PhotoSession` | References the identifier strings `api_disp_UpdateThroughArea_PhotoSession`, `UpdateThroughArea_PhotoSession AreaState`, `[ASSERT]UpdateThroughArea_PhotoSession ret` → probably `api_disp_UpdateThroughArea_PhotoSession` or a helper of it. | string pass 3 |
+| `0x7db90c4a` | 8 | `api_disp_Disp_Sync_Update_Img_Ext` | References the identifier strings `api_disp_Disp_Sync_Update_Img_Ext`, `Disp_Sync_Update_Img_Ext`, `Disp_Sync_Update_Img_Ext param` … → probably `api_disp_Disp_Sync_Update_Img_Ext` or a helper of it. | string pass 3 |
+| `0x7db90e5e` | 1 | `api_disp_Disp_ImgUpdateScreen_Async_Ext` | References the identifier strings `api_disp_Disp_ImgUpdateScreen_Async_Ext`, `Disp_ImgUpdateScreen_Async_Ext`, `Disp_ImgUpdateScreen_Async_Ext param->img_handle[0]` … → probably `api_disp_Disp_ImgUpdateScreen_Async_Ext` or a helper of it. | string pass 3 |
+| `0x7db91415` | 1 | `api_dps_Dps_IsUpdateCapability` | References the identifier string `api_dps_Dps_IsUpdateCapability` → probably `api_dps_Dps_IsUpdateCapability` or a helper of it. | string pass 3 |
+| `0x7db98a2c` | 1 | `api_picfile_Update_PictureFile` | References the identifier string `api_picfile_Update_PictureFile` → probably `api_picfile_Update_PictureFile` or a helper of it. | string pass 3 |
+| `0x7db9d6d4` | 2 | `api_rec_Update_WhiteBalance` | References the identifier strings `api_rec_Update_WhiteBalance`, `Update_WhiteBalance` → probably `api_rec_Update_WhiteBalance` or a helper of it. | string pass 3 |
+| `0x7db9eb86` | 1 | `api_rec_Update_FocusRingDirection` | References the identifier string `api_rec_Update_FocusRingDirection` → probably `api_rec_Update_FocusRingDirection` or a helper of it. | string pass 3 |
+| `0x7db9ed5a` | 1 | `api_rec_Update_ExposePreview` | References the identifier string `api_rec_Update_ExposePreview` → probably `api_rec_Update_ExposePreview` or a helper of it. | string pass 3 |
+| `0x7db9f2dd` | 1 | `api_rec_Update_Anti_Shake` | References the identifier strings `api_rec_Update_Anti_Shake`, `Update_Anti_Shake param error!` → probably `api_rec_Update_Anti_Shake` or a helper of it. | string pass 3 |
+| `0x7dba26c4` | 1 | `api_rec_Update_Bulb_Lv` | References the identifier string `api_rec_Update_Bulb_Lv` → probably `api_rec_Update_Bulb_Lv` or a helper of it. | string pass 3 |
+| `0x7dba45d1` | 1 | `api_tft_Update_Through` | References the identifier strings `api_tft_Update_Through`, `Update_Through sensor`, `Update_Through mode` … → probably `api_tft_Update_Through` or a helper of it. | string pass 3 |
+| `0x7dba539c` | 1 | `api_tft_Update_Through_Image` | References the identifier strings `api_tft_Update_Through_Image`, `Update_Through_Image display_w`, `Update_Through_Image display_h` … → probably `api_tft_Update_Through_Image` or a helper of it. | string pass 3 |
+| `0x7dba5a9f` | 3 | `api_tft_dummy_Display_Update` | References the identifier string `api_tft_dummy_Display_Update` → probably `api_tft_dummy_Display_Update` or a helper of it. | string pass 3 |
+| `0x7dbab53d` | 1 | `disp_fn_7dbab53d` | Logs with the module tag `[DISP]`: `[DISP]ADJ CONT TFT!->->`, `->->[DISP]ADJ CONT TFT!`. Named after the tag only; not read. | string pass 3 |
+| `0x7dbaec0b` | 1 | `disp_fn_7dbaec0b` | Logs with the module tag `[DISP]`: `[DISP] Set tft duty :`, `bievf`, `can be set ... tft` …. Named after the tag only; not read. | string pass 3 |
+| `0x7dbb3dc1` | 1 | `hdmitop_fn_7dbb3dc1` | Logs with the module tag `[HDMITOP]`: `[HDMITOP]:Update wait Timeout!`. Named after the tag only; not read. | string pass 3 |
+| `0x7dbb4761` | 3 | `hdmitop_fn_7dbb4761` | Logs with the module tag `[HDMITOP]`: `[HDMITOP]:Update wait Timeout!`. Named after the tag only; not read. | string pass 3 |
+| `0x7dbb771e` | 2 | `displayframe_fn_7dbb771e` | Logs with the module tag `[DisplayFrame]`: `[DisplayFrame]UpdateQwriteError...`. Named after the tag only; not read. | string pass 3 |
+| `0x7dbb7fdf` | 7 | `display_fn_7dbb7fdf` | Logs with the module tag `[display]`: `[display]update odd_start wait error:`. Named after the tag only; not read. | string pass 3 |
+| `0x7dd423fe` | 1 | `ser_fn_7dd423fe` | Logs with the module tag `[ser]`: `[ser]wai`, `dat`. Named after the tag only; not read. | string pass 3 |
+| `0x7dd42530` | 2 | `ser_fn_7dd42530` | Logs with the module tag `[ser]`: `[ser]`. Named after the tag only; not read. | string pass 3 |
+| `0x7dd4e9e4` | 2 | `reg_fn_7dd4e9e4` | Logs with the module tag `[reg]`: `[reg]adr`, `dat`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddb744d` | 0 | `dng0_fn_7ddb744d` | Logs with the module tag `[Dng0]`: `SCST0`, `[Dng0]`, `[Dng1]` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddbf13d` | 1 | `eav_fn_7ddbf13d` | Logs with the module tag `[Eav]`: `VHPF OK!`, `[Eav]`, `[HSPv]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc29c3` | 5 | `fng_fn_7ddc29c3` | Logs with the module tag `[Fng]`: `[Fng]`, `[Fok]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc2c39` | 5 | `tng_fn_7ddc2c39` | Logs with the module tag `[Tng]`: `[Tng]`, `[Tok]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc465c` | 1 | `fe1s_fn_7ddc465c` | Logs with the module tag `[Fe1s]`: `[Fe1s]`, `[Fe00]`, `[Fe01]` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc48c0` | 1 | `he3_fn_7ddc48c0` | Logs with the module tag `[He3]`: `[He3]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc572a` | 2 | `exp_e_fn_7ddc572a` | Logs with the module tag `[EXP_E]`: `[EXP_E]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc7462` | 1 | `ctv_fn_7ddc7462` | Logs with the module tag `[ctv]`: `[ctv]`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddc7ae9` | 6 | `nb0_fn_7ddc7ae9` | Logs with the module tag `[nb0]`: `[nb0]`, `[nb1]`, `[nob]` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddcb130` | 1 | `aud_fn_7ddcb130` | Logs with the module tag `[Aud]`: `[Aud] ID:%d PTS:%d Addr:%X time:%d`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddcbba8` | 1 | `irq_fn_7ddcbba8` | Logs with the module tag `[IRQ]`: `[IRQ  ] :`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddcdd2d` | 1 | `avm_api_fn_7ddcdd2d` | Logs with the module tag `[AVM_API]`: `[AVM_API] RingBuff update_rp :`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddcdd86` | 1 | `avm_api_fn_7ddcdd86` | Logs with the module tag `[AVM_API]`: `[AVM_API] RingBuff update_wp :`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd33ab` | 1 | `avm_mp_fn_7ddd33ab` | Logs with the module tag `[AVM_MP]`: `[AVM_MP] RingBuff update_rp A:`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd3615` | 2 | `avm_mp_fn_7ddd3615` | Logs with the module tag `[AVM_MP]`: `[AVM_MP] RingBuff update_wp V:`, `[AVM_MP] RingBuff update_wp A:`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd3ab5` | 2 | `disp_sync_fn_7ddd3ab5` | Logs with the module tag `[disp_sync]`: `[disp_sync]wait_img_update_osd_sync update err`, `[disp_sync]wait_img_update_osd_sync os err1`, `[disp_sync]wait_img_update_osd_sync warning` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd3f0d` | 3 | `disp_sync_fn_7ddd3f0d` | Logs with the module tag `[disp_sync]`: `[disp_sync]wait_osd_update_img_sync update err`, `[disp_sync]wait_osd_update_img_sync os err1`, `[disp_sync]wait_osd_update_img_sync warning` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd47a7` | 2 | `disp_sync_fn_7ddd47a7` | Logs with the module tag `[disp_sync]`: `[disp_sync]force_wait_img update err1`, `[disp_sync]force_wait_img os err1`, `[disp_sync]force_wait_img update osd err2` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd495c` | 2 | `disp_sync_fn_7ddd495c` | Logs with the module tag `[disp_sync]`: `[disp_sync]force_wait_osd update err1`, `[disp_sync]force_wait_osd os err1`, `[disp_sync]force_wait_osd update osd err2` …. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd70d7` | 4 | `disp_sync_fn_7ddd70d7` | Logs with the module tag `[disp_sync]`: `[disp_sync]DISP_UPDATE_SCREEN_OSD err!`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd7113` | 4 | `disp_sync_fn_7ddd7113` | Logs with the module tag `[disp_sync]`: `[disp_sync]DISP_UPDATE_SCREEN_IMG err!`. Named after the tag only; not read. | string pass 3 |
+| `0x7ddd7188` | 4 | `disp_sync_fn_7ddd7188` | Logs with the module tag `[disp_sync]`: `[disp_sync]DISP_UPDATE_SCREEN err!`. Named after the tag only; not read. | string pass 3 |
+| `0x7de2bf7b` | 3 | `olis_fn_7de2bf7b` | Logs with the module tag `[OLIS]`: `olis_ctrl_update_imgshare    : I`, `fileif_get_free_space err :  olis_ctrl_update_imgshare`, `upper(hex):` …. Named after the tag only; not read. | string pass 3 |
+| `0x7de30b0e` | 1 | `iseq_ps_func_comb_exec_lv_update_copy_cmp` | References the identifier strings `iseq_ps_func_comb_exec_lv_update_copy_cmp`, `iseq_ps_func_comb_set_lv_update_copy_param_cmp` → probably `iseq_ps_func_comb_exec_lv_update_copy_cmp` or a helper of it. | string pass 3 |
+| `0x7de3a190` | 1 | `iseq_ps_update_get_frame_info_cmp` | References the identifier strings `iseq_ps_update_get_frame_info_cmp`, `iseq_ps_update_get_frame_info` → probably `iseq_ps_update_get_frame_info_cmp` or a helper of it. | string pass 3 |
+| `0x7de3a575` | 2 | `iseq_ps_update_exe_pass_comb_cmp` | References the identifier strings `iseq_ps_update_exe_pass_comb_cmp`, `iseq_ps_update_exe_pass_exec_comb_cmp`, `iseq_ps_update_exe_pass_post_comb_cmp` → probably `iseq_ps_update_exe_pass_comb_cmp` or a helper of it. | string pass 3 |
+| `0x7de3a65d` | 2 | `iseq_ps_update_exe_pass_comb_cmp_7de3a65d` | References the identifier strings `iseq_ps_update_exe_pass_comb_cmp`, `iseq_ps_update_exe_pass_exec_copy_cmp`, `iseq_ps_update_exe_pass_post_copy_cmp` → probably `iseq_ps_update_exe_pass_comb_cmp` or a helper of it. | string pass 3 |
+| `0x7de3a715` | 2 | `iseq_ps_update_exe_pass_comb_date_cmp` | References the identifier strings `iseq_ps_update_exe_pass_comb_date_cmp`, `iseq_ps_update_exe_pass_exec_comb_date_cmp`, `iseq_ps_update_exe_pass_post_comb_date_cmp` → probably `iseq_ps_update_exe_pass_comb_date_cmp` or a helper of it. | string pass 3 |
+| `0x7de3a7fe` | 2 | `iseq_ps_update_exe_pass_nochange` | References the identifier string `iseq_ps_update_exe_pass_nochange` → probably `iseq_ps_update_exe_pass_nochange` or a helper of it. | string pass 3 |
+| `0x7de3a83f` | 2 | `iseq_ps_update_exe_pass_comb` | References the identifier strings `iseq_ps_update_exe_pass_comb`, `iseq_ps_update_exe_pass_exec_comb`, `iseq_ps_update_exe_pass_post_comb` → probably `iseq_ps_update_exe_pass_comb` or a helper of it. | string pass 3 |
+| `0x7de3a911` | 2 | `iseq_ps_update_exe_pass_comb_bank` | References the identifier strings `iseq_ps_update_exe_pass_comb_bank`, `iseq_ps_update_exe_pass_exec_comb_bank`, `iseq_ps_update_exe_pass_post_comb_bank` → probably `iseq_ps_update_exe_pass_comb_bank` or a helper of it. | string pass 3 |
+| `0x7de3a9c9` | 2 | `iseq_ps_update_terminate` | References the identifier string `iseq_ps_update_terminate` → probably `iseq_ps_update_terminate` or a helper of it. | string pass 3 |
+| `0x7de3aa0b` | 5 | `iseq_ps_update_analyze_post` | References the identifier string `iseq_ps_update_analyze_post` → probably `iseq_ps_update_analyze_post` or a helper of it. | string pass 3 |
+| `0x7de3cf84` | 1 | `rec_bracket_update` | References the identifier string `rec_bracket_update` → probably `rec_bracket_update` or a helper of it. | string pass 3 |
+| `0x7de41853` | 1 | `rec_imgpro_callback_c_fn_7de41853` | References the source-file name `rec_imgpro_callback.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de41bfe` | 1 | `rec_imgpro_callback_c_fn_7de41bfe` | References the source-file name `rec_imgpro_callback.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de41ddd` | 1 | `rec_imgpro_callback_c_fn_7de41ddd` | References the source-file name `rec_imgpro_callback.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de862e5` | 1 | `dcfif_c_fn_7de862e5` | References the source-file name `dcfif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de87f80` | 1 | `dcfnum_c_fn_7de87f80` | References the source-file name `dcfnum.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d575` | 4 | `dosfat_c_fn_7de8d575` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d680` | 2 | `dosfat_c_fn_7de8d680` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d733` | 2 | `dosfat_c_fn_7de8d733` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d815` | 4 | `dosfat_c_fn_7de8d815` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d889` | 2 | `dosfat_c_fn_7de8d889` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8d8e8` | 2 | `dosfat_c_fn_7de8d8e8` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8db26` | 1 | `dosfat_c_fn_7de8db26` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8dd08` | 1 | `dosfat_c_fn_7de8dd08` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8de78` | 2 | `dosfat_c_fn_7de8de78` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e027` | 7 | `dosfat_c_fn_7de8e027` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e143` | 1 | `dosfat_c_fn_7de8e143` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e16e` | 1 | `dosfat_c_fn_7de8e16e` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e3d0` | 1 | `dosfat_c_fn_7de8e3d0` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e474` | 2 | `dosfat_c_fn_7de8e474` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e52f` | 2 | `dosfat_c_fn_7de8e52f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e5fd` | 1 | `dosfat_c_fn_7de8e5fd` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e685` | 1 | `dosfat_c_fn_7de8e685` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e769` | 1 | `dosfat_c_fn_7de8e769` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e973` | 2 | `dosfat_c_fn_7de8e973` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8e9e2` | 2 | `dosfat_c_fn_7de8e9e2` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8ee53` | 1 | `dosfat_c_fn_7de8ee53` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8eeb0` | 1 | `dosfat_c_fn_7de8eeb0` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8ef47` | 1 | `dosfat_c_fn_7de8ef47` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8ef8f` | 1 | `dosfat_c_fn_7de8ef8f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f00c` | 1 | `dosfat_c_fn_7de8f00c` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f1ed` | 2 | `dosfat_c_fn_7de8f1ed` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f3bd` | 1 | `dosfat_c_fn_7de8f3bd` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f536` | 1 | `dosfat_c_fn_7de8f536` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f56a` | 1 | `dosfat_c_fn_7de8f56a` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f7cf` | 1 | `dosfat_c_fn_7de8f7cf` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f86f` | 1 | `dosfat_c_fn_7de8f86f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f8fe` | 1 | `dosfat_c_fn_7de8f8fe` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f971` | 1 | `dosfat_c_fn_7de8f971` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8f9c1` | 1 | `dosfat_c_fn_7de8f9c1` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8fac6` | 1 | `dosfat_c_fn_7de8fac6` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8fc5e` | 1 | `dosfat_c_fn_7de8fc5e` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de8fd0e` | 1 | `dosfat_c_fn_7de8fd0e` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9017e` | 1 | `dosfat_c_fn_7de9017e` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90318` | 1 | `dosfat_c_fn_7de90318` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9062b` | 5 | `dosfat_c_fn_7de9062b` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9071d` | 2 | `dosfat_c_fn_7de9071d` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9076d` | 2 | `dosfat_c_fn_7de9076d` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9082d` | 1 | `dosfat_c_fn_7de9082d` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90990` | 1 | `dosfat_c_fn_7de90990` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90a3f` | 5 | `dosfat_c_fn_7de90a3f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90ad2` | 1 | `dosfat_c_fn_7de90ad2` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90bb1` | 2 | `dosfat_c_fn_7de90bb1` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90c89` | 19 | `dosfat_c_fn_7de90c89` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de90f3f` | 3 | `dosfat_c_fn_7de90f3f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9132c` | 17 | `dosfat_c_fn_7de9132c` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de914da` | 1 | `dosfat_c_fn_7de914da` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91837` | 1 | `dosfat_c_fn_7de91837` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91961` | 1 | `dosfat_c_fn_7de91961` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91b58` | 1 | `dosfat_c_fn_7de91b58` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91c59` | 1 | `dosfat_c_fn_7de91c59` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91d32` | 1 | `dosfat_c_fn_7de91d32` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91d9c` | 1 | `dosfat_c_fn_7de91d9c` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de91dfa` | 1 | `dosfat_c_fn_7de91dfa` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9210e` | 1 | `dosfat_c_fn_7de9210e` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9223c` | 1 | `dosfat_c_fn_7de9223c` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de92b2f` | 2 | `dosfat_c_fn_7de92b2f` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de92b97` | 16 | `dosfat_c_fn_7de92b97` | References the source-file name `dosfat.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9583e` | 2 | `dospath_lfn_c_fn_7de9583e` | References the source-file name `dospath_lfn.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de97d11` | 2 | `job_fn_7de97d11` | Logs with the module tag `[JOB]`: `RGN=END`, `[JOB]`, `[HDR]`. Named after the tag only; not read. | string pass 3 |
+| `0x7de9d570` | 1 | `fileif_c_fn_7de9d570` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9d6be` | 1 | `fileif_c_fn_7de9d6be` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9d8a3` | 18 | `fileif_c_fn_7de9d8a3` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9d9cd` | 3 | `fileif_c_fn_7de9d9cd` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9de44` | 1 | `fileif_c_fn_7de9de44` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7de9e5ba` | 23 | `fileif_c_fn_7de9e5ba` | References the source-file name `fileif.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7deb256d` | 1 | `sdphy_c_fn_7deb256d` | References the source-file name `sdphy.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7deb26a9` | 1 | `sdphy_c_fn_7deb26a9` | References the source-file name `sdphy.c` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7deb70ac` | 1 | `exp_fn_7deb70ac` | Logs with the module tag `[exp]`: `[exp]:com`. Named after the tag only; not read. | string pass 3 |
+| `0x7deb7bb3` | 2 | `exp_fn_7deb7bb3` | Logs with the module tag `[exp]`: `[exp]:cam adj post`. Named after the tag only; not read. | string pass 3 |
+| `0x7dec561e` | 1 | `exp_fn_7dec561e` | Logs with the module tag `[exp]`: `[exp]:post`. Named after the tag only; not read. | string pass 3 |
+| `0x7dec8935` | 1 | `exp_fn_7dec8935` | Logs with the module tag `[exp]`: `[exp]:Wb RG    :`, `[exp]:Wb BG    :`. Named after the tag only; not read. | string pass 3 |
+| `0x7decb672` | 1 | `exp_fn_7decb672` | Logs with the module tag `[exp]`: `[exp]:face num`, `[exp]:face cx`, `[exp]:face cy` …. Named after the tag only; not read. | string pass 3 |
+| `0x7decec03` | 1 | `exp_yc2bayer_fn_7decec03` | Logs with the module tag `[exp yc2bayer]`: `[exp yc2bayer] mode:`. Named after the tag only; not read. | string pass 3 |
+| `0x7e0836af` | 2 | `ps_fn_7e0836af` | Logs with the module tag `[PS]`: `[PS]updateThroughArea(frameNo=%d)`. Named after the tag only; not read. | string pass 3 |
+| `0x7e08383e` | 1 | `ps_fn_7e08383e` | Logs with the module tag `[PS]`: `[PS]updateThroughArea`. Named after the tag only; not read. | string pass 3 |
+| `0x7e083c88` | 2 | `ps_fn_7e083c88` | Logs with the module tag `[PS]`: `[PS]update_PhotoSession`, `[PS]update_PhotoSession area[%d].state = %d`. Named after the tag only; not read. | string pass 3 |
+| `0x7e0885c0` | 1 | `chls_fn_7e0885c0` | Logs with the module tag `[chls]`: `CapPls update_index_info_oldb index_type:%#x err`, `CapPls update_index_info_oldb PERSON target_pos:%#x err`, `CapPls update_index_info_oldb NONE target_pos:%#x err` …. Named after the tag only; not read. | string pass 3 |
+| `0x7e0901f8` | 1 | `capthr_fn_7e0901f8` | Logs with the module tag `[CapThr]`: `[CapThr]execUpdateThrough() set Peaking`, `###### [LOWAPI]Through Start/Update(OUT) start ######`, `display       WH(%d,%d)` …. Named after the tag only; not read. | string pass 3 |
+| `0x7e094ad1` | 1 | `CapThr_ThroughImage_cpp_fn_7e094ad1` | References the source-file name `CapThr_ThroughImage.cpp` (an assertion or log location): a function compiled from that file. Not read. | string pass 3 |
+| `0x7e0f08d8` | 7 | `entryREADY_TRIG2` | References the identifier strings `ENRT2\|B`, `isEndPictureReady() 0 != updateLensState()`, `ITE & AFL` … → probably `entryREADY_TRIG2` or a helper of it. | string pass 3 |
+| `0x7e0f0c08` | 1 | `entryREADY_TRIG2_7e0f0c08` | References the identifier strings `ENRT2\|B`, `isEndPictureReady() 0 != updateLensState()`, `ITE & AFL` … → probably `entryREADY_TRIG2` or a helper of it. | string pass 3 |
+| `0x7e108e71` | 1 | `TAKEPIC_BULB_LV_UPDATE_send` | References the identifier string `TAKEPIC_BULB_LV_UPDATE_send` → probably `TAKEPIC_BULB_LV_UPDATE_send` or a helper of it. | string pass 3 |
+| `0x7e13f8f4` | 3 | `disp_area_0_fn_7e13f8f4` | Logs with the module tag `[DISP_AREA_0]`: `tp_updateDelayDrawingInfo start dir=%d`, `[DISP_AREA_0] DispMngInfo(x,hw)=(%d,%d) VBUFF%d(x,hw)=(%d,%d)`, `[DISP_AREA_1] DispMngInfo(x,hw)=(%d,%d) VBUFF%d(x,hw)=(%d,%d)` …. Named after the tag only; not read. | string pass 3 |
+| `0x7e226d52` | 5 | `gui_gpi_fn_7e226d52` | Logs with the module tag `[GUI gpi]`: `[GUI gpi]:cw_updateDisplay normal`. Named after the tag only; not read. | string pass 3 |
+| `0x7e226e68` | 2 | `gui_gpi_fn_7e226e68` | Logs with the module tag `[GUI gpi]`: `[GUI gpi]:cw_updateDisplay OsdOff`. Named after the tag only; not read. | string pass 3 |
+| `0x7e2275e1` | 1 | `gui_app_fn_7e2275e1` | Logs with the module tag `[GUI App]`: `[GUI App]: exeUpdateDisplayCallBack GEDeleteTargetEvent()`. Named after the tag only; not read. | string pass 3 |
+| `0x7e24132c` | 1 | `gui_app_fn_7e24132c` | Logs with the module tag `[GUI App]`: `[GUI App   ]:OlyApiPlayCalendar::getInterface()->updateImage() result:%d`. Named after the tag only; not read. | string pass 3 |
+| `0x7e24426e` | 1 | `gui_app_fn_7e24426e` | Logs with the module tag `[GUI App]`: `[GUI App   ]CPlayIndex::updateScrollBar finish!!!`. Named after the tag only; not read. | string pass 3 |
+| `0x7e2906d1` | 3 | `gui_app_fn_7e2906d1` | Logs with the module tag `[GUI App]`: `[GUI App   ]:GCPnl_CompScale::UpdateRawMark:image[%d] JPEG`. Named after the tag only; not read. | string pass 3 |
+| `0x7e29d786` | 2 | `gui_app_fn_7e29d786` | Logs with the module tag `[GUI App]`: `[GUI App   ]:GCPnl_Play::UpdateProtected Called BLINK`. Named after the tag only; not read. | string pass 3 |
+| `0x7e2a1042` | 2 | `gui_app_fn_7e2a1042` | Logs with the module tag `[GUI App]`: `[GUI App   ] GCPnl_Play_Overall::UpdateISOMode() ISODisplay:%x, usISOMode:%x`. Named after the tag only; not read. | string pass 3 |
+| `0x7e2c9d7a` | 1 | `gui_app_fn_7e2c9d7a` | Logs with the module tag `[GUI App]`: `[GUI App   ]status=%d`. Named after the tag only; not read. | string pass 3 |
+| `0x7e2cb807` | 3 | `gui_app_lv_fn_7e2cb807` | Logs with the module tag `[GUI App lv]`: `[GUI App lv]:rec_info_update`, `[GUI App lv]:disable_update=%d`, `[GUI App lv]:dust_reduction=%d` …. Named after the tag only; not read. | string pass 3 |
+| `0x7e301cd6` | 4 | `gui_app_fn_7e301cd6` | Logs with the module tag `[Gui App]`: `[Gui App   ]:Rec_Viewer::SetMustUpdateFlg() flg=true`. Named after the tag only; not read. | string pass 3 |
+| `0x7e334f77` | 2 | `GM_DB_REQUEST_UPDATE` | References the identifier string `GM_DB_REQUEST_UPDATE` → probably `GM_DB_REQUEST_UPDATE` or a helper of it. | string pass 3 |
+| `0x7e33976a` | 1 | `UI_END_INDEX_ANIMATION` | References the identifier strings `[GUI] start userGuiBTAnimation::updateData`, `y::chgBackGround called (DRAW_BG_NONE)`, `UI_END_INDEX_ANIMATION` … → probably `UI_END_INDEX_ANIMATION` or a helper of it. | string pass 3 |
+| `0x7e3398bc` | 2 | `gui_fn_7e3398bc` | Logs with the module tag `[GUI]`: `[GUI] start userGuiBTAnimation::updateAnimation`. Named after the tag only; not read. | string pass 3 |
+| `0x7e352cdd` | 5 | `gui_app_fn_7e352cdd` | Logs with the module tag `[GUI App]`: `[GUI App]:mode:%d`. Named after the tag only; not read. | string pass 3 |
+| `0x7e7071f1` | 2 | `wifi_http_fn_7e7071f1` | Logs with the module tag `[WIFI HTTP]`: `[WIFI HTTP]`, `[WIFI ELAP]`, `[WIFI WLAN]` …. Named after the tag only; not read. | string pass 3 |
+| `0x7e7e0282` | 1 | `c3d_fn_7e7e0282` | Logs with the module tag `[C3D]`: `[C3D] c3d_3D_update() format ERROR :`. Named after the tag only; not read. | string pass 3 |
