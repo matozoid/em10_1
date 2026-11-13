@@ -81,7 +81,7 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
 - Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
   one over at least part of the table** (see the correction there); needs re-deriving.
 - **About 39 600 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
-  - `symbol-map.md` (~2 040 rows): hand-analysed, with a description each. ~40 subsystems: heap
+  - `symbol-map.md` (~2 010 rows): hand-analysed, with a description each. ~40 subsystems: heap
     allocator, object model, OS/IPC primitives and the kernel's services (`knl_*`), libc, soft-float,
     GUI base/container classes, Super Control Panel, playback components (Cmp*), movie playback, AE,
     sensor black-correction, audio codec, VG draw engine, embedded Expat 1.95.5, OKAO face detection,
