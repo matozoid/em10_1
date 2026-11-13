@@ -80,7 +80,7 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
   renames (`classes.md`, `blocks.md`, `memory-map.md`).
 - Task registry: 134 tasks with id, entry, priority, stack (`rtos-tasks.md`). **Names are shifted by
   one over at least part of the table** (see the correction there); needs re-deriving.
-- **About 36 300 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
+- **About 37 700 of the ~72 600 block-0 functions have a documented name** (2026-11-13), in three files:
   - `symbol-map.md` (~1 890 rows): hand-analysed, with a description each. ~40 subsystems: heap
     allocator, object model, OS/IPC primitives, libc, soft-float, GUI base/container classes, Super
     Control Panel, playback components (Cmp*), movie playback, AE, sensor black-correction, audio
@@ -93,7 +93,11 @@ All are `jmp` (opcode `DC`, rel32) into the payload cave `0x40326ff0..~0x4032740
     does only where the call target has a name of its own.
   - `symbol-strings.md` (~9 000 rows): names derived from log strings. Heuristic; `symbol-map.md`
     takes precedence.
-  So roughly 11 000 names carry a meaning (hand-analysed or from log strings) and 25 000 a shape.
+  So roughly 11 600 names carry a meaning (hand-analysed, from log strings, or the firmware's own API
+  names) and 25 000 a shape.
+- **The API layer's names are known** (2026-11-13): 1,195 `Class::method` names in 58 classes, resolved
+  from the trace catalog image in block 0, with the entry function for most of them:
+  [`firmware/trace-catalog.md`](firmware/trace-catalog.md), `tools/trace_catalog.py`.
   `tools/symbols.py stats` prints current counts; `tools/symbol_index.py --once ADDR` finds an address.
   The names are also applied in the Ghidra project (`tools/ghidra/ApplyNames.java`).
 - Factory/test features seen while labelling, not investigated further: white-chart calibration and

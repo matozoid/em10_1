@@ -175,8 +175,8 @@ example when it logs on behalf of a callee), so treat the class and method as li
 | `0x7dff03f5` | 3 | `OlyHfwPower__judgeSleepWakeupIssue_7dff03f5` | References the log string `OlyHfwPower::judgeSleepWakeupIssue event=0x%08x` → probably `OlyHfwPower::judgeSleepWakeupIssue`. | Ghidra name pass 2 |
 | `0x7dff04eb` | 2 | `OlyHfwPower__sleepForSystem_7dff04eb` | References the log string `OlyHfwPower::sleepForSystem() KeyEvent TimeUp wakeEvent=%d` → probably `OlyHfwPower::sleepForSystem`. | Ghidra name pass 2 |
 | `0x7dfffefb` | 1 | `OlyApiSettingController__resetIntervalShooting_7dfffefb` | References the log string `OlyApiSettingController::resetIntervalShooting` → probably `OlyApiSettingController::resetIntervalShooting`. | Ghidra name pass 2 |
-| `0x7e004065` | 1 | `IOlyApiTouchPanel__CTRL_EVENT_7e004065` | References the log string `c0-c5 is IOlyApiTouchPanel::CTRL_EVENT member values` → probably `IOlyApiTouchPanel::CTRL_EVENT`. | Ghidra name pass 2 |
-| `0x7e004c2b` | 1 | `IOlyApiShooting__SHOOTING_TYPE_NORMAL_7e004c2b` | References the log string `result = IOlyApiShooting::SHOOTING_TYPE_NORMAL` → probably `IOlyApiShooting::SHOOTING_TYPE_NORMAL`. | Ghidra name pass 2 |
+| `0x7e004065` | 1 | `IOlyApiTouchPanel__CTRL_EVENT_7e004065` | References the log string `c0-c5 is IOlyApiTouchPanel::CTRL_EVENT member values` → probably `IOlyApiTouchPanel::CTRL_EVENT`. **API name from the trace catalog (id `0x50503`): `TouchPanel::ctrlTouchPanelEvent`.** | Ghidra name pass 2 |
+| `0x7e004c2b` | 1 | `IOlyApiShooting__SHOOTING_TYPE_NORMAL_7e004c2b` | References the log string `result = IOlyApiShooting::SHOOTING_TYPE_NORMAL` → probably `IOlyApiShooting::SHOOTING_TYPE_NORMAL`. **API name from the trace catalog (id `0x2015a`): `Shooting::getShootingType`.** | Ghidra name pass 2 |
 | `0x7e0083d7` | 1 | `OlyApiShootingController__abortSelfTimer_7e0083d7` | References the log string `OlyApiShootingController::abortSelfTimer` → probably `OlyApiShootingController::abortSelfTimer`. | Ghidra name pass 2 |
 | `0x7e0097e7` | 1 | `OlyApiShootingController__oneShotTakingPicture_7e0097e7` | References the log string `OlyApiShootingController::oneShotTakingPicture` → probably `OlyApiShootingController::oneShotTakingPicture`. | Ghidra name pass 2 |
 | `0x7e009815` | 1 | `OlyApiShootingController__endIntervalShooting_7e009815` | References the log string `OlyApiShootingController::endIntervalShooting` → probably `OlyApiShootingController::endIntervalShooting`. | Ghidra name pass 2 |
@@ -190,7 +190,7 @@ example when it logs on behalf of a callee), so treat the class and method as li
 | `0x7e00a1ee` | 1 | `OlyApiShootingController__getPhotoSessionTakeCount_7e00a1ee` | References the log string `OlyApiShootingController::getPhotoSessionTakeCount` → probably `OlyApiShootingController::getPhotoSessionTakeCount`. | Ghidra name pass 2 |
 | `0x7e00a294` | 1 | `OlyApiShootingController__resetPhotoSession_7e00a294` | References the log string `OlyApiShootingController::resetPhotoSession` → probably `OlyApiShootingController::resetPhotoSession`. | Ghidra name pass 2 |
 | `0x7e00a3d5` | 1 | `OlyApiShootingController__getPhotoSessionStateArea_7e00a3d5` | References the log string `OlyApiShootingController::getPhotoSessionStateArea` → probably `OlyApiShootingController::getPhotoSessionStateArea`. | Ghidra name pass 2 |
-| `0x7e00a9ad` | 1 | `IOlyApiShooting__CHANGE_FOCUS_MODE_1_7e00a9ad` | References the log string `result = IOlyApiShooting::CHANGE_FOCUS_MODE_1` → probably `IOlyApiShooting::CHANGE_FOCUS_MODE_1`. | Ghidra name pass 2 |
+| `0x7e00a9ad` | 1 | `IOlyApiShooting__CHANGE_FOCUS_MODE_1_7e00a9ad` | References the log string `result = IOlyApiShooting::CHANGE_FOCUS_MODE_1` → probably `IOlyApiShooting::CHANGE_FOCUS_MODE_1`. **API name from the trace catalog (id `0x20183`): `Shooting::getFocusModeChange`.** | Ghidra name pass 2 |
 | `0x7e00aa02` | 1 | `OlyApiShootingController__stopCreateTimeLapseMovie_7e00aa02` | References the log string `OlyApiShootingController::stopCreateTimeLapseMovie` → probably `OlyApiShootingController::stopCreateTimeLapseMovie`. | Ghidra name pass 2 |
 | `0x7e03530e` | 1 | `OlyHfwOpeBlueth__Cube_7e03530e` | References the log string `OlyHfwOpeBlueth::Cube Not Connect[%d]#` → probably `OlyHfwOpeBlueth::Cube`. | Ghidra name pass 2 |
 | `0x7e035376` | 1 | `OlyHfwOpeBlueth__Cube_7e035376` | References the log string `OlyHfwOpeBlueth::Cube Not Connect[%d]#` → probably `OlyHfwOpeBlueth::Cube`. | Ghidra name pass 2 |
@@ -3709,458 +3709,458 @@ an underscore or inner capital). 7831 listed; 255 left out for the reason above;
 | `0x7dffc2f8` | 0 | `CBC_TOUCH_EVENT_7dffc2f8` | References the string `CBC_TOUCH_EVENT - CBS_GESTURE_TOUCH`. | Ghidra name pass 1 |
 | `0x7dffc3f0` | 1 | `MT_WB_AUTO_7dffc3f0` | References the string `MT_WB_AUTO`. | Ghidra name pass 1 |
 | `0x7dffc5f6` | 81 | `commandID_7dffc5f6` | References the string `commandID, 0x%08X %s`. | Ghidra name pass 1 |
-| `0x7dffcdd0` | 1 | `API_SHUTDOWN_NORMAL_7dffcdd0` | References the string `API_SHUTDOWN_NORMAL    = 0x01`. | Ghidra name pass 1 |
-| `0x7dffcf4d` | 1 | `API_OUT_LCD_7dffcf4d` | References the string `API_OUT_LCD       = 0x01`. | Ghidra name pass 1 |
-| `0x7dffcff8` | 1 | `SIZE_INFO_7dffcff8` | References the string `SIZE_INFO    1`. | Ghidra name pass 1 |
-| `0x7dffd181` | 1 | `API_WUI_UNKNOWN_7dffd181` | References the string `API_WUI_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7dffd25c` | 1 | `API_SLP_WUI_UNKNOWN_7dffd25c` | References the string `API_SLP_WUI_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7dffd4c2` | 1 | `OLY_TRUE_7dffd4c2` | References the string `OLY_TRUE (TFT ON)       = 1`. | Ghidra name pass 1 |
-| `0x7dffd561` | 1 | `API_CONNECTED_7dffd561` | References the string `API_CONNECTED`. | Ghidra name pass 1 |
-| `0x7dffd5ab` | 1 | `API_CONNECTED_7dffd5ab` | References the string `API_CONNECTED`. | Ghidra name pass 1 |
-| `0x7dffd5f5` | 1 | `API_CONNECTED_7dffd5f5` | References the string `API_CONNECTED`. | Ghidra name pass 1 |
-| `0x7dffd63f` | 1 | `API_CONNECTED_7dffd63f` | References the string `API_CONNECTED`. | Ghidra name pass 1 |
-| `0x7dffd727` | 1 | `API_CONNECTED_7dffd727` | References the string `API_CONNECTED`. | Ghidra name pass 1 |
-| `0x7dffd7d7` | 1 | `isPopUp_7dffd7d7` | References the string `isPopUp`. | Ghidra name pass 1 |
+| `0x7dffcdd0` | 1 | `API_SHUTDOWN_NORMAL_7dffcdd0` | References the string `API_SHUTDOWN_NORMAL    = 0x01`. **API name from the trace catalog (id `0x10102`): `CameraCommon::shutDown`.** | Ghidra name pass 1 |
+| `0x7dffcf4d` | 1 | `API_OUT_LCD_7dffcf4d` | References the string `API_OUT_LCD       = 0x01`. **API name from the trace catalog (id `0x10105`): `CameraCommon::changeOutLine`.** | Ghidra name pass 1 |
+| `0x7dffcff8` | 1 | `SIZE_INFO_7dffcff8` | References the string `SIZE_INFO    1`. **API name from the trace catalog (id `0x10106`): `CameraCommon::getDisplayDeviceState`.** | Ghidra name pass 1 |
+| `0x7dffd181` | 1 | `API_WUI_UNKNOWN_7dffd181` | References the string `API_WUI_UNKNOWN`. **API name from the trace catalog (id `0x10108`): `CameraCommon::getWakeUpIssue`.** | Ghidra name pass 1 |
+| `0x7dffd25c` | 1 | `API_SLP_WUI_UNKNOWN_7dffd25c` | References the string `API_SLP_WUI_UNKNOWN`. **API name from the trace catalog (id `0x10115`): `CameraCommon::getSleepWakeupIssue`.** | Ghidra name pass 1 |
+| `0x7dffd4c2` | 1 | `OLY_TRUE_7dffd4c2` | References the string `OLY_TRUE (TFT ON)       = 1`. **API name from the trace catalog (id `0x10129`): `CameraCommon::ctrlLcdBacklight`.** | Ghidra name pass 1 |
+| `0x7dffd561` | 1 | `API_CONNECTED_7dffd561` | References the string `API_CONNECTED`. **API name from the trace catalog (id `0x10109`): `CameraCommon::getUsbState`.** | Ghidra name pass 1 |
+| `0x7dffd5ab` | 1 | `API_CONNECTED_7dffd5ab` | References the string `API_CONNECTED`. **API name from the trace catalog (id `0x1010a`): `CameraCommon::getCompositeState`.** | Ghidra name pass 1 |
+| `0x7dffd5f5` | 1 | `API_CONNECTED_7dffd5f5` | References the string `API_CONNECTED`. **API name from the trace catalog (id `0x1010b`): `CameraCommon::getHdmiState`.** | Ghidra name pass 1 |
+| `0x7dffd63f` | 1 | `API_CONNECTED_7dffd63f` | References the string `API_CONNECTED`. **API name from the trace catalog (id `0x10122`): `CameraCommon::getEvfState`.** | Ghidra name pass 1 |
+| `0x7dffd727` | 1 | `API_CONNECTED_7dffd727` | References the string `API_CONNECTED`. **API name from the trace catalog (id `0x1012c`): `CameraCommon::getPenpalState`.** | Ghidra name pass 1 |
+| `0x7dffd7d7` | 1 | `isPopUp_7dffd7d7` | References the string `isPopUp`. **API name from the trace catalog (id `0x1010d`): `CameraCommon::getFlashInfo`.** | Ghidra name pass 1 |
 | `0x7dffd8c4` | 1 | `API_NO_KEY_7dffd8c4` | References the string `API_NO_KEY              0`. | Ghidra name pass 1 |
-| `0x7dffd913` | 1 | `API_MODE_DIAL_UNKNOWN_7dffd913` | References the string `API_MODE_DIAL_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7dffda2c` | 1 | `JOG_DIAL_MAIN_7dffda2c` | References the string `JOG_DIAL_MAIN       = 0`. | Ghidra name pass 1 |
-| `0x7dffdb6d` | 1 | `LENS_STATUS_IDLE_7dffdb6d` | References the string `LENS_STATUS_IDLE`. | Ghidra name pass 1 |
-| `0x7dffdbdd` | 1 | `NOT_EYEFI_7dffdbdd` | References the string `NOT_EYEFI`. | Ghidra name pass 1 |
-| `0x7dffdc65` | 1 | `pattern_7dffdc65` | References the string `usage: sdk api %s type pattern`. | Ghidra name pass 1 |
-| `0x7dffdde6` | 1 | `CAMERA_TEMP_UNKNOWN_7dffdde6` | References the string `CAMERA_TEMP_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7dffde4a` | 1 | `OLY_TRUE_7dffde4a` | References the string `OLY_TRUE  =`. | Ghidra name pass 1 |
-| `0x7dffdeee` | 1 | `IS_STATUS_IDLE_7dffdeee` | References the string `IS_STATUS_IDLE`. | Ghidra name pass 1 |
-| `0x7dffe154` | 1 | `MONITOR_ROTATE_OPEN_7dffe154` | References the string `device MONITOR_ROTATE_OPEN`. | Ghidra name pass 1 |
-| `0x7dffe27f` | 1 | `API_LEVER_SW_1_7dffe27f` | References the string `API_LEVER_SW_1`. | Ghidra name pass 1 |
-| `0x7dffe368` | 1 | `API_LEVER_SW_1_7dffe368` | References the string `API_LEVER_SW_1`. | Ghidra name pass 1 |
-| `0x7dffe448` | 1 | `OlyShell_SettingController__isAfEnable_7dffe448` | References the string `@ OlyShell_SettingController__isAfEnable`. | Ghidra name pass 1 |
-| `0x7dffe4f4` | 1 | `isFtsLens_7dffe4f4` | References the string `usage: sdk api %s isFtsLens`. | Ghidra name pass 1 |
-| `0x7dffe599` | 1 | `operation_7dffe599` | References the string `usage: sdk api %s operation`. | Ghidra name pass 1 |
-| `0x7dffe6de` | 1 | `OLY_FALSE_7dffe6de` | References the string `usage: sdk api %s ctrl 0:OLY_FALSE 1:OLY_TRUE`. | Ghidra name pass 1 |
-| `0x7dffe75b` | 1 | `testmode_7dffe75b` | References the string `usage: sdk api %s testmode`. | Ghidra name pass 1 |
-| `0x7dffe81b` | 1 | `MONITOR_LIFT_NORMAL_7dffe81b` | References the string `status MONITOR_LIFT_NORMAL 0`. | Ghidra name pass 1 |
+| `0x7dffd913` | 1 | `API_MODE_DIAL_UNKNOWN_7dffd913` | References the string `API_MODE_DIAL_UNKNOWN`. **API name from the trace catalog (id `0x1010f`): `CameraCommon::getModeDialState`.** | Ghidra name pass 1 |
+| `0x7dffda2c` | 1 | `JOG_DIAL_MAIN_7dffda2c` | References the string `JOG_DIAL_MAIN       = 0`. **API name from the trace catalog (id `0x10123`): `CameraCommon::getJogDialState`.** | Ghidra name pass 1 |
+| `0x7dffdb6d` | 1 | `LENS_STATUS_IDLE_7dffdb6d` | References the string `LENS_STATUS_IDLE`. **API name from the trace catalog (id `0x10114`): `CameraCommon::isMirrorSetup`.** | Ghidra name pass 1 |
+| `0x7dffdbdd` | 1 | `NOT_EYEFI_7dffdbdd` | References the string `NOT_EYEFI`. **API name from the trace catalog (id `0x10125`): `CameraCommon::getEyeFiStatus`.** | Ghidra name pass 1 |
+| `0x7dffdc65` | 1 | `pattern_7dffdc65` | References the string `usage: sdk api %s type pattern`. **API name from the trace catalog (id `0x10126`): `CameraCommon::startHighlightShadow`.** | Ghidra name pass 1 |
+| `0x7dffdde6` | 1 | `CAMERA_TEMP_UNKNOWN_7dffdde6` | References the string `CAMERA_TEMP_UNKNOWN`. **API name from the trace catalog (id `0x10128`): `CameraCommon::getTemperatureState`.** | Ghidra name pass 1 |
+| `0x7dffde4a` | 1 | `OLY_TRUE_7dffde4a` | References the string `OLY_TRUE  =`. **API name from the trace catalog (id `0x1012d`): `CameraCommon::setDispSync`.** | Ghidra name pass 1 |
+| `0x7dffdeee` | 1 | `IS_STATUS_IDLE_7dffdeee` | References the string `IS_STATUS_IDLE`. **API name from the trace catalog (id `0x1012e`): `CameraCommon::getISStatus`.** | Ghidra name pass 1 |
+| `0x7dffe154` | 1 | `MONITOR_ROTATE_OPEN_7dffe154` | References the string `device MONITOR_ROTATE_OPEN`. **API name from the trace catalog (id `0x10139`): `CameraCommon::getMonitorRotateStatus`.** | Ghidra name pass 1 |
+| `0x7dffe27f` | 1 | `API_LEVER_SW_1_7dffe27f` | References the string `API_LEVER_SW_1`. **API name from the trace catalog (id `0x10140`): `CameraCommon::getLeverSwitchState`.** | Ghidra name pass 1 |
+| `0x7dffe368` | 1 | `API_LEVER_SW_1_7dffe368` | References the string `API_LEVER_SW_1`. **API name from the trace catalog (id `0x10142`): `CameraCommon::getChangeFunctionButton`.** | Ghidra name pass 1 |
+| `0x7dffe448` | 1 | `OlyShell_SettingController__isAfEnable_7dffe448` | References the string `@ OlyShell_SettingController__isAfEnable`. **API name from the trace catalog (id `0x20193`): `Shooting::isAfEnable`.** | Ghidra name pass 1 |
+| `0x7dffe4f4` | 1 | `isFtsLens_7dffe4f4` | References the string `usage: sdk api %s isFtsLens`. **API name from the trace catalog (id `0x20194`): `Shooting::setAfAreaType`.** | Ghidra name pass 1 |
+| `0x7dffe599` | 1 | `operation_7dffe599` | References the string `usage: sdk api %s operation`. **API name from the trace catalog (id `0x20195`): `Shooting::getAfAreaType`.** | Ghidra name pass 1 |
+| `0x7dffe6de` | 1 | `OLY_FALSE_7dffe6de` | References the string `usage: sdk api %s ctrl 0:OLY_FALSE 1:OLY_TRUE`. **API name from the trace catalog (id `0x10147`): `CameraCommon::ctrlExternalEyeSensor`.** | Ghidra name pass 1 |
+| `0x7dffe75b` | 1 | `testmode_7dffe75b` | References the string `usage: sdk api %s testmode`. **API name from the trace catalog (id `0x10145`): `CameraCommon::getRCCommanderInfo`.** | Ghidra name pass 1 |
+| `0x7dffe81b` | 1 | `MONITOR_LIFT_NORMAL_7dffe81b` | References the string `status MONITOR_LIFT_NORMAL 0`. **API name from the trace catalog (id `0x10144`): `CameraCommon::getMonitorLiftStatus`.** | Ghidra name pass 1 |
 | `0x7dffe942` | 1 | `getMicType_7dffe942` | References the string `getMicType is not work`. | Ghidra name pass 1 |
-| `0x7dffe9b2` | 1 | `CTRL_DIRECT_INFO_7dffe9b2` | References the string `CTRL_DIRECT_INFO 0x00`. | Ghidra name pass 1 |
-| `0x7dffeaa0` | 1 | `settingID_7dffeaa0` | References the string `usage: sdk api %s settingID`. | Ghidra name pass 1 |
-| `0x7dffeb32` | 1 | `settingID_7dffeb32` | References the string `usage: sdk api %s settingID value`. | Ghidra name pass 1 |
-| `0x7dffebcd` | 1 | `modeID_7dffebcd` | References the string `usage: sdk api %s modeID`. | Ghidra name pass 1 |
-| `0x7dffec60` | 1 | `settingID_7dffec60` | References the string `usage: sdk api %s settingID`. | Ghidra name pass 1 |
-| `0x7dffed1e` | 1 | `modeID_7dffed1e` | References the string `usage: sdk api %s modeID`. | Ghidra name pass 1 |
-| `0x7dffedab` | 1 | `settingID_7dffedab` | References the string `usage: sdk api %s settingID`. | Ghidra name pass 1 |
-| `0x7dffee2a` | 1 | `settingID_7dffee2a` | References the string `usage: sdk api %s settingID`. | Ghidra name pass 1 |
-| `0x7dffeea4` | 1 | `settingID_7dffeea4` | References the string `usage: sdk api %s settingID index`. | Ghidra name pass 1 |
-| `0x7dffef34` | 1 | `settingID_7dffef34` | References the string `usage: sdk api %s settingID valueID`. | Ghidra name pass 1 |
-| `0x7dffefc4` | 1 | `settingID_7dffefc4` | References the string `usage: sdk api %s settingID valueID`. | Ghidra name pass 1 |
-| `0x7dfff059` | 1 | `RESET_TYPE_NORMAL_7dfff059` | References the string `RESET_TYPE_NORMAL  0`. | Ghidra name pass 1 |
-| `0x7dfff114` | 1 | `dataID_7dfff114` | References the string `usage: sdk api %s dataID type size`. | Ghidra name pass 1 |
-| `0x7dfff252` | 1 | `dataID_7dfff252` | References the string `usage: sdk api %s dataID type`. | Ghidra name pass 1 |
-| `0x7dfff3b4` | 1 | `languageID_7dfff3b4` | References the string `usage: sdk api %s languageID`. | Ghidra name pass 1 |
-| `0x7dfff637` | 1 | `pattern_7dfff637` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7dfff92e` | 1 | `LOAD_CMD_MYSET_7dfff92e` | References the string `LOAD_CMD_MYSET          0`. | Ghidra name pass 1 |
-| `0x7dfffac2` | 1 | `ModeDial_7dfffac2` | References the string `usage: sdk api %s ModeDial`. | Ghidra name pass 1 |
-| `0x7dfffca1` | 1 | `OlyShell_SettingController__isMFsetting_7dfffca1` | References the string `@ OlyShell_SettingController__isMFsetting`. | Ghidra name pass 1 |
-| `0x7dfffd21` | 1 | `OlyShell_SettingController__endMFsetting_7dfffd21` | References the string `@ OlyShell_SettingController__endMFsetting`. | Ghidra name pass 1 |
-| `0x7dfffde2` | 1 | `API_MODE_DIAL_UNKNOWN_7dfffde2` | References the string `API_MODE_DIAL_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7dffff26` | 1 | `settingID_7dffff26` | References the string `usage: sdk api %s settingID`. | Ghidra name pass 1 |
-| `0x7dffffe8` | 1 | `OLY_TRUE_7dffffe8` | References the string `OLY_TRUE:  1`. | Ghidra name pass 1 |
-| `0x7e000230` | 1 | `picNum_7e000230` | References the string `usage: sdk api %s picNum type`. | Ghidra name pass 1 |
-| `0x7e00039e` | 1 | `setMenuArea_7e00039e` | References the string `for ErrorCase: call setMenuArea( NULL,NULL,NULL )`. | Ghidra name pass 1 |
-| `0x7e00082e` | 1 | `operation_7e00082e` | References the string `usage: sdk api %s operation`. | Ghidra name pass 1 |
-| `0x7e00097d` | 1 | `VARIOUS_DRAW_COLOR_CREATOR_7e00097d` | References the string `type   = 0:VARIOUS_DRAW_COLOR_CREATOR`. | Ghidra name pass 1 |
-| `0x7e000a02` | 1 | `VARIOUS_DRAW_COLOR_CREATOR_7e000a02` | References the string `type   = 0:VARIOUS_DRAW_COLOR_CREATOR`. | Ghidra name pass 1 |
-| `0x7e000a87` | 1 | `outputTime_7e000a87` | References the string `usage: sdk api %s ID vol loop outputTime[ms] intervalTime[ms]`. | Ghidra name pass 1 |
-| `0x7e000c49` | 1 | `SOUND_ID_7e000c49` | References the string `SOUND_ID`. | Ghidra name pass 1 |
-| `0x7e000d22` | 1 | `SOUND_ID_7e000d22` | References the string `SOUND_ID`. | Ghidra name pass 1 |
-| `0x7e000dba` | 1 | `SOUND_ID_7e000dba` | References the string `SOUND_ID`. | Ghidra name pass 1 |
-| `0x7e000e74` | 1 | `outputTime_7e000e74` | References the string `usage: sdk api %s ID vol loop outputTime[ms] intervalTime[ms]`. | Ghidra name pass 1 |
+| `0x7dffe9b2` | 1 | `CTRL_DIRECT_INFO_7dffe9b2` | References the string `CTRL_DIRECT_INFO 0x00`. **API name from the trace catalog (id `0x10202`): `SettingController::setSetting`.** | Ghidra name pass 1 |
+| `0x7dffeaa0` | 1 | `settingID_7dffeaa0` | References the string `usage: sdk api %s settingID`. **API name from the trace catalog (id `0x10203`): `SettingController::getSetting`.** | Ghidra name pass 1 |
+| `0x7dffeb32` | 1 | `settingID_7dffeb32` | References the string `usage: sdk api %s settingID value`. **API name from the trace catalog (id `0x1020d`): `SettingController::setSettingDetail`.** | Ghidra name pass 1 |
+| `0x7dffebcd` | 1 | `modeID_7dffebcd` | References the string `usage: sdk api %s modeID`. **API name from the trace catalog (id `0x1020e`): `SettingController::getSettingDetail`.** | Ghidra name pass 1 |
+| `0x7dffec60` | 1 | `settingID_7dffec60` | References the string `usage: sdk api %s settingID`. **API name from the trace catalog (id `0x10217`): `SettingController::getSettingUser`.** | Ghidra name pass 1 |
+| `0x7dffed1e` | 1 | `modeID_7dffed1e` | References the string `usage: sdk api %s modeID`. **API name from the trace catalog (id `0x10219`): `SettingController::getSettingDetailUser`.** | Ghidra name pass 1 |
+| `0x7dffedab` | 1 | `settingID_7dffedab` | References the string `usage: sdk api %s settingID`. **API name from the trace catalog (id `0x10204`): `SettingController::isEnabled`.** | Ghidra name pass 1 |
+| `0x7dffee2a` | 1 | `settingID_7dffee2a` | References the string `usage: sdk api %s settingID`. **API name from the trace catalog (id `0x10205`): `SettingController::getSettingCount`.** | Ghidra name pass 1 |
+| `0x7dffeea4` | 1 | `settingID_7dffeea4` | References the string `usage: sdk api %s settingID index`. **API name from the trace catalog (id `0x10206`): `SettingController::getSettingValue`.** | Ghidra name pass 1 |
+| `0x7dffef34` | 1 | `settingID_7dffef34` | References the string `usage: sdk api %s settingID valueID`. **API name from the trace catalog (id `0x10207`): `SettingController::getSettingIndex`.** | Ghidra name pass 1 |
+| `0x7dffefc4` | 1 | `settingID_7dffefc4` | References the string `usage: sdk api %s settingID valueID`. **API name from the trace catalog (id `0x10208`): `SettingController::canSettingValue`.** | Ghidra name pass 1 |
+| `0x7dfff059` | 1 | `RESET_TYPE_NORMAL_7dfff059` | References the string `RESET_TYPE_NORMAL  0`. **API name from the trace catalog (id `0x10209`): `SettingController::resetSetting`.** | Ghidra name pass 1 |
+| `0x7dfff114` | 1 | `dataID_7dfff114` | References the string `usage: sdk api %s dataID type size`. **API name from the trace catalog (id `0x1020c`): `SettingController::loadLanguageHeader`.** | Ghidra name pass 1 |
+| `0x7dfff252` | 1 | `dataID_7dfff252` | References the string `usage: sdk api %s dataID type`. **API name from the trace catalog (id `0x1020b`): `SettingController::loadLanguageData`.** | Ghidra name pass 1 |
+| `0x7dfff3b4` | 1 | `languageID_7dfff3b4` | References the string `usage: sdk api %s languageID`. **API name from the trace catalog (id `0x10210`): `SettingController::notifyCurrentLanguage`.** | Ghidra name pass 1 |
+| `0x7dfff637` | 1 | `pattern_7dfff637` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x10211`): `SettingController::notifySupportLanguage`.** | Ghidra name pass 1 |
+| `0x7dfff92e` | 1 | `LOAD_CMD_MYSET_7dfff92e` | References the string `LOAD_CMD_MYSET          0`. **API name from the trace catalog (id `0x10214`): `SettingController::loadCustom`.** | Ghidra name pass 1 |
+| `0x7dfffac2` | 1 | `ModeDial_7dfffac2` | References the string `usage: sdk api %s ModeDial`. **API name from the trace catalog (id `0x10216`): `SettingController::changeMode`.** | Ghidra name pass 1 |
+| `0x7dfffca1` | 1 | `OlyShell_SettingController__isMFsetting_7dfffca1` | References the string `@ OlyShell_SettingController__isMFsetting`. **API name from the trace catalog (id `0x1021e`): `SettingController::isMFsetting`.** | Ghidra name pass 1 |
+| `0x7dfffd21` | 1 | `OlyShell_SettingController__endMFsetting_7dfffd21` | References the string `@ OlyShell_SettingController__endMFsetting`. **API name from the trace catalog (id `0x10220`): `SettingController::endMFsetting`.** | Ghidra name pass 1 |
+| `0x7dfffde2` | 1 | `API_MODE_DIAL_UNKNOWN_7dfffde2` | References the string `API_MODE_DIAL_UNKNOWN`. **API name from the trace catalog (id `0x10221`): `SettingController::getExposeMode`.** | Ghidra name pass 1 |
+| `0x7dffff26` | 1 | `settingID_7dffff26` | References the string `usage: sdk api %s settingID`. **API name from the trace catalog (id `0x10228`): `SettingController::getSettingDefault`.** | Ghidra name pass 1 |
+| `0x7dffffe8` | 1 | `OLY_TRUE_7dffffe8` | References the string `OLY_TRUE:  1`. **API name from the trace catalog (id `0x10226`): `SettingController::setLensMfMode`.** | Ghidra name pass 1 |
+| `0x7e000230` | 1 | `picNum_7e000230` | References the string `usage: sdk api %s picNum type`. **API name from the trace catalog (id `0x10307`): `BackGroundCtrl::drawQR`.** | Ghidra name pass 1 |
+| `0x7e00039e` | 1 | `setMenuArea_7e00039e` | References the string `for ErrorCase: call setMenuArea( NULL,NULL,NULL )`. **API name from the trace catalog (id `0x10303`): `BackGroundCtrl::setMenuArea`.** | Ghidra name pass 1 |
+| `0x7e00082e` | 1 | `operation_7e00082e` | References the string `usage: sdk api %s operation`. **API name from the trace catalog (id `0x10306`): `BackGroundCtrl::getDrawState`.** | Ghidra name pass 1 |
+| `0x7e00097d` | 1 | `VARIOUS_DRAW_COLOR_CREATOR_7e00097d` | References the string `type   = 0:VARIOUS_DRAW_COLOR_CREATOR`. **API name from the trace catalog (id `0x10308`): `BackGroundCtrl::startVariousDraw`.** | Ghidra name pass 1 |
+| `0x7e000a02` | 1 | `VARIOUS_DRAW_COLOR_CREATOR_7e000a02` | References the string `type   = 0:VARIOUS_DRAW_COLOR_CREATOR`. **API name from the trace catalog (id `0x10309`): `BackGroundCtrl::endVariousDraw`.** | Ghidra name pass 1 |
+| `0x7e000a87` | 1 | `outputTime_7e000a87` | References the string `usage: sdk api %s ID vol loop outputTime[ms] intervalTime[ms]`. **API name from the trace catalog (id `0x10501`): `SoundCtrl::play`.** | Ghidra name pass 1 |
+| `0x7e000c49` | 1 | `SOUND_ID_7e000c49` | References the string `SOUND_ID`. **API name from the trace catalog (id `0x10505`): `SoundCtrl::getSoundName`.** | Ghidra name pass 1 |
+| `0x7e000d22` | 1 | `SOUND_ID_7e000d22` | References the string `SOUND_ID`. **API name from the trace catalog (id `0x10507`): `SoundCtrl::getImportSoundName`.** | Ghidra name pass 1 |
+| `0x7e000dba` | 1 | `SOUND_ID_7e000dba` | References the string `SOUND_ID`. **API name from the trace catalog (id `0x10508`): `SoundCtrl::registImportSound`.** | Ghidra name pass 1 |
+| `0x7e000e74` | 1 | `outputTime_7e000e74` | References the string `usage: sdk api %s ID vol loop outputTime[ms] intervalTime[ms]`. **API name from the trace catalog (id `0x1050a`): `SoundCtrl::playImportSound`.** | Ghidra name pass 1 |
 | `0x7e000f7c` | 1 | `CBC_SOUND_LEVEL_7e000f7c` | References the string `cb CBC_SOUND_LEVEL`. | Ghidra name pass 1 |
-| `0x7e00110f` | 1 | `EXTENDED_7e00110f` | References the string `EXTENDED`. | Ghidra name pass 1 |
-| `0x7e0013d2` | 1 | `pattern_7e0013d2` | References the string `test pattern:NULL`. | Ghidra name pass 1 |
-| `0x7e0014aa` | 1 | `nullCheck_7e0014aa` | References the string `nullCheck`. | Ghidra name pass 1 |
-| `0x7e001618` | 1 | `nullCheck_7e001618` | References the string `usage: sdk api %s sec nullCheck`. | Ghidra name pass 1 |
-| `0x7e001744` | 1 | `API_MEDIA_INTERNAL_7e001744` | References the string `API_MEDIA_INTERNAL`. | Ghidra name pass 1 |
-| `0x7e0017a6` | 1 | `API_MEDIA_INTERNAL_7e0017a6` | References the string `API_MEDIA_INTERNAL`. | Ghidra name pass 1 |
-| `0x7e001809` | 1 | `isFormat_7e001809` | References the string `isFormat`. | Ghidra name pass 1 |
-| `0x7e00189e` | 1 | `API_MEDIA_INTERNAL_7e00189e` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e00193f` | 1 | `API_MEDIA_INTERNAL_7e00193f` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e0019e7` | 1 | `API_MEDIA_INTERNAL_7e0019e7` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e001a82` | 1 | `setting_7e001a82` | References the string `dst and src setting`. | Ghidra name pass 1 |
-| `0x7e001b3e` | 1 | `setting_7e001b3e` | References the string `dst and src setting`. | Ghidra name pass 1 |
-| `0x7e001c21` | 1 | `API_MEDIA_INTERNAL_7e001c21` | References the string `API_MEDIA_INTERNAL  0x01`. | Ghidra name pass 1 |
-| `0x7e001ce2` | 1 | `API_MEDIA_INTERNAL_7e001ce2` | References the string `API_MEDIA_INTERNAL  1`. | Ghidra name pass 1 |
-| `0x7e001eac` | 1 | `API_MEDIA_INTERNAL_7e001eac` | References the string `API_MEDIA_INTERNAL  1`. | Ghidra name pass 1 |
-| `0x7e001f95` | 1 | `setting_7e001f95` | References the string `dst and src setting`. | Ghidra name pass 1 |
-| `0x7e002078` | 1 | `API_MEDIA_INTERNAL_7e002078` | References the string `API_MEDIA_INTERNAL  1`. | Ghidra name pass 1 |
+| `0x7e00110f` | 1 | `EXTENDED_7e00110f` | References the string `EXTENDED`. **API name from the trace catalog (id `0x1050f`): `SoundCtrl::getMicDevice`.** | Ghidra name pass 1 |
+| `0x7e0013d2` | 1 | `pattern_7e0013d2` | References the string `test pattern:NULL`. **API name from the trace catalog (id `0x1070b`): `DateCtrl::getDefaultDateTime`.** | Ghidra name pass 1 |
+| `0x7e0014aa` | 1 | `nullCheck_7e0014aa` | References the string `nullCheck`. **API name from the trace catalog (id `0x1070c`): `DateCtrl::getTimeValueToSerial`.** | Ghidra name pass 1 |
+| `0x7e001618` | 1 | `nullCheck_7e001618` | References the string `usage: sdk api %s sec nullCheck`. **API name from the trace catalog (id `0x1070d`): `DateCtrl::getSerialToTimeValue`.** | Ghidra name pass 1 |
+| `0x7e001744` | 1 | `API_MEDIA_INTERNAL_7e001744` | References the string `API_MEDIA_INTERNAL`. **API name from the trace catalog (id `0x10c01`): `MediaCtrl::getExistMedia`.** | Ghidra name pass 1 |
+| `0x7e0017a6` | 1 | `API_MEDIA_INTERNAL_7e0017a6` | References the string `API_MEDIA_INTERNAL`. **API name from the trace catalog (id `0x10c02`): `MediaCtrl::getCurrentMedia`.** | Ghidra name pass 1 |
+| `0x7e001809` | 1 | `isFormat_7e001809` | References the string `isFormat`. **API name from the trace catalog (id `0x10c03`): `MediaCtrl::getMediaStateInfo`.** | Ghidra name pass 1 |
+| `0x7e00189e` | 1 | `API_MEDIA_INTERNAL_7e00189e` | References the string `API_MEDIA_INTERNAL = 0x01`. **API name from the trace catalog (id `0x10c06`): `MediaCtrl::isMediaAccess`.** | Ghidra name pass 1 |
+| `0x7e00193f` | 1 | `API_MEDIA_INTERNAL_7e00193f` | References the string `API_MEDIA_INTERNAL = 0x01`. **API name from the trace catalog (id `0x10c07`): `MediaCtrl::formatMedia`.** | Ghidra name pass 1 |
+| `0x7e0019e7` | 1 | `API_MEDIA_INTERNAL_7e0019e7` | References the string `API_MEDIA_INTERNAL = 0x01`. **API name from the trace catalog (id `0x10c08`): `MediaCtrl::canFormat`.** | Ghidra name pass 1 |
+| `0x7e001a82` | 1 | `setting_7e001a82` | References the string `dst and src setting`. **API name from the trace catalog (id `0x10c0c`): `MediaCtrl::canCopy`.** | Ghidra name pass 1 |
+| `0x7e001b3e` | 1 | `setting_7e001b3e` | References the string `dst and src setting`. **API name from the trace catalog (id `0x10c0d`): `MediaCtrl::eraseAll`.** | Ghidra name pass 1 |
+| `0x7e001c21` | 1 | `API_MEDIA_INTERNAL_7e001c21` | References the string `API_MEDIA_INTERNAL  0x01`. **API name from the trace catalog (id `0x10c0f`): `MediaCtrl::getMediaConsumeRate`.** | Ghidra name pass 1 |
+| `0x7e001ce2` | 1 | `API_MEDIA_INTERNAL_7e001ce2` | References the string `API_MEDIA_INTERNAL  1`. **API name from the trace catalog (id `0x10c0e`): `MediaCtrl::getImageCount`.** | Ghidra name pass 1 |
+| `0x7e001eac` | 1 | `API_MEDIA_INTERNAL_7e001eac` | References the string `API_MEDIA_INTERNAL  1`. **API name from the trace catalog (id `0x10c10`): `MediaCtrl::getAvailableShootCount`.** | Ghidra name pass 1 |
+| `0x7e001f95` | 1 | `setting_7e001f95` | References the string `dst and src setting`. **API name from the trace catalog (id `0x10c11`): `MediaCtrl::unlockProtectAll`.** | Ghidra name pass 1 |
+| `0x7e002078` | 1 | `API_MEDIA_INTERNAL_7e002078` | References the string `API_MEDIA_INTERNAL  1`. **API name from the trace catalog (id `0x10c12`): `MediaCtrl::transferImageAll`.** | Ghidra name pass 1 |
 | `0x7e0021df` | 1 | `API_MEDIA_INTERNAL_7e0021df` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e0022b1` | 1 | `INTERNAL_7e0022b1` | References the string `INTERNAL 1`. | Ghidra name pass 1 |
-| `0x7e00239e` | 1 | `API_MEDIA_INTERNAL_7e00239e` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e002551` | 1 | `canExecute_7e002551` | References the string `usage: canExecute() ParamErr!!`. | Ghidra name pass 1 |
-| `0x7e0025d0` | 1 | `pattern_7e0025d0` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e002687` | 1 | `BATTERY_STATUS_UNKNOWN_7e002687` | References the string `BATTERY_STATUS_UNKNOWN`. | Ghidra name pass 1 |
-| `0x7e0027e9` | 1 | `CHARGE_NO_BATTERY_7e0027e9` | References the string `CHARGE_NO_BATTERY`. | Ghidra name pass 1 |
-| `0x7e002977` | 1 | `vertical_7e002977` | References the string `vertical`. | Ghidra name pass 1 |
-| `0x7e002ad4` | 1 | `setRepeatKey_7e002ad4` | References the string `usage: setRepeatKey() ParamErr!!`. | Ghidra name pass 1 |
-| `0x7e002d88` | 1 | `unsetRepeatKey_7e002d88` | References the string `usage: unsetRepeatKey() ParamErr!!`. | Ghidra name pass 1 |
-| `0x7e00300d` | 1 | `setLongPressKey_7e00300d` | References the string `usage: setLongPressKey() ParamErr!!`. | Ghidra name pass 1 |
-| `0x7e003280` | 1 | `unsetLongPressKey_7e003280` | References the string `usage: unsetLongPressKey() ParamErr!!`. | Ghidra name pass 1 |
-| `0x7e003505` | 1 | `API_NO_KEY_7e003505` | References the string `API_NO_KEY           =`. | Ghidra name pass 1 |
-| `0x7e0037ae` | 1 | `SYSEVENT_7e0037ae` | References the string `usage: sdk api %s SYSEVENT ...`. | Ghidra name pass 1 |
-| `0x7e003f7b` | 1 | `pattern_7e003f7b` | References the string `usage: sdk api %s  pattern`. | Ghidra name pass 1 |
-| `0x7e0041ff` | 1 | `longPress_7e0041ff` | References the string `longPress x[%d] y[%d] cnt[%d] tm[%d] fs[%d]`. | Ghidra name pass 1 |
+| `0x7e0022b1` | 1 | `INTERNAL_7e0022b1` | References the string `INTERNAL 1`. **API name from the trace catalog (id `0x10c16`): `MediaCtrl::getMountState`.** | Ghidra name pass 1 |
+| `0x7e00239e` | 1 | `API_MEDIA_INTERNAL_7e00239e` | References the string `API_MEDIA_INTERNAL = 0x01`. **API name from the trace catalog (id `0x10c17`): `MediaCtrl::isMediaWriting`.** | Ghidra name pass 1 |
+| `0x7e002551` | 1 | `canExecute_7e002551` | References the string `usage: canExecute() ParamErr!!`. **API name from the trace catalog (id `0x10901`): `ModeCheck::canExecute`.** | Ghidra name pass 1 |
+| `0x7e0025d0` | 1 | `pattern_7e0025d0` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x10a01`): `PowerSupplyControl::startMonitor`.** | Ghidra name pass 1 |
+| `0x7e002687` | 1 | `BATTERY_STATUS_UNKNOWN_7e002687` | References the string `BATTERY_STATUS_UNKNOWN`. **API name from the trace catalog (id `0x10a02`): `PowerSupplyControl::getBatteryState`.** | Ghidra name pass 1 |
+| `0x7e0027e9` | 1 | `CHARGE_NO_BATTERY_7e0027e9` | References the string `CHARGE_NO_BATTERY`. **API name from the trace catalog (id `0x10a06`): `PowerSupplyControl::getChargeState`.** | Ghidra name pass 1 |
+| `0x7e002977` | 1 | `vertical_7e002977` | References the string `vertical`. **API name from the trace catalog (id `0x10f03`): `LevelCtrl::getSlope`.** | Ghidra name pass 1 |
+| `0x7e002ad4` | 1 | `setRepeatKey_7e002ad4` | References the string `usage: setRepeatKey() ParamErr!!`. **API name from the trace catalog (id `0x10e02`): `KeyCtrl::setRepeatKey`.** | Ghidra name pass 1 |
+| `0x7e002d88` | 1 | `unsetRepeatKey_7e002d88` | References the string `usage: unsetRepeatKey() ParamErr!!`. **API name from the trace catalog (id `0x10e06`): `KeyCtrl::unsetRepeatKey`.** | Ghidra name pass 1 |
+| `0x7e00300d` | 1 | `setLongPressKey_7e00300d` | References the string `usage: setLongPressKey() ParamErr!!`. **API name from the trace catalog (id `0x10e01`): `KeyCtrl::setLongPressKey`.** | Ghidra name pass 1 |
+| `0x7e003280` | 1 | `unsetLongPressKey_7e003280` | References the string `usage: unsetLongPressKey() ParamErr!!`. **API name from the trace catalog (id `0x10e05`): `KeyCtrl::unsetLongPressKey`.** | Ghidra name pass 1 |
+| `0x7e003505` | 1 | `API_NO_KEY_7e003505` | References the string `API_NO_KEY           =`. **API name from the trace catalog (id `0x10e07`): `KeyCtrl::setExclusion`.** | Ghidra name pass 1 |
+| `0x7e0037ae` | 1 | `SYSEVENT_7e0037ae` | References the string `usage: sdk api %s SYSEVENT ...`. **API name from the trace catalog (id `0x10e08`): `KeyCtrl::cancelKeyEvent`.** | Ghidra name pass 1 |
+| `0x7e003f7b` | 1 | `pattern_7e003f7b` | References the string `usage: sdk api %s  pattern`. **API name from the trace catalog (id `0x50501`): `TouchPanel::startTouchPanel`.** | Ghidra name pass 1 |
+| `0x7e0041ff` | 1 | `longPress_7e0041ff` | References the string `longPress x[%d] y[%d] cnt[%d] tm[%d] fs[%d]`. **API name from the trace catalog (id `0x50506`): `TouchPanel::getTouchPanelHistory`.** | Ghidra name pass 1 |
 | `0x7e00441d` | 1 | `TouchKind_7e00441d` | References the string `c0 TouchKind   : single:1 index:2 enlarge:3`. | Ghidra name pass 1 |
-| `0x7e00492c` | 1 | `ModeDial_7e00492c` | References the string `usage: sdk api %s ModeDial`. | Ghidra name pass 1 |
-| `0x7e004b67` | 1 | `SHOOTING_TYPE_NORMAL_7e004b67` | References the string `SHOOTING_TYPE_NORMAL      =`. | Ghidra name pass 1 |
-| `0x7e004c98` | 1 | `topLeft_7e004c98` | References the string `area.topLeft.x      = OlyUint16`. | Ghidra name pass 1 |
+| `0x7e00492c` | 1 | `ModeDial_7e00492c` | References the string `usage: sdk api %s ModeDial`. **API name from the trace catalog (id `0x20101`): `Shooting::startShootingService`.** | Ghidra name pass 1 |
+| `0x7e004b67` | 1 | `SHOOTING_TYPE_NORMAL_7e004b67` | References the string `SHOOTING_TYPE_NORMAL      =`. **API name from the trace catalog (id `0x20104`): `Shooting::setShootingType`.** | Ghidra name pass 1 |
+| `0x7e004c98` | 1 | `topLeft_7e004c98` | References the string `area.topLeft.x      = OlyUint16`. **API name from the trace catalog (id `0x20105`): `Shooting::setRecViewArea`.** | Ghidra name pass 1 |
 | `0x7e004e76` | 1 | `releaseGo_7e004e76` | References the string `usage: sdk api %s releaseGo takePicture takeMovie key_1st key_2nd key_movie`. | Ghidra name pass 1 |
-| `0x7e005130` | 1 | `startHistogram_7e005130` | References the string `usage: sdk api %s startHistogram opt ySetting rSetting gSetting bSettng resolution aspect`. | Ghidra name pass 1 |
-| `0x7e0052ae` | 1 | `pattern_7e0052ae` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00573a` | 1 | `p_state_7e00573a` | References the string `usage: sdk api %s p_state`. | Ghidra name pass 1 |
-| `0x7e005828` | 1 | `pattern_7e005828` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e005a79` | 1 | `pattern_7e005a79` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e0068d3` | 1 | `pattern_7e0068d3` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e006aab` | 1 | `pattern_7e006aab` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e006e4f` | 1 | `available_7e006e4f` | References the string `available`. | Ghidra name pass 1 |
-| `0x7e006f35` | 1 | `MODE_THROUGH_ZOOM_30_7e006f35` | References the string `MODE_THROUGH_ZOOM_30  = 0x00`. | Ghidra name pass 1 |
-| `0x7e007162` | 1 | `CTRL_FRAME_UP_S_7e007162` | References the string `CTRL_FRAME_UP_S    0x00`. | Ghidra name pass 1 |
-| `0x7e0072af` | 1 | `ZOOM_RATE_NONE_7e0072af` | References the string `ZOOM_RATE_NONE  0x00`. | Ghidra name pass 1 |
-| `0x7e00738a` | 1 | `areaWidth_7e00738a` | References the string `areaWidth      =`. | Ghidra name pass 1 |
-| `0x7e00747a` | 1 | `MULTI_THROUGH_WB_7e00747a` | References the string `MULTI_THROUGH_WB = 0x00`. | Ghidra name pass 1 |
-| `0x7e007576` | 1 | `DIRECTION_LEFT_7e007576` | References the string `DIRECTION_LEFT  = 0x03`. | Ghidra name pass 1 |
-| `0x7e007644` | 1 | `OLY_TRUE_7e007644` | References the string `OLY_TRUE  0x01`. | Ghidra name pass 1 |
-| `0x7e0076dc` | 1 | `DIRECTION_UP_7e0076dc` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
+| `0x7e005130` | 1 | `startHistogram_7e005130` | References the string `usage: sdk api %s startHistogram opt ySetting rSetting gSetting bSettng resolution aspect`. **API name from the trace catalog (id `0x2010a`): `Shooting::startHistogram`.** | Ghidra name pass 1 |
+| `0x7e0052ae` | 1 | `pattern_7e0052ae` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x2010c`): `Shooting::getCondition`.** | Ghidra name pass 1 |
+| `0x7e00573a` | 1 | `p_state_7e00573a` | References the string `usage: sdk api %s p_state`. **API name from the trace catalog (id `0x2010e`): `Shooting::getFlashChargeStatus`.** | Ghidra name pass 1 |
+| `0x7e005828` | 1 | `pattern_7e005828` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x20110`): `Shooting::getHistogramData`.** | Ghidra name pass 1 |
+| `0x7e005a79` | 1 | `pattern_7e005a79` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x20111`): `Shooting::getRecViewInfo`.** | Ghidra name pass 1 |
+| `0x7e0068d3` | 1 | `pattern_7e0068d3` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x20112`): `Shooting::getAspectFrame`.** | Ghidra name pass 1 |
+| `0x7e006aab` | 1 | `pattern_7e006aab` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x20113`): `Shooting::getFocusPosition`.** | Ghidra name pass 1 |
+| `0x7e006e4f` | 1 | `available_7e006e4f` | References the string `available`. **API name from the trace catalog (id `0x20116`): `Shooting::getAvailableShootCount`.** | Ghidra name pass 1 |
+| `0x7e006f35` | 1 | `MODE_THROUGH_ZOOM_30_7e006f35` | References the string `MODE_THROUGH_ZOOM_30  = 0x00`. **API name from the trace catalog (id `0x20119`): `Shooting::getZoomFrame`.** | Ghidra name pass 1 |
+| `0x7e007162` | 1 | `CTRL_FRAME_UP_S_7e007162` | References the string `CTRL_FRAME_UP_S    0x00`. **API name from the trace catalog (id `0x2011a`): `Shooting::moveZoomFrame`.** | Ghidra name pass 1 |
+| `0x7e0072af` | 1 | `ZOOM_RATE_NONE_7e0072af` | References the string `ZOOM_RATE_NONE  0x00`. **API name from the trace catalog (id `0x2011b`): `Shooting::zoomThrough`.** | Ghidra name pass 1 |
+| `0x7e00738a` | 1 | `areaWidth_7e00738a` | References the string `areaWidth      =`. **API name from the trace catalog (id `0x2011d`): `Shooting::getEnlargeInfo`.** | Ghidra name pass 1 |
+| `0x7e00747a` | 1 | `MULTI_THROUGH_WB_7e00747a` | References the string `MULTI_THROUGH_WB = 0x00`. **API name from the trace catalog (id `0x2011e`): `Shooting::setMultiThroughMode`.** | Ghidra name pass 1 |
+| `0x7e007576` | 1 | `DIRECTION_LEFT_7e007576` | References the string `DIRECTION_LEFT  = 0x03`. **API name from the trace catalog (id `0x20121`): `Shooting::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e007644` | 1 | `OLY_TRUE_7e007644` | References the string `OLY_TRUE  0x01`. **API name from the trace catalog (id `0x20123`): `Shooting::apertureDown`.** | Ghidra name pass 1 |
+| `0x7e0076dc` | 1 | `DIRECTION_UP_7e0076dc` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x20124`): `Shooting::changeDirection`.** | Ghidra name pass 1 |
 | `0x7e007854` | 1 | `imageWidth_7e007854` | References the string `imageWidth`. | Ghidra name pass 1 |
-| `0x7e007906` | 1 | `IAUTO_PROGRAM_7e007906` | References the string `IAUTO_PROGRAM`. | Ghidra name pass 1 |
-| `0x7e007acd` | 1 | `OLY_TRUE_7e007acd` | References the string `OLY_TRUE  0x01`. | Ghidra name pass 1 |
-| `0x7e007b8f` | 1 | `OLY_TRUE_7e007b8f` | References the string `OLY_TRUE  0x01`. | Ghidra name pass 1 |
-| `0x7e007cbb` | 1 | `TARGET_AF_LOCK_ON_7e007cbb` | References the string `TARGET_AF_LOCK_ON`. | Ghidra name pass 1 |
-| `0x7e007d9f` | 1 | `WBAdjustRB_7e007d9f` | References the string `usage: sdk api %s  WBMode WBAdjustRB WBAdjustGM`. | Ghidra name pass 1 |
-| `0x7e007f8d` | 1 | `ZOOM_RATE_7e007f8d` | References the string `rate  -> set ZOOM_RATE`. | Ghidra name pass 1 |
-| `0x7e00810b` | 1 | `operation_7e00810b` | References the string `usage: sdk api %s operation`. | Ghidra name pass 1 |
-| `0x7e008314` | 1 | `ShootingTime_7e008314` | References the string `ShootingTime.hour    =`. | Ghidra name pass 1 |
-| `0x7e008405` | 1 | `OLY_TRUE_7e008405` | References the string `OLY_TRUE      =`. | Ghidra name pass 1 |
-| `0x7e0084b4` | 1 | `canEnd_7e0084b4` | References the string `canEnd = OLY_TRUE`. | Ghidra name pass 1 |
-| `0x7e008515` | 1 | `TARGET_AF_CTRL_ON_7e008515` | References the string `TARGET_AF_CTRL_ON      0x00`. | Ghidra name pass 1 |
-| `0x7e008604` | 2 | `direction_7e008604` | References the string `usage: sdk api %s direction touch.x touch.y`. | Ghidra name pass 1 |
-| `0x7e008751` | 1 | `getTouchAction_7e008751` | References the string `usage: getTouchAction() operation`. | Ghidra name pass 1 |
-| `0x7e008856` | 1 | `gesture_7e008856` | References the string `usage: sdk api %s gesture`. | Ghidra name pass 1 |
-| `0x7e0088fa` | 1 | `zoomType_7e0088fa` | References the string `usage: sdk api %s zoomType`. | Ghidra name pass 1 |
-| `0x7e008a6f` | 1 | `THROUGH_TYPE_ZOOM_7e008a6f` | References the string `THROUGH_TYPE_ZOOM    0x00`. | Ghidra name pass 1 |
-| `0x7e008b90` | 1 | `COLORTONE_NONE_7e008b90` | References the string `COLORTONE_NONE`. | Ghidra name pass 1 |
-| `0x7e008c80` | 1 | `nowcount_7e008c80` | References the string `nowcount`. | Ghidra name pass 1 |
-| `0x7e008de0` | 1 | `CTRL_EFFECT_MULTIECHO_START_7e008de0` | References the string `CTRL_EFFECT_MULTIECHO_START`. | Ghidra name pass 1 |
-| `0x7e008fd2` | 1 | `ZOOM_RATE_NONE_7e008fd2` | References the string `ZOOM_RATE_NONE`. | Ghidra name pass 1 |
-| `0x7e00912a` | 1 | `GUIDE_TYPE_SATURATION_7e00912a` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
-| `0x7e009215` | 1 | `GUIDE_TYPE_SATURATION_7e009215` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
+| `0x7e007906` | 1 | `IAUTO_PROGRAM_7e007906` | References the string `IAUTO_PROGRAM`. **API name from the trace catalog (id `0x2012a`): `Shooting::getScene`.** | Ghidra name pass 1 |
+| `0x7e007acd` | 1 | `OLY_TRUE_7e007acd` | References the string `OLY_TRUE  0x01`. **API name from the trace catalog (id `0x2012b`): `Shooting::setAflState`.** | Ghidra name pass 1 |
+| `0x7e007b8f` | 1 | `OLY_TRUE_7e007b8f` | References the string `OLY_TRUE  0x01`. **API name from the trace catalog (id `0x2012d`): `Shooting::setAelState`.** | Ghidra name pass 1 |
+| `0x7e007cbb` | 1 | `TARGET_AF_LOCK_ON_7e007cbb` | References the string `TARGET_AF_LOCK_ON`. **API name from the trace catalog (id `0x2016f`): `Shooting::getTargetAfState`.** | Ghidra name pass 1 |
+| `0x7e007d9f` | 1 | `WBAdjustRB_7e007d9f` | References the string `usage: sdk api %s  WBMode WBAdjustRB WBAdjustGM`. **API name from the trace catalog (id `0x20130`): `Shooting::sampleWBadjust`.** | Ghidra name pass 1 |
+| `0x7e007f8d` | 1 | `ZOOM_RATE_7e007f8d` | References the string `rate  -> set ZOOM_RATE`. **API name from the trace catalog (id `0x20131`): `Shooting::startMFAssist`.** | Ghidra name pass 1 |
+| `0x7e00810b` | 1 | `operation_7e00810b` | References the string `usage: sdk api %s operation`. **API name from the trace catalog (id `0x20184`): `Shooting::getMFAssist`.** | Ghidra name pass 1 |
+| `0x7e008314` | 1 | `ShootingTime_7e008314` | References the string `ShootingTime.hour    =`. **API name from the trace catalog (id `0x20139`): `Shooting::getMovieTime`.** | Ghidra name pass 1 |
+| `0x7e008405` | 1 | `OLY_TRUE_7e008405` | References the string `OLY_TRUE      =`. **API name from the trace catalog (id `0x2016e`): `Shooting::lightThrough`.** | Ghidra name pass 1 |
+| `0x7e0084b4` | 1 | `canEnd_7e0084b4` | References the string `canEnd = OLY_TRUE`. **API name from the trace catalog (id `0x20145`): `Shooting::getRecViewState`.** | Ghidra name pass 1 |
+| `0x7e008515` | 1 | `TARGET_AF_CTRL_ON_7e008515` | References the string `TARGET_AF_CTRL_ON      0x00`. **API name from the trace catalog (id `0x20146`): `Shooting::touchTargetAf`.** | Ghidra name pass 1 |
+| `0x7e008604` | 2 | `direction_7e008604` | References the string `usage: sdk api %s direction touch.x touch.y`. **API name from the trace catalog (id `0x2011c`): `Shooting::scrollThrough`.** | Ghidra name pass 1 |
+| `0x7e008751` | 1 | `getTouchAction_7e008751` | References the string `usage: getTouchAction() operation`. **API name from the trace catalog (id `0x20149`): `Shooting::getTouchAction`.** | Ghidra name pass 1 |
+| `0x7e008856` | 1 | `gesture_7e008856` | References the string `usage: sdk api %s gesture`. **API name from the trace catalog (id `0x2014a`): `Shooting::notifyGesture`.** | Ghidra name pass 1 |
+| `0x7e0088fa` | 1 | `zoomType_7e0088fa` | References the string `usage: sdk api %s zoomType`. **API name from the trace catalog (id `0x2014b`): `Shooting::getMovableArea`.** | Ghidra name pass 1 |
+| `0x7e008a6f` | 1 | `THROUGH_TYPE_ZOOM_7e008a6f` | References the string `THROUGH_TYPE_ZOOM    0x00`. **API name from the trace catalog (id `0x2014d`): `Shooting::setThroughType`.** | Ghidra name pass 1 |
+| `0x7e008b90` | 1 | `COLORTONE_NONE_7e008b90` | References the string `COLORTONE_NONE`. **API name from the trace catalog (id `0x2014f`): `Shooting::getSlideRecView`.** | Ghidra name pass 1 |
+| `0x7e008c80` | 1 | `nowcount_7e008c80` | References the string `nowcount`. **API name from the trace catalog (id `0x20150`): `Shooting::getLiveBulbInfo`.** | Ghidra name pass 1 |
+| `0x7e008de0` | 1 | `CTRL_EFFECT_MULTIECHO_START_7e008de0` | References the string `CTRL_EFFECT_MULTIECHO_START`. **API name from the trace catalog (id `0x20152`): `Shooting::ctrlMovieEffect`.** | Ghidra name pass 1 |
+| `0x7e008fd2` | 1 | `ZOOM_RATE_NONE_7e008fd2` | References the string `ZOOM_RATE_NONE`. **API name from the trace catalog (id `0x2015c`): `Shooting::getThroughZoomRate`.** | Ghidra name pass 1 |
+| `0x7e00912a` | 1 | `GUIDE_TYPE_SATURATION_7e00912a` | References the string `0    GUIDE_TYPE_SATURATION`. **API name from the trace catalog (id `0x2015d`): `Shooting::startLiveGuide`.** | Ghidra name pass 1 |
+| `0x7e009215` | 1 | `GUIDE_TYPE_SATURATION_7e009215` | References the string `0    GUIDE_TYPE_SATURATION`. **API name from the trace catalog (id `0x2015e`): `Shooting::startLiveGuideLevel`.** | Ghidra name pass 1 |
 | `0x7e009300` | 1 | `GUIDE_TYPE_SATURATION_7e009300` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
-| `0x7e0093ea` | 1 | `GUIDE_TYPE_SATURATION_7e0093ea` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
-| `0x7e0095bf` | 1 | `GUIDE_TYPE_SATURATION_7e0095bf` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
-| `0x7e0096e1` | 1 | `SelfRemainTime_7e0096e1` | References the string `SelfRemainTime.hour      =`. | Ghidra name pass 1 |
+| `0x7e0093ea` | 1 | `GUIDE_TYPE_SATURATION_7e0093ea` | References the string `0    GUIDE_TYPE_SATURATION`. **API name from the trace catalog (id `0x20160`): `Shooting::changeLiveGuideLevel`.** | Ghidra name pass 1 |
+| `0x7e0095bf` | 1 | `GUIDE_TYPE_SATURATION_7e0095bf` | References the string `0    GUIDE_TYPE_SATURATION`. **API name from the trace catalog (id `0x20161`): `Shooting::endLiveGuideLevel`.** | Ghidra name pass 1 |
+| `0x7e0096e1` | 1 | `SelfRemainTime_7e0096e1` | References the string `SelfRemainTime.hour      =`. **API name from the trace catalog (id `0x20167`): `Shooting::getSelfRemainTime`.** | Ghidra name pass 1 |
 | `0x7e00974b` | 1 | `release_7e00974b` | References the string `usage: sdk api %s release`. | Ghidra name pass 1 |
-| `0x7e009843` | 1 | `MOVIE_TELECON_MODE_NONE_7e009843` | References the string `MOVIE_TELECON_MODE_NONE    0`. | Ghidra name pass 1 |
-| `0x7e0098f5` | 1 | `topLeft_7e0098f5` | References the string `topLeft.x`. | Ghidra name pass 1 |
-| `0x7e0099c0` | 1 | `CTRL_FRAME_UP_S_7e0099c0` | References the string `CTRL_FRAME_UP_S    0`. | Ghidra name pass 1 |
+| `0x7e009843` | 1 | `MOVIE_TELECON_MODE_NONE_7e009843` | References the string `MOVIE_TELECON_MODE_NONE    0`. **API name from the trace catalog (id `0x20177`): `Shooting::ctrlMovieTelecon`.** | Ghidra name pass 1 |
+| `0x7e0098f5` | 1 | `topLeft_7e0098f5` | References the string `topLeft.x`. **API name from the trace catalog (id `0x20178`): `Shooting::getMovieTeleconFrame`.** | Ghidra name pass 1 |
+| `0x7e0099c0` | 1 | `CTRL_FRAME_UP_S_7e0099c0` | References the string `CTRL_FRAME_UP_S    0`. **API name from the trace catalog (id `0x20179`): `Shooting::moveMovieTeleconFrame`.** | Ghidra name pass 1 |
 | `0x7e009ba0` | 1 | `ZOOM_FRAME_CTRL_UP_7e009ba0` | References the string `ZOOM_FRAME_CTRL_UP  = 0`. | Ghidra name pass 1 |
-| `0x7e009d12` | 1 | `ZOOM_KEY_7e009d12` | References the string `type = ZOOM_KEY`. | Ghidra name pass 1 |
-| `0x7e009d7d` | 1 | `ZOOM_KEY_7e009d7d` | References the string `type = ZOOM_KEY`. | Ghidra name pass 1 |
-| `0x7e009e08` | 1 | `optical_7e009e08` | References the string `optical`. | Ghidra name pass 1 |
-| `0x7e009e68` | 1 | `optical_7e009e68` | References the string `optical max`. | Ghidra name pass 1 |
-| `0x7e009f1d` | 1 | `optical_7e009f1d` | References the string `optical`. | Ghidra name pass 1 |
+| `0x7e009d12` | 1 | `ZOOM_KEY_7e009d12` | References the string `type = ZOOM_KEY`. **API name from the trace catalog (id `0x20168`): `Shooting::zoomIn`.** | Ghidra name pass 1 |
+| `0x7e009d7d` | 1 | `ZOOM_KEY_7e009d7d` | References the string `type = ZOOM_KEY`. **API name from the trace catalog (id `0x20169`): `Shooting::zoomOut`.** | Ghidra name pass 1 |
+| `0x7e009e08` | 1 | `optical_7e009e08` | References the string `optical`. **API name from the trace catalog (id `0x2016b`): `Shooting::getMaxZoomMagnification`.** | Ghidra name pass 1 |
+| `0x7e009e68` | 1 | `optical_7e009e68` | References the string `optical max`. **API name from the trace catalog (id `0x2017e`): `Shooting::getZoomMagnification`.** | Ghidra name pass 1 |
+| `0x7e009f1d` | 1 | `optical_7e009f1d` | References the string `optical`. **API name from the trace catalog (id `0x2016c`): `Shooting::getCurrentZoomMagnification`.** | Ghidra name pass 1 |
 | `0x7e00a009` | 1 | `pointArea_7e00a009` | References the string `pointArea.topLeft.x      =`. | Ghidra name pass 1 |
 | `0x7e00a21e` | 1 | `area_num_7e00a21e` | References the string `usage: sdk api %s area_num`. | Ghidra name pass 1 |
 | `0x7e00a2c2` | 1 | `area_num_7e00a2c2` | References the string `usage: sdk api %s area_num`. | Ghidra name pass 1 |
 | `0x7e00a338` | 1 | `area_num_7e00a338` | References the string `usage: sdk api %s area_num`. | Ghidra name pass 1 |
-| `0x7e00a414` | 1 | `area_num_7e00a414` | References the string `usage: sdk api %s area_num`. | Ghidra name pass 1 |
-| `0x7e00a4bd` | 1 | `area_num_7e00a4bd` | References the string `usage: sdk api %s area_num`. | Ghidra name pass 1 |
+| `0x7e00a414` | 1 | `area_num_7e00a414` | References the string `usage: sdk api %s area_num`. **API name from the trace catalog (id `0x2018e`): `Shooting::photoSessionSpeedTouch`.** | Ghidra name pass 1 |
+| `0x7e00a4bd` | 1 | `area_num_7e00a4bd` | References the string `usage: sdk api %s area_num`. **API name from the trace catalog (id `0x20190`): `Shooting::photoSessionSpeedTakePicture`.** | Ghidra name pass 1 |
 | `0x7e00a53b` | 1 | `LIVE_BULB_MODE_RECINFO_7e00a53b` | References the string `LIVE_BULB_MODE_RECINFO    0`. | Ghidra name pass 1 |
 | `0x7e00a5ee` | 1 | `LIVE_BULB_MODE_RECINFO_7e00a5ee` | References the string `LIVE_BULB_MODE_RECINFO    0`. | Ghidra name pass 1 |
 | `0x7e00a6bc` | 1 | `pattern_7e00a6bc` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00a906` | 1 | `CHANGE_FOCUS_MODE_1_7e00a906` | References the string `CHANGE_FOCUS_MODE_1 =`. | Ghidra name pass 1 |
-| `0x7e00abe2` | 1 | `MONITORING_RING_TYPE_7e00abe2` | References the string `usage: sdk api %s MONITORING_RING_TYPE MONITORING_KEY`. | Ghidra name pass 1 |
-| `0x7e00accd` | 1 | `darkFrameState_7e00accd` | References the string `darkFrameState`. | Ghidra name pass 1 |
-| `0x7e00ad9c` | 1 | `GUIDE_TYPE_SATURATION_7e00ad9c` | References the string `0    GUIDE_TYPE_SATURATION`. | Ghidra name pass 1 |
-| `0x7e00af53` | 1 | `record_index_7e00af53` | References the string `usage: sdk api %s record_index`. | Ghidra name pass 1 |
-| `0x7e00b128` | 1 | `withSave_7e00b128` | References the string `usage: sdk api %s withSave`. | Ghidra name pass 1 |
-| `0x7e00b1fc` | 1 | `telewide_7e00b1fc` | References the string `usage: sdk api %s  telewide`. | Ghidra name pass 1 |
-| `0x7e00b294` | 1 | `FINETUNE_RECORD_7e00b294` | References the string `[FINETUNE_RECORD]:`. | Ghidra name pass 1 |
-| `0x7e00b489` | 1 | `FINETUNE_RECORD_7e00b489` | References the string `[FINETUNE_RECORD]`. | Ghidra name pass 1 |
-| `0x7e00b669` | 1 | `target_no_7e00b669` | References the string `usage: sdk api %s target_no`. | Ghidra name pass 1 |
-| `0x7e00b92e` | 1 | `TARGET_0_7e00b92e` | References the string `TARGET_0      =`. | Ghidra name pass 1 |
-| `0x7e00bbf3` | 1 | `telewide_7e00bbf3` | References the string `usage: sdk api %s  telewide value`. | Ghidra name pass 1 |
-| `0x7e00bcce` | 1 | `targetRecord_7e00bcce` | References the string `usage: sdk api %s targetRecord`. | Ghidra name pass 1 |
-| `0x7e00bea2` | 1 | `telewide_7e00bea2` | References the string `usage: sdk api %s  telewide`. | Ghidra name pass 1 |
-| `0x7e00bf48` | 1 | `telewide_7e00bf48` | References the string `usage: sdk api %s  telewide`. | Ghidra name pass 1 |
-| `0x7e00c05e` | 1 | `IMAGE_TYPE_STILL_7e00c05e` | References the string `IMAGE_TYPE_STILL`. | Ghidra name pass 1 |
-| `0x7e00c14a` | 1 | `createDate_7e00c14a` | References the string `createDate.year`. | Ghidra name pass 1 |
-| `0x7e00cd69` | 1 | `createDate_7e00cd69` | References the string `createDate.year`. | Ghidra name pass 1 |
-| `0x7e00cef0` | 1 | `fileNumber_7e00cef0` | References the string `fileNumber`. | Ghidra name pass 1 |
-| `0x7e00cf5d` | 1 | `GET_HISTOGRAM_7e00cf5d` | References the string `GET_HISTOGRAM`. | Ghidra name pass 1 |
-| `0x7e00d57b` | 1 | `isSelected_7e00d57b` | References the string `isSelected`. | Ghidra name pass 1 |
-| `0x7e00d751` | 1 | `API_MEDIA_INTERNAL_7e00d751` | References the string `API_MEDIA_INTERNAL         = 1`. | Ghidra name pass 1 |
-| `0x7e00d979` | 1 | `pattern_7e00d979` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00dabb` | 1 | `direction_7e00dabb` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e00dce4` | 1 | `pattern_7e00dce4` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00dde7` | 1 | `magnifying_7e00dde7` | References the string `magnifying power : 2 - 14`. | Ghidra name pass 1 |
-| `0x7e00dedc` | 1 | `direction_7e00dedc` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e00dfc6` | 1 | `imageWidth_7e00dfc6` | References the string `imageWidth    0x%08X % 4d`. | Ghidra name pass 1 |
-| `0x7e00e164` | 1 | `magnifying_7e00e164` | References the string `magnifying power : 2 - 14`. | Ghidra name pass 1 |
-| `0x7e00e347` | 1 | `direction_7e00e347` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
+| `0x7e00a906` | 1 | `CHANGE_FOCUS_MODE_1_7e00a906` | References the string `CHANGE_FOCUS_MODE_1 =`. **API name from the trace catalog (id `0x20182`): `Shooting::setFocusModeChange`.** | Ghidra name pass 1 |
+| `0x7e00abe2` | 1 | `MONITORING_RING_TYPE_7e00abe2` | References the string `usage: sdk api %s MONITORING_RING_TYPE MONITORING_KEY`. **API name from the trace catalog (id `0x2019f`): `Shooting::ctrlMonitoringState`.** | Ghidra name pass 1 |
+| `0x7e00accd` | 1 | `darkFrameState_7e00accd` | References the string `darkFrameState`. **API name from the trace catalog (id `0x201a0`): `Shooting::getDarkFrameState`.** | Ghidra name pass 1 |
+| `0x7e00ad9c` | 1 | `GUIDE_TYPE_SATURATION_7e00ad9c` | References the string `0    GUIDE_TYPE_SATURATION`. **API name from the trace catalog (id `0x201a3`): `Shooting::changeLiveGuide`.** | Ghidra name pass 1 |
+| `0x7e00af53` | 1 | `record_index_7e00af53` | References the string `usage: sdk api %s record_index`. **API name from the trace catalog (id `0x20403`): `AfFinetune::deleteRecord`.** | Ghidra name pass 1 |
+| `0x7e00b128` | 1 | `withSave_7e00b128` | References the string `usage: sdk api %s withSave`. **API name from the trace catalog (id `0x20402`): `AfFinetune::endTune`.** | Ghidra name pass 1 |
+| `0x7e00b1fc` | 1 | `telewide_7e00b1fc` | References the string `usage: sdk api %s  telewide`. **API name from the trace catalog (id `0x20408`): `AfFinetune::getFinetuneValue`.** | Ghidra name pass 1 |
+| `0x7e00b294` | 1 | `FINETUNE_RECORD_7e00b294` | References the string `[FINETUNE_RECORD]:`. **API name from the trace catalog (id `0x20404`): `AfFinetune::getRecordLens`.** | Ghidra name pass 1 |
+| `0x7e00b489` | 1 | `FINETUNE_RECORD_7e00b489` | References the string `[FINETUNE_RECORD]`. **API name from the trace catalog (id `0x20405`): `AfFinetune::getTemporaryRecord`.** | Ghidra name pass 1 |
+| `0x7e00b669` | 1 | `target_no_7e00b669` | References the string `usage: sdk api %s target_no`. **API name from the trace catalog (id `0x2040a`): `AfFinetune::setCheckMark`.** | Ghidra name pass 1 |
+| `0x7e00b92e` | 1 | `TARGET_0_7e00b92e` | References the string `TARGET_0      =`. **API name from the trace catalog (id `0x20407`): `AfFinetune::setCurrentTarget`.** | Ghidra name pass 1 |
+| `0x7e00bbf3` | 1 | `telewide_7e00bbf3` | References the string `usage: sdk api %s  telewide value`. **API name from the trace catalog (id `0x20409`): `AfFinetune::setFinetuneValue`.** | Ghidra name pass 1 |
+| `0x7e00bcce` | 1 | `targetRecord_7e00bcce` | References the string `usage: sdk api %s targetRecord`. **API name from the trace catalog (id `0x20401`): `AfFinetune::startTune`.** | Ghidra name pass 1 |
+| `0x7e00bea2` | 1 | `telewide_7e00bea2` | References the string `usage: sdk api %s  telewide`. **API name from the trace catalog (id `0x2040b`): `AfFinetune::upFinetuneValue`.** | Ghidra name pass 1 |
+| `0x7e00bf48` | 1 | `telewide_7e00bf48` | References the string `usage: sdk api %s  telewide`. **API name from the trace catalog (id `0x2040c`): `AfFinetune::downFinetuneValue`.** | Ghidra name pass 1 |
+| `0x7e00c05e` | 1 | `IMAGE_TYPE_STILL_7e00c05e` | References the string `IMAGE_TYPE_STILL`. **API name from the trace catalog (id `0x30102`): `PlayCommon::getImageType`.** | Ghidra name pass 1 |
+| `0x7e00c14a` | 1 | `createDate_7e00c14a` | References the string `createDate.year`. **API name from the trace catalog (id `0x30103`): `PlayCommon::getStillInfo`.** | Ghidra name pass 1 |
+| `0x7e00cd69` | 1 | `createDate_7e00cd69` | References the string `createDate.year`. **API name from the trace catalog (id `0x30104`): `PlayCommon::getMovieInfo`.** | Ghidra name pass 1 |
+| `0x7e00cef0` | 1 | `fileNumber_7e00cef0` | References the string `fileNumber`. **API name from the trace catalog (id `0x30105`): `PlayCommon::getNumber`.** | Ghidra name pass 1 |
+| `0x7e00cf5d` | 1 | `GET_HISTOGRAM_7e00cf5d` | References the string `GET_HISTOGRAM`. **API name from the trace catalog (id `0x30107`): `PlayCommon::getHistogram`.** | Ghidra name pass 1 |
+| `0x7e00d57b` | 1 | `isSelected_7e00d57b` | References the string `isSelected`. **API name from the trace catalog (id `0x30112`): `PlayCommon::selectCurrent`.** | Ghidra name pass 1 |
+| `0x7e00d751` | 1 | `API_MEDIA_INTERNAL_7e00d751` | References the string `API_MEDIA_INTERNAL         = 1`. **API name from the trace catalog (id `0x30114`): `PlayCommon::transferImage`.** | Ghidra name pass 1 |
+| `0x7e00d979` | 1 | `pattern_7e00d979` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30201`): `PlaySingleFrame::startSingleFrame`.** | Ghidra name pass 1 |
+| `0x7e00dabb` | 1 | `direction_7e00dabb` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x30203`): `PlaySingleFrame::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e00dce4` | 1 | `pattern_7e00dce4` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30207`): `PlaySingleFrame::updateImage`.** | Ghidra name pass 1 |
+| `0x7e00dde7` | 1 | `magnifying_7e00dde7` | References the string `magnifying power : 2 - 14`. **API name from the trace catalog (id `0x30216`): `PlaySingleFrame::zoomImage`.** | Ghidra name pass 1 |
+| `0x7e00dedc` | 1 | `direction_7e00dedc` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x3020a`): `PlaySingleFrame::scrollImage`.** | Ghidra name pass 1 |
+| `0x7e00dfc6` | 1 | `imageWidth_7e00dfc6` | References the string `imageWidth    0x%08X % 4d`. **API name from the trace catalog (id `0x30213`): `PlaySingleFrame::getEnlargeInfo`.** | Ghidra name pass 1 |
+| `0x7e00e164` | 1 | `magnifying_7e00e164` | References the string `magnifying power : 2 - 14`. **API name from the trace catalog (id `0x30217`): `PlaySingleFrame::getZoomFrame`.** | Ghidra name pass 1 |
+| `0x7e00e347` | 1 | `direction_7e00e347` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x30218`): `PlaySingleFrame::moveZoomFrame`.** | Ghidra name pass 1 |
 | `0x7e00e439` | 1 | `candidate_7e00e439` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e00e5c1` | 1 | `topLeft_7e00e5c1` | References the string `area.topLeft      %4d,%4d`. | Ghidra name pass 1 |
-| `0x7e00e725` | 1 | `TopLeft_7e00e725` | References the string `usage: sdk api %s TopLeft.x TopLeft.y DownRight.x DownRight.y HDMI_flg`. | Ghidra name pass 1 |
-| `0x7e00e898` | 1 | `distance_7e00e898` | References the string `usage: sdk api %s distance touch.x touch.y`. | Ghidra name pass 1 |
-| `0x7e00e9c4` | 1 | `direction_7e00e9c4` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e00eb0e` | 1 | `OlyUint16_7e00eb0e` | References the string `rate: OlyUint16`. | Ghidra name pass 1 |
-| `0x7e00eba9` | 1 | `OlyUint16_7e00eba9` | References the string `rate: OlyUint16`. | Ghidra name pass 1 |
-| `0x7e00ec79` | 1 | `OlyUint16_7e00ec79` | References the string `slide.x:  OlyUint16`. | Ghidra name pass 1 |
-| `0x7e00ee3f` | 1 | `isAnimation_7e00ee3f` | References the string `usage: sdk api %s isAnimation`. | Ghidra name pass 1 |
-| `0x7e00ef09` | 1 | `pattern_7e00ef09` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00f11e` | 1 | `isImage_7e00f11e` | References the string `isImage`. | Ghidra name pass 1 |
-| `0x7e00f183` | 1 | `pattern_7e00f183` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00f36c` | 1 | `direction_7e00f36c` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e00f492` | 1 | `DIRECTION_UP_7e00f492` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e00f5a2` | 1 | `candidate_7e00f5a2` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e00f67a` | 1 | `positionID_7e00f67a` | References the string `usage: sdk api %s positionID`. | Ghidra name pass 1 |
-| `0x7e00f704` | 1 | `DIRECTION_UP_7e00f704` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e00f7b3` | 1 | `DIRECTION_UP_7e00f7b3` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e00f9cf` | 1 | `SELECT_TYPE_ALL_7e00f9cf` | References the string `SELECT_TYPE_ALL           =`. | Ghidra name pass 1 |
-| `0x7e00fac9` | 1 | `pattern_7e00fac9` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00fbe7` | 1 | `pattern_7e00fbe7` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e00fd63` | 1 | `currentPage_7e00fd63` | References the string `currentPage`. | Ghidra name pass 1 |
-| `0x7e00fde8` | 1 | `direction_7e00fde8` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e00ff0e` | 1 | `direction_7e00ff0e` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e010314` | 1 | `SPEED_RATIO_HALF_7e010314` | References the string `SPEED_RATIO_HALF    = 0x00`. | Ghidra name pass 1 |
-| `0x7e0103d1` | 1 | `SPEED_RATIO_TWICE_7e0103d1` | References the string `SPEED_RATIO_TWICE   = 0x01`. | Ghidra name pass 1 |
-| `0x7e0104c3` | 1 | `SEEK_NEXT_7e0104c3` | References the string `SEEK_NEXT      = 0x00`. | Ghidra name pass 1 |
-| `0x7e010710` | 1 | `RESERVE_SINGLE_7e010710` | References the string `RESERVE_SINGLE = 0x00`. | Ghidra name pass 1 |
-| `0x7e0107fa` | 1 | `pattern_7e0107fa` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e0108fb` | 1 | `DIRECTION_UP_7e0108fb` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e010ae6` | 1 | `PREVIOUS_7e010ae6` | References the string `PREVIOUS = 1`. | Ghidra name pass 1 |
-| `0x7e010bbc` | 1 | `PRINT_NOTHING_7e010bbc` | References the string `PRINT_NOTHING = 0x00`. | Ghidra name pass 1 |
-| `0x7e010cd5` | 1 | `isAnimation_7e010cd5` | References the string `usage: sdk api %s isAnimation`. | Ghidra name pass 1 |
-| `0x7e010e00` | 1 | `soundID_7e010e00` | References the string `usage: sdk api %s soundID`. | Ghidra name pass 1 |
-| `0x7e010efd` | 1 | `DIRECTION_LEFT_7e010efd` | References the string `DIRECTION_LEFT  = 0x03`. | Ghidra name pass 1 |
-| `0x7e01118a` | 1 | `VOLUME_TARGET_ALL_7e01118a` | References the string `VOLUME_TARGET_ALL  :0`. | Ghidra name pass 1 |
-| `0x7e011350` | 1 | `pattern_7e011350` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e011457` | 1 | `TopDate_7e011457` | References the string `TopDate.year`. | Ghidra name pass 1 |
-| `0x7e01151d` | 1 | `positionID_7e01151d` | References the string `positionID`. | Ghidra name pass 1 |
-| `0x7e01155c` | 1 | `positionID_7e01155c` | References the string `usage: sdk api %s positionID`. | Ghidra name pass 1 |
-| `0x7e011605` | 1 | `targetID_7e011605` | References the string `usage: sdk api %s ctrl targetID`. | Ghidra name pass 1 |
-| `0x7e01171f` | 1 | `DIRECTION_UP_7e01171f` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e0117c1` | 1 | `DIRECTION_UP_7e0117c1` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
+| `0x7e00e5c1` | 1 | `topLeft_7e00e5c1` | References the string `area.topLeft      %4d,%4d`. **API name from the trace catalog (id `0x30215`): `PlaySingleFrame::getAspectFrame`.** | Ghidra name pass 1 |
+| `0x7e00e725` | 1 | `TopLeft_7e00e725` | References the string `usage: sdk api %s TopLeft.x TopLeft.y DownRight.x DownRight.y HDMI_flg`. **API name from the trace catalog (id `0x30219`): `PlaySingleFrame::getFocusPosition`.** | Ghidra name pass 1 |
+| `0x7e00e898` | 1 | `distance_7e00e898` | References the string `usage: sdk api %s distance touch.x touch.y`. **API name from the trace catalog (id `0x3021b`): `PlaySingleFrame::startSlide`.** | Ghidra name pass 1 |
+| `0x7e00e9c4` | 1 | `direction_7e00e9c4` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x3021d`): `PlaySingleFrame::startMoveCurrentContinuous`.** | Ghidra name pass 1 |
+| `0x7e00eb0e` | 1 | `OlyUint16_7e00eb0e` | References the string `rate: OlyUint16`. **API name from the trace catalog (id `0x3021f`): `PlaySingleFrame::startFastZoom`.** | Ghidra name pass 1 |
+| `0x7e00eba9` | 1 | `OlyUint16_7e00eba9` | References the string `rate: OlyUint16`. **API name from the trace catalog (id `0x30220`): `PlaySingleFrame::zoomImageFast`.** | Ghidra name pass 1 |
+| `0x7e00ec79` | 1 | `OlyUint16_7e00ec79` | References the string `slide.x:  OlyUint16`. **API name from the trace catalog (id `0x30222`): `PlaySingleFrame::startScrollFast`.** | Ghidra name pass 1 |
+| `0x7e00ee3f` | 1 | `isAnimation_7e00ee3f` | References the string `usage: sdk api %s isAnimation`. **API name from the trace catalog (id `0x30226`): `PlaySingleFrame::updateImageSync`.** | Ghidra name pass 1 |
+| `0x7e00ef09` | 1 | `pattern_7e00ef09` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30301`): `PlayIndex::startIndex`.** | Ghidra name pass 1 |
+| `0x7e00f11e` | 1 | `isImage_7e00f11e` | References the string `isImage`. **API name from the trace catalog (id `0x30303`): `PlayIndex::getCurrentInfo`.** | Ghidra name pass 1 |
+| `0x7e00f183` | 1 | `pattern_7e00f183` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30304`): `PlayIndex::changeIndexNumber`.** | Ghidra name pass 1 |
+| `0x7e00f36c` | 1 | `direction_7e00f36c` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x30307`): `PlayIndex::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e00f492` | 1 | `DIRECTION_UP_7e00f492` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x30306`): `PlayIndex::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e00f5a2` | 1 | `candidate_7e00f5a2` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x3030c`): `PlayIndex::rotateImage`.** | Ghidra name pass 1 |
+| `0x7e00f67a` | 1 | `positionID_7e00f67a` | References the string `usage: sdk api %s positionID`. **API name from the trace catalog (id `0x3030e`): `PlayIndex::moveCurrentDirect`.** | Ghidra name pass 1 |
+| `0x7e00f704` | 1 | `DIRECTION_UP_7e00f704` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x3030f`): `PlayIndex::canMovePage`.** | Ghidra name pass 1 |
+| `0x7e00f7b3` | 1 | `DIRECTION_UP_7e00f7b3` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x30310`): `PlayIndex::movePage`.** | Ghidra name pass 1 |
+| `0x7e00f9cf` | 1 | `SELECT_TYPE_ALL_7e00f9cf` | References the string `SELECT_TYPE_ALL           =`. **API name from the trace catalog (id `0x31c01`): `PlaySelect::start`.** | Ghidra name pass 1 |
+| `0x7e00fac9` | 1 | `pattern_7e00fac9` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31c02`): `PlaySelect::singleMode`.** | Ghidra name pass 1 |
+| `0x7e00fbe7` | 1 | `pattern_7e00fbe7` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31c03`): `PlaySelect::indexMode`.** | Ghidra name pass 1 |
+| `0x7e00fd63` | 1 | `currentPage_7e00fd63` | References the string `currentPage`. **API name from the trace catalog (id `0x31c04`): `PlaySelect::getPageInfo`.** | Ghidra name pass 1 |
+| `0x7e00fde8` | 1 | `direction_7e00fde8` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x31c07`): `PlaySelect::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e00ff0e` | 1 | `direction_7e00ff0e` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x31c06`): `PlaySelect::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e010314` | 1 | `SPEED_RATIO_HALF_7e010314` | References the string `SPEED_RATIO_HALF    = 0x00`. **API name from the trace catalog (id `0x30505`): `PlayMovie::fastForward`.** | Ghidra name pass 1 |
+| `0x7e0103d1` | 1 | `SPEED_RATIO_TWICE_7e0103d1` | References the string `SPEED_RATIO_TWICE   = 0x01`. **API name from the trace catalog (id `0x30506`): `PlayMovie::rewind`.** | Ghidra name pass 1 |
+| `0x7e0104c3` | 1 | `SEEK_NEXT_7e0104c3` | References the string `SEEK_NEXT      = 0x00`. **API name from the trace catalog (id `0x3050a`): `PlayMovie::seek`.** | Ghidra name pass 1 |
+| `0x7e010710` | 1 | `RESERVE_SINGLE_7e010710` | References the string `RESERVE_SINGLE = 0x00`. **API name from the trace catalog (id `0x31001`): `ReservePrint::start`.** | Ghidra name pass 1 |
+| `0x7e0107fa` | 1 | `pattern_7e0107fa` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31004`): `ReservePrint::singleMode`.** | Ghidra name pass 1 |
+| `0x7e0108fb` | 1 | `DIRECTION_UP_7e0108fb` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x31006`): `ReservePrint::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e010ae6` | 1 | `PREVIOUS_7e010ae6` | References the string `PREVIOUS = 1`. **API name from the trace catalog (id `0x31007`): `ReservePrint::changePrintCount`.** | Ghidra name pass 1 |
+| `0x7e010bbc` | 1 | `PRINT_NOTHING_7e010bbc` | References the string `PRINT_NOTHING = 0x00`. **API name from the trace catalog (id `0x31009`): `ReservePrint::changeDatePrint`.** | Ghidra name pass 1 |
+| `0x7e010cd5` | 1 | `isAnimation_7e010cd5` | References the string `usage: sdk api %s isAnimation`. **API name from the trace catalog (id `0x3100e`): `ReservePrint::updateImageSync`.** | Ghidra name pass 1 |
+| `0x7e010e00` | 1 | `soundID_7e010e00` | References the string `usage: sdk api %s soundID`. **API name from the trace catalog (id `0x30f02`): `PlaySlideShow::startSlideShow`.** | Ghidra name pass 1 |
+| `0x7e010efd` | 1 | `DIRECTION_LEFT_7e010efd` | References the string `DIRECTION_LEFT  = 0x03`. **API name from the trace catalog (id `0x30f03`): `PlaySlideShow::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e01118a` | 1 | `VOLUME_TARGET_ALL_7e01118a` | References the string `VOLUME_TARGET_ALL  :0`. **API name from the trace catalog (id `0x31704`): `PlaySound::setVolume`.** | Ghidra name pass 1 |
+| `0x7e011350` | 1 | `pattern_7e011350` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31e01`): `PlayCalendar::start`.** | Ghidra name pass 1 |
+| `0x7e011457` | 1 | `TopDate_7e011457` | References the string `TopDate.year`. **API name from the trace catalog (id `0x31e02`): `PlayCalendar::getDateRange`.** | Ghidra name pass 1 |
+| `0x7e01151d` | 1 | `positionID_7e01151d` | References the string `positionID`. **API name from the trace catalog (id `0x31e03`): `PlayCalendar::getCursorPosition`.** | Ghidra name pass 1 |
+| `0x7e01155c` | 1 | `positionID_7e01155c` | References the string `usage: sdk api %s positionID`. **API name from the trace catalog (id `0x31e04`): `PlayCalendar::getPresenceImage`.** | Ghidra name pass 1 |
+| `0x7e011605` | 1 | `targetID_7e011605` | References the string `usage: sdk api %s ctrl targetID`. **API name from the trace catalog (id `0x31e05`): `PlayCalendar::MoveCursor`.** | Ghidra name pass 1 |
+| `0x7e01171f` | 1 | `DIRECTION_UP_7e01171f` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x31e06`): `PlayCalendar::canMovePage`.** | Ghidra name pass 1 |
+| `0x7e0117c1` | 1 | `DIRECTION_UP_7e0117c1` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x31e07`): `PlayCalendar::movePage`.** | Ghidra name pass 1 |
 | `0x7e01186a` | 1 | `froceHeadImage_7e01186a` | References the string `usage: sdk api %s froceHeadImage`. | Ghidra name pass 1 |
-| `0x7e011963` | 1 | `DIRECTION_UP_7e011963` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e011a0b` | 1 | `imageWidth_7e011a0b` | References the string `imageWidth : %d`. | Ghidra name pass 1 |
-| `0x7e011e75` | 1 | `direction_7e011e75` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e011f32` | 1 | `direction_7e011f32` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e012037` | 1 | `isAnimation_7e012037` | References the string `usage: sdk api %s direction isAnimation`. | Ghidra name pass 1 |
-| `0x7e0121ab` | 1 | `magnifying_7e0121ab` | References the string `magnifying power : 1 - 14`. | Ghidra name pass 1 |
-| `0x7e012277` | 1 | `enalbeRotate_7e012277` | References the string `usage: sdk api %s enalbeRotate`. | Ghidra name pass 1 |
-| `0x7e012302` | 1 | `enalbeRotate_7e012302` | References the string `usage: sdk api %s enalbeRotate`. | Ghidra name pass 1 |
-| `0x7e0123f7` | 1 | `BaseNumber_7e0123f7` | References the string `BaseNumber`. | Ghidra name pass 1 |
-| `0x7e012456` | 1 | `BaseValue_7e012456` | References the string `BaseValue`. | Ghidra name pass 1 |
-| `0x7e01253e` | 1 | `pattern_7e01253e` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e012611` | 1 | `RESIZE_QVGA_7e012611` | References the string `RESIZE_QVGA`. | Ghidra name pass 1 |
-| `0x7e012688` | 1 | `pattern_7e012688` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01278a` | 1 | `RESIZE_NONE_7e01278a` | References the string `RESIZE_NONE = 0x00`. | Ghidra name pass 1 |
-| `0x7e012955` | 1 | `OLY_TRUE_7e012955` | References the string `OLY_TRUE`. | Ghidra name pass 1 |
-| `0x7e0129a1` | 1 | `pattern_7e0129a1` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e012ad9` | 1 | `imageWidth_7e012ad9` | References the string `info.imageWidth`. | Ghidra name pass 1 |
-| `0x7e012c12` | 1 | `candidate_7e012c12` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e012cb5` | 1 | `direction_7e012cb5` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e012d72` | 1 | `pattern_7e012d72` | References the string `usage: sdk api %s type pattern`. | Ghidra name pass 1 |
-| `0x7e012f70` | 1 | `aspectRatio_7e012f70` | References the string `usage: sdk api %s aspectRatio pattern`. | Ghidra name pass 1 |
-| `0x7e0130c3` | 1 | `imageWidth_7e0130c3` | References the string `info.imageWidth`. | Ghidra name pass 1 |
-| `0x7e01322e` | 1 | `direction_7e01322e` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e0132eb` | 1 | `pattern_7e0132eb` | References the string `usage: sdk api %s type pattern`. | Ghidra name pass 1 |
-| `0x7e0134da` | 1 | `pattern_7e0134da` | References the string `usage: sdk api %s type kind level pattern`. | Ghidra name pass 1 |
-| `0x7e013699` | 1 | `pattern_7e013699` | References the string `usage: sdk api %s level pattern`. | Ghidra name pass 1 |
-| `0x7e013866` | 1 | `pattern_7e013866` | References the string `usage: sdk api %s type pattern`. | Ghidra name pass 1 |
-| `0x7e013a64` | 1 | `pattern_7e013a64` | References the string `usage: sdk api %s type pattern`. | Ghidra name pass 1 |
-| `0x7e013c02` | 1 | `BEAUTY_ALL_7e013c02` | References the string `BEAUTY_ALL          = 0x00`. | Ghidra name pass 1 |
-| `0x7e013e62` | 1 | `pattern_7e013e62` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e013f98` | 1 | `restart_7e013f98` | References the string `usage: sdk api %s restart`. | Ghidra name pass 1 |
-| `0x7e01402a` | 1 | `KIND_EDIT_1_7e01402a` | References the string `KIND_EDIT_1  = 0x00`. | Ghidra name pass 1 |
-| `0x7e0140d4` | 1 | `pattern_7e0140d4` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01420a` | 1 | `restart_7e01420a` | References the string `usage: sdk api %s restart`. | Ghidra name pass 1 |
-| `0x7e01430d` | 1 | `restart_7e01430d` | References the string `usage: sdk api %s restart`. | Ghidra name pass 1 |
-| `0x7e0143d2` | 1 | `pattern_7e0143d2` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e0144d3` | 1 | `currentPage_7e0144d3` | References the string `currentPage`. | Ghidra name pass 1 |
-| `0x7e014528` | 1 | `positionID_7e014528` | References the string `positionID`. | Ghidra name pass 1 |
-| `0x7e014569` | 1 | `direction_7e014569` | References the string `direction`. | Ghidra name pass 1 |
-| `0x7e0146cf` | 1 | `direction_7e0146cf` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e014816` | 1 | `isSelected_7e014816` | References the string `isSelected`. | Ghidra name pass 1 |
-| `0x7e014880` | 1 | `usePic_7e014880` | References the string `usage: sdk api %s pattern usePic`. | Ghidra name pass 1 |
-| `0x7e014a25` | 1 | `picNum_7e014a25` | References the string `usage: sdk api %s picNum gain`. | Ghidra name pass 1 |
-| `0x7e014af2` | 1 | `pattern_7e014af2` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e014bf5` | 1 | `positionID_7e014bf5` | References the string `usage: sdk api %s positionID`. | Ghidra name pass 1 |
-| `0x7e014d3d` | 1 | `pattern_7e014d3d` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e014e50` | 1 | `currentPage_7e014e50` | References the string `currentPage`. | Ghidra name pass 1 |
-| `0x7e014ea6` | 1 | `positionID_7e014ea6` | References the string `positionID`. | Ghidra name pass 1 |
-| `0x7e014ee7` | 1 | `direction_7e014ee7` | References the string `direction`. | Ghidra name pass 1 |
-| `0x7e015016` | 1 | `direction_7e015016` | References the string `direction`. | Ghidra name pass 1 |
-| `0x7e0151df` | 1 | `ADJ_POWER_ON_STATE_7e0151df` | References the string `ADJ_POWER_ON_STATE  = 0`. | Ghidra name pass 1 |
-| `0x7e01526c` | 1 | `beforeAction_7e01526c` | References the string `usage: sdk api %s action beforeAction`. | Ghidra name pass 1 |
-| `0x7e01570c` | 1 | `ADJ_MODE_MP_7e01570c` | References the string `ADJ_MODE_MP`. | Ghidra name pass 1 |
-| `0x7e0157ab` | 1 | `itemNumber_7e0157ab` | References the string `usage: sdk api %s itemNumber`. | Ghidra name pass 1 |
-| `0x7e015adc` | 1 | `Refer_Null_flg_7e015adc` | References the string `usage: sdk api %s Refer_Null_flg`. | Ghidra name pass 1 |
-| `0x7e015d8c` | 1 | `ADJ_SLF_AUDIO_MAIN_7e015d8c` | References the string `[%2d] ADJ_SLF_AUDIO_MAIN        (0x%X)  result=%d`. | Ghidra name pass 1 |
-| `0x7e016036` | 1 | `actionItem_7e016036` | References the string `usage: sdk api %s actionItem [option]Refer_Null_flg`. | Ghidra name pass 1 |
-| `0x7e01670c` | 1 | `Refer_Null_flg_7e01670c` | References the string `usage: sdk api %s action [option]Refer_Null_flg`. | Ghidra name pass 1 |
-| `0x7e016fb2` | 1 | `ADJ_SLF_AUDIO_MAIN_7e016fb2` | References the string `[%2d] ADJ_SLF_AUDIO_MAIN        (0x%X)`. | Ghidra name pass 1 |
-| `0x7e0172a2` | 1 | `LineInfo_7e0172a2` | References the string `test case LineInfo = NULL !!`. | Ghidra name pass 1 |
+| `0x7e011963` | 1 | `DIRECTION_UP_7e011963` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x31d02`): `PlayLightBox::setScrollTarget`.** | Ghidra name pass 1 |
+| `0x7e011a0b` | 1 | `imageWidth_7e011a0b` | References the string `imageWidth : %d`. **API name from the trace catalog (id `0x31d07`): `PlayLightBox::getEnlargeInfo`.** | Ghidra name pass 1 |
+| `0x7e011e75` | 1 | `direction_7e011e75` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x31d03`): `PlayLightBox::scrollImage`.** | Ghidra name pass 1 |
+| `0x7e011f32` | 1 | `direction_7e011f32` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x31d05`): `PlayLightBox::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e012037` | 1 | `isAnimation_7e012037` | References the string `usage: sdk api %s direction isAnimation`. **API name from the trace catalog (id `0x31d06`): `PlayLightBox::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e0121ab` | 1 | `magnifying_7e0121ab` | References the string `magnifying power : 1 - 14`. **API name from the trace catalog (id `0x31d08`): `PlayLightBox::zoomImage`.** | Ghidra name pass 1 |
+| `0x7e012277` | 1 | `enalbeRotate_7e012277` | References the string `usage: sdk api %s enalbeRotate`. **API name from the trace catalog (id `0x31d0b`): `PlayLightBox::singleMode`.** | Ghidra name pass 1 |
+| `0x7e012302` | 1 | `enalbeRotate_7e012302` | References the string `usage: sdk api %s enalbeRotate`. **API name from the trace catalog (id `0x31d0c`): `PlayLightBox::singleModeUpdate`.** | Ghidra name pass 1 |
+| `0x7e0123f7` | 1 | `BaseNumber_7e0123f7` | References the string `BaseNumber`. **API name from the trace catalog (id `0x31d0f`): `PlayLightBox::getNumber`.** | Ghidra name pass 1 |
+| `0x7e012456` | 1 | `BaseValue_7e012456` | References the string `BaseValue`. **API name from the trace catalog (id `0x31d10`): `PlayLightBox::getAFFineTuneValue`.** | Ghidra name pass 1 |
+| `0x7e01253e` | 1 | `pattern_7e01253e` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30701`): `EditResize::start`.** | Ghidra name pass 1 |
+| `0x7e012611` | 1 | `RESIZE_QVGA_7e012611` | References the string `RESIZE_QVGA`. **API name from the trace catalog (id `0x30702`): `EditResize::getPossibleSize`.** | Ghidra name pass 1 |
+| `0x7e012688` | 1 | `pattern_7e012688` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30705`): `EditResize::makePreview`.** | Ghidra name pass 1 |
+| `0x7e01278a` | 1 | `RESIZE_NONE_7e01278a` | References the string `RESIZE_NONE = 0x00`. **API name from the trace catalog (id `0x30704`): `EditResize::save`.** | Ghidra name pass 1 |
+| `0x7e012955` | 1 | `OLY_TRUE_7e012955` | References the string `OLY_TRUE`. **API name from the trace catalog (id `0x30804`): `EditTrimming::canTrimming`.** | Ghidra name pass 1 |
+| `0x7e0129a1` | 1 | `pattern_7e0129a1` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30808`): `EditTrimming::trimmingMode`.** | Ghidra name pass 1 |
+| `0x7e012ad9` | 1 | `imageWidth_7e012ad9` | References the string `info.imageWidth`. **API name from the trace catalog (id `0x3080d`): `EditTrimming::getTrimmingInfo`.** | Ghidra name pass 1 |
+| `0x7e012c12` | 1 | `candidate_7e012c12` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x30809`): `EditTrimming::changeSize`.** | Ghidra name pass 1 |
+| `0x7e012cb5` | 1 | `direction_7e012cb5` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x3080a`): `EditTrimming::changePosition`.** | Ghidra name pass 1 |
+| `0x7e012d72` | 1 | `pattern_7e012d72` | References the string `usage: sdk api %s type pattern`. **API name from the trace catalog (id `0x3080e`): `EditTrimming::makePreview`.** | Ghidra name pass 1 |
+| `0x7e012f70` | 1 | `aspectRatio_7e012f70` | References the string `usage: sdk api %s aspectRatio pattern`. **API name from the trace catalog (id `0x31a03`): `EditAspect::aspectMode`.** | Ghidra name pass 1 |
+| `0x7e0130c3` | 1 | `imageWidth_7e0130c3` | References the string `info.imageWidth`. **API name from the trace catalog (id `0x31a06`): `EditAspect::getAspectInfo`.** | Ghidra name pass 1 |
+| `0x7e01322e` | 1 | `direction_7e01322e` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x31a04`): `EditAspect::changePosition`.** | Ghidra name pass 1 |
+| `0x7e0132eb` | 1 | `pattern_7e0132eb` | References the string `usage: sdk api %s type pattern`. **API name from the trace catalog (id `0x31a07`): `EditAspect::makePreview`.** | Ghidra name pass 1 |
+| `0x7e0134da` | 1 | `pattern_7e0134da` | References the string `usage: sdk api %s type kind level pattern`. **API name from the trace catalog (id `0x3090c`): `EditColor::makePreview`.** | Ghidra name pass 1 |
+| `0x7e013699` | 1 | `pattern_7e013699` | References the string `usage: sdk api %s level pattern`. **API name from the trace catalog (id `0x3090d`): `EditColor::makeComparePreview`.** | Ghidra name pass 1 |
+| `0x7e013866` | 1 | `pattern_7e013866` | References the string `usage: sdk api %s type pattern`. **API name from the trace catalog (id `0x30b08`): `EditRedEyeAdjust::makePreview`.** | Ghidra name pass 1 |
+| `0x7e013a64` | 1 | `pattern_7e013a64` | References the string `usage: sdk api %s type pattern`. **API name from the trace catalog (id `0x30c0a`): `EditShadowAdjust::makePreview`.** | Ghidra name pass 1 |
+| `0x7e013c02` | 1 | `BEAUTY_ALL_7e013c02` | References the string `BEAUTY_ALL          = 0x00`. **API name from the trace catalog (id `0x30d01`): `EditBeautyAdjust::start`.** | Ghidra name pass 1 |
+| `0x7e013e62` | 1 | `pattern_7e013e62` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31b04`): `EditRaw::previewCurrentModeEdit`.** | Ghidra name pass 1 |
+| `0x7e013f98` | 1 | `restart_7e013f98` | References the string `usage: sdk api %s restart`. **API name from the trace catalog (id `0x31b06`): `EditRaw::endCurrentModeEdit`.** | Ghidra name pass 1 |
+| `0x7e01402a` | 1 | `KIND_EDIT_1_7e01402a` | References the string `KIND_EDIT_1  = 0x00`. **API name from the trace catalog (id `0x31b07`): `EditRaw::startCustomEdit`.** | Ghidra name pass 1 |
+| `0x7e0140d4` | 1 | `pattern_7e0140d4` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31b08`): `EditRaw::previewCustomEdit`.** | Ghidra name pass 1 |
+| `0x7e01420a` | 1 | `restart_7e01420a` | References the string `usage: sdk api %s restart`. **API name from the trace catalog (id `0x31b0a`): `EditRaw::endCustomEdit`.** | Ghidra name pass 1 |
+| `0x7e01430d` | 1 | `restart_7e01430d` | References the string `usage: sdk api %s restart`. **API name from the trace catalog (id `0x31b0d`): `EditRaw::endArtBktEdit`.** | Ghidra name pass 1 |
+| `0x7e0143d2` | 1 | `pattern_7e0143d2` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30a05`): `EditImageOverlay::index`.** | Ghidra name pass 1 |
+| `0x7e0144d3` | 1 | `currentPage_7e0144d3` | References the string `currentPage`. **API name from the trace catalog (id `0x30a04`): `EditImageOverlay::getPageInfo`.** | Ghidra name pass 1 |
+| `0x7e014528` | 1 | `positionID_7e014528` | References the string `positionID`. **API name from the trace catalog (id `0x30a03`): `EditImageOverlay::getCurrentInfo`.** | Ghidra name pass 1 |
+| `0x7e014569` | 1 | `direction_7e014569` | References the string `direction`. **API name from the trace catalog (id `0x30a02`): `EditImageOverlay::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e0146cf` | 1 | `direction_7e0146cf` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x30a08`): `EditImageOverlay::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e014816` | 1 | `isSelected_7e014816` | References the string `isSelected`. **API name from the trace catalog (id `0x30a0a`): `EditImageOverlay::selectCurrent`.** | Ghidra name pass 1 |
+| `0x7e014880` | 1 | `usePic_7e014880` | References the string `usage: sdk api %s pattern usePic`. **API name from the trace catalog (id `0x30a06`): `EditImageOverlay::makeAdjustPreview`.** | Ghidra name pass 1 |
+| `0x7e014a25` | 1 | `picNum_7e014a25` | References the string `usage: sdk api %s picNum gain`. **API name from the trace catalog (id `0x30a01`): `EditImageOverlay::adjustGain`.** | Ghidra name pass 1 |
+| `0x7e014af2` | 1 | `pattern_7e014af2` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x30a07`): `EditImageOverlay::makePreview`.** | Ghidra name pass 1 |
+| `0x7e014bf5` | 1 | `positionID_7e014bf5` | References the string `usage: sdk api %s positionID`. **API name from the trace catalog (id `0x30a0c`): `EditImageOverlay::moveCurrentDirect`.** | Ghidra name pass 1 |
+| `0x7e014d3d` | 1 | `pattern_7e014d3d` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x31f02`): `SelectOverlay::index`.** | Ghidra name pass 1 |
+| `0x7e014e50` | 1 | `currentPage_7e014e50` | References the string `currentPage`. **API name from the trace catalog (id `0x31f03`): `SelectOverlay::getPageInfo`.** | Ghidra name pass 1 |
+| `0x7e014ea6` | 1 | `positionID_7e014ea6` | References the string `positionID`. **API name from the trace catalog (id `0x31f04`): `SelectOverlay::getCurrentInfo`.** | Ghidra name pass 1 |
+| `0x7e014ee7` | 1 | `direction_7e014ee7` | References the string `direction`. **API name from the trace catalog (id `0x31f05`): `SelectOverlay::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e015016` | 1 | `direction_7e015016` | References the string `direction`. **API name from the trace catalog (id `0x31f06`): `SelectOverlay::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e0151df` | 1 | `ADJ_POWER_ON_STATE_7e0151df` | References the string `ADJ_POWER_ON_STATE  = 0`. **API name from the trace catalog (id `0x40101`): `SelfAdjust::readyExecuteSelfAdjust`.** | Ghidra name pass 1 |
+| `0x7e01526c` | 1 | `beforeAction_7e01526c` | References the string `usage: sdk api %s action beforeAction`. **API name from the trace catalog (id `0x40102`): `SelfAdjust::execute`.** | Ghidra name pass 1 |
+| `0x7e01570c` | 1 | `ADJ_MODE_MP_7e01570c` | References the string `ADJ_MODE_MP`. **API name from the trace catalog (id `0x40103`): `SelfAdjust::getMode`.** | Ghidra name pass 1 |
+| `0x7e0157ab` | 1 | `itemNumber_7e0157ab` | References the string `usage: sdk api %s itemNumber`. **API name from the trace catalog (id `0x40105`): `SelfAdjust::getMenuItem`.** | Ghidra name pass 1 |
+| `0x7e015adc` | 1 | `Refer_Null_flg_7e015adc` | References the string `usage: sdk api %s Refer_Null_flg`. **API name from the trace catalog (id `0x40106`): `SelfAdjust::getDefaultItem`.** | Ghidra name pass 1 |
+| `0x7e015d8c` | 1 | `ADJ_SLF_AUDIO_MAIN_7e015d8c` | References the string `[%2d] ADJ_SLF_AUDIO_MAIN        (0x%X)  result=%d`. **API name from the trace catalog (id `0x40107`): `SelfAdjust::getSelectItemNumber`.** | Ghidra name pass 1 |
+| `0x7e016036` | 1 | `actionItem_7e016036` | References the string `usage: sdk api %s actionItem [option]Refer_Null_flg`. **API name from the trace catalog (id `0x40108`): `SelfAdjust::getSelectItem`.** | Ghidra name pass 1 |
+| `0x7e01670c` | 1 | `Refer_Null_flg_7e01670c` | References the string `usage: sdk api %s action [option]Refer_Null_flg`. **API name from the trace catalog (id `0x40109`): `SelfAdjust::getBeforeAction`.** | Ghidra name pass 1 |
+| `0x7e016fb2` | 1 | `ADJ_SLF_AUDIO_MAIN_7e016fb2` | References the string `[%2d] ADJ_SLF_AUDIO_MAIN        (0x%X)`. **API name from the trace catalog (id `0x4010a`): `SelfAdjust::getString`.** | Ghidra name pass 1 |
+| `0x7e0172a2` | 1 | `LineInfo_7e0172a2` | References the string `test case LineInfo = NULL !!`. **API name from the trace catalog (id `0x4010b`): `SelfAdjust::getLineInfo`.** | Ghidra name pass 1 |
 | `0x7e01755a` | 1 | `manufactureCode_7e01755a` | References the string `manufactureCode`. | Ghidra name pass 1 |
-| `0x7e017681` | 1 | `executeMode_7e017681` | References the string `executeMode`. | Ghidra name pass 1 |
-| `0x7e0177d5` | 1 | `left_top_in_7e0177d5` | References the string `left_top_in.h`. | Ghidra name pass 1 |
-| `0x7e017a78` | 1 | `program_7e017a78` | References the string `usage: sdk api %s program item`. | Ghidra name pass 1 |
-| `0x7e017dc9` | 1 | `revision_7e017dc9` | References the string `revision`. | Ghidra name pass 1 |
-| `0x7e017e55` | 1 | `pattern_7e017e55` | References the string `usage: sdk api %s mode pattern`. | Ghidra name pass 1 |
-| `0x7e017f89` | 1 | `API_SHIPPING_INFO_DEST_AREA_7e017f89` | References the string `API_SHIPPING_INFO_DEST_AREA`. | Ghidra name pass 1 |
-| `0x7e017ff3` | 1 | `API_VERSION_BOOT_7e017ff3` | References the string `API_VERSION_BOOT`. | Ghidra name pass 1 |
-| `0x7e018073` | 1 | `API_MAINTENANCE_RELEASE_7e018073` | References the string `API_MAINTENANCE_RELEASE`. | Ghidra name pass 1 |
+| `0x7e017681` | 1 | `executeMode_7e017681` | References the string `executeMode`. **API name from the trace catalog (id `0x40111`): `SelfAdjust::getResultInfo`.** | Ghidra name pass 1 |
+| `0x7e0177d5` | 1 | `left_top_in_7e0177d5` | References the string `left_top_in.h`. **API name from the trace catalog (id `0x40114`): `SelfAdjust::getResolutionInfo`.** | Ghidra name pass 1 |
+| `0x7e017a78` | 1 | `program_7e017a78` | References the string `usage: sdk api %s program item`. **API name from the trace catalog (id `0x40201`): `LifeTest::execute`.** | Ghidra name pass 1 |
+| `0x7e017dc9` | 1 | `revision_7e017dc9` | References the string `revision`. **API name from the trace catalog (id `0x40401`): `Maintenance::getApiVersion`.** | Ghidra name pass 1 |
+| `0x7e017e55` | 1 | `pattern_7e017e55` | References the string `usage: sdk api %s mode pattern`. **API name from the trace catalog (id `0x40403`): `Maintenance::getSystemName`.** | Ghidra name pass 1 |
+| `0x7e017f89` | 1 | `API_SHIPPING_INFO_DEST_AREA_7e017f89` | References the string `API_SHIPPING_INFO_DEST_AREA`. **API name from the trace catalog (id `0x40404`): `Maintenance::getShippingInfo`.** | Ghidra name pass 1 |
+| `0x7e017ff3` | 1 | `API_VERSION_BOOT_7e017ff3` | References the string `API_VERSION_BOOT`. **API name from the trace catalog (id `0x40405`): `Maintenance::getSystemVersion`.** | Ghidra name pass 1 |
+| `0x7e018073` | 1 | `API_MAINTENANCE_RELEASE_7e018073` | References the string `API_MAINTENANCE_RELEASE`. **API name from the trace catalog (id `0x40406`): `Maintenance::getMaintenanceData`.** | Ghidra name pass 1 |
 | `0x7e0180f5` | 1 | `API_SERIAL_BODY_7e0180f5` | References the string `API_SERIAL_BODY`. | Ghidra name pass 1 |
-| `0x7e01842f` | 1 | `destinationNum_7e01842f` | References the string `usage: sdk api %s destinationNum NG`. | Ghidra name pass 1 |
-| `0x7e0184bb` | 1 | `TRANSITION_TYPE_MENU_7e0184bb` | References the string `TRANSITION_TYPE_MENU         = 0x00`. | Ghidra name pass 1 |
-| `0x7e0185a5` | 1 | `direction_7e0185a5` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e018688` | 1 | `direction_7e018688` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e018824` | 1 | `EVENT_INDEX_7e018824` | References the string `type : EVENT_INDEX`. | Ghidra name pass 1 |
+| `0x7e01842f` | 1 | `destinationNum_7e01842f` | References the string `usage: sdk api %s destinationNum NG`. **API name from the trace catalog (id `0x40411`): `Maintenance::getDestinationString`.** | Ghidra name pass 1 |
+| `0x7e0184bb` | 1 | `TRANSITION_TYPE_MENU_7e0184bb` | References the string `TRANSITION_TYPE_MENU         = 0x00`. **API name from the trace catalog (id `0x50201`): `EasyPrint::startEasyPrintService`.** | Ghidra name pass 1 |
+| `0x7e0185a5` | 1 | `direction_7e0185a5` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x50203`): `EasyPrint::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e018688` | 1 | `direction_7e018688` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x50204`): `EasyPrint::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e018824` | 1 | `EVENT_INDEX_7e018824` | References the string `type : EVENT_INDEX`. **API name from the trace catalog (id `0x5020a`): `EasyPrint::getFrameInfo`.** | Ghidra name pass 1 |
 | `0x7e0189e1` | 4 | `SIZE_DEFAULT_7e0189e1` | References the string `SIZE_DEFAULT:`. | Ghidra name pass 1 |
-| `0x7e018d34` | 1 | `PRINT_SELECTED_FRAME_7e018d34` | References the string `PRINT_SELECTED_FRAME`. | Ghidra name pass 1 |
-| `0x7e018dbd` | 1 | `PRINT_MODE_NORMAL_7e018dbd` | References the string `PRINT_MODE_NORMAL    = 0x00`. | Ghidra name pass 1 |
-| `0x7e018ecd` | 1 | `candidate_7e018ecd` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e018f9a` | 1 | `candidate_7e018f9a` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e019067` | 1 | `candidate_7e019067` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e019169` | 1 | `pattern_7e019169` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e019249` | 1 | `pattern_7e019249` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01940f` | 1 | `printNum_7e01940f` | References the string `info.printNum`. | Ghidra name pass 1 |
-| `0x7e0194b7` | 1 | `direction_7e0194b7` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e0195dd` | 1 | `direction_7e0195dd` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e0197f8` | 1 | `candidate_7e0197f8` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e019972` | 1 | `IsNumber_7e019972` | References the string `IsNumber`. | Ghidra name pass 1 |
-| `0x7e019a6e` | 1 | `pattern_7e019a6e` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e019b76` | 1 | `imageWidth_7e019b76` | References the string `info.imageWidth`. | Ghidra name pass 1 |
-| `0x7e019caf` | 1 | `candidate_7e019caf` | References the string `usage: sdk api %s candidate`. | Ghidra name pass 1 |
-| `0x7e019d45` | 1 | `direction_7e019d45` | References the string `usage: sdk api %s direction`. | Ghidra name pass 1 |
-| `0x7e019f92` | 1 | `protocol_7e019f92` | References the string `usage: sdk api %s protocol`. | Ghidra name pass 1 |
-| `0x7e01a08a` | 1 | `pattern_7e01a08a` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01a246` | 1 | `OLY_TRUE_7e01a246` | References the string `OLY_TRUE`. | Ghidra name pass 1 |
+| `0x7e018d34` | 1 | `PRINT_SELECTED_FRAME_7e018d34` | References the string `PRINT_SELECTED_FRAME`. **API name from the trace catalog (id `0x50319`): `CustomPrint::getSupportedPrintMode`.** | Ghidra name pass 1 |
+| `0x7e018dbd` | 1 | `PRINT_MODE_NORMAL_7e018dbd` | References the string `PRINT_MODE_NORMAL    = 0x00`. **API name from the trace catalog (id `0x50302`): `CustomPrint::setPrintMode`.** | Ghidra name pass 1 |
+| `0x7e018ecd` | 1 | `candidate_7e018ecd` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x50304`): `CustomPrint::changePaperSize`.** | Ghidra name pass 1 |
+| `0x7e018f9a` | 1 | `candidate_7e018f9a` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x50305`): `CustomPrint::changeBorderSetting`.** | Ghidra name pass 1 |
+| `0x7e019067` | 1 | `candidate_7e019067` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x50306`): `CustomPrint::changeMultiCount`.** | Ghidra name pass 1 |
+| `0x7e019169` | 1 | `pattern_7e019169` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50308`): `CustomPrint::singleMode`.** | Ghidra name pass 1 |
+| `0x7e019249` | 1 | `pattern_7e019249` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50309`): `CustomPrint::indexMode`.** | Ghidra name pass 1 |
+| `0x7e01940f` | 1 | `printNum_7e01940f` | References the string `info.printNum`. **API name from the trace catalog (id `0x5030a`): `CustomPrint::detailMode`.** | Ghidra name pass 1 |
+| `0x7e0194b7` | 1 | `direction_7e0194b7` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x5030b`): `CustomPrint::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e0195dd` | 1 | `direction_7e0195dd` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x5030c`): `CustomPrint::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e0197f8` | 1 | `candidate_7e0197f8` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x5030d`): `CustomPrint::changePrintCount`.** | Ghidra name pass 1 |
+| `0x7e019972` | 1 | `IsNumber_7e019972` | References the string `IsNumber`. **API name from the trace catalog (id `0x50312`): `CustomPrint::canDetailSetting`.** | Ghidra name pass 1 |
+| `0x7e019a6e` | 1 | `pattern_7e019a6e` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50313`): `CustomPrint::trimmingMode`.** | Ghidra name pass 1 |
+| `0x7e019b76` | 1 | `imageWidth_7e019b76` | References the string `info.imageWidth`. **API name from the trace catalog (id `0x50321`): `CustomPrint::getTrimmingInfo`.** | Ghidra name pass 1 |
+| `0x7e019caf` | 1 | `candidate_7e019caf` | References the string `usage: sdk api %s candidate`. **API name from the trace catalog (id `0x50314`): `CustomPrint::changeSize`.** | Ghidra name pass 1 |
+| `0x7e019d45` | 1 | `direction_7e019d45` | References the string `usage: sdk api %s direction`. **API name from the trace catalog (id `0x50315`): `CustomPrint::changePosition`.** | Ghidra name pass 1 |
+| `0x7e019f92` | 1 | `protocol_7e019f92` | References the string `usage: sdk api %s protocol`. **API name from the trace catalog (id `0x50101`): `DeviceLink::connect`.** | Ghidra name pass 1 |
+| `0x7e01a08a` | 1 | `pattern_7e01a08a` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50103`): `DeviceLink::getStatus`.** | Ghidra name pass 1 |
+| `0x7e01a246` | 1 | `OLY_TRUE_7e01a246` | References the string `OLY_TRUE`. **API name from the trace catalog (id `0x50104`): `DeviceLink::isCommunication`.** | Ghidra name pass 1 |
 | `0x7e01a292` | 5 | `address_7e01a292` | References the string `address %d:%d:%d:%d:%d:%d`. | Ghidra name pass 1 |
-| `0x7e01a3e8` | 1 | `pattern_7e01a3e8` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01a5da` | 1 | `timeout_7e01a5da` | References the string `usage: sdk api %s timeout`. | Ghidra name pass 1 |
-| `0x7e01a725` | 1 | `requestPairing_7e01a725` | References the string `usage: sdk api %s requestPairing pattern`. | Ghidra name pass 1 |
-| `0x7e01a978` | 1 | `pattern_7e01a978` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ab69` | 1 | `pattern_7e01ab69` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ad97` | 1 | `pattern_7e01ad97` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01aefb` | 1 | `dataNum_7e01aefb` | References the string `usage: sdk api %s dataNum`. | Ghidra name pass 1 |
-| `0x7e01b01a` | 1 | `dataNum_7e01b01a` | References the string `usage: sdk api %s dataNum`. | Ghidra name pass 1 |
-| `0x7e01b17e` | 1 | `API_MEDIA_INTERNAL_7e01b17e` | References the string `API_MEDIA_INTERNAL = 0x01`. | Ghidra name pass 1 |
-| `0x7e01b271` | 1 | `pattern_7e01b271` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01b399` | 1 | `pattern_7e01b399` | References the string `usage: sdk api %s index pattern`. | Ghidra name pass 1 |
-| `0x7e01b4d5` | 1 | `picNum_7e01b4d5` | References the string `usage: sdk api %s picNum pattern`. | Ghidra name pass 1 |
-| `0x7e01b632` | 1 | `picNum_7e01b632` | References the string `usage: sdk api %s picNum pattern`. | Ghidra name pass 1 |
-| `0x7e01b790` | 1 | `API_SUCCESS_7e01b790` | References the string `API_SUCCESS`. | Ghidra name pass 1 |
+| `0x7e01a3e8` | 1 | `pattern_7e01a3e8` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50403`): `Bluetooth::requestConnection`.** | Ghidra name pass 1 |
+| `0x7e01a5da` | 1 | `timeout_7e01a5da` | References the string `usage: sdk api %s timeout`. **API name from the trace catalog (id `0x50405`): `Bluetooth::searchDevice`.** | Ghidra name pass 1 |
+| `0x7e01a725` | 1 | `requestPairing_7e01a725` | References the string `usage: sdk api %s requestPairing pattern`. **API name from the trace catalog (id `0x50409`): `Bluetooth::requestPairing`.** | Ghidra name pass 1 |
+| `0x7e01a978` | 1 | `pattern_7e01a978` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x5040d`): `Bluetooth::acceptPairing`.** | Ghidra name pass 1 |
+| `0x7e01ab69` | 1 | `pattern_7e01ab69` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50411`): `Bluetooth::receiveImage`.** | Ghidra name pass 1 |
+| `0x7e01ad97` | 1 | `pattern_7e01ad97` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x50414`): `Bluetooth::sendPinCode`.** | Ghidra name pass 1 |
+| `0x7e01aefb` | 1 | `dataNum_7e01aefb` | References the string `usage: sdk api %s dataNum`. **API name from the trace catalog (id `0x50417`): `Bluetooth::getSearchDeviceList`.** | Ghidra name pass 1 |
+| `0x7e01b01a` | 1 | `dataNum_7e01b01a` | References the string `usage: sdk api %s dataNum`. **API name from the trace catalog (id `0x50419`): `Bluetooth::getPairingDeviceList`.** | Ghidra name pass 1 |
+| `0x7e01b17e` | 1 | `API_MEDIA_INTERNAL_7e01b17e` | References the string `API_MEDIA_INTERNAL = 0x01`. **API name from the trace catalog (id `0x5041c`): `Bluetooth::recordReceiveImage`.** | Ghidra name pass 1 |
+| `0x7e01b271` | 1 | `pattern_7e01b271` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x5041e`): `Bluetooth::setMyDeviceName`.** | Ghidra name pass 1 |
+| `0x7e01b399` | 1 | `pattern_7e01b399` | References the string `usage: sdk api %s index pattern`. **API name from the trace catalog (id `0x5041f`): `Bluetooth::setPairingDeviceName`.** | Ghidra name pass 1 |
+| `0x7e01b4d5` | 1 | `picNum_7e01b4d5` | References the string `usage: sdk api %s picNum pattern`. **API name from the trace catalog (id `0x50420`): `Bluetooth::showSendImage`.** | Ghidra name pass 1 |
+| `0x7e01b632` | 1 | `picNum_7e01b632` | References the string `usage: sdk api %s picNum pattern`. **API name from the trace catalog (id `0x50421`): `Bluetooth::showReceiveImage`.** | Ghidra name pass 1 |
+| `0x7e01b790` | 1 | `API_SUCCESS_7e01b790` | References the string `API_SUCCESS`. **API name from the trace catalog (id `0x50422`): `Bluetooth::getAuthNumber`.** | Ghidra name pass 1 |
 | `0x7e01b820` | 1 | `timer_cb_7e01b820` | References the string `timer_cb, id=%d type=%d`. | Ghidra name pass 1 |
 | `0x7e01b84c` | 1 | `debug_cb_7e01b84c` | References the string `debug_cb, argc=%d argv[0]=%s`. | Ghidra name pass 1 |
-| `0x7e01b879` | 1 | `timerId_7e01b879` | References the string `usage: sdk api %s timerId elaps type`. | Ghidra name pass 1 |
-| `0x7e01b9b1` | 2 | `timerId_7e01b9b1` | References the string `usage: sdk api %s timerId elaps type`. | Ghidra name pass 1 |
-| `0x7e01ba40` | 2 | `timerId_7e01ba40` | References the string `usage: sdk api %s timerId`. | Ghidra name pass 1 |
-| `0x7e01bacf` | 1 | `timerId_7e01bacf` | References the string `usage: sdk api %s timerId`. | Ghidra name pass 1 |
-| `0x7e01bb5e` | 1 | `pointer_7e01bb5e` | References the string `target pointer = %x`. | Ghidra name pass 1 |
-| `0x7e01bc86` | 1 | `ENS_STATUS_IDLE_7e01bc86` | References the string `ENS_STATUS_IDLE`. | Ghidra name pass 1 |
-| `0x7e01bdd5` | 1 | `pointer_7e01bdd5` | References the string `target pointer = %x`. | Ghidra name pass 1 |
-| `0x7e01bf31` | 1 | `ENS_STATUS_IDLE_7e01bf31` | References the string `ENS_STATUS_IDLE`. | Ghidra name pass 1 |
-| `0x7e01c064` | 1 | `compare_7e01c064` | References the string `compare length`. | Ghidra name pass 1 |
-| `0x7e01c177` | 1 | `compare_7e01c177` | References the string `compare length`. | Ghidra name pass 1 |
-| `0x7e01c3cc` | 1 | `pointer_7e01c3cc` | References the string `target pointer = %x`. | Ghidra name pass 1 |
-| `0x7e01c4c6` | 1 | `pointer_7e01c4c6` | References the string `target pointer = %x`. | Ghidra name pass 1 |
-| `0x7e01c976` | 1 | `allocate_7e01c976` | References the string `allocate size`. | Ghidra name pass 1 |
+| `0x7e01b879` | 1 | `timerId_7e01b879` | References the string `usage: sdk api %s timerId elaps type`. **API name from the trace catalog (id `0x11001`): `SystemCommon::scSetTimer`.** | Ghidra name pass 1 |
+| `0x7e01b9b1` | 2 | `timerId_7e01b9b1` | References the string `usage: sdk api %s timerId elaps type`. **API name from the trace catalog (id `0x11002`): `SystemCommon::scStartTimer`.** | Ghidra name pass 1 |
+| `0x7e01ba40` | 2 | `timerId_7e01ba40` | References the string `usage: sdk api %s timerId`. **API name from the trace catalog (id `0x11003`): `SystemCommon::scStopTimer`.** | Ghidra name pass 1 |
+| `0x7e01bacf` | 1 | `timerId_7e01bacf` | References the string `usage: sdk api %s timerId`. **API name from the trace catalog (id `0x11004`): `SystemCommon::scKillTimer`.** | Ghidra name pass 1 |
+| `0x7e01bb5e` | 1 | `pointer_7e01bb5e` | References the string `target pointer = %x`. **API name from the trace catalog (id `0x11005`): `SystemCommon::scStrncpy`.** | Ghidra name pass 1 |
+| `0x7e01bc86` | 1 | `ENS_STATUS_IDLE_7e01bc86` | References the string `ENS_STATUS_IDLE`. **API name from the trace catalog (id `0x11006`): `SystemCommon::scWcsncpy`.** | Ghidra name pass 1 |
+| `0x7e01bdd5` | 1 | `pointer_7e01bdd5` | References the string `target pointer = %x`. **API name from the trace catalog (id `0x11007`): `SystemCommon::scStrncat`.** | Ghidra name pass 1 |
+| `0x7e01bf31` | 1 | `ENS_STATUS_IDLE_7e01bf31` | References the string `ENS_STATUS_IDLE`. **API name from the trace catalog (id `0x11008`): `SystemCommon::scWcsncat`.** | Ghidra name pass 1 |
+| `0x7e01c064` | 1 | `compare_7e01c064` | References the string `compare length`. **API name from the trace catalog (id `0x11009`): `SystemCommon::scStrncmp`.** | Ghidra name pass 1 |
+| `0x7e01c177` | 1 | `compare_7e01c177` | References the string `compare length`. **API name from the trace catalog (id `0x1100a`): `SystemCommon::scWcsncmp`.** | Ghidra name pass 1 |
+| `0x7e01c3cc` | 1 | `pointer_7e01c3cc` | References the string `target pointer = %x`. **API name from the trace catalog (id `0x1100d`): `SystemCommon::scStrupr`.** | Ghidra name pass 1 |
+| `0x7e01c4c6` | 1 | `pointer_7e01c4c6` | References the string `target pointer = %x`. **API name from the trace catalog (id `0x1100e`): `SystemCommon::scWcsupr`.** | Ghidra name pass 1 |
+| `0x7e01c976` | 1 | `allocate_7e01c976` | References the string `allocate size`. **API name from the trace catalog (id `0x11005`): `SystemCommon::scStrncpy`.** | Ghidra name pass 1 |
 | `0x7e01ca25` | 1 | `pointer_7e01ca25` | References the string `usage: sdk api %s pointer`. | Ghidra name pass 1 |
 | `0x7e01cc78` | 1 | `SC_DEBUG_DEVICE_SERIAL_7e01cc78` | References the string `SC_DEBUG_DEVICE_SERIAL : 0`. | Ghidra name pass 1 |
 | `0x7e01cd49` | 1 | `functionID_7e01cd49` | References the string `usage: sdk api %s functionID pattern`. | Ghidra name pass 1 |
-| `0x7e01ce49` | 1 | `taskID_7e01ce49` | References the string `usage: sdk api %s mode taskID nickName`. | Ghidra name pass 1 |
-| `0x7e01cfcd` | 1 | `taskID_7e01cfcd` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d05c` | 1 | `taskID_7e01d05c` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d0eb` | 1 | `taskID_7e01d0eb` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d17a` | 1 | `taskID_7e01d17a` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d209` | 1 | `taskID_7e01d209` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d298` | 1 | `taskID_7e01d298` | References the string `usage: sdk api %s taskID`. | Ghidra name pass 1 |
-| `0x7e01d349` | 1 | `timeOut_7e01d349` | References the string `usage: sdk api %s timeOut`. | Ghidra name pass 1 |
-| `0x7e01d3d8` | 1 | `delayTime_7e01d3d8` | References the string `usage: sdk api %s delayTime`. | Ghidra name pass 1 |
-| `0x7e01d467` | 1 | `eventID_7e01d467` | References the string `usage: sdk api %s mode eventID nickName`. | Ghidra name pass 1 |
-| `0x7e01d590` | 1 | `eventID_7e01d590` | References the string `usage: sdk api %s eventID`. | Ghidra name pass 1 |
-| `0x7e01d61f` | 1 | `eventID_7e01d61f` | References the string `usage: sdk api %s eventID eventFlg`. | Ghidra name pass 1 |
-| `0x7e01d6dc` | 1 | `eventID_7e01d6dc` | References the string `usage: sdk api %s eventID eventFlg`. | Ghidra name pass 1 |
-| `0x7e01d799` | 1 | `eventID_7e01d799` | References the string `usage: sdk api %s eventID eventFlg timeOut waitMode`. | Ghidra name pass 1 |
-| `0x7e01d8ef` | 1 | `eventID_7e01d8ef` | References the string `usage: sdk api %s eventID eventFlg`. | Ghidra name pass 1 |
-| `0x7e01d9ac` | 1 | `queueID_7e01d9ac` | References the string `usage: sdk api %s mode queueID nickName queueCount queueSize`. | Ghidra name pass 1 |
-| `0x7e01db34` | 1 | `queueID_7e01db34` | References the string `usage: sdk api %s queueID`. | Ghidra name pass 1 |
-| `0x7e01dbc3` | 1 | `queueID_7e01dbc3` | References the string `usage: sdk api %s queueID dataSize writeData`. | Ghidra name pass 1 |
-| `0x7e01dcb4` | 1 | `queueID_7e01dcb4` | References the string `usage: sdk api %s queueID timeOut`. | Ghidra name pass 1 |
-| `0x7e01dd90` | 1 | `semaphoreID_7e01dd90` | References the string `usage: sdk api %s mode semaphoreID nickName initSemaphore maxCount`. | Ghidra name pass 1 |
-| `0x7e01df18` | 1 | `semaphoreID_7e01df18` | References the string `usage: sdk api %s semaphoreID`. | Ghidra name pass 1 |
-| `0x7e01dfa7` | 1 | `semaphoreID_7e01dfa7` | References the string `usage: sdk api %s semaphoreID timeOut`. | Ghidra name pass 1 |
-| `0x7e01e07e` | 1 | `semaphoreID_7e01e07e` | References the string `usage: sdk api %s semaphoreID`. | Ghidra name pass 1 |
-| `0x7e01e10d` | 1 | `semaphoreID_7e01e10d` | References the string `usage: sdk api %s semaphoreID`. | Ghidra name pass 1 |
-| `0x7e01e19c` | 1 | `taskID_7e01e19c` | References the string `usage: sdk api %s taskID priority`. | Ghidra name pass 1 |
-| `0x7e01e2a1` | 1 | `characters_7e01e2a1` | References the string `name of timer (max 3 characters)`. | Ghidra name pass 1 |
-| `0x7e01e38d` | 1 | `characters_7e01e38d` | References the string `name of timer (max 3 characters)`. | Ghidra name pass 1 |
+| `0x7e01ce49` | 1 | `taskID_7e01ce49` | References the string `usage: sdk api %s mode taskID nickName`. **API name from the trace catalog (id `0x11018`): `SystemCommon::scOsCreateTask`.** | Ghidra name pass 1 |
+| `0x7e01cfcd` | 1 | `taskID_7e01cfcd` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x11019`): `SystemCommon::scOsDeleteTask`.** | Ghidra name pass 1 |
+| `0x7e01d05c` | 1 | `taskID_7e01d05c` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x1101a`): `SystemCommon::scOsStartTask`.** | Ghidra name pass 1 |
+| `0x7e01d0eb` | 1 | `taskID_7e01d0eb` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x1101b`): `SystemCommon::scOsIStartTask`.** | Ghidra name pass 1 |
+| `0x7e01d17a` | 1 | `taskID_7e01d17a` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x1101c`): `SystemCommon::scOsStopTask`.** | Ghidra name pass 1 |
+| `0x7e01d209` | 1 | `taskID_7e01d209` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x1101d`): `SystemCommon::scOsWakeupTask`.** | Ghidra name pass 1 |
+| `0x7e01d298` | 1 | `taskID_7e01d298` | References the string `usage: sdk api %s taskID`. **API name from the trace catalog (id `0x1101e`): `SystemCommon::scOsIWakeupTask`.** | Ghidra name pass 1 |
+| `0x7e01d349` | 1 | `timeOut_7e01d349` | References the string `usage: sdk api %s timeOut`. **API name from the trace catalog (id `0x11020`): `SystemCommon::scOsSleepTask`.** | Ghidra name pass 1 |
+| `0x7e01d3d8` | 1 | `delayTime_7e01d3d8` | References the string `usage: sdk api %s delayTime`. **API name from the trace catalog (id `0x11021`): `SystemCommon::scOsSelfSleepTask`.** | Ghidra name pass 1 |
+| `0x7e01d467` | 1 | `eventID_7e01d467` | References the string `usage: sdk api %s mode eventID nickName`. **API name from the trace catalog (id `0x11022`): `SystemCommon::scOsCreateEvent`.** | Ghidra name pass 1 |
+| `0x7e01d590` | 1 | `eventID_7e01d590` | References the string `usage: sdk api %s eventID`. **API name from the trace catalog (id `0x11023`): `SystemCommon::scOsDeleteEvent`.** | Ghidra name pass 1 |
+| `0x7e01d61f` | 1 | `eventID_7e01d61f` | References the string `usage: sdk api %s eventID eventFlg`. **API name from the trace catalog (id `0x11024`): `SystemCommon::scOsSetEvent`.** | Ghidra name pass 1 |
+| `0x7e01d6dc` | 1 | `eventID_7e01d6dc` | References the string `usage: sdk api %s eventID eventFlg`. **API name from the trace catalog (id `0x11025`): `SystemCommon::scOsISetEvent`.** | Ghidra name pass 1 |
+| `0x7e01d799` | 1 | `eventID_7e01d799` | References the string `usage: sdk api %s eventID eventFlg timeOut waitMode`. **API name from the trace catalog (id `0x11026`): `SystemCommon::scOsWaitEvent`.** | Ghidra name pass 1 |
+| `0x7e01d8ef` | 1 | `eventID_7e01d8ef` | References the string `usage: sdk api %s eventID eventFlg`. **API name from the trace catalog (id `0x11027`): `SystemCommon::scOsClearEvent`.** | Ghidra name pass 1 |
+| `0x7e01d9ac` | 1 | `queueID_7e01d9ac` | References the string `usage: sdk api %s mode queueID nickName queueCount queueSize`. **API name from the trace catalog (id `0x11028`): `SystemCommon::scOsCreateQueue`.** | Ghidra name pass 1 |
+| `0x7e01db34` | 1 | `queueID_7e01db34` | References the string `usage: sdk api %s queueID`. **API name from the trace catalog (id `0x11029`): `SystemCommon::scOsDeleteQueue`.** | Ghidra name pass 1 |
+| `0x7e01dbc3` | 1 | `queueID_7e01dbc3` | References the string `usage: sdk api %s queueID dataSize writeData`. **API name from the trace catalog (id `0x1102a`): `SystemCommon::scOsWriteQueue`.** | Ghidra name pass 1 |
+| `0x7e01dcb4` | 1 | `queueID_7e01dcb4` | References the string `usage: sdk api %s queueID timeOut`. **API name from the trace catalog (id `0x1102b`): `SystemCommon::scOsReadQueue`.** | Ghidra name pass 1 |
+| `0x7e01dd90` | 1 | `semaphoreID_7e01dd90` | References the string `usage: sdk api %s mode semaphoreID nickName initSemaphore maxCount`. **API name from the trace catalog (id `0x1102c`): `SystemCommon::scOsCreateSemaphore`.** | Ghidra name pass 1 |
+| `0x7e01df18` | 1 | `semaphoreID_7e01df18` | References the string `usage: sdk api %s semaphoreID`. **API name from the trace catalog (id `0x1102d`): `SystemCommon::scOsDeleteSemaphore`.** | Ghidra name pass 1 |
+| `0x7e01dfa7` | 1 | `semaphoreID_7e01dfa7` | References the string `usage: sdk api %s semaphoreID timeOut`. **API name from the trace catalog (id `0x1102e`): `SystemCommon::scOsWaitSemaphore`.** | Ghidra name pass 1 |
+| `0x7e01e07e` | 1 | `semaphoreID_7e01e07e` | References the string `usage: sdk api %s semaphoreID`. **API name from the trace catalog (id `0x1102f`): `SystemCommon::scOsSignalSemaphore`.** | Ghidra name pass 1 |
+| `0x7e01e10d` | 1 | `semaphoreID_7e01e10d` | References the string `usage: sdk api %s semaphoreID`. **API name from the trace catalog (id `0x11030`): `SystemCommon::scOsISignalSemaphore`.** | Ghidra name pass 1 |
+| `0x7e01e19c` | 1 | `taskID_7e01e19c` | References the string `usage: sdk api %s taskID priority`. **API name from the trace catalog (id `0x11038`): `SystemCommon::scOsChangePriority`.** | Ghidra name pass 1 |
+| `0x7e01e2a1` | 1 | `characters_7e01e2a1` | References the string `name of timer (max 3 characters)`. **API name from the trace catalog (id `0x11032`): `SystemCommon::scTimeMset`.** | Ghidra name pass 1 |
+| `0x7e01e38d` | 1 | `characters_7e01e38d` | References the string `name of timer (max 3 characters)`. **API name from the trace catalog (id `0x11035`): `SystemCommon::scUsrTimeMeasurementStart`.** | Ghidra name pass 1 |
 | `0x7e01e4df` | 1 | `API_OSD_PLANE_LAYER1_7e01e4df` | References the string `API_OSD_PLANE_LAYER1   : 0`. | Ghidra name pass 1 |
-| `0x7e01e5d5` | 1 | `pattern_7e01e5d5` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01e6cc` | 1 | `pattern_7e01e6cc` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01e782` | 1 | `pattern_7e01e782` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01e838` | 1 | `pattern_7e01e838` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01e8ee` | 1 | `pattern_7e01e8ee` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01e9a4` | 1 | `pattern_7e01e9a4` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ea5a` | 1 | `pattern_7e01ea5a` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01eb15` | 1 | `pattern_7e01eb15` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ebcb` | 1 | `pattern_7e01ebcb` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ec81` | 1 | `pattern_7e01ec81` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ed37` | 1 | `pattern_7e01ed37` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01edf3` | 1 | `pattern_7e01edf3` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01eeb4` | 1 | `pattern_7e01eeb4` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01ef60` | 1 | `pattern_7e01ef60` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01f007` | 1 | `handleNum_7e01f007` | References the string `usage: sdk api %s plane handleNum`. | Ghidra name pass 1 |
-| `0x7e01f1df` | 1 | `handleNum_7e01f1df` | References the string `usage: sdk api %s plane handleNum`. | Ghidra name pass 1 |
-| `0x7e01f26e` | 1 | `pattern_7e01f26e` | References the string `usage: sdk api %s pattern`. | Ghidra name pass 1 |
-| `0x7e01f318` | 1 | `API_OSD_PLANE_LAYER1_7e01f318` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. | Ghidra name pass 1 |
-| `0x7e01f4ff` | 1 | `API_OSD_PLANE_LAYER1_7e01f4ff` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. | Ghidra name pass 1 |
-| `0x7e01f6b4` | 1 | `API_OSD_PLANE_LAYER1_7e01f6b4` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. | Ghidra name pass 1 |
-| `0x7e01fadf` | 1 | `WIFI_LINK_KIND_PRIVATE_7e01fadf` | References the string `WIFI_LINK_KIND_PRIVATE   = 0`. | Ghidra name pass 1 |
-| `0x7e01fcfc` | 1 | `LIGHT_ON_7e01fcfc` | References the string `LIGHT_ON`. | Ghidra name pass 1 |
-| `0x7e01fe38` | 1 | `GPS_STATE_OFF_7e01fe38` | References the string `GPS_STATE_OFF`. | Ghidra name pass 1 |
-| `0x7e01fea6` | 1 | `degree_sign_7e01fea6` | References the string `pos.latitude.degree_sign`. | Ghidra name pass 1 |
+| `0x7e01e5d5` | 1 | `pattern_7e01e5d5` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11105`): `OSDControl::setFrameSize`.** | Ghidra name pass 1 |
+| `0x7e01e6cc` | 1 | `pattern_7e01e6cc` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11106`): `OSDControl::drawDot`.** | Ghidra name pass 1 |
+| `0x7e01e782` | 1 | `pattern_7e01e782` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11107`): `OSDControl::drawLine`.** | Ghidra name pass 1 |
+| `0x7e01e838` | 1 | `pattern_7e01e838` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11108`): `OSDControl::drawRect`.** | Ghidra name pass 1 |
+| `0x7e01e8ee` | 1 | `pattern_7e01e8ee` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11109`): `OSDControl::drawFont`.** | Ghidra name pass 1 |
+| `0x7e01e9a4` | 1 | `pattern_7e01e9a4` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110a`): `OSDControl::drawBitmap`.** | Ghidra name pass 1 |
+| `0x7e01ea5a` | 1 | `pattern_7e01ea5a` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110b`): `OSDControl::copyFrame`.** | Ghidra name pass 1 |
+| `0x7e01eb15` | 1 | `pattern_7e01eb15` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110c`): `OSDControl::copyAreaBlock`.** | Ghidra name pass 1 |
+| `0x7e01ebcb` | 1 | `pattern_7e01ebcb` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110d`): `OSDControl::customDisplay`.** | Ghidra name pass 1 |
+| `0x7e01ec81` | 1 | `pattern_7e01ec81` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110e`): `OSDControl::updateDisplay`.** | Ghidra name pass 1 |
+| `0x7e01ed37` | 1 | `pattern_7e01ed37` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x1110f`): `OSDControl::updateImageLayer`.** | Ghidra name pass 1 |
+| `0x7e01edf3` | 1 | `pattern_7e01edf3` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11110`): `OSDControl::setColorPalette`.** | Ghidra name pass 1 |
+| `0x7e01eeb4` | 1 | `pattern_7e01eeb4` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11111`): `OSDControl::setTransparent`.** | Ghidra name pass 1 |
+| `0x7e01ef60` | 1 | `pattern_7e01ef60` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11112`): `OSDControl::resetTransparent`.** | Ghidra name pass 1 |
+| `0x7e01f007` | 1 | `handleNum_7e01f007` | References the string `usage: sdk api %s plane handleNum`. **API name from the trace catalog (id `0x11113`): `OSDControl::getVramInfo`.** | Ghidra name pass 1 |
+| `0x7e01f1df` | 1 | `handleNum_7e01f1df` | References the string `usage: sdk api %s plane handleNum`. **API name from the trace catalog (id `0x11114`): `OSDControl::freeVramInfo`.** | Ghidra name pass 1 |
+| `0x7e01f26e` | 1 | `pattern_7e01f26e` | References the string `usage: sdk api %s pattern`. **API name from the trace catalog (id `0x11115`): `OSDControl::setDispInfo`.** | Ghidra name pass 1 |
+| `0x7e01f318` | 1 | `API_OSD_PLANE_LAYER1_7e01f318` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. **API name from the trace catalog (id `0x11201`): `OSDEffect::LVControlBase`.** | Ghidra name pass 1 |
+| `0x7e01f4ff` | 1 | `API_OSD_PLANE_LAYER1_7e01f4ff` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. **API name from the trace catalog (id `0x11202`): `OSDEffect::LVControlDirect`.** | Ghidra name pass 1 |
+| `0x7e01f6b4` | 1 | `API_OSD_PLANE_LAYER1_7e01f6b4` | References the string `osd API_OSD_PLANE_LAYER1 : 0`. **API name from the trace catalog (id `0x11203`): `OSDEffect::LVguidePlate`.** | Ghidra name pass 1 |
+| `0x7e01fadf` | 1 | `WIFI_LINK_KIND_PRIVATE_7e01fadf` | References the string `WIFI_LINK_KIND_PRIVATE   = 0`. **API name from the trace catalog (id `0x50609`): `FlashAir::connect`.** | Ghidra name pass 1 |
+| `0x7e01fcfc` | 1 | `LIGHT_ON_7e01fcfc` | References the string `LIGHT_ON`. **API name from the trace catalog (id `0x10403`): `OnetouchLightCtrl::getStatus`.** | Ghidra name pass 1 |
+| `0x7e01fe38` | 1 | `GPS_STATE_OFF_7e01fe38` | References the string `GPS_STATE_OFF`. **API name from the trace catalog (id `0x10d03`): `GpsCtrl::getGPSState`.** | Ghidra name pass 1 |
+| `0x7e01fea6` | 1 | `degree_sign_7e01fea6` | References the string `pos.latitude.degree_sign`. **API name from the trace catalog (id `0x10d04`): `GpsCtrl::getGPSdata`.** | Ghidra name pass 1 |
 | `0x7e01ffc6` | 2 | `commandID_7e01ffc6` | References the string `commandID, 0x%08X %s`. | Ghidra name pass 1 |
-| `0x7e02016a` | 1 | `orientation_7e02016a` | References the string `orientation`. | Ghidra name pass 1 |
-| `0x7e0201ab` | 1 | `DIRECTION_UP_7e0201ab` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e020285` | 1 | `OLY_TRUE_7e020285` | References the string `OLY_TRUE  0x01`. | Ghidra name pass 1 |
-| `0x7e020311` | 1 | `TOUGH_GEAR_MODE_INFO_7e020311` | References the string `TOUGH_GEAR_MODE_INFO   = 0x00`. | Ghidra name pass 1 |
+| `0x7e02016a` | 1 | `orientation_7e02016a` | References the string `orientation`. **API name from the trace catalog (id `0x10d08`): `GpsCtrl::getOrientation`.** | Ghidra name pass 1 |
+| `0x7e0201ab` | 1 | `DIRECTION_UP_7e0201ab` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x10d0b`): `GpsCtrl::getPositionCandidate`.** | Ghidra name pass 1 |
+| `0x7e020285` | 1 | `OLY_TRUE_7e020285` | References the string `OLY_TRUE  0x01`. **API name from the trace catalog (id `0x10d0c`): `GpsCtrl::optimizeGpsUpdate`.** | Ghidra name pass 1 |
+| `0x7e020311` | 1 | `TOUGH_GEAR_MODE_INFO_7e020311` | References the string `TOUGH_GEAR_MODE_INFO   = 0x00`. **API name from the trace catalog (id `0x10d0d`): `GpsCtrl::startToughGear`.** | Ghidra name pass 1 |
 | `0x7e0203d2` | 1 | `strength_7e0203d2` | References the string `[%d] no %d, strength %d, elevation %d, azimuth %d`. | Ghidra name pass 1 |
-| `0x7e02044b` | 1 | `degree_sign_7e02044b` | References the string `pos.latitude.degree_sign`. | Ghidra name pass 1 |
-| `0x7e02052d` | 1 | `GPS_KEY_STATE_UP_7e02052d` | References the string `GPS_KEY_STATE_UP           = 0x00`. | Ghidra name pass 1 |
-| `0x7e0205e3` | 1 | `OLY_TRUE_7e0205e3` | References the string `OLY_TRUE  0x01`. | Ghidra name pass 1 |
-| `0x7e02066f` | 1 | `interval_7e02066f` | References the string `usage: sdk api %s interval`. | Ghidra name pass 1 |
-| `0x7e02077c` | 1 | `GPS_LOG_SAVE_MODE_NEW_7e02077c` | References the string `GPS_LOG_SAVE_MODE_NEW    = 0x00`. | Ghidra name pass 1 |
-| `0x7e0208ca` | 1 | `seek_cmd_7e0208ca` | References the string `usage: sdk api %s seek_cmd`. | Ghidra name pass 1 |
-| `0x7e020a1d` | 1 | `CURRENT_FRAME_7e020a1d` | References the string `CURRENT_FRAME   = 0x00`. | Ghidra name pass 1 |
-| `0x7e020b89` | 1 | `isSelect_7e020b89` | References the string `isSelect`. | Ghidra name pass 1 |
-| `0x7e020bed` | 1 | `DIRECTION_UP_7e020bed` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e020cbb` | 1 | `DIRECTION_UP_7e020cbb` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e020d9e` | 1 | `isSelected_7e020d9e` | References the string `isSelected`. | Ghidra name pass 1 |
-| `0x7e020fcc` | 1 | `imageID_7e020fcc` | References the string `usage: sdk api %s imageID`. | Ghidra name pass 1 |
-| `0x7e0211fa` | 1 | `imageWidth_7e0211fa` | References the string `imageWidth`. | Ghidra name pass 1 |
-| `0x7e021378` | 1 | `DIRECTION_UP_7e021378` | References the string `DIRECTION_UP    = 0x01`. | Ghidra name pass 1 |
-| `0x7e0214da` | 1 | `outputDisplay_7e0214da` | References the string `usage: sdk api %s outputDisplay isAnimation direction`. | Ghidra name pass 1 |
-| `0x7e0216b4` | 1 | `isAnimation_7e0216b4` | References the string `usage: sdk api %s isAnimation`. | Ghidra name pass 1 |
-| `0x7e021752` | 1 | `WIFI_LINK_KIND_PRIVATE_7e021752` | References the string `WIFI_LINK_KIND_PRIVATE 0`. | Ghidra name pass 1 |
-| `0x7e0217f2` | 1 | `WIFI_LINK_KIND_PRIVATE_7e0217f2` | References the string `WIFI_LINK_KIND_PRIVATE 0`. | Ghidra name pass 1 |
-| `0x7e0218b3` | 1 | `operation_7e0218b3` | References the string `usage: sdk api %s type operation`. | Ghidra name pass 1 |
-| `0x7e0219ff` | 1 | `operation_7e0219ff` | References the string `operation`. | Ghidra name pass 1 |
+| `0x7e02044b` | 1 | `degree_sign_7e02044b` | References the string `pos.latitude.degree_sign`. **API name from the trace catalog (id `0x10d10`): `GpsCtrl::getCurrentLandMarkData`.** | Ghidra name pass 1 |
+| `0x7e02052d` | 1 | `GPS_KEY_STATE_UP_7e02052d` | References the string `GPS_KEY_STATE_UP           = 0x00`. **API name from the trace catalog (id `0x10d11`): `GpsCtrl::setKeyState`.** | Ghidra name pass 1 |
+| `0x7e0205e3` | 1 | `OLY_TRUE_7e0205e3` | References the string `OLY_TRUE  0x01`. **API name from the trace catalog (id `0x10d12`): `GpsCtrl::setTimeCorrection`.** | Ghidra name pass 1 |
+| `0x7e02066f` | 1 | `interval_7e02066f` | References the string `usage: sdk api %s interval`. **API name from the trace catalog (id `0x10d13`): `GpsCtrl::startLogger`.** | Ghidra name pass 1 |
+| `0x7e02077c` | 1 | `GPS_LOG_SAVE_MODE_NEW_7e02077c` | References the string `GPS_LOG_SAVE_MODE_NEW    = 0x00`. **API name from the trace catalog (id `0x10d17`): `GpsCtrl::saveLog`.** | Ghidra name pass 1 |
+| `0x7e0208ca` | 1 | `seek_cmd_7e0208ca` | References the string `usage: sdk api %s seek_cmd`. **API name from the trace catalog (id `0x31904`): `PlayContinuousShots::seek`.** | Ghidra name pass 1 |
+| `0x7e020a1d` | 1 | `CURRENT_FRAME_7e020a1d` | References the string `CURRENT_FRAME   = 0x00`. **API name from the trace catalog (id `0x32102`): `ReserveTransfer::singleMode`.** | Ghidra name pass 1 |
+| `0x7e020b89` | 1 | `isSelect_7e020b89` | References the string `isSelect`. **API name from the trace catalog (id `0x32105`): `ReserveTransfer::getCurrentInfo`.** | Ghidra name pass 1 |
+| `0x7e020bed` | 1 | `DIRECTION_UP_7e020bed` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x32106`): `ReserveTransfer::canMoveCurrent`.** | Ghidra name pass 1 |
+| `0x7e020cbb` | 1 | `DIRECTION_UP_7e020cbb` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x32107`): `ReserveTransfer::moveCurrent`.** | Ghidra name pass 1 |
+| `0x7e020d9e` | 1 | `isSelected_7e020d9e` | References the string `isSelected`. **API name from the trace catalog (id `0x32108`): `ReserveTransfer::selectCurrent`.** | Ghidra name pass 1 |
+| `0x7e020fcc` | 1 | `imageID_7e020fcc` | References the string `usage: sdk api %s imageID`. **API name from the trace catalog (id `0x10601`): `LogoScreen::drawImage`.** | Ghidra name pass 1 |
+| `0x7e0211fa` | 1 | `imageWidth_7e0211fa` | References the string `imageWidth`. **API name from the trace catalog (id `0x30e04`): `PlayPanorama::getDisplayPosition`.** | Ghidra name pass 1 |
+| `0x7e021378` | 1 | `DIRECTION_UP_7e021378` | References the string `DIRECTION_UP    = 0x01`. **API name from the trace catalog (id `0x30e06`): `PlayPanorama::manualScroll`.** | Ghidra name pass 1 |
+| `0x7e0214da` | 1 | `outputDisplay_7e0214da` | References the string `usage: sdk api %s outputDisplay isAnimation direction`. **API name from the trace catalog (id `0x31802`): `PlayEventView::startEventView`.** | Ghidra name pass 1 |
+| `0x7e0216b4` | 1 | `isAnimation_7e0216b4` | References the string `usage: sdk api %s isAnimation`. **API name from the trace catalog (id `0x31803`): `PlayEventView::endEventView`.** | Ghidra name pass 1 |
+| `0x7e021752` | 1 | `WIFI_LINK_KIND_PRIVATE_7e021752` | References the string `WIFI_LINK_KIND_PRIVATE 0`. **API name from the trace catalog (id `0x50703`): `InternalWiFi::changePassword`.** | Ghidra name pass 1 |
+| `0x7e0217f2` | 1 | `WIFI_LINK_KIND_PRIVATE_7e0217f2` | References the string `WIFI_LINK_KIND_PRIVATE 0`. **API name from the trace catalog (id `0x50701`): `InternalWiFi::connect`.** | Ghidra name pass 1 |
+| `0x7e0218b3` | 1 | `operation_7e0218b3` | References the string `usage: sdk api %s type operation`. **API name from the trace catalog (id `0x50704`): `InternalWiFi::getWiFiSetting`.** | Ghidra name pass 1 |
+| `0x7e0219ff` | 1 | `operation_7e0219ff` | References the string `operation`. **API name from the trace catalog (id `0x50705`): `InternalWiFi::getWiFiStatus`.** | Ghidra name pass 1 |
 | `0x7e0285d6` | 1 | `getSlope_7e0285d6` | References the string `getSlope is under construction!`. | Ghidra name pass 1 |
-| `0x7e02f12b` | 1 | `pValue_7e02f12b` | References the string `%s(%d), ERR pValue[%08X]`. | Ghidra name pass 1 |
-| `0x7e02f1f4` | 1 | `pValue_7e02f1f4` | References the string `%s(%d), ERR pValue[%08X]`. | Ghidra name pass 1 |
-| `0x7e02f92b` | 1 | `SETTING_7e02f92b` | References the string `%s SETTING NG`. | Ghidra name pass 1 |
-| `0x7e02feef` | 1 | `getAvailableShootCount_7e02feef` | References the string `getAvailableShootCount *availableCount,*waitSaveCount[%d,%d]`. | Ghidra name pass 1 |
-| `0x7e02ff88` | 1 | `getCondition_7e02ff88` | References the string `getCondition *pCondition[%d]`. | Ghidra name pass 1 |
-| `0x7e0303d0` | 1 | `startHistogram_7e0303d0` | References the string `startHistogram setting[0-3]=[%d,%d,%d,%d] resolution=%d aspect=%d`. | Ghidra name pass 1 |
+| `0x7e02f12b` | 1 | `pValue_7e02f12b` | References the string `%s(%d), ERR pValue[%08X]`. **API name from the trace catalog (id `0x1020e`): `SettingController::getSettingDetail`.** | Ghidra name pass 1 |
+| `0x7e02f1f4` | 1 | `pValue_7e02f1f4` | References the string `%s(%d), ERR pValue[%08X]`. **API name from the trace catalog (id `0x10217`): `SettingController::getSettingUser`.** | Ghidra name pass 1 |
+| `0x7e02f92b` | 1 | `SETTING_7e02f92b` | References the string `%s SETTING NG`. **API name from the trace catalog (id `0x10202`): `SettingController::setSetting`.** | Ghidra name pass 1 |
+| `0x7e02feef` | 1 | `getAvailableShootCount_7e02feef` | References the string `getAvailableShootCount *availableCount,*waitSaveCount[%d,%d]`. **API name from the trace catalog (id `0x20116`): `Shooting::getAvailableShootCount`.** | Ghidra name pass 1 |
+| `0x7e02ff88` | 1 | `getCondition_7e02ff88` | References the string `getCondition *pCondition[%d]`. **API name from the trace catalog (id `0x2010c`): `Shooting::getCondition`.** | Ghidra name pass 1 |
+| `0x7e0303d0` | 1 | `startHistogram_7e0303d0` | References the string `startHistogram setting[0-3]=[%d,%d,%d,%d] resolution=%d aspect=%d`. **API name from the trace catalog (id `0x2010a`): `Shooting::startHistogram`.** | Ghidra name pass 1 |
 | `0x7e034c63` | 1 | `Connect_7e034c63` | References the string `ube Not Connect[%d]#`. | Ghidra name pass 1 |
 | `0x7e03ca3b` | 1 | `HfwOpeInWiFi_7e03ca3b` | References the string `[ASSERT]HfwOpeInWiFi L.%d pass error!`. | Ghidra name pass 1 |
 | `0x7e03ce71` | 1 | `HfwOpeInWiFi_7e03ce71` | References the string `HfwOpeInWiFi L.%d disconnect disable`. | Ghidra name pass 1 |
@@ -9257,3 +9257,594 @@ left out of this pass.
 | `0x7e352cdd` | 5 | `gui_app_fn_7e352cdd` | Logs with the module tag `[GUI App]`: `[GUI App]:mode:%d`. Named after the tag only; not read. | string pass 3 |
 | `0x7e7071f1` | 2 | `wifi_http_fn_7e7071f1` | Logs with the module tag `[WIFI HTTP]`: `[WIFI HTTP]`, `[WIFI ELAP]`, `[WIFI WLAN]` …. Named after the tag only; not read. | string pass 3 |
 | `0x7e7e0282` | 1 | `c3d_fn_7e7e0282` | Logs with the module tag `[C3D]`: `[C3D] c3d_3D_update() format ERROR :`. Named after the tag only; not read. | string pass 3 |
+
+## Pass 4: API names from the trace catalog
+Listed 2026-11-13. The API layer logs each call with a three-byte trace id that `trace_catalog_lookup`
+`0x7dfc7272` turns into a name. The name tables are in the code block as the start-up image of the data
+section, so every id can be resolved without running the camera; see [`trace-catalog.md`](trace-catalog.md)
+for the method and the full list. A function that passes exactly one constant id to the lookup is the API
+entry function of that name. 580 such functions had no name yet and are listed here; where the plain name was
+taken the address is appended. Unlike passes 1 to 3 these names are the firmware's own, not guesses.
+
+| address | xrefs | symbol | role | source |
+|---|---|---|---|---|
+| `0x7dff7382` | 1 | `Maintenance__clearDamageInfo` | Logs trace id `0x40409`, which the trace catalog resolves to `Maintenance::clearDamageInfo`: the API entry function of that name. | trace catalog |
+| `0x7dff745f` | 1 | `Maintenance__getChangeDestinationArea` | Logs trace id `0x40410`, which the trace catalog resolves to `Maintenance::getChangeDestinationArea`: the API entry function of that name. | trace catalog |
+| `0x7dff74db` | 1 | `Maintenance__getDamageInfo` | Logs trace id `0x40408`, which the trace catalog resolves to `Maintenance::getDamageInfo`: the API entry function of that name. | trace catalog |
+| `0x7dff754d` | 1 | `Maintenance__getDestinationArea` | Logs trace id `0x4040e`, which the trace catalog resolves to `Maintenance::getDestinationArea`: the API entry function of that name. | trace catalog |
+| `0x7dff75b1` | 1 | `Maintenance__getDestinationString` | Logs trace id `0x40411`, which the trace catalog resolves to `Maintenance::getDestinationString`: the API entry function of that name. | trace catalog |
+| `0x7dff7617` | 1 | `Maintenance__getGpsModuleVersion` | Logs trace id `0x4040d`, which the trace catalog resolves to `Maintenance::getGpsModuleVersion`: the API entry function of that name. | trace catalog |
+| `0x7dff7674` | 1 | `Maintenance__getMaintenanceData` | Logs trace id `0x40406`, which the trace catalog resolves to `Maintenance::getMaintenanceData`: the API entry function of that name. | trace catalog |
+| `0x7dff7756` | 1 | `Maintenance__getSerialNumber` | Logs trace id `0x40407`, which the trace catalog resolves to `Maintenance::getSerialNumber`: the API entry function of that name. | trace catalog |
+| `0x7dff791d` | 1 | `Maintenance__setDestinationArea` | Logs trace id `0x4040f`, which the trace catalog resolves to `Maintenance::setDestinationArea`: the API entry function of that name. | trace catalog |
+| `0x7dff8452` | 1 | `ModeCheck__canExecute` | Logs trace id `0x10901`, which the trace catalog resolves to `ModeCheck::canExecute`: the API entry function of that name. | trace catalog |
+| `0x7dff84cb` | 5 | `SystemCommon__scOsCreateTask` | Logs trace id `0x11018`, which the trace catalog resolves to `SystemCommon::scOsCreateTask`: the API entry function of that name. | trace catalog |
+| `0x7dff854a` | 2 | `SystemCommon__scOsDeleteTask` | Logs trace id `0x11019`, which the trace catalog resolves to `SystemCommon::scOsDeleteTask`: the API entry function of that name. | trace catalog |
+| `0x7dff85c3` | 2 | `SystemCommon__scOsStartTask` | Logs trace id `0x1101a`, which the trace catalog resolves to `SystemCommon::scOsStartTask`: the API entry function of that name. | trace catalog |
+| `0x7dff863c` | 1 | `SystemCommon__scOsIStartTask` | Logs trace id `0x1101b`, which the trace catalog resolves to `SystemCommon::scOsIStartTask`: the API entry function of that name. | trace catalog |
+| `0x7dff86b5` | 2 | `SystemCommon__scOsStopTask` | Logs trace id `0x1101c`, which the trace catalog resolves to `SystemCommon::scOsStopTask`: the API entry function of that name. | trace catalog |
+| `0x7dff872e` | 2 | `SystemCommon__scOsWakeupTask` | Logs trace id `0x1101d`, which the trace catalog resolves to `SystemCommon::scOsWakeupTask`: the API entry function of that name. | trace catalog |
+| `0x7dff87a7` | 1 | `SystemCommon__scOsIWakeupTask` | Logs trace id `0x1101e`, which the trace catalog resolves to `SystemCommon::scOsIWakeupTask`: the API entry function of that name. | trace catalog |
+| `0x7dff8820` | 1 | `SystemCommon__scOsSelfEndTask` | Logs trace id `0x1101f`, which the trace catalog resolves to `SystemCommon::scOsSelfEndTask`: the API entry function of that name. | trace catalog |
+| `0x7dff888c` | 2 | `SystemCommon__scOsSleepTask` | Logs trace id `0x11020`, which the trace catalog resolves to `SystemCommon::scOsSleepTask`: the API entry function of that name. | trace catalog |
+| `0x7dff8905` | 2 | `SystemCommon__scOsSelfSleepTask` | Logs trace id `0x11021`, which the trace catalog resolves to `SystemCommon::scOsSelfSleepTask`: the API entry function of that name. | trace catalog |
+| `0x7dff897e` | 2 | `SystemCommon__scOsCreateEvent` | Logs trace id `0x11022`, which the trace catalog resolves to `SystemCommon::scOsCreateEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff89f9` | 2 | `SystemCommon__scOsDeleteEvent` | Logs trace id `0x11023`, which the trace catalog resolves to `SystemCommon::scOsDeleteEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff8a72` | 2 | `SystemCommon__scOsSetEvent` | Logs trace id `0x11024`, which the trace catalog resolves to `SystemCommon::scOsSetEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff8aeb` | 1 | `SystemCommon__scOsISetEvent` | Logs trace id `0x11025`, which the trace catalog resolves to `SystemCommon::scOsISetEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff8b64` | 2 | `SystemCommon__scOsWaitEvent` | Logs trace id `0x11026`, which the trace catalog resolves to `SystemCommon::scOsWaitEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff8bfc` | 2 | `SystemCommon__scOsClearEvent` | Logs trace id `0x11027`, which the trace catalog resolves to `SystemCommon::scOsClearEvent`: the API entry function of that name. | trace catalog |
+| `0x7dff8c74` | 2 | `SystemCommon__scOsCreateQueue` | Logs trace id `0x11028`, which the trace catalog resolves to `SystemCommon::scOsCreateQueue`: the API entry function of that name. | trace catalog |
+| `0x7dff8cf4` | 2 | `SystemCommon__scOsDeleteQueue` | Logs trace id `0x11029`, which the trace catalog resolves to `SystemCommon::scOsDeleteQueue`: the API entry function of that name. | trace catalog |
+| `0x7dff8d6d` | 2 | `SystemCommon__scOsWriteQueue` | Logs trace id `0x1102a`, which the trace catalog resolves to `SystemCommon::scOsWriteQueue`: the API entry function of that name. | trace catalog |
+| `0x7dff8de8` | 2 | `SystemCommon__scOsReadQueue` | Logs trace id `0x1102b`, which the trace catalog resolves to `SystemCommon::scOsReadQueue`: the API entry function of that name. | trace catalog |
+| `0x7dff8e62` | 3 | `SystemCommon__scOsCreateSemaphore` | Logs trace id `0x1102c`, which the trace catalog resolves to `SystemCommon::scOsCreateSemaphore`: the API entry function of that name. | trace catalog |
+| `0x7dff8ee2` | 2 | `SystemCommon__scOsDeleteSemaphore` | Logs trace id `0x1102d`, which the trace catalog resolves to `SystemCommon::scOsDeleteSemaphore`: the API entry function of that name. | trace catalog |
+| `0x7dff8f5b` | 6 | `SystemCommon__scOsWaitSemaphore` | Logs trace id `0x1102e`, which the trace catalog resolves to `SystemCommon::scOsWaitSemaphore`: the API entry function of that name. | trace catalog |
+| `0x7dff8fd4` | 6 | `SystemCommon__scOsSignalSemaphore` | Logs trace id `0x1102f`, which the trace catalog resolves to `SystemCommon::scOsSignalSemaphore`: the API entry function of that name. | trace catalog |
+| `0x7dff904d` | 1 | `SystemCommon__scOsISignalSemaphore` | Logs trace id `0x11030`, which the trace catalog resolves to `SystemCommon::scOsISignalSemaphore`: the API entry function of that name. | trace catalog |
+| `0x7dff90cf` | 2 | `SystemCommon__scOsChangePriority` | Logs trace id `0x11038`, which the trace catalog resolves to `SystemCommon::scOsChangePriority`: the API entry function of that name. | trace catalog |
+| `0x7dff943b` | 13 | `SystemCommon__scSetTimer` | Logs trace id `0x11001`, which the trace catalog resolves to `SystemCommon::scSetTimer`: the API entry function of that name. | trace catalog |
+| `0x7dff94bd` | 22 | `SystemCommon__scStartTimer` | Logs trace id `0x11002`, which the trace catalog resolves to `SystemCommon::scStartTimer`: the API entry function of that name. | trace catalog |
+| `0x7dff95af` | 5 | `SystemCommon__scKillTimer` | Logs trace id `0x11004`, which the trace catalog resolves to `SystemCommon::scKillTimer`: the API entry function of that name. | trace catalog |
+| `0x7dffcd9b` | 2 | `CameraCommon__initializeApi` | Logs trace id `0x10101`, which the trace catalog resolves to `CameraCommon::initializeApi`: the API entry function of that name. | trace catalog |
+| `0x7dffced4` | 1 | `CameraCommon__startSleep` | Logs trace id `0x10103`, which the trace catalog resolves to `CameraCommon::startSleep`: the API entry function of that name. | trace catalog |
+| `0x7dffcf03` | 1 | `CameraCommon__retractLens` | Logs trace id `0x10104`, which the trace catalog resolves to `CameraCommon::retractLens`: the API entry function of that name. | trace catalog |
+| `0x7dffd404` | 1 | `CameraCommon__startSaveLcd` | Logs trace id `0x10112`, which the trace catalog resolves to `CameraCommon::startSaveLcd`: the API entry function of that name. | trace catalog |
+| `0x7dffd493` | 1 | `CameraCommon__endSaveLcd` | Logs trace id `0x10113`, which the trace catalog resolves to `CameraCommon::endSaveLcd`: the API entry function of that name. | trace catalog |
+| `0x7dffd771` | 1 | `CameraCommon__isCecConnect` | Logs trace id `0x10118`, which the trace catalog resolves to `CameraCommon::isCecConnect`: the API entry function of that name. | trace catalog |
+| `0x7dffd7a4` | 1 | `CameraCommon__getDisplaySupport3D` | Logs trace id `0x10119`, which the trace catalog resolves to `CameraCommon::getDisplaySupport3D`: the API entry function of that name. | trace catalog |
+| `0x7dffddb3` | 1 | `CameraCommon__endHighlightShadow` | Logs trace id `0x10127`, which the trace catalog resolves to `CameraCommon::endHighlightShadow`: the API entry function of that name. | trace catalog |
+| `0x7dffdf46` | 1 | `CameraCommon__setModeDialState` | Logs trace id `0x1012f`, which the trace catalog resolves to `CameraCommon::setModeDialState`: the API entry function of that name. | trace catalog |
+| `0x7dffdfc0` | 1 | `CameraCommon__getDispSync` | Logs trace id `0x10132`, which the trace catalog resolves to `CameraCommon::getDispSync`: the API entry function of that name. | trace catalog |
+| `0x7dffdff3` | 1 | `CameraCommon__cancelDispSync` | Logs trace id `0x10133`, which the trace catalog resolves to `CameraCommon::cancelDispSync`: the API entry function of that name. | trace catalog |
+| `0x7dffe026` | 1 | `CameraCommon__getEyeSensorState` | Logs trace id `0x10134`, which the trace catalog resolves to `CameraCommon::getEyeSensorState`: the API entry function of that name. | trace catalog |
+| `0x7dffe05a` | 1 | `CameraCommon__ctrlAutoThrough` | Logs trace id `0x10135`, which the trace catalog resolves to `CameraCommon::ctrlAutoThrough`: the API entry function of that name. | trace catalog |
+| `0x7dffe0d7` | 1 | `CameraCommon__ctrlEyeSensor` | Logs trace id `0x10136`, which the trace catalog resolves to `CameraCommon::ctrlEyeSensor`: the API entry function of that name. | trace catalog |
+| `0x7dffe2d4` | 1 | `CameraCommon__changeFunctionButton` | Logs trace id `0x10141`, which the trace catalog resolves to `CameraCommon::changeFunctionButton`: the API entry function of that name. | trace catalog |
+| `0x7dffe407` | 1 | `Shooting__isMFtsLensMount` | Logs trace id `0x20192`, which the trace catalog resolves to `Shooting::isMFtsLensMount`: the API entry function of that name. | trace catalog |
+| `0x7dffe669` | 1 | `Shooting__isFtsLensMount` | Logs trace id `0x20198`, which the trace catalog resolves to `Shooting::isFtsLensMount`: the API entry function of that name. | trace catalog |
+| `0x7dffe6aa` | 1 | `CameraCommon__getEyeSensorExternalState` | Logs trace id `0x10146`, which the trace catalog resolves to `CameraCommon::getEyeSensorExternalState`: the API entry function of that name. | trace catalog |
+| `0x7dffe878` | 1 | `CameraCommon__getCtrlAutoThrough` | Logs trace id `0x10149`, which the trace catalog resolves to `CameraCommon::getCtrlAutoThrough`: the API entry function of that name. | trace catalog |
+| `0x7dffe8ac` | 1 | `CameraCommon__getLensMfSwitchState` | Logs trace id `0x10148`, which the trace catalog resolves to `CameraCommon::getLensMfSwitchState`: the API entry function of that name. | trace catalog |
+| `0x7dffe8da` | 1 | `CameraCommon__isEZoomEnable` | Logs trace id `0x1014a`, which the trace catalog resolves to `CameraCommon::isEZoomEnable`: the API entry function of that name. | trace catalog |
+| `0x7dffe90e` | 1 | `CameraCommon__isOwnEZoomLens` | Logs trace id `0x1014e`, which the trace catalog resolves to `CameraCommon::isOwnEZoomLens`: the API entry function of that name. | trace catalog |
+| `0x7dffe956` | 1 | `CameraCommon__isChangeOutLineEnable` | Logs trace id `0x1014b`, which the trace catalog resolves to `CameraCommon::isChangeOutLineEnable`: the API entry function of that name. | trace catalog |
+| `0x7dffe984` | 1 | `CameraCommon__isGpsProcessing` | Logs trace id `0x1014d`, which the trace catalog resolves to `CameraCommon::isGpsProcessing`: the API entry function of that name. | trace catalog |
+| `0x7dfff0eb` | 1 | `SettingController__resetFactorySetting` | Logs trace id `0x1020a`, which the trace catalog resolves to `SettingController::resetFactorySetting`: the API entry function of that name. | trace catalog |
+| `0x7dfff37a` | 1 | `SettingController__registerCallback` | Logs trace id `0x1020f`, which the trace catalog resolves to `SettingController::registerCallback`: the API entry function of that name. | trace catalog |
+| `0x7dfff800` | 1 | `SettingController__saveCustom` | Logs trace id `0x10212`, which the trace catalog resolves to `SettingController::saveCustom`: the API entry function of that name. | trace catalog |
+| `0x7dfff897` | 1 | `SettingController__clearCustom` | Logs trace id `0x10213`, which the trace catalog resolves to `SettingController::clearCustom`: the API entry function of that name. | trace catalog |
+| `0x7dfffa2b` | 1 | `SettingController__getCustomState` | Logs trace id `0x10215`, which the trace catalog resolves to `SettingController::getCustomState`: the API entry function of that name. | trace catalog |
+| `0x7dfffce1` | 1 | `SettingController__startMFsetting` | Logs trace id `0x1021f`, which the trace catalog resolves to `SettingController::startMFsetting`: the API entry function of that name. | trace catalog |
+| `0x7dffffba` | 1 | `SettingController__getLensMfMode` | Logs trace id `0x10227`, which the trace catalog resolves to `SettingController::getLensMfMode`: the API entry function of that name. | trace catalog |
+| `0x7e000080` | 1 | `BackGroundCtrl__draw` | Logs trace id `0x10301`, which the trace catalog resolves to `BackGroundCtrl::draw`: the API entry function of that name. | trace catalog |
+| `0x7e0002f9` | 1 | `BackGroundCtrl__paint` | Logs trace id `0x10302`, which the trace catalog resolves to `BackGroundCtrl::paint`: the API entry function of that name. | trace catalog |
+| `0x7e000745` | 1 | `BackGroundCtrl__setImageAreas` | Logs trace id `0x10305`, which the trace catalog resolves to `BackGroundCtrl::setImageAreas`: the API entry function of that name. | trace catalog |
+| `0x7e000b5b` | 1 | `SoundCtrl__stop` | Logs trace id `0x10502`, which the trace catalog resolves to `SoundCtrl::stop`: the API entry function of that name. | trace catalog |
+| `0x7e000b8e` | 1 | `SoundCtrl__setVolume` | Logs trace id `0x10503`, which the trace catalog resolves to `SoundCtrl::setVolume`: the API entry function of that name. | trace catalog |
+| `0x7e000c0f` | 1 | `SoundCtrl__startImportSound` | Logs trace id `0x10504`, which the trace catalog resolves to `SoundCtrl::startImportSound`: the API entry function of that name. | trace catalog |
+| `0x7e000ce1` | 1 | `SoundCtrl__getImportSoundCount` | Logs trace id `0x10506`, which the trace catalog resolves to `SoundCtrl::getImportSoundCount`: the API entry function of that name. | trace catalog |
+| `0x7e000e41` | 1 | `SoundCtrl__endImportSound` | Logs trace id `0x10509`, which the trace catalog resolves to `SoundCtrl::endImportSound`: the API entry function of that name. | trace catalog |
+| `0x7e000f49` | 1 | `SoundCtrl__stopImportSound` | Logs trace id `0x1050b`, which the trace catalog resolves to `SoundCtrl::stopImportSound`: the API entry function of that name. | trace catalog |
+| `0x7e000fc9` | 1 | `SoundCtrl__startLevel` | Logs trace id `0x1050c`, which the trace catalog resolves to `SoundCtrl::startLevel`: the API entry function of that name. | trace catalog |
+| `0x7e0010dc` | 1 | `SoundCtrl__endLevel` | Logs trace id `0x1050e`, which the trace catalog resolves to `SoundCtrl::endLevel`: the API entry function of that name. | trace catalog |
+| `0x7e00116f` | 1 | `DateCtrl__getCurrentDateTime` | Logs trace id `0x10701`, which the trace catalog resolves to `DateCtrl::getCurrentDateTime`: the API entry function of that name. | trace catalog |
+| `0x7e00128c` | 1 | `DateCtrl__setDateTime` | Logs trace id `0x10704`, which the trace catalog resolves to `DateCtrl::setDateTime`: the API entry function of that name. | trace catalog |
+| `0x7e0013a5` | 1 | `DateCtrl__canPopup` | Logs trace id `0x10706`, which the trace catalog resolves to `DateCtrl::canPopup`: the API entry function of that name. | trace catalog |
+| `0x7e0021ac` | 1 | `MediaCtrl__cancelTransferImageAll` | Logs trace id `0x10c13`, which the trace catalog resolves to `MediaCtrl::cancelTransferImageAll`: the API entry function of that name. | trace catalog |
+| `0x7e00227e` | 1 | `MediaCtrl__getAVCHDstate` | Logs trace id `0x10c15`, which the trace catalog resolves to `MediaCtrl::getAVCHDstate`: the API entry function of that name. | trace catalog |
+| `0x7e00243f` | 1 | `MediaCtrl__eraseReserveWiFiTransfer` | Logs trace id `0x10c18`, which the trace catalog resolves to `MediaCtrl::eraseReserveWiFiTransfer`: the API entry function of that name. | trace catalog |
+| `0x7e002472` | 1 | `PixelMapping__execute` | Logs trace id `0x10801`, which the trace catalog resolves to `PixelMapping::execute`: the API entry function of that name. | trace catalog |
+| `0x7e002524` | 1 | `PixelMapping__canPixelMapping` | Logs trace id `0x10802`, which the trace catalog resolves to `PixelMapping::canPixelMapping`: the API entry function of that name. | trace catalog |
+| `0x7e00278f` | 1 | `PowerSupplyControl__startCharging` | Logs trace id `0x10a04`, which the trace catalog resolves to `PowerSupplyControl::startCharging`: the API entry function of that name. | trace catalog |
+| `0x7e0027bc` | 1 | `PowerSupplyControl__stopCharging` | Logs trace id `0x10a05`, which the trace catalog resolves to `PowerSupplyControl::stopCharging`: the API entry function of that name. | trace catalog |
+| `0x7e002865` | 1 | `PowerSupplyControl__startChargeSleep` | Logs trace id `0x10a07`, which the trace catalog resolves to `PowerSupplyControl::startChargeSleep`: the API entry function of that name. | trace catalog |
+| `0x7e002892` | 1 | `LevelCtrl__startLevel` | Logs trace id `0x10f01`, which the trace catalog resolves to `LevelCtrl::startLevel`: the API entry function of that name. | trace catalog |
+| `0x7e002945` | 1 | `LevelCtrl__endLevel` | Logs trace id `0x10f02`, which the trace catalog resolves to `LevelCtrl::endLevel`: the API entry function of that name. | trace catalog |
+| `0x7e002a08` | 1 | `LevelCtrl__reset` | Logs trace id `0x10f04`, which the trace catalog resolves to `LevelCtrl::reset`: the API entry function of that name. | trace catalog |
+| `0x7e002a3b` | 1 | `LevelCtrl__calibration` | Logs trace id `0x10f05`, which the trace catalog resolves to `LevelCtrl::calibration`: the API entry function of that name. | trace catalog |
+| `0x7e002a6e` | 1 | `LevelCtrl__start3DLevel` | Logs trace id `0x10f07`, which the trace catalog resolves to `LevelCtrl::start3DLevel`: the API entry function of that name. | trace catalog |
+| `0x7e002aa1` | 1 | `LevelCtrl__end3DLevel` | Logs trace id `0x10f08`, which the trace catalog resolves to `LevelCtrl::end3DLevel`: the API entry function of that name. | trace catalog |
+| `0x7e002fda` | 1 | `KeyCtrl__unsetAllRepeatKey` | Logs trace id `0x10e04`, which the trace catalog resolves to `KeyCtrl::unsetAllRepeatKey`: the API entry function of that name. | trace catalog |
+| `0x7e0034d2` | 1 | `KeyCtrl__unsetAllLongPressKey` | Logs trace id `0x10e03`, which the trace catalog resolves to `KeyCtrl::unsetAllLongPressKey`: the API entry function of that name. | trace catalog |
+| `0x7e003f48` | 1 | `KeyCtrl__resetKeyEvent` | Logs trace id `0x10e09`, which the trace catalog resolves to `KeyCtrl::resetKeyEvent`: the API entry function of that name. | trace catalog |
+| `0x7e004032` | 1 | `TouchPanel__endTouchPanel` | Logs trace id `0x50502`, which the trace catalog resolves to `TouchPanel::endTouchPanel`: the API entry function of that name. | trace catalog |
+| `0x7e00419e` | 1 | `TouchPanel__getTouchPanelState` | Logs trace id `0x50504`, which the trace catalog resolves to `TouchPanel::getTouchPanelState`: the API entry function of that name. | trace catalog |
+| `0x7e0041d1` | 1 | `TouchPanel__getTouchNumber` | Logs trace id `0x50505`, which the trace catalog resolves to `TouchPanel::getTouchNumber`: the API entry function of that name. | trace catalog |
+| `0x7e0043f0` | 1 | `TouchPanel__isTouchDetection` | Logs trace id `0x50507`, which the trace catalog resolves to `TouchPanel::isTouchDetection`: the API entry function of that name. | trace catalog |
+| `0x7e004afb` | 1 | `Shooting__endShootingService` | Logs trace id `0x20102`, which the trace catalog resolves to `Shooting::endShootingService`: the API entry function of that name. | trace catalog |
+| `0x7e004b31` | 1 | `Shooting__canEndShootingService` | Logs trace id `0x20103`, which the trace catalog resolves to `Shooting::canEndShootingService`: the API entry function of that name. | trace catalog |
+| `0x7e005279` | 1 | `Shooting__stopHistogram` | Logs trace id `0x2010b`, which the trace catalog resolves to `Shooting::stopHistogram`: the API entry function of that name. | trace catalog |
+| `0x7e006e18` | 1 | `Shooting__getProgress` | Logs trace id `0x20115`, which the trace catalog resolves to `Shooting::getProgress`: the API entry function of that name. | trace catalog |
+| `0x7e006ec9` | 1 | `Shooting__startZoomFrame` | Logs trace id `0x20117`, which the trace catalog resolves to `Shooting::startZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e006eff` | 1 | `Shooting__endZoomFrame` | Logs trace id `0x20118`, which the trace catalog resolves to `Shooting::endZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e007510` | 1 | `Shooting__startMultiThrough` | Logs trace id `0x2011f`, which the trace catalog resolves to `Shooting::startMultiThrough`: the API entry function of that name. | trace catalog |
+| `0x7e00760e` | 1 | `Shooting__endMultiExposure` | Logs trace id `0x20134`, which the trace catalog resolves to `Shooting::endMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e007784` | 1 | `Shooting__getDirection` | Logs trace id `0x20125`, which the trace catalog resolves to `Shooting::getDirection`: the API entry function of that name. | trace catalog |
+| `0x7e0077b1` | 1 | `Shooting__endPanoramaShooting` | Logs trace id `0x20126`, which the trace catalog resolves to `Shooting::endPanoramaShooting`: the API entry function of that name. | trace catalog |
+| `0x7e0077e6` | 1 | `Shooting__getPanoramaCount` | Logs trace id `0x20127`, which the trace catalog resolves to `Shooting::getPanoramaCount`: the API entry function of that name. | trace catalog |
+| `0x7e00781d` | 1 | `Shooting__getPanoramaCountMax` | Logs trace id `0x20128`, which the trace catalog resolves to `Shooting::getPanoramaCountMax`: the API entry function of that name. | trace catalog |
+| `0x7e007b62` | 1 | `Shooting__getAflState` | Logs trace id `0x2012c`, which the trace catalog resolves to `Shooting::getAflState`: the API entry function of that name. | trace catalog |
+| `0x7e007c24` | 1 | `Shooting__startTargetAf` | Logs trace id `0x20170`, which the trace catalog resolves to `Shooting::startTargetAf`: the API entry function of that name. | trace catalog |
+| `0x7e007c59` | 1 | `Shooting__endTargetAf` | Logs trace id `0x20171`, which the trace catalog resolves to `Shooting::endTargetAf`: the API entry function of that name. | trace catalog |
+| `0x7e007c8e` | 1 | `Shooting__getAelState` | Logs trace id `0x2012e`, which the trace catalog resolves to `Shooting::getAelState`: the API entry function of that name. | trace catalog |
+| `0x7e007d14` | 1 | `Shooting__saveWBdetect` | Logs trace id `0x2012f`, which the trace catalog resolves to `Shooting::saveWBdetect`: the API entry function of that name. | trace catalog |
+| `0x7e0080d6` | 1 | `Shooting__endMFAssist` | Logs trace id `0x20132`, which the trace catalog resolves to `Shooting::endMFAssist`: the API entry function of that name. | trace catalog |
+| `0x7e0081f2` | 1 | `Shooting__startMultiExposure` | Logs trace id `0x20133`, which the trace catalog resolves to `Shooting::startMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e008227` | 1 | `Shooting__endMultiExposure_7e008227` | Logs trace id `0x20134`, which the trace catalog resolves to `Shooting::endMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e00825c` | 1 | `Shooting__saveMultiExposure` | Logs trace id `0x20136`, which the trace catalog resolves to `Shooting::saveMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e008292` | 1 | `Shooting__getMultiExposureCount` | Logs trace id `0x20137`, which the trace catalog resolves to `Shooting::getMultiExposureCount`: the API entry function of that name. | trace catalog |
+| `0x7e0082de` | 1 | `Shooting__deleteMultiExposure` | Logs trace id `0x20138`, which the trace catalog resolves to `Shooting::deleteMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e008a39` | 1 | `Shooting__getFPNexposureStatus` | Logs trace id `0x2014c`, which the trace catalog resolves to `Shooting::getFPNexposureStatus`: the API entry function of that name. | trace catalog |
+| `0x7e008b13` | 1 | `Shooting__ctrlZoomExposure` | Logs trace id `0x2014e`, which the trace catalog resolves to `Shooting::ctrlZoomExposure`: the API entry function of that name. | trace catalog |
+| `0x7e008d10` | 1 | `Shooting__updateLiveBulb` | Logs trace id `0x20151`, which the trace catalog resolves to `Shooting::updateLiveBulb`: the API entry function of that name. | trace catalog |
+| `0x7e008d46` | 1 | `Shooting__end3DLensShooting` | Logs trace id `0x20154`, which the trace catalog resolves to `Shooting::end3DLensShooting`: the API entry function of that name. | trace catalog |
+| `0x7e008d7c` | 1 | `Shooting__getReleaseSetting` | Logs trace id `0x20155`, which the trace catalog resolves to `Shooting::getReleaseSetting`: the API entry function of that name. | trace catalog |
+| `0x7e008daa` | 1 | `Shooting__start3DLensShooting` | Logs trace id `0x20153`, which the trace catalog resolves to `Shooting::start3DLensShooting`: the API entry function of that name. | trace catalog |
+| `0x7e008ec4` | 1 | `Shooting__cancelRecview` | Logs trace id `0x20156`, which the trace catalog resolves to `Shooting::cancelRecview`: the API entry function of that name. | trace catalog |
+| `0x7e008efa` | 1 | `Shooting__isLiveBulbShooting` | Logs trace id `0x20157`, which the trace catalog resolves to `Shooting::isLiveBulbShooting`: the API entry function of that name. | trace catalog |
+| `0x7e008f30` | 1 | `Shooting__getShootingState` | Logs trace id `0x20158`, which the trace catalog resolves to `Shooting::getShootingState`: the API entry function of that name. | trace catalog |
+| `0x7e008f66` | 1 | `Shooting__resetTouchScrollPosition` | Logs trace id `0x20159`, which the trace catalog resolves to `Shooting::resetTouchScrollPosition`: the API entry function of that name. | trace catalog |
+| `0x7e008f9c` | 1 | `Shooting__getZoomFrameState` | Logs trace id `0x2015b`, which the trace catalog resolves to `Shooting::getZoomFrameState`: the API entry function of that name. | trace catalog |
+| `0x7e009057` | 1 | `Shooting__startAfl` | Logs trace id `0x20172`, which the trace catalog resolves to `Shooting::startAfl`: the API entry function of that name. | trace catalog |
+| `0x7e009085` | 1 | `Shooting__endAfl` | Logs trace id `0x20173`, which the trace catalog resolves to `Shooting::endAfl`: the API entry function of that name. | trace catalog |
+| `0x7e0096ab` | 1 | `Shooting__endLiveGuide` | Logs trace id `0x20162`, which the trace catalog resolves to `Shooting::endLiveGuide`: the API entry function of that name. | trace catalog |
+| `0x7e009b0e` | 1 | `Shooting__isLiveGuide` | Logs trace id `0x2017a`, which the trace catalog resolves to `Shooting::isLiveGuide`: the API entry function of that name. | trace catalog |
+| `0x7e009dda` | 1 | `Shooting__stopZooming` | Logs trace id `0x2016a`, which the trace catalog resolves to `Shooting::stopZooming`: the API entry function of that name. | trace catalog |
+| `0x7e009f7d` | 1 | `Shooting__startWBdetect` | Logs trace id `0x20122`, which the trace catalog resolves to `Shooting::startWBdetect`: the API entry function of that name. | trace catalog |
+| `0x7e00a136` | 1 | `Shooting__startCombine` | Logs trace id `0x20176`, which the trace catalog resolves to `Shooting::startCombine`: the API entry function of that name. | trace catalog |
+| `0x7e00a492` | 1 | `Shooting__photoSessionSpeedRelease` | Logs trace id `0x2018f`, which the trace catalog resolves to `Shooting::photoSessionSpeedRelease`: the API entry function of that name. | trace catalog |
+| `0x7e00aa30` | 1 | `Shooting__isZoomRecView` | Logs trace id `0x20199`, which the trace catalog resolves to `Shooting::isZoomRecView`: the API entry function of that name. | trace catalog |
+| `0x7e00aa66` | 1 | `Shooting__isZoomThrough` | Logs trace id `0x2019a`, which the trace catalog resolves to `Shooting::isZoomThrough`: the API entry function of that name. | trace catalog |
+| `0x7e00aa9c` | 1 | `Shooting__isLiveBulbHistogramEnable` | Logs trace id `0x2019b`, which the trace catalog resolves to `Shooting::isLiveBulbHistogramEnable`: the API entry function of that name. | trace catalog |
+| `0x7e00aad2` | 1 | `Shooting__startFrameAssist` | Logs trace id `0x2019c`, which the trace catalog resolves to `Shooting::startFrameAssist`: the API entry function of that name. | trace catalog |
+| `0x7e00ab08` | 1 | `Shooting__endFrameAssist` | Logs trace id `0x2019d`, which the trace catalog resolves to `Shooting::endFrameAssist`: the API entry function of that name. | trace catalog |
+| `0x7e00abac` | 1 | `Shooting__getSubjectDistance` | Logs trace id `0x2019e`, which the trace catalog resolves to `Shooting::getSubjectDistance`: the API entry function of that name. | trace catalog |
+| `0x7e00ad30` | 1 | `Shooting__cancelDarkFrame` | Logs trace id `0x201a1`, which the trace catalog resolves to `Shooting::cancelDarkFrame`: the API entry function of that name. | trace catalog |
+| `0x7e00ad66` | 1 | `Shooting__getMovieState` | Logs trace id `0x201a2`, which the trace catalog resolves to `Shooting::getMovieState`: the API entry function of that name. | trace catalog |
+| `0x7e00ae87` | 1 | `Shooting__getLiveGuideInfo` | Logs trace id `0x201a4`, which the trace catalog resolves to `Shooting::getLiveGuideInfo`: the API entry function of that name. | trace catalog |
+| `0x7e00aebf` | 1 | `Shooting__getApertureDownState` | Logs trace id `0x201a5`, which the trace catalog resolves to `Shooting::getApertureDownState`: the API entry function of that name. | trace catalog |
+| `0x7e00aef5` | 1 | `Shooting__getCustomSelfShootingCount` | Logs trace id `0x201a6`, which the trace catalog resolves to `Shooting::getCustomSelfShootingCount`: the API entry function of that name. | trace catalog |
+| `0x7e00af24` | 1 | `Shooting__getSelfTimerCount` | Logs trace id `0x201a7`, which the trace catalog resolves to `Shooting::getSelfTimerCount`: the API entry function of that name. | trace catalog |
+| `0x7e00b1ce` | 1 | `AfFinetune__getCurrentTarget` | Logs trace id `0x20406`, which the trace catalog resolves to `AfFinetune::getCurrentTarget`: the API entry function of that name. | trace catalog |
+| `0x7e00bfee` | 1 | `PlayCommon__startPlayService` | Logs trace id `0x30101`, which the trace catalog resolves to `PlayCommon::startPlayService`: the API entry function of that name. | trace catalog |
+| `0x7e00c029` | 1 | `PlayCommon__endPlayService` | Logs trace id `0x3010a`, which the trace catalog resolves to `PlayCommon::endPlayService`: the API entry function of that name. | trace catalog |
+| `0x7e00d5c1` | 1 | `PlayCommon__getSelectPicNumber` | Logs trace id `0x30113`, which the trace catalog resolves to `PlayCommon::getSelectPicNumber`: the API entry function of that name. | trace catalog |
+| `0x7e00d5ee` | 1 | `PlayCommon__erase` | Logs trace id `0x3010e`, which the trace catalog resolves to `PlayCommon::erase`: the API entry function of that name. | trace catalog |
+| `0x7e00d623` | 1 | `PlayCommon__changeProtect` | Logs trace id `0x3010b`, which the trace catalog resolves to `PlayCommon::changeProtect`: the API entry function of that name. | trace catalog |
+| `0x7e00d650` | 1 | `PlayCommon__canProtect` | Logs trace id `0x3010c`, which the trace catalog resolves to `PlayCommon::canProtect`: the API entry function of that name. | trace catalog |
+| `0x7e00d67d` | 1 | `PlayCommon__changeProtectSelected` | Logs trace id `0x3010d`, which the trace catalog resolves to `PlayCommon::changeProtectSelected`: the API entry function of that name. | trace catalog |
+| `0x7e00d6b2` | 1 | `PlayCommon__isReservePrint` | Logs trace id `0x3010f`, which the trace catalog resolves to `PlayCommon::isReservePrint`: the API entry function of that name. | trace catalog |
+| `0x7e00d6e7` | 1 | `PlayCommon__isProtect` | Logs trace id `0x30110`, which the trace catalog resolves to `PlayCommon::isProtect`: the API entry function of that name. | trace catalog |
+| `0x7e00d71c` | 1 | `PlayCommon__isRecording` | Logs trace id `0x30111`, which the trace catalog resolves to `PlayCommon::isRecording`: the API entry function of that name. | trace catalog |
+| `0x7e00d87c` | 1 | `PlayCommon__cancelSelectedAll` | Logs trace id `0x30115`, which the trace catalog resolves to `PlayCommon::cancelSelectedAll`: the API entry function of that name. | trace catalog |
+| `0x7e00d8b1` | 1 | `PlayCommon__selectPic` | Logs trace id `0x30116`, which the trace catalog resolves to `PlayCommon::selectPic`: the API entry function of that name. | trace catalog |
+| `0x7e00d8ea` | 1 | `PlayCommon__changeReserveWiFiTransfer` | Logs trace id `0x30117`, which the trace catalog resolves to `PlayCommon::changeReserveWiFiTransfer`: the API entry function of that name. | trace catalog |
+| `0x7e00d917` | 1 | `PlayCommon__changeReserveWiFiTransferSelected` | Logs trace id `0x30118`, which the trace catalog resolves to `PlayCommon::changeReserveWiFiTransferSelected`: the API entry function of that name. | trace catalog |
+| `0x7e00d94c` | 1 | `PlayCommon__canReserveWiFiTransfer` | Logs trace id `0x30119`, which the trace catalog resolves to `PlayCommon::canReserveWiFiTransfer`: the API entry function of that name. | trace catalog |
+| `0x7e00dba7` | 1 | `PlaySingleFrame__moveCurrent` | Logs trace id `0x30202`, which the trace catalog resolves to `PlaySingleFrame::moveCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e00df99` | 1 | `PlaySingleFrame__isEnlarge` | Logs trace id `0x3020b`, which the trace catalog resolves to `PlaySingleFrame::isEnlarge`: the API entry function of that name. | trace catalog |
+| `0x7e00e404` | 1 | `PlaySingleFrame__canRotate` | Logs trace id `0x3021a`, which the trace catalog resolves to `PlaySingleFrame::canRotate`: the API entry function of that name. | trace catalog |
+| `0x7e00e557` | 1 | `PlaySingleFrame__canPrint` | Logs trace id `0x30212`, which the trace catalog resolves to `PlaySingleFrame::canPrint`: the API entry function of that name. | trace catalog |
+| `0x7e00e58c` | 1 | `PlaySingleFrame__eraseCurrent` | Logs trace id `0x3020d`, which the trace catalog resolves to `PlaySingleFrame::eraseCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e00e98f` | 1 | `PlaySingleFrame__endSlide` | Logs trace id `0x3021c`, which the trace catalog resolves to `PlaySingleFrame::endSlide`: the API entry function of that name. | trace catalog |
+| `0x7e00ead7` | 1 | `PlaySingleFrame__endMoveCurrentContinuous` | Logs trace id `0x3021e`, which the trace catalog resolves to `PlaySingleFrame::endMoveCurrentContinuous`: the API entry function of that name. | trace catalog |
+| `0x7e00ec44` | 1 | `PlaySingleFrame__endFastZoom` | Logs trace id `0x30221`, which the trace catalog resolves to `PlaySingleFrame::endFastZoom`: the API entry function of that name. | trace catalog |
+| `0x7e00ed9e` | 1 | `PlaySingleFrame__endScrollFast` | Logs trace id `0x30223`, which the trace catalog resolves to `PlaySingleFrame::endScrollFast`: the API entry function of that name. | trace catalog |
+| `0x7e00edd3` | 1 | `PlaySingleFrame__startScrollZoomFrame` | Logs trace id `0x30224`, which the trace catalog resolves to `PlaySingleFrame::startScrollZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e00ee0a` | 1 | `PlaySingleFrame__endScrollZoomFrame` | Logs trace id `0x30225`, which the trace catalog resolves to `PlaySingleFrame::endScrollZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e00f0c7` | 1 | `PlayIndex__getPageInfo` | Logs trace id `0x30302`, which the trace catalog resolves to `PlayIndex::getPageInfo`: the API entry function of that name. | trace catalog |
+| `0x7e00f337` | 1 | `PlayIndex__updateImage` | Logs trace id `0x30305`, which the trace catalog resolves to `PlayIndex::updateImage`: the API entry function of that name. | trace catalog |
+| `0x7e00f575` | 1 | `PlayIndex__canRotate` | Logs trace id `0x3030d`, which the trace catalog resolves to `PlayIndex::canRotate`: the API entry function of that name. | trace catalog |
+| `0x7e00f645` | 1 | `PlayIndex__startExpandAnimation` | Logs trace id `0x30308`, which the trace catalog resolves to `PlayIndex::startExpandAnimation`: the API entry function of that name. | trace catalog |
+| `0x7e00f860` | 1 | `PlayIndex__getIndexInfo` | Logs trace id `0x30311`, which the trace catalog resolves to `PlayIndex::getIndexInfo`: the API entry function of that name. | trace catalog |
+| `0x7e00f8ad` | 1 | `PlayIndex__startSlide` | Logs trace id `0x30312`, which the trace catalog resolves to `PlayIndex::startSlide`: the API entry function of that name. | trace catalog |
+| `0x7e00f8f8` | 1 | `PlayIndex__endSlide` | Logs trace id `0x30313`, which the trace catalog resolves to `PlayIndex::endSlide`: the API entry function of that name. | trace catalog |
+| `0x7e00f92d` | 1 | `PlayIndex__getMaxRow` | Logs trace id `0x30314`, which the trace catalog resolves to `PlayIndex::getMaxRow`: the API entry function of that name. | trace catalog |
+| `0x7e00f95a` | 1 | `PlayIndex__getShowedRow` | Logs trace id `0x30315`, which the trace catalog resolves to `PlayIndex::getShowedRow`: the API entry function of that name. | trace catalog |
+| `0x7e00f996` | 1 | `PlayIndex__selectPic` | Logs trace id `0x30316`, which the trace catalog resolves to `PlayIndex::selectPic`: the API entry function of that name. | trace catalog |
+| `0x7e00fdba` | 1 | `PlaySelect__getCurrentInfo` | Logs trace id `0x31c05`, which the trace catalog resolves to `PlaySelect::getCurrentInfo`: the API entry function of that name. | trace catalog |
+| `0x7e0100fd` | 1 | `PlaySelect__expandAnimation` | Logs trace id `0x31c08`, which the trace catalog resolves to `PlaySelect::expandAnimation`: the API entry function of that name. | trace catalog |
+| `0x7e010132` | 1 | `PlaySelect__getIndexInfo` | Logs trace id `0x31c0b`, which the trace catalog resolves to `PlaySelect::getIndexInfo`: the API entry function of that name. | trace catalog |
+| `0x7e01017f` | 1 | `PlaySelect__changeSelectedFrame` | Logs trace id `0x31c0c`, which the trace catalog resolves to `PlaySelect::changeSelectedFrame`: the API entry function of that name. | trace catalog |
+| `0x7e0101b4` | 1 | `PlaySelect__updateImageSync` | Logs trace id `0x31c0d`, which the trace catalog resolves to `PlaySelect::updateImageSync`: the API entry function of that name. | trace catalog |
+| `0x7e01021b` | 1 | `PlayMovie__startMovieService` | Logs trace id `0x30501`, which the trace catalog resolves to `PlayMovie::startMovieService`: the API entry function of that name. | trace catalog |
+| `0x7e0102aa` | 1 | `PlayMovie__play` | Logs trace id `0x30502`, which the trace catalog resolves to `PlayMovie::play`: the API entry function of that name. | trace catalog |
+| `0x7e0102df` | 1 | `PlayMovie__reversePlay` | Logs trace id `0x30503`, which the trace catalog resolves to `PlayMovie::reversePlay`: the API entry function of that name. | trace catalog |
+| `0x7e01048e` | 1 | `PlayMovie__pause` | Logs trace id `0x30507`, which the trace catalog resolves to `PlayMovie::pause`: the API entry function of that name. | trace catalog |
+| `0x7e010580` | 1 | `PlayMovie__forwardFrame` | Logs trace id `0x30508`, which the trace catalog resolves to `PlayMovie::forwardFrame`: the API entry function of that name. | trace catalog |
+| `0x7e0105b5` | 1 | `PlayMovie__rewindFrame` | Logs trace id `0x30509`, which the trace catalog resolves to `PlayMovie::rewindFrame`: the API entry function of that name. | trace catalog |
+| `0x7e0105ea` | 1 | `PlayMovie__stop` | Logs trace id `0x30504`, which the trace catalog resolves to `PlayMovie::stop`: the API entry function of that name. | trace catalog |
+| `0x7e010617` | 1 | `PlayRecord__start` | Logs trace id `0x30601`, which the trace catalog resolves to `PlayRecord::start`: the API entry function of that name. | trace catalog |
+| `0x7e010654` | 1 | `PlayRecord__record` | Logs trace id `0x30603`, which the trace catalog resolves to `PlayRecord::record`: the API entry function of that name. | trace catalog |
+| `0x7e010689` | 1 | `PlayRecord__canRecord` | Logs trace id `0x30604`, which the trace catalog resolves to `PlayRecord::canRecord`: the API entry function of that name. | trace catalog |
+| `0x7e0106b6` | 1 | `PlayRecord__erase` | Logs trace id `0x30605`, which the trace catalog resolves to `PlayRecord::erase`: the API entry function of that name. | trace catalog |
+| `0x7e0106e3` | 1 | `PlayRecord__stop` | Logs trace id `0x30606`, which the trace catalog resolves to `PlayRecord::stop`: the API entry function of that name. | trace catalog |
+| `0x7e0107a4` | 1 | `ReservePrint__hasReservation` | Logs trace id `0x31002`, which the trace catalog resolves to `ReservePrint::hasReservation`: the API entry function of that name. | trace catalog |
+| `0x7e0107d1` | 1 | `ReservePrint__eraseReservation` | Logs trace id `0x31003`, which the trace catalog resolves to `ReservePrint::eraseReservation`: the API entry function of that name. | trace catalog |
+| `0x7e0109c9` | 1 | `ReservePrint__moveCurrent` | Logs trace id `0x31005`, which the trace catalog resolves to `ReservePrint::moveCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e010ab9` | 1 | `ReservePrint__canChangePrintCount` | Logs trace id `0x3100c`, which the trace catalog resolves to `ReservePrint::canChangePrintCount`: the API entry function of that name. | trace catalog |
+| `0x7e010b8f` | 1 | `ReservePrint__hasPrintCount` | Logs trace id `0x31008`, which the trace catalog resolves to `ReservePrint::hasPrintCount`: the API entry function of that name. | trace catalog |
+| `0x7e010c4e` | 1 | `ReservePrint__getPrintCount` | Logs trace id `0x3100b`, which the trace catalog resolves to `ReservePrint::getPrintCount`: the API entry function of that name. | trace catalog |
+| `0x7e010c77` | 1 | `ReservePrint__reservePrint` | Logs trace id `0x3100a`, which the trace catalog resolves to `ReservePrint::reservePrint`: the API entry function of that name. | trace catalog |
+| `0x7e010cac` | 1 | `ReservePrint__end` | Logs trace id `0x3100d`, which the trace catalog resolves to `ReservePrint::end`: the API entry function of that name. | trace catalog |
+| `0x7e010d9f` | 1 | `ReservePrint__canReserve` | Logs trace id `0x3100f`, which the trace catalog resolves to `ReservePrint::canReserve`: the API entry function of that name. | trace catalog |
+| `0x7e010dcc` | 1 | `PlaySlideShow__start` | Logs trace id `0x30f01`, which the trace catalog resolves to `PlaySlideShow::start`: the API entry function of that name. | trace catalog |
+| `0x7e010f8b` | 1 | `PlaySlideShow__endSlideShow` | Logs trace id `0x30f04`, which the trace catalog resolves to `PlaySlideShow::endSlideShow`: the API entry function of that name. | trace catalog |
+| `0x7e010fb8` | 1 | `PlaySlideShow__canSlideShowGPU` | Logs trace id `0x30f0f`, which the trace catalog resolves to `PlaySlideShow::canSlideShowGPU`: the API entry function of that name. | trace catalog |
+| `0x7e010fe4` | 1 | `PlaySlideShow__startSlideShowGPU` | Logs trace id `0x30f10`, which the trace catalog resolves to `PlaySlideShow::startSlideShowGPU`: the API entry function of that name. | trace catalog |
+| `0x7e011015` | 1 | `PlaySlideShow__skipPage` | Logs trace id `0x30f11`, which the trace catalog resolves to `PlaySlideShow::skipPage`: the API entry function of that name. | trace catalog |
+| `0x7e011042` | 1 | `PlaySlideShow__endSlideShowGPU` | Logs trace id `0x30f12`, which the trace catalog resolves to `PlaySlideShow::endSlideShowGPU`: the API entry function of that name. | trace catalog |
+| `0x7e011070` | 1 | `PlaySlideShow__setSelectPicDisable` | Logs trace id `0x30f13`, which the trace catalog resolves to `PlaySlideShow::setSelectPicDisable`: the API entry function of that name. | trace catalog |
+| `0x7e011099` | 1 | `PlaySound__start` | Logs trace id `0x31701`, which the trace catalog resolves to `PlaySound::start`: the API entry function of that name. | trace catalog |
+| `0x7e0110cc` | 1 | `PlaySound__startPlay` | Logs trace id `0x31702`, which the trace catalog resolves to `PlaySound::startPlay`: the API entry function of that name. | trace catalog |
+| `0x7e011155` | 1 | `PlaySound__stopPlay` | Logs trace id `0x31703`, which the trace catalog resolves to `PlaySound::stopPlay`: the API entry function of that name. | trace catalog |
+| `0x7e0118f2` | 1 | `PlayLightBox__start` | Logs trace id `0x31d01`, which the trace catalog resolves to `PlayLightBox::start`: the API entry function of that name. | trace catalog |
+| `0x7e011e48` | 1 | `PlayLightBox__setBase` | Logs trace id `0x31d04`, which the trace catalog resolves to `PlayLightBox::setBase`: the API entry function of that name. | trace catalog |
+| `0x7e012144` | 1 | `PlayLightBox__updateImage` | Logs trace id `0x31d09`, which the trace catalog resolves to `PlayLightBox::updateImage`: the API entry function of that name. | trace catalog |
+| `0x7e012242` | 1 | `PlayLightBox__isSameNumber` | Logs trace id `0x31d0a`, which the trace catalog resolves to `PlayLightBox::isSameNumber`: the API entry function of that name. | trace catalog |
+| `0x7e01238d` | 1 | `PlayLightBox__eraseCurrent` | Logs trace id `0x31d0d`, which the trace catalog resolves to `PlayLightBox::eraseCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e0123c2` | 1 | `PlayLightBox__erase` | Logs trace id `0x31d0e`, which the trace catalog resolves to `PlayLightBox::erase`: the API entry function of that name. | trace catalog |
+| `0x7e012854` | 1 | `EditResize__preCheck` | Logs trace id `0x30706`, which the trace catalog resolves to `EditResize::preCheck`: the API entry function of that name. | trace catalog |
+| `0x7e012922` | 1 | `EditTrimming__start` | Logs trace id `0x30801`, which the trace catalog resolves to `EditTrimming::start`: the API entry function of that name. | trace catalog |
+| `0x7e012eae` | 1 | `EditTrimming__save` | Logs trace id `0x3080b`, which the trace catalog resolves to `EditTrimming::save`: the API entry function of that name. | trace catalog |
+| `0x7e012ee3` | 1 | `EditTrimming__preCheck` | Logs trace id `0x3080f`, which the trace catalog resolves to `EditTrimming::preCheck`: the API entry function of that name. | trace catalog |
+| `0x7e012f10` | 1 | `EditAspect__start` | Logs trace id `0x31a01`, which the trace catalog resolves to `EditAspect::start`: the API entry function of that name. | trace catalog |
+| `0x7e012f43` | 1 | `EditAspect__canAspect` | Logs trace id `0x31a02`, which the trace catalog resolves to `EditAspect::canAspect`: the API entry function of that name. | trace catalog |
+| `0x7e013445` | 1 | `EditAspect__save` | Logs trace id `0x31a05`, which the trace catalog resolves to `EditAspect::save`: the API entry function of that name. | trace catalog |
+| `0x7e01347a` | 1 | `EditColor__start` | Logs trace id `0x30901`, which the trace catalog resolves to `EditColor::start`: the API entry function of that name. | trace catalog |
+| `0x7e0134ad` | 1 | `EditColor__canColor` | Logs trace id `0x30904`, which the trace catalog resolves to `EditColor::canColor`: the API entry function of that name. | trace catalog |
+| `0x7e0137d9` | 1 | `EditColor__save` | Logs trace id `0x3090a`, which the trace catalog resolves to `EditColor::save`: the API entry function of that name. | trace catalog |
+| `0x7e013806` | 1 | `EditRedEyeAdjust__start` | Logs trace id `0x30b01`, which the trace catalog resolves to `EditRedEyeAdjust::start`: the API entry function of that name. | trace catalog |
+| `0x7e013839` | 1 | `EditRedEyeAdjust__canAdjust` | Logs trace id `0x30b04`, which the trace catalog resolves to `EditRedEyeAdjust::canAdjust`: the API entry function of that name. | trace catalog |
+| `0x7e0139a2` | 1 | `EditRedEyeAdjust__save` | Logs trace id `0x30b09`, which the trace catalog resolves to `EditRedEyeAdjust::save`: the API entry function of that name. | trace catalog |
+| `0x7e0139d7` | 1 | `EditRedEyeAdjust__preCheck` | Logs trace id `0x30b0b`, which the trace catalog resolves to `EditRedEyeAdjust::preCheck`: the API entry function of that name. | trace catalog |
+| `0x7e013a04` | 1 | `EditShadowAdjust__start` | Logs trace id `0x30c01`, which the trace catalog resolves to `EditShadowAdjust::start`: the API entry function of that name. | trace catalog |
+| `0x7e013a37` | 1 | `EditShadowAdjust__canAdjust` | Logs trace id `0x30c04`, which the trace catalog resolves to `EditShadowAdjust::canAdjust`: the API entry function of that name. | trace catalog |
+| `0x7e013ba0` | 1 | `EditShadowAdjust__save` | Logs trace id `0x30c08`, which the trace catalog resolves to `EditShadowAdjust::save`: the API entry function of that name. | trace catalog |
+| `0x7e013bd5` | 1 | `EditShadowAdjust__preCheck` | Logs trace id `0x30c0b`, which the trace catalog resolves to `EditShadowAdjust::preCheck`: the API entry function of that name. | trace catalog |
+| `0x7e013cc6` | 1 | `EditBeautyAdjust__canAdjust` | Logs trace id `0x30d04`, which the trace catalog resolves to `EditBeautyAdjust::canAdjust`: the API entry function of that name. | trace catalog |
+| `0x7e013cf3` | 1 | `EditBeautyAdjust__ready` | Logs trace id `0x30d11`, which the trace catalog resolves to `EditBeautyAdjust::ready`: the API entry function of that name. | trace catalog |
+| `0x7e013d20` | 1 | `EditBeautyAdjust__executeAdjust` | Logs trace id `0x30d0a`, which the trace catalog resolves to `EditBeautyAdjust::executeAdjust`: the API entry function of that name. | trace catalog |
+| `0x7e013d55` | 1 | `EditBeautyAdjust__save` | Logs trace id `0x30d0b`, which the trace catalog resolves to `EditBeautyAdjust::save`: the API entry function of that name. | trace catalog |
+| `0x7e013d8a` | 1 | `EditBeautyAdjust__startCompare` | Logs trace id `0x30d0f`, which the trace catalog resolves to `EditBeautyAdjust::startCompare`: the API entry function of that name. | trace catalog |
+| `0x7e013db6` | 1 | `EditRaw__canRaw` | Logs trace id `0x31b02`, which the trace catalog resolves to `EditRaw::canRaw`: the API entry function of that name. | trace catalog |
+| `0x7e013deb` | 1 | `EditRaw__save` | Logs trace id `0x31b01`, which the trace catalog resolves to `EditRaw::save`: the API entry function of that name. | trace catalog |
+| `0x7e013e26` | 1 | `EditRaw__startCurrentModeEdit` | Logs trace id `0x31b03`, which the trace catalog resolves to `EditRaw::startCurrentModeEdit`: the API entry function of that name. | trace catalog |
+| `0x7e013f63` | 1 | `EditRaw__saveCurrentModeEdit` | Logs trace id `0x31b05`, which the trace catalog resolves to `EditRaw::saveCurrentModeEdit`: the API entry function of that name. | trace catalog |
+| `0x7e0141d5` | 1 | `EditRaw__saveCustomEdit` | Logs trace id `0x31b09`, which the trace catalog resolves to `EditRaw::saveCustomEdit`: the API entry function of that name. | trace catalog |
+| `0x7e01429c` | 1 | `EditRaw__startArtBktEdit` | Logs trace id `0x31b0b`, which the trace catalog resolves to `EditRaw::startArtBktEdit`: the API entry function of that name. | trace catalog |
+| `0x7e0142d8` | 1 | `EditRaw__saveArtBktEdit` | Logs trace id `0x31b0c`, which the trace catalog resolves to `EditRaw::saveArtBktEdit`: the API entry function of that name. | trace catalog |
+| `0x7e01439f` | 1 | `EditImageOverlay__start` | Logs trace id `0x30a0b`, which the trace catalog resolves to `EditImageOverlay::start`: the API entry function of that name. | trace catalog |
+| `0x7e014bc0` | 1 | `EditImageOverlay__save` | Logs trace id `0x30a09`, which the trace catalog resolves to `EditImageOverlay::save`: the API entry function of that name. | trace catalog |
+| `0x7e014c88` | 1 | `EditImageOverlay__canOverlay` | Logs trace id `0x30a0d`, which the trace catalog resolves to `EditImageOverlay::canOverlay`: the API entry function of that name. | trace catalog |
+| `0x7e014cb5` | 1 | `EditImageOverlay__getIndexInfo` | Logs trace id `0x30a0e`, which the trace catalog resolves to `EditImageOverlay::getIndexInfo`: the API entry function of that name. | trace catalog |
+| `0x7e014d02` | 1 | `SelectOverlay__start` | Logs trace id `0x31f01`, which the trace catalog resolves to `SelectOverlay::start`: the API entry function of that name. | trace catalog |
+| `0x7e01515d` | 1 | `SelectOverlay__selectCurrent` | Logs trace id `0x31f07`, which the trace catalog resolves to `SelectOverlay::selectCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e015192` | 1 | `SelectOverlay__getIndexInfo` | Logs trace id `0x31f09`, which the trace catalog resolves to `SelectOverlay::getIndexInfo`: the API entry function of that name. | trace catalog |
+| `0x7e01577e` | 1 | `SelfAdjust__getMenuItemNumber` | Logs trace id `0x40104`, which the trace catalog resolves to `SelfAdjust::getMenuItemNumber`: the API entry function of that name. | trace catalog |
+| `0x7e0175cd` | 1 | `SelfAdjust__turnOnTFT` | Logs trace id `0x4010f`, which the trace catalog resolves to `SelfAdjust::turnOnTFT`: the API entry function of that name. | trace catalog |
+| `0x7e0175fa` | 1 | `SelfAdjust__turnOffTFT` | Logs trace id `0x40110`, which the trace catalog resolves to `SelfAdjust::turnOffTFT`: the API entry function of that name. | trace catalog |
+| `0x7e017627` | 1 | `SelfAdjust__startThrough` | Logs trace id `0x4010d`, which the trace catalog resolves to `SelfAdjust::startThrough`: the API entry function of that name. | trace catalog |
+| `0x7e017654` | 1 | `SelfAdjust__stopThrough` | Logs trace id `0x4010e`, which the trace catalog resolves to `SelfAdjust::stopThrough`: the API entry function of that name. | trace catalog |
+| `0x7e0176e8` | 1 | `SelfAdjust__getResultString` | Logs trace id `0x40112`, which the trace catalog resolves to `SelfAdjust::getResultString`: the API entry function of that name. | trace catalog |
+| `0x7e0177a8` | 1 | `SelfAdjust__getNextMenuItem` | Logs trace id `0x40113`, which the trace catalog resolves to `SelfAdjust::getNextMenuItem`: the API entry function of that name. | trace catalog |
+| `0x7e017958` | 1 | `SelfAdjust__getContentsNumber` | Logs trace id `0x40115`, which the trace catalog resolves to `SelfAdjust::getContentsNumber`: the API entry function of that name. | trace catalog |
+| `0x7e017c78` | 1 | `LifeTest__getLifeTestMode` | Logs trace id `0x40202`, which the trace catalog resolves to `LifeTest::getLifeTestMode`: the API entry function of that name. | trace catalog |
+| `0x7e017caf` | 1 | `LifeTest__getLifeTestCount` | Logs trace id `0x40203`, which the trace catalog resolves to `LifeTest::getLifeTestCount`: the API entry function of that name. | trace catalog |
+| `0x7e017d0e` | 1 | `LifeTest__abortLifeTest` | Logs trace id `0x40204`, which the trace catalog resolves to `LifeTest::abortLifeTest`: the API entry function of that name. | trace catalog |
+| `0x7e017d37` | 1 | `LifeTest__reset` | Logs trace id `0x40205`, which the trace catalog resolves to `LifeTest::reset`: the API entry function of that name. | trace catalog |
+| `0x7e017d60` | 1 | `Relocate__registerCode` | Logs trace id `0x40301`, which the trace catalog resolves to `Relocate::registerCode`: the API entry function of that name. | trace catalog |
+| `0x7e017d94` | 1 | `Relocate__eraseCode` | Logs trace id `0x40302`, which the trace catalog resolves to `Relocate::eraseCode`: the API entry function of that name. | trace catalog |
+| `0x7e017e27` | 1 | `Maintenance__getNumberOfSystemName` | Logs trace id `0x40402`, which the trace catalog resolves to `Maintenance::getNumberOfSystemName`: the API entry function of that name. | trace catalog |
+| `0x7e018247` | 1 | `Maintenance__clearDamageInfo_7e018247` | Logs trace id `0x40409`, which the trace catalog resolves to `Maintenance::clearDamageInfo`: the API entry function of that name. | trace catalog |
+| `0x7e018565` | 1 | `EasyPrint__select` | Logs trace id `0x50202`, which the trace catalog resolves to `EasyPrint::select`: the API entry function of that name. | trace catalog |
+| `0x7e018757` | 1 | `EasyPrint__getStillImageCount` | Logs trace id `0x50209`, which the trace catalog resolves to `EasyPrint::getStillImageCount`: the API entry function of that name. | trace catalog |
+| `0x7e018785` | 1 | `EasyPrint__print` | Logs trace id `0x50205`, which the trace catalog resolves to `EasyPrint::print`: the API entry function of that name. | trace catalog |
+| `0x7e0187ba` | 1 | `EasyPrint__continuePrint` | Logs trace id `0x50207`, which the trace catalog resolves to `EasyPrint::continuePrint`: the API entry function of that name. | trace catalog |
+| `0x7e0187ef` | 1 | `EasyPrint__abortPrint` | Logs trace id `0x50206`, which the trace catalog resolves to `EasyPrint::abortPrint`: the API entry function of that name. | trace catalog |
+| `0x7e0189b8` | 1 | `EasyPrint__endEasyPrintService` | Logs trace id `0x50208`, which the trace catalog resolves to `EasyPrint::endEasyPrintService`: the API entry function of that name. | trace catalog |
+| `0x7e018cf9` | 1 | `CustomPrint__startCustomPrintService` | Logs trace id `0x50301`, which the trace catalog resolves to `CustomPrint::startCustomPrintService`: the API entry function of that name. | trace catalog |
+| `0x7e018e87` | 1 | `CustomPrint__getPaperSetting` | Logs trace id `0x50303`, which the trace catalog resolves to `CustomPrint::getPaperSetting`: the API entry function of that name. | trace catalog |
+| `0x7e019134` | 1 | `CustomPrint__setPaperSetting` | Logs trace id `0x50307`, which the trace catalog resolves to `CustomPrint::setPaperSetting`: the API entry function of that name. | trace catalog |
+| `0x7e019718` | 1 | `CustomPrint__getStillImageCount` | Logs trace id `0x5031f`, which the trace catalog resolves to `CustomPrint::getStillImageCount`: the API entry function of that name. | trace catalog |
+| `0x7e019746` | 1 | `CustomPrint__getPageInfo` | Logs trace id `0x5031b`, which the trace catalog resolves to `CustomPrint::getPageInfo`: the API entry function of that name. | trace catalog |
+| `0x7e019796` | 1 | `CustomPrint__startExpandAnimation` | Logs trace id `0x5031c`, which the trace catalog resolves to `CustomPrint::startExpandAnimation`: the API entry function of that name. | trace catalog |
+| `0x7e0197cb` | 1 | `CustomPrint__canPrint` | Logs trace id `0x5031d`, which the trace catalog resolves to `CustomPrint::canPrint`: the API entry function of that name. | trace catalog |
+| `0x7e0198ae` | 1 | `CustomPrint__changeDatePrint` | Logs trace id `0x5030e`, which the trace catalog resolves to `CustomPrint::changeDatePrint`: the API entry function of that name. | trace catalog |
+| `0x7e0198db` | 1 | `CustomPrint__changeFileNamePrint` | Logs trace id `0x5030f`, which the trace catalog resolves to `CustomPrint::changeFileNamePrint`: the API entry function of that name. | trace catalog |
+| `0x7e019908` | 1 | `CustomPrint__setPrintSetting` | Logs trace id `0x50310`, which the trace catalog resolves to `CustomPrint::setPrintSetting`: the API entry function of that name. | trace catalog |
+| `0x7e01993d` | 1 | `CustomPrint__resetPrintSetting` | Logs trace id `0x50311`, which the trace catalog resolves to `CustomPrint::resetPrintSetting`: the API entry function of that name. | trace catalog |
+| `0x7e019e02` | 1 | `CustomPrint__setTrimming` | Logs trace id `0x50316`, which the trace catalog resolves to `CustomPrint::setTrimming`: the API entry function of that name. | trace catalog |
+| `0x7e019e37` | 1 | `CustomPrint__makePreview` | Logs trace id `0x50322`, which the trace catalog resolves to `CustomPrint::makePreview`: the API entry function of that name. | trace catalog |
+| `0x7e019e7a` | 1 | `CustomPrint__print` | Logs trace id `0x50317`, which the trace catalog resolves to `CustomPrint::print`: the API entry function of that name. | trace catalog |
+| `0x7e019eaf` | 1 | `CustomPrint__continuePrint` | Logs trace id `0x5031e`, which the trace catalog resolves to `CustomPrint::continuePrint`: the API entry function of that name. | trace catalog |
+| `0x7e019ee4` | 1 | `CustomPrint__abortPrint` | Logs trace id `0x50318`, which the trace catalog resolves to `CustomPrint::abortPrint`: the API entry function of that name. | trace catalog |
+| `0x7e019f19` | 1 | `CustomPrint__endCustomPrintService` | Logs trace id `0x5031a`, which the trace catalog resolves to `CustomPrint::endCustomPrintService`: the API entry function of that name. | trace catalog |
+| `0x7e019f42` | 1 | `CustomPrint__getPrintCount` | Logs trace id `0x50320`, which the trace catalog resolves to `CustomPrint::getPrintCount`: the API entry function of that name. | trace catalog |
+| `0x7e01a055` | 1 | `DeviceLink__disconnect` | Logs trace id `0x50102`, which the trace catalog resolves to `DeviceLink::disconnect`: the API entry function of that name. | trace catalog |
+| `0x7e01a375` | 1 | `Bluetooth__startCommunication` | Logs trace id `0x50401`, which the trace catalog resolves to `Bluetooth::startCommunication`: the API entry function of that name. | trace catalog |
+| `0x7e01a3ae` | 1 | `Bluetooth__stopCommunication` | Logs trace id `0x50402`, which the trace catalog resolves to `Bluetooth::stopCommunication`: the API entry function of that name. | trace catalog |
+| `0x7e01a5a0` | 1 | `Bluetooth__cancelConnection` | Logs trace id `0x50404`, which the trace catalog resolves to `Bluetooth::cancelConnection`: the API entry function of that name. | trace catalog |
+| `0x7e01a677` | 1 | `Bluetooth__cancelSearchDevice` | Logs trace id `0x50406`, which the trace catalog resolves to `Bluetooth::cancelSearchDevice`: the API entry function of that name. | trace catalog |
+| `0x7e01a6b1` | 1 | `Bluetooth__sendImage` | Logs trace id `0x50407`, which the trace catalog resolves to `Bluetooth::sendImage`: the API entry function of that name. | trace catalog |
+| `0x7e01a6eb` | 1 | `Bluetooth__cancelSendImage` | Logs trace id `0x50408`, which the trace catalog resolves to `Bluetooth::cancelSendImage`: the API entry function of that name. | trace catalog |
+| `0x7e01a8ca` | 1 | `Bluetooth__cancelPairing` | Logs trace id `0x5040a`, which the trace catalog resolves to `Bluetooth::cancelPairing`: the API entry function of that name. | trace catalog |
+| `0x7e01a904` | 1 | `Bluetooth__waitRequest` | Logs trace id `0x5040b`, which the trace catalog resolves to `Bluetooth::waitRequest`: the API entry function of that name. | trace catalog |
+| `0x7e01a93e` | 1 | `Bluetooth__abortWaitRequest` | Logs trace id `0x5040c`, which the trace catalog resolves to `Bluetooth::abortWaitRequest`: the API entry function of that name. | trace catalog |
+| `0x7e01aabb` | 1 | `Bluetooth__rejectPairing` | Logs trace id `0x5040e`, which the trace catalog resolves to `Bluetooth::rejectPairing`: the API entry function of that name. | trace catalog |
+| `0x7e01aaf5` | 1 | `Bluetooth__acceptConnection` | Logs trace id `0x5040f`, which the trace catalog resolves to `Bluetooth::acceptConnection`: the API entry function of that name. | trace catalog |
+| `0x7e01ab2f` | 1 | `Bluetooth__rejectConnection` | Logs trace id `0x50410`, which the trace catalog resolves to `Bluetooth::rejectConnection`: the API entry function of that name. | trace catalog |
+| `0x7e01acac` | 1 | `Bluetooth__cancelReceiveImage` | Logs trace id `0x50412`, which the trace catalog resolves to `Bluetooth::cancelReceiveImage`: the API entry function of that name. | trace catalog |
+| `0x7e01ace6` | 1 | `Bluetooth__removePairingDevice` | Logs trace id `0x50413`, which the trace catalog resolves to `Bluetooth::removePairingDevice`: the API entry function of that name. | trace catalog |
+| `0x7e01ae83` | 1 | `Bluetooth__createSendImage` | Logs trace id `0x50415`, which the trace catalog resolves to `Bluetooth::createSendImage`: the API entry function of that name. | trace catalog |
+| `0x7e01aeb6` | 1 | `Bluetooth__getSearchDeviceCount` | Logs trace id `0x50416`, which the trace catalog resolves to `Bluetooth::getSearchDeviceCount`: the API entry function of that name. | trace catalog |
+| `0x7e01afd5` | 1 | `Bluetooth__getPairingDeviceCount` | Logs trace id `0x50418`, which the trace catalog resolves to `Bluetooth::getPairingDeviceCount`: the API entry function of that name. | trace catalog |
+| `0x7e01b0f4` | 1 | `Bluetooth__getPairingResult` | Logs trace id `0x5041a`, which the trace catalog resolves to `Bluetooth::getPairingResult`: the API entry function of that name. | trace catalog |
+| `0x7e01b139` | 1 | `Bluetooth__getCommingDeviceInfo` | Logs trace id `0x5041b`, which the trace catalog resolves to `Bluetooth::getCommingDeviceInfo`: the API entry function of that name. | trace catalog |
+| `0x7e01b22c` | 1 | `Bluetooth__getMyDeviceInfo` | Logs trace id `0x5041d`, which the trace catalog resolves to `Bluetooth::getMyDeviceInfo`: the API entry function of that name. | trace catalog |
+| `0x7e01c28a` | 1 | `SystemCommon__scStrlen` | Logs trace id `0x1100b`, which the trace catalog resolves to `SystemCommon::scStrlen`: the API entry function of that name. | trace catalog |
+| `0x7e01c312` | 1 | `SystemCommon__scWcslen` | Logs trace id `0x1100c`, which the trace catalog resolves to `SystemCommon::scWcslen`: the API entry function of that name. | trace catalog |
+| `0x7e01c5c4` | 1 | `SystemCommon__scWcstol` | Logs trace id `0x1100f`, which the trace catalog resolves to `SystemCommon::scWcstol`: the API entry function of that name. | trace catalog |
+| `0x7e01c64c` | 1 | `SystemCommon__scSprintf` | Logs trace id `0x11010`, which the trace catalog resolves to `SystemCommon::scSprintf`: the API entry function of that name. | trace catalog |
+| `0x7e01c76b` | 1 | `SystemCommon__scWcsprintf` | Logs trace id `0x11011`, which the trace catalog resolves to `SystemCommon::scWcsprintf`: the API entry function of that name. | trace catalog |
+| `0x7e01ca96` | 1 | `SystemCommon__scMemcpy` | Logs trace id `0x11014`, which the trace catalog resolves to `SystemCommon::scMemcpy`: the API entry function of that name. | trace catalog |
+| `0x7e01cb99` | 1 | `SystemCommon__scMemset` | Logs trace id `0x11015`, which the trace catalog resolves to `SystemCommon::scMemset`: the API entry function of that name. | trace catalog |
+| `0x7e01d327` | 1 | `SystemCommon__scOsSelfEndTask_7e01d327` | Logs trace id `0x1101f`, which the trace catalog resolves to `SystemCommon::scOsSelfEndTask`: the API entry function of that name. | trace catalog |
+| `0x7e01e273` | 1 | `SystemCommon__scTimeMinit` | Logs trace id `0x11031`, which the trace catalog resolves to `SystemCommon::scTimeMinit`: the API entry function of that name. | trace catalog |
+| `0x7e01e331` | 1 | `SystemCommon__scTimeMshow` | Logs trace id `0x11033`, which the trace catalog resolves to `SystemCommon::scTimeMshow`: the API entry function of that name. | trace catalog |
+| `0x7e01e35f` | 1 | `SystemCommon__scTimeMwrite` | Logs trace id `0x11034`, which the trace catalog resolves to `SystemCommon::scTimeMwrite`: the API entry function of that name. | trace catalog |
+| `0x7e01e41d` | 1 | `SystemCommon__scProcLogStart` | Logs trace id `0x11036`, which the trace catalog resolves to `SystemCommon::scProcLogStart`: the API entry function of that name. | trace catalog |
+| `0x7e01e44b` | 1 | `SystemCommon__scProcLogStop` | Logs trace id `0x11037`, which the trace catalog resolves to `SystemCommon::scProcLogStop`: the API entry function of that name. | trace catalog |
+| `0x7e01e479` | 1 | `OSDControl__initOsdControl` | Logs trace id `0x11101`, which the trace catalog resolves to `OSDControl::initOsdControl`: the API entry function of that name. | trace catalog |
+| `0x7e01e49b` | 1 | `OSDControl__drawOsdStart` | Logs trace id `0x11102`, which the trace catalog resolves to `OSDControl::drawOsdStart`: the API entry function of that name. | trace catalog |
+| `0x7e01e4bd` | 1 | `OSDControl__drawOsdEnd` | Logs trace id `0x11103`, which the trace catalog resolves to `OSDControl::drawOsdEnd`: the API entry function of that name. | trace catalog |
+| `0x7e01f8ab` | 1 | `FlashAir__isFlashAir` | Logs trace id `0x50601`, which the trace catalog resolves to `FlashAir::isFlashAir`: the API entry function of that name. | trace catalog |
+| `0x7e01f8e2` | 1 | `FlashAir__getSettingStatus` | Logs trace id `0x50602`, which the trace catalog resolves to `FlashAir::getSettingStatus`: the API entry function of that name. | trace catalog |
+| `0x7e01f93a` | 1 | `FlashAir__getWifiSetting` | Logs trace id `0x50603`, which the trace catalog resolves to `FlashAir::getWifiSetting`: the API entry function of that name. | trace catalog |
+| `0x7e01f974` | 1 | `FlashAir__getWifiStatus` | Logs trace id `0x50604`, which the trace catalog resolves to `FlashAir::getWifiStatus`: the API entry function of that name. | trace catalog |
+| `0x7e01f9ac` | 1 | `FlashAir__setWifiSSID` | Logs trace id `0x50605`, which the trace catalog resolves to `FlashAir::setWifiSSID`: the API entry function of that name. | trace catalog |
+| `0x7e01f9fb` | 1 | `FlashAir__setWifiPassword` | Logs trace id `0x50606`, which the trace catalog resolves to `FlashAir::setWifiPassword`: the API entry function of that name. | trace catalog |
+| `0x7e01fa4b` | 1 | `FlashAir__getOneTimePassword` | Logs trace id `0x50607`, which the trace catalog resolves to `FlashAir::getOneTimePassword`: the API entry function of that name. | trace catalog |
+| `0x7e01fa8b` | 1 | `FlashAir__setOneTimePassword` | Logs trace id `0x50608`, which the trace catalog resolves to `FlashAir::setOneTimePassword`: the API entry function of that name. | trace catalog |
+| `0x7e01fb93` | 1 | `FlashAir__disconnect` | Logs trace id `0x5060a`, which the trace catalog resolves to `FlashAir::disconnect`: the API entry function of that name. | trace catalog |
+| `0x7e01fbc8` | 1 | `FlashAir__getSettingMode` | Logs trace id `0x5060b`, which the trace catalog resolves to `FlashAir::getSettingMode`: the API entry function of that name. | trace catalog |
+| `0x7e01fc00` | 1 | `FlashAir__setSettingMode` | Logs trace id `0x5060c`, which the trace catalog resolves to `FlashAir::setSettingMode`: the API entry function of that name. | trace catalog |
+| `0x7e01fc9c` | 1 | `OnetouchLightCtrl__turnOn` | Logs trace id `0x10401`, which the trace catalog resolves to `OnetouchLightCtrl::turnOn`: the API entry function of that name. | trace catalog |
+| `0x7e01fccf` | 1 | `OnetouchLightCtrl__turnOff` | Logs trace id `0x10402`, which the trace catalog resolves to `OnetouchLightCtrl::turnOff`: the API entry function of that name. | trace catalog |
+| `0x7e01fd48` | 1 | `ReserveUpload__changeUpload` | Logs trace id `0x32001`, which the trace catalog resolves to `ReserveUpload::changeUpload`: the API entry function of that name. | trace catalog |
+| `0x7e01fd7b` | 1 | `ReserveUpload__isUpload` | Logs trace id `0x32002`, which the trace catalog resolves to `ReserveUpload::isUpload`: the API entry function of that name. | trace catalog |
+| `0x7e01fda8` | 1 | `ReserveUpload__canUpload` | Logs trace id `0x32003`, which the trace catalog resolves to `ReserveUpload::canUpload`: the API entry function of that name. | trace catalog |
+| `0x7e01fdd5` | 1 | `GpsCtrl__startGPS` | Logs trace id `0x10d01`, which the trace catalog resolves to `GpsCtrl::startGPS`: the API entry function of that name. | trace catalog |
+| `0x7e01fe06` | 1 | `GpsCtrl__endGPS` | Logs trace id `0x10d02`, which the trace catalog resolves to `GpsCtrl::endGPS`: the API entry function of that name. | trace catalog |
+| `0x7e01ff5a` | 1 | `GpsCtrl__updateGPS` | Logs trace id `0x10d05`, which the trace catalog resolves to `GpsCtrl::updateGPS`: the API entry function of that name. | trace catalog |
+| `0x7e01ff85` | 1 | `GpsCtrl__getGPSUpdateTime` | Logs trace id `0x10d06`, which the trace catalog resolves to `GpsCtrl::getGPSUpdateTime`: the API entry function of that name. | trace catalog |
+| `0x7e020088` | 1 | `GpsCtrl__getLandMarkList` | Logs trace id `0x10d07`, which the trace catalog resolves to `GpsCtrl::getLandMarkList`: the API entry function of that name. | trace catalog |
+| `0x7e02010d` | 1 | `GpsCtrl__startCompass` | Logs trace id `0x10d09`, which the trace catalog resolves to `GpsCtrl::startCompass`: the API entry function of that name. | trace catalog |
+| `0x7e02013f` | 1 | `GpsCtrl__endCompass` | Logs trace id `0x10d0a`, which the trace catalog resolves to `GpsCtrl::endCompass`: the API entry function of that name. | trace catalog |
+| `0x7e0203a7` | 1 | `GpsCtrl__endToughGear` | Logs trace id `0x10d0e`, which the trace catalog resolves to `GpsCtrl::endToughGear`: the API entry function of that name. | trace catalog |
+| `0x7e02071f` | 1 | `GpsCtrl__endLogger` | Logs trace id `0x10d14`, which the trace catalog resolves to `GpsCtrl::endLogger`: the API entry function of that name. | trace catalog |
+| `0x7e020751` | 1 | `GpsCtrl__isAssistGpsData` | Logs trace id `0x10d15`, which the trace catalog resolves to `GpsCtrl::isAssistGpsData`: the API entry function of that name. | trace catalog |
+| `0x7e020812` | 1 | `GpsCtrl__abortUpdateGPS` | Logs trace id `0x10d18`, which the trace catalog resolves to `GpsCtrl::abortUpdateGPS`: the API entry function of that name. | trace catalog |
+| `0x7e02083d` | 1 | `PlayContinuousShots__start` | Logs trace id `0x31901`, which the trace catalog resolves to `PlayContinuousShots::start`: the API entry function of that name. | trace catalog |
+| `0x7e020870` | 1 | `PlayContinuousShots__play` | Logs trace id `0x31902`, which the trace catalog resolves to `PlayContinuousShots::play`: the API entry function of that name. | trace catalog |
+| `0x7e02089d` | 1 | `PlayContinuousShots__pause` | Logs trace id `0x31903`, which the trace catalog resolves to `PlayContinuousShots::pause`: the API entry function of that name. | trace catalog |
+| `0x7e020982` | 1 | `PlayContinuousShots__getPlayInfo` | Logs trace id `0x31905`, which the trace catalog resolves to `PlayContinuousShots::getPlayInfo`: the API entry function of that name. | trace catalog |
+| `0x7e0209bd` | 1 | `PlayContinuousShots__end` | Logs trace id `0x31906`, which the trace catalog resolves to `PlayContinuousShots::end`: the API entry function of that name. | trace catalog |
+| `0x7e0209ea` | 1 | `ReserveTransfer__start` | Logs trace id `0x32101`, which the trace catalog resolves to `ReserveTransfer::start`: the API entry function of that name. | trace catalog |
+| `0x7e020abe` | 1 | `ReserveTransfer__indexMode` | Logs trace id `0x32103`, which the trace catalog resolves to `ReserveTransfer::indexMode`: the API entry function of that name. | trace catalog |
+| `0x7e020b39` | 1 | `ReserveTransfer__getPageInfo` | Logs trace id `0x32104`, which the trace catalog resolves to `ReserveTransfer::getPageInfo`: the API entry function of that name. | trace catalog |
+| `0x7e020ddc` | 1 | `ReserveTransfer__getSelectPicNumber` | Logs trace id `0x32109`, which the trace catalog resolves to `ReserveTransfer::getSelectPicNumber`: the API entry function of that name. | trace catalog |
+| `0x7e020e0a` | 1 | `ReserveTransfer__startExpandAnimation` | Logs trace id `0x3210a`, which the trace catalog resolves to `ReserveTransfer::startExpandAnimation`: the API entry function of that name. | trace catalog |
+| `0x7e020e37` | 1 | `ReserveTransfer__reserveTransferSelected` | Logs trace id `0x3210b`, which the trace catalog resolves to `ReserveTransfer::reserveTransferSelected`: the API entry function of that name. | trace catalog |
+| `0x7e020e64` | 1 | `ReserveTransfer__reserveTransferAll` | Logs trace id `0x3210c`, which the trace catalog resolves to `ReserveTransfer::reserveTransferAll`: the API entry function of that name. | trace catalog |
+| `0x7e020e98` | 1 | `EraseSelectedPic__canMoveCurrent` | Logs trace id `0x30401`, which the trace catalog resolves to `EraseSelectedPic::canMoveCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e020eb4` | 1 | `EraseSelectedPic__erase` | Logs trace id `0x30402`, which the trace catalog resolves to `EraseSelectedPic::erase`: the API entry function of that name. | trace catalog |
+| `0x7e020ed0` | 1 | `EraseSelectedPic__getCurrentInfo` | Logs trace id `0x30403`, which the trace catalog resolves to `EraseSelectedPic::getCurrentInfo`: the API entry function of that name. | trace catalog |
+| `0x7e020eec` | 1 | `EraseSelectedPic__getPageInfo` | Logs trace id `0x30404`, which the trace catalog resolves to `EraseSelectedPic::getPageInfo`: the API entry function of that name. | trace catalog |
+| `0x7e020f08` | 1 | `EraseSelectedPic__getSelectedPicNumber` | Logs trace id `0x30405`, which the trace catalog resolves to `EraseSelectedPic::getSelectedPicNumber`: the API entry function of that name. | trace catalog |
+| `0x7e020f24` | 1 | `EraseSelectedPic__indexMode` | Logs trace id `0x30406`, which the trace catalog resolves to `EraseSelectedPic::indexMode`: the API entry function of that name. | trace catalog |
+| `0x7e020f40` | 1 | `EraseSelectedPic__moveCurrent` | Logs trace id `0x30407`, which the trace catalog resolves to `EraseSelectedPic::moveCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e020f5c` | 1 | `EraseSelectedPic__selectCurrent` | Logs trace id `0x30408`, which the trace catalog resolves to `EraseSelectedPic::selectCurrent`: the API entry function of that name. | trace catalog |
+| `0x7e020f78` | 1 | `EraseSelectedPic__singleMode` | Logs trace id `0x30409`, which the trace catalog resolves to `EraseSelectedPic::singleMode`: the API entry function of that name. | trace catalog |
+| `0x7e020f94` | 1 | `EraseSelectedPic__start` | Logs trace id `0x3040a`, which the trace catalog resolves to `EraseSelectedPic::start`: the API entry function of that name. | trace catalog |
+| `0x7e020fb0` | 1 | `EraseSelectedPic__startExpandAnimation` | Logs trace id `0x3040b`, which the trace catalog resolves to `EraseSelectedPic::startExpandAnimation`: the API entry function of that name. | trace catalog |
+| `0x7e021044` | 1 | `LogoScreen__existImage` | Logs trace id `0x10602`, which the trace catalog resolves to `LogoScreen::existImage`: the API entry function of that name. | trace catalog |
+| `0x7e02106f` | 1 | `LogoScreen__regist` | Logs trace id `0x10603`, which the trace catalog resolves to `LogoScreen::regist`: the API entry function of that name. | trace catalog |
+| `0x7e02109a` | 1 | `LogoScreen__unregist` | Logs trace id `0x10604`, which the trace catalog resolves to `LogoScreen::unregist`: the API entry function of that name. | trace catalog |
+| `0x7e0210c5` | 1 | `PlayPanorama__start` | Logs trace id `0x30e01`, which the trace catalog resolves to `PlayPanorama::start`: the API entry function of that name. | trace catalog |
+| `0x7e021119` | 1 | `PlayPanorama__getIndexPosition` | Logs trace id `0x30e02`, which the trace catalog resolves to `PlayPanorama::getIndexPosition`: the API entry function of that name. | trace catalog |
+| `0x7e0211cd` | 1 | `PlayPanorama__startScroll` | Logs trace id `0x30e03`, which the trace catalog resolves to `PlayPanorama::startScroll`: the API entry function of that name. | trace catalog |
+| `0x7e02134b` | 1 | `PlayPanorama__stopScroll` | Logs trace id `0x30e05`, which the trace catalog resolves to `PlayPanorama::stopScroll`: the API entry function of that name. | trace catalog |
+| `0x7e021420` | 1 | `PlayPanorama__enlargeImage` | Logs trace id `0x30e07`, which the trace catalog resolves to `PlayPanorama::enlargeImage`: the API entry function of that name. | trace catalog |
+| `0x7e02144d` | 1 | `PlayPanorama__reduceImage` | Logs trace id `0x30e08`, which the trace catalog resolves to `PlayPanorama::reduceImage`: the API entry function of that name. | trace catalog |
+| `0x7e02147a` | 1 | `PlayPanorama__getScrollDirection` | Logs trace id `0x30e09`, which the trace catalog resolves to `PlayPanorama::getScrollDirection`: the API entry function of that name. | trace catalog |
+| `0x7e0214a7` | 1 | `PlayEventView__initialize` | Logs trace id `0x31801`, which the trace catalog resolves to `PlayEventView::initialize`: the API entry function of that name. | trace catalog |
+| `0x7e021888` | 1 | `InternalWiFi__disconnect` | Logs trace id `0x50702`, which the trace catalog resolves to `InternalWiFi::disconnect`: the API entry function of that name. | trace catalog |
+| `0x7e021af5` | 1 | `InternalWiFi__notifyReleaseModeStartComplete` | Logs trace id `0x50706`, which the trace catalog resolves to `InternalWiFi::notifyReleaseModeStartComplete`: the API entry function of that name. | trace catalog |
+| `0x7e021b20` | 1 | `InternalWiFi__notifyReleaseModeEndStart` | Logs trace id `0x50708`, which the trace catalog resolves to `InternalWiFi::notifyReleaseModeEndStart`: the API entry function of that name. | trace catalog |
+| `0x7e021b4b` | 1 | `InternalWiFi__notifyReleaseModeEndComplete` | Logs trace id `0x50707`, which the trace catalog resolves to `InternalWiFi::notifyReleaseModeEndComplete`: the API entry function of that name. | trace catalog |
+| `0x7e021b76` | 1 | `InternalWiFi__notifyStartWiFiRemoteTake` | Logs trace id `0x50709`, which the trace catalog resolves to `InternalWiFi::notifyStartWiFiRemoteTake`: the API entry function of that name. | trace catalog |
+| `0x7e021ba9` | 1 | `InternalWiFi__notifyEndWiFiRemoteTake` | Logs trace id `0x5070a`, which the trace catalog resolves to `InternalWiFi::notifyEndWiFiRemoteTake`: the API entry function of that name. | trace catalog |
+| `0x7e021bdc` | 1 | `InternalWiFi__notifyChangeWiFiModeDial` | Logs trace id `0x5070b`, which the trace catalog resolves to `InternalWiFi::notifyChangeWiFiModeDial`: the API entry function of that name. | trace catalog |
+| `0x7e021d89` | 1 | `BackGroundCtrl__drawQR` | Logs trace id `0x10307`, which the trace catalog resolves to `BackGroundCtrl::drawQR`: the API entry function of that name. | trace catalog |
+| `0x7e021e01` | 1 | `BackGroundCtrl__endVariousDraw` | Logs trace id `0x10309`, which the trace catalog resolves to `BackGroundCtrl::endVariousDraw`: the API entry function of that name. | trace catalog |
+| `0x7e0220b2` | 1 | `BackGroundCtrl__startVariousDraw` | Logs trace id `0x10308`, which the trace catalog resolves to `BackGroundCtrl::startVariousDraw`: the API entry function of that name. | trace catalog |
+| `0x7e02737b` | 1 | `GpsCtrl__endGPS_7e02737b` | Logs trace id `0x10d02`, which the trace catalog resolves to `GpsCtrl::endGPS`: the API entry function of that name. | trace catalog |
+| `0x7e0273d9` | 1 | `GpsCtrl__endLogger_7e0273d9` | Logs trace id `0x10d14`, which the trace catalog resolves to `GpsCtrl::endLogger`: the API entry function of that name. | trace catalog |
+| `0x7e0277ce` | 1 | `GpsCtrl__saveLog` | Logs trace id `0x10d17`, which the trace catalog resolves to `GpsCtrl::saveLog`: the API entry function of that name. | trace catalog |
+| `0x7e027996` | 2 | `GpsCtrl__startLogger` | Logs trace id `0x10d13`, which the trace catalog resolves to `GpsCtrl::startLogger`: the API entry function of that name. | trace catalog |
+| `0x7e027a03` | 1 | `GpsCtrl__startToughGear` | Logs trace id `0x10d0d`, which the trace catalog resolves to `GpsCtrl::startToughGear`: the API entry function of that name. | trace catalog |
+| `0x7e028d4b` | 0 | `PixelMapping__canPixelMapping_7e028d4b` | Logs trace id `0x10802`, which the trace catalog resolves to `PixelMapping::canPixelMapping`: the API entry function of that name. | trace catalog |
+| `0x7e028db1` | 1 | `PixelMapping__execute_7e028db1` | Logs trace id `0x10801`, which the trace catalog resolves to `PixelMapping::execute`: the API entry function of that name. | trace catalog |
+| `0x7e029352` | 1 | `PlayCommon__canReserveWiFiTransfer_7e029352` | Logs trace id `0x30119`, which the trace catalog resolves to `PlayCommon::canReserveWiFiTransfer`: the API entry function of that name. | trace catalog |
+| `0x7e0294e0` | 1 | `PlayCommon__changeReserveWiFiTransfer_7e0294e0` | Logs trace id `0x30117`, which the trace catalog resolves to `PlayCommon::changeReserveWiFiTransfer`: the API entry function of that name. | trace catalog |
+| `0x7e029546` | 1 | `PlayCommon__changeReserveWiFiTransferSelected_7e029546` | Logs trace id `0x30118`, which the trace catalog resolves to `PlayCommon::changeReserveWiFiTransferSelected`: the API entry function of that name. | trace catalog |
+| `0x7e02d209` | 0 | `Relocate__eraseCode_7e02d209` | Logs trace id `0x40302`, which the trace catalog resolves to `Relocate::eraseCode`: the API entry function of that name. | trace catalog |
+| `0x7e02d26a` | 1 | `Relocate__registerCode_7e02d26a` | Logs trace id `0x40301`, which the trace catalog resolves to `Relocate::registerCode`: the API entry function of that name. | trace catalog |
+| `0x7e02fe22` | 1 | `Shooting__changeDirection` | Logs trace id `0x20124`, which the trace catalog resolves to `Shooting::changeDirection`: the API entry function of that name. | trace catalog |
+| `0x7e02fe8e` | 1 | `Shooting__endPanoramaShooting_7e02fe8e` | Logs trace id `0x20126`, which the trace catalog resolves to `Shooting::endPanoramaShooting`: the API entry function of that name. | trace catalog |
+| `0x7e03001a` | 1 | `Shooting__getDirection_7e03001a` | Logs trace id `0x20125`, which the trace catalog resolves to `Shooting::getDirection`: the API entry function of that name. | trace catalog |
+| `0x7e03007b` | 1 | `Shooting__getFlashChargeStatus` | Logs trace id `0x2010e`, which the trace catalog resolves to `Shooting::getFlashChargeStatus`: the API entry function of that name. | trace catalog |
+| `0x7e0300e8` | 1 | `Shooting__getHistogramData` | Logs trace id `0x20110`, which the trace catalog resolves to `Shooting::getHistogramData`: the API entry function of that name. | trace catalog |
+| `0x7e03015f` | 1 | `Shooting__getPanoramaCount_7e03015f` | Logs trace id `0x20127`, which the trace catalog resolves to `Shooting::getPanoramaCount`: the API entry function of that name. | trace catalog |
+| `0x7e0301c2` | 1 | `Shooting__getProgress_7e0301c2` | Logs trace id `0x20115`, which the trace catalog resolves to `Shooting::getProgress`: the API entry function of that name. | trace catalog |
+| `0x7e030225` | 1 | `Shooting__getRecViewHistogram` | Logs trace id `0x20114`, which the trace catalog resolves to `Shooting::getRecViewHistogram`: the API entry function of that name. | trace catalog |
+| `0x7e030292` | 1 | `Shooting__getScene` | Logs trace id `0x2012a`, which the trace catalog resolves to `Shooting::getScene`: the API entry function of that name. | trace catalog |
+| `0x7e0302f3` | 1 | `Shooting__getShakeWarning` | Logs trace id `0x2010f`, which the trace catalog resolves to `Shooting::getShakeWarning`: the API entry function of that name. | trace catalog |
+| `0x7e030364` | 1 | `Shooting__setMultiThroughMode` | Logs trace id `0x2011e`, which the trace catalog resolves to `Shooting::setMultiThroughMode`: the API entry function of that name. | trace catalog |
+| `0x7e0304cb` | 1 | `Shooting__setAflState` | Logs trace id `0x2012b`, which the trace catalog resolves to `Shooting::setAflState`: the API entry function of that name. | trace catalog |
+| `0x7e030537` | 1 | `Shooting__getAflState_7e030537` | Logs trace id `0x2012c`, which the trace catalog resolves to `Shooting::getAflState`: the API entry function of that name. | trace catalog |
+| `0x7e03059d` | 1 | `Shooting__getPanoramaCountMax_7e03059d` | Logs trace id `0x20128`, which the trace catalog resolves to `Shooting::getPanoramaCountMax`: the API entry function of that name. | trace catalog |
+| `0x7e030600` | 1 | `Shooting__endShootingService_7e030600` | Logs trace id `0x20102`, which the trace catalog resolves to `Shooting::endShootingService`: the API entry function of that name. | trace catalog |
+| `0x7e03066c` | 1 | `Shooting__getFaceInfo` | Logs trace id `0x2013d`, which the trace catalog resolves to `Shooting::getFaceInfo`: the API entry function of that name. | trace catalog |
+| `0x7e0306d9` | 1 | `Shooting__endMFAssist_7e0306d9` | Logs trace id `0x20132`, which the trace catalog resolves to `Shooting::endMFAssist`: the API entry function of that name. | trace catalog |
+| `0x7e03073a` | 1 | `Shooting__startMFAssist` | Logs trace id `0x20131`, which the trace catalog resolves to `Shooting::startMFAssist`: the API entry function of that name. | trace catalog |
+| `0x7e0307b0` | 1 | `Shooting__saveWBdetect_7e0307b0` | Logs trace id `0x2012f`, which the trace catalog resolves to `Shooting::saveWBdetect`: the API entry function of that name. | trace catalog |
+| `0x7e030820` | 1 | `Shooting__getAelState_7e030820` | Logs trace id `0x2012e`, which the trace catalog resolves to `Shooting::getAelState`: the API entry function of that name. | trace catalog |
+| `0x7e03088a` | 1 | `Shooting__endMultiExposure_7e03088a` | Logs trace id `0x20134`, which the trace catalog resolves to `Shooting::endMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e0308eb` | 1 | `Shooting__startMultiExposure_7e0308eb` | Logs trace id `0x20133`, which the trace catalog resolves to `Shooting::startMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e03094c` | 1 | `Shooting__setAelState` | Logs trace id `0x2012d`, which the trace catalog resolves to `Shooting::setAelState`: the API entry function of that name. | trace catalog |
+| `0x7e0309b8` | 1 | `Shooting__getAspectFrame` | Logs trace id `0x20112`, which the trace catalog resolves to `Shooting::getAspectFrame`: the API entry function of that name. | trace catalog |
+| `0x7e030a25` | 1 | `Shooting__setShootingType` | Logs trace id `0x20104`, which the trace catalog resolves to `Shooting::setShootingType`: the API entry function of that name. | trace catalog |
+| `0x7e030b09` | 1 | `Shooting__getRecViewInfo` | Logs trace id `0x20111`, which the trace catalog resolves to `Shooting::getRecViewInfo`: the API entry function of that name. | trace catalog |
+| `0x7e030b76` | 1 | `Shooting__getFocusPosition` | Logs trace id `0x20113`, which the trace catalog resolves to `Shooting::getFocusPosition`: the API entry function of that name. | trace catalog |
+| `0x7e030be3` | 1 | `Shooting__startZoomFrame_7e030be3` | Logs trace id `0x20117`, which the trace catalog resolves to `Shooting::startZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e030c44` | 1 | `Shooting__endZoomFrame_7e030c44` | Logs trace id `0x20118`, which the trace catalog resolves to `Shooting::endZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e030ca5` | 1 | `Shooting__getZoomFrame` | Logs trace id `0x20119`, which the trace catalog resolves to `Shooting::getZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e030d43` | 1 | `Shooting__moveZoomFrame` | Logs trace id `0x2011a`, which the trace catalog resolves to `Shooting::moveZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e030daf` | 1 | `Shooting__zoomThrough` | Logs trace id `0x2011b`, which the trace catalog resolves to `Shooting::zoomThrough`: the API entry function of that name. | trace catalog |
+| `0x7e030e1b` | 1 | `Shooting__scrollThrough` | Logs trace id `0x2011c`, which the trace catalog resolves to `Shooting::scrollThrough`: the API entry function of that name. | trace catalog |
+| `0x7e030e87` | 1 | `Shooting__getEnlargeInfo` | Logs trace id `0x2011d`, which the trace catalog resolves to `Shooting::getEnlargeInfo`: the API entry function of that name. | trace catalog |
+| `0x7e030eea` | 1 | `Shooting__apertureDown` | Logs trace id `0x20123`, which the trace catalog resolves to `Shooting::apertureDown`: the API entry function of that name. | trace catalog |
+| `0x7e030f56` | 1 | `Shooting__sampleWBadjust` | Logs trace id `0x20130`, which the trace catalog resolves to `Shooting::sampleWBadjust`: the API entry function of that name. | trace catalog |
+| `0x7e030fe0` | 1 | `Shooting__overlay` | Logs trace id `0x20135`, which the trace catalog resolves to `Shooting::overlay`: the API entry function of that name. | trace catalog |
+| `0x7e03104c` | 1 | `Shooting__saveMultiExposure_7e03104c` | Logs trace id `0x20136`, which the trace catalog resolves to `Shooting::saveMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e0310ad` | 1 | `Shooting__getMultiExposureCount_7e0310ad` | Logs trace id `0x20137`, which the trace catalog resolves to `Shooting::getMultiExposureCount`: the API entry function of that name. | trace catalog |
+| `0x7e03111a` | 1 | `Shooting__deleteMultiExposure_7e03111a` | Logs trace id `0x20138`, which the trace catalog resolves to `Shooting::deleteMultiExposure`: the API entry function of that name. | trace catalog |
+| `0x7e03117b` | 1 | `Shooting__getMovieTime` | Logs trace id `0x20139`, which the trace catalog resolves to `Shooting::getMovieTime`: the API entry function of that name. | trace catalog |
+| `0x7e0311ea` | 1 | `Shooting__abortSelfTimer` | Logs trace id `0x2013a`, which the trace catalog resolves to `Shooting::abortSelfTimer`: the API entry function of that name. | trace catalog |
+| `0x7e03124b` | 1 | `Shooting__canEndShootingService_7e03124b` | Logs trace id `0x20103`, which the trace catalog resolves to `Shooting::canEndShootingService`: the API entry function of that name. | trace catalog |
+| `0x7e0312b1` | 1 | `Shooting__getRecViewState` | Logs trace id `0x20145`, which the trace catalog resolves to `Shooting::getRecViewState`: the API entry function of that name. | trace catalog |
+| `0x7e0314ed` | 1 | `Shooting__notifyGesture` | Logs trace id `0x2014a`, which the trace catalog resolves to `Shooting::notifyGesture`: the API entry function of that name. | trace catalog |
+| `0x7e03155e` | 1 | `Shooting__getMovableArea` | Logs trace id `0x2014b`, which the trace catalog resolves to `Shooting::getMovableArea`: the API entry function of that name. | trace catalog |
+| `0x7e0315cc` | 1 | `Shooting__ctrlRelease` | Logs trace id `0x20106`, which the trace catalog resolves to `Shooting::ctrlRelease`: the API entry function of that name. | trace catalog |
+| `0x7e031662` | 1 | `Shooting__getFPNexposureStatus_7e031662` | Logs trace id `0x2014c`, which the trace catalog resolves to `Shooting::getFPNexposureStatus`: the API entry function of that name. | trace catalog |
+| `0x7e0316c8` | 1 | `Shooting__setThroughType` | Logs trace id `0x2014d`, which the trace catalog resolves to `Shooting::setThroughType`: the API entry function of that name. | trace catalog |
+| `0x7e031734` | 1 | `Shooting__updateLiveBulb_7e031734` | Logs trace id `0x20151`, which the trace catalog resolves to `Shooting::updateLiveBulb`: the API entry function of that name. | trace catalog |
+| `0x7e031795` | 1 | `Shooting__ctrlZoomExposure_7e031795` | Logs trace id `0x2014e`, which the trace catalog resolves to `Shooting::ctrlZoomExposure`: the API entry function of that name. | trace catalog |
+| `0x7e031801` | 1 | `Shooting__getLiveBulbInfo` | Logs trace id `0x20150`, which the trace catalog resolves to `Shooting::getLiveBulbInfo`: the API entry function of that name. | trace catalog |
+| `0x7e031874` | 1 | `Shooting__getSlideRecView` | Logs trace id `0x2014f`, which the trace catalog resolves to `Shooting::getSlideRecView`: the API entry function of that name. | trace catalog |
+| `0x7e0318d5` | 1 | `Shooting__end3DLensShooting_7e0318d5` | Logs trace id `0x20154`, which the trace catalog resolves to `Shooting::end3DLensShooting`: the API entry function of that name. | trace catalog |
+| `0x7e031936` | 1 | `Shooting__getReleaseSetting_7e031936` | Logs trace id `0x20155`, which the trace catalog resolves to `Shooting::getReleaseSetting`: the API entry function of that name. | trace catalog |
+| `0x7e031997` | 1 | `Shooting__start3DLensShooting_7e031997` | Logs trace id `0x20153`, which the trace catalog resolves to `Shooting::start3DLensShooting`: the API entry function of that name. | trace catalog |
+| `0x7e0319f8` | 1 | `Shooting__ctrlMovieEffect` | Logs trace id `0x20152`, which the trace catalog resolves to `Shooting::ctrlMovieEffect`: the API entry function of that name. | trace catalog |
+| `0x7e031a64` | 1 | `Shooting__cancelRecview_7e031a64` | Logs trace id `0x20156`, which the trace catalog resolves to `Shooting::cancelRecview`: the API entry function of that name. | trace catalog |
+| `0x7e031ac5` | 1 | `Shooting__isLiveBulbShooting_7e031ac5` | Logs trace id `0x20157`, which the trace catalog resolves to `Shooting::isLiveBulbShooting`: the API entry function of that name. | trace catalog |
+| `0x7e031b2b` | 1 | `Shooting__getLiveBulbInfo_7e031b2b` | Logs trace id `0x20150`, which the trace catalog resolves to `Shooting::getLiveBulbInfo`: the API entry function of that name. | trace catalog |
+| `0x7e031ba2` | 1 | `Shooting__getLiveBulbInfo_7e031ba2` | Logs trace id `0x20150`, which the trace catalog resolves to `Shooting::getLiveBulbInfo`: the API entry function of that name. | trace catalog |
+| `0x7e031c19` | 1 | `Shooting__getShootingState_7e031c19` | Logs trace id `0x20158`, which the trace catalog resolves to `Shooting::getShootingState`: the API entry function of that name. | trace catalog |
+| `0x7e031c7f` | 1 | `Shooting__resetTouchScrollPosition_7e031c7f` | Logs trace id `0x20159`, which the trace catalog resolves to `Shooting::resetTouchScrollPosition`: the API entry function of that name. | trace catalog |
+| `0x7e031ce0` | 1 | `Shooting__getShootingType` | Logs trace id `0x2015a`, which the trace catalog resolves to `Shooting::getShootingType`: the API entry function of that name. | trace catalog |
+| `0x7e031d41` | 1 | `Shooting__getThroughZoomRate` | Logs trace id `0x2015c`, which the trace catalog resolves to `Shooting::getThroughZoomRate`: the API entry function of that name. | trace catalog |
+| `0x7e031da2` | 1 | `Shooting__getZoomFrameState_7e031da2` | Logs trace id `0x2015b`, which the trace catalog resolves to `Shooting::getZoomFrameState`: the API entry function of that name. | trace catalog |
+| `0x7e031e08` | 1 | `Shooting__startShootingService` | Logs trace id `0x20101`, which the trace catalog resolves to `Shooting::startShootingService`: the API entry function of that name. | trace catalog |
+| `0x7e031e7c` | 1 | `Shooting__getLiveGuideLevel` | Logs trace id `0x2015f`, which the trace catalog resolves to `Shooting::getLiveGuideLevel`: the API entry function of that name. | trace catalog |
+| `0x7e031ee8` | 1 | `Shooting__endLiveGuide_7e031ee8` | Logs trace id `0x20162`, which the trace catalog resolves to `Shooting::endLiveGuide`: the API entry function of that name. | trace catalog |
+| `0x7e031f49` | 1 | `Shooting__getMovieTeleconFrame` | Logs trace id `0x20178`, which the trace catalog resolves to `Shooting::getMovieTeleconFrame`: the API entry function of that name. | trace catalog |
+| `0x7e031fac` | 1 | `Shooting__startLiveGuide` | Logs trace id `0x2015d`, which the trace catalog resolves to `Shooting::startLiveGuide`: the API entry function of that name. | trace catalog |
+| `0x7e032018` | 1 | `Shooting__createTimeLapseMovie` | Logs trace id `0x2017b`, which the trace catalog resolves to `Shooting::createTimeLapseMovie`: the API entry function of that name. | trace catalog |
+| `0x7e032079` | 1 | `Shooting__ctrlMovieTelecon` | Logs trace id `0x20177`, which the trace catalog resolves to `Shooting::ctrlMovieTelecon`: the API entry function of that name. | trace catalog |
+| `0x7e0320e5` | 1 | `Shooting__startIntervalShooting` | Logs trace id `0x20163`, which the trace catalog resolves to `Shooting::startIntervalShooting`: the API entry function of that name. | trace catalog |
+| `0x7e032151` | 1 | `Shooting__getTouchAction` | Logs trace id `0x20149`, which the trace catalog resolves to `Shooting::getTouchAction`: the API entry function of that name. | trace catalog |
+| `0x7e0321b4` | 1 | `Shooting__changeLiveGuideLevel` | Logs trace id `0x20160`, which the trace catalog resolves to `Shooting::changeLiveGuideLevel`: the API entry function of that name. | trace catalog |
+| `0x7e032220` | 1 | `Shooting__oneShotTakingPicture` | Logs trace id `0x20164`, which the trace catalog resolves to `Shooting::oneShotTakingPicture`: the API entry function of that name. | trace catalog |
+| `0x7e032281` | 1 | `Shooting__startLiveGuideLevel` | Logs trace id `0x2015e`, which the trace catalog resolves to `Shooting::startLiveGuideLevel`: the API entry function of that name. | trace catalog |
+| `0x7e0322ed` | 1 | `Shooting__endLiveGuideLevel` | Logs trace id `0x20161`, which the trace catalog resolves to `Shooting::endLiveGuideLevel`: the API entry function of that name. | trace catalog |
+| `0x7e032359` | 1 | `Shooting__moveMovieTeleconFrame` | Logs trace id `0x20179`, which the trace catalog resolves to `Shooting::moveMovieTeleconFrame`: the API entry function of that name. | trace catalog |
+| `0x7e0323cb` | 1 | `Shooting__endIntervalShooting` | Logs trace id `0x20165`, which the trace catalog resolves to `Shooting::endIntervalShooting`: the API entry function of that name. | trace catalog |
+| `0x7e03242c` | 1 | `Shooting__applyChangeSetting` | Logs trace id `0x20174`, which the trace catalog resolves to `Shooting::applyChangeSetting`: the API entry function of that name. | trace catalog |
+| `0x7e032486` | 1 | `Shooting__endTargetAf_7e032486` | Logs trace id `0x20171`, which the trace catalog resolves to `Shooting::endTargetAf`: the API entry function of that name. | trace catalog |
+| `0x7e032511` | 1 | `Shooting__getCurrentZoomMagnification` | Logs trace id `0x2016c`, which the trace catalog resolves to `Shooting::getCurrentZoomMagnification`: the API entry function of that name. | trace catalog |
+| `0x7e032561` | 1 | `Shooting__getMaxZoomMagnification` | Logs trace id `0x2016b`, which the trace catalog resolves to `Shooting::getMaxZoomMagnification`: the API entry function of that name. | trace catalog |
+| `0x7e0325c1` | 1 | `Shooting__getShootingTargetPos` | Logs trace id `0x2016d`, which the trace catalog resolves to `Shooting::getShootingTargetPos`: the API entry function of that name. | trace catalog |
+| `0x7e032643` | 1 | `Shooting__getTargetAfState` | Logs trace id `0x2016f`, which the trace catalog resolves to `Shooting::getTargetAfState`: the API entry function of that name. | trace catalog |
+| `0x7e0326c6` | 1 | `Shooting__lightThrough` | Logs trace id `0x2016e`, which the trace catalog resolves to `Shooting::lightThrough`: the API entry function of that name. | trace catalog |
+| `0x7e032718` | 1 | `Shooting__startCombine_7e032718` | Logs trace id `0x20176`, which the trace catalog resolves to `Shooting::startCombine`: the API entry function of that name. | trace catalog |
+| `0x7e03277d` | 1 | `Shooting__startTargetAf_7e03277d` | Logs trace id `0x20170`, which the trace catalog resolves to `Shooting::startTargetAf`: the API entry function of that name. | trace catalog |
+| `0x7e032804` | 1 | `Shooting__stopZooming_7e032804` | Logs trace id `0x2016a`, which the trace catalog resolves to `Shooting::stopZooming`: the API entry function of that name. | trace catalog |
+| `0x7e03286d` | 1 | `Shooting__zoomIn` | Logs trace id `0x20168`, which the trace catalog resolves to `Shooting::zoomIn`: the API entry function of that name. | trace catalog |
+| `0x7e0328da` | 1 | `Shooting__zoomOut` | Logs trace id `0x20169`, which the trace catalog resolves to `Shooting::zoomOut`: the API entry function of that name. | trace catalog |
+| `0x7e032947` | 1 | `Shooting__getSelfRemainTime` | Logs trace id `0x20167`, which the trace catalog resolves to `Shooting::getSelfRemainTime`: the API entry function of that name. | trace catalog |
+| `0x7e0329b3` | 1 | `Shooting__startAfl_7e0329b3` | Logs trace id `0x20172`, which the trace catalog resolves to `Shooting::startAfl`: the API entry function of that name. | trace catalog |
+| `0x7e032a14` | 1 | `Shooting__endAfl_7e032a14` | Logs trace id `0x20173`, which the trace catalog resolves to `Shooting::endAfl`: the API entry function of that name. | trace catalog |
+| `0x7e032a8b` | 1 | `Shooting__oneShotTapShooting` | Logs trace id `0x20166`, which the trace catalog resolves to `Shooting::oneShotTapShooting`: the API entry function of that name. | trace catalog |
+| `0x7e032af0` | 1 | `Shooting__isLiveGuide_7e032af0` | Logs trace id `0x2017a`, which the trace catalog resolves to `Shooting::isLiveGuide`: the API entry function of that name. | trace catalog |
+| `0x7e032b56` | 1 | `Shooting__getTouchTrackingAfl` | Logs trace id `0x2017c`, which the trace catalog resolves to `Shooting::getTouchTrackingAfl`: the API entry function of that name. | trace catalog |
+| `0x7e032bbc` | 1 | `Shooting__changeZoomFrameRate` | Logs trace id `0x2017d`, which the trace catalog resolves to `Shooting::changeZoomFrameRate`: the API entry function of that name. | trace catalog |
+| `0x7e032c28` | 1 | `Shooting__getZoomMagnification` | Logs trace id `0x2017e`, which the trace catalog resolves to `Shooting::getZoomMagnification`: the API entry function of that name. | trace catalog |
+| `0x7e032c76` | 1 | `Shooting__setLiveBulbSetting` | Logs trace id `0x20180`, which the trace catalog resolves to `Shooting::setLiveBulbSetting`: the API entry function of that name. | trace catalog |
+| `0x7e032ce2` | 1 | `Shooting__getLiveBulbSetting` | Logs trace id `0x2017f`, which the trace catalog resolves to `Shooting::getLiveBulbSetting`: the API entry function of that name. | trace catalog |
+| `0x7e032d50` | 1 | `Shooting__getLiveBulbHistogram` | Logs trace id `0x20181`, which the trace catalog resolves to `Shooting::getLiveBulbHistogram`: the API entry function of that name. | trace catalog |
+| `0x7e032dbd` | 1 | `Shooting__setFocusModeChange` | Logs trace id `0x20182`, which the trace catalog resolves to `Shooting::setFocusModeChange`: the API entry function of that name. | trace catalog |
+| `0x7e032e26` | 1 | `Shooting__getFocusModeChange` | Logs trace id `0x20183`, which the trace catalog resolves to `Shooting::getFocusModeChange`: the API entry function of that name. | trace catalog |
+| `0x7e032e84` | 1 | `Shooting__getPhotoSessionStateArea` | Logs trace id `0x2018c`, which the trace catalog resolves to `Shooting::getPhotoSessionStateArea`: the API entry function of that name. | trace catalog |
+| `0x7e032eef` | 1 | `Shooting__savePhotoSession` | Logs trace id `0x20187`, which the trace catalog resolves to `Shooting::savePhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e032f50` | 1 | `Shooting__getPhotoSessionLastArea` | Logs trace id `0x2018d`, which the trace catalog resolves to `Shooting::getPhotoSessionLastArea`: the API entry function of that name. | trace catalog |
+| `0x7e032fb8` | 1 | `Shooting__resetPhotoSession` | Logs trace id `0x2018a`, which the trace catalog resolves to `Shooting::resetPhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e033019` | 1 | `Shooting__startPhotoSession` | Logs trace id `0x20185`, which the trace catalog resolves to `Shooting::startPhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e03307a` | 1 | `Shooting__getPhotoSessionTakeCount` | Logs trace id `0x20188`, which the trace catalog resolves to `Shooting::getPhotoSessionTakeCount`: the API entry function of that name. | trace catalog |
+| `0x7e0330dd` | 1 | `Shooting__updatePhotoSession` | Logs trace id `0x2018b`, which the trace catalog resolves to `Shooting::updatePhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e033141` | 1 | `Shooting__endPhotoSession` | Logs trace id `0x20186`, which the trace catalog resolves to `Shooting::endPhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e0331a2` | 1 | `Shooting__deletePhotoSession` | Logs trace id `0x20189`, which the trace catalog resolves to `Shooting::deletePhotoSession`: the API entry function of that name. | trace catalog |
+| `0x7e033206` | 1 | `Shooting__notifyGesture_7e033206` | Logs trace id `0x2014a`, which the trace catalog resolves to `Shooting::notifyGesture`: the API entry function of that name. | trace catalog |
+| `0x7e033276` | 1 | `Shooting__getMFAssist` | Logs trace id `0x20184`, which the trace catalog resolves to `Shooting::getMFAssist`: the API entry function of that name. | trace catalog |
+| `0x7e0332db` | 1 | `Shooting__startMFAssist_7e0332db` | Logs trace id `0x20131`, which the trace catalog resolves to `Shooting::startMFAssist`: the API entry function of that name. | trace catalog |
+| `0x7e033347` | 1 | `Shooting__photoSessionSpeedTouch` | Logs trace id `0x2018e`, which the trace catalog resolves to `Shooting::photoSessionSpeedTouch`: the API entry function of that name. | trace catalog |
+| `0x7e0333b3` | 1 | `Shooting__photoSessionSpeedRelease_7e0333b3` | Logs trace id `0x2018f`, which the trace catalog resolves to `Shooting::photoSessionSpeedRelease`: the API entry function of that name. | trace catalog |
+| `0x7e0333fd` | 1 | `Shooting__photoSessionSpeedTakePicture` | Logs trace id `0x20190`, which the trace catalog resolves to `Shooting::photoSessionSpeedTakePicture`: the API entry function of that name. | trace catalog |
+| `0x7e033503` | 1 | `Shooting__isMFtsLensMount_7e033503` | Logs trace id `0x20192`, which the trace catalog resolves to `Shooting::isMFtsLensMount`: the API entry function of that name. | trace catalog |
+| `0x7e033569` | 1 | `Shooting__getAfAreaType` | Logs trace id `0x20195`, which the trace catalog resolves to `Shooting::getAfAreaType`: the API entry function of that name. | trace catalog |
+| `0x7e0335cc` | 1 | `Shooting__setAfAreaType` | Logs trace id `0x20194`, which the trace catalog resolves to `Shooting::setAfAreaType`: the API entry function of that name. | trace catalog |
+| `0x7e033639` | 1 | `Shooting__isFtsLensMount_7e033639` | Logs trace id `0x20198`, which the trace catalog resolves to `Shooting::isFtsLensMount`: the API entry function of that name. | trace catalog |
+| `0x7e03369f` | 1 | `Shooting__stopCreateTimeLapseMovie` | Logs trace id `0x20197`, which the trace catalog resolves to `Shooting::stopCreateTimeLapseMovie`: the API entry function of that name. | trace catalog |
+| `0x7e033700` | 1 | `Shooting__isZoomRecView_7e033700` | Logs trace id `0x20199`, which the trace catalog resolves to `Shooting::isZoomRecView`: the API entry function of that name. | trace catalog |
+| `0x7e033766` | 1 | `Shooting__isZoomThrough_7e033766` | Logs trace id `0x2019a`, which the trace catalog resolves to `Shooting::isZoomThrough`: the API entry function of that name. | trace catalog |
+| `0x7e0337cc` | 1 | `Shooting__isLiveBulbHistogramEnable_7e0337cc` | Logs trace id `0x2019b`, which the trace catalog resolves to `Shooting::isLiveBulbHistogramEnable`: the API entry function of that name. | trace catalog |
+| `0x7e033832` | 1 | `Shooting__getZoomFrame_7e033832` | Logs trace id `0x20119`, which the trace catalog resolves to `Shooting::getZoomFrame`: the API entry function of that name. | trace catalog |
+| `0x7e0338a6` | 1 | `Shooting__startFrameAssist_7e0338a6` | Logs trace id `0x2019c`, which the trace catalog resolves to `Shooting::startFrameAssist`: the API entry function of that name. | trace catalog |
+| `0x7e033907` | 1 | `Shooting__endFrameAssist_7e033907` | Logs trace id `0x2019d`, which the trace catalog resolves to `Shooting::endFrameAssist`: the API entry function of that name. | trace catalog |
+| `0x7e033973` | 1 | `Shooting__getSubjectDistance_7e033973` | Logs trace id `0x2019e`, which the trace catalog resolves to `Shooting::getSubjectDistance`: the API entry function of that name. | trace catalog |
+| `0x7e0339d4` | 1 | `Shooting__ctrlMonitoringState` | Logs trace id `0x2019f`, which the trace catalog resolves to `Shooting::ctrlMonitoringState`: the API entry function of that name. | trace catalog |
+| `0x7e033a40` | 1 | `Shooting__cancelDarkFrame_7e033a40` | Logs trace id `0x201a1`, which the trace catalog resolves to `Shooting::cancelDarkFrame`: the API entry function of that name. | trace catalog |
+| `0x7e033aa1` | 1 | `Shooting__getDarkFrameState` | Logs trace id `0x201a0`, which the trace catalog resolves to `Shooting::getDarkFrameState`: the API entry function of that name. | trace catalog |
+| `0x7e033b0e` | 1 | `Shooting__getLiveBulbInfo_7e033b0e` | Logs trace id `0x20150`, which the trace catalog resolves to `Shooting::getLiveBulbInfo`: the API entry function of that name. | trace catalog |
+| `0x7e033b99` | 1 | `Shooting__getMovieState_7e033b99` | Logs trace id `0x201a2`, which the trace catalog resolves to `Shooting::getMovieState`: the API entry function of that name. | trace catalog |
+| `0x7e033c11` | 1 | `Shooting__getApertureDownState_7e033c11` | Logs trace id `0x201a5`, which the trace catalog resolves to `Shooting::getApertureDownState`: the API entry function of that name. | trace catalog |
+| `0x7e033c77` | 1 | `Shooting__getCustomSelfShootingCount_7e033c77` | Logs trace id `0x201a6`, which the trace catalog resolves to `Shooting::getCustomSelfShootingCount`: the API entry function of that name. | trace catalog |
+| `0x7e033cc7` | 1 | `Shooting__getSelfTimerCount_7e033cc7` | Logs trace id `0x201a7`, which the trace catalog resolves to `Shooting::getSelfTimerCount`: the API entry function of that name. | trace catalog |
+| `0x7e033dea` | 1 | `SoundCtrl__endLevel_7e033dea` | Logs trace id `0x1050e`, which the trace catalog resolves to `SoundCtrl::endLevel`: the API entry function of that name. | trace catalog |
+| `0x7e033f31` | 1 | `SoundCtrl__getLevel` | Logs trace id `0x1050d`, which the trace catalog resolves to `SoundCtrl::getLevel`: the API entry function of that name. | trace catalog |
+| `0x7e033f9c` | 1 | `SoundCtrl__getMicDevice` | Logs trace id `0x1050f`, which the trace catalog resolves to `SoundCtrl::getMicDevice`: the API entry function of that name. | trace catalog |
+| `0x7e034313` | 1 | `SoundCtrl__startLevel_7e034313` | Logs trace id `0x1050c`, which the trace catalog resolves to `SoundCtrl::startLevel`: the API entry function of that name. | trace catalog |

@@ -24,6 +24,7 @@ go under gitignored `firmware/` or `research/` and are never committed.
 | `symbols.py stats\|export\|dupes\|candidates` | work with the three symbol documents: counts, name export for Ghidra, duplicate check, unlabelled functions by reference count |
 | `func_patterns.py clusters\|small\|shapes` | find unlabelled functions that can be labelled as a group: byte-identical copies, one- and two-instruction bodies; needs `mn10300-elf-objdump` |
 | `subsystems.py` | group `FuncStrings.java` output by log-tag prefix |
+| `trace_catalog.py list\|ID...` | resolve the API layer's three-byte trace ids to names (`docs/firmware/trace-catalog.md`) |
 | `opcode_intersect.py` | OM Workspace SDK opcodes vs the Mark I's own (`docs/usb-protocol/sdk-opcode-compat.md`) |
 
 ## Blocks 1/2 (resources)
